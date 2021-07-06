@@ -8,7 +8,7 @@ export default function Home() {
             <section className='image-cover' style={{ backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/979/558/501/road-house-landscape-illustration-wallpaper-preview.jpg')`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 129%', height: '40vh' }}>
                 <h1 className='display-6'>FIND VERIFIED FLATMATES.</h1>
             </section>
-            <div className='container-fluid'>
+            <div className='container'>
                 <div className='row justify-content-between p-2'>
                     <div>
                         <h5><b>Heading</b></h5>
