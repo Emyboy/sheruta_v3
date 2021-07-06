@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import './Layout.css';
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/img/logo.png';
+
+const FooterNav = ({
+    text,
+    icon,
+    path
+}) => {
+    return <div className='ml-4 mr-4 text-center'>
+        <i className={icon}></i><br />
+        <small>{text}</small>
+    </div>
+}
 
 export default function SideNav({
     children
@@ -28,23 +39,30 @@ export default function SideNav({
                 </div>
 
             </aside>
+
+
             <div className='pt-5 mt-3'>
                 {children}
             </div>
+
+
             <nav className='fixed-bottom bg-white border'>
                 <div className='row justify-content-center mt-1'>
-                    <div className='ml-4 mr-4 text-center'>
-                        <i className='ti-home display-7'></i><br />
-                        <small>Home</small>
-                    </div>
-                    <div className='ml-4 mr-4 text-center'>
-                        <i className='ti-search display-7'></i><br />
-                        <small>Search</small>
-                    </div>
-                    <div className='ml-4 mr-4 text-center'>
-                        <i className='ti-user display-7'></i><br />
-                        <small>Login</small>
-                    </div>
+                    <FooterNav 
+                        icon='ti-home'
+                        text='Home'
+                        path='/'
+                    />
+                    <FooterNav 
+                        icon='ti-search'
+                        text='Search'
+                        path='/search'
+                    />
+                    <FooterNav 
+                        icon='ti-user'
+                        text='Login'
+                        path='/login'
+                    />
                 </div>
             </nav>
         </>
