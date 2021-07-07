@@ -5,9 +5,14 @@ import PropertyCard from '../../components/PropertyCard/PropertyCard'
 export default function Home() {
     return (
         <Layout>
-            <section className='image-cover' style={{ backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/979/558/501/road-house-landscape-illustration-wallpaper-preview.jpg')`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 129%', height: '40vh' }}>
-                <h1 className='display-6'>FIND VERIFIED FLATMATES.</h1>
-            </section>
+            <div className="image-cover hero-banner" style={{ background: `url("https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/project%20prism%2Fcolor%20search%20archive%2Ffdca42285757a45c50328d80460f369b415e66a3") no-repeat`, height: '5vh' }} data-overlay="6">
+                <div className="container">
+
+                    <h1 className="big-header-capt mb-0">Find Verified Flatmates.</h1>
+                    <p className="text-center mb-5"></p>
+                    
+                </div>
+                </div>
             <div className='container'>
                 <div className='row justify-content-between p-2'>
                     <div>

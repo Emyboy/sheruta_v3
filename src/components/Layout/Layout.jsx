@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Layout.css';
 import logo from '../../assets/img/logo.png';
+import IconBtn from '../IconBtn/IconBtn';
+import Search from '../Search/Search';
 
 const FooterNav = ({
     text,
@@ -11,31 +13,47 @@ const FooterNav = ({
         <i className={icon}></i><br />
         <small>{text}</small>
     </div>
+};
+
+const EachNav = ({
+    text,
+    path,
+    icon
+}) => {
+    return <a className='border-bottom1' href={path}>
+        <span><i className={`${icon} mr-2`}></i></span>
+        {text}
+        <hr />
+    </a>
 }
 
 export default function SideNav({
     children
 }) {
 
-    const [showNav, setShowNav] = useState(false)
+    const [showNav, setShowNav] = useState(false);
+    const [showSearch, setShowSearch] = useState(false)
 
     return (
         <>
             <nav className='fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border'>
                 <div className='row justify-content-between'>
-                    <button className='icon-btn btn border' onClick={() => { setShowNav(!showNav) }}><i className='ti-menu'></i></button>
+                    <IconBtn icon='ti-menu' onClick={() => { setShowNav(!showNav) }} />
                     <img width='150' height='40' className='mt-1' src={logo} alt='sheruta.ng' />
-                    <button className='icon-btn btn border'><i className='ti-search'></i></button>
+                    <IconBtn icon={`${showSearch ? 'ti-close' : 'ti-search'}`} onClick={() => { setShowSearch(!showSearch) }} />
                 </div>
             </nav>
 
+            <Search show={showSearch} />
+
             <aside>
-                <div id="mySidenav" className="sidenav" style={{ width: showNav ? '300px' : '0px' }}>
+                <div id="mySidenav" className="sidenav" style={{ width: showNav ? '300px' : '0px', zIndex: 2 }}>
                     <a href="#navigator" className="closebtn" onClick={() => { setShowNav(false) }}>&times;</a>
-                    <a className='border-bottom mt-5' href="/">Home</a>
-                    <a className='border-bottom' href="/requests">Request</a>
-                    <a className='border-bottom' href="/about">About Us</a>
-                    <a className='border-bottom' href="/contact">Contact Us</a>
+                    <hr />
+                    <EachNav icon='ti-home' text='Home' path='/' />
+                    <EachNav icon='ti-comment' text='Requests' path='/reqeusts' />
+                    <EachNav icon='ti-briefcase' text='About Us' path='/about' />
+                    <EachNav icon='ti-mobile' text='Contact Us' path='/contact' />
                 </div>
 
             </aside>
@@ -46,19 +64,19 @@ export default function SideNav({
             </div>
 
 
-            <nav className='fixed-bottom bg-white border'>
+            <nav className='fixed-bottom bg-white border' style={{ zIndex: 2 }}>
                 <div className='row justify-content-center mt-1'>
-                    <FooterNav 
+                    <FooterNav
                         icon='ti-home'
                         text='Home'
                         path='/'
                     />
-                    <FooterNav 
+                    <FooterNav
                         icon='ti-search'
                         text='Search'
                         path='/search'
                     />
-                    <FooterNav 
+                    <FooterNav
                         icon='ti-user'
                         text='Login'
                         path='/login'
