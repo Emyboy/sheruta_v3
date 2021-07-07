@@ -8,7 +8,8 @@ export default function EachRequest({
 
     console.log(data)
     return (
-        <article className='bg-white p-2 rounded border mb-3'>
+
+        <article className='bg-white p-2 rounded border mb-3 '>
             <div className="comment-details">
                 {
                     data.users_permissions_user ?
@@ -27,5 +28,6 @@ export default function EachRequest({
                 </div>
             </div>
         </article>
+
     )
 }

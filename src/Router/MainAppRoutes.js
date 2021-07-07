@@ -5,19 +5,17 @@ import store from "../redux/store/store";
 import '../assets/css/styles.css';
 import '../App.css';
 import 'antd/dist/antd.css';
-// import '../assets/css/nav.css';
 import '../assets/css/colors.css';
-// import '../assets/css/bootstrap.min.css';
-// import '../assets/css/animate.min.css';
-// import '../assets/themify-icons.css'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from '../pages/Home/Home';
 import Contact from '../pages/Contact/Contact';
-import About from '../pages/About/About'
+import About from '../pages/About/About';
+import Request from '../pages/Request/Request'
 import PageNotFound from '../pages/PageNotFound';
-import FeedbackPopup from '../pages/Feedback/FeedbackPopup'
+import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
+import AllRequests from '../pages/Request/AllRequests'
 
 function App() {
     return (
@@ -33,13 +31,13 @@ function App() {
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/contact" component={Contact} />
                                     <Route exact path="/about" component={About} />
+                                    <Route exact path="/requests" component={Request} />
+                                    <Route exact path="/requests/all" component={AllRequests} />
                                     {/* <Route exact path="/login" component={Login} />
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
-                                    <Route exact path="/requests" component={Request} />
                                     <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={RequestCategory} />
                                     <Route exact path="/requests/create" component={RequestCategory} />
-                                    <Route exact path="/requests/all" component={AllRequests} />
                                     <Route exact path="/request/:uid/:user_id" component={RequestDetails} />
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />

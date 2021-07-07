@@ -4,6 +4,21 @@ import logo from '../../assets/img/logo.png';
 import IconBtn from '../IconBtn/IconBtn';
 import Search from '../Search/Search';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    view: state.view
+})
+
+// const mapActionToProps = {
+//     logout,
+//     toggleNavbar,
+//     getAllCategories,
+//     getAllServices
+// }
+
 
 const FooterNav = ({
     text,
@@ -29,9 +44,9 @@ const EachNav = ({
     </Link>
 }
 
-export default function SideNav({
+export default connect(mapStateToProps)(({
     children
-}) {
+}) => {
 
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false)
@@ -88,4 +103,4 @@ export default function SideNav({
             </nav>
         </>
     )
-}
+});
