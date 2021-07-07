@@ -7,7 +7,7 @@ export default function Search({
     show
 }) {
     return (
-        <div className={`pt-1 pr-4 pr-0 w-100 animated ${show ? 'animate__bounceInDown' : 'animate__bounceOutUp'}`} id='search'>
+        <div className={`pt-1 pr-4 pr-0 w-100 animated ${show ? 'animate__slideInRight' : 'animate__slideOutRight'}`} id='search'>
             <div className='container-fluid'>
                 <div className='row justify-content-end'>
                     <div className='col-lg-6 col-md-6 col-sm-12 mb-4 p-2'>
