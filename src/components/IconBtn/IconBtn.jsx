@@ -8,7 +8,7 @@ export default function IconBtn({
 }) {
     return (
             <Button
-                className='icon-btn btn border'
+                className='icon-btn btn border btn-sm'
                 shape="circle"
                 onClick={onClick}>
                 <i className={`${icon} text-dark`}></i>

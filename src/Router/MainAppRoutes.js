@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import store from "../redux/store/store";
 import '../assets/css/styles.css';
 import '../App.css';
-import 'antd/dist/antd.css';
 import '../assets/css/colors.css';
+import 'antd/dist/antd.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import Request from '../pages/Request/Request'
 import PageNotFound from '../pages/PageNotFound';
 import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import AllRequests from '../pages/Request/AllRequests'
+import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                                     <Route exact path="/about" component={About} />
                                     <Route exact path="/requests" component={Request} />
                                     <Route exact path="/requests/all" component={AllRequests} />
+                                    <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
                                     {/* <Route exact path="/login" component={Login} />
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
@@ -40,7 +42,6 @@ function App() {
                                     <Route exact path="/requests/create" component={RequestCategory} />
                                     <Route exact path="/request/:uid/:user_id" component={RequestDetails} />
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
-                                    <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
                                     <Route exact path="/properties" component={PropertySort} />
                                     <Route exact path="/pricing" component={Pricing} />
 

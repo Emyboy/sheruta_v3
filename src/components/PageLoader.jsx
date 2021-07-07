@@ -4,7 +4,7 @@ import { Spinner } from 'react-activity';
 
 const PageLoader = () => {
     return (
-        
+
         <div id="preloader" >
             <div style={{
                 // position: 'absolute',
@@ -14,6 +14,7 @@ const PageLoader = () => {
             }}>
                 <div className="text-center">
                     <img style={{ width: '150px' }} src={Icon} alt='loading-gif' /><br />
+                    <small className='mt-3'>Loading...</small>
                     <div className="mt-3">
                         <Spinner size={10} color={'green'} />
                     </div>

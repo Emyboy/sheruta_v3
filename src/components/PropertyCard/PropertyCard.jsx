@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Tag } from 'antd'
+import { Link } from 'react-router-dom'
 
 export default function PropertyCard({
     data
@@ -31,7 +32,10 @@ export default function PropertyCard({
             </div>
             <div className='container-fluid p-0 mt-2'>
                 <h2 className='mb-0' style={{ fontSize: '19px' }}>
-                    <a className='text-dark' href='/details'>{data.name}</a>
+                    <Link className='text-dark' to={{
+                        pathname: `/property/${data.name}/${data.id}`,
+                        state: data
+                    }}>{data.name}</Link>
                 </h2>
                 <div className='d-flex justify-content-between'>
                     <span style={{ fontSize: '18px' }}><b>₦ {window.formatedPrice.format(data.price)}</b>/ {data.payment_type ? data.payment_type.name : null}</span>

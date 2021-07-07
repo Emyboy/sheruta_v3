@@ -5,6 +5,9 @@ import IconBtn from '../IconBtn/IconBtn';
 import Search from '../Search/Search';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
+import {
+    useHistory,
+    } from 'react-router-dom'
 
 
 const mapStateToProps = state => ({
@@ -45,17 +48,23 @@ const EachNav = ({
 }
 
 export default connect(mapStateToProps)(({
-    children
+    children,
+    back
 }) => {
 
     const [showNav, setShowNav] = useState(false);
-    const [showSearch, setShowSearch] = useState(false)
+    const [showSearch, setShowSearch] = useState(false);
+    
+    const router = useHistory()
 
     return (
         <>
             <nav className='fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border'>
                 <div className='row justify-content-between'>
-                    <IconBtn icon='ti-menu' onClick={() => { setShowNav(!showNav) }} />
+                    {
+                        back ? <IconBtn icon='ti-arrow-left' onClick={() => router.goBack()} />:
+                            <IconBtn icon='ti-menu' onClick={() => { setShowNav(!showNav) }} />
+                    }
                     <img width='140' height='30' className='mt-1' src={logo} alt='sheruta.ng' />
                     <IconBtn icon={`${showSearch ? 'ti-close' : 'ti-search'}`} onClick={() => { setShowSearch(!showSearch) }} />
                 </div>
