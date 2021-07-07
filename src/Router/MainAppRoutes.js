@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import PageLoader from '../components/PageLoader';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
+import 'antd/dist/antd.css';
 import '../App.css';
 import '../assets/css/styles.css';
 import '../assets/css/nav.css';

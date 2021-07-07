@@ -9,6 +9,14 @@
 .bg-theme {
   background-color: var(--theme-color) !important;
 }
+
+.text-theme {
+  color: var(--theme-color) !important;
+}
+.text-accent {
+  color: var(--accent-color) !important;
+}
+
 .text-shadow {
   text-shadow: 4px 9px 15px #110805 !important;
 }

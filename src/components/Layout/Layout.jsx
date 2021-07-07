@@ -3,16 +3,18 @@ import './Layout.css';
 import logo from '../../assets/img/logo.png';
 import IconBtn from '../IconBtn/IconBtn';
 import Search from '../Search/Search';
+import { Link } from 'react-router-dom';
 
 const FooterNav = ({
     text,
     icon,
-    path
+    path,
+    active
 }) => {
-    return <div className='ml-4 mr-4 text-center'>
-        <i className={icon}></i><br />
+    return <Link className={`ml-4 mr-4 text-center ${active ? 'text-theme' : 'text-accent'}`} to={path}>
+        <i style={{ fontSize: '22px' }} className={icon}></i><br />
         <small>{text}</small>
-    </div>
+    </Link>
 };
 
 const EachNav = ({
@@ -20,11 +22,11 @@ const EachNav = ({
     path,
     icon
 }) => {
-    return <a className='border-bottom1' href={path}>
+    return <Link className='border-bottom1' to={path}>
         <span><i className={`${icon} mr-2`}></i></span>
         {text}
-        <hr />
-    </a>
+        <hr className='mb-1' />
+    </Link>
 }
 
 export default function SideNav({
@@ -70,6 +72,7 @@ export default function SideNav({
                         icon='ti-home'
                         text='Home'
                         path='/'
+                        active={true}
                     />
                     <FooterNav
                         icon='ti-search'
