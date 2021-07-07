@@ -39,7 +39,7 @@ export default function SideNav({
             <nav className='fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border'>
                 <div className='row justify-content-between'>
                     <IconBtn icon='ti-menu' onClick={() => { setShowNav(!showNav) }} />
-                    <img width='150' height='40' className='mt-1' src={logo} alt='sheruta.ng' />
+                    <img width='140' height='30' className='mt-1' src={logo} alt='sheruta.ng' />
                     <IconBtn icon={`${showSearch ? 'ti-close' : 'ti-search'}`} onClick={() => { setShowSearch(!showSearch) }} />
                 </div>
                 <Search show={showSearch} />
@@ -59,7 +59,7 @@ export default function SideNav({
             </aside>
 
 
-            <div className='pt-5 mt-3'>
+            <div className='pt-5 mt-2'>
                 {children}
             </div>
 

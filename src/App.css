@@ -12,11 +12,3 @@
 .text-shadow {
   text-shadow: 4px 9px 15px #110805 !important;
 }
-
-.icon-btn {
-  display:block;
-  height: 50px;
-  width: 50px;
-  border-radius: 50% !important;
-  border: 1px solid var(--theme-color);
-}
