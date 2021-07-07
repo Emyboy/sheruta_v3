@@ -14,7 +14,7 @@ const Btn = ({
 }) => {
     return (
         <button
-            className={`${className ? className : ''}btn rounded ${danger ? 'btn-danger' : 'bg-theme'} text-white`}
+            className={`${className ? className : ''} ${danger ? 'btn-danger' : 'bg-theme'} btn rounded text-white`}
             disabled={disabled || loading}
             onClick={onClick}
             type={type}

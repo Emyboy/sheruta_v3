@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
-import PropertyCard from '../../components/PropertyCard/PropertyCard'
+import PropertyCard from '../../components/PropertyCard/PropertyCard';
+import HowToUse from './HowToUse';
+import WhatPeopleSay from './WhatPeopleSay';
 
 export default function Home() {
     return (
@@ -31,27 +33,8 @@ export default function Home() {
                     <PropertyCard />
                 </div>
             </div>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
-            <p>lorema f;sdkfs fsdkfjsd flskaf </p>
+           <HowToUse />
+           <WhatPeopleSay />
         </Layout>
     )
 }
