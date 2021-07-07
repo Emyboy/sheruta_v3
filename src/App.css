@@ -2,7 +2,9 @@
   --theme-color: #00ba74;
   --accent-color: #252c41;
 }
-
+html {
+  background-color: #f7f9fc !important;
+}
 .bg-accent {
   background-color: var(--accent-color) !important;
 }

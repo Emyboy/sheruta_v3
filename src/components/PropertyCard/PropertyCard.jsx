@@ -4,7 +4,6 @@ import {Tag} from 'antd'
 export default function PropertyCard({
     data
 }) {
-    console.log('DATA --', data)
     const [state, setState] = useState({
         info: false
     })

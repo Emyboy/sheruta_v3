@@ -7,18 +7,30 @@ import WhatPeopleSay from './WhatPeopleSay';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
+import EachRequest from '../../components/EachRequest/EachRequest';
 
 export default function Home() {
     const [state, setState] = useState({
-        properties: []
+        properties: [],
+        list: []
     });
-   
+
     useEffect(() => {
-        if(state.properties.length === 0){
-            axios(process.env.REACT_APP_BASE_URL + '/properties/recent/6')
+        if (state.properties.length === 0) {
+            axios(process.env.REACT_APP_API_URL + '/properties/recent/6')
                 .then(res => {
                     console.log(res)
                     setState({ ...state, properties: res.data })
+                })
+                .catch(err => {
+                })
+        }
+    }, [state]);
+    useEffect(() => {
+        if (state.list.length === 0) {
+            axios(process.env.REACT_APP_API_URL + '/property-requests/recent/6')
+                .then(res => {
+                    setState({ ...state, list: res.data })
                 })
                 .catch(err => {
                 })
@@ -40,16 +52,45 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
-            <div className='container'>
-                <Heading heading='Recent Properties' subHeading='These are the most recent properties we have.' />
-                {/* <hr /> */}
+            <div className='container-fluid'>
                 <div className='row'>
-                    {
-                        state.properties.map((val, i) => {
-                            return <PropertyCard key={i} data={val} />
-                        })
-                    }
+                    <div className='col-lg-8 col-md-12 col-sm-12'>
+                        <Heading heading='Recent Properties' subHeading='These are the most recent properties we have.' />
+                        {/* <hr /> */}
+                        <div className='row'>
+                            {
+                                state.properties.map((val, i) => {
+                                    return <PropertyCard key={i} data={val} />
+                                })
+                            }
 
+                        </div>
+                    </div>
+                    <div className='col-lg-4 col-md-12 col-sm-12'>
+                        <Heading heading='Recent Properties' subHeading='These are the most recent properties we have.' />
+
+                        <div className=" pl-4 pr-1">
+
+                            <div className="block-body">
+                                <div className="author-review">
+                                    <div className="comment-list">
+                                        <div className="article_comments_wrap">
+                                            {
+                                                state.list.map((val, i) => {
+                                                    return <EachRequest key={i} data={val} />
+                                                })
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <Link to="/requests/all" className="reviews-checked theme-cl"><i className="fas fa-arrow-alt-circle-down mr-2"></i>See More Requests</Link>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <HowToUse />
