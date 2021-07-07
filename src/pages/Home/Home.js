@@ -69,7 +69,7 @@ export default function Home() {
                     <div className='col-lg-4 col-md-12 col-sm-12'>
                         <Heading heading='Recent Requests' subHeading='These are the most recent requests we have.' />
 
-                        <div className=" pl-4 pr-1">
+                        <div className=" pl-0 pr-1">
 
                             <div className="block-body">
                                 <div className="author-review">

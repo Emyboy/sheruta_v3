@@ -1,15 +1,17 @@
 import React from 'react'
-import './IconBtn.css'
+import './IconBtn.css';
+import { Button } from 'antd';
 
 export default function IconBtn({
     onClick,
     icon
 }) {
     return (
-        <button
-            className='icon-btn btn border'
-            onClick={onClick}>
-            <i className={icon}></i>
-        </button>
+            <Button
+                className='icon-btn btn border'
+                shape="circle"
+                onClick={onClick}>
+                <i className={`${icon} text-dark`}></i>
+            </Button>
     )
 }
