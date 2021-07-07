@@ -67,7 +67,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className='col-lg-4 col-md-12 col-sm-12'>
-                        <Heading heading='Recent Properties' subHeading='These are the most recent properties we have.' />
+                        <Heading heading='Recent Requests' subHeading='These are the most recent requests we have.' />
 
                         <div className=" pl-4 pr-1">
 
