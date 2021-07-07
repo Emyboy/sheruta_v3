@@ -42,9 +42,9 @@ export default function SideNav({
                     <img width='150' height='40' className='mt-1' src={logo} alt='sheruta.ng' />
                     <IconBtn icon={`${showSearch ? 'ti-close' : 'ti-search'}`} onClick={() => { setShowSearch(!showSearch) }} />
                 </div>
+                <Search show={showSearch} />
             </nav>
 
-            <Search show={showSearch} />
 
             <aside>
                 <div id="mySidenav" className="sidenav" style={{ width: showNav ? '300px' : '0px', zIndex: 2 }}>
