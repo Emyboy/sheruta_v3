@@ -55,7 +55,7 @@ const EachNav = ({
     </Link>
 }
 
-export default connect(mapStateToProps, mapActionToProps)((props) => {
+const Layout =  connect(mapStateToProps, mapActionToProps)((props) => {
     const {
         children,
         back,
@@ -104,7 +104,9 @@ export default connect(mapStateToProps, mapActionToProps)((props) => {
                     <EachNav icon='ti-comment' text='Requests' path='/requests' />
                     <EachNav icon='ti-briefcase' text='About Us' path='/about' />
                     <EachNav icon='ti-mobile' text='Contact Us' path='/contact' />
-                    <EachNav icon='ti-power-off' text='Logout' path='#logout' onClick={props.logout} />
+                    {
+                        !user ? <EachNav icon='ti-user' text='Login / Signup' path='/login' onClick={props.logout} />: <EachNav icon='ti-power-off' text='Logout' path='#logout' onClick={props.logout} />
+                    }
                 </div>
 
             </aside>
@@ -148,3 +150,5 @@ export default connect(mapStateToProps, mapActionToProps)((props) => {
         </>
     )
 });
+
+export default Layout;

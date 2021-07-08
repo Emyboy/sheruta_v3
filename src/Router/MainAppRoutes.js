@@ -18,7 +18,9 @@ import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import AllRequests from '../pages/Request/AllRequests'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
 import Login from '../pages/Login/Login';
-import Profile2 from '../pages/Profile/Profile2'
+import Profile2 from '../pages/Profile/Profile2';
+import Signup from '../pages/Signup/Signup'
+import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess'
 
 function App() {
     return (
@@ -39,9 +41,9 @@ function App() {
                                     <Route exact path="/requests/all" component={AllRequests} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
                                     <Route exact path="/profile" component={Profile2} />
-                                    {/* 
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
+                                    {/* 
                                     <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={RequestCategory} />
                                     <Route exact path="/requests/create" component={RequestCategory} />
                                     <Route exact path="/request/:uid/:user_id" component={RequestDetails} />

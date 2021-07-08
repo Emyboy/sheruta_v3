@@ -60,7 +60,9 @@ export const Request = (props) => {
     }, [display])
 
     return (
-        <Layout>
+        <Layout
+            back
+        >
             <MetaTags>
                 <title>Requests | Sheruta NG</title>
                 <meta name="description" content={"Make apartment requests so everyone can see it"} />
