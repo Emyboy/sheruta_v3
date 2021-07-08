@@ -2,9 +2,11 @@ import React from 'react';
 import './Search.css';
 import Select from 'react-select'
 import Btn from '../Btn/Btn';
+import { connect } from 'react-redux';
 
  function Search({
-    show
+    show,
+    view
 }) {
     if(show){
         return (
@@ -16,7 +18,9 @@ import Btn from '../Btn/Btn';
                                 <div className='card-body'>
                                     <h5>Search</h5>
                                     <Select
-                                        options={[{ value: "House", label: "House" }]}
+                                        options={view.categories.map((val) => {
+                                            return {value: val.id, label: val.name.toUpperCase()}
+                                        })}
                                     />
                                     <Btn
                                         text='Search'
@@ -33,4 +37,10 @@ import Btn from '../Btn/Btn';
         return null;
 }
 
-export default React.memo(Search)
+const mapStateToProps = state => ({
+    view: state.view
+})
+
+export default connect(
+    mapStateToProps
+)(Search)
