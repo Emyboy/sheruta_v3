@@ -36,7 +36,9 @@ export default function Home() {
         }
     }, [state]);
     return (
-        <Layout>
+        <Layout
+            page='home'
+        >
             <div className="image-cover hero-banner mb-5" style={{ background: `url("https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/project%20prism%2Fcolor%20search%20archive%2Ffdca42285757a45c50328d80460f369b415e66a3") no-repeat`, height: '5vh' }} data-overlay="6">
                 <div className="container text-center">
 

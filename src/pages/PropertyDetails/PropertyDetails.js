@@ -232,6 +232,7 @@ export const PropertyDetails = (props) => {
                                                     {/* <li><strong>Bathrooms</strong>2</li> */}
                                                     <li><strong>Sitting Rooms</strong>{query.sittingroom}</li>
                                                     <li><strong>Bathrooms</strong>{query.bathroom}</li>
+                                                    <li><strong>Toilets</strong>{query.toilet}</li>
                                                 </ul>
                                             </div>
 

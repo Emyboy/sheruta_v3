@@ -25,3 +25,7 @@ html {
 .link {
   cursor: pointer !important;
 }
+
+.ant-notification {
+  z-index: 100 !important;
+}

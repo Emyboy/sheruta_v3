@@ -17,6 +17,8 @@ import PageNotFound from '../pages/PageNotFound';
 import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import AllRequests from '../pages/Request/AllRequests'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
+import Login from '../pages/Login/Login';
+import Profile2 from '../pages/Profile/Profile2'
 
 function App() {
     return (
@@ -30,12 +32,14 @@ function App() {
                                 <FeedbackPopup />
                                 <Switch>
                                     <Route exact path="/" component={Home} />
+                                    <Route exact path="/login" component={Login} />
                                     <Route exact path="/contact" component={Contact} />
                                     <Route exact path="/about" component={About} />
                                     <Route exact path="/requests" component={Request} />
                                     <Route exact path="/requests/all" component={AllRequests} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
-                                    {/* <Route exact path="/login" component={Login} />
+                                    <Route exact path="/profile" component={Profile2} />
+                                    {/* 
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
                                     <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={RequestCategory} />
@@ -48,7 +52,6 @@ function App() {
                                     <Route exact path="/share" component={Share} />
 
                                     <Route exact path="/feedback" component={UserFeedback} />
-                                    <Route exact path="/profile" component={Profile2} />
                                     <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
                                     <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
                                     <Route exact path="/search/:category/:location/:bedroom" component={SearchResults} /> */}
