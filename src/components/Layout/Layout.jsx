@@ -87,7 +87,7 @@ export default connect(mapStateToProps, mapActionToProps)((props) => {
                     <a href="#navigator" className="closebtn" onClick={() => { setShowNav(false) }}>&times;</a>
                     <hr />
                     <EachNav icon='ti-home' text='Home' path='/' />
-                    <EachNav icon='ti-comment' text='Requests' path='/reqeusts' />
+                    <EachNav icon='ti-comment' text='Requests' path='/requests' />
                     <EachNav icon='ti-briefcase' text='About Us' path='/about' />
                     <EachNav icon='ti-mobile' text='Contact Us' path='/contact' />
                 </div>

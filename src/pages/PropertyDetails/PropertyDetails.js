@@ -7,7 +7,7 @@ import { Carousel, Image } from 'react-bootstrap';
 import MetaTags from 'react-meta-tags';
 import { Spinner } from 'react-activity';
 import Layout from '../../components/Layout/Layout';
-
+import { Link } from 'react-router-dom';
 
 export const PropertyDetails = (props) => {
 
@@ -290,7 +290,7 @@ export const PropertyDetails = (props) => {
 
                                     <div className="sidebar-widgets mt-4">
 
-                                        <h4>Featured Property</h4>
+                                        <h4>Similar Properties</h4>
 
                                         <div className="sidebar_featured_property">
                                             {
@@ -301,8 +301,11 @@ export const PropertyDetails = (props) => {
                                                             <img src={val.image_urls[0]} className="img-fluid" alt="" />
                                                         </div>
                                                         <div className="sides_list_property_detail">
-                                                            <h4><a href="single-property-1.html">{val.name.length > 10 ? val.name.slice(0, 22)+"..." : val.name}</a></h4>
-                                                            <span><i className="ti-location-pin"></i>Sans Fransico</span>
+                                                            <h4 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Link to={{
+                                                                pathname: `/property/${val.name}/${val.id}`,
+                                                                state: val
+                                                            }}>{val.name.length > 10 ? val.name.slice(0, 22)+"..." : val.name}</Link></h4>
+                                                            <span><i className="ti-location-pin"></i>{val.location}</span>
                                                             <div className="lists_property_price">
                                                                 <div className="lists_property_types">
                                                                     {

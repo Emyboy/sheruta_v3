@@ -6,7 +6,6 @@ export default function EachRequest({
     data
 }) {
 
-    console.log(data)
     return (
 
         <article className='bg-white p-2 rounded border mb-3 '>

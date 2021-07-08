@@ -19,7 +19,6 @@ export default function Home() {
         if (state.properties.length === 0) {
             axios(process.env.REACT_APP_API_URL + '/properties/recent/6')
                 .then(res => {
-                    console.log(res)
                     setState({ ...state, properties: res.data })
                 })
                 .catch(err => {
