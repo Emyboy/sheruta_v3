@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SelectionCard({
+export default React.memo(({
     onSelect,
     isSelected,
     isDisabled,
@@ -8,7 +8,7 @@ export default function SelectionCard({
     subHeading,
     style,
     className
-}) {
+}) => {
 
 
     return (
@@ -35,4 +35,4 @@ export default function SelectionCard({
             </div>
         </div>
     )
-}
+});

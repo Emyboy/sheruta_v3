@@ -25,7 +25,7 @@ export default function PropertyCard({
                         </button>
                     </div>
                     <p className={`card-text text-shadow bg-accent rounded p-1 mt-1 ${state.info ? 'show' : 'hide'}`}>
-                        {data.description.length > 100 ? data.description.slice(0, 400) + "..." : data.description}
+                        {data.description.length > 200 ? data.description.slice(0, 200) + "..." : data.description}
                     </p>
                     {/* <p className={`card-text text-shadow ${state.info ? 'show' : 'hide'}`}>I don't even know what ill go here sef lol</p> */}
                 </div>

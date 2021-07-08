@@ -12,18 +12,38 @@ export const Request = (props) => {
     const { view } = props;
 
     const [state, setState] = useState({
-        selectedQuery: null,
         disabledBtn: true,
-        selectedCategory: null,
-        selectedService: null,
-        display: 'query',
         heading: 'How Can We Help You?',
         nextPage: null,
         done: false
     });
 
+    const [display, setDisplay] = useState('query');
+    const [selectedQuery, setSelectedQuery] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedService, setSelectedServices] = useState(null);
+
     useEffect(() => {
-        switch (state.display) {
+        if (selectedService) {
+            setState({ ...state, disabledBtn: false, nextPage: 'category' });
+        }
+        
+    }, [selectedService]);
+
+    useEffect(() => {
+        if (selectedCategory) {
+            setState({ ...state, done: true })
+        }
+    },[selectedCategory])
+
+    useEffect(() => {
+        if (selectedQuery) {
+            setState({ ...state, disabledBtn: false, nextPage: 'service' });
+        }
+    }, [selectedQuery]);
+
+    useEffect(() => {
+        switch (display) {
             case 'query':
                 setState({ ...state, heading: 'How Can We Help You?' })
                 break;
@@ -37,22 +57,7 @@ export const Request = (props) => {
             default:
                 break;
         }
-    }, [state.display, state]);
-
-    useEffect(() => {
-        if (state.selectedQuery) {
-            setState({ ...state, disabledBtn: false, nextPage: 'service' });
-        }
-        if (state.selectedService) {
-            setState({ ...state, disabledBtn: false, nextPage: 'category' });
-        }
-    }, [state.selectedQuery, state.selectedService, state.selectedCategory, state])
-
-    useEffect(() => {
-        if (state.selectedCategory) {
-            setState({ ...state, done: true })
-        }
-    }, [state.selectedCategory, state]);
+    }, [display])
 
     return (
         <Layout>
@@ -68,44 +73,44 @@ export const Request = (props) => {
                 </div>
                 <hr />
                 {
-                    state.display === 'query' ? <div className='row justify-content-center'>
+                    display === 'query' ? <div className='row justify-content-center'>
                         <SelectionCard
                             heading='I currently have'
                             subHeading="I have an available property for Share or For Rent etc"
-                            onSelect={() => setState({ ...state, selectedQuery: 'have' })}
-                            isSelected={state.selectedQuery === 'have'}
+                            onSelect={() => setSelectedQuery('have')}
+                            isSelected={selectedQuery === 'have'}
                         />
                         <SelectionCard
                             heading="I am looking for"
                             subHeading="I'm looking for an available property for Share or For Rent etc"
-                            onSelect={() => setState({ ...state, selectedQuery: 'search' })}
-                            isSelected={state.selectedQuery === 'search'}
+                            onSelect={() => setSelectedQuery('search')}
+                            isSelected={selectedQuery === 'search'}
                         />
                     </div> : null
                 }
                 {
-                    state.display === 'service' ? <div className='row justify-content-center'>
+                    display === 'service' ? <div className='row justify-content-center'>
                         {
                             view.services.map((val, i) => {
                                 return <SelectionCard
                                     key={i}
                                     heading={val.name}
-                                    isSelected={state.selectedService === val}
-                                    onSelect={() => setState({ ...state, selectedService: val })}
+                                    isSelected={selectedService === val}
+                                    onSelect={() => setSelectedServices(val)}
                                 />
                             })
                         }
                     </div> : null
                 }
                 {
-                    state.display === 'category' ? <div className='row justify-content-center'>
+                    display === 'category' ? <div className='row justify-content-center'>
                         {
                             view.categories.map((val, i) => {
                                 return <SelectionCard
                                     key={i}
                                     heading={val.name}
-                                    isSelected={state.selectedCategory === val}
-                                    onSelect={() => setState({ ...state, selectedCategory: val })}
+                                    isSelected={selectedCategory === val}
+                                    onSelect={() => setSelectedCategory(val)}
                                 />
                             })
                         }
@@ -114,7 +119,7 @@ export const Request = (props) => {
                 <hr />
                 {
                     state.done ? <Link to={
-                        `/requests/create/${state.selectedService.id}/${state.selectedCategory.id}/${state.selectedQuery === "search"}`
+                        `/requests/create/${selectedService.id}/${selectedCategory.id}/${selectedQuery === "search"}`
                     }>
                         <Btn
                             text='Finish'
@@ -124,11 +129,12 @@ export const Request = (props) => {
                         text='Next'
                         disabled={state.disabledBtn}
                         onClick={() => {
-                            setState({ ...state, display: state.nextPage, disabledBtn: true });
+                            setState({ ...state, disabledBtn: true });
+                            setDisplay(state.nextPage)
                         }}
                     />
                 }
-                
+
                 {/* <Link to='/requests/create'>
                     <div className='border text-center rounded mt-3 agency agency-list'>
                         <div className='card-body'>

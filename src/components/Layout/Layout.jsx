@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Layout.css';
 import logo from '../../assets/img/logo.png';
 import IconBtn from '../IconBtn/IconBtn';
 import Search from '../Search/Search';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import {
+    getAllCategories,
+    getAllServices
+} from '../../redux/strapi_actions/view.action'
 import {
     useHistory,
-    } from 'react-router-dom'
+} from 'react-router-dom'
 
 
 const mapStateToProps = state => ({
@@ -15,12 +19,12 @@ const mapStateToProps = state => ({
     view: state.view
 })
 
-// const mapActionToProps = {
-//     logout,
-//     toggleNavbar,
-//     getAllCategories,
-//     getAllServices
-// }
+const mapActionToProps = {
+    // logout,
+    // toggleNavbar,
+    getAllCategories,
+    getAllServices
+}
 
 
 const FooterNav = ({
@@ -47,22 +51,28 @@ const EachNav = ({
     </Link>
 }
 
-export default connect(mapStateToProps)(({
-    children,
-    back
-}) => {
+export default connect(mapStateToProps, mapActionToProps)((props) => {
+    const {
+        children,
+        back
+    } = props;
 
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
-    
-    const router = useHistory()
+
+    const router = useHistory();
+
+    useEffect(() => {
+        props.getAllCategories();
+        props.getAllServices()
+    }, [])
 
     return (
         <>
             <nav className='fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border'>
                 <div className='row justify-content-between'>
                     {
-                        back ? <IconBtn icon='ti-arrow-left' onClick={() => router.goBack()} />:
+                        back ? <IconBtn icon='ti-arrow-left' onClick={() => router.goBack()} /> :
                             <IconBtn icon='ti-menu' onClick={() => { setShowNav(!showNav) }} />
                     }
                     <img width='140' height='30' className='mt-1' src={logo} alt='sheruta.ng' />

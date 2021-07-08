@@ -4,7 +4,7 @@ import store from "../store/store"
 
 
 export const getAllServices = () => dispatch => {
-    axios(process.env.REACT_APP_BASE_URL + '/services')
+    axios(process.env.REACT_APP_API_URL + '/services')
         .then(res => {
             dispatch({
                 type: 'GET_ALL_SERVICES',
@@ -17,7 +17,7 @@ export const getAllServices = () => dispatch => {
 }
 
 export const getAllCategories = () => dispatch => {
-    axios(process.env.REACT_APP_BASE_URL + '/categories')
+    axios(process.env.REACT_APP_API_URL + '/categories')
         .then(res => {
             dispatch({
                 type: 'GET_ALL_CATEGORIES',
@@ -33,7 +33,7 @@ export const getAllCategories = () => dispatch => {
 export const getUserFeedback = () => dispatch => {
     setTimeout(() => {
         const user = store.getState().auth.user;
-        axios(process.env.REACT_APP_BASE_URL + '/user-feedbacks/?users_permissions_user=' + user.user.id)
+        axios(process.env.REACT_APP_API_URL + '/user-feedbacks/?users_permissions_user=' + user.user.id)
             .then(res => {
                 if(res.data.length === 0){
                     dispatch({
