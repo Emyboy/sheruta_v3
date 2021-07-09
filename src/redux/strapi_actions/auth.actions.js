@@ -21,7 +21,7 @@ export const logout = () => dispatch => {
 
 export const getUser = () => dispatch => {
     // console.log('%cgetting user --', 'color: red; font-size: 30px;')
-    axios(process.env.REACT_APP_BASE_URL +"/users/me", {
+    axios(process.env.REACT_APP_API_URL +"/users/me", {
         headers: {
             Authorization: 'Bearer ' + state.auth.user.jwt
         },

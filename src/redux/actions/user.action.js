@@ -56,7 +56,7 @@ const searchError = error => {
 
 export const uploadApartment = data => dispatch => {
     dispatch(uploadLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/hostels`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/hostels`, {
         method: 'POST',
         data
     })
@@ -71,7 +71,7 @@ export const uploadApartment = data => dispatch => {
 export const sendRequest = data => dispatch => {
     console.log('sending request', data);
     dispatch(uploadLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/message`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/message`, {
         method: 'POST',
         data
     })
@@ -79,7 +79,7 @@ export const sendRequest = data => dispatch => {
             console.log('res..', res);
             if (res.data.status === 200) {
                 notification.success({ message: 'Request Sent..' });
-                Axios(`${process.env.REACT_APP_BASE_URL}/agent`, )
+                Axios(`${process.env.REACT_APP_API_URL}/agent`, )
                 dispatch(sendRequestSuccess(res.data));
                 dispatch(toggleDoneModal(true));
             } else {
@@ -96,7 +96,7 @@ export const sendRequest = data => dispatch => {
 
 export const sharedSignup = data => dispatch => {
     dispatch(uploadLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/sharing/signup`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/sharing/signup`, {
         method: 'POST',
         data
     }).then(res => {
@@ -119,7 +119,7 @@ export const sharedSignup = data => dispatch => {
 }
 
 export const addToFavorite = data => dispatch => {
-    return Axios(`${process.env.REACT_APP_BASE_URL}/cube/${data.userId}`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/cube/${data.userId}`, {
         data,
         method: 'POST'
     })
@@ -135,7 +135,7 @@ export const search = data => dispatch => {
     console.log('searchin ', data);
     dispatch(uploadLoading());
     const { area, bedrooms, sittingrooms, price, type } = data;
-    return Axios(`${process.env.REACT_APP_BASE_URL}/search/${area}/${bedrooms}/${sittingrooms}/${type}/${price}`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/search/${area}/${bedrooms}/${sittingrooms}/${type}/${price}`, {
         method: 'POST'
     })
         .then(res => {
@@ -151,7 +151,7 @@ export const search = data => dispatch => {
 }
 
 export const SendMessage = data => dispatch => {
-    return Axios(`${process.env.REACT_APP_BASE_URL}/message`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/message`, {
         data,
         method: 'POST'
     })

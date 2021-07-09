@@ -12,7 +12,7 @@ import $ from 'jquery'
 
 export const getAllAgents = () => dispatch => {
     dispatch({ type: AGENT_LOADING, payload: true });
-    Axios(`${process.env.REACT_APP_BASE_URL}/agent/all`)
+    Axios(`${process.env.REACT_APP_API_URL}/agent/all`)
         .then(agents => {
             dispatch({ type: SET_AGENT_LIST, payload: agents.data.list })
             dispatch({ type: AGENT_LOADING, payload: false });
@@ -48,7 +48,7 @@ export const addNewProperty = data => dispatch => {
             duration: 1 });
                 dispatch({ type: UPDATE_AGENT_PROGRESS, payload: 0 });
                 if (list.length === data.image_files.length) {
-                    Axios(`${process.env.REACT_APP_BASE_URL}/property`, {
+                    Axios(`${process.env.REACT_APP_API_URL}/property`, {
                         method: 'POST',
                         data: { ...data, uuid: id, image_urls },
                         headers: { 
@@ -93,7 +93,7 @@ export const addNewProperty = data => dispatch => {
 
 
 export const getAgentsProperties = agent_id => dispatch => {
-    Axios(`${process.env.REACT_APP_BASE_URL}/property/${agent_id}`)
+    Axios(`${process.env.REACT_APP_API_URL}/property/${agent_id}`)
         .then(res => {
             dispatch({ type: SET_AGENT_PROPERTIES, payload: res.data })
         })
@@ -104,7 +104,7 @@ export const getAgentsProperties = agent_id => dispatch => {
 
 export const deleteApartment = data => dispatch => {
     dispatch({ type: 'DELETE_LOADING', payload: true })
-    Axios(`${process.env.REACT_APP_BASE_URL}/property/${data.uuid}`, {
+    Axios(`${process.env.REACT_APP_API_URL}/property/${data.uuid}`, {
         method: 'DELETE'
     })
         .then(res => {

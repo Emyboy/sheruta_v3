@@ -18,7 +18,7 @@ const VerifyEmail = (props) => {
     const token = props.match.params.token || null;
 
     const verifyUserAccount = () => {
-        axios(process.env.REACT_APP_BASE_URL + `/verify/email`, {
+        axios(process.env.REACT_APP_API_URL + `/verify/email`, {
             method: 'POST',
             data: { confirmationToken, token }
         })

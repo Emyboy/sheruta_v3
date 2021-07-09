@@ -71,7 +71,7 @@ export const logout = () => dispatch => {
 export const signup = data => dispatch => {
   dispatch(authLoading());
 
-  return Axios(`${process.env.REACT_APP_BASE_URL}/signup`, {
+  return Axios(`${process.env.REACT_APP_API_URL}/signup`, {
     method: 'POST',
     data: data,
     validateStatus: (status) => {
@@ -110,7 +110,7 @@ export const signup = data => dispatch => {
 
 export const login = data => dispatch => {
   dispatch(authLoading())
-  return Axios(`${process.env.REACT_APP_BASE_URL}/login`, {
+  return Axios(`${process.env.REACT_APP_API_URL}/login`, {
     method: 'POST',
     data
   })
@@ -132,7 +132,7 @@ export const login = data => dispatch => {
 }
 
 export const handleGoogleLogin = data => dispatch => {
-  Axios(`${process.env.REACT_APP_BASE_URL}/login/google`, {
+  Axios(`${process.env.REACT_APP_API_URL}/login/google`, {
     method: 'POST',
     data: { ...data, login_type: 'google' }
   })
@@ -149,7 +149,7 @@ export const handleGoogleLogin = data => dispatch => {
 };
 
 export const updateUserAccount = update => dispatch => {
-  Axios(`${process.env.REACT_APP_BASE_URL}/users/${update.user_id}`, {
+  Axios(`${process.env.REACT_APP_API_URL}/users/${update.user_id}`, {
     method: 'PUT',
     data: update
   })
@@ -172,7 +172,7 @@ export const crate_agent_account = data => dispatch => {
     notification.error({ message: 'Error Uploading Image ' });
   }, () => {
     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-      Axios(`${process.env.REACT_APP_BASE_URL}/agent`, {
+      Axios(`${process.env.REACT_APP_API_URL}/agent`, {
         method: 'POST',
         data: { ...data, company_logo: downloadURL }
       })
@@ -195,7 +195,7 @@ export const crate_agent_account = data => dispatch => {
 
 export const editAgentAccount = data => dispatch => {
   dispatch({ type: AGENT_LOADING, payload: true });
-  Axios(`${process.env.REACT_APP_BASE_URL}/agent`, {
+  Axios(`${process.env.REACT_APP_API_URL}/agent`, {
     method: 'PUT',
     data
   })

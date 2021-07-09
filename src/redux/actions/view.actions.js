@@ -32,7 +32,7 @@ export const toggleNavbar = boolen => {
 
 export const getAllAreas = () => dispatch => {
     alert('working')
-    return Axios(`${process.env.REACT_APP_BASE_URL}/views/area`)
+    return Axios(`${process.env.REACT_APP_API_URL}/views/area`)
         .then(res => {
             console.log(res);
         })

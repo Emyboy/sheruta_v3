@@ -35,7 +35,7 @@ const UserFeedback = (props) => {
         setTimeout(() => {
             setState({ ...state, step: 4 })
         }, 1000);
-        axios(process.env.REACT_APP_BASE_URL + '/user-feedbacks', {
+        axios(process.env.REACT_APP_API_URL + '/user-feedbacks', {
             method: 'POST',
             headers: {
                 Authorization:

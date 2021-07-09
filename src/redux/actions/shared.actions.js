@@ -18,7 +18,7 @@ const getApartmentError = error => {
 }
 
 export const getRecentSharedApartments = limit => dispatch => {
-    return Axios(`${process.env.REACT_APP_BASE_URL}/shared`)
+    return Axios(`${process.env.REACT_APP_API_URL}/shared`)
         .then(res => {
             switch (res.data.message) {
                 case 'success':
@@ -43,7 +43,7 @@ export const getRecentSharedApartments = limit => dispatch => {
  */
 export const getSharedById = id => dispatch => {
     dispatch({ type: DETAIL_LOADING });
-    return Axios(`${process.env.REACT_APP_BASE_URL}/shared/${id}`)
+    return Axios(`${process.env.REACT_APP_API_URL}/shared/${id}`)
         .then(res => {
             switch (res.data.message) {
                 case 'success':

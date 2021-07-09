@@ -23,7 +23,7 @@ const getAllBlogs = data => {
 
 export const getAllBlog = () => dispatch => {
     dispatch(blogLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/blogs/all`)
+    return Axios(`${process.env.REACT_APP_API_URL}/blogs/all`)
         .then(res => {
             if(res.data.length > 0){
                 dispatch(getAllBlogs(res.data));
@@ -39,7 +39,7 @@ export const getAllBlog = () => dispatch => {
 export const getBlogByName = name => dispatch => {
     
     dispatch(blogLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/blog/${name}`)
+    return Axios(`${process.env.REACT_APP_API_URL}/blog/${name}`)
         .then(res => {
             if(res.data.status === 200){
                 dispatch(getAllBlogs(res.data.blog[0]))

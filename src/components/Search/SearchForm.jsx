@@ -23,7 +23,7 @@ export default function SearchBox() {
     });
 
     const getAllCategories = () => {
-        axios(process.env.REACT_APP_BASE_URL + '/categories')
+        axios(process.env.REACT_APP_API_URL + '/categories')
             .then(res => {
                 setState({ ...state, categories: res.data })
             })
@@ -32,7 +32,7 @@ export default function SearchBox() {
     }
 
     const getAllServices = () => {
-        axios(process.env.REACT_APP_BASE_URL + '/services')
+        axios(process.env.REACT_APP_API_URL + '/services')
             .then(res => {
                 setState({ ...state, services: res.data })
             })
@@ -56,7 +56,7 @@ export default function SearchBox() {
                 places: [],
             })
         }
-        axios(process.env.REACT_APP_BASE_URL + '/properties/search/keyword' + keyword)
+        axios(process.env.REACT_APP_API_URL + '/properties/search/keyword' + keyword)
             .then(res => {
                 setData({
                     ...data,

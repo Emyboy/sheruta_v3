@@ -62,7 +62,7 @@ class CustomImage extends PureComponent {
 
     sendToDb(imageUrl) {
         this.setState({ loading: true })
-        axios(process.env.REACT_APP_BASE_URL + `/users-permissions/auth/local/edit/${state.auth.user.user.id}`, {
+        axios(process.env.REACT_APP_API_URL + `/users-permissions/auth/local/edit/${state.auth.user.user.id}`, {
             method: 'POST',
             data: {
                 avatar_url: imageUrl

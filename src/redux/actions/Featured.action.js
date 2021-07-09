@@ -52,7 +52,7 @@ export const UploadToDatabase = data => dispatch => {
     delete data.showAmenities;
     delete data.showModal;
     dispatch(featureLoading());
-    return Axios(`${process.env.REACT_APP_BASE_URL}/featured`, {
+    return Axios(`${process.env.REACT_APP_API_URL}/featured`, {
         method: 'POST',
         data
     })
