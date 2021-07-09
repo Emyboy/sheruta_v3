@@ -69,7 +69,7 @@ const RequestDetails = (props) => {
     } else
         return (
             <Layout>
-                <section>
+                <section className='pt-3'>
                     <MetaTags>
                         <title>Request | {request.heading}</title>
                         <meta name="description" content={request.body} />

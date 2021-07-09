@@ -2,7 +2,7 @@ import React from 'react'
 import Avatar from 'antd/lib/avatar/avatar'
 import moment from 'moment'
 import { Tag } from 'antd';
-
+import { Link } from 'react-router-dom';
 export default function EachRequest({
     data
 }) {
@@ -25,10 +25,10 @@ export default function EachRequest({
                 <div className='container'>
                     <div className='mt-2 row'>
                         {
-                            data.category ? <Tag color='volcano' className='badge'>{data.category.name.toUpperCase()}</Tag> : null
+                            data.category ? <Tag color='volcano'>{data.category.name.toUpperCase()}</Tag> : null
                         }
                         {
-                            data.service ? <Tag color='cyan' className='badge'>{data.service.name.toUpperCase()}</Tag> : null
+                            data.service ? <Tag color='cyan'>{data.service.name.toUpperCase()}</Tag> : null
                         }
                     </div>
                 </div>
@@ -38,9 +38,14 @@ export default function EachRequest({
                 <hr className='mt-1 mb-1' />
                 {
                     data.users_permissions_user ?
-                        <a href={`tel:${data.users_permissions_user.phone_number}`}>
-                            <span className='badge badge-danger' style={{ fontSize: '15px' }}><i className='ti-mobile'></i> Call Me</span>
-                        </a>
+                        <div className='d-flex justify-content-between'>
+                            <a href={`tel:${data.users_permissions_user.phone_number}`}>
+                                <span className='badge badge-danger' style={{ fontSize: '15px' }}><i className='ti-mobile'></i> Call Me</span>
+                            </a>
+                            <Link to={`/request/${data.uuid}/${data.users_permissions_user.id}`} className='text-theme'>
+                                View More Details
+                            </Link>
+                            </div>
                         : null
                 }
             </div>
