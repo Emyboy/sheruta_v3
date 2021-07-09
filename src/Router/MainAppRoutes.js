@@ -24,6 +24,7 @@ import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
 import CreateRequest from '../pages/Request/CraeteRequest';
 import RequestDetails from '../pages/Request/RequestDetails';
 import SearchResults from '../pages/SearchResults/SearchResults'
+import Pricing from '../pages/Pricing/Pricing';
 
 function App() {
     return (
@@ -50,11 +51,11 @@ function App() {
                                     <Route exact path="/request/:uid/:user_id" component={RequestDetails} />
                                     <Route exact path="/search" component={SearchResults} /> 
                                     <Route exact path="/search/:category/:location/:bedroom" component={SearchResults} /> 
+                                    <Route exact path="/pricing" component={Pricing} />
                                     {/* 
                                     <Route exact path="/requests/create" component={RequestCategory} />
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/properties" component={PropertySort} />
-                                    <Route exact path="/pricing" component={Pricing} />
 
                                     <Route exact path="/share" component={Share} />
 

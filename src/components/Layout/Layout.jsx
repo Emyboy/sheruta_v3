@@ -102,6 +102,7 @@ const Layout =  connect(mapStateToProps, mapActionToProps)((props) => {
                     <hr />
                     <EachNav icon='ti-home' text='Home' path='/' />
                     <EachNav icon='ti-comment' text='Requests' path='/requests' />
+                    <EachNav icon='ti-money' text='Pricing' path='/pricing' />
                     <EachNav icon='ti-briefcase' text='About Us' path='/about' />
                     <EachNav icon='ti-mobile' text='Contact Us' path='/contact' />
                     {

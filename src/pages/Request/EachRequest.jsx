@@ -24,11 +24,9 @@ const Eachval = ({
         })
             .then(res => {
                 setState({ ...state, loading: false })
-                console.log(res)
             })
             .catch(err => {
                 setState({ ...state, loading: false })
-                console.log(err)
             })
     }
 
