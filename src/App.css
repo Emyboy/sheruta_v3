@@ -2,8 +2,9 @@
   --theme-color: #00ba74;
   --accent-color: #252c41;
 }
-html {
-  background-color: #f7f9fc !important;
+html, body, #root {
+  /* background-color: #f7f9fc !important; */
+  background-color: #f8f7fc !important;
 }
 .bg-accent {
   background-color: var(--accent-color) !important;
@@ -28,4 +29,17 @@ html {
 
 .ant-notification {
   z-index: 100 !important;
+}
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu div {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
 }

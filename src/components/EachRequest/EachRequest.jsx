@@ -1,11 +1,11 @@
 import React from 'react'
 import Avatar from 'antd/lib/avatar/avatar'
 import moment from 'moment'
+import { Tag } from 'antd';
 
 export default function EachRequest({
     data
 }) {
-
     return (
 
         <article className='bg-white p-2 rounded border mb-3 '>
@@ -22,7 +22,17 @@ export default function EachRequest({
                             </div>
                         </div> : null
                 }
-                <div className="comment-text">
+                <div className='container'>
+                    <div className='mt-2 row'>
+                        {
+                            data.category ? <Tag color='volcano' className='badge'>{data.category.name.toUpperCase()}</Tag> : null
+                        }
+                        {
+                            data.service ? <Tag color='cyan' className='badge'>{data.service.name.toUpperCase()}</Tag> : null
+                        }
+                    </div>
+                </div>
+                <div className="comment-text mt-1">
                     <p>{data.body.length > 90 ? data.body.slice(0, 90) + "..." : data.body}</p>
                 </div>
             </div>

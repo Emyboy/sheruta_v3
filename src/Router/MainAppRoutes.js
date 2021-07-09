@@ -20,7 +20,10 @@ import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
 import Login from '../pages/Login/Login';
 import Profile2 from '../pages/Profile/Profile2';
 import Signup from '../pages/Signup/Signup'
-import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess'
+import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
+import CreateRequest from '../pages/Request/CraeteRequest';
+import RequestDetails from '../pages/Request/RequestDetails';
+import SearchResults from '../pages/SearchResults/SearchResults'
 
 function App() {
     return (
@@ -43,10 +46,12 @@ function App() {
                                     <Route exact path="/profile" component={Profile2} />
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
-                                    {/* 
-                                    <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={RequestCategory} />
-                                    <Route exact path="/requests/create" component={RequestCategory} />
+                                    <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={CreateRequest} />
                                     <Route exact path="/request/:uid/:user_id" component={RequestDetails} />
+                                    <Route exact path="/search" component={SearchResults} /> 
+                                    <Route exact path="/search/:category/:location/:bedroom" component={SearchResults} /> 
+                                    {/* 
+                                    <Route exact path="/requests/create" component={RequestCategory} />
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/properties" component={PropertySort} />
                                     <Route exact path="/pricing" component={Pricing} />
@@ -56,7 +61,7 @@ function App() {
                                     <Route exact path="/feedback" component={UserFeedback} />
                                     <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
                                     <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
-                                    <Route exact path="/search/:category/:location/:bedroom" component={SearchResults} /> */}
+                                    */}
                                     <Route component={PageNotFound} />
                                 </Switch>
                             </BrowserRouter>

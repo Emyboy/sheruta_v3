@@ -5,7 +5,8 @@ import EachRequest from '../../components/EachRequest/EachRequest'
 import Sticky from 'react-sticky-el';
 import { notification } from 'antd';
 import { Spinner } from 'react-activity';
-import Layout from '../../components/Layout/Layout'
+import Layout from '../../components/Layout/Layout';
+import Heading from '../../components/Heading/Heading';
 
 const AllRequests = (props) => {
 
@@ -30,7 +31,7 @@ const AllRequests = (props) => {
                 })
         } else {
             setState({ ...state, loading: true, })
-            axios(process.env.REACT_APP_API_URL + '/property-requests/?category=' + state.selectedCategory)
+            axios(process.env.REACT_APP_API_URL + '/property-requests/?category=' + state.selectedCategory.id)
                 .then(res => {
                     setState({ ...state, list: res.data, loading: false })
                 })
@@ -39,7 +40,7 @@ const AllRequests = (props) => {
                     notification.error({ message: 'Error, Please try again' })
                 })
         }
-    }, [state.selectedCategory, state]);
+    }, [state.selectedCategory]);
 
     return (
         <Layout>
@@ -51,15 +52,15 @@ const AllRequests = (props) => {
                     <div className="scrollmenu">
                         <div
                             onClick={() => setState({ ...state, selectedCategory: null })}
-                            className={`nearby_place_rate good border mr-2 p-2 rounded ml-3 ${!state.selectedCategory ? 'bg-info' : ''} text-dark`}>
+                            className={`nearby_place_rate good border text-accent mr-2 p-1 rounded ml-3 ${!state.selectedCategory ? 'bg-theme' : 'bg-white'} text-dark`}>
                             <b>All</b>
                         </div>
                         {
                             view.categories.map((val, i) => {
                                 return <div
-                                    onClick={() => setState({ ...state, selectedCategory: val.id })}
+                                    onClick={() => setState({ ...state, selectedCategory: val })}
                                     key={i}
-                                    className={`nearby_place_rate good border mr-2 p-2 rounded ml-3 link ${state.selectedCategory === val.id ? 'bg-info' : ''} text-dark`}>
+                                    className={`nearby_place_rate good border text-accent mr-2 p-1 rounded ml-3 link ${state.selectedCategory?.id === val.id ? 'bg-theme' : 'bg-white'} text-dark`}>
                                     <b>{val.name}</b>
                                 </div>
                             })
@@ -67,16 +68,9 @@ const AllRequests = (props) => {
                     </div>
                 </div>
             </Sticky>
-            <section>
+            <section className='pt-1'>
                 <div className='container-fluid'>
-                    <div className="row">
-                        <div className="col-lg-12 col-md-12">
-                            <div className="sec-heading center">
-                                <h1>All Requests</h1>
-                                {/* <p>Find new & featured property for you.</p> */}
-                            </div>
-                        </div>
-                    </div>
+                    <Heading heading={`${state.selectedCategory ? state.selectedCategory.name : 'All '} Requests`}/>
                     <hr />
                 </div>
                 <div className="format-standard">
