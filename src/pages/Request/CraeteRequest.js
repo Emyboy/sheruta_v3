@@ -66,6 +66,7 @@ const CraeteRequest = (props) => {
             },
         })
             .then(res => {
+                console.log(res)
                 props.getUserFeedback();
                 setState({ ...state, loading: false, done: true })
             })

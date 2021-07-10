@@ -48,7 +48,6 @@ export default connect(
     const handlePaystackSuccessAction = (reference, payment_plan_id) => {
         // Implementation for whatever you want to do with reference and after success call.
         setData({ ...data, payment_plan: payment_plan_id, reference })
-        console.log(reference, data.payment_plan);
         setState({ ...state, paystackDone: true })
     };
 
@@ -61,7 +60,6 @@ export default connect(
     const getAllPaymentPlans = () => {
         axios(process.env.REACT_APP_API_URL + '/payment-plans')
             .then(res => {
-                console.log(res.data);
                 setState({ ...state, loading: false, plans: res.data })
             })
             .catch(err => {
@@ -90,7 +88,6 @@ export default connect(
             }
         })
             .then(res => {
-                console.log('Payment ---', res);
                 if (res.status === 201) {
                     setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'success' })
                 } else
@@ -98,7 +95,6 @@ export default connect(
             })
             .catch(err => {
                 setState({ ...state, paystackDone: false, message: 'Server Error', messageType: 'failed' })
-                console.log({ ...err });
             })
     }
 
@@ -118,7 +114,7 @@ export default connect(
 
     return (
        <Layout>
-            <div className='container mt-4'>
+            <div className='container mt-4 pb-5'>
                 <Modal show={state.message ? true : false}>
                     <Modal.Body>
                         <div className='text-center'>
@@ -139,7 +135,7 @@ export default connect(
                     </div>
                 </div>
 
-                <div className="row mb-5 justify-content-center">
+                <div className="row mb-5 justify-content-center pb-5">
 
                     {
                         state.plans.map((val, i) => {

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
 import EachRequest from '../../components/EachRequest/EachRequest';
+import Global from '../../Global'
 
 export default function Home() {
     const [state, setState] = useState({
@@ -17,7 +18,7 @@ export default function Home() {
 
     useEffect(() => {
         if (state.properties.length === 0) {
-            axios(process.env.REACT_APP_API_URL + '/properties/recent/6')
+            axios(process.env.REACT_APP_API_URL + `/properties/recent/${Global.isMobile ? '6': '4'}`)
                 .then(res => {
                     setState({ ...state, properties: res.data })
                 })
