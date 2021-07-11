@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import store from '../../redux/store/store'
 import { Spinner } from 'react-activity';
 import { notification } from 'antd';
 import MetaTags from 'react-meta-tags';
@@ -11,7 +10,7 @@ import Layout from '../../components/Layout/Layout'
 
 export const Signup = (props) => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const [state, setState] = useState({
         loading: false,
         errorMessage: null,

@@ -8,26 +8,14 @@ import Global from '../../Global';
 import Layout from '../../components/Layout/Layout';
 
 const RequestDetails = (props) => {
-    const { user_id, uid } = props.match.params;
+    const { uid } = props.match.params;
 
     const [state, setState] = useState({
         loading: true
     })
     const [request, setRequest] = useState(null)
 
-    const getRequestData = () => {
-        setState({ ...state, loading: true })
-        axios(process.env.REACT_APP_API_URL + "/property-requests/?uuid=" + uid)
-            .then(res => {
-                console.log(res)
-                setRequest(res.data[0])
-                setState({ ...state, loading: false })
-            })
-            .catch(err => {
-                setState({ ...state, loading: false })
-                notification.error({ message: 'Error fetching reqeust data' })
-            })
-    }
+
 
     function makeJobSchema(request) {
         // const desc = stripHTML(job.description)
@@ -61,7 +49,18 @@ const RequestDetails = (props) => {
     }
 
     useEffect(() => {
-        getRequestData()
+        setState({ ...state, loading: true })
+
+        axios(process.env.REACT_APP_API_URL + "/property-requests/?uuid=" + uid)
+            .then(res => {
+                console.log(res)
+                setRequest(res.data[0])
+                setState({ ...state, loading: false })
+            })
+            .catch(err => {
+                setState({ ...state, loading: false })
+                notification.error({ message: 'Error fetching reqeust data' })
+            })
     }, [])
 
     if (state.loading) {

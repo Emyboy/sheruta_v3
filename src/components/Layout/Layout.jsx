@@ -113,7 +113,7 @@ const Layout =  connect(mapStateToProps, mapActionToProps)((props) => {
             </aside>
 
 
-            <div className='pt-5 mt-2'>
+            <div className='pt-5 mt-2 pb-5'>
                 {children}
             </div>
 

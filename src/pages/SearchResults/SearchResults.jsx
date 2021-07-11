@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Spinner } from 'react-activity';
 import axios from 'axios';
 import HorizontalProductCard from '../../components/PropertyCard/HorizontalPropertyCard';
-import { notification } from 'antd';
 import Layout from '../../components/Layout/Layout';
 // import SearchBox from '../pages/Home/SearchBox';
 
 const SearchResults = (props) => {
-    console.log('PARAMS ---', props.match.params)
+
     const [state, setState] = useState({
         loading: true,
         results: []
     })
     const { category, bedroom, location } = props.match.params;
 
-    const getSearchResults = () => {
+    useEffect(() => {
         axios(process.env.REACT_APP_API_URL + `/properties/search/${category}/${location}/${bedroom}`)
             .then(res => {
                 console.log('search result ---', res)
@@ -27,11 +25,7 @@ const SearchResults = (props) => {
             .catch(err => {
                 // notification.error({ message: 'Application Error' })
             })
-    }
-
-    useEffect(() => {
-        getSearchResults();
-    }, []);
+    }, [category, bedroom, location]);
 
     return (
         <Layout page='search'>

@@ -70,7 +70,7 @@ export const Request = (props) => {
                     <meta property="og:title" content={'Requests | Sheruta NG'} />
                     <meta property="og:description" content={'Make apartment requests so everyone can see it'} />
                 </MetaTags>
-                <div className='container bg-white pt-5 pb-5 mt-4 mb-5 rounded shadow border'>
+                <div className='container bg-white pt-5 pb-5 mt-4 rounded shadow border'>
                     <div className='text-center'>
                         <h2><b className='text-muted'>{state.heading}</b></h2>
                     </div>
