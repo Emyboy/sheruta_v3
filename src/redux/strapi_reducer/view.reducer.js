@@ -2,7 +2,8 @@
 const initialState = {
     services: [],
     categories: [],
-    askForUserFeedback: false
+    askForUserFeedback: false,
+    showPaymentPopup: false
 }
 
 function ViewReducer(state = initialState, { type, payload }) {

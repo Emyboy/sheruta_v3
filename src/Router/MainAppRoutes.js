@@ -26,6 +26,7 @@ import RequestDetails from '../pages/Request/RequestDetails';
 import SearchResults from '../pages/SearchResults/SearchResults'
 import Pricing from '../pages/Pricing/Pricing';
 import UserFeedback from '../pages/Feedback/UserFeedback'
+import PaymentPopup from '../components/Popups/PaymentPopup';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                             <div className="clearfix"></div>
                             <BrowserRouter>
                                 <FeedbackPopup />
+                                <PaymentPopup />
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/login" component={Login} />

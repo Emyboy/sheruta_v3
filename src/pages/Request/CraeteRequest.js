@@ -5,12 +5,13 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { v4 as Uid } from 'uuid'
-import { notification } from 'antd';
+import { Alert, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import TextInput from '../../components/TextInput/TextInput'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { getUserFeedback } from '../../redux/strapi_actions/view.action'
 import Layout from '../../components/Layout/Layout';
+import store from '../../redux/store/store';
 
 const uid = Uid();
 
@@ -28,7 +29,8 @@ const CraeteRequest = (props) => {
         services: [],
         loading: false,
         done: false,
-        hideOptions: true
+        hideOptions: true,
+        message: null
     });
 
     const [data, setData] = React.useState({
@@ -46,8 +48,7 @@ const CraeteRequest = (props) => {
 
 
     const handleSubmit = e => {
-        // e.priventDefault();
-        console.log(state)
+        e.preventDefault();
         if (!state.categories) {
             notification.error({ message: 'Please select a category' });
             return
@@ -56,32 +57,51 @@ const CraeteRequest = (props) => {
             notification.error({ message: 'Please add a location' });
             return
         }
-        setState({ ...state, loading: true })
+        setState({ ...state, loading: true });
+        const newRequest = { ...data, body_html: `<p>${data.body}</p>`, uuid: uid, users_permissions_user: props.auth.user.user.id };
         axios(process.env.REACT_APP_API_URL + "/property-requests", {
             method: 'POST',
-            data: { ...data, body_html: `<p>${data.body}</p>`, uuid: uid, users_permissions_user: props.auth.user.user.id },
+            data: newRequest,
             headers: {
                 Authorization:
                     `Bearer ${props.auth.user.jwt}`,
             },
         })
             .then(res => {
-                console.log(res)
                 props.getUserFeedback();
+                localStorage.removeItem('ph_request');
                 setState({ ...state, loading: false, done: true })
             })
             .catch(err => {
+                if (err.response.status == 426 || err.response.status === 402) {
+                    store.dispatch({
+                        type: 'SET_VIEW_STATE',
+                        payload: {
+                            showPaymentPopup: true
+                        }
+                    });
+                    localStorage.setItem('ph_request', JSON.stringify(newRequest));
+                }
                 setState({ ...state, loading: false });
                 notification.error({ message: 'Error creating request' })
             })
     };
 
     React.useEffect(() => {
+        const ph_request = JSON.parse(localStorage.getItem('ph_request'))
         if (Object.keys(params).length === 0) {
             setState({ ...state, hideOptions: false })
         }
         if (Object.keys(params).length > 0) {
-            setData({ ...data, service: parseInt(params.service_id), category: parseInt(params.category_id), is_searching: params.is_searching === "true" })
+            setData({
+                ...data,
+                service: parseInt(params.service_id), category: parseInt(params.category_id),
+                is_searching: params.is_searching === "true",
+            })
+            setData({ ...data, ...ph_request })
+        }
+        if (ph_request) {
+            setState({ ...state, message: 'Continue from where you left off' })
         }
     }, [])
 
@@ -98,7 +118,7 @@ const CraeteRequest = (props) => {
                         <div className="comment-box submit-form">
                             {/* <h3 className="reply-title">Post Request</h3> */}
                             <div className="comment-form">
-                                <Link to={`/request/${uid}/${props.auth.user.user.id}`}>
+                                <Link to={`/request/${data.uuid}/${props.auth.user.user.id}`}>
                                     <Btn text='View Request' />
                                 </Link>
                             </div>
@@ -112,11 +132,12 @@ const CraeteRequest = (props) => {
     } else
         return (
             <Layout back>
-                <div className='mt-5 mb-5'>
-                    <div className='container bg-white'>
+                <div className='mt-5 pb-5'>
+                    <div className='container bg-white mb-5'>
                         <div className='pt-5 pb-5'>
                             <div className='text-center'>
                                 <h2>Create Request</h2>
+                                {state.message ? <Alert message={state.message} type="success" /> : null}
                             </div>
                             <div className="comment-box submit-form">
                                 {/* <h3 className="reply-title">Post Request</h3> */}
@@ -126,8 +147,10 @@ const CraeteRequest = (props) => {
                                             <div className="col-lg-12 col-md-6 col-sm-12">
                                                 <TextInput
                                                     label='Request Heading'
+                                                    required
                                                     placeholder="Eg. I need a shared apartment in Ikeja"
                                                     onChange={e => setData({ ...data, heading: e.target.value })}
+                                                    defaultValue={data.heading}
                                                 />
                                             </div>
 
@@ -174,7 +197,6 @@ const CraeteRequest = (props) => {
                                                             // props.state.location,
                                                             className: 'border',
                                                             onChange: e => {
-                                                                console.log(e)
                                                                 setData({ ...data, google_location: e, location: e.label })
                                                             },
                                                             placeholder:
@@ -195,6 +217,8 @@ const CraeteRequest = (props) => {
                                                         style={{ height: '40px' }}
                                                         className='form-control'
                                                         type='number'
+                                                        required
+                                                        defaultValue={data.budget}
                                                         placeholder='Eg. 300000'
                                                         onChange={e => setData({ ...data, budget: e.target.value })}
                                                     />
@@ -209,12 +233,14 @@ const CraeteRequest = (props) => {
                                                             body_html: e.target.value,
                                                             body: e.target.value,
                                                         })
-                                                    }} disabled={state.loading} required name="body" className="form-control" cols="30" rows="6" placeholder="Type your request...."></textarea>
+                                                    }} disabled={state.loading} required name="body" className="form-control" cols="30" rows="6" placeholder="Type your request...."
+                                                        defaultValue={data.body}
+                                                    ></textarea>
                                                 </div>
                                             </div>
                                             <div className="col-lg-12 col-md-12 col-sm-12">
                                                 <div className="form-group">
-                                                    <Btn onClick={handleSubmit} type='button' text='Post Request' className='w-100 shadow' loading={state.loading} />
+                                                    <Btn type='submit' text='Post Request' className='w-100 shadow' loading={state.loading} />
                                                 </div>
                                             </div>
                                         </div>

@@ -43,3 +43,8 @@ div.scrollmenu div {
   padding: 14px;
   text-decoration: none;
 }
+
+.profile-content {
+    overflow-y: scroll !important;
+    height: 70vh !important;
+}

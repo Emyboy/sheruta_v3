@@ -46,9 +46,9 @@ export const Profile2 = (props) => {
             <Layout
                 page='profile'
             >
-                <section className="pt-2" style={{ height: '90vh' }}>
+                <section className="pt-2" style={{ height: '90vh', marginBottom: '20vh' }}>
                     <ProfileImageModal show={state.showImageModal} handleClose={() => setState({ ...state, showImageModal: !state.showImageModal })} />
-                    <div className="container-fluid">
+                    <div className="container-fluid pb-5">
                         <div className="row" style={{ justifyContent: 'center' }}>
 
                             <div className="col-lg-9 col-md-8 p-0">
@@ -74,14 +74,16 @@ export const Profile2 = (props) => {
                                                 />
                                             </div>
                                         </TabPane>
-                                        <TabPane tab="Requests" key="2" className='profile-content'>
+                                        <TabPane tab="Requests" key="2" className='profile-content mb-5'>
                                             <div className="comment-area">
                                                 <div className="all-comments">
                                                     <div className="comment-list container">
                                                         <div className='row'>
                                                             {
                                                                 state.userRequests.map((val, i) => {
-                                                                    return <EachRequest val={val} key={i} />
+                                                                    return <div className='col-lg-4 col-md-6 col-sm-12'>
+                                                                        <EachRequest val={val} key={i} />
+                                                                    </div>
                                                                 })
                                                             }
                                                         </div>

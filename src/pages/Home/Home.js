@@ -8,7 +8,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
 import EachRequest from '../../components/EachRequest/EachRequest';
-import Global from '../../Global'
+import Global from '../../Global';
+import PropertyCardSM from '../../components/PropertyCard/PropertyCardSM'
 
 export default function Home() {
     const [state, setState] = useState({
@@ -18,7 +19,7 @@ export default function Home() {
 
     useEffect(() => {
         if (state.properties.length === 0) {
-            axios(process.env.REACT_APP_API_URL + `/properties/recent/${Global.isMobile ? '6': '4'}`)
+            axios(process.env.REACT_APP_API_URL + `/properties/recent/${Global.isMobile ? '4': '6'}`)
                 .then(res => {
                     setState({ ...state, properties: res.data })
                 })
@@ -28,7 +29,7 @@ export default function Home() {
     }, [state]);
     useEffect(() => {
         if (state.list.length === 0) {
-            axios(process.env.REACT_APP_API_URL + '/property-requests/recent/6')
+            axios(process.env.REACT_APP_API_URL + `/property-requests/recent/${Global.isMobile ? '4' : '5'}`)
                 .then(res => {
                     setState({ ...state, list: res.data })
                 })
@@ -62,7 +63,7 @@ export default function Home() {
                         <div className='row'>
                             {
                                 state.properties.map((val, i) => {
-                                    return <PropertyCard key={i} data={val} />
+                                    return Global.isMobile ? <PropertyCardSM key={i} val={val} /> :<PropertyCard key={i} data={val} />
                                 })
                             }
 
