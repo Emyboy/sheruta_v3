@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 export const PropertyCardSM = ({
     val
 }) => {
+    console.log('val --', val)
     return (
         <div className="sides_list_property">
             <div className="sides_list_property_thumb">
@@ -25,6 +26,13 @@ export const PropertyCardSM = ({
                     </div>
                     <div className="lists_property_price_value">
                         <h4>₦ {window.formatedPrice.format(val.price)}</h4>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="container">
+                        <small>Bedroom: <b>{val.bedroom}</b></small>{' '}
+                        <small>Bathroom: <b>{val.bathroom}</b></small>{' '}
+                        <small>Toilet: <b>{val.toilet}</b></small>{' '}
                     </div>
                 </div>
             </div>

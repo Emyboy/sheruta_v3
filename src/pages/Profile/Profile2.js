@@ -25,7 +25,7 @@ export const Profile2 = (props) => {
 
 
     useEffect(() => {
-        if(user){
+        if (user) {
             axios(process.env.REACT_APP_API_URL + '/property-requests/?users_permissions_user=' + user.user.id, {
 
             })
@@ -56,7 +56,7 @@ export const Profile2 = (props) => {
                                     <Tabs defaultActiveKey="1" onChange={callback}>
                                         <TabPane tab="Profile" key="1" className='profile-content'>
                                             <div className="d-user-avater">
-                                                <img src={user.user.avatar_url} className="img-fluid avater" alt="" />
+                                                <img src={user.user.avatar_url} className="img-fluid avater" alt=""  />
                                                 <h4>{`${user.user.first_name} ${user.user.last_name}`}</h4>
                                                 <span>{user.user.email}</span><br />
                                                 <span>@{user.user.username}</span>

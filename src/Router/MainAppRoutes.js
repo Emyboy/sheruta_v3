@@ -29,7 +29,8 @@ import UserFeedback from '../pages/Feedback/UserFeedback'
 import PaymentPopup from '../components/Popups/PaymentPopup';
 import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
-import PasswordReset from '../pages/ResetPassword/PasswordReset'
+import PasswordReset from '../pages/ResetPassword/PasswordReset';
+import PropertySort from '../pages/Property/PropertySort'
 
 function App() {
     return (
@@ -62,9 +63,9 @@ function App() {
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
                                     <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
+                                    <Route exact path="/properties" component={PropertySort} />
                                     {/* 
                                     <Route exact path="/requests/create" component={RequestCategory} />
-                                    <Route exact path="/properties" component={PropertySort} />
 
                                     <Route exact path="/share" component={Share} />
 

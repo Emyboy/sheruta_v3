@@ -29,7 +29,7 @@ export default function Home() {
     }, [state]);
     useEffect(() => {
         if (state.list.length === 0) {
-            axios(process.env.REACT_APP_API_URL + `/property-requests/recent/${Global.isMobile ? '4' : '5'}`)
+            axios(process.env.REACT_APP_API_URL + `/property-requests/recent/${Global.isMobile ? '4' : '4'}`)
                 .then(res => {
                     setState({ ...state, list: res.data })
                 })
@@ -66,8 +66,8 @@ export default function Home() {
                                     return Global.isMobile ? <PropertyCardSM key={i} val={val} /> :<PropertyCard key={i} data={val} />
                                 })
                             }
-
                         </div>
+                            <Link to="/properties" className="reviews-checked theme-cl"><i className="fas fa-arrow-alt-circle-down mr-2"></i>See More Properties</Link>
                     </div>
                     <div className='col-lg-4 col-md-12 col-sm-12'>
                         <Heading heading='Recent Requests' subHeading='These are the most recent requests we have.' />
