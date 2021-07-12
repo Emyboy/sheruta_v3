@@ -27,6 +27,9 @@ import SearchResults from '../pages/SearchResults/SearchResults'
 import Pricing from '../pages/Pricing/Pricing';
 import UserFeedback from '../pages/Feedback/UserFeedback'
 import PaymentPopup from '../components/Popups/PaymentPopup';
+import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
+import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
+import PasswordReset from '../pages/ResetPassword/PasswordReset'
 
 function App() {
     return (
@@ -56,15 +59,15 @@ function App() {
                                     <Route exact path="/search/:category/:location/:bedroom" component={SearchResults} /> 
                                     <Route exact path="/pricing" component={Pricing} />
                                     <Route exact path="/feedback" component={UserFeedback} />
+                                    <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
+                                    <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
+                                    <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
                                     {/* 
                                     <Route exact path="/requests/create" component={RequestCategory} />
-                                    <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/properties" component={PropertySort} />
 
                                     <Route exact path="/share" component={Share} />
 
-                                    <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
-                                    <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
                                     */}
                                     <Route component={PageNotFound} />
                                 </Switch>

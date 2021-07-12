@@ -3,23 +3,23 @@
   "name": "Sheruta",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2FLOGOS%2Fsheruta%20logo%20green%203D.png?alt=media&token=2090e013-6e9c-4c7d-a4bb-db976b316ed1",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo.png",
+      "src": "https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2FLOGOS%2Fsheruta%20logo%20green%203D.png?alt=media&token=2090e013-6e9c-4c7d-a4bb-db976b316ed1",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo.png",
+      "src": "https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2FLOGOS%2Fsheruta%20logo%20green%203D.png?alt=media&token=2090e013-6e9c-4c7d-a4bb-db976b316ed1",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#252c41",
-  "background_color": "#ffffff"
+  "theme_color": "#00ba74",
+  "background_color": "#00ba74"
 }

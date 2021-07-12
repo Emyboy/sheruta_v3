@@ -60,6 +60,7 @@ export default connect(
     const getAllPaymentPlans = () => {
         axios(process.env.REACT_APP_API_URL + '/payment-plans')
             .then(res => {
+                console.log('res---', res);
                 setState({ ...state, loading: false, plans: res.data })
             })
             .catch(err => {
@@ -68,12 +69,12 @@ export default connect(
     }
 
     const sendPaymentToBackend = () => {
-        console.log('SENDING ----', {
-            ...data.reference,
-            // ...mockRef,
-            payment_plan: data.payment_plan,
-            users_permissions_user: props.auth.user.user.id
-        })
+        // console.log('SENDING ----', {
+        //     ...data.reference,
+        //     // ...mockRef,
+        //     payment_plan: data.payment_plan,
+        //     users_permissions_user: props.auth.user.user.id
+        // })
         axios(process.env.REACT_APP_API_URL + '/transactions', {
             method: 'POST',
             headers: {
@@ -113,7 +114,7 @@ export default connect(
     }, [state.paystackDone])
 
     return (
-       <Layout>
+        <Layout>
             <div className='container mt-4 pb-5'>
                 <Modal show={state.message ? true : false}>
                     <Modal.Body>
@@ -142,13 +143,14 @@ export default connect(
                             return <div className="col-lg-4 col-md-4" key={i}>
                                 <div className="pricing-wrap">
 
-                                    <div className="pricing-header">
+                                    <div className="pricing-header pb-1">
                                         <i className="lni-layers"></i>
                                         <h4 className="pr-title">{val.name}</h4>
                                         <span className="pr-subtitle">{val.sub_title}</span>
                                     </div>
                                     <div className="pricing-value">
-                                        <h4 className="pr-value">{formatedPrice.format(val.price)}</h4>
+                                        {val.discount_price ? <h5 className="mb-4 line-through  text-danger">{formatedPrice.format(val.price)}</h5> : null}
+                                        <h4 className="pr-value">{formatedPrice.format(val.discount_price ? val.discount_price : val.price)}</h4>
                                     </div>
                                     <div className="pricing-body">
                                         <ul>
@@ -169,7 +171,7 @@ export default connect(
                                                 <PaystackButton className='btn bg-theme rounded' {...{
                                                     ...config,
                                                     text: 'Pay Now',
-                                                    amount: val.price + "00",
+                                                    amount: `${val.discount_price ? val.discount_price + "00" : val.price + "00"}`,
                                                     email: props.auth.user.user.email,
                                                     onSuccess: (reference) => handlePaystackSuccessAction(reference, val.id),
                                                     onClose: handlePaystackCloseAction,
@@ -238,6 +240,6 @@ export default connect(
 
                 </div>
             </div>
-       </Layout>
+        </Layout>
     )
 });

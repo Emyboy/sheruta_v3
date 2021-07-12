@@ -48,3 +48,6 @@ div.scrollmenu div {
     overflow-y: scroll !important;
     height: 70vh !important;
 }
+.line-through {
+  text-decoration: line-through!important;
+}
