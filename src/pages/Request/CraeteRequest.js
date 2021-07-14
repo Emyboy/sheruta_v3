@@ -12,6 +12,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { getUserFeedback } from '../../redux/strapi_actions/view.action'
 import Layout from '../../components/Layout/Layout';
 import store from '../../redux/store/store';
+import { notifyEmy } from '../../utils/Sheruta'
 
 const uid = Uid();
 
@@ -22,6 +23,7 @@ const CraeteRequest = (props) => {
     const { view, match } = props;
 
     const { params } = match;
+    console.log('PRAMS ---', params)
 
 
     const [state, setState] = React.useState({
@@ -58,7 +60,15 @@ const CraeteRequest = (props) => {
             return
         }
         setState({ ...state, loading: true });
-        const newRequest = { ...data, body_html: `<p>${data.body}</p>`, uuid: uid, users_permissions_user: props.auth.user.user.id };
+        const newRequest = { 
+            ...data, 
+            body_html: `<p>${data.body}</p>`, 
+            uuid: uid, users_permissions_user: props.auth.user.user.id ,
+            service: parseInt(params.service_id),
+            category: parseInt(params.category_id),
+            is_searching: params.is_searching === "true",
+        };
+        console.log('ADDING ---', newRequest)
         axios(process.env.REACT_APP_API_URL + "/property-requests", {
             method: 'POST',
             data: newRequest,
@@ -73,6 +83,10 @@ const CraeteRequest = (props) => {
                 setState({ ...state, loading: false, done: true })
             })
             .catch(err => {
+                notifyEmy({
+                    heading: 'Error while posting request',
+                    body: JSON.stringify(err)
+                })
                 if (err.response.status == 426 || err.response.status === 402) {
                     store.dispatch({
                         type: 'SET_VIEW_STATE',
@@ -95,7 +109,8 @@ const CraeteRequest = (props) => {
         if (Object.keys(params).length > 0) {
             setData({
                 ...data,
-                service: parseInt(params.service_id), category: parseInt(params.category_id),
+                service: parseInt(params.service_id), 
+                category: parseInt(params.category_id),
                 is_searching: params.is_searching === "true",
             })
             setData({ ...data, ...ph_request })

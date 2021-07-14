@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Layout from '../../components/Layout/Layout';
+import { notifyEmy } from '../../utils/Sheruta'
 
 const formatedPrice = new Intl.NumberFormat('en-NG');
 
@@ -49,6 +50,10 @@ export default connect(
         // Implementation for whatever you want to do with reference and after success call.
         setData({ ...data, payment_plan: payment_plan_id, reference })
         setState({ ...state, paystackDone: true })
+        notifyEmy({
+            heading: 'Payment was sent to paystack',
+            body: JSON.stringify({...reference, payment_plan_id})
+        })
     };
 
     // you can call this function anything
@@ -64,6 +69,10 @@ export default connect(
                 setState({ ...state, loading: false, plans: res.data })
             })
             .catch(err => {
+                notifyEmy({
+                    heading: "Error getting payment plans",
+                    body: JSON.stringify(err)
+                })
                 notification.error({ message: 'Error getting payment plans' })
             })
     }
@@ -89,12 +98,20 @@ export default connect(
             }
         })
             .then(res => {
+                notifyEmy({
+                    heading: "Money was paied to sheruta",
+                    body: JSON.stringify(res)
+                })
                 if (res.status === 201) {
                     setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'success' })
                 } else
                     setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'failed' })
             })
             .catch(err => {
+                notifyEmy({
+                    heading: "Error while sending payment to backend",
+                    body: JSON.stringify(err)
+                })
                 setState({ ...state, paystackDone: false, message: 'Server Error', messageType: 'failed' })
             })
     }
@@ -156,12 +173,13 @@ export default connect(
                                         <ul>
                                             <li>{val.duration_in_days} Days Access To</li>
                                             {/* <li>{val.property_count} Property Upload</li> */}
-                                            <li>Agent Contacts {val.agent_contact ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
-                                            <li>Email Notifications {val.email_update ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
-                                            <li>Join Paddy {val.join_paddy ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
-                                            <li>Requests {val.requests ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Flatmate Requests {val.requests ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Email Updates {val.email_update ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Contact Verified Agents{val.agent_contact ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Access Join paddy{val.join_paddy ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Property Inspection{val.inspection_fee ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
+                                            <li>Contact Users{val.user_contacts ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
                                             <li>Property Upload {val.upload_property ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
-                                            <li>User Contacts {val.user_contacts ? <i className='ti ti-check text-theme'></i> : <i className='ti ti-close text-danger'></i>}</li>
                                         </ul>
                                     </div>
                                     <div className="pricing-bottom">

@@ -10,6 +10,7 @@ import MetaTags from 'react-meta-tags';
 import { Link } from 'react-router-dom';
 import VerifyEmailProcess from '../VerifyEmail/VerifyEmailProcess';
 import Layout from '../../components/Layout/Layout';
+import { notifyEmy } from '../../utils/Sheruta';
 
 const mapStateToProps = state => ({
     auth: state.auth
@@ -54,6 +55,10 @@ const Login = props => {
                 }
             })
             .catch(err => {
+                notifyEmy({
+                    heading: "Error logging in ",
+                    body: JSON.stringify({...err, ...data})
+                })
                 setState({
                     ...state,
                     errorMessage: err.response? err.response.data.data[0].messages[0].message : "Server Error",

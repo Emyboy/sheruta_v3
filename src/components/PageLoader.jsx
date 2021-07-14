@@ -15,9 +15,7 @@ const PageLoader = () => {
                 <div className="text-center">
                     <img style={{ width: '150px' }} src={Icon} alt='loading-gif' /><br />
                     {/* <small className='mt-3'>Loading...</small> */}
-                    <div className="mt-3 text-center">
                         <Spinner size={10} color={'green'} />
-                    </div>
                 </div>
             </div>
         </div>

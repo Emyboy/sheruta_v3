@@ -7,6 +7,7 @@ import { Spinner } from 'react-activity';
 import { notification } from 'antd';
 import MetaTags from 'react-meta-tags';
 import Layout from '../../components/Layout/Layout'
+import { notifyEmy } from '../../utils/Sheruta';
 
 export const Signup = (props) => {
 
@@ -23,11 +24,15 @@ export const Signup = (props) => {
         setState({ ...state, loading: true })
         axios(process.env.REACT_APP_API_URL + '/auth/local/register', {
             method: 'POST',
-            data: { ...e, username: e.username.replace(/\s/g, '')},
+            data: { ...e, username: e.username.replace(/\s/g, '') },
         })
             .then(res => {
                 if (res.status === 201) {
                     notification.success({ message: 'Account Created' });
+                    notifyEmy({
+                        heading: `${e.email} just signup`,
+                        body: JSON.stringify(e)
+                    })
                     sessionStorage.setItem('mail', e.email);
                     setState({ ...state, loading: false, goToSuccess: true })
                 }
@@ -40,6 +45,10 @@ export const Signup = (props) => {
                 // })
             })
             .catch(err => {
+                notifyEmy({
+                    heading: "Error signing Up",
+                    body: JSON.stringify({ ...err, ...e })
+                })
                 setState({ ...state, loading: false })
                 setState({ ...state, errorMessage: err.response.data.message || 'Singup Error' })
                 setTimeout(() => {

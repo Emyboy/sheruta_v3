@@ -9,7 +9,7 @@ const SignUpSuccess = () => {
                 <div className="modal-content" id="sign-up-success">
                     <Link to='/'><span className="mod-close" data-dismiss="modal" aria-hidden="true"><i className="ti-close"></i></span></Link>
                     <div className="modal-body">
-                        <h4 className="modal-header-title mt-5" style={{ lineHeight: '30px'}}>Activate Account</h4>
+                        <h4 className="modal-header-title mt-5" style={{ lineHeight: '40px'}}>Activate Account</h4>
                         <p className="text-center">
                             Your account has been created. An activation link has been sent to your registration email.
                             Use the link to activate your account.

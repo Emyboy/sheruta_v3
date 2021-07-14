@@ -6,6 +6,7 @@ import { Spinner } from 'react-activity'
 import { Link } from 'react-router-dom';
 import { notification } from 'antd';
 import Layout from '../../components/Layout/Layout';
+import { notifyEmy } from '../../utils/Sheruta';
 
 
 const VerifyEmail = (props) => {
@@ -34,6 +35,10 @@ const VerifyEmail = (props) => {
                 }
             })
             .catch(err => {
+                notifyEmy({
+                    heading: "Error verifing email",
+                    body: JSON.stringify(err)
+                })
                 if (err.response.status === 404) {
                     setState({
                         ...state,

@@ -6,14 +6,18 @@ import PageLoader from '../../components/PageLoader';
 import MetaTags from 'react-meta-tags';
 import Global from '../../Global';
 import Layout from '../../components/Layout/Layout';
+import PageNotFound from '../../pages/PageNotFound'
+import { Link } from 'react-router-dom';
 
 const RequestDetails = (props) => {
     const { uid } = props.match.params;
+    const { auth } = props;
 
     const [state, setState] = useState({
-        loading: true
+        loading: true,
+        notFound: false
     })
-    const [request, setRequest] = useState(null)
+    const [request, setRequest] = useState(null);
 
 
 
@@ -53,11 +57,16 @@ const RequestDetails = (props) => {
 
         axios(process.env.REACT_APP_API_URL + "/property-requests/?uuid=" + uid)
             .then(res => {
-                console.log(res)
-                setRequest(res.data[0])
-                setState({ ...state, loading: false })
+                console.log('RES --------', res)
+                if (res.data.length === 0) {
+                    setState({ ...state, notFound: true, loading: false })
+                } else {
+                    setRequest(res.data[0])
+                    setState({ ...state, loading: false })
+                }
             })
             .catch(err => {
+                // console.log('ERROR ------', err)
                 setState({ ...state, loading: false })
                 notification.error({ message: 'Error fetching reqeust data' })
             })
@@ -65,7 +74,9 @@ const RequestDetails = (props) => {
 
     if (state.loading) {
         return <PageLoader />
-    } else
+    } else if (state.notFound) {
+        return <PageNotFound />
+    } else {
         return (
             <Layout>
                 <section className='pt-3'>
@@ -80,10 +91,14 @@ const RequestDetails = (props) => {
                         </script>
                     </MetaTags>
                     <div className='d-flex justify-content-center mt-5'>
-                        <div className='col-lg-8 col-md-12 col-sm-12 col-12'>
+                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
                             <div className="pt-4 pl-3 pr-3 blog-details single-post-item format-standard shadow bg-dark" style={{ borderRadius: 10 }}>
                                 <div className=''>
-                                    <a href={`tel:${request.users_permissions_user.phone_number}`}><i style={{ fontSize: '25px' }} className='fa fa-phone text-theme'></i></a>
+                                    {
+                                        auth.user ?
+                                            <a href={`tel:${request.users_permissions_user.phone_number}`}><i style={{ fontSize: '25px' }} className='fa fa-phone text-theme'></i></a> :
+                                            <Link to={`/login`}><i style={{ fontSize: '25px' }} className='fa fa-phone text-theme'></i></Link>
+                                    }
                                 </div>
                                 <div className="posts-author">
                                     {
@@ -106,7 +121,10 @@ const RequestDetails = (props) => {
                                         <span className='ml-2 text-white'>{request.location}</span>
                                     </div>
                                     <hr />
-                                    <h1 className='text-white' style={{ fontSize: '20px' }}><b>{request.heading}</b></h1>
+                                    {
+                                        request.heading ?
+                                            <h1 className='text-white' style={{ fontSize: '20px' }}><b>{request.heading}</b></h1> : null
+                                    }
                                     <p className="pa-text text-white" style={{ textAlign: 'start' }}>{request.body}</p>
                                 </div>
 
@@ -116,10 +134,11 @@ const RequestDetails = (props) => {
                 </section>
             </Layout>
         )
+    }
 }
 
 const mapStateToProps = (state) => ({
-
+    auth: state.auth
 })
 
 const mapDispatchToProps = {
