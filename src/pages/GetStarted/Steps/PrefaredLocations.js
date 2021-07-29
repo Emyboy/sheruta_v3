@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Btn from '../../../components/Btn/Btn';
+import { AiFillCloseCircle } from 'react-icons/ai'
+import axios from 'axios';
 
 export const PrefaredLocations = (props) => {
     const [data, setData] = React.useState({
@@ -10,16 +12,38 @@ export const PrefaredLocations = (props) => {
     });
 
     const [locaitons, setLocations] = React.useState([]);
+    const [location, setLocation] = React.useState(null);
 
     const handleAddLocation = () => {
-        console.log('adding ---', data.location)
-        setLocations([...locaitons, data.location])
+        // console.log('adding ---', data.location);
+        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
+            method: 'POST',
+            headers: {
+                authorization: 'Berer ' + props.auth.user.token
+            },
+            data: {
+                ...data,
+                users_permissions_user: props.auth.user.user.id,
+                personal_info: props.hasInfo?.id
+            }
+        })
+            .then(res => {
+                console.log(res)
+                setLocations([...locaitons, data])
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
+
+    const removeAddressFromList = (a) => {
+        setLocations([...locaitons.filter(x => x !== a)])
+    }
 
     return (
         <div>
             <div className="sec-heading center">
-                <h2 className='animated animate__bounceIn'>What are your prefared locations?</h2>
+                <h2 className='animated animate__bounceIn'>What are your Preferred locations?</h2>
                 <p>Add multiple locations of your choice</p>
             </div>
             <div className='container'>
@@ -28,7 +52,9 @@ export const PrefaredLocations = (props) => {
                         return <div className='card shadow border border-success mb-2' key={i}>
                             <div className='pl-2 d-flex justify-content-between'>
                                 <p className='mb-0' style={{ fontSize: '20px' }}>{val}</p>
-                                <button className='btn btn-sm btn-danger'>X</button>
+                                <button className='btn btn-sm text-danger' onClick={() => removeAddressFromList(val)}>
+                                    <AiFillCloseCircle size={20} />
+                                </button>
                             </div>
                         </div>
                     })
@@ -55,10 +81,11 @@ export const PrefaredLocations = (props) => {
                                 },
                             }}
                         />
-                        <button className='btn text-success mt-3' onClick={handleAddLocation}>Add+</button><br />
+                        <button className='btn w-50 text-success mt-3' onClick={handleAddLocation}>Add+</button>
+                        <br />
                         <hr />
                         <Btn
-                            text='Next'
+                            text="I'm done"
                             className='mt-3'
                             style={{ backgroundColor: null }}
                             onClick={handleAddLocation}
@@ -71,7 +98,7 @@ export const PrefaredLocations = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-
+    auth: state.auth
 })
 
 const mapDispatchToProps = {
