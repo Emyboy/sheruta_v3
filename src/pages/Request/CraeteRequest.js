@@ -23,7 +23,6 @@ const CraeteRequest = (props) => {
     const { view, match } = props;
 
     const { params } = match;
-    console.log('PRAMS ---', params)
 
 
     const [state, setState] = React.useState({

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { MdCheckBox } from 'react-icons/md'
 
 export default React.memo(({
     onSelect,
@@ -19,6 +20,16 @@ export default React.memo(({
             }
             >
                 {
+                    isSelected ? <MdCheckBox
+                    className='text-success display-6'
+                        style={{
+                            position: 'absolute',
+                            left: '10px',
+                            top: '-4px'
+                        }}
+                     /> : null
+                }
+                {/* {
                     isSelected ? <img
                         style={{
                             position: 'absolute',
@@ -29,8 +40,8 @@ export default React.memo(({
                         alt='check box'
                         src={'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/green-checkmark.png'}
                     /> : null
-                }
-                <h6 style={{ fontSize: '25px' }}>{heading}</h6>
+                } */}
+                <h6 style={{ fontSize: '25px', lineHeight: '30px' }}>{heading}</h6>
                 {subHeading ? <p className='m-0'>{subHeading}</p> : null}
             </div>
         </div>

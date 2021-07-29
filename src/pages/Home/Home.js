@@ -46,7 +46,7 @@ export default function Home() {
 
                     <h1 className="big-header-capt mb-0">Find Verified Flatmates.</h1>
                     <p className="text-center mb-5"></p>
-                    <Link to='/requests'>
+                    <Link to='/start'>
                         <Btn
                             text='Get Started'
                             className='shadow'

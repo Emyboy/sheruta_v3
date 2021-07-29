@@ -31,6 +31,7 @@ import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
 import PasswordReset from '../pages/ResetPassword/PasswordReset';
 import PropertySort from '../pages/Property/PropertySort'
+import GetStarted from '../pages/GetStarted/GetStarted';
 
 function App() {
     return (
@@ -45,6 +46,7 @@ function App() {
                                 <PaymentPopup />
                                 <Switch>
                                     <Route exact path="/" component={Home} />
+                                    <Route exact path="/start" component={GetStarted} />
                                     <Route exact path="/login" component={Login} />
                                     <Route exact path="/contact" component={Contact} />
                                     <Route exact path="/about" component={About} />
