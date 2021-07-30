@@ -1,6 +1,5 @@
 import React from 'react';
 import { func, bool, string } from 'prop-types';
-import { Spinner } from 'react-activity'
 
 const Btn = ({
     text,
@@ -20,7 +19,7 @@ const Btn = ({
             type={type}
             style={{ fontSize: '20px' }}
         >
-            {loading ? <Spinner color='white' /> : <><i className={icon}></i>  {text}</>}
+            {loading ? "Loading..." : <><i className={icon}></i>  {text}</>}
         </button>
     )
 }

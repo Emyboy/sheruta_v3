@@ -9,6 +9,7 @@ import { notification } from 'antd';
 import LookingForGender from './Steps/LookingForGender';
 import LookingForStatus from './Steps/LookingForStatus';
 import PrefaredLocations from './Steps/PrefaredLocations';
+import PersonalInfoForm from './Steps/PersonalInfoForm';
 
 const RenderStep = ({ props, step }) => {
     switch (step) {
@@ -20,6 +21,8 @@ const RenderStep = ({ props, step }) => {
             return <LookingForGender {...props} />
         case 4:
             return <PrefaredLocations {...props} />
+        case 5:
+            return <PersonalInfoForm {...props} />
         default:
             return null;
     }
@@ -29,7 +32,7 @@ export const GetStarted = (props) => {
     localStorage.setItem('after_login', '/start');
     const { auth } = props;
     const [step, setStep] = useState(1);
-   
+
     const [hasInfo, setHasInfo] = useState(false);
 
     const stepsProps = {
@@ -53,7 +56,7 @@ export const GetStarted = (props) => {
         }
     }, [step]);
 
-    
+
 
     if (auth.user) {
         return (

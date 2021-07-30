@@ -67,7 +67,6 @@ const CraeteRequest = (props) => {
             category: parseInt(params.category_id),
             is_searching: params.is_searching === "true",
         };
-        console.log('ADDING ---', newRequest)
         axios(process.env.REACT_APP_API_URL + "/property-requests", {
             method: 'POST',
             data: newRequest,

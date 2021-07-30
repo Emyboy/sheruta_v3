@@ -4,41 +4,75 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Btn from '../../../components/Btn/Btn';
 import { AiFillCloseCircle } from 'react-icons/ai'
 import axios from 'axios';
+import { notification } from 'antd';
 
 export const PrefaredLocations = (props) => {
+
+    const { setStep, step } = props;
+
     const [data, setData] = React.useState({
         location: null,
         google_location: null,
     });
 
     const [locaitons, setLocations] = React.useState([]);
-    const [location, setLocation] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
 
     const handleAddLocation = () => {
-        // console.log('adding ---', data.location);
+        setLoading(true)
         axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
             method: 'POST',
             headers: {
-                authorization: 'Berer ' + props.auth.user.token
+                Authorization:
+                    `Bearer ${props.auth.user.jwt}`,
             },
             data: {
                 ...data,
                 users_permissions_user: props.auth.user.user.id,
-                personal_info: props.hasInfo?.id
+                personal_info: props.hasInfo?.id || null
             }
         })
             .then(res => {
-                console.log(res)
-                setLocations([...locaitons, data])
+                setLoading(false)
+                setLocations([...locaitons, res.data])
             })
             .catch(err => {
-                console.log(err)
+                setLoading(false);
+                notification.error({ message: 'Error adding location' })
             })
     };
 
-    const removeAddressFromList = (a) => {
-        setLocations([...locaitons.filter(x => x !== a)])
-    }
+    const removeAddressFromList = (id) => {
+        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations/' + id, {
+            method: 'DELETE',
+            headers: {
+                Authorization:
+                    `Bearer ${props.auth.user.jwt}`,
+            },
+        })
+            .then(res => {
+                setLocations([...locaitons.filter(x => x.id !== res.data.id)])
+            })
+            .catch(err => {
+                notification.error({ message: 'Error deleting location' })
+            })
+    };
+
+    React.useEffect(() => {
+        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations' + '/?users_permissions_user=' + props.auth.user.user.id, {
+            headers: {
+                Authorization:
+                    `Bearer ${props.auth.user.jwt}`,
+            },
+        })
+            .then(res => {
+                setLocations(res.data)
+            })
+            .catch(err => {
+                notification.error({ message: 'Error fetching your location' })
+                console.log(err)
+            })
+    }, []);
 
     return (
         <div>
@@ -51,9 +85,9 @@ export const PrefaredLocations = (props) => {
                     locaitons.map((val, i) => {
                         return <div className='card shadow border border-success mb-2' key={i}>
                             <div className='pl-2 d-flex justify-content-between'>
-                                <p className='mb-0' style={{ fontSize: '20px' }}>{val}</p>
-                                <button className='btn btn-sm text-danger' onClick={() => removeAddressFromList(val)}>
-                                    <AiFillCloseCircle size={20} />
+                                <p className='mb-0' style={{ fontSize: '20px' }}>{val.location}</p>
+                                <button className='btn btn-sm text-danger' onClick={() => removeAddressFromList(val.id)}>
+                                    <AiFillCloseCircle size={25} />
                                 </button>
                             </div>
                         </div>
@@ -81,14 +115,17 @@ export const PrefaredLocations = (props) => {
                                 },
                             }}
                         />
-                        <button className='btn w-50 text-success mt-3' onClick={handleAddLocation}>Add+</button>
+                        <button disabled={loading} className='btn w-50 text-success mt-3' onClick={handleAddLocation}>
+                            {loading ? "Loading..." : "Add +"}
+                        </button>
                         <br />
                         <hr />
                         <Btn
                             text="I'm done"
                             className='mt-3'
+                            disabled={locaitons.length === 0 || loading}
                             style={{ backgroundColor: null }}
-                            onClick={handleAddLocation}
+                            onClick={() => setStep(step + 1)}
                         />
                     </div>
                 </div>
