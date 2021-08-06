@@ -7,13 +7,18 @@ import { Form, InputGroup, FormControl } from 'react-bootstrap';
 
 const PersonalInfoForm = (props) => {
   const [info, setInfo] = useState(props.info);
-  
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(info);
+    }
+
   useEffect(() => {
     setInfo(props.info);
   }, [props.info]);
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="text-center">
         <h4>Work Information</h4>
       </div>

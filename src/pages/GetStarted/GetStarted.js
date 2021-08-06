@@ -44,7 +44,11 @@ export const GetStarted = (props) => {
 
     useEffect(() => {
         if (auth.user) {
-            axios(process.env.REACT_APP_API_URL + `/personal-infos/?users_permissions_user=${auth.user.user.id}`)
+            axios(process.env.REACT_APP_API_URL + `/personal-infos/?users_permissions_user=${auth.user.user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${auth.user.token}`
+                }
+            })
                 .then(res => {
                     if (res.data.length > 0) {
                         setHasInfo(res.data[0]);
