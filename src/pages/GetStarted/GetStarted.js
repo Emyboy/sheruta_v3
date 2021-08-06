@@ -30,7 +30,7 @@ const RenderStep = ({ props, step }) => {
 
 export const GetStarted = (props) => {
     localStorage.setItem('after_login', '/start');
-    const { auth } = props;
+    const { auth, match } = props;
     const [step, setStep] = useState(1);
 
     const [hasInfo, setHasInfo] = useState(false);
@@ -43,7 +43,7 @@ export const GetStarted = (props) => {
     };
 
     useEffect(() => {
-        if (auth.user && !hasInfo) {
+        if (auth.user) {
             axios(process.env.REACT_APP_API_URL + `/personal-infos/?users_permissions_user=${auth.user.user.id}`)
                 .then(res => {
                     if (res.data.length > 0) {
@@ -77,7 +77,7 @@ export const GetStarted = (props) => {
                                 {hasInfo ? <div className="badge-warning">Updated Personal Information</div> : null}
                             </div>
                         </div>
-                        <RenderStep props={stepsProps} step={step} />
+                        <RenderStep props={stepsProps} step={parseInt(match.params?.step) || step} />
                     </div>
                 </secion>
 
