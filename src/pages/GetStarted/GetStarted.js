@@ -44,19 +44,25 @@ export const GetStarted = (props) => {
 
     useEffect(() => {
         if (auth.user) {
-            axios(process.env.REACT_APP_API_URL + `/personal-infos/?users_permissions_user=${auth.user.user.id}`, {
+            axios(
+              process.env.REACT_APP_API_URL +
+                `/personal-infos/?users_permissions_user=${auth.user.user.id}`,
+              {
                 headers: {
-                    Authorization: `Bearer ${auth.user.token}`
+                  Authorization: `Bearer ${props.auth.user.jwt}`,
+                },
+              }
+            )
+              .then((res) => {
+                if (res.data.length > 0) {
+                  setHasInfo(res.data[0]);
                 }
-            })
-                .then(res => {
-                    if (res.data.length > 0) {
-                        setHasInfo(res.data[0]);
-                    }
-                })
-                .catch(error => {
-                    notification.error({ message: "Error fetching user information" })
-                })
+              })
+              .catch((error) => {
+                notification.error({
+                  message: "Error fetching user information",
+                });
+              });
         }
     }, [step]);
 
