@@ -10,6 +10,7 @@ import LookingForGender from './Steps/LookingForGender';
 import LookingForStatus from './Steps/LookingForStatus';
 import PrefaredLocations from './Steps/PrefaredLocations';
 import PersonalInfoForm from './Steps/PersonalInfoForm';
+import Age from './Steps/Age';
 
 const RenderStep = ({ props, step }) => {
     switch (step) {
@@ -23,6 +24,8 @@ const RenderStep = ({ props, step }) => {
             return <PrefaredLocations {...props} />
         case 5:
             return <PersonalInfoForm {...props} />
+        case 6:
+            return <Age {...props} />
         default:
             return null;
     }
@@ -70,7 +73,7 @@ export const GetStarted = (props) => {
 
     if (auth.user) {
         return (
-            <Layout>
+            <Layout back>
                 <MetaTags>
                     <title>Get Started | Sheruta NG</title>
                     <meta name="description" content="Get Started with Sheruta Today" />
