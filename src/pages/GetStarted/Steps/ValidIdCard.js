@@ -26,18 +26,17 @@ const ValidIdCard = (props) => {
   };
 
   async function handleSelected(e, img) {
-    console.log("IMG --", e.target.files[0]);
     const file = e.target.files[0];
     if (img === 1) {
       new Compressor(file, {
-        quality: file.size > 138145 ? 0.1 : 0.2,
+        quality: 0.2,
         success: (compressedResult) => {
           setFrontImage(compressedResult);
         },
       });
     } else {
       new Compressor(file, {
-        quality: file.size > 138145 ? 0.1 : 0.2,
+        quality: 0.2,
         success: (compressedResult) => {
           setBackImage(compressedResult);
         },
@@ -76,7 +75,7 @@ const ValidIdCard = (props) => {
               setFrontImageURL(downloadURL);
             } else {
               setBackImageURL(downloadURL);
-              setUploading(false)
+              setUploading(false);
             }
           });
         }
