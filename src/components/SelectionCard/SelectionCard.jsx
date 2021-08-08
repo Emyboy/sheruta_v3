@@ -24,8 +24,8 @@ export default React.memo(({
                     className='text-success display-6'
                         style={{
                             position: 'absolute',
-                            left: '10px',
-                            top: '-4px'
+                            left: '15px',
+                            top: '1px'
                         }}
                      /> : null
                 }

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 export const PropertyCardSM = ({
     val
 }) => {
-    console.log('val --', val)
     return (
         <div className="sides_list_property">
             <div className="sides_list_property_thumb">

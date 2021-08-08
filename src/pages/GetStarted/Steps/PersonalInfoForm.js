@@ -7,6 +7,7 @@ import { Form, InputGroup, FormControl } from "react-bootstrap";
 import Select from "react-select";
 import axios from "axios";
 import { notification } from "antd";
+import { AiOutlineWarning } from "react-icons/ai";
 
 const PersonalInfoForm = (props) => {
   const [info, setInfo] = useState(props.info);
@@ -175,6 +176,15 @@ const PersonalInfoForm = (props) => {
       <hr />
       <div className="text-center">
         <h4>Social Information</h4>
+        <div className="text-center">
+          <div className="p-0 alert alert-warning col-md-8 text-center rounded border border-warning">
+            <div className="row justify-content-center">
+              <AiOutlineWarning size={40} />
+              <b className="display-7">Get Verified</b>
+            </div>
+            <p>Provide Your Social Media Handle And Get Verified By Sheruta</p>
+          </div>
+        </div>
       </div>
       <div className="row">
         <div className="col-lg-6 col-md-6">
@@ -192,7 +202,11 @@ const PersonalInfoForm = (props) => {
                 <FormControl
                   id="basic-url"
                   aria-describedby="basic-addon3"
+                  defaultValue={info.facebook}
                   className="pl-1"
+                  onChange={(e) =>
+                    setData({ ...data, facebook: e.target.value })
+                  }
                 />
               </InputGroup>
             </div>
@@ -214,6 +228,10 @@ const PersonalInfoForm = (props) => {
                   id="basic-url"
                   aria-describedby="basic-addon3"
                   className="pl-1"
+                  defaultValue={info.instagram}
+                  onChange={(e) =>
+                    setData({ ...data, instagram: e.target.value })
+                  }
                 />
               </InputGroup>
             </div>
@@ -236,6 +254,10 @@ const PersonalInfoForm = (props) => {
                   id="basic-url"
                   aria-describedby="basic-addon3"
                   className="pl-1"
+                  defaultValue={info.twitter}
+                  onChange={(e) =>
+                    setData({ ...data, twitter: e.target.value })
+                  }
                 />
               </InputGroup>
             </div>
@@ -248,14 +270,14 @@ const PersonalInfoForm = (props) => {
               <TextInput
                 label="Linkedin URL"
                 placeholder="EX. linkedin.com/in/sheruta"
-                defaultValue={info.supervisor_name}
-                onChange={(e) => {}}
+                defaultValue={info.linkedin}
+                onChange={(e) => setData({ ...data, linkedin: e.target.value })}
               />
             </div>
           </div>
         </div>
       </div>
-
+      <hr />
       <div className="form-group text-center">
         {/* <button type="submit" className="btn btn-md full-width pop-login">Sign Up</button> */}
         <Btn text="Submit" className="w-50" type="submit" loading={loading} />

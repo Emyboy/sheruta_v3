@@ -2,7 +2,9 @@
   --theme-color: #00ba74;
   --accent-color: #252c41;
 }
-html, body, #root {
+html,
+body,
+#root {
   /* background-color: #f7f9fc !important; */
   background-color: #f8f7fc !important;
 }
@@ -19,7 +21,17 @@ html, body, #root {
 .text-accent {
   color: var(--accent-color) !important;
 }
-
+.rounded {
+  border-radius: 10px !important;
+}
+.shadow {
+  box-shadow: -7px 10px 43px -7px rgba(176, 192, 180, 0.75);
+  -webkit-box-shadow: -7px 10px 43px -7px rgba(176, 192, 180, 0.75);
+  -moz-box-shadow: -7px 10px 43px -7px rgba(176, 192, 180, 0.75);
+}
+.ant-slider-track {
+  background-color: #00ba74 !important;
+}
 .text-shadow {
   text-shadow: 4px 9px 15px #110805 !important;
 }
@@ -45,9 +57,9 @@ div.scrollmenu div {
 }
 
 .profile-content {
-    overflow-y: scroll !important;
-    height: 70vh !important;
+  overflow-y: scroll !important;
+  height: 70vh !important;
 }
 .line-through {
-  text-decoration: line-through!important;
+  text-decoration: line-through !important;
 }

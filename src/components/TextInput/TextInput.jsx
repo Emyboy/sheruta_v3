@@ -28,6 +28,7 @@ export default ({
         {required ? <span className="text-danger">Required *</span> : null}
         <div className={icon ? "input-with-icon" : ""}>
           <Form.Control
+            className={`${!icon ? 'pl-2' : ''}`}
             required={required}
             onChange={onChange ? (e) => onChange(e) : null}
             disabled={disabled}

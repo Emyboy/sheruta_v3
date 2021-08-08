@@ -11,6 +11,8 @@ import LookingForStatus from './Steps/LookingForStatus';
 import PrefaredLocations from './Steps/PrefaredLocations';
 import PersonalInfoForm from './Steps/PersonalInfoForm';
 import Age from './Steps/Age';
+import AgeRange from './Steps/AgeRange';
+import UpdateAvatar from './Steps/UpdateAvatar';
 
 const RenderStep = ({ props, step }) => {
     switch (step) {
@@ -26,6 +28,10 @@ const RenderStep = ({ props, step }) => {
             return <PersonalInfoForm {...props} />
         case 6:
             return <Age {...props} />
+        case 7:
+            return <AgeRange {...props} />
+        case 8:
+            return <UpdateAvatar {...props} />
         default:
             return null;
     }
@@ -33,8 +39,9 @@ const RenderStep = ({ props, step }) => {
 
 export const GetStarted = (props) => {
     localStorage.setItem('after_login', '/start');
+    const { params  } = props.match;
     const { auth, match } = props;
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(parseInt(params.step) || 1);
 
     const [hasInfo, setHasInfo] = useState(false);
 

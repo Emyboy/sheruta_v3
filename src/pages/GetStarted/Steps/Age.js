@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Form } from "react-bootstrap";
 import Btn from "../../../components/Btn/Btn";
@@ -6,7 +6,6 @@ import axios from "axios";
 import TextInput from "../../../components/TextInput/TextInput";
 
 const Age = (props) => {
-    console.log('PROPS --', props);
   const [date, setDate] = useState();
   const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
@@ -21,18 +20,34 @@ const Age = (props) => {
         method: "PUT",
         data: {
           date_of_birth: date,
+          age: getAge()
         },
       }
     )
       .then((res) => {
         console.log(res);
         setLoading(false);
+        props.setStep(props.step+1)
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
       });
   };
+
+  function getAge() {
+    const dateString = date || props.info.date_of_birth;
+    if (dateString) {
+      const yourYear = dateString.split("-")[0];
+      return new Date().getFullYear() - yourYear;
+    }
+  };
+
+  useEffect(() => {
+    if(props.info) {
+      setDate(props.info.date_of_birth)
+    }
+  },[props.info])
 
   return (
     <div>
@@ -51,14 +66,26 @@ const Age = (props) => {
                     label="Date Of Birth"
                     type="date"
                     onChange={(e) => setDate(e.target.value)}
-                    defaultValue={props.info.date_of_birth}
+                    defaultValue={props.info.date_of_birth || date}
                   />
                 </div>
+                <TextInput
+                  label="Age"
+                  disabled={true}
+                  defaultValue={getAge()}
+                />
+                {getAge() < 18 ? (
+                  <div className="text-center">
+                    <div className="alert alert-danger">
+                      <span>You are bellow the age limit</span>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
           <hr />
-          <Btn text="Submit" loading={loading} />
+          <Btn text="Submit" loading={loading} disabled={!date || !props.info || getAge() < 18} />
         </form>
       </div>
     </div>
