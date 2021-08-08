@@ -6,10 +6,8 @@ import axios from "axios";
 
 export const AgeRange = (props) => {
   const [data, setData] = useState([18, 30]);
-  console.log(props);
   const handleSubmit = () => {
     props.setStep(props.step + 1);
-    console.log("yup");
   };
 
   return (

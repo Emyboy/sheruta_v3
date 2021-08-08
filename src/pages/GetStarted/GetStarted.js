@@ -13,6 +13,7 @@ import PersonalInfoForm from './Steps/PersonalInfoForm';
 import Age from './Steps/Age';
 import AgeRange from './Steps/AgeRange';
 import UpdateAvatar from './Steps/UpdateAvatar';
+import ValidIdCard from './Steps/ValidIdCard';
 
 const RenderStep = ({ props, step }) => {
     switch (step) {
@@ -32,6 +33,8 @@ const RenderStep = ({ props, step }) => {
             return <AgeRange {...props} />
         case 8:
             return <UpdateAvatar {...props} />
+        case 9:
+            return <ValidIdCard {...props} />
         default:
             return null;
     }

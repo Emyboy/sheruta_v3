@@ -25,13 +25,11 @@ const Age = (props) => {
       }
     )
       .then((res) => {
-        console.log(res);
         setLoading(false);
         props.setStep(props.step+1)
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
   };
 
@@ -47,7 +45,7 @@ const Age = (props) => {
     if(props.info) {
       setDate(props.info.date_of_birth)
     }
-  },[props.info])
+  },[props.info]);
 
   return (
     <div>

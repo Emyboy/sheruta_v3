@@ -62,10 +62,10 @@ const PersonalInfoForm = (props) => {
   useEffect(() => {
     setInfo(props.info);
   }, [props.info]);
-  console.log("PROPS ---", props);
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className="text-center">
+      <div>
         <h4>Work Information</h4>
       </div>
       <div className="row">
@@ -162,6 +162,10 @@ const PersonalInfoForm = (props) => {
               <span className="text-danger">Required *</span>
               <Select
                 className="mt-2"
+                value={{
+                  value: data.religion || props.info.religion,
+                  label: data.religion || props.info.religion,
+                }}
                 options={[
                   { value: "christian", label: "Christian" },
                   { value: "muslim", label: "Muslim" },
@@ -174,9 +178,9 @@ const PersonalInfoForm = (props) => {
         </div>
       </div>
       <hr />
-      <div className="text-center">
+      <div>
         <h4>Social Information</h4>
-        <div className="text-center">
+        <div className="row justify-content-center">
           <div className="p-0 alert alert-warning col-md-8 text-center rounded border border-warning">
             <div className="row justify-content-center">
               <AiOutlineWarning size={40} />
@@ -269,6 +273,7 @@ const PersonalInfoForm = (props) => {
             <div className="input-with-icon">
               <TextInput
                 label="Linkedin URL"
+                name='linkedin'
                 placeholder="EX. linkedin.com/in/sheruta"
                 defaultValue={info.linkedin}
                 onChange={(e) => setData({ ...data, linkedin: e.target.value })}

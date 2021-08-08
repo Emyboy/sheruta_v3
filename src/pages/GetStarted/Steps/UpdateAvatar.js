@@ -109,7 +109,6 @@ const UpdateAvatar = (props) => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log("URL --", downloadURL);
           sendToDb(downloadURL);
         });
       }
@@ -127,18 +126,23 @@ const UpdateAvatar = (props) => {
       </div>
       {done ? (
         <div className="d-user-avater">
-          <img src={URL.createObjectURL(img)} className="img-fluid avater" alt="" />
+          <img
+            src={URL.createObjectURL(img)}
+            className="img-fluid avater"
+            alt=""
+          />
           <div
             onClick={() => {
               setBlob(null);
               setDone(false);
             }}
-            className="badge badge-success"
+            className="badge badge-success shadow"
             style={{
               position: "absolute",
-              right: "90px",
+              right: "405",
               fontSize: "13px",
-              top: "400px",
+              top: "40%",
+              left: "52%",
             }}
           >
             <b>Change Image</b>
@@ -183,6 +187,7 @@ const UpdateAvatar = (props) => {
                 id="selectImage"
                 hidden
                 type="file"
+                accept="image/*"
                 onChange={handleSelected}
               />
             </div>
