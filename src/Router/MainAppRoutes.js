@@ -12,7 +12,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Contact from '../pages/Contact/Contact';
 import About from '../pages/About/About';
-import Request from '../pages/Request/Request'
 import PageNotFound from '../pages/PageNotFound';
 import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import AllRequests from '../pages/Request/AllRequests'
@@ -24,15 +23,19 @@ import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
 import CreateRequest from '../pages/Request/CraeteRequest';
 import RequestDetails from '../pages/Request/RequestDetails';
 import SearchResults from '../pages/SearchResults/SearchResults'
-import Pricing from '../pages/Pricing/Pricing';
 import UserFeedback from '../pages/Feedback/UserFeedback'
 import PaymentPopup from '../components/Popups/PaymentPopup';
 import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
 import PasswordReset from '../pages/ResetPassword/PasswordReset';
 import PropertySort from '../pages/Property/PropertySort'
+import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 // import GetStarted from '../pages/GetStarted/GetStarted';
+// import Pricing from '../pages/Pricing/Pricing';
+
 const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
+const Request = React.lazy(() => import("../pages/Request/Request"));
+const Pricing = React.lazy(() => import("../pages/Pricing/Pricing"));
 
 function App() {
     return (
@@ -48,6 +51,7 @@ function App() {
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/start" component={GetStarted} />
+                                    <Route exact path="/what-next" component={WhatNext} />
                                     <Route exact path="/start/:step" component={GetStarted} />
                                     <Route exact path="/login" component={Login} />
                                     <Route exact path="/contact" component={Contact} />

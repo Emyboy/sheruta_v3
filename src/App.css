@@ -63,3 +63,18 @@ div.scrollmenu div {
 .line-through {
   text-decoration: line-through !important;
 }
+.mobile-only {
+  visibility: collapse !important;
+}
+.desktop-only {
+  visibility: visible !important;
+}
+
+@media only screen and (max-width: 770px) {
+  .mobile-only {
+    visibility: visible !important;
+  }
+  .desktop-only {
+    visibility: collapse !important;
+  }
+}

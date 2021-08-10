@@ -15,7 +15,6 @@ import AgeRange from './Steps/AgeRange';
 import UpdateAvatar from './Steps/UpdateAvatar';
 import ValidIdCard from './Steps/ValidIdCard';
 import FinishStep from './Steps/FinishStep';
-import { WhatNext } from './Steps/WhatNext';
 
 const RenderStep = ({ props, step }) => {
     switch (step) {
@@ -39,8 +38,6 @@ const RenderStep = ({ props, step }) => {
             return <ValidIdCard {...props} />
         case 10:
             return <FinishStep {...props} />
-        case 11:
-            return <WhatNext {...props} />
         default:
             return null;
     }

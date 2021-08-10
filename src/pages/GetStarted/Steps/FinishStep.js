@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
 
 const FinishStep = (props) => {
@@ -15,13 +16,15 @@ const FinishStep = (props) => {
       </div>
       <hr />
       <div className="text-center">
-        <Btn
-          text="Finish"
-          className="mb-4"
-          onClick={() => {
-            props.setStep(props.step + 1);
-          }}
-        />
+        <Link to='/what-next'>
+          <Btn
+            text="Finish"
+            className="mb-4"
+            onClick={() => {
+              // props.setStep(props.step + 1);
+            }}
+          />
+        </Link>
       </div>
     </div>
   );
