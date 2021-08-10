@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Slider } from "antd";
+import { notification, Slider } from "antd";
 import Btn from "../../../components/Btn/Btn";
 import axios from "axios";
 
 export const AgeRange = (props) => {
+  const looking_for_age_range = props.info.looking_for_age_range;
   const [data, setData] = useState([18, 30]);
+  const [loading, setLoading] = useState(false);
   const handleSubmit = () => {
-    props.setStep(props.step + 1);
+    setLoading(true);
+    axios(process.env.REACT_APP_API_URL + "/personal-infos/" + props.info.id, {
+      method: "PUT",
+      data: {
+        looking_for_age_range: `${data[0]}-${data[1]}`,
+      },
+    })
+      .then((res) => {
+        setLoading(false);
+        props.setStep(props.step + 1);
+      })
+      .catch((err) => {
+        setLoading(false);
+        notification.error({ message: "Error, please try again" });
+      });
   };
 
   return (
@@ -38,7 +54,12 @@ export const AgeRange = (props) => {
         //   onAfterChange={e => console.log(e)}
       />
       <hr />
-      <Btn text="Continue" className="mb-3" onClick={handleSubmit} />
+      <Btn
+        text="Continue"
+        className="mb-3"
+        onClick={handleSubmit}
+        loading={loading}
+      />
     </div>
   );
 };

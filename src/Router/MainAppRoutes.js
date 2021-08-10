@@ -31,7 +31,8 @@ import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
 import PasswordReset from '../pages/ResetPassword/PasswordReset';
 import PropertySort from '../pages/Property/PropertySort'
-import GetStarted from '../pages/GetStarted/GetStarted';
+// import GetStarted from '../pages/GetStarted/GetStarted';
+const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
 
 function App() {
     return (

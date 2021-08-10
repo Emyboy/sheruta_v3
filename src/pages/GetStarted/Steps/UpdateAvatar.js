@@ -68,6 +68,7 @@ const UpdateAvatar = (props) => {
         props.getUser();
         setUploading(false);
         notification.success({ message: "Image Updated" });
+        props.setStep(props.step+1)
       })
       .catch((err) => {
         console.log(err);

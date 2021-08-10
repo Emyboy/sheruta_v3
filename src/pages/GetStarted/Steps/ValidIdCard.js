@@ -6,6 +6,7 @@ import { storage } from "../../../Firebase";
 import { compressImage } from "../../../utils/Sheruta";
 import Compressor from "compressorjs";
 import { ProgressBar } from "react-bootstrap";
+import axios from "axios";
 
 const ValidIdCard = (props) => {
   const [frontImage, setFrontImage] = useState(null);
@@ -43,6 +44,23 @@ const ValidIdCard = (props) => {
       });
     }
   }
+
+  const sendToDb = () => {
+    axios(process.env.REACT_APP_API_URL + "/personal-infos/" + props.info.id, {
+      method: "PUT",
+      data: {
+        id_back_img_url: backImageURL,
+        id_front_img_url: frontImageURL,
+      },
+    })
+      .then((res) => {
+        props.setStep(props.step + 1);
+      })
+      .catch((err) => {
+        notification.error({ message: "Error uploading images" });
+      });
+  };
+
   const handleImageUpload = () => {
     setUploading(true);
 
@@ -76,6 +94,7 @@ const ValidIdCard = (props) => {
             } else {
               setBackImageURL(downloadURL);
               setUploading(false);
+              sendToDb();
             }
           });
         }
