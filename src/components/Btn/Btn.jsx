@@ -17,7 +17,7 @@ const Btn = ({
             disabled={disabled || loading}
             onClick={onClick}
             type={type}
-            style={{ fontSize: '20px' }}
+            style={{ fontSize: '17px' }}
         >
             {loading ? "Loading..." : <><i className={icon}></i>  {text}</>}
         </button>

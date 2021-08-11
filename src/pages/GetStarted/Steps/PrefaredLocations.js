@@ -69,7 +69,7 @@ export const PrefaredLocations = (props) => {
                 setLocations(res.data)
             })
             .catch(err => {
-                notification.error({ message: 'Error fetching your location' })
+                // notification.error({ message: 'Error fetching your location' })
                 console.log(err)
             })
     }, []);
@@ -115,7 +115,7 @@ export const PrefaredLocations = (props) => {
                                 },
                             }}
                         />
-                        <button disabled={loading} className='btn w-50 text-success mt-3' onClick={handleAddLocation}>
+                        <button disabled={!data.location || loading} className='btn w-50 text-success mt-3' onClick={handleAddLocation}>
                             {loading ? "Loading..." : "Add +"}
                         </button>
                         <br />

@@ -40,7 +40,7 @@ export const Profile2 = (props) => {
     }, [props.auth.user])
 
     if (!props.auth.user) {
-        return <Redirect to='/' />
+        return <Redirect to='/login' />
     } else
         return (
             <Layout

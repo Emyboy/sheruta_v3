@@ -39,6 +39,11 @@ export default connect(
             .catch(err => {
                 setLoading(false)
                 notification.error('An error occurred, Please try again')
+                notifyEmy({
+                  heading: "Error updating looking for",
+                  log: { ...err },
+                  status: "error",
+                });
             })
     }
 

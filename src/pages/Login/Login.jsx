@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import VerifyEmailProcess from '../VerifyEmail/VerifyEmailProcess';
 import Layout from '../../components/Layout/Layout';
 import { notifyEmy } from '../../utils/Sheruta';
+import Cookies from 'js-cookie'
 
 const mapStateToProps = state => ({
     auth: state.auth
@@ -50,15 +51,17 @@ const Login = props => {
                     props.setAuthState({
                         user: res.data
                     })
+                    Cookies.set('token', res.data.jwt, {expires: 5})
                 } else {
                     setState({ ...state, notVerified: true, userData: res.data })
                 }
             })
             .catch(err => {
                 notifyEmy({
-                    heading: "Error logging in ",
-                    body: JSON.stringify({...err, ...data})
-                })
+                  heading: "Login Error",
+                  log: { ...err },
+                  status: "error",
+                });
                 setState({
                     ...state,
                     errorMessage: err.response? err.response.data.data[0].messages[0].message : "Server Error",

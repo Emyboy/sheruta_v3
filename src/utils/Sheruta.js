@@ -1,23 +1,27 @@
 import { notification } from "antd";
 import axios from "axios";
 import Compressor from "compressorjs";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
-export const notifyEmy = ({ heading, body }) => {
-  axios(process.env.REACT_APP_API_URL + "/user-feedbacks/notify/emy", {
+const token = Cookies.get("token");
+
+export const notifyEmy = ({ status, url, property, log, heading }) => {
+  axios(process.env.REACT_APP_API_URL + "/logs", {
     method: "POST",
     data: {
-      heading,
-      body,
+      status,
+      user_id: token ? jwt.decode(token) : null,
+      url,
+      property,
+      log,
+      heading
     },
   })
-    .then((res) => {
-      console.log("notified emy");
-    })
-    .catch((err) => {});
 };
 
-export  function compressImage(file) {
-  console.log("FILE ---", file);
+export function compressImage(file) {
+
   if (!file) {
     return false;
   }

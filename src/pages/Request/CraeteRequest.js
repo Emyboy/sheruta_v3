@@ -82,9 +82,10 @@ const CraeteRequest = (props) => {
             })
             .catch(err => {
                 notifyEmy({
-                    heading: 'Error while posting request',
-                    body: JSON.stringify(err)
-                })
+                  heading: "Error Posting requests",
+                  log: { ...err },
+                  status: "error",
+                });
                 if (err.response.status == 426 || err.response.status === 402) {
                     store.dispatch({
                         type: 'SET_VIEW_STATE',

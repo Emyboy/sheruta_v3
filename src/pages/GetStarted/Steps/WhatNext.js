@@ -1,86 +1,140 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Btn from '../../../components/Btn/Btn';
-import Layout from '../../../components/Layout/Layout';
+import { notification } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Btn from "../../../components/Btn/Btn";
+import Layout from "../../../components/Layout/Layout";
 
 const WhatNext = (props) => {
-    return (
-      <Layout>
-        <div className="container">
-          <div className="pt-5">
-            <div className="sec-heading center mb-4">
-              <h2 className="animated animate__bounceIn">What Next?</h2>
-              <p>
-                Read the steps below to find how to become a member of sheruta
-              </p>
+  localStorage.setItem("after_payment", "/what-next");
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [payment, setPayment] = useState(null);
+
+  const checkPaymentStatus = () => {
+    setPaymentLoading(true);
+    axios(
+      process.env.REACT_APP_API_URL +
+        "/transactions/?users_permissions_user=" +
+        props.auth.user.user.id +
+        "&status=success",
+      {
+        headers: {
+          Authorization: `Bearer ${props.auth.user.jwt}`,
+        },
+      }
+    )
+      .then((res) => {
+        setPaymentLoading(false);
+        setPayment(res.data[0]);
+      })
+      .catch((err) => {
+        setPaymentLoading(false);
+        notification.error({ message: "Error verifying payment" });
+      });
+  };
+
+  useEffect(() => {
+    checkPaymentStatus();
+  }, []);
+
+  return (
+    <Layout>
+      <div className="container-fluid">
+        <div className="pt-5">
+          <div className="sec-heading center mb-4">
+            <h2 className="animated animate__bounceIn">What Next?</h2>
+            <p>
+              Read the steps below to find how to become a member of sheruta
+            </p>
+          </div>
+        </div>
+        <div className="row pb-5">
+          <div className="col-lg-4 col-md-4">
+            <div className="middle-icon-features">
+              <div className="middle-icon-features-item">
+                <div className="middle-icon-large-features-box">
+                  <i className="">1</i>
+                  {/* <span className="steps bg-danger">01</span> */}
+                </div>
+                <div className="middle-icon-features-content">
+                  <h4>Subscribe</h4>
+                  <p>Subscribe to join the community of verified flat mates.</p>
+                  {payment ? (
+                    <div className="badge text-success btn-lg">
+                      <i className="ti ti-check display-7"></i>
+                    </div>
+                  ) : (
+                    <Link to="/pricing">
+                      <Btn
+                        text="Subscribe Now"
+                        disabled={paymentLoading}
+                        onClick={() => {}}
+                        className="btn-sm mt-2"
+                      />
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-          <div className="row pb-5">
-            <div className="col-lg-4 col-md-4">
-              <div className="middle-icon-features">
-                <div className="middle-icon-features-item">
-                  <div className="middle-icon-large-features-box">
-                    <i className="">1</i>
-                    {/* <span className="steps bg-danger">01</span> */}
-                  </div>
-                  <div className="middle-icon-features-content">
-                    <h4>Subscribe</h4>
-                    <p>
-                      Subscribe to join the community of verified flat mates.
-                    </p>
-                    <Btn text='Subscribe Now' onClick={() => {}} className='btn-sm mt-2' />
-                  </div>
+
+          <div className="col-lg-4 col-md-4">
+            <div className="middle-icon-features">
+              <div className="middle-icon-features-item">
+                <div className="middle-icon-large-features-box">
+                  <i className="text-success">2</i>
+                  {/* <span className="steps bg-success">02</span> */}
+                </div>
+                <div className="middle-icon-features-content">
+                  <h4>Post An Apartment or Request</h4>
+                  <p>Post something for the community.</p>
+                  <Link to="/submit">
+                    <Btn
+                      onClick={() => {}}
+                      text="Upload Now"
+                      className="btn-sm mt-2"
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="col-lg-4 col-md-4">
-              <div className="middle-icon-features">
-                <div className="middle-icon-features-item">
-                  <div className="middle-icon-large-features-box">
-                    <i className="text-success">2</i>
-                    {/* <span className="steps bg-success">02</span> */}
-                  </div>
-                  <div className="middle-icon-features-content">
-                    <h4>post &amp; Search Property</h4>
-                    <p>
-                      Find shared apartments that fit your lifestyle and living
-                      standard around Lagos without scraping your bank account..
-                    </p>
-                  </div>
+          <div className="col-lg-4 col-md-4">
+            <div className="middle-icon-features">
+              <div className="middle-icon-features-item">
+                <div className="middle-icon-large-features-box">
+                  <i className="text-warning">3</i>
+                  {/* <span className="steps bg-warning">03</span> */}
                 </div>
-              </div>
-            </div>
-
-            <div className="col-lg-4 col-md-4">
-              <div className="middle-icon-features">
-                <div className="middle-icon-features-item">
-                  <div className="middle-icon-large-features-box">
-                    <i className="text-warning">3</i>
-                    {/* <span className="steps bg-warning">03</span> */}
-                  </div>
-                  <div className="middle-icon-features-content">
-                    <h4>feedback</h4>
-                    <p>
-                      Book and rent your potential new home at your comfort with
-                      little or no stress. Free online consultation for user.
-                    </p>
-                  </div>
+                <div className="middle-icon-features-content">
+                  <h4>feedback</h4>
+                  <p>
+                    Help us improve you experience by giving us your honest
+                    feedback.
+                  </p>
+                  <Link to="/feedback">
+                    <Btn
+                      onClick={() => {}}
+                      text="Start"
+                      className="btn-sm mt-2"
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </Layout>
-    );
-}
+      </div>
+    </Layout>
+  );
+};
 
 const mapStateToProps = (state) => ({
-    
-})
+  auth: state.auth,
+});
 
-const mapDispatchToProps = {
-    
-}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhatNext)
+export default connect(mapStateToProps, mapDispatchToProps)(WhatNext);

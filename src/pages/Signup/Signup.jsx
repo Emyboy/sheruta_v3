@@ -31,7 +31,7 @@ export const Signup = (props) => {
                     notification.success({ message: 'Account Created' });
                     notifyEmy({
                         heading: `${e.email} just signup`,
-                        body: JSON.stringify(e)
+                        log: {...res.data}
                     })
                     sessionStorage.setItem('mail', e.email);
                     setState({ ...state, loading: false, goToSuccess: true })
@@ -47,7 +47,7 @@ export const Signup = (props) => {
             .catch(err => {
                 notifyEmy({
                     heading: "Error signing Up",
-                    body: JSON.stringify({ ...err, ...e })
+                    log: {...err}
                 })
                 setState({ ...state, loading: false })
                 setState({ ...state, errorMessage: err.response.data.message || 'Singup Error' })

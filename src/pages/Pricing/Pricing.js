@@ -65,13 +65,12 @@ export default connect(
     const getAllPaymentPlans = () => {
         axios(process.env.REACT_APP_API_URL + '/payment-plans')
             .then(res => {
-                console.log('res---', res);
                 setState({ ...state, loading: false, plans: res.data })
             })
             .catch(err => {
                 notifyEmy({
                     heading: "Error getting payment plans",
-                    body: JSON.stringify(err)
+                    log: {...err}
                 })
                 notification.error({ message: 'Error getting payment plans' })
             })
@@ -99,8 +98,10 @@ export default connect(
         })
             .then(res => {
                 notifyEmy({
-                    heading: "Money was paied to sheruta",
-                    body: JSON.stringify(res)
+                    log: {message: 'Sent to backend'},
+                    status: 'success',
+                    url: window.location.pathname,
+                    heading: 'A user made payments'
                 })
                 if (res.status === 201) {
                     setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'success' })
@@ -109,8 +110,10 @@ export default connect(
             })
             .catch(err => {
                 notifyEmy({
-                    heading: "Error while sending payment to backend",
-                    body: JSON.stringify(err)
+                    heading: "Payment Error",
+                    log: {...err},
+                    status: 'error',
+                    url: window.location.pathname
                 })
                 setState({ ...state, paystackDone: false, message: 'Server Error', messageType: 'failed' })
             })
