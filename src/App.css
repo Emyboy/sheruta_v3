@@ -14,6 +14,9 @@ body,
 .bg-theme {
   background-color: var(--theme-color) !important;
 }
+input {
+  background-color: #F7F7F7 !important;
+}
 
 .text-theme {
   color: var(--theme-color) !important;

@@ -6,6 +6,7 @@ import '../assets/css/styles.css';
 import '../App.css';
 import '../assets/css/colors.css';
 import 'antd/dist/antd.css';
+// import '../v4_css/style.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -30,6 +31,7 @@ import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
 import PasswordReset from '../pages/ResetPassword/PasswordReset';
 import PropertySort from '../pages/Property/PropertySort'
 import WhatNext from '../pages/GetStarted/Steps/WhatNext';
+import Submit from '../pages/Submit/Submit';
 // import GetStarted from '../pages/GetStarted/GetStarted';
 // import Pricing from '../pages/Pricing/Pricing';
 
@@ -51,6 +53,7 @@ function App() {
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/start" component={GetStarted} />
+                                    <Route exact path="/submit" component={Submit} />
                                     <Route exact path="/what-next" component={WhatNext} />
                                     <Route exact path="/start/:step" component={GetStarted} />
                                     <Route exact path="/login" component={Login} />
