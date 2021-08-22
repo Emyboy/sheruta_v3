@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
+import { notifyEmy } from "../../../utils/Sheruta";
 
 const FinishStep = (props) => {
+  const { user } = props.auth;
+  useEffect(() => {
+    notifyEmy({
+      heading: `${user.user.first_name} Finished updating personal info`,
+      log: {
+        user: user.user,
+        personal_info: props.info
+      },
+      personal_info: props.info.id,
+      status: 'success',
+      url: window.location.pathname
+    })
+  },[])
   return (
     <div className="container">
       <div className="text-center">
@@ -30,7 +44,9 @@ const FinishStep = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = {};
 

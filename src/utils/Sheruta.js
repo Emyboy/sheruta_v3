@@ -11,13 +11,13 @@ export const notifyEmy = ({ status, url, property, log, heading }) => {
     method: "POST",
     data: {
       status,
-      user_id: token ? jwt.decode(token) : null,
+      users_permissions_user: token ? jwt.decode(token) : null,
       url,
       property,
       log,
-      heading
+      heading,
     },
-  })
+  });
 };
 
 export function compressImage(file) {

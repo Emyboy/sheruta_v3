@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
 import PageLoader from '../components/PageLoader';
+import '../social_css/css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
-import '../assets/css/styles.css';
 import '../App.css';
 import '../assets/css/colors.css';
 import 'antd/dist/antd.css';
 // import '../v4_css/style.css';
+import '../assets/css/styles.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 

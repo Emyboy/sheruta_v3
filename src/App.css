@@ -81,3 +81,9 @@ div.scrollmenu div {
     visibility: collapse !important;
   }
 }
+.ant-tabs-nav-wrap {
+  background-color: white !important;
+  padding: 10px;
+  border-radius: 8px;
+  /* width: 100% !important; */
+}
