@@ -79,6 +79,7 @@ div.scrollmenu div {
   }
   .desktop-only {
     visibility: collapse !important;
+    display: none;
   }
 }
 .ant-tabs-nav-wrap {

@@ -9,41 +9,41 @@ const EachSocialRequest = (props) => {
   const { data } = props;
   return (
     <div
-      class="central-meta item"
+      className="central-meta item"
       style={{ display: "inline-block", borderRadius: "17px" }}
     >
-      <div class="user-post">
-        <div class="friend-info">
+      <div className="user-post">
+        <div className="friend-info">
           {data.users_permissions_user ? (
             <>
               <figure>
                 <img src={data.users_permissions_user.avatar_url} alt="" />
               </figure>
-              <div class="friend-name">
-                <div class="more">
-                  <div class="more-post-optns">
-                    <i class="ti-more-alt"></i>
+              <div className="friend-name">
+                <div className="more">
+                  <div className="more-post-optns">
+                    <i className="ti-more-alt"></i>
                     <ul>
                       <li>
-                        <i class="fa fa-pencil-square-o"></i>Edit Post
+                        <i className="fa fa-pencil-square-o"></i>Edit Post
                       </li>
                       <li>
-                        <i class="fa fa-trash-o"></i>Delete Post
+                        <i className="fa fa-trash-o"></i>Delete Post
                       </li>
-                      <li class="bad-report">
-                        <i class="fa fa-flag"></i>Report Post
-                      </li>
-                      <li>
-                        <i class="fa fa-address-card-o"></i>Boost This Post
+                      <li className="bad-report">
+                        <i className="fa fa-flag"></i>Report Post
                       </li>
                       <li>
-                        <i class="fa fa-clock-o"></i>Schedule Post
+                        <i className="fa fa-address-card-o"></i>Boost This Post
                       </li>
                       <li>
-                        <i class="fa fa-wpexplorer"></i>Select as featured
+                        <i className="fa fa-clock-o"></i>Schedule Post
                       </li>
                       <li>
-                        <i class="fa fa-bell-slash-o"></i>Turn off Notifications
+                        <i className="fa fa-wpexplorer"></i>Select as featured
+                      </li>
+                      <li>
+                        <i className="fa fa-bell-slash-o"></i>Turn off Notifications
                       </li>
                     </ul>
                   </div>
@@ -58,61 +58,61 @@ const EachSocialRequest = (props) => {
               </div>
             </>
           ) : null}
-          <div class="post-meta">
+          <div className="post-meta">
+            <div className="description mt-0">
+              <p>{data.body}</p>
+            </div>
             <figure>
               <img src={image} />
             </figure>
-            <div class="description">
-              <p>{data.body}</p>
-            </div>
 
-            <ul class="like-dislike">
+            <ul className="like-dislike">
               <li>
                 <a href="#" title="Save to Pin Post">
-                  <i class="fa fa-thumb-tack"></i>
+                  <i className="fa fa-thumb-tack"></i>
                 </a>
               </li>
               <li>
                 <a href="#" title="Like Post">
-                  <i class="ti-thumb-up"></i>
+                  <i className="ti-thumb-up"></i>
                 </a>
               </li>
               <li>
                 <a href="#" title="dislike Post">
-                  <i class="ti-thumb-down"></i>
+                  <i className="ti-thumb-down"></i>
                 </a>
               </li>
             </ul>
-            {/* <div class="we-video-info">
+            {/* <div className="we-video-info">
               <ul>
                 <li>
-                  <span class="views" title="views">
-                    <i class="fa fa-eye"></i>
+                  <span className="views" title="views">
+                    <i className="fa fa-eye"></i>
                     <ins>1.2k</ins>
                   </span>
                 </li>
                 <li>
-                  <div class="likes heart" title="Like/Dislike">
+                  <div className="likes heart" title="Like/Dislike">
                     ❤ <span>2K</span>
                   </div>
                 </li>
                 <li>
-                  <span class="comment" title="Comments">
-                    <i class="fa fa-commenting"></i>
+                  <span className="comment" title="Comments">
+                    <i className="fa fa-commenting"></i>
                     <ins>52</ins>
                   </span>
                 </li>
 
                 <li>
                   <span>
-                    <a class="share-pst" href="#" title="Share">
-                      <i class="fa fa-share-alt"></i>
+                    <a className="share-pst" href="#" title="Share">
+                      <i className="fa fa-share-alt"></i>
                     </a>
                     <ins>20</ins>
                   </span>
                 </li>
               </ul>
-              <div class="users-thumb-list">
+              <div className="users-thumb-list">
                 <a
                   data-toggle="tooltip"
                   title=""
@@ -163,13 +163,13 @@ const EachSocialRequest = (props) => {
               </div>
             </div> */}
           </div>
-          <div class="coment-area">
-            <ul class="we-comet">
+          <div className="coment-area">
+            <ul className="we-comet">
               <li>
-                <div class="comet-avatar">
+                <div className="comet-avatar">
                   <img src="images/resources/nearly3.jpg" alt="" />
                 </div>
-                <div class="we-comment">
+                <div className="we-comment">
                   <h5>
                     <a href="time-line.html" title="">
                       Jason borne
@@ -180,23 +180,23 @@ const EachSocialRequest = (props) => {
                     very awesome for the youngster. please vote this video and
                     like our channel
                   </p>
-                  <div class="inline-itms">
+                  <div className="inline-itms">
                     <span>1 year ago</span>
-                    <a class="we-reply" href="#" title="Reply">
-                      <i class="fa fa-reply"></i>
+                    <a className="we-reply" href="#" title="Reply">
+                      <i className="fa fa-reply"></i>
                     </a>
                     <a href="#" title="">
-                      <i class="fa fa-heart"></i>
+                      <i className="fa fa-heart"></i>
                       <span>20</span>
                     </a>
                   </div>
                 </div>
               </li>
               <li>
-                <div class="comet-avatar">
+                <div className="comet-avatar">
                   <img src="images/resources/comet-4.jpg" alt="" />
                 </div>
-                <div class="we-comment">
+                <div className="we-comment">
                   <h5>
                     <a href="time-line.html" title="">
                       Sophia
@@ -205,56 +205,56 @@ const EachSocialRequest = (props) => {
                   <p>
                     we are working for the dance and sing songs. this video is
                     very awesome for the youngster.
-                    <i class="em em-smiley"></i>
+                    <i className="em em-smiley"></i>
                   </p>
-                  <div class="inline-itms">
+                  <div className="inline-itms">
                     <span>1 year ago</span>
-                    <a class="we-reply" href="#" title="Reply">
-                      <i class="fa fa-reply"></i>
+                    <a className="we-reply" href="#" title="Reply">
+                      <i className="fa fa-reply"></i>
                     </a>
                     <a href="#" title="">
-                      <i class="fa fa-heart"></i>
+                      <i className="fa fa-heart"></i>
                       <span>20</span>
                     </a>
                   </div>
                 </div>
               </li>
               <li>
-                <a href="#" title="" class="showmore underline">
+                <a href="#" title="" className="showmore underline">
                   more comments+
                 </a>
               </li>
-              <li class="post-comment">
-                <div class="comet-avatar">
+              <li className="post-comment">
+                <div className="comet-avatar">
                   <img src="images/resources/nearly1.jpg" alt="" />
                 </div>
-                <div class="post-comt-box">
+                <div className="post-comt-box">
                   <form method="post">
                     <textarea placeholder="Post your comment"></textarea>
-                    <div class="add-smiles">
-                      <div class="uploadimage">
-                        <i class="fa fa-image"></i>
-                        <label class="fileContainer">
+                    <div className="add-smiles">
+                      <div className="uploadimage">
+                        <i className="fa fa-image"></i>
+                        <label className="fileContainer">
                           <input type="file" />
                         </label>
                       </div>
                       <span
-                        class="em em-expressionless"
+                        className="em em-expressionless"
                         title="add icon"
                       ></span>
-                      <div class="smiles-bunch">
-                        <i class="em em---1"></i>
-                        <i class="em em-smiley"></i>
-                        <i class="em em-anguished"></i>
-                        <i class="em em-laughing"></i>
-                        <i class="em em-angry"></i>
-                        <i class="em em-astonished"></i>
-                        <i class="em em-blush"></i>
-                        <i class="em em-disappointed"></i>
-                        <i class="em em-worried"></i>
-                        <i class="em em-kissing_heart"></i>
-                        <i class="em em-rage"></i>
-                        <i class="em em-stuck_out_tongue"></i>
+                      <div className="smiles-bunch">
+                        <i className="em em---1"></i>
+                        <i className="em em-smiley"></i>
+                        <i className="em em-anguished"></i>
+                        <i className="em em-laughing"></i>
+                        <i className="em em-angry"></i>
+                        <i className="em em-astonished"></i>
+                        <i className="em em-blush"></i>
+                        <i className="em em-disappointed"></i>
+                        <i className="em em-worried"></i>
+                        <i className="em em-kissing_heart"></i>
+                        <i className="em em-rage"></i>
+                        <i className="em em-stuck_out_tongue"></i>
                       </div>
                     </div>
 

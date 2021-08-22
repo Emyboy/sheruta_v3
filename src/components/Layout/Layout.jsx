@@ -105,7 +105,7 @@ const Layout = connect(
               <Link to='/profile'>
                 <IconBtn
                   className="mr-3 desktop-only"
-                  icon={`${showSearch ? "ti-close" : "ti-user"}`}
+                  icon={"ti-user"}
                   onClick={() => {}}
                 />
               </Link>

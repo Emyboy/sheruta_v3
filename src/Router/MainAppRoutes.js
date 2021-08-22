@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import PageLoader from '../components/PageLoader';
+import "../social_css/css/main.min.css";
 import '../social_css/css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
@@ -19,7 +20,6 @@ import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import AllRequests from '../pages/Request/AllRequests'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
 import Login from '../pages/Login/Login';
-import Profile2 from '../pages/Profile/Profile2';
 import Signup from '../pages/Signup/Signup'
 import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
 import CreateRequest from '../pages/Request/CraeteRequest';
@@ -33,12 +33,16 @@ import PasswordReset from '../pages/ResetPassword/PasswordReset';
 import PropertySort from '../pages/Property/PropertySort'
 import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import Submit from '../pages/Submit/Submit';
+import MasterPopup from '../components/Popups/MasterPopup';
 // import GetStarted from '../pages/GetStarted/GetStarted';
 // import Pricing from '../pages/Pricing/Pricing';
+// import Profile2 from "../pages/Profile/Profile2";
+
 
 const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
 const Pricing = React.lazy(() => import("../pages/Pricing/Pricing"));
+const Profile2 = React.lazy(() => import("../pages/Profile/Profile2"));
 
 function App() {
     return (
@@ -51,6 +55,7 @@ function App() {
                             <BrowserRouter>
                                 <FeedbackPopup />
                                 <PaymentPopup />
+                                <MasterPopup />
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/start" component={GetStarted} />

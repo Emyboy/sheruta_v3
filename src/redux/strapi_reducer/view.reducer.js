@@ -3,7 +3,8 @@ const initialState = {
     services: [],
     categories: [],
     askForUserFeedback: false,
-    showPaymentPopup: false
+    showPaymentPopup: false,
+    personal_info: null
 }
 
 function ViewReducer(state = initialState, { type, payload }) {

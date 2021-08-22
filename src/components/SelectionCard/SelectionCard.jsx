@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdCheckBox } from 'react-icons/md'
 
-export default React.memo(({
+export default ({
     onSelect,
     isSelected,
     isDisabled,
@@ -46,4 +46,4 @@ export default React.memo(({
             </div>
         </div>
     )
-});
+}
