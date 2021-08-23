@@ -124,11 +124,11 @@ const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
   const [state, setState] = useState({
-      showImageModal: false,
-      userRequests: [],
-    });
-    const user = props.auth.user;
-    useEffect(() => {
+    showImageModal: false,
+    userRequests: [],
+  });
+  const user = props.auth.user;
+  useEffect(() => {
     if (user) {
       axios(
         process.env.REACT_APP_API_URL +
@@ -149,7 +149,6 @@ export const Profile2 = (props) => {
   if (!user) {
     return <Redirect to="/" />;
   } else
-
     return (
       <Layout>
         <section className="mt-0 pt-4">
@@ -158,11 +157,11 @@ export const Profile2 = (props) => {
               <div className="row justify-content-center">
                 <div className="col-lg-8">
                   <div className="row merged20" id="page-contents">
-                    <div class="user-profile">
+                    <div className="user-profile">
                       <figure>
-                        <div class="edit-pp">
-                          <label class="fileContainer">
-                            <i class="fa fa-camera"></i>
+                        <div className="edit-pp">
+                          <label className="fileContainer">
+                            <i className="fa fa-camera"></i>
                             <input type="file" />
                           </label>
                         </div>
@@ -172,28 +171,33 @@ export const Profile2 = (props) => {
                         />
                       </figure>
 
-                      <div class="profile-section">
-                        <div class="row">
-                          <div class="col-lg-6 col-md-8">
-                            <div class="profile-author">
-                              <div class="profile-author-thumb">
+                      <div className="profile-section">
+                        <div className="row">
+                          <div className="col-lg-6 col-md-8">
+                            <div
+                              className="profile-author"
+                              style={{ textAlign: "start" }}
+                            >
+                              <div className="profile-author-thumb">
                                 <img alt="author" src={user.user.avatar_url} />
-                                <div class="edit-dp">
-                                  <label class="fileContainer">
-                                    <i class="fa fa-camera"></i>
+                                <div className="edit-dp">
+                                  <label className="fileContainer">
+                                    <i className="fa fa-camera"></i>
                                     <input type="file" />
                                   </label>
                                 </div>
                               </div>
 
                               <div
-                                class="author-content"
+                                className="author-content"
                                 style={{ textAlign: "start" }}
                               >
-                                <a class="h4 author-name" href="about.html">
+                                <a className="h4 author-name" href="about.html">
                                   {user.user.first_name} {user.user.last_name}
                                 </a>
-                                <div class="country">@{user.user.username}</div>
+                                <div className="country">
+                                  @{user.user.username}
+                                </div>
                               </div>
                             </div>
                           </div>
