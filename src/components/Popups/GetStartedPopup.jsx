@@ -5,7 +5,7 @@ import Btn from "../Btn/Btn";
 import { Link } from "react-router-dom";
 
 const GetStartedPopup = (props) => {
-  const { view } = props;
+  const { view, auth } = props;
   const [hasFinished, setHasFinished] = useState(undefined);
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -19,7 +19,7 @@ const GetStartedPopup = (props) => {
         setShow(true);
       }
     }
-  }, [view.personal_info]);
+  }, [view.personal_info, auth]);
 
   return (
     <Modal show={show}>
@@ -51,6 +51,7 @@ const GetStartedPopup = (props) => {
 
 const mapStateToProps = (state) => ({
   view: state.view,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {};
