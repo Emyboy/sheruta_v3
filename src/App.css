@@ -2,6 +2,9 @@
   --theme-color: #00ba74;
   --accent-color: #252c41;
 }
+*{
+  transition: 0.1s;
+}
 html,
 body,
 #root {
