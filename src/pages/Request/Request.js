@@ -34,13 +34,19 @@ export const Request = (props) => {
         if (selectedCategory) {
             setState({ ...state, done: true })
         }
-    },[selectedCategory])
+    },[selectedCategory]);
 
     useEffect(() => {
         if (selectedQuery) {
             setState({ ...state, disabledBtn: false, nextPage: 'service' });
         }
     }, [selectedQuery]);
+
+    useEffect(() => {
+        if(view.personal_info){
+            
+        }
+    },[view.personal_info])
 
     useEffect(() => {
         switch (display) {

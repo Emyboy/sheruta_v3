@@ -14,8 +14,9 @@ body,
 .bg-theme {
   background-color: var(--theme-color) !important;
 }
-input {
+.form-control {
   background-color: #F7F7F7 !important;
+  height: 45px !important;
 }
 
 .text-theme {
@@ -68,6 +69,7 @@ div.scrollmenu div {
 }
 .mobile-only {
   visibility: collapse !important;
+  display: none;
 }
 .desktop-only {
   visibility: visible !important;

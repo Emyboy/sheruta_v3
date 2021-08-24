@@ -4,11 +4,11 @@ import "../social_css/css/main.min.css";
 import '../social_css/css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
-import '../App.css';
 import '../assets/css/colors.css';
 import 'antd/dist/antd.css';
 // import '../v4_css/style.css';
 import '../assets/css/styles.css';
+import '../App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ import PropertySort from '../pages/Property/PropertySort'
 import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import Submit from '../pages/Submit/Submit';
 import MasterPopup from '../components/Popups/MasterPopup';
+import CraeteRequest from '../pages/Request/CraeteRequest';
 // import GetStarted from '../pages/GetStarted/GetStarted';
 // import Pricing from '../pages/Pricing/Pricing';
 // import Profile2 from "../pages/Profile/Profile2";
@@ -65,7 +66,7 @@ function App() {
                                     <Route exact path="/login" component={Login} />
                                     <Route exact path="/contact" component={Contact} />
                                     <Route exact path="/about" component={About} />
-                                    <Route exact path="/requests" component={Request} />
+                                    <Route exact path="/requests" component={CreateRequest} />
                                     <Route exact path="/requests/all" component={AllRequests} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
                                     <Route exact path="/profile" component={Profile2} />
@@ -80,9 +81,9 @@ function App() {
                                     <Route exact path="/email/activate/:token/:confirmationToken" component={VerifyEmail} />
                                     <Route exact path="/password/reset/request" component={ResetPasswordRequest} />
                                     <Route exact path="/password/reset/u/:token/:resetPasswordToken" component={PasswordReset} />
+                                    <Route exact path="/requests/create" component={CraeteRequest} />
                                     <Route exact path="/properties" component={PropertySort} />
                                     {/* 
-                                    <Route exact path="/requests/create" component={RequestCategory} />
 
                                     <Route exact path="/share" component={Share} />
 

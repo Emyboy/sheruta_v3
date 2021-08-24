@@ -55,7 +55,7 @@ const Layout = connect(
   mapStateToProps,
   mapActionToProps
 )((props) => {
-  const { children, back, page } = props;
+  const { children, back, page, auth } = props;
 
   const [showNav, setShowNav] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -102,7 +102,7 @@ const Layout = connect(
           />
           <div className="row mr-2">
             {window.innerWidth > 500 ? (
-              <Link to='/profile'>
+              <Link to={auth.user ? "/profile" : "/login"}>
                 <IconBtn
                   className="mr-3 desktop-only"
                   icon={"ti-user"}

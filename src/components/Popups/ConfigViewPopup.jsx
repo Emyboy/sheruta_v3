@@ -7,6 +7,8 @@ import SelectionCard from "../SelectionCard/SelectionCard";
 import Btn from "../Btn/Btn";
 import store from "../../redux/store/store";
 import { notifyEmy } from "../../utils/Sheruta";
+import { logout } from "../../redux/strapi_actions/auth.actions";
+import { notification } from "antd";
 
 const ConfigViewPopup = (props) => {
   const { auth, view } = props;
@@ -16,24 +18,28 @@ const ConfigViewPopup = (props) => {
   const [isLookingFor, setIsLookingFor] = useState(undefined);
 
   useEffect(() => {
-    console.log("USER --", user);
-    axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-    })
-      .then((res) => {
-        console.log("RES ---", res);
-        store.dispatch({
-          type: "SET_VIEW_STATE",
-          payload: {
-            personal_info: res.data,
-          },
-        });
+    if (Cookies.get("token")){
+      axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
       })
-      .catch((err) => {
-        setShow(true);
-      });
+        .then((res) => {
+          store.dispatch({
+            type: "SET_VIEW_STATE",
+            payload: {
+              personal_info: res.data,
+            },
+          });
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 401) {
+            props.logout();
+            notification.error({ message: "You are logged out" });
+          }
+          setShow(true);
+        });
+    }
   }, []);
 
   const updatePersonalInfo = () => {
@@ -64,9 +70,9 @@ const ConfigViewPopup = (props) => {
         });
         setShow(false);
         notifyEmy({
-            heading: `${user.first_name} updated personal from set view popup`,
-            log: data,
-        })
+          heading: `${user.first_name} updated personal from set view popup`,
+          log: data,
+        });
       })
       .catch((err) => {
         setLoading(false);
@@ -110,6 +116,8 @@ const mapStateToProps = (state) => ({
   view: state.view,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  logout,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfigViewPopup);

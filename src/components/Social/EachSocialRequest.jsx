@@ -1,8 +1,9 @@
 import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
-import image from "../../social_css/images/resources/profile-image.jpg";
+import image from "../../social_css/images/resources/album5.jpg";
 import image2 from "../../social_css/images/resources/author.jpg";
+import { Link } from "react-router-dom";
 
 const EachSocialRequest = (props) => {
   console.log("EACH REQUESTS ---", props);
@@ -14,75 +15,149 @@ const EachSocialRequest = (props) => {
     >
       <div className="user-post">
         <div className="friend-info">
-          {data.users_permissions_user ? (
-            <>
-              <figure>
-                <img src={data.users_permissions_user.avatar_url} alt="" />
-              </figure>
-              <div className="friend-name">
-                <div className="more">
-                  <div className="more-post-optns">
-                    <i className="ti-more-alt"></i>
-                    <ul>
-                      <li>
-                        <i className="fa fa-pencil-square-o"></i>Edit Post
-                      </li>
-                      <li>
-                        <i className="fa fa-trash-o"></i>Delete Post
-                      </li>
-                      <li className="bad-report">
-                        <i className="fa fa-flag"></i>Report Post
-                      </li>
-                      <li>
-                        <i className="fa fa-address-card-o"></i>Boost This Post
-                      </li>
-                      <li>
-                        <i className="fa fa-clock-o"></i>Schedule Post
-                      </li>
-                      <li>
-                        <i className="fa fa-wpexplorer"></i>Select as featured
-                      </li>
-                      <li>
-                        <i className="fa fa-bell-slash-o"></i>Turn off Notifications
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <ins>
-                  <a href="time-line.html" title="">
-                    {data.users_permissions_user.first_name}{" "}
-                    {data.users_permissions_user.last_name}
-                  </a>
-                </ins>
-                <span> {moment(data.created_at).fromNow()}</span>
-              </div>
-            </>
-          ) : null}
-          <div className="post-meta">
-            <div className="description mt-0">
-              <p>{data.body}</p>
-            </div>
+          <div className="d-flex">
             <figure>
-              <img src={image} />
+              <img
+                src={data.users_permissions_user.avatar_url}
+                alt=""
+                width="50px"
+                style={{ borderRadius: "50%" }}
+              />
+            </figure>
+            <span className="friend-name">
+              <div className="more">
+                <div className="more-post-optns">
+                  <i className="ti-more-alt"></i>
+                  <ul>
+                    <li>
+                      <i className="fa fa-pencil-square-o"></i>Edit Post
+                    </li>
+                    <li>
+                      <i className="fa fa-trash-o"></i>Delete Post
+                    </li>
+                    <li className="bad-report">
+                      <i className="fa fa-flag"></i>Report Post
+                    </li>
+                    <li>
+                      <i className="fa fa-address-card-o"></i>Boost This Post
+                    </li>
+                    <li>
+                      <i className="fa fa-clock-o"></i>Schedule Post
+                    </li>
+                    <li>
+                      <i className="fa fa-wpexplorer"></i>Select as featured
+                    </li>
+                    <li>
+                      <i className="fa fa-bell-slash-o"></i>Turn off
+                      Notifications
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <ins>
+                <Link
+                  to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+                  title=""
+                >
+                  {data.users_permissions_user.first_name}{" "}
+                  {data.users_permissions_user.last_name}
+                </Link>
+              </ins>
+              <span> {moment(data.created_at).fromNow()}</span>
+            </span>
+          </div>
+          <div className="post-meta">
+            <Link
+              to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+            >
+              <div className="description mt-0">
+                <p>
+                  {data.body.length > 200 ? (
+                    <>
+                      {data.body.slice(0, 200)}...{" "}
+                      <b className="text-theme">Read More</b>
+                    </>
+                  ) : (
+                    data.body
+                  )}
+                </p>
+              </div>
+            </Link>
+            <figure>
+              <div class="img-bunch">
+                <div class="row">
+                  {data.image_url &&
+                    data.image_url.map((val, i) => {
+                      return (
+                        <div
+                          className="col-4"
+                          style={{ maxWidth: "32.333333%", margin: '2.1px' }}
+                        >
+                          <div
+                            className="card"
+                            data-strip-group-options="loop: false"
+                            data-strip-group="mygroup"
+                            style={{
+                              backgroundImage: `url(${val})`,
+                              height: "160px",
+                              width: "100%",
+                              // backgroundPosition: 'center',
+                              backgroundSize: "100% 100%",
+                            }}
+                          ></div>
+                        </div>
+                        // <figure className="col-4 gray-bg">
+                        //   <a
+                        //     class="strip"
+                        //     href={val}
+                        //     title=""
+                        //     data-strip-group="mygroup"
+                        //     data-strip-group-options="loop: false"
+                        //   >
+                        //     <img src={val} alt="" width="100" />
+                        //   </a>
+                        // </figure>
+                      );
+                    })}
+                </div>
+              </div>
+              {/* <ul class="like-dislike">
+                <li>
+                  <Link class="bg-purple" href="#" title="Save to Pin Post">
+                    <i class="fa fa-thumb-tack"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link class="bg-blue" href="#" title="Like Post">
+                    <i class="ti-thumb-up"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link class="bg-red" href="#" title="dislike Post">
+                    <i class="ti-thumb-down"></i>
+                  </Link>
+                </li>
+              </ul> */}
             </figure>
 
-            <ul className="like-dislike">
+            {/* <ul className="like-dislike">
               <li>
-                <a href="#" title="Save to Pin Post">
+                <Link href="#" title="Save to Pin Post">
                   <i className="fa fa-thumb-tack"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" title="Like Post">
+                <Link href="#" title="Like Post">
                   <i className="ti-thumb-up"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" title="dislike Post">
+                <Link href="#" title="dislike Post">
                   <i className="ti-thumb-down"></i>
-                </a>
+                </Link>
               </li>
-            </ul>
+            </ul> */}
+
             {/* <div className="we-video-info">
               <ul>
                 <li>
@@ -105,59 +180,59 @@ const EachSocialRequest = (props) => {
 
                 <li>
                   <span>
-                    <a className="share-pst" href="#" title="Share">
+                    <Link className="share-pst" href="#" title="Share">
                       <i className="fa fa-share-alt"></i>
-                    </a>
+                    </Link>
                     <ins>20</ins>
                   </span>
                 </li>
               </ul>
               <div className="users-thumb-list">
-                <a
+                <Link
                   data-toggle="tooltip"
                   title=""
                   href="#"
                   data-original-title="Anderw"
                 >
                   <img alt="" src="images/resources/userlist-1.jpg" />
-                </a>
-                <a
+                </Link>
+                <Link
                   data-toggle="tooltip"
                   title=""
                   href="#"
                   data-original-title="frank"
                 >
                   <img alt="" src="images/resources/userlist-2.jpg" />
-                </a>
-                <a
+                </Link>
+                <Link
                   data-toggle="tooltip"
                   title=""
                   href="#"
                   data-original-title="Sara"
                 >
                   <img alt="" src="images/resources/userlist-3.jpg" />
-                </a>
-                <a
+                </Link>
+                <Link
                   data-toggle="tooltip"
                   title=""
                   href="#"
                   data-original-title="Amy"
                 >
                   <img alt="" src="images/resources/userlist-4.jpg" />
-                </a>
-                <a
+                </Link>
+                <Link
                   data-toggle="tooltip"
                   title=""
                   href="#"
                   data-original-title="Ema"
                 >
                   <img alt="" src="images/resources/userlist-5.jpg" />
-                </a>
+                </Link>
                 <span>
                   <strong>You</strong>, <b>Sarah</b> and{" "}
-                  <a href="#" title="">
+                  <Link href="#" title="">
                     24+ more
-                  </a>{" "}
+                  </Link>{" "}
                   liked
                 </span>
               </div>
@@ -171,9 +246,12 @@ const EachSocialRequest = (props) => {
                 </div>
                 <div className="we-comment">
                   <h5>
-                    <a href="time-line.html" title="">
+                    <Link
+                      to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+                      title=""
+                    >
                       Jason borne
-                    </a>
+                    </Link>
                   </h5>
                   <p>
                     we are working for the dance and sing songs. this video is
@@ -182,13 +260,13 @@ const EachSocialRequest = (props) => {
                   </p>
                   <div className="inline-itms">
                     <span>1 year ago</span>
-                    <a className="we-reply" href="#" title="Reply">
+                    <Link className="we-reply" href="#" title="Reply">
                       <i className="fa fa-reply"></i>
-                    </a>
-                    <a href="#" title="">
+                    </Link>
+                    <Link href="#" title="">
                       <i className="fa fa-heart"></i>
                       <span>20</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </li>
@@ -198,9 +276,12 @@ const EachSocialRequest = (props) => {
                 </div>
                 <div className="we-comment">
                   <h5>
-                    <a href="time-line.html" title="">
+                    <Link
+                      to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+                      title=""
+                    >
                       Sophia
-                    </a>
+                    </Link>
                   </h5>
                   <p>
                     we are working for the dance and sing songs. this video is
@@ -209,20 +290,20 @@ const EachSocialRequest = (props) => {
                   </p>
                   <div className="inline-itms">
                     <span>1 year ago</span>
-                    <a className="we-reply" href="#" title="Reply">
+                    <Link className="we-reply" href="#" title="Reply">
                       <i className="fa fa-reply"></i>
-                    </a>
-                    <a href="#" title="">
+                    </Link>
+                    <Link href="#" title="">
                       <i className="fa fa-heart"></i>
                       <span>20</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </li>
               <li>
-                <a href="#" title="" className="showmore underline">
+                <Link href="#" title="" className="showmore underline">
                   more comments+
-                </a>
+                </Link>
               </li>
               <li className="post-comment">
                 <div className="comet-avatar">

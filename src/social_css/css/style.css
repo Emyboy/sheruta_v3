@@ -18189,7 +18189,7 @@ nav .main-btn{margin-left: 20px;}
     border-radius: 100px !important;
     color: #535165;
     font-size: 14px;
-    height: 46px;
+    /* height: 46px; */
     line-height: 30px;
     text-align: center;
     width: 100%;

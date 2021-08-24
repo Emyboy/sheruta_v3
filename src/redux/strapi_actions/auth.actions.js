@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const state = JSON.parse(localStorage.getItem('state'));
 
@@ -14,6 +15,7 @@ export const setAuthState = state => dispatch => {
 export const logout = () => dispatch => {
     localStorage.clear();
     sessionStorage.clear();
+    Cookies.remove('token')
     dispatch({
         type: 'LOGOUT'
     })
