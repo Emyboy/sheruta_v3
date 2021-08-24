@@ -91,7 +91,7 @@ const EachSocialRequest = (props) => {
                       return (
                         <div
                           className="col-4"
-                          style={{ maxWidth: "32.333333%", margin: '2.1px' }}
+                          style={{ maxWidth: "32.333333%", margin: '1.0px' }}
                         >
                           <div
                             className="card"
