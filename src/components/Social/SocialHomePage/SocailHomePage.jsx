@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Global from "../../../Global";
 import EachSocialRequest from "../EachSocialRequest";
 import Sticky from "react-sticky-el";
+import { PropertyCardSM } from "../../PropertyCard/PropertyCardSM";
 
 export const SocailHomePage = (props) => {
   const { user } = props.auth.user;
@@ -41,7 +42,7 @@ export const SocailHomePage = (props) => {
       <div className="gap2 gray-bg">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12">
+            <div className="">
               <div className="row merged20" id="page-contents">
                 <div className="col-lg-3 desktop-only">
                   <Sticky stickyStyle={{ marginTop: "80px" }}>
@@ -290,12 +291,18 @@ export const SocailHomePage = (props) => {
                     </aside>
                   </Sticky>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-lg-5">
                   {state.list.map((val, i) => {
                     return <EachSocialRequest key={i} data={val} />;
                   })}
                 </div>
-                <div className="col-lg-3"></div>
+                <div className="col-lg-4 desktop-only">
+                  <Sticky stickyStyle={{ marginTop: "80px" }}>
+                    {state.properties.map((val, i) => {
+                      return <PropertyCardSM val={val} key={i} />;
+                    })}
+                  </Sticky>
+                </div>
               </div>
             </div>
           </div>

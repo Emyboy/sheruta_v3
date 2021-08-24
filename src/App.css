@@ -69,7 +69,6 @@ div.scrollmenu div {
 }
 .mobile-only {
   visibility: collapse !important;
-  display: none;
 }
 .desktop-only {
   visibility: visible !important;

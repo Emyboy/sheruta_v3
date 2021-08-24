@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import image from "../../social_css/images/resources/album5.jpg";
 import image2 from "../../social_css/images/resources/author.jpg";
 import { Link } from "react-router-dom";
+import Gallery from "react-grid-gallery";
 
 const EachSocialRequest = (props) => {
   console.log("EACH REQUESTS ---", props);
@@ -106,17 +107,6 @@ const EachSocialRequest = (props) => {
                             }}
                           ></div>
                         </div>
-                        // <figure className="col-4 gray-bg">
-                        //   <a
-                        //     class="strip"
-                        //     href={val}
-                        //     title=""
-                        //     data-strip-group="mygroup"
-                        //     data-strip-group-options="loop: false"
-                        //   >
-                        //     <img src={val} alt="" width="100" />
-                        //   </a>
-                        // </figure>
                       );
                     })}
                 </div>
