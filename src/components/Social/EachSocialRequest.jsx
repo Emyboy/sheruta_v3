@@ -10,7 +10,7 @@ import { GoLocation } from "react-icons/go";
 
 const EachSocialRequest = (props) => {
   const { data } = props;
-  console.log("EACH REQUESTS ---", data);
+  // console.log("EACH REQUESTS ---", data);
   return (
     <div className="central-meta item" style={{ display: "inline-block" }}>
       <div className="user-post job">
@@ -55,10 +55,13 @@ const EachSocialRequest = (props) => {
                 </div>
               </div>
               <ins>
-                <a href="time-line.html" title="">
+                <Link
+                  to={`/user/${data.users_permissions_user.username}`}
+                  title=""
+                >
                   {data.users_permissions_user.first_name}{" "}
                   {data.users_permissions_user.last_name}
-                </a>
+                </Link>
                 's Request
               </ins>
               <em
@@ -146,16 +149,22 @@ const EachSocialRequest = (props) => {
               </ul>
             </div>
             <div className="description">
-              <p>
-                {data.body.length > 200 ? (
-                  <>
-                    {data.body.slice(0, 200)}...{" "}
-                    <b className="text-theme">Read More</b>
-                  </>
-                ) : (
-                  data.body
-                )}
-              </p>
+              {data.body ? (
+                <Link
+                  to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+                >
+                  <p>
+                    {data.body.length > 200 ? (
+                      <>
+                        {data.body.slice(0, 200)}...{" "}
+                        <b className="text-theme">Read More</b>
+                      </>
+                    ) : (
+                      data.body
+                    )}
+                  </p>
+                </Link>
+              ) : null}
             </div>
             <figure>
               <div className="img-bunch">
@@ -183,7 +192,7 @@ const EachSocialRequest = (props) => {
                     })}
                 </div>
               </div>
-              <ul className="like-dislike">
+              {/* <ul className="like-dislike">
                 <li>
                   <Link className="bg-purple" href="#" title="Save to Pin Post">
                     <i className="fa fa-thumb-tack"></i>
@@ -199,7 +208,7 @@ const EachSocialRequest = (props) => {
                     <i className="ti-thumb-down"></i>
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </figure>
             <div className="rate-n-apply">
               <div className="job-price">
@@ -210,9 +219,9 @@ const EachSocialRequest = (props) => {
                 </ins>
               </div>
               <a
-                href="career-detail.html"
+                href={`tel:${data.users_permissions_user.phone_number}`}
                 title=""
-                className="main-btn bg-theme"
+                className="main-btn bg-theme text-white"
                 data-ripple=""
               >
                 Call Me<i className="fa fa-phone ml-2"></i>

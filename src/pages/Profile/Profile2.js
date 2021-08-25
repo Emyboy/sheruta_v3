@@ -25,7 +25,7 @@
 
 //     useEffect(() => {
 //         if (user) {
-//             axios(process.env.REACT_APP_API_URL + '/property-requests/?users_permissions_user=' + user.user.id, {
+//             axios(process.env.REACT_APP_API_URL + '/property-requests/?users_permissions_user=' + userData.id, {
 
 //             })
 //                 .then(res => {
@@ -55,10 +55,10 @@
 //                                     <Tabs defaultActiveKey="1" onChange={callback}>
 //                                         <TabPane tab="Profile" key="1" className='profile-content'>
 //                                             <div className="d-user-avater">
-//                                                 <img src={user.user.avatar_url} className="img-fluid avater" alt=""  />
-//                                                 <h4>{`${user.user.first_name} ${user.user.last_name}`}</h4>
-//                                                 <span>{user.user.email}</span><br />
-//                                                 <span>@{user.user.username}</span>
+//                                                 <img src={userData.avatar_url} className="img-fluid avater" alt=""  />
+//                                                 <h4>{`${userData.first_name} ${userData.last_name}`}</h4>
+//                                                 <span>{userData.email}</span><br />
+//                                                 <span>@{userData.username}</span>
 //                                                 <button
 //                                                     onClick={() => setState({ ...state, showImageModal: !state.showImageModal })}
 //                                                     className='btn btn-sm btn-success shadow'
@@ -120,20 +120,29 @@ import { Tabs, notification } from "antd";
 import axios from "axios";
 import EachSocialRequest from "../../components/Social/EachSocialRequest";
 import { Redirect } from "react-router";
+import PageLoader from "../../components/PageLoader";
+import PageNotFound from "../PageNotFound";
+import PersonalInfo from "./PersonalInfo";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
+  const { auth } = props;
+  const { params } = props.match;
   const [state, setState] = useState({
     showImageModal: false,
     userRequests: [],
   });
-  const user = props.auth.user;
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+  const [notFound, setNotFound] = useState(false);
+  // const user = props.auth.user;
+  
   useEffect(() => {
-    if (user) {
+    if (userData) {
       axios(
         process.env.REACT_APP_API_URL +
           "/property-requests/?users_permissions_user=" +
-          user.user.id,
+          userData.id,
         {}
       )
         .then((res) => {
@@ -145,14 +154,42 @@ export const Profile2 = (props) => {
           notification.error({ message: "Error Fetching User Data" });
         });
     }
-  }, [props.auth.user]);
-  if (!user) {
-    return <Redirect to="/" />;
-  } else
+  }, [userData]);
+
+ 
+
+  useEffect(() => {
+    if (params.username) {
+      axios(
+        process.env.REACT_APP_API_URL + `/users/?username=${params.username}`
+      )
+        .then((res) => {
+          console.log("USER --", res);
+          if (res.data.length > 0) {
+            setUserData(res.data[0]);
+          } else {
+            setNotFound(true);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log('ERROR --', err)
+          notification.error({ message: "Error fetching user data" });
+          setNotFound(true);
+        });
+    }
+  }, [params]);
+
+  if(loading){
+    return <PageLoader />
+  }else if(notFound){
+    return <PageNotFound />
+  }else{
+    // const user = userData;
     return (
       <Layout>
-        <section className="mt-0 pt-4">
-          <div className="gap2 gray-bg">
+        <section className="mt-0">
+          <div className="gap2 gray-bg pt-2">
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-lg-8">
@@ -179,7 +216,7 @@ export const Profile2 = (props) => {
                               style={{ textAlign: "start" }}
                             >
                               <div className="profile-author-thumb">
-                                <img alt="author" src={user.user.avatar_url} />
+                                <img alt="author" src={userData.avatar_url} />
                                 <div className="edit-dp">
                                   <label className="fileContainer">
                                     <i className="fa fa-camera"></i>
@@ -192,11 +229,11 @@ export const Profile2 = (props) => {
                                 className="author-content"
                                 style={{ textAlign: "start" }}
                               >
-                                <a className="h4 author-name" href="about.html">
-                                  {user.user.first_name} {user.user.last_name}
-                                </a>
+                                <p className="h4 author-name" href="about.html">
+                                  {userData.first_name} {userData.last_name}
+                                </p>
                                 <div className="country">
-                                  @{user.user.username}
+                                  @{userData.username}
                                 </div>
                               </div>
                             </div>
@@ -206,7 +243,7 @@ export const Profile2 = (props) => {
                     </div>
 
                     <div className="">
-                      <Tabs defaultActiveKey="1">
+                      <Tabs defaultActiveKey="2">
                         <TabPane tab="My Requests" key="1">
                           <div>
                             {state.userRequests.map((val, i) => {
@@ -215,7 +252,7 @@ export const Profile2 = (props) => {
                           </div>
                         </TabPane>
                         <TabPane tab="My Personal Info" key="2">
-                          Coming Soon
+                          <PersonalInfo userData={userData} />
                         </TabPane>
                         <TabPane tab="Settings" key="3">
                           Coming Soon
@@ -230,6 +267,7 @@ export const Profile2 = (props) => {
         </section>
       </Layout>
     );
+  }
 };
 
 const mapStateToProps = (state) => ({

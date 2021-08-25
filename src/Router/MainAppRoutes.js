@@ -68,8 +68,9 @@ function App() {
                                     <Route exact path="/about" component={About} />
                                     <Route exact path="/requests" component={CreateRequest} />
                                     <Route exact path="/requests/all" component={AllRequests} />
+                                    <Route exact path="/user/:username" component={Profile2} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
-                                    <Route exact path="/profile" component={Profile2} />
+                                    {/* <Route exact path="/profile" component={Profile2} /> */}
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
                                     <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={CreateRequest} />

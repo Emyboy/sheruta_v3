@@ -45,6 +45,10 @@ const Home = (props) => {
         .catch((err) => {});
     }
   }, [state]);
+
+  useEffect(() => {
+    
+  },[user])
   return (
     <Layout page="home">
       {user && view.personal_info ? (

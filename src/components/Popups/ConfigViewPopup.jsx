@@ -18,7 +18,7 @@ const ConfigViewPopup = (props) => {
   const [isLookingFor, setIsLookingFor] = useState(undefined);
 
   useEffect(() => {
-    if (Cookies.get("token")){
+    if (Cookies.get("token") && auth.user){
       axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
@@ -40,7 +40,7 @@ const ConfigViewPopup = (props) => {
           setShow(true);
         });
     }
-  }, []);
+  }, [auth.user]);
 
   const updatePersonalInfo = () => {
     setLoading(true);
