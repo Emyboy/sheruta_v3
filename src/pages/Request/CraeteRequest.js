@@ -118,6 +118,14 @@ const CraeteRequest = (props) => {
       notification.error({ message: "Please add a location" });
       return;
     }
+    if (!data.category) {
+      notification.error({ message: "Please add a category" });
+      return;
+    }
+    if (!data.service) {
+      notification.error({ message: "Please add a service" });
+      return;
+    }
     setState({ ...state, loading: true });
     //.. Send images to firebase
     const files = [];
