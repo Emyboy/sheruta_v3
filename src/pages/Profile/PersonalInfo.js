@@ -83,7 +83,7 @@ const PersonalInfo = ({ userData }) => {
               <span>
                 <i className="fa fa-venus-mars"></i> Gender
               </span>
-              <p>{info.gender.toUpperCase()}</p>
+              <p>{info.gender && info.gender.toUpperCase()}</p>
             </div>
           </div>
           <div className="col-lg-6">

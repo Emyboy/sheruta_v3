@@ -1,26 +1,29 @@
 import { notification } from "antd";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
 import Layout from "../../../components/Layout/Layout";
+import { notifyEmy } from "../../../utils/Sheruta";
 
 const WhatNext = (props) => {
   localStorage.setItem("after_payment", "/what-next");
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [payment, setPayment] = useState(null);
+  const [hasRequest, setHasRequest] = useState(false)
 
   const checkPaymentStatus = () => {
     setPaymentLoading(true);
     axios(
       process.env.REACT_APP_API_URL +
-        "/transactions/?users_permissions_user=" +
-        props.auth.user.user.id +
-        "&status=success",
+      "/transactions/?users_permissions_user=" +
+      props.auth.user.user.id +
+      "&status=success",
       {
         headers: {
-          Authorization: `Bearer ${props.auth.user.jwt}`,
+          Authorization: `Bearer ${Cookies.get('token')}`,
         },
       }
     )
@@ -31,11 +34,38 @@ const WhatNext = (props) => {
       .catch((err) => {
         setPaymentLoading(false);
         notification.error({ message: "Error verifying payment" });
+        notifyEmy({
+          heading: "Error fetching user transactions",
+          log: err,
+          url: window.location.pathname,
+          status: "error",
+        })
       });
   };
 
+  const getUsersRequests = () => {
+    axios(process.env.REACT_APP_API_URL + `/property-requests/?users_permissions_user=${props.auth.user.user.id}`)
+      .then(res => {
+        if (res.data.length > 0) {
+          setHasRequest(true)
+        }
+      })
+      .catch(err => {
+        notification.error({ message: "Error fetching requests" })
+        notifyEmy({
+          heading: "Error fetching user request",
+          log: err,
+          url: window.location.pathname,
+          status: "error",
+        })
+      })
+  }
+
   useEffect(() => {
     checkPaymentStatus();
+  }, []);
+  useEffect(() => {
+    getUsersRequests();
   }, []);
 
   return (
@@ -69,7 +99,7 @@ const WhatNext = (props) => {
                       <Btn
                         text="Subscribe Now"
                         disabled={paymentLoading}
-                        onClick={() => {}}
+                        onClick={() => { }}
                         className="btn-sm mt-2"
                       />
                     </Link>
@@ -87,15 +117,20 @@ const WhatNext = (props) => {
                   {/* <span className="steps bg-success">02</span> */}
                 </div>
                 <div className="middle-icon-features-content">
-                  <h4>Post An Apartment or Request</h4>
+                  <h4>Post A Request</h4>
                   <p>Post something for the community.</p>
-                  <Link to="/submit">
-                    <Btn
-                      onClick={() => {}}
-                      text="Upload Now"
-                      className="btn-sm mt-2"
-                    />
-                  </Link>
+                  {
+                    hasRequest ? <div className="badge text-success btn-lg">
+                      <i className="ti ti-check display-7"></i>
+                    </div> :
+                      <Link to="/requests">
+                        <Btn
+                          onClick={() => { }}
+                          text="Upload Now"
+                          className="btn-sm mt-2"
+                        />
+                      </Link>
+                  }
                 </div>
               </div>
             </div>
@@ -116,7 +151,7 @@ const WhatNext = (props) => {
                   </p>
                   <Link to="/feedback">
                     <Btn
-                      onClick={() => {}}
+                      onClick={() => { }}
                       text="Start"
                       className="btn-sm mt-2"
                     />

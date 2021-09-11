@@ -34,8 +34,8 @@ export const getUserFeedback = () => (dispatch) => {
     const user = store.getState().auth.user;
     axios(
       process.env.REACT_APP_API_URL +
-        "/user-feedbacks/?users_permissions_user=" +
-        user.user.id
+      "/user-feedbacks/?users_permissions_user=" +
+      user.user.id
     )
       .then((res) => {
         if (res.data.length === 0) {
@@ -47,45 +47,44 @@ export const getUserFeedback = () => (dispatch) => {
           });
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, 5000);
 };
 
 export const getAuthPersonalInfo = () => (dispatch) => {
-  if (Cookies.get("token") && store.getState().auth.user) {
-    axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-    })
-      .then((res) => {
-        store.dispatch({
-          type: "SET_VIEW_STATE",
-          payload: {
-            personal_info: res.data,
-          },
-        });
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 401) {
-          localStorage.clear();
-          Cookies.remove("token");
-          sessionStorage.clear();
-          store.dispatch({
-            type: "SET_AUTH_STATE",
-            payload: {
-              user: null,
-              agentData: null,
-            },
-          });
-          notification.error({ message: "You are logged out" });
-        }
-        store.dispatch({
-          type: "SET_VIEW_STATE",
-          payload: {
-            configureView: true,
-          },
-        });
+  axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((res) => {
+      console.log('PERSONAL INFO')
+      store.dispatch({
+        type: "SET_VIEW_STATE",
+        payload: {
+          personal_info: res.data,
+        },
       });
-  }
+    })
+    .catch((err) => {
+      if (err.response && err.response.status === 401) {
+        localStorage.clear();
+        Cookies.remove("token");
+        sessionStorage.clear();
+        store.dispatch({
+          type: "SET_AUTH_STATE",
+          payload: {
+            user: null,
+            agentData: null,
+          },
+        });
+        notification.error({ message: "You are logged out" });
+      }
+      store.dispatch({
+        type: "SET_VIEW_STATE",
+        payload: {
+          configureView: true,
+        },
+      });
+    });
 };

@@ -185,7 +185,7 @@ const Layout = connect(
               className={`ml-4 mr-4 text-center ${
                 page === "profile" ? "text-theme" : "text-accent"
               }`}
-              to="/profile"
+              to={`/user/${user.username}`}
             >
               <img
                 src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"

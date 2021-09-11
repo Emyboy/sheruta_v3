@@ -35,7 +35,7 @@ const ConfigViewPopup = (props) => {
           phone_number: user.phone_number,
           users_permissions_user: user.id,
         };
-    axios(process.env.REACT_APP_API_URL + "/personal-infos", {
+    axios(process.env.REACT_APP_API_URL + `/personal-infos/?users_permissions_user=${auth.user.user.id}`, {
       method: view.personal_info ? "PUT" : "POST",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
@@ -48,6 +48,7 @@ const ConfigViewPopup = (props) => {
           type: "SET_VIEW_STATE",
           payload: {
             personal_info: res.data,
+            configureView: false
           },
         });
         setShow(false);

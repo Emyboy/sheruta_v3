@@ -1,15 +1,23 @@
 import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
-import image from "../../social_css/images/resources/album5.jpg";
-import image2 from "../../social_css/images/resources/author.jpg";
 import { Link } from "react-router-dom";
 import { Badge, Tag } from "antd";
-import { GoLocation } from "react-icons/go";
+import { notifyEmy } from "../../utils/Sheruta";
+import { useSelector } from 'react-redux';
 
 const EachSocialRequest = (props) => {
   const { data } = props;
-  // console.log("EACH REQUESTS ---", data);
+  const { user } = useSelector(state => state.auth);
+
+  const handleCallRequest = () => {
+    notifyEmy({
+      heading: `Called ${data.users_permissions_user.first_name} ${data.users_permissions_user.last_name}`,
+      url: window.location.pathname,
+      status: 'success',
+    })
+  }
+
   return (
     <div className="central-meta item" style={{ display: "inline-block" }}>
       <div className="user-post job">
@@ -64,9 +72,8 @@ const EachSocialRequest = (props) => {
                 's Request
               </ins>
               <em
-                className={`${
-                  data.users_permissions_user.is_verified ? "text-theme" : ""
-                }`}
+                className={`${data.users_permissions_user.is_verified ? "text-theme" : ""
+                  }`}
               >
                 <i
                   className={
@@ -217,14 +224,25 @@ const EachSocialRequest = (props) => {
                   <b>₦{window.formatedPrice.format(data.budget)}</b>
                 </ins>
               </div>
-              <a
-                href={`tel:${data.users_permissions_user.phone_number}`}
-                title=""
-                className="main-btn bg-theme text-white"
-                data-ripple=""
-              >
-                Call Me<i className="fa fa-phone ml-2"></i>
-              </a>
+              {
+                user ? <a
+                  onClick={handleCallRequest}
+                  href={`tel:${data.users_permissions_user.phone_number}`}
+                  title=""
+                  className="main-btn bg-theme text-white"
+                  data-ripple=""
+                >
+                  Call Me<i className="fa fa-phone ml-2"></i>
+                </a> : <Link
+                  onClick={handleCallRequest}
+                  to={"/login"}
+                  title=""
+                  className="main-btn bg-theme text-white"
+                  data-ripple=""
+                >
+                  Call Me<i className="fa fa-phone ml-2"></i>
+                </Link>
+              }
             </div>
             {/* <div className="we-video-info">
               <ul>

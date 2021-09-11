@@ -124,6 +124,7 @@ import PageLoader from "../../components/PageLoader";
 import PageNotFound from "../PageNotFound";
 import PersonalInfo from "./PersonalInfo";
 import ProfileSettings from "./ProfileSettings";
+import { notifyEmy } from "../../utils/Sheruta";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -137,27 +138,31 @@ export const Profile2 = (props) => {
   const [userData, setUserData] = useState(null);
   const [notFound, setNotFound] = useState(false);
   // const user = props.auth.user;
-  
+
   useEffect(() => {
     if (userData) {
       axios(
         process.env.REACT_APP_API_URL +
-          "/property-requests/?users_permissions_user=" +
-          userData.id,
+        "/property-requests/?users_permissions_user=" +
+        userData.id,
         {}
       )
         .then((res) => {
-          console.log("REQ --", res);
           setState({ ...state, userRequests: res.data });
         })
         .catch((err) => {
-          console.log(err);
           notification.error({ message: "Error Fetching User Data" });
+          notifyEmy({
+            heading: "Error fetch user requests",
+            log: err,
+            status: "error",
+            url: window.location.pathname
+          })
         });
     }
   }, [userData]);
 
- 
+
 
   useEffect(() => {
     if (params.username) {
@@ -177,15 +182,21 @@ export const Profile2 = (props) => {
           console.log('ERROR --', err)
           notification.error({ message: "Error fetching user data" });
           setNotFound(true);
+          notifyEmy({
+            heading: "Error fetch user data",
+            log: err,
+            status: "error",
+            url: window.location.pathname
+          })
         });
     }
   }, [params]);
 
-  if(loading){
+  if (loading) {
     return <PageLoader />
-  }else if(notFound){
+  } else if (notFound) {
     return <PageNotFound />
-  }else{
+  } else {
     // const user = userData;
     return (
       <Layout>
@@ -255,9 +266,11 @@ export const Profile2 = (props) => {
                         <TabPane tab="My Personal Info" key="2">
                           <PersonalInfo userData={userData} />
                         </TabPane>
-                        <TabPane tab="Settings" key="3">
-                          <ProfileSettings />
-                        </TabPane>
+                        {
+                          userData.id === auth.user.user.id ? <TabPane tab="Settings" key="3">
+                            <ProfileSettings />
+                          </TabPane> : null
+                        }
                       </Tabs>
                     </div>
                   </div>

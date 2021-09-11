@@ -35,7 +35,6 @@ import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import Submit from '../pages/Submit/Submit';
 import MasterPopup from '../components/Popups/MasterPopup';
 import CraeteRequest from '../pages/Request/CraeteRequest';
-import SocialImagePreview from '../components/Social/SocialImagePreview/SocialImagePreview';
 // import GetStarted from '../pages/GetStarted/GetStarted';
 // import Pricing from '../pages/Pricing/Pricing';
 // import Profile2 from "../pages/Profile/Profile2";
@@ -58,7 +57,6 @@ function App() {
                                 <FeedbackPopup />
                                 <PaymentPopup />
                                 <MasterPopup />
-                                {/* <SocialImagePreview /> */}
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/start" component={GetStarted} />

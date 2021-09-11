@@ -19,15 +19,16 @@ const GetStartedPopup = (props) => {
         setShow(true);
       }
     }
-  }, [view.personal_info, auth]);
+  }, [auth]);
 
   return (
     <Modal show={show}>
       <Modal.Body>
         <h3>Join the community today.</h3>
-        <h5 className="text-muted">Get access to verified flat mates</h5>
-        <h5 className="text-muted">Find people closest to you</h5>
-        <h5 className="text-muted">Be the first to get updates</h5>
+        <small className="text-muted display-7">Get access to verified flat mates.</small>
+        <small className="text-muted display-7">Find people closest to you.</small><br />
+        <small className="text-muted display-7">Be the first to get updates.</small>
+        <div className='container'>
         <div className="row">
           <Link to="/start">
             <Btn
@@ -43,6 +44,7 @@ const GetStartedPopup = (props) => {
           >
             <h6 className="text-theme">Remind me later</h6>
           </span>
+        </div>
         </div>
       </Modal.Body>
     </Modal>

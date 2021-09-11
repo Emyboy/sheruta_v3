@@ -5,6 +5,7 @@ import Global from "../../../Global";
 import EachSocialRequest from "../EachSocialRequest";
 import Sticky from "react-sticky-el";
 import { PropertyCardSM } from "../../PropertyCard/PropertyCardSM";
+import { Link } from 'react-router-dom'
 
 export const SocailHomePage = (props) => {
   const { user } = props.auth.user;
@@ -17,24 +18,24 @@ export const SocailHomePage = (props) => {
     if (state.properties.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
-          `/properties/recent/${Global.isMobile ? "4" : "6"}`
+        `/properties/recent/${Global.isMobile ? "4" : "6"}`
       )
         .then((res) => {
           setState({ ...state, properties: res.data });
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [state]);
   useEffect(() => {
     if (state.list.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
-          `/property-requests/recent/${Global.isMobile ? "20" : "20"}`
+        `/property-requests/recent/${Global.isMobile ? "20" : "20"}`
       )
         .then((res) => {
           setState({ ...state, list: res.data });
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [state]);
   return (
@@ -56,10 +57,13 @@ export const SocailHomePage = (props) => {
                             </a>
                           </figure>
                           <div className="page-meta">
-                            <a href="#" title="" className="underline">
+                            <Link to={`/user/${user.username}`} title="">
                               {user.first_name} {user.last_name}
-                            </a>
+                            </Link>
                             <span>
+                              @{user.username}
+                            </span>
+                            {/* <span>
                               <i className="ti-comment"></i>
                               <a href="insight.html" title="">
                                 Messages <em>9</em>
@@ -70,9 +74,9 @@ export const SocailHomePage = (props) => {
                               <a href="insight.html" title="">
                                 Notifications <em>2</em>
                               </a>
-                            </span>
+                            </span> */}
                           </div>
-                          <ul className="page-publishes">
+                          {/* <ul className="page-publishes">
                             <li>
                               <span>
                                 <i className="ti-pencil-alt"></i>Publish
@@ -93,9 +97,9 @@ export const SocailHomePage = (props) => {
                                 <i className="fa fa-user-plus"></i>Invite
                               </span>
                             </li>
-                          </ul>
+                          </ul> */}
                           <div className="page-likes">
-                            <div className="tab-content">
+                            {/* <div className="tab-content">
                               <div
                                 className="tab-pane active fade show"
                                 id="link1"
@@ -273,7 +277,7 @@ export const SocailHomePage = (props) => {
                                   </a>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
 
                             <div className="nav nav-tabs likes-btn d-flex justify-content-center">
                               <button
