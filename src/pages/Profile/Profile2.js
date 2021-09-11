@@ -125,6 +125,7 @@ import PageNotFound from "../PageNotFound";
 import PersonalInfo from "./PersonalInfo";
 import ProfileSettings from "./ProfileSettings";
 import { notifyEmy } from "../../utils/Sheruta";
+import MetaTags from "react-meta-tags";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -199,87 +200,95 @@ export const Profile2 = (props) => {
   } else {
     // const user = userData;
     return (
-      <Layout>
-        <section className="mt-0">
-          <div className="gap2 gray-bg pt-2">
-            <div className="container">
-              <div className="row justify-content-center">
-                <div className="col-lg-8">
-                  <div className="row merged20" id="page-contents">
-                    <div className="user-profile">
-                      <figure>
-                        <div className="edit-pp">
-                          <label className="fileContainer">
-                            <i className="fa fa-camera"></i>
-                            <input type="file" />
-                          </label>
-                        </div>
-                        <img
-                          src={"https://picsum.photos/800/300/?blur"}
-                          alt=""
-                        />
-                      </figure>
+      <>
+        <MetaTags>
+          <title>{`${userData.first_name} ${userData.last_name}`}'s Profile | Sheruta</title>
+          <meta name="description" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
+          <meta property="og:title" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
+          <meta property="og:description" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
+        </MetaTags>
+        <Layout>
+          <section className="mt-0">
+            <div className="gap2 gray-bg pt-2">
+              <div className="container">
+                <div className="row justify-content-center">
+                  <div className="col-lg-8">
+                    <div className="row merged20" id="page-contents">
+                      <div className="user-profile">
+                        <figure>
+                          <div className="edit-pp">
+                            <label className="fileContainer">
+                              <i className="fa fa-camera"></i>
+                              <input type="file" />
+                            </label>
+                          </div>
+                          <img
+                            src={"https://picsum.photos/800/300/?blur"}
+                            alt=""
+                          />
+                        </figure>
 
-                      <div className="profile-section">
-                        <div className="row">
-                          <div className="col-lg-6 col-md-8">
-                            <div
-                              className="profile-author"
-                              style={{ textAlign: "start" }}
-                            >
-                              <div className="profile-author-thumb">
-                                <img alt="author" src={userData.avatar_url} />
-                                <div className="edit-dp">
-                                  <label className="fileContainer">
-                                    <i className="fa fa-camera"></i>
-                                    <input type="file" />
-                                  </label>
-                                </div>
-                              </div>
-
+                        <div className="profile-section">
+                          <div className="row">
+                            <div className="col-lg-6 col-md-8">
                               <div
-                                className="author-content"
+                                className="profile-author"
                                 style={{ textAlign: "start" }}
                               >
-                                <p className="h4 author-name" href="about.html">
-                                  {userData.first_name} {userData.last_name}
-                                </p>
-                                <div className="country">
-                                  @{userData.username}
+                                <div className="profile-author-thumb">
+                                  <img alt="author" src={userData.avatar_url} />
+                                  <div className="edit-dp">
+                                    <label className="fileContainer">
+                                      <i className="fa fa-camera"></i>
+                                      <input type="file" />
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <div
+                                  className="author-content"
+                                  style={{ textAlign: "start" }}
+                                >
+                                  <p className="h4 author-name" href="about.html">
+                                    {userData.first_name} {userData.last_name}
+                                  </p>
+                                  <div className="country">
+                                    @{userData.username}
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="w-100">
-                      <Tabs defaultActiveKey="2">
-                        <TabPane tab="My Requests" key="1">
-                          <div>
-                            {state.userRequests.map((val, i) => {
-                              return <EachSocialRequest key={i} data={val} />;
-                            })}
-                          </div>
-                        </TabPane>
-                        <TabPane tab="My Personal Info" key="2">
-                          <PersonalInfo userData={userData} />
-                        </TabPane>
-                        {
-                          userData.id === auth.user.user.id ? <TabPane tab="Settings" key="3">
-                            <ProfileSettings />
-                          </TabPane> : null
-                        }
-                      </Tabs>
+                      <div className="w-100">
+                        <Tabs defaultActiveKey="2">
+                          <TabPane tab="My Requests" key="1">
+                            <div>
+                              {state.userRequests.map((val, i) => {
+                                return <EachSocialRequest key={i} data={val} />;
+                              })}
+                            </div>
+                          </TabPane>
+                          <TabPane tab="My Personal Info" key="2">
+                            <PersonalInfo userData={userData} />
+                          </TabPane>
+                          {
+                            userData.id === auth.user.user.id ? <TabPane tab="Settings" key="3">
+                              <ProfileSettings />
+                            </TabPane> : null
+                          }
+                        </Tabs>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </Layout>
+          </section>
+        </Layout>
+      </>
     );
   }
 };

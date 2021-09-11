@@ -119,7 +119,7 @@ const PersonalInfo = ({ userData }) => {
                   </span>
                   <p>
                     {locations.map((val) => {
-                      return <span key={val.id}>{val.location},</span>;
+                      return <span key={val.id}>{val.location} OR </span>;
                     })}
                   </p>
                 </div>

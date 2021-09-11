@@ -81,7 +81,7 @@ const RequestDetails = (props) => {
             <Layout>
                 <section className='pt-3'>
                     <MetaTags>
-                        <title>Request | {request.heading}</title>
+                        <title>{request.heading} | Request</title>
                         <meta name="description" content={request.body} />
                         <meta property="og:title" content={'Request | ' + request.heading} />
                         <meta property="og:description" content={request.body} />

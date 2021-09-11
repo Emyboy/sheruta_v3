@@ -19,7 +19,7 @@ const GetStartedPopup = (props) => {
         setShow(true);
       }
     }
-  }, [auth]);
+  }, [auth, view.personal_info]);
 
   return (
     <Modal show={show}>
