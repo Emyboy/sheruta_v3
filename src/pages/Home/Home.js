@@ -52,7 +52,9 @@ const Home = (props) => {
   return (
     <Layout page="home">
       {user && view.personal_info ? (
-        <SocailHomePage />
+        <div className='container-fluid'>
+          <SocailHomePage />
+        </div>
       ) : (
         <>
           <div

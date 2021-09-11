@@ -45,7 +45,8 @@ export const SocailHomePage = (props) => {
           <div className="row">
             <div className="">
               <div className="row merged20" id="page-contents">
-                <div className="col-lg-3 desktop-only">
+                {
+                  Global.isMobile ? null : <div className="col-lg-3 desktop-only">
                   <Sticky stickyStyle={{ marginTop: "80px" }}>
                     <aside className="sidebar static left">
                       <div className="widget">
@@ -295,18 +296,21 @@ export const SocailHomePage = (props) => {
                     </aside>
                   </Sticky>
                 </div>
+                }
                 <div className="col-lg-5">
                   {state.list.map((val, i) => {
                     return <EachSocialRequest key={i} data={val} />;
                   })}
                 </div>
-                <div className="col-lg-4 desktop-only">
+                {
+                  Global.isMobile ? null : <div className="col-lg-4 desktop-only">
                   <Sticky stickyStyle={{ marginTop: "80px" }}>
                     {state.properties.map((val, i) => {
                       return <PropertyCardSM val={val} key={i} />;
                     })}
                   </Sticky>
                 </div>
+                }
               </div>
             </div>
           </div>

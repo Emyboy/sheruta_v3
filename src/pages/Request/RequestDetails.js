@@ -8,11 +8,23 @@ import Global from '../../Global';
 import Layout from '../../components/Layout/Layout';
 import PageNotFound from '../../pages/PageNotFound'
 import { Link } from 'react-router-dom';
-import { notifyEmy } from '../../utils/Sheruta'
+import { notifyEmy } from '../../utils/Sheruta';
+import styled from 'styled-components';
+import ImageViewer from "react-simple-image-viewer";
+
+const ImgContainer = styled.section`
+    padding: 5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+`;
 
 const RequestDetails = (props) => {
     const { uid } = props.match.params;
     const { auth } = props;
+    const [showImages, setShowImages] = useState(false);
     localStorage.setItem('after_login', window.location.pathname)
     const [state, setState] = useState({
         loading: true,
@@ -74,12 +86,13 @@ const RequestDetails = (props) => {
 
     useEffect(() => {
         if (request) {
+            console.log('req --', request)
             if (auth.user && auth.user.user.id !== request.users_permissions_user.id) {
                 notifyEmy({
                     heading: ` Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
                     url: window.location.pathname
                 })
-            } else if(!auth.user){
+            } else if (!auth.user) {
                 notifyEmy({
                     heading: `Someone Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
                     url: window.location.pathname
@@ -106,6 +119,20 @@ const RequestDetails = (props) => {
                             {makeJobSchema(request)}
                         </script>
                     </MetaTags>
+                    {
+                        showImages ? <ImageViewer
+                            src={request.image_url}
+                            currentIndex={0}
+                            onClose={() => {
+                                setShowImages(!showImages)
+                            }}
+                            disableScroll={false}
+                            backgroundStyle={{
+                                backgroundColor: "rgb(0 0 0 / 91%)"
+                            }}
+                            closeOnClickOutside={true}
+                        /> : null
+                    }
                     <div className='d-flex justify-content-center mt-5'>
                         <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
                             <div className="pt-4 pl-3 pr-3 blog-details single-post-item format-standard shadow bg-dark" style={{ borderRadius: 10 }}>
@@ -141,9 +168,11 @@ const RequestDetails = (props) => {
                                         request.heading ?
                                             <h1 className='text-white' style={{ fontSize: '20px' }}><b>{request.heading}</b></h1> : null
                                     }
+                                    <ImgContainer style={{ backgroundImage: `url(${request.image_url[0]})` }}>
+                                        <button className='btn btn-theme btn-sm' onClick={() => setShowImages(!showImages)}>Show Images</button>
+                                    </ImgContainer>
                                     <p className="pa-text text-white" style={{ textAlign: 'start' }}>{request.body}</p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
