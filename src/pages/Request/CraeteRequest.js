@@ -3,7 +3,7 @@ import Btn from "../../components/Btn/Btn";
 import Select from "react-select";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { v4 as Uid } from "uuid";
 import { Alert, notification } from "antd";
 import { Link } from "react-router-dom";
@@ -27,6 +27,7 @@ const CraeteRequest = (props) => {
   localStorage.setItem("after_payment", `${window.location.pathname}`);
   const [done, setDone] = useState(false);
   const [image_url, set_image_url] = useState([]);
+  const dispatch = useDispatch();
 
   const { view, match, auth } = props;
 
@@ -75,7 +76,7 @@ const CraeteRequest = (props) => {
       is_searching: params.is_searching === "true",
       image_url,
     };
-    console.log("SENDING TO DB ---", newRequest);
+    
     axios(process.env.REACT_APP_API_URL + "/property-requests", {
       method: "POST",
       data: newRequest,
@@ -101,6 +102,7 @@ const CraeteRequest = (props) => {
               showPaymentPopup: true,
             },
           });
+          dispatch(getUserFeedback);
           localStorage.setItem("ph_request", JSON.stringify(newRequest));
         }
         setState({ ...state, loading: false });
@@ -137,12 +139,12 @@ const CraeteRequest = (props) => {
     });
     if (files.length > 0) {
       files.map(async (file, i) => {
-        console.log("UPLOADING ---", file);
+        
         if (file) {
           await new Compressor(file, {
             quality: 0.1,
             success(result) {
-              console.log("RESULT --", result);
+              
               var uploadTask = storage
                 .child(`images/requests/${auth.user.user.id}/${uid}/image_${i}`)
                 .put(result);
@@ -173,15 +175,7 @@ const CraeteRequest = (props) => {
                     .getDownloadURL()
                     .then((downloadURL) => {
                       img_urls.push(downloadURL);
-                      console.log("I is now == ", i);
-                      console.log(
-                        "IS DONE --",
-                        img_urls.length === files.length
-                      );
-                      console.log({
-                        img_urls: img_urls,
-                        files,
-                      });
+                      
                       if (img_urls.length === files.length) {
                         set_image_url(img_urls);
                         setDone(true);

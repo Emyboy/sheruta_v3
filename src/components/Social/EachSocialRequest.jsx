@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import image from "../../social_css/images/resources/album5.jpg";
 import image2 from "../../social_css/images/resources/author.jpg";
 import { Link } from "react-router-dom";
-import Gallery from "react-grid-gallery";
 import { Badge, Tag } from "antd";
 import { GoLocation } from "react-icons/go";
 

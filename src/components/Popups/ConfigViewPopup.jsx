@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -8,38 +8,20 @@ import Btn from "../Btn/Btn";
 import store from "../../redux/store/store";
 import { notifyEmy } from "../../utils/Sheruta";
 import { logout } from "../../redux/strapi_actions/auth.actions";
-import { notification } from "antd";
+
+import { getAuthPersonalInfo } from "../../redux/strapi_actions/view.action";
 
 const ConfigViewPopup = (props) => {
-  const { auth, view } = props;
+  const { auth } = props;
   const { user } = auth.user;
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [isLookingFor, setIsLookingFor] = useState(undefined);
+  const dispatch = useDispatch();
+  const view = useSelector(state => state.view);
 
   useEffect(() => {
-    if (Cookies.get("token") && auth.user){
-      axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      })
-        .then((res) => {
-          store.dispatch({
-            type: "SET_VIEW_STATE",
-            payload: {
-              personal_info: res.data,
-            },
-          });
-        })
-        .catch((err) => {
-          if (err.response && err.response.status === 401) {
-            props.logout();
-            notification.error({ message: "You are logged out" });
-          }
-          setShow(true);
-        });
-    }
+    dispatch(getAuthPersonalInfo());
   }, [auth.user]);
 
   const updatePersonalInfo = () => {
@@ -80,7 +62,7 @@ const ConfigViewPopup = (props) => {
   };
 
   return (
-    <Modal show={show}>
+    <Modal show={view.configureView}>
       <Modal.Body>
         <h3>Configure what you see</h3>
         <h4 className="text-muted">How can we help?</h4>

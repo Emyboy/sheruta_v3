@@ -102,7 +102,7 @@ const Layout = connect(
           />
           <div className="row mr-2">
             {window.innerWidth > 500 ? (
-              <Link to={auth.user ? "/profile" : "/login"}>
+              <Link to={auth.user ? `/user/${auth.user.user.username}` : "/login"}>
                 <IconBtn
                   className="mr-3 desktop-only"
                   icon={"ti-user"}

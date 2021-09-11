@@ -123,6 +123,7 @@ import { Redirect } from "react-router";
 import PageLoader from "../../components/PageLoader";
 import PageNotFound from "../PageNotFound";
 import PersonalInfo from "./PersonalInfo";
+import ProfileSettings from "./ProfileSettings";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -242,7 +243,7 @@ export const Profile2 = (props) => {
                       </div>
                     </div>
 
-                    <div className="">
+                    <div className="w-100">
                       <Tabs defaultActiveKey="2">
                         <TabPane tab="My Requests" key="1">
                           <div>
@@ -255,7 +256,7 @@ export const Profile2 = (props) => {
                           <PersonalInfo userData={userData} />
                         </TabPane>
                         <TabPane tab="Settings" key="3">
-                          Coming Soon
+                          <ProfileSettings />
                         </TabPane>
                       </Tabs>
                     </div>

@@ -12,6 +12,7 @@ const initialState = {
     detailLoading: false,
     showAddNumber: true,
     currentDashboardView: 'listings',
+    configureView: false
 }
 
 export default (state = initialState, { type, payload }) => {
