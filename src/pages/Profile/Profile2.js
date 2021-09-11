@@ -275,7 +275,7 @@ export const Profile2 = (props) => {
                             <PersonalInfo userData={userData} />
                           </TabPane>
                           {
-                            userData.id === auth.user.user.id ? <TabPane tab="Settings" key="3">
+                            auth.user && auth.user.user.id === userData.id ? <TabPane tab="Settings" key="3">
                               <ProfileSettings />
                             </TabPane> : null
                           }

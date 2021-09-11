@@ -12,8 +12,8 @@ const PersonalInfo = ({ userData }) => {
     if (userData) {
       axios(
         process.env.REACT_APP_API_URL +
-          "/personal-infos/?users_permissions_user=" +
-          userData.id,
+        "/personal-infos/?users_permissions_user=" +
+        userData.id,
         {}
       )
         .then((res) => {
@@ -30,8 +30,8 @@ const PersonalInfo = ({ userData }) => {
     if (userData) {
       axios(
         process.env.REACT_APP_API_URL +
-          "/user-preferred-locations/?users_permissions_user=" +
-          userData.id,
+        "/user-preferred-locations/?users_permissions_user=" +
+        userData.id,
         {}
       )
         .then((res) => {
@@ -98,8 +98,8 @@ const PersonalInfo = ({ userData }) => {
                 <i className="fa fa-map-marker-alt"></i> Preferred Locations
               </span>
               <p>
-                {locations.map((val) => {
-                  return <span key={val.id}>{val.location},</span>;
+                {locations.map((val, i) => {
+                  return <span key={val.id}>{val.location}{i === locations.length - 1 ? null : ". OR "}</span>;
                 })}
               </p>
             </div>
