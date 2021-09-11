@@ -6,7 +6,6 @@ import GetStartedPopup from './GetStartedPopup';
 const MasterPopup = (props) => {
     const { user } = props.auth;
     if(user){
-      console.log('THERE IS USER NOW')
         return (
           <>
             <ConfigViewPopup />

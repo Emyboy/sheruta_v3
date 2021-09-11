@@ -40,9 +40,12 @@ const EachSocialRequest = (props) => {
                       <i className="fa fa-pencil-square-o"></i>Edit Post
                     </li>
                     <li>
-                      <i className="fa fa-trash-o"></i>Delete Post
+                      <i className="fa fa-trash"></i>Delete Post
                     </li>
-                    <li className="bad-report">
+                    <li className='text-danger'>
+                      <i className="fa fa-flag"></i>Report Post
+                    </li>
+                    {/* <li className="bad-report">
                       <i className="fa fa-flag-o"></i>Report Post
                     </li>
                     <li>
@@ -57,7 +60,7 @@ const EachSocialRequest = (props) => {
                     <li>
                       <i className="fa fa-bell-slash-o"></i>Turn off
                       Notifications
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>

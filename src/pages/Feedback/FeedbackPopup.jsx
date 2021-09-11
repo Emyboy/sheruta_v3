@@ -4,6 +4,7 @@ import { Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Btn from '../../components/Btn/Btn'
 import store from '../../redux/store/store'
+import { notifyEmy } from '../../utils/Sheruta'
 
 export const FeedbackPopup = (props) => {
     return (
@@ -24,12 +25,18 @@ export const FeedbackPopup = (props) => {
                         })}
                     />
                 </Link>
-                <h4 className='mt-3 text-theme' onClick={() => store.dispatch({
-                    type: 'SET_VIEW_STATE',
-                    payload: {
-                        askForUserFeedback: false
-                    }
-                })}>Remind me later</h4>
+                <h4 className='mt-3 text-theme' onClick={() => {
+                    notifyEmy({
+                        heading: "Didn't want to give feedback from popup",
+                        url: window.location.pathname,
+                    })
+                    store.dispatch({
+                        type: 'SET_VIEW_STATE',
+                        payload: {
+                            askForUserFeedback: false
+                        }
+                    })
+                }}>Remind me later</h4>
             </Modal.Body>
         </Modal>
     )

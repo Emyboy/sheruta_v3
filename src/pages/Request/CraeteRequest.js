@@ -280,8 +280,6 @@ const CraeteRequest = (props) => {
                         />
                       </div>
 
-                      {state.hideOptions ? null : (
-                        <>
                           <div className="col-lg-6 col-md-6 col-sm-12">
                             <div className="form-group">
                               <label>Select Category</label>
@@ -316,8 +314,6 @@ const CraeteRequest = (props) => {
                               />
                             </div>
                           </div>
-                        </>
-                      )}
                       <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="form-group">
                           <label>Area</label>
