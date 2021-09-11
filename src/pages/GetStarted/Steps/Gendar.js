@@ -29,7 +29,6 @@ export default connect(
             method: hasInfo ? 'PUT' : 'POST',
             data: {
                 gender: gender,
-                users_permissions_user: auth.user.user.id
             }
         })
             .then(res => {

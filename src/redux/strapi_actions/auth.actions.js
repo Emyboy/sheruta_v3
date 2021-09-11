@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
+import store from "../store/store";
 
 const state = JSON.parse(localStorage.getItem('state'));
 
@@ -18,6 +19,12 @@ export const logout = () => dispatch => {
     Cookies.remove('token')
     dispatch({
         type: 'LOGOUT'
+    });
+    store.dispatch({
+        type: 'SET_VIEW_STATE',
+        payload: {
+            personal_info: null
+        }
     })
 };
 

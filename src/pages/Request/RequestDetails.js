@@ -8,11 +8,12 @@ import Global from '../../Global';
 import Layout from '../../components/Layout/Layout';
 import PageNotFound from '../../pages/PageNotFound'
 import { Link } from 'react-router-dom';
+import { notifyEmy } from '../../utils/Sheruta'
 
 const RequestDetails = (props) => {
     const { uid } = props.match.params;
     const { auth } = props;
-
+    localStorage.setItem('after_login', window.location.pathname)
     const [state, setState] = useState({
         loading: true,
         notFound: false
@@ -57,7 +58,6 @@ const RequestDetails = (props) => {
 
         axios(process.env.REACT_APP_API_URL + "/property-requests/?uuid=" + uid)
             .then(res => {
-                console.log('RES --------', res)
                 if (res.data.length === 0) {
                     setState({ ...state, notFound: true, loading: false })
                 } else {
@@ -70,7 +70,23 @@ const RequestDetails = (props) => {
                 setState({ ...state, loading: false })
                 notification.error({ message: 'Error fetching reqeust data' })
             })
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (request) {
+            if (auth.user && auth.user.user.id !== request.users_permissions_user.id) {
+                notifyEmy({
+                    heading: ` Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
+                    url: window.location.pathname
+                })
+            } else if(!auth.user){
+                notifyEmy({
+                    heading: `Someone Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
+                    url: window.location.pathname
+                })
+            }
+        }
+    }, [request])
 
     if (state.loading) {
         return <PageLoader />

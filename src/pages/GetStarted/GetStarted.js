@@ -17,6 +17,7 @@ import ValidIdCard from './Steps/ValidIdCard';
 import FinishStep from './Steps/FinishStep';
 
 const RenderStep = ({ props, step }) => {
+    console.log('BUT RENDERED ---', { props, step })
     switch (step) {
         case 1:
             return <LookingForStatus {...props} />
@@ -45,7 +46,7 @@ const RenderStep = ({ props, step }) => {
 
 export const GetStarted = (props) => {
     localStorage.setItem('after_login', '/start');
-    const { params  } = props.match;
+    const { params } = props.match;
     const { auth, match } = props;
     const [step, setStep] = useState(parseInt(params.step) || 1);
 
@@ -61,26 +62,28 @@ export const GetStarted = (props) => {
     useEffect(() => {
         if (auth.user) {
             axios(
-              process.env.REACT_APP_API_URL +
-                `/personal-infos/?users_permissions_user=${auth.user.user.id}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${props.auth.user.jwt}`,
-                },
-              }
-            )
-              .then((res) => {
-                if (res.data.length > 0) {
-                  setHasInfo(res.data[0]);
+                process.env.REACT_APP_API_URL +
+                `/personal-infos/me`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${props.auth.user.jwt}`,
+                    },
                 }
-              })
-              .catch((error) => {
-                notification.error({
-                  message: "Error fetching user information",
+            )
+                .then((res) => {
+                    setHasInfo(res.data);
+                })
+                .catch((error) => {
+                    notification.error({
+                        message: "Error fetching user information",
+                    });
                 });
-              });
         }
     }, [step]);
+
+    useEffect(() => {
+        console.log('STARTED PROPS ---', hasInfo)
+    }, [step])
 
 
 
@@ -103,7 +106,7 @@ export const GetStarted = (props) => {
                                 {hasInfo ? <div className="badge-warning">Updated Personal Information</div> : null}
                             </div>
                         </div>
-                        <RenderStep props={stepsProps} step={parseInt(match.params?.step) || step} />
+                        <RenderStep props={{ hasInfo: hasInfo, setStep, info: hasInfo, step }} step={parseInt(match.params?.step) || step} />
                     </div>
                 </secion>
 

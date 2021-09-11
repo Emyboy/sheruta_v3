@@ -71,9 +71,7 @@ const CraeteRequest = (props) => {
       body_html: `<p>${data.body}</p>`,
       uuid: uid,
       users_permissions_user: props.auth.user.user.id,
-      service: parseInt(params.service_id),
-      category: parseInt(params.category_id),
-      is_searching: params.is_searching === "true",
+      is_searching: view.personal_info.looking_for,
       image_url,
     };
     

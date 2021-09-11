@@ -53,7 +53,7 @@ const ConfigViewPopup = (props) => {
         });
         setShow(false);
         notifyEmy({
-          heading: `${user.first_name} updated personal from set view popup`,
+          heading: `${user.first_name} updated his status`,
           log: data,
         });
       })

@@ -1,5 +1,5 @@
 import { notification } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Btn from "../../../components/Btn/Btn";
 import { storage } from "../../../Firebase";
@@ -48,18 +48,28 @@ const ValidIdCard = (props) => {
   const sendToDb = () => {
     axios(process.env.REACT_APP_API_URL + "/personal-infos/" + props.info.id, {
       method: "PUT",
+      headers: {
+        Authorization: `Bearer ${props.auth.user.jwt}`,
+      },
       data: {
         id_back_img_url: backImageURL,
         id_front_img_url: frontImageURL,
       },
     })
       .then((res) => {
+        console.log('RES --', res)
         props.setStep(props.step + 1);
       })
       .catch((err) => {
         notification.error({ message: "Error uploading images" });
       });
   };
+
+  useEffect(() => {
+    if (frontImageURL && backImageURL) {
+      sendToDb(frontImageURL, backImageURL)
+    }
+  }, [frontImageURL, backImageURL])
 
   const handleImageUpload = () => {
     setUploading(true);
@@ -89,12 +99,16 @@ const ValidIdCard = (props) => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            console.log({
+              downloadURL,
+              i
+            })
             if (i === 1) {
               setFrontImageURL(downloadURL);
             } else {
               setBackImageURL(downloadURL);
               setUploading(false);
-              sendToDb();
+              // sendToDb();
             }
           });
         }

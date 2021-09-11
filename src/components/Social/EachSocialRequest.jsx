@@ -114,9 +114,7 @@ const EachSocialRequest = (props) => {
           </ol> */}
           <div className="post-meta">
             <h6>
-              <a href="#" title="">
                 {data.heading}
-              </a>
             </h6>
             <div className="loc-cate">
               {/* <ul className="cate">
@@ -326,107 +324,6 @@ const EachSocialRequest = (props) => {
                 </span>
               </div>
             </div> */}
-          </div>
-          <div className="coment-area">
-            <ul className="we-comet">
-              <li>
-                <div className="comet-avatar">
-                  <img src="images/resources/comet-1.jpg" alt="" />
-                </div>
-                <div className="we-comment">
-                  <h5>
-                    <a href="time-line.html" title="">
-                      Jason borne
-                    </a>
-                  </h5>
-                  <p>
-                    we are working for the dance and sing songs. this video is
-                    very awesome for the youngster. please vote this video and
-                    like our channel
-                  </p>
-                  <div className="inline-itms">
-                    <span>1 year ago</span>
-                    <a className="we-reply" href="#" title="Reply">
-                      <i className="fa fa-reply"></i>
-                    </a>
-                    <a href="#" title="">
-                      <i className="fa fa-heart"></i>
-                      <span>20</span>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="comet-avatar">
-                  <img src="images/resources/comet-2.jpg" alt="" />
-                </div>
-                <div className="we-comment">
-                  <h5>
-                    <a href="time-line.html" title="">
-                      Sophia
-                    </a>
-                  </h5>
-                  <p>
-                    we are working for the dance and sing songs. this video is
-                    very awesome for the youngster.
-                    <i className="em em-smiley"></i>
-                  </p>
-                  <div className="inline-itms">
-                    <span>1 year ago</span>
-                    <a className="we-reply" href="#" title="Reply">
-                      <i className="fa fa-reply"></i>
-                    </a>
-                    <a href="#" title="">
-                      <i className="fa fa-heart"></i>
-                      <span>20</span>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a href="#" title="" className="showmore underline">
-                  more comments+
-                </a>
-              </li>
-              <li className="post-comment">
-                <div className="comet-avatar">
-                  <img src="images/resources/comet-2.jpg" alt="" />
-                </div>
-                <div className="post-comt-box">
-                  <form method="post">
-                    <textarea placeholder="Post your comment"></textarea>
-                    <div className="add-smiles">
-                      <div className="uploadimage">
-                        <i className="fa fa-image"></i>
-                        <label className="fileContainer">
-                          <input type="file" />
-                        </label>
-                      </div>
-                      <span
-                        className="em em-expressionless"
-                        title="add icon"
-                      ></span>
-                      <div className="smiles-bunch">
-                        <i className="em em---1"></i>
-                        <i className="em em-smiley"></i>
-                        <i className="em em-anguished"></i>
-                        <i className="em em-laughing"></i>
-                        <i className="em em-angry"></i>
-                        <i className="em em-astonished"></i>
-                        <i className="em em-blush"></i>
-                        <i className="em em-disappointed"></i>
-                        <i className="em em-worried"></i>
-                        <i className="em em-kissing_heart"></i>
-                        <i className="em em-rage"></i>
-                        <i className="em em-stuck_out_tongue"></i>
-                      </div>
-                    </div>
-
-                    <button type="submit"></button>
-                  </form>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

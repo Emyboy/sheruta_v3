@@ -45,7 +45,7 @@ const PersonalInfoForm = (props) => {
         headers: {
           Authorization: `Bearer ${props.auth.user.jwt}`,
         },
-        method: props.info ? "PUT" : "POST",
+        method: "PUT",
         data,
       }
     )
@@ -60,7 +60,8 @@ const PersonalInfoForm = (props) => {
   };
 
   useEffect(() => {
-    setInfo(props.info);
+    setInfo(props.hasInfo);
+    console.log(props);
   }, [props.info]);
 
   return (

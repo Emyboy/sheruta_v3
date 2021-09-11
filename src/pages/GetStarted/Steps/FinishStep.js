@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +18,18 @@ const FinishStep = (props) => {
       status: 'success',
       url: window.location.pathname
     })
-  },[])
+  }, []);
+
+  useEffect(() => {
+    axios(process.env.REACT_APP_API_URL + `/sheruta/verify-request/${user.user.id}`, { method: 'POST' })
+      .then(res => {
+        console.log('VERIFY --', res)
+      })
+      .catch(err => {
+        console.log('VEIRFY ---', err)
+      })
+  }, [])
+
   return (
     <div className="container">
       <div className="text-center">

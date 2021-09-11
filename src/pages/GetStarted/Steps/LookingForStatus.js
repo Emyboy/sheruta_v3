@@ -15,21 +15,20 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps
 )((props) => {
-    const { auth, hasInfo } = props;
+    const { auth, hasInfo, info } = props;
     const [lookingFor, setLookingFor] = useState(false);
     const [loading, setLoading] = useState(false)
     const { step, setStep } = props;
 
     const updateLookingFor = () => {
         setLoading(true);
-        axios(process.env.REACT_APP_API_URL + "/personal-infos" + `${hasInfo ? `/${hasInfo.id}` : ``}`, {
+        axios(process.env.REACT_APP_API_URL + "/personal-infos" + `${hasInfo ? `/${info.id}` : ``}`, {
             headers: {
                 Authorization: `Bearer ${auth.user.jwt}`
             },
-            method: hasInfo ? 'PUT' : 'POST',
+            method: "PUT",
             data: {
                 looking_for: lookingFor,
-                users_permissions_user: auth.user.user.id
             }
         })
             .then(res => {
@@ -37,6 +36,7 @@ export default connect(
                 setLoading(false)
             })
             .catch(err => {
+                console.log({...err})
                 setLoading(false)
                 notification.error('An error occurred, Please try again')
                 notifyEmy({
