@@ -17,7 +17,6 @@ const EachSocialRequest = (props) => {
       status: 'success',
     })
   }
-
   return (
     <div className="central-meta item" style={{ display: "inline-block" }}>
       <div className="user-post job">
@@ -114,7 +113,7 @@ const EachSocialRequest = (props) => {
           </ol> */}
           <div className="post-meta">
             <h6>
-                {data.heading}
+              {data.heading}
             </h6>
             <div className="loc-cate">
               {/* <ul className="cate">
@@ -173,50 +172,39 @@ const EachSocialRequest = (props) => {
                 </Link>
               ) : null}
             </div>
-            <figure>
-              <div className="img-bunch">
-                <div className="row">
-                  {data.image_url &&
-                    data.image_url.map((val, i) => {
-                      return (
-                        <div
-                          className="col-4"
-                          style={{ maxWidth: "32.333333%", margin: "1.0px" }}
-                        >
-                          <div
-                            className="card"
-                            data-strip-group-options="loop: false"
-                            data-strip-group="mygroup"
-                            style={{
-                              backgroundImage: `url(${val})`,
-                              height: "160px",
-                              width: "100%",
-                              backgroundSize: "100% 100%",
-                            }}
-                          ></div>
-                        </div>
-                      );
-                    })}
-                </div>
-              </div>
-              {/* <ul className="like-dislike">
-                <li>
-                  <Link className="bg-purple" href="#" title="Save to Pin Post">
-                    <i className="fa fa-thumb-tack"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="bg-blue" href="#" title="Like Post">
-                    <i className="ti-thumb-up"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="bg-red" href="#" title="dislike Post">
-                    <i className="ti-thumb-down"></i>
-                  </Link>
-                </li>
-              </ul> */}
-            </figure>
+            {
+              data.image_url && data.image_url.length > 0 ? <Link
+                to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+              >
+                <figure>
+                  <div className="img-bunch">
+                    <div className="row">
+                      {data.image_url &&
+                        data.image_url.map((val, i) => {
+                          return (
+                            <div
+                              className="col-4"
+                              style={{ maxWidth: "32.333333%", margin: "1.0px" }}
+                            >
+                              <div
+                                className="card"
+                                data-strip-group-options="loop: false"
+                                data-strip-group="mygroup"
+                                style={{
+                                  backgroundImage: `url(${val})`,
+                                  height: "160px",
+                                  width: "100%",
+                                  backgroundSize: "100% 100%",
+                                }}
+                              ></div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </figure>
+              </Link> : null
+            }
             <div className="rate-n-apply">
               <div className="job-price">
                 <span>Budget:</span>

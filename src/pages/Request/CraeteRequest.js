@@ -140,7 +140,7 @@ const CraeteRequest = (props) => {
         
         if (file) {
           await new Compressor(file, {
-            quality: 0.1,
+            quality: 0.3,
             success(result) {
               
               var uploadTask = storage
@@ -270,6 +270,7 @@ const CraeteRequest = (props) => {
                         <TextInput
                           label="Request Heading"
                           required
+                          maxLength={60}
                           placeholder="Eg. I need a shared apartment in Ikeja"
                           onChange={(e) =>
                             setData({ ...data, heading: e.target.value })

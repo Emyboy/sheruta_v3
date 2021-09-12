@@ -14,7 +14,6 @@ import ImageViewer from "react-simple-image-viewer";
 
 const ImgContainer = styled.section`
     padding: 5em;
-    margin-top: 1em;
     margin-bottom: 1em;
     border-radius: 10px;
     background-size: cover;
@@ -99,7 +98,14 @@ const RequestDetails = (props) => {
                 })
             }
         }
-    }, [request])
+    }, [request]);
+
+    const notifySherutaAboutCall = () => {
+        notifyEmy({
+            heading: ` Gave ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name} a phone call`,
+            url: window.location.pathname
+        })
+    }
 
     if (state.loading) {
         return <PageLoader />
@@ -166,11 +172,13 @@ const RequestDetails = (props) => {
                                     <hr />
                                     {
                                         request.heading ?
-                                            <h1 className='text-white' style={{ fontSize: '20px' }}><b>{request.heading}</b></h1> : null
+                                            <h1 className='text-white display-7' style={{ fontSize: '17px', textAlign: 'start' }}>{request.heading}</h1> : null
                                     }
-                                    <ImgContainer style={{ backgroundImage: `url(${request.image_url[0]})` }}>
-                                        <button className='btn btn-theme btn-sm' onClick={() => setShowImages(!showImages)}>Show Images</button>
-                                    </ImgContainer>
+                                    {
+                                        request.image_url.length > 0 ? <ImgContainer style={{ backgroundImage: `url(${request.image_url[0]})` }}>
+                                            <button className='btn btn-dark btn-sm rounded' onClick={() => setShowImages(!showImages)}>Show All Images</button>
+                                        </ImgContainer> : null
+                                    }
                                     <p className="pa-text text-white" style={{ textAlign: 'start' }}>{request.body}</p>
                                 </div>
                             </div>

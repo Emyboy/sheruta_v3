@@ -16,7 +16,8 @@ export default ({
     autoFocus,
     icon,
     required,
-    errorMessage
+    errorMessage,
+    maxLength
 }) => {
    
     return (
@@ -34,6 +35,7 @@ export default ({
             disabled={disabled}
             defaultValue={defaultValue}
             autoFocus={autoFocus}
+            maxLength={maxLength}
             name={name}
             type={type}
             placeholder={placeholder}
