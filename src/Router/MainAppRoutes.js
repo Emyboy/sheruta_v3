@@ -34,14 +34,15 @@ import PropertySort from '../pages/Property/PropertySort'
 import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import Submit from '../pages/Submit/Submit';
 import MasterPopup from '../components/Popups/MasterPopup';
-import CraeteRequest from '../pages/Request/CraeteRequest';
 // import GetStarted from '../pages/GetStarted/GetStarted';
 // import Pricing from '../pages/Pricing/Pricing';
 // import Profile2 from "../pages/Profile/Profile2";
+// import CraeteRequest from '../pages/Request/CraeteRequest';
 
 
 const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
+const CraeteRequest = React.lazy(() => import("../pages/Request/CraeteRequest"));
 const Pricing = React.lazy(() => import("../pages/Pricing/Pricing"));
 const Profile2 = React.lazy(() => import("../pages/Profile/Profile2"));
 
@@ -66,11 +67,10 @@ function App() {
                                     <Route exact path="/login" component={Login} />
                                     <Route exact path="/contact" component={Contact} />
                                     <Route exact path="/about" component={About} />
-                                    <Route exact path="/requests" component={CreateRequest} />
+                                    <Route exact path="/requests" component={Request} />
                                     <Route exact path="/requests/all" component={AllRequests} />
                                     <Route exact path="/user/:username" component={Profile2} />
                                     <Route exact path="/property/:name/:property_id" component={PropertyDetails} />
-                                    {/* <Route exact path="/profile" component={Profile2} /> */}
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/signup/success" component={SignUpSuccess} />
                                     <Route exact path="/requests/create/:service_id/:category_id/:is_searching" component={CreateRequest} />

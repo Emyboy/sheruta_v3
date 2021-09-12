@@ -183,7 +183,7 @@ const PersonalInfoForm = (props) => {
         <h4>Social Information</h4>
         <div className="row justify-content-center">
           <div className="p-0 alert alert-warning col-md-8 text-center rounded border border-warning">
-            <div className="row justify-content-center">
+            <div>
               <AiOutlineWarning size={40} />
               <b className="display-7">Get Verified</b>
             </div>
@@ -199,7 +199,6 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  className="mt-3"
                   style={{ fontWeight: "bold" }}
                 >
                   https://www.facebook.com/
@@ -224,7 +223,6 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  className="mt-3"
                   style={{ fontWeight: "bold" }}
                 >
                   https://www.instagram.com/
@@ -250,7 +248,6 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  className="mt-3"
                   style={{ fontWeight: "bold" }}
                 >
                   https://www.twitter.com/
@@ -284,7 +281,7 @@ const PersonalInfoForm = (props) => {
         </div>
       </div>
       <hr />
-      <div className="form-group text-center">
+      <div className="row justify-content-center w-100 mb-3">
         {/* <button type="submit" className="btn btn-md full-width pop-login">Sign Up</button> */}
         <Btn text="Submit" className="w-50" type="submit" loading={loading} />
       </div>

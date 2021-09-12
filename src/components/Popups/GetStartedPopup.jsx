@@ -20,12 +20,12 @@ const GetStartedPopup = (props) => {
       }
     }
   }, [auth, view.personal_info]);
-
+  console.log(window.location.pathname )
   return (
-    <Modal show={show}>
+    <Modal show={show && window.location.pathname !== '/start'}>
       <Modal.Body>
         <h3>Join the community today.</h3>
-        <small className="text-muted display-7">Get access to verified flat mates.</small>
+        <small className="text-muted display-7">Get access to verified flat mates.</small><br />
         <small className="text-muted display-7">Find people closest to you.</small><br />
         <small className="text-muted display-7">Be the first to get updates.</small>
         <div className='container'>

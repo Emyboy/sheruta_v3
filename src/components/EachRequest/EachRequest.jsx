@@ -46,7 +46,7 @@ export default connect(
     return (
         <>
             {
-                state.confirmDelete ? <div className={`m-2 single-comment bg-dark  card shadow p-4 text-center ${state.deleted ? 'animated animate__fadeOutRightBig': 'show'}`}>
+                state.confirmDelete ? <div className={`m-2 single-comment bg-dark  card shadow p-4 text-center ${state.deleted ? 'animated animate__fadeOutRightBig' : 'show'}`}>
                     <h6 className='text-white'>Are you sure you want to delete?</h6>
                     <div className="btn-group" style={{ alignSelf: 'center' }} role="group" aria-label="Basic example">
                         <button disabled={state.loading} type="button" className="btn btn-danger" onClick={handleDelete}>{state.loading ? 'Loading...' : 'Delete'}</button>
@@ -59,10 +59,10 @@ export default connect(
                                 data.users_permissions_user ?
                                     <div className="comment-meta row">
                                         <div className="article_comments_thumb" style={{ width: '60px' }}>
-                                            <Avatar src={data.users_permissions_user.avatar_url} size={50} />
+                                            <Link to={`/user/${data.users_permissions_user.username}`}><Avatar src={data.users_permissions_user.avatar_url} size={50} /></Link>
                                         </div>
                                         <div className="comment-left-meta">
-                                            <h4 className="author-name mb-1" style={{ fontSize: '20px' }}>{data.users_permissions_user.first_name}</h4>
+                                            <Link to={`/user/${data.users_permissions_user.username}`}><h4 className="author-name mb-1" style={{ fontSize: '20px' }}>{data.users_permissions_user.first_name}</h4></Link>
                                             <div className="comment-date">{moment(data.created_at).fromNow()}</div>
                                         </div>
                                     </div> : null
@@ -90,7 +90,7 @@ export default connect(
                                                     <span><i onClick={() => setState({ ...state, confirmDelete: true })} className='fa fa-trash link text-theme ml-4'></i></span> : <a href={`tel:${data.users_permissions_user.phone_number}`}>
                                                         {
                                                             auth.user ?
-                                                            <span className='badge badge-danger' style={{ fontSize: '15px' }}><i className='ti-mobile'></i> Call Me</span>:
+                                                                <span className='badge badge-danger' style={{ fontSize: '15px' }}><i className='ti-mobile'></i> Call Me</span> :
                                                                 <Link to='/login' className='badge badge-danger' style={{ fontSize: '15px' }}><i className='ti-mobile'></i> Call Me</Link>
                                                         }
                                                     </a>

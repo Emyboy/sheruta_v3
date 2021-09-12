@@ -9,7 +9,7 @@ import {
   getAllCategories,
   getAllServices,
 } from "../../redux/strapi_actions/view.action";
-import { logout } from "../../redux/strapi_actions/auth.actions";
+import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
 
 const mapStateToProps = (state) => ({
@@ -27,9 +27,8 @@ const mapActionToProps = {
 const FooterNav = ({ text, icon, path, active }) => {
   return (
     <Link
-      className={`ml-4 mr-4 text-center ${
-        active ? "text-theme" : "text-accent"
-      }`}
+      className={`ml-4 mr-4 text-center ${active ? "text-theme" : "text-accent"
+        }`}
       to={path}
     >
       <i style={{ fontSize: "22px" }} className={icon}></i>
@@ -62,6 +61,7 @@ const Layout = connect(
   const [user, setUser] = useState(null);
 
   const router = useHistory();
+  
 
   useEffect(() => {
     props.getAllCategories();
@@ -106,7 +106,7 @@ const Layout = connect(
                 <IconBtn
                   className="mr-3 desktop-only"
                   icon={"ti-user"}
-                  onClick={() => {}}
+                  onClick={() => { }}
                 />
               </Link>
             ) : null}
@@ -182,16 +182,14 @@ const Layout = connect(
           />
           {user ? (
             <Link
-              className={`ml-4 mr-4 text-center ${
-                page === "profile" ? "text-theme" : "text-accent"
-              }`}
+              className={`ml-4 mr-4 text-center ${page === "profile" ? "text-theme" : "text-accent"
+                }`}
               to={`/user/${user.username}`}
             >
               <img
                 src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
-                className={`${
-                  page === "profile" ? "border border-success" : ""
-                }`}
+                className={`${page === "profile" ? "border border-success" : ""
+                  }`}
                 width="28"
                 style={{ borderRadius: "50px" }}
                 alt=""

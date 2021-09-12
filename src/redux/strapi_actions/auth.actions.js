@@ -29,10 +29,10 @@ export const logout = () => dispatch => {
 };
 
 export const getUser = () => dispatch => {
-    // console.log('%cgetting user --', 'color: red; font-size: 30px;')
+    console.log('%cgetting user --', 'color: red; font-size: 30px;')
     axios(process.env.REACT_APP_API_URL +"/users/me", {
         headers: {
-            Authorization: 'Bearer ' + state.auth.user.jwt
+            Authorization: `Bearer ${localStorage.getItem('token')}`
         },
     })
         .then(res => {
@@ -43,7 +43,10 @@ export const getUser = () => dispatch => {
         })
         .catch(err => {
             notification.error({ message: 'Error fetching profile' })
-            console.log(err)
+            store.dispatch({ type: 'LOGOUT'});
+            Cookies.remove('token');
+            localStorage.clear();
+            sessionStorage.clear();
         })
 }
 

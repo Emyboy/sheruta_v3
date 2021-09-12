@@ -79,12 +79,14 @@ export const getAuthPersonalInfo = () => (dispatch) => {
           },
         });
         notification.error({ message: "You are logged out" });
+      };
+      if (err.response?.status === 404){
+        store.dispatch({
+          type: "SET_VIEW_STATE",
+          payload: {
+            configureView: true,
+          },
+        });
       }
-      store.dispatch({
-        type: "SET_VIEW_STATE",
-        payload: {
-          configureView: true,
-        },
-      });
     });
 };

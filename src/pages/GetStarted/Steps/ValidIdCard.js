@@ -129,6 +129,7 @@ const ValidIdCard = (props) => {
                 className="rounded"
                 width="100%"
                 height="150px"
+                style={{ height: '200px'}}
                 src={URL.createObjectURL(frontImage)}
               />
               <button
@@ -166,6 +167,7 @@ const ValidIdCard = (props) => {
                 className="rounded"
                 width="100%"
                 height="150px"
+                style={{ height: '200px'}}
                 src={URL.createObjectURL(backImage)}
               />
               <button

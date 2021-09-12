@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import Layout from '../../components/Layout/Layout';
 import MetaTags from 'react-meta-tags';
 import { Redirect } from 'react-router';
@@ -7,7 +7,7 @@ import Gendar from './Steps/Gendar'
 import axios from 'axios';
 import { notification } from 'antd';
 import LookingForGender from './Steps/LookingForGender';
-import LookingForStatus from './Steps/LookingForStatus';
+import LookingForStatus from './Steps/GetStartedInstructions';
 import PrefaredLocations from './Steps/PrefaredLocations';
 import PersonalInfoForm from './Steps/PersonalInfoForm';
 import Age from './Steps/Age';
@@ -17,7 +17,7 @@ import ValidIdCard from './Steps/ValidIdCard';
 import FinishStep from './Steps/FinishStep';
 
 const RenderStep = ({ props, step }) => {
-    console.log('BUT RENDERED ---', { props, step })
+    // console.log('BUT RENDERED ---', { props, step })
     switch (step) {
         case 1:
             return <LookingForStatus {...props} />
@@ -49,15 +49,17 @@ export const GetStarted = (props) => {
     const { params } = props.match;
     const { auth, match } = props;
     const [step, setStep] = useState(parseInt(params.step) || 1);
+    const { personal_info } = useSelector(state => state.view);
 
     const [hasInfo, setHasInfo] = useState(false);
+    const dispatch = useDispatch();
 
-    const stepsProps = {
-        setStep: setStep,
-        step: step,
-        hasInfo,
-        info: hasInfo
-    };
+    // const stepsProps = {
+    //     setStep: setStep,
+    //     step: step,
+    //     hasInfo,
+    //     info: hasInfo
+    // };
 
     useEffect(() => {
         if (auth.user) {
@@ -71,7 +73,14 @@ export const GetStarted = (props) => {
                 }
             )
                 .then((res) => {
+                    console.log(res)
                     setHasInfo(res.data);
+                    dispatch({
+                        type: 'SET_VIEW_STATE',
+                        payload: {
+                            personal_info: res.data
+                        }
+                    })
                 })
                 .catch((error) => {
                     notification.error({
@@ -81,11 +90,9 @@ export const GetStarted = (props) => {
         }
     }, [step]);
 
-    useEffect(() => {
-        console.log('STARTED PROPS ---', hasInfo)
-    }, [step])
-
-
+    if (personal_info && personal_info.id_back_img_url && personal_info.id_front_img_url) {
+        return <Redirect to='/' />
+    }
 
     if (auth.user) {
         return (
@@ -99,13 +106,12 @@ export const GetStarted = (props) => {
 
                 <secion>
                     <div className='container bg-white mt-5 mb-2 border-success border rounded'
-                    // style={{ height: '80vh' }}
                     >
-                        <div className="row mb-3">
+                        {/* <div className="row mb-3">
                             <div className="col text-center">
                                 {hasInfo ? <div className="badge-warning">Updated Personal Information</div> : null}
                             </div>
-                        </div>
+                        </div> */}
                         <RenderStep props={{ hasInfo: hasInfo, setStep, info: hasInfo, step }} step={parseInt(match.params?.step) || step} />
                     </div>
                 </secion>
@@ -115,6 +121,7 @@ export const GetStarted = (props) => {
     } else {
         return <Redirect to="/login" />
     }
+    
 }
 
 const mapStateToProps = (state) => ({
