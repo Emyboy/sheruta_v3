@@ -187,7 +187,7 @@ const PersonalInfoForm = (props) => {
               <AiOutlineWarning size={40} />
               <b className="display-7">Get Verified</b>
             </div>
-            <p>Provide Your Social Media Handle And Get Verified By Sheruta</p>
+            <p>Provide at least two of your social media handles.</p>
           </div>
         </div>
       </div>
