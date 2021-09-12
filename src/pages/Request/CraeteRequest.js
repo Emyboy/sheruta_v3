@@ -74,7 +74,7 @@ const CraeteRequest = (props) => {
       is_searching: view.personal_info.looking_for,
       image_url,
     };
-    
+
     axios(process.env.REACT_APP_API_URL + "/property-requests", {
       method: "POST",
       data: newRequest,
@@ -137,12 +137,12 @@ const CraeteRequest = (props) => {
     });
     if (files.length > 0) {
       files.map(async (file, i) => {
-        
+
         if (file) {
           await new Compressor(file, {
             quality: 0.3,
             success(result) {
-              
+
               var uploadTask = storage
                 .child(`images/requests/${auth.user.user.id}/${uid}/image_${i}`)
                 .put(result);
@@ -173,7 +173,7 @@ const CraeteRequest = (props) => {
                     .getDownloadURL()
                     .then((downloadURL) => {
                       img_urls.push(downloadURL);
-                      
+
                       if (img_urls.length === files.length) {
                         set_image_url(img_urls);
                         setDone(true);
@@ -215,6 +215,14 @@ const CraeteRequest = (props) => {
     }
     if (ph_request) {
       setState({ ...state, message: "Continue from where you left off" });
+      const req = JSON.parse(localStorage.getItem('ph_request'))
+      setData({
+        ...data,
+        heading: req.heading,
+        body: req.body,
+        budget: req.budget,
+        category: req.category
+      })
     }
   }, []);
 
@@ -279,40 +287,40 @@ const CraeteRequest = (props) => {
                         />
                       </div>
 
-                          <div className="col-lg-6 col-md-6 col-sm-12">
-                            <div className="form-group">
-                              <label>Select Category</label>
-                              <Select
-                                placeholder="Select Category"
-                                options={view.categories.map((val) => ({
-                                  label: val.name,
-                                  value: val.id,
-                                }))}
-                                onChange={(e) => {
-                                  setData({ ...data, category: e.value });
-                                }}
-                                className="border rounded"
-                                disabled={state.loading}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6 col-sm-12">
-                            <div className="form-group">
-                              <label>Select Service</label>
-                              <Select
-                                placeholder="Select Service"
-                                onChange={(e) => {
-                                  setData({ ...data, service: e.value });
-                                }}
-                                options={view.services.map((val) => ({
-                                  label: val.name,
-                                  value: val.id,
-                                }))}
-                                className="border rounded"
-                                disabled={state.loading}
-                              />
-                            </div>
-                          </div>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group">
+                          <label>Apartment Type</label>
+                          <Select
+                            placeholder="Select Category"
+                            options={view.categories.map((val) => ({
+                              label: val.name,
+                              value: val.id,
+                            }))}
+                            onChange={(e) => {
+                              setData({ ...data, category: e.value });
+                            }}
+                            className="border rounded"
+                            disabled={state.loading}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group">
+                          <label>Select Service</label>
+                          <Select
+                            placeholder="Select Service"
+                            onChange={(e) => {
+                              setData({ ...data, service: e.value });
+                            }}
+                            options={view.services.map((val) => ({
+                              label: val.name,
+                              value: val.id,
+                            }))}
+                            className="border rounded"
+                            disabled={state.loading}
+                          />
+                        </div>
+                      </div>
                       <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="form-group">
                           <label>Area</label>

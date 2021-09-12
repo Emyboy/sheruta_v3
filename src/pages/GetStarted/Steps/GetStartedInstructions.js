@@ -8,7 +8,7 @@ export default function GetStartedInstructions(props) {
         <div className='pb-4 container'>
             <div className='text-center'>
                 <h2 className=''>What You Should Know</h2>
-                <h6 className='text-muted'>To match you with a verified flatmate, we have to collect more information about you.</h6>
+                <h6 className='text-muted'>For a secure flat share community, we require some information about you.</h6>
             </div>
             <hr />
             <ol>
