@@ -160,9 +160,9 @@ const EachSocialRequest = (props) => {
                   to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
                 >
                   <p>
-                    {data.body.length > 200 ? (
+                    {data.body.length > 100 ? (
                       <>
-                        {data.body.slice(0, 200)}...{" "}
+                        {data.body.slice(0, 100)}...{" "}
                         <b className="text-theme">Read More</b>
                       </>
                     ) : (
