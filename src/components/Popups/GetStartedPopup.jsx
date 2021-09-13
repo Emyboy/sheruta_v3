@@ -10,13 +10,16 @@ const GetStartedPopup = (props) => {
   const [show, setShow] = useState(false);
   useEffect(() => {
     if (view.personal_info) {
-      const { id_front_img_url, occupation, looking_for_gender } =
+      const { id_front_img_url, looking_for_gender, id_back_img_url } =
         view.personal_info;
       if (looking_for_gender) {
         setHasFinished(false);
       }
-      if (!id_front_img_url && !occupation) {
+      if (!id_front_img_url && !id_back_img_url) {
         setShow(true);
+      }else {
+        setShow(false);
+        
       }
     }
   }, [auth, view.personal_info]);

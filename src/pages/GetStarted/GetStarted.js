@@ -90,9 +90,9 @@ export const GetStarted = (props) => {
         }
     }, [step]);
 
-    if (personal_info && personal_info.id_back_img_url && personal_info.id_front_img_url) {
-        return <Redirect to='/' />
-    }
+    // if (personal_info && personal_info.id_back_img_url && personal_info.id_front_img_url) {
+    //     return <Redirect to='/' />
+    // }
 
     if (auth.user) {
         return (

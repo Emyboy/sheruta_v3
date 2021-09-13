@@ -71,7 +71,7 @@ const EachSocialRequest = (props) => {
                   {data.users_permissions_user.first_name}{" "}
                   {/* {data.users_permissions_user.last_name} */}
                 </Link>
-                's Request
+                Request
               </ins>
               <em
                 className={`${data.users_permissions_user.is_verified ? "text-theme" : ""

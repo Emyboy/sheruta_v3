@@ -67,11 +67,12 @@ const Age = (props) => {
                     defaultValue={props.info.date_of_birth || date}
                   />
                 </div>
-                <TextInput
+                {/* <TextInput
                   label="Age"
                   disabled={true}
+                  type="number"
                   defaultValue={getAge()}
-                />
+                /> */}
                 {getAge() < 18 ? (
                   <div className="text-center">
                     <div className="alert alert-danger">
