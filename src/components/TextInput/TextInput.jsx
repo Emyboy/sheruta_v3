@@ -17,7 +17,8 @@ export default ({
     icon,
     required,
     errorMessage,
-    maxLength
+    maxLength,
+    test_id
 }) => {
    
     return (
@@ -29,6 +30,7 @@ export default ({
         {required ? <span className="text-danger">Required *</span> : null}
         <div className={icon ? "input-with-icon" : ""}>
           <Form.Control
+            data-cy={test_id}
             className={`${!icon ? 'pl-2' : ''}`}
             required={required}
             onChange={onChange ? (e) => onChange(e) : null}

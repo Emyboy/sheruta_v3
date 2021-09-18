@@ -65,7 +65,7 @@ const PersonalInfoForm = (props) => {
   }, [props.info]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='mt-4'>
       <div>
         <h4>Work Information</h4>
       </div>
@@ -90,6 +90,7 @@ const PersonalInfoForm = (props) => {
           <div className="form-group">
             <div className="input-with-icon">
               <TextInput
+                test_id='company_name'
                 label="Company Name"
                 placeholder="EX. Shell"
                 name="company_name"
@@ -183,11 +184,13 @@ const PersonalInfoForm = (props) => {
         <h4>Social Information</h4>
         <div className="row justify-content-center">
           <div className="p-0 alert alert-warning col-md-8 text-center rounded border border-warning">
-            <div>
+            {/* <div>
               <AiOutlineWarning size={40} />
               <b className="display-7">Get Verified</b>
-            </div>
-            <p>Provide at least two of your social media handles.</p>
+            </div> */}
+            <p className='m-0'>
+              Increase your credibility, drop two active social media handles.
+            </p>
           </div>
         </div>
       </div>
@@ -271,7 +274,7 @@ const PersonalInfoForm = (props) => {
             <div className="input-with-icon">
               <TextInput
                 label="Linkedin URL"
-                name='linkedin'
+                name="linkedin"
                 placeholder="EX. linkedin.com/in/sheruta"
                 defaultValue={info.linkedin}
                 onChange={(e) => setData({ ...data, linkedin: e.target.value })}
@@ -283,7 +286,7 @@ const PersonalInfoForm = (props) => {
       <hr />
       <div className="row justify-content-center w-100 mb-3">
         {/* <button type="submit" className="btn btn-md full-width pop-login">Sign Up</button> */}
-        <Btn text="Submit" className="w-50" type="submit" loading={loading} />
+        <Btn text="Submit" className="w-50" type="submit" loading={loading} test_id='submit-btn' />
       </div>
     </form>
   );

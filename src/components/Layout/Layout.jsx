@@ -88,6 +88,7 @@ const Layout = connect(
           ) : (
             <IconBtn
               icon="ti-menu"
+              test_id="sidebar-toggle"
               onClick={() => {
                 setShowNav(!showNav);
               }}

@@ -35,6 +35,7 @@ const GetStartedPopup = (props) => {
         <div className="row">
           <Link to="/start">
             <Btn
+              test_id='get_started_popup_btn'
               text="Join Now"
               className="mt-4"
               onClick={() => setShow(false)}

@@ -98,6 +98,7 @@ export const PrefaredLocations = (props) => {
                     <div className="form-group text-center">
                         <label className='display-6'>Location</label>
                         <GooglePlacesAutocomplete
+                            data-cy='google-places'
                             apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
                             apiOptions={{ language: 'en', region: 'ng' }}
                             selectProps={{

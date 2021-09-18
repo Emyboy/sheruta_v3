@@ -8,12 +8,13 @@ export default ({
     heading,
     subHeading,
     style,
-    className
+    className,
+    test_id
 }) => {
 
 
     return (
-        <div className='col-lg-4 col-md-6'>
+        <div className='col-lg-4 col-md-6' data-cy={test_id} id='select-card'>
             <div style={style} onClick={!isDisabled ? onSelect : () => { }} className={
                 `border rounded text-center mb-3 p-3 ${className} 
                  ${isSelected ? 'shadow border-success' : (isDisabled ? 'bg-gray' : 'bg-white grow link')}`

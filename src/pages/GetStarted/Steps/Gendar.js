@@ -71,6 +71,7 @@ export default connect(
                 <div className="text-center mb-5 mt-3">
                     <Btn
                         text='Next'
+                        id='next-btn'
                         disabled={!gender}
                         loading={loading}
                         onClick={updateGender}

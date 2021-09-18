@@ -9,10 +9,14 @@ const Btn = ({
     onClick,
     danger,
     type,
-    icon
+    icon,
+    id,
+    test_id
 }) => {
     return (
         <button
+            id={id}
+            data-cy={test_id}
             className={` ${danger ? 'btn-danger' : 'bg-theme'} btn rounded text-white ${className ? className : ''}`}
             disabled={disabled || loading}
             onClick={onClick}

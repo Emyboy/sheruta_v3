@@ -72,6 +72,7 @@ const ConfigViewPopup = (props) => {
         <div className="row justify-content-center mt-5">
           <SelectionCard
             heading="I am looking for"
+            test_id="looking_for"
             subHeading="Show me people who have"
             onSelect={() => setIsLookingFor(true)}
             isSelected={isLookingFor === true}
@@ -79,6 +80,7 @@ const ConfigViewPopup = (props) => {
           <SelectionCard
             heading="I have for share"
             subHeading="Show me people who are looking"
+            test_id="not_looking_for"
             onSelect={() => setIsLookingFor(false)}
             isSelected={isLookingFor === false}
           />

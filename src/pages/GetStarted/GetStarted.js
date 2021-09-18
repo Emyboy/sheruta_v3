@@ -119,7 +119,7 @@ export const GetStarted = (props) => {
             </Layout>
         )
     } else {
-        return <Redirect to="/login" />
+        return <Redirect to="/signup" />
     }
     
 }

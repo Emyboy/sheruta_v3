@@ -22,9 +22,9 @@ export default function GetStartedInstructions(props) {
             </div>
             <hr />
             <div className='row justify-content-around'>
-                <Btn text="Agree" onClick={() => props.setStep(props.step + 1)} />
+                <Btn id='agree-btn' text="Agree" onClick={() => props.setStep(props.step + 1)} />
                 <Link to="/">
-                    <Btn text="Cancel" danger onClick={() => { }} /></Link>
+                    <Btn id='cancel-btn' text="Cancel" danger onClick={() => { }} /></Link>
             </div>
         </div>
     )

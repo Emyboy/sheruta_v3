@@ -48,7 +48,7 @@ const VerifyEmailProcess = ({ userData }) => {
                     <div className="modal-body">
                         {
                             state.display === 'verify' ? <>
-                                <h4 className="modal-header-title" style={{ lineHeight: '46px' }}>Please Verify You Eamil</h4>
+                                <h4 className="modal-header-title" style={{ lineHeight: '46px' }}>Please Verify You Email</h4>
 
                                 <div className='text-center'>
                                     <i className='fa fa-times text-center mb-2' style={{ fontSize: '100px' }}></i>
