@@ -74,7 +74,7 @@ export default (props) => {
                   <div className="col-lg-3 desktop-only">
                     <Sticky stickyStyle={{ marginTop: "80px" }}>
                       <aside className="sidebar static left rounded">
-                        <div className="widget border-gray">
+                        <div className="widget border-gray rounded">
                           <h4 className="widget-title">Your page</h4>
                           <div className="your-page">
                             <figure>
@@ -315,7 +315,7 @@ export default (props) => {
                             </div>
                           </div>
                         </div>
-                        <div className="widget border-gray">
+                        <div className="widget border-gray rounded">
                           <h4 className="widget-title">New Users</h4>
                           <ul
                             className="followers ps-container ps-theme-default ps-active-y"

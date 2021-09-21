@@ -94,14 +94,14 @@ const Layout = connect(
               }}
             />
           )}
-          <Link to='/'>
-          <img
-            width="140"
-            height="30"
-            className="mt-1"
-            src={logo}
-            alt="sheruta.ng"
-          />
+          <Link to="/">
+            <img
+              width="140"
+              height="30"
+              className="mt-1"
+              src={logo}
+              alt="sheruta.ng"
+            />
           </Link>
           <div className="row mr-2">
             {window.innerWidth > 500 ? (
