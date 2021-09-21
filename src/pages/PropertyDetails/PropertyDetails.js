@@ -127,7 +127,7 @@ export const PropertyDetails = (props) => {
                 <Layout
                     back
                 >
-                    <section className="gray pt-0">
+                    <section className="pt-5">
                         <MetaTags>
                             <title>{query.name} | Sheruta NG</title>
                             <meta name="description" content={query.description} />

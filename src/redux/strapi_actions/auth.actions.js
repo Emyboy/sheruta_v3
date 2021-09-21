@@ -42,7 +42,7 @@ export const getUser = () => dispatch => {
             })
         })
         .catch(err => {
-            notification.error({ message: 'Error fetching profile' })
+            // notification.error({ message: 'Error fetching profile' })
             store.dispatch({ type: 'LOGOUT'});
             Cookies.remove('token');
             localStorage.clear();

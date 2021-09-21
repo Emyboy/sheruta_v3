@@ -56,7 +56,7 @@ export default function ValidIdCard() {
         </h2>
         <p>Identity verification for security reasons.</p>
       </div>
-      <Modal show={showUserData && ninData}>
+      <Modal show={showUserData && ninData} size='lg'>
         {ninData && (
           <Modal.Body>
             <h2 className="text-center">Please Verify This Is You</h2>
@@ -67,7 +67,7 @@ export default function ValidIdCard() {
             />
             <div>
               <h5 className="mt-3">
-                <b>Name: </b>
+                <b className="text-muted">Name: </b>
                 {ninData.title +
                   " " +
                   ninData.firstname +
@@ -75,21 +75,33 @@ export default function ValidIdCard() {
                   ninData.lastname}
               </h5>
               <h5 className="mt-3">
-                <b>Date Of Birth: </b>
+                <b className="text-muted">Date Of Birth: </b>
                 {ninData.birthdate}
               </h5>
               <h5 className="mt-3">
-                <b>Religion: </b>
+                <b className="text-muted">Religion: </b>
                 {ninData.religion}
               </h5>
               <h5 className="mt-3">
-                <b>Spoken Language: </b>
-                {ninData.ospokenlang}
-              </h5>
-              <h5 className="mt-3">
-                <b>Native Language: </b>
+                <b className="text-muted">Native Language: </b>
                 {ninData.nspokenlang}
               </h5>
+              <h5 className="mt-3">
+                <b className="text-muted">State Of Origin: </b>
+                {ninData.stateOfOrigin}
+              </h5>
+              <div className="alert alert-danger">
+                <span className="lead">
+                  <b>
+                    The last name on your NIN doesn't match with the last name
+                    you gave us.
+                  </b>
+                </span>
+                <hr />
+                <p>
+                  <b>Continue ?</b>
+                </p>
+              </div>
             </div>
             <hr />
             <div className="d-flex justify-content-between">
@@ -100,6 +112,16 @@ export default function ValidIdCard() {
         )}
       </Modal>
       <div className="container">
+        {process.env.NODE_ENV === "development" ? (
+          <ul>
+            <li>
+              <h6>21202384433</h6>
+            </li>
+            <li>
+              <h6>38010034757</h6>
+            </li>
+          </ul>
+        ) : null}
         <div className="d-flex justify-content-center mb-5 mt-5">
           <NinInput
             placeholder="Ex. 10000000001"

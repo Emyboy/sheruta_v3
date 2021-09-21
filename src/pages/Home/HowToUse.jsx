@@ -3,7 +3,7 @@ import React from 'react'
 export default function HowToUse() {
     return (
         <div>
-            <section>
+            <section className='bg-white mt-3'>
 				<div class="container">
 					
 					<div class="row">

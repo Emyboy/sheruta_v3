@@ -4,21 +4,25 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Badge, Tag } from "antd";
 import { notifyEmy } from "../../utils/Sheruta";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
+import Btn from "../Btn/Btn";
 
 const EachSocialRequest = (props) => {
   const { data } = props;
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const handleCallRequest = () => {
     notifyEmy({
       heading: `Called ${data.users_permissions_user.first_name} ${data.users_permissions_user.last_name}`,
       url: window.location.pathname,
-      status: 'success',
-    })
-  }
+      status: "success",
+    });
+  };
   return (
-    <div className="central-meta item" style={{ display: "inline-block" }}>
+    <article
+      className="central-meta item rounded border-gray"
+      style={{ display: "inline-block" }}
+    >
       <div className="user-post job">
         <div className="friend-info">
           <div className="d-flex">
@@ -41,7 +45,7 @@ const EachSocialRequest = (props) => {
                     <li>
                       <i className="fa fa-trash"></i>Delete Post
                     </li>
-                    <li className='text-danger'>
+                    <li className="text-danger">
                       <i className="fa fa-flag"></i>Report Post
                     </li>
                     {/* <li className="bad-report">
@@ -74,8 +78,9 @@ const EachSocialRequest = (props) => {
                 Request
               </ins>
               <em
-                className={`${data.users_permissions_user.is_verified ? "text-theme" : ""
-                  }`}
+                className={`${
+                  data.users_permissions_user.is_verified ? "text-theme" : ""
+                }`}
               >
                 <i
                   className={
@@ -112,9 +117,7 @@ const EachSocialRequest = (props) => {
             </li>
           </ol> */}
           <div className="post-meta">
-            <h6>
-              {data.heading}
-            </h6>
+            <h6>{data.heading}</h6>
             <div className="loc-cate">
               {/* <ul className="cate">
                 <li>
@@ -172,39 +175,47 @@ const EachSocialRequest = (props) => {
                 </Link>
               ) : null}
             </div>
-            {
-              data.image_url && data.image_url.length > 0 ? <Link
+            {data.image_url && data.image_url.length > 0 ? (
+              <Link
                 to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
               >
                 <figure>
                   <div className="img-bunch">
-                    <div className="row">
-                      {data.image_url &&
-                        data.image_url.map((val, i) => {
-                          return (
-                            <div
-                              className="col-4"
-                              style={{ maxWidth: "32.333333%", margin: "1.0px" }}
-                            >
-                              <div
-                                className="card"
-                                data-strip-group-options="loop: false"
-                                data-strip-group="mygroup"
-                                style={{
-                                  backgroundImage: `url(${val})`,
-                                  height: "160px",
-                                  width: "100%",
-                                  backgroundSize: "100% 100%",
-                                }}
-                              ></div>
-                            </div>
-                          );
-                        })}
-                    </div>
+                    {data.image_url && (
+                      <div>
+                        <div
+                          className="card"
+                          data-strip-group-options="loop: false"
+                          data-strip-group="mygroup"
+                          style={{
+                            backgroundImage: `url(${data.image_url[0]})`,
+                            height: "160px",
+                            width: "100%",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            filter: "blur(2px)",
+                          }}
+                        ></div>
+                        <Btn
+                          text="View Images"
+                          className="btn-sm shadow"
+                          onClick={() => {}}
+                          style={{
+                            position: "absolute",
+                            top: "40%",
+                            left: "40%",
+                            padding: "5px",
+                            fontWeight: "bold",
+                            fontSize: "12px"
+                          }}
+                        />
+                      </div>
+                    )}
+                    <div className="row"></div>
                   </div>
                 </figure>
-              </Link> : null
-            }
+              </Link>
+            ) : null}
             <div className="rate-n-apply">
               <div className="job-price">
                 <span>Budget:</span>
@@ -213,8 +224,8 @@ const EachSocialRequest = (props) => {
                   <b>₦{window.formatedPrice.format(data.budget)}</b>
                 </ins>
               </div>
-              {
-                user ? <a
+              {user ? (
+                <a
                   onClick={handleCallRequest}
                   href={`tel:${data.users_permissions_user.phone_number}`}
                   title=""
@@ -222,7 +233,9 @@ const EachSocialRequest = (props) => {
                   data-ripple=""
                 >
                   Call Me<i className="fa fa-phone ml-2"></i>
-                </a> : <Link
+                </a>
+              ) : (
+                <Link
                   onClick={handleCallRequest}
                   to={"/login"}
                   title=""
@@ -231,7 +244,7 @@ const EachSocialRequest = (props) => {
                 >
                   Call Me<i className="fa fa-phone ml-2"></i>
                 </Link>
-              }
+              )}
             </div>
             {/* <div className="we-video-info">
               <ul>
@@ -315,7 +328,7 @@ const EachSocialRequest = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </article>
 
     // <div
     //   className="central-meta item"

@@ -52,7 +52,7 @@ const Home = (props) => {
   return (
     <Layout page="home">
       {user && view.personal_info ? (
-        <div className='container-fluid'>
+        <div className="container-fluid">
           <SocailHomePage />
         </div>
       ) : (
@@ -94,6 +94,7 @@ const Home = (props) => {
                   <i className="fas fa-arrow-alt-circle-down mr-2"></i>See More
                   Properties
                 </Link>
+                {Global.isMobile ? <hr /> : null}
               </div>
               <div className="col-lg-4 col-md-12 col-sm-12">
                 <Heading
@@ -121,6 +122,7 @@ const Home = (props) => {
                     </Link>
                   </div>
                 </div>
+                {Global.isMobile ? <hr /> : null}
               </div>
             </div>
           </div>

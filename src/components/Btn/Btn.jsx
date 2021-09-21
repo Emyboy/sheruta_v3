@@ -11,7 +11,8 @@ const Btn = ({
     type,
     icon,
     id,
-    test_id
+    test_id,
+    style
 }) => {
     return (
         <button
@@ -21,7 +22,7 @@ const Btn = ({
             disabled={disabled || loading}
             onClick={onClick}
             type={type}
-            style={{ fontSize: '17px' }}
+            style={{ fontSize: '17px', ...style }}
         >
             {loading ? "Loading..." : <><i className={icon}></i>  {text}</>}
         </button>

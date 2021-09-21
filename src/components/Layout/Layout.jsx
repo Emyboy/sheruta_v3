@@ -27,8 +27,9 @@ const mapActionToProps = {
 const FooterNav = ({ text, icon, path, active }) => {
   return (
     <Link
-      className={`ml-4 mr-4 text-center ${active ? "text-theme" : "text-accent"
-        }`}
+      className={`ml-4 mr-4 text-center ${
+        active ? "text-theme" : "text-accent"
+      }`}
       to={path}
     >
       <i style={{ fontSize: "22px" }} className={icon}></i>
@@ -54,14 +55,13 @@ const Layout = connect(
   mapStateToProps,
   mapActionToProps
 )((props) => {
-  const { children, back, page, auth } = props;
+  const { children, back, page, auth, view } = props;
 
   const [showNav, setShowNav] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [user, setUser] = useState(null);
 
   const router = useHistory();
-  
 
   useEffect(() => {
     props.getAllCategories();
@@ -79,7 +79,7 @@ const Layout = connect(
   return (
     <>
       <nav
-        className="fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border"
+        className="fixed-top w-100 bd-navbar border-1 bg-white pl-4 pr-4 pt-2 pb-2 border-gray"
         style={{ zIndex: 3 }}
       >
         <div className="row justify-content-between">
@@ -94,6 +94,7 @@ const Layout = connect(
               }}
             />
           )}
+          <Link to='/'>
           <img
             width="140"
             height="30"
@@ -101,13 +102,16 @@ const Layout = connect(
             src={logo}
             alt="sheruta.ng"
           />
+          </Link>
           <div className="row mr-2">
             {window.innerWidth > 500 ? (
-              <Link to={auth.user ? `/user/${auth.user.user.username}` : "/login"}>
+              <Link
+                to={auth.user ? `/user/${auth.user.user.username}` : "/login"}
+              >
                 <IconBtn
                   className="mr-3 desktop-only"
                   icon={"ti-user"}
-                  onClick={() => { }}
+                  onClick={() => {}}
                 />
               </Link>
             ) : null}
@@ -139,6 +143,9 @@ const Layout = connect(
           </a>
           <hr />
           <EachNav icon="ti-home" text="Home" path="/" />
+          {view.personal_info && view.personal_info.occupation ? (
+            <EachNav icon="ti-view-grid" text="Get Started" path="/start" />
+          ) : null}
           <EachNav icon="ti-comment" text="Requests" path="/requests" />
           <EachNav icon="ti-money" text="Pricing" path="/pricing" />
           <EachNav icon="ti-briefcase" text="About Us" path="/about" />
@@ -164,7 +171,7 @@ const Layout = connect(
       <div className="pt-5 mt-2 pb-5">{children}</div>
 
       <nav
-        className="fixed-bottom bg-white border mobile-only"
+        className="fixed-bottom bg-white border-gray mobile-only"
         style={{ zIndex: 2 }}
       >
         <div className="row justify-content-center mt-1">
@@ -183,14 +190,16 @@ const Layout = connect(
           />
           {user ? (
             <Link
-              className={`ml-4 mr-4 text-center ${page === "profile" ? "text-theme" : "text-accent"
-                }`}
+              className={`ml-4 mr-4 text-center ${
+                page === "profile" ? "text-theme" : "text-accent"
+              }`}
               to={`/user/${user.username}`}
             >
               <img
                 src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
-                className={`${page === "profile" ? "border border-success" : ""
-                  }`}
+                className={`${
+                  page === "profile" ? "border border-success" : ""
+                }`}
                 width="28"
                 style={{ borderRadius: "50px" }}
                 alt=""

@@ -46,7 +46,7 @@ export const Signup = (props) => {
       .catch((err) => {
         notifyEmy({
           heading: "Error signing Up",
-          log: { ...err },
+          log: null
         });
         setState({ ...state, loading: false });
         setState({

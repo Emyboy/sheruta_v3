@@ -5,23 +5,25 @@ import Global from "../../../Global";
 import EachSocialRequest from "../EachSocialRequest";
 import Sticky from "react-sticky-el";
 import { PropertyCardSM } from "../../PropertyCard/PropertyCardSM";
-import { Link } from 'react-router-dom';
-import Btn from '../../Btn/Btn';
-import { getUser, logout } from '../../../redux/strapi_actions/auth.actions';
+import { Link } from "react-router-dom";
+import Btn from "../../Btn/Btn";
+import { getUser, logout } from "../../../redux/strapi_actions/auth.actions";
+import Heading from "../../Heading/Heading";
 
 export default (props) => {
-  const auth = useSelector(state => state.auth);
-  const view = useSelector(state => state.view);
-  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth);
+  const view = useSelector((state) => state.view);
+  const dispatch = useDispatch();
   const { user } = auth.user;
   const [state, setState] = useState({
     properties: [],
     list: [],
   });
+  const [newUsers, setNewUsers] = useState([]);
 
   useEffect(() => {
     if (auth.user) {
-      dispatch(getUser())
+      dispatch(getUser());
     }
   }, []);
 
@@ -29,24 +31,36 @@ export default (props) => {
     if (state.properties.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
-        `/properties/recent/${Global.isMobile ? "4" : "6"}`
+          `/properties/recent/${Global.isMobile ? "4" : "6"}`
       )
         .then((res) => {
           setState({ ...state, properties: res.data });
         })
-        .catch((err) => { });
+        .catch((err) => {});
     }
   }, [state]);
+
+  useEffect(() => {
+    axios(
+      process.env.REACT_APP_API_URL +
+        `/users/?confirmed=true&_limit=7&_sort=created_at:DESC`
+    )
+      .then((res) => {
+        setNewUsers(res.data);
+      })
+      .catch((err) => {});
+  }, []);
   useEffect(() => {
     if (state.list.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
-        `/property-requests/?is_searching=${!view.personal_info.looking_for}&_limit=25&_start=0&_sort=created_at:DESC`
+          `/property-requests/?is_searching=${!view.personal_info
+            .looking_for}&_limit=25&_start=0&_sort=created_at:DESC`
       )
         .then((res) => {
           setState({ ...state, list: res.data });
         })
-        .catch((err) => { });
+        .catch((err) => {});
     }
   }, [state]);
   return (
@@ -56,11 +70,11 @@ export default (props) => {
           <div className="row">
             <div className="">
               <div className="row merged20" id="page-contents">
-                {
-                  Global.isMobile ? null : <div className="col-lg-3 desktop-only">
+                {Global.isMobile ? null : (
+                  <div className="col-lg-3 desktop-only">
                     <Sticky stickyStyle={{ marginTop: "80px" }}>
-                      <aside className="sidebar static left">
-                        <div className="widget">
+                      <aside className="sidebar static left rounded">
+                        <div className="widget border-gray">
                           <h4 className="widget-title">Your page</h4>
                           <div className="your-page">
                             <figure>
@@ -72,9 +86,7 @@ export default (props) => {
                               <Link to={`/user/${user.username}`} title="">
                                 {user.first_name} {user.last_name}
                               </Link>
-                              <span>
-                                @{user.username}
-                              </span>
+                              <span>@{user.username}</span>
                               {/* <span>
                               <i className="ti-comment"></i>
                               <a href="insight.html" title="">
@@ -291,32 +303,100 @@ export default (props) => {
                               </div>
                             </div> */}
 
-                             <Link to={`/user/${user.username}`}>
+                              <Link to={`/user/${user.username}`}>
                                 <div className="nav nav-tabs likes-btn d-flex justify-content-center">
-                                  <Btn className='btn-sm' text="View Profile" onClick={() => { }} />
+                                  <Btn
+                                    className="btn-sm"
+                                    text="View Profile"
+                                    onClick={() => {}}
+                                  />
                                 </div>
-                             </Link>
+                              </Link>
                             </div>
                           </div>
+                        </div>
+                        <div className="widget border-gray">
+                          <h4 className="widget-title">New Users</h4>
+                          <ul
+                            className="followers ps-container ps-theme-default ps-active-y"
+                            data-ps-id="dcb7159e-c79e-aac7-b46b-9ac56abf3ecd"
+                          >
+                            {
+                              newUsers.map((val, i) => {
+                                if(val.id !== auth.user.user.id){
+                                  return (
+                                    <li>
+                                      <figure>
+                                        <img
+                                          src={val.avatar_url}
+                                          alt=""
+                                        />
+                                      </figure>
+                                      <div className="friend-meta">
+                                        <h4>
+                                          <Link to={`/user/${val.username}`} title="">
+                                            {val.username}
+                                          </Link>
+                                        </h4>
+                                        <Link
+                                          to={`/user/${val.username}`}
+                                          title=""
+                                          className="underline"
+                                        >
+                                          View Profile
+                                        </Link>
+                                      </div>
+                                    </li>
+                                  );
+                                }
+                              })
+                            }
+
+                            <div
+                              className="ps-scrollbar-x-rail"
+                              style={{ left: "0px", bottom: "0px" }}
+                            >
+                              <div
+                                className="ps-scrollbar-x"
+                                tabindex="0"
+                                style={{ left: "0px", width: "0px" }}
+                              ></div>
+                            </div>
+                            <div
+                              className="ps-scrollbar-y-rail"
+                              style={{
+                                top: "0px",
+                                height: "260px",
+                                right: "0px",
+                              }}
+                            >
+                              <div
+                                className="ps-scrollbar-y"
+                                tabindex="0"
+                                style={{ top: "0px", height: "233px" }}
+                              ></div>
+                            </div>
+                          </ul>
                         </div>
                       </aside>
                     </Sticky>
                   </div>
-                }
+                )}
                 <div className="col-lg-5">
                   {state.list.map((val, i) => {
                     return <EachSocialRequest key={i} data={val} />;
                   })}
                 </div>
-                {
-                  Global.isMobile ? null : <div className="col-lg-4 desktop-only">
-                    <Sticky stickyStyle={{ marginTop: "80px" }}>
+                {Global.isMobile ? null : (
+                  <div className="col-lg-4 desktop-only">
+                    <Sticky stickyStyle={{ marginTop: "50px" }}>
+                      <Heading heading="Recent Apartments" />
                       {state.properties.map((val, i) => {
                         return <PropertyCardSM val={val} key={i} />;
                       })}
                     </Sticky>
                   </div>
-                }
+                )}
               </div>
             </div>
           </div>
@@ -325,5 +405,3 @@ export default (props) => {
     </section>
   );
 };
-
-

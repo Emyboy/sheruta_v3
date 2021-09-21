@@ -51,10 +51,11 @@ export const getUserFeedback = () => (dispatch) => {
   }, 5000);
 };
 
-export const getAuthPersonalInfo = () => (dispatch) => {
+export const getAuthPersonalInfo = () => async (dispatch) => {
+  let token = await Cookies.get("token");
   axios(process.env.REACT_APP_API_URL + "/personal-infos/me", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Authorization: `Bearer ${token}`,
     },
   })
     .then((res) => {
@@ -72,11 +73,7 @@ export const getAuthPersonalInfo = () => (dispatch) => {
         Cookies.remove("token");
         sessionStorage.clear();
         store.dispatch({
-          type: "SET_AUTH_STATE",
-          payload: {
-            user: null,
-            agentData: null,
-          },
+          type: "LOGOUT",
         });
         notification.error({ message: "You are logged out" });
       };

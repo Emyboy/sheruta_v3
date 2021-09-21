@@ -53,7 +53,7 @@ export default connect(
                         <button disabled={state.loading} type="button" className="btn btn-info" onClick={() => setState({ ...state, confirmDelete: false })}>Cancel</button>
                     </div>
                 </div> :
-                    <article className='bg-white p-2 rounded border mb-3 '>
+                    <article className='bg-white p-2 rounded border mb-3 border-gray '>
                         <div className="comment-details pl-3">
                             {
                                 data.users_permissions_user ?

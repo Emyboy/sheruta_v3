@@ -5,7 +5,7 @@ import { Button } from "antd";
 export default function IconBtn({ onClick, icon, className, test_id }) {
   return (
     <Button
-      className={`icon-btn btn border btn-sm ${className ? className : ""}`}
+      className={`icon-btn btn border-gray btn-sm ${className ? className : ""}`}
       shape="circle"
       onClick={onClick}
       data-cy={test_id}

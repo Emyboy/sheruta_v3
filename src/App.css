@@ -9,7 +9,7 @@ html,
 body,
 #root {
   /* background-color: #f7f9fc !important; */
-  background-color: #f8f7fc !important;
+  background-color: #F3F2EF !important;
 }
 .bg-accent {
   background-color: var(--accent-color) !important;
@@ -75,6 +75,10 @@ div.scrollmenu div {
 }
 .desktop-only {
   visibility: visible !important;
+}
+
+.border-gray {
+  border: 1px solid #cac8c8 !important;
 }
 
 @media only screen and (max-width: 970px) {

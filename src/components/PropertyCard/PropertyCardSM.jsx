@@ -6,7 +6,7 @@ export const PropertyCardSM = ({
     val
 }) => {
     return (
-        <div className="sides_list_property">
+        <div className="sides_list_property border-gray">
             <div className="sides_list_property_thumb">
                 <img src={val.image_urls[0]} className="img-fluid" alt="" />
             </div>

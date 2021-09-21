@@ -43,13 +43,13 @@ const Login = (props) => {
       .then((res) => {
         const isVerified = res.data.user.confirmed;
         if (isVerified) {
+          Cookies.set("token", res.data.jwt, { expires: 5 })
           setState({ ...state, loading: false });
           notification.success({ message: "Welcome" });
           localStorage.setItem("token", res.data.jwt);
           props.setAuthState({
             user: res.data,
           });
-          Cookies.set("token", res.data.jwt, { expires: 5 });
         } else {
           setState({ ...state, notVerified: true, userData: res.data });
         }
@@ -57,7 +57,7 @@ const Login = (props) => {
       .catch((err) => {
         notifyEmy({
           heading: "Login Error",
-          log: { ...err },
+          log: null,
           status: "error",
         });
         setState({
