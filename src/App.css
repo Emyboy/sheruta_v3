@@ -12,8 +12,8 @@ body,
   background-color: #F3F2EF !important;
   background-image: url(./assets/img/pattern.png) !important;
   /* background-position: center; */
-  background-size: 70%;
-  background-attachment: fixed;
+  background-size: 100%;
+  /* background-attachment: fixed; */
   background-repeat: repeat;
 }
 .bg-accent {
