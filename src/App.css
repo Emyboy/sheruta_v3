@@ -7,9 +7,14 @@
 }
 html,
 body,
-#root {
+#root, .gray-bg{
   /* background-color: #f7f9fc !important; */
   background-color: #F3F2EF !important;
+  background-image: url(./assets/img/pattern.png) !important;
+  /* background-position: center; */
+  background-size: 70%;
+  background-attachment: fixed;
+  background-repeat: repeat;
 }
 .bg-accent {
   background-color: var(--accent-color) !important;

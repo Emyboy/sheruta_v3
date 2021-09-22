@@ -18,7 +18,8 @@ const NinInput = styled.input`
   }
 `;
 
-export default function ValidIdCard() {
+export default function ValidIdCard(props) {
+  console.log('PROPS- --', props)
   const [nin, setNin] = useState("");
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
@@ -56,7 +57,7 @@ export default function ValidIdCard() {
         </h2>
         <p>Identity verification for security reasons.</p>
       </div>
-      <Modal show={showUserData && ninData} size='lg'>
+      <Modal show={showUserData && ninData} size="lg">
         {ninData && (
           <Modal.Body>
             <h2 className="text-center">Please Verify This Is You</h2>
@@ -72,7 +73,9 @@ export default function ValidIdCard() {
                   " " +
                   ninData.firstname +
                   " " +
-                  ninData.lastname}
+                  ninData.lastname +
+                  " " +
+                  ninData.middlename}
               </h5>
               <h5 className="mt-3">
                 <b className="text-muted">Date Of Birth: </b>
@@ -93,7 +96,7 @@ export default function ValidIdCard() {
               <div className="alert alert-danger">
                 <span className="lead">
                   <b>
-                    The last name on your NIN doesn't match with the last name
+                    The last name on your NIN doesn't match the last name
                     you gave us.
                   </b>
                 </span>
