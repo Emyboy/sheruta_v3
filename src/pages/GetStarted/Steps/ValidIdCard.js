@@ -19,7 +19,7 @@ const NinInput = styled.input`
 `;
 
 export default function ValidIdCard(props) {
-  console.log('PROPS- --', props)
+  // console.log('PROPS- --', props)
   const [nin, setNin] = useState("");
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ export default function ValidIdCard(props) {
         setNinData(res.data);
         setLoading(false);
         setShowUserData(true);
-        console.log(user.user);
+        console.log(res.data);
       })
       .catch((err) => {
         setLoading(false);
@@ -93,22 +93,24 @@ export default function ValidIdCard(props) {
                 <b className="text-muted">State Of Origin: </b>
                 {ninData.stateOfOrigin}
               </h5>
-              <div className="alert alert-danger">
-                <span className="lead">
-                  <b>
-                    The last name on your NIN doesn't match the last name
-                    you gave us.
-                  </b>
-                </span>
-                <hr />
-                <p>
-                  <b>Continue ?</b>
-                </p>
-              </div>
+              {!ninData.fieldMatches.lastname ? (
+                <div className="alert alert-danger">
+                  <span className="lead">
+                    <b>
+                      The last name on your NIN doesn't match the last name you
+                      gave us.
+                    </b>
+                  </span>
+                  <hr />
+                  <p>
+                    <b>Continue ?</b>
+                  </p>
+                </div>
+              ) : null}
             </div>
             <hr />
             <div className="d-flex justify-content-between">
-              <Btn text="Yes" onClick={() => props.setStep(props.step+1)} />
+              <Btn text="Yes" onClick={() => props.setStep(props.step + 1)} />
               <Btn text="No" danger onClick={() => setShowUserData(false)} />
             </div>
           </Modal.Body>
