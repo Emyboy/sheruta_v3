@@ -108,7 +108,7 @@ export default function ValidIdCard(props) {
             </div>
             <hr />
             <div className="d-flex justify-content-between">
-              <Btn text="Yes" />
+              <Btn text="Yes" onClick={() => props.setStep(props.step+1)} />
               <Btn text="No" danger onClick={() => setShowUserData(false)} />
             </div>
           </Modal.Body>
