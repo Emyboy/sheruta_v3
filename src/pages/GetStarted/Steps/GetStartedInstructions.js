@@ -12,7 +12,7 @@ export default function GetStartedInstructions(props) {
             </div>
             <hr />
             <ol>
-                <li>Front and back images of your valid ID card. <b className='text-danger'>This won't be shared to anyone</b></li>
+                <li>National Identification Number. <b className='text-danger'>This won't be shared to anyone</b></li>
                 <li>A recent photo of yourself. (profile picture)</li>
                 <li>Work information (supervisor's name, company etc)</li>
                 <li>Links to your social social media account. <b className='text-danger'>You chose who can see this</b></li>

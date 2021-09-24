@@ -3,14 +3,14 @@ import { connect, useSelector, useDispatch } from 'react-redux'
 import Layout from '../../components/Layout/Layout';
 import MetaTags from 'react-meta-tags';
 import { Redirect } from 'react-router';
-import Gendar from './Steps/Gendar'
+import Gender from './Steps/Gendar'
 import axios from 'axios';
 import { notification } from 'antd';
 import LookingForGender from './Steps/LookingForGender';
 import LookingForStatus from './Steps/GetStartedInstructions';
 import PrefaredLocations from './Steps/PrefaredLocations';
 import PersonalInfoForm from './Steps/PersonalInfoForm';
-import Age from './Steps/Age';
+// import Age from './Steps/Age';
 import AgeRange from './Steps/AgeRange';
 import UpdateAvatar from './Steps/UpdateAvatar';
 import ValidIdCard from './Steps/ValidIdCard';
@@ -18,30 +18,18 @@ import FinishStep from './Steps/FinishStep';
 
 const RenderStep = ({ props, step }) => {
     // console.log('BUT RENDERED ---', { props, step })
-    switch (step) {
-        case 1:
-            return <LookingForStatus {...props} />
-        case 2:
-            return <Gendar {...props} />
-        case 3:
-            return <LookingForGender {...props} />
-        case 4:
-            return <PrefaredLocations {...props} />
-        case 5:
-            return <PersonalInfoForm {...props} />
-        case 6:
-            return <Age {...props} />
-        case 7:
-            return <AgeRange {...props} />
-        case 8:
-            return <UpdateAvatar {...props} />
-        case 9:
-            return <ValidIdCard {...props} />
-        case 10:
-            return <FinishStep {...props} />
-        default:
-            return null;
-    }
+    const allSteps = [
+      <LookingForStatus {...props} />,
+    //   <Gender {...props} />,
+      <LookingForGender {...props} />,
+      <PrefaredLocations {...props} />,
+      <ValidIdCard {...props} />,
+      <AgeRange {...props} />,
+      <UpdateAvatar {...props} />,
+      <PersonalInfoForm {...props} />,
+      <FinishStep {...props} />,
+    ];
+    return allSteps[step-1]
 }
 
 export const GetStarted = (props) => {

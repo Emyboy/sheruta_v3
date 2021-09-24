@@ -68,7 +68,7 @@ const UpdateAvatar = (props) => {
         props.getUser();
         setUploading(false);
         notification.success({ message: "Image Updated" });
-        props.setStep(props.step+1)
+        props.setStep(props.step + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -115,7 +115,6 @@ const UpdateAvatar = (props) => {
       }
     );
   };
-
 
   return (
     <div>
@@ -167,12 +166,12 @@ const UpdateAvatar = (props) => {
                   onChange={(e) => setImg(e)}
                 />
               </div>
-              <Btn
-                text="Crop"
-                className=" w-50 mt-4 mb-5"
-                onClick={handleCrop}
-                style={{ zIndex: 100, position: "absolute" }}
-              />
+                <Btn
+                  text="Crop"
+                  className=" w-50 mt-4 mb-5"
+                  onClick={handleCrop}
+                  // style={{ zIndex: 100, position: "absolute" }}
+                />
             </div>
           ) : (
             <div className="text-center mb-5 mt-5">

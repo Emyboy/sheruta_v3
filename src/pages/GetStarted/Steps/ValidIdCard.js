@@ -5,6 +5,9 @@ import styled from "styled-components";
 import Btn from "../../../components/Btn/Btn";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { notification } from "antd";
+import { notifyEmy } from "../../../utils/Sheruta";
+import moment from "moment";
 
 const NinInput = styled.input`
   width: 60%;
@@ -25,6 +28,7 @@ export default function ValidIdCard(props) {
   const [loading, setLoading] = useState(false);
   const [showUserData, setShowUserData] = useState(false);
   const [ninData, setNinData] = useState(null);
+  const [hasError, setHasError] = useState(false);
   const handleSubmit = () => {
     setLoading(true);
     axios(process.env.REACT_APP_API_URL + "/sheruta/verify-nin", {
@@ -45,7 +49,50 @@ export default function ValidIdCard(props) {
         console.log(res.data);
       })
       .catch((err) => {
+        console.log({ ...err });
+
         setLoading(false);
+        notification.error({ message: "Error, please try again " });
+        setTimeout(() => {
+          notification.info({ message: "Please check your NIN properly" });
+        }, 3000);
+      });
+  };
+
+  const returnNINDataOfBirth = (date) => {
+    const oldDate = date.split("-");
+    return `${oldDate[2]}-${oldDate[1]}-${oldDate[0]}`
+  };
+
+  const next = () => {
+    const data = {
+      gender: ninData.gender,
+      occupation: ninData.profession.toLowerCase(),
+      date_of_birth: returnNINDataOfBirth(ninData.birthdate),
+      middle_name: ninData.middlename.toLowerCase(),
+      lgaOfOrigin: ninData.lgaOfOrigin.toLowerCase(),
+      nspokenlang: ninData.nspokenlang.toLowerCase(),
+      ospokenlang: ninData.ospokenlang.toLowerCase(),
+      photo: ninData.photo,
+      religion: ninData.religion.toLowerCase(),
+      stateOfOrigin: ninData.stateOfOrigin.toLowerCase(),
+      last_name_match: ninData.fieldMatches.lastname,
+    };
+    axios(process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`, {
+      method: "PUT",
+      data,
+    })
+      .then((res) => {
+        props.setStep(props.step + 1);
+      })
+      .catch((err) => {
+        notification.error({ message: "Error saving data" });
+        notifyEmy({
+          heading: "had issues saving data from NIN",
+          log: { ...err },
+          status: "error",
+          url: window.location.pathname,
+        });
       });
   };
 
@@ -110,7 +157,7 @@ export default function ValidIdCard(props) {
             </div>
             <hr />
             <div className="d-flex justify-content-between">
-              <Btn text="Yes" onClick={() => props.setStep(props.step + 1)} />
+              <Btn text="Yes" onClick={next} />
               <Btn text="No" danger onClick={() => setShowUserData(false)} />
             </div>
           </Modal.Body>

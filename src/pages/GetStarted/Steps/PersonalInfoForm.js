@@ -23,9 +23,7 @@ const PersonalInfoForm = (props) => {
     facebook: info.facebook,
     linkedin: info.linkedin,
     instagram: info.instagram,
-    religion: info.religion,
-    marital_status: info.marital_status,
-    nin: info.nin,
+    employment_status: info.employment_status,
     temperament: info.temperament,
     phone_number: info.phone_number,
     next_of_kin_address: info.next_of_kin_address,
@@ -65,7 +63,7 @@ const PersonalInfoForm = (props) => {
   }, [props.info]);
 
   return (
-    <form onSubmit={handleSubmit} className='mt-4'>
+    <form onSubmit={handleSubmit} className="mt-4">
       <div>
         <h4>Work Information</h4>
       </div>
@@ -89,6 +87,31 @@ const PersonalInfoForm = (props) => {
         <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
+              <Form.Label>
+                <b className="text-muted">Employment Status</b>
+              </Form.Label>{" "}
+              <span className="text-danger">Required *</span>
+              <Select
+                className="mt-2"
+                value={{
+                  value: data.employment_status || props.info.employment_status,
+                  label: data.employment_status || props.info.employment_status,
+                }}
+                options={[
+                  { value: "employed", label: "Employed" },
+                  { value: "unemployed", label: "Unemployed" },
+                  { value: "self-employed", label: "Self Employed" },
+                ]}
+                onChange={(e) =>
+                  setData({ ...data, employment_status: e.value })
+                }
+              />
+            </div>
+          </div>
+        </div>
+        {/* <div className="col-lg-6 col-md-6">
+          <div className="form-group">
+            <div className="input-with-icon">
               <TextInput
                 test_id='company_name'
                 label="Company Name"
@@ -102,9 +125,9 @@ const PersonalInfoForm = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-lg-6 col-md-6">
+        {/* <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
               <TextInput
@@ -119,9 +142,9 @@ const PersonalInfoForm = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-lg-6 col-md-6">
+        {/* <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
               <TextInput
@@ -136,9 +159,9 @@ const PersonalInfoForm = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-lg-6 col-md-6">
+        {/* <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
               <TextInput
@@ -153,9 +176,9 @@ const PersonalInfoForm = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-lg-6 col-md-6">
+        {/* <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
               <Form.Label>
@@ -177,7 +200,7 @@ const PersonalInfoForm = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <hr />
       <div>
@@ -188,7 +211,7 @@ const PersonalInfoForm = (props) => {
               <AiOutlineWarning size={40} />
               <b className="display-7">Get Verified</b>
             </div> */}
-            <p className='m-0'>
+            <p className="m-0">
               Increase your credibility, drop two active social media handles.
             </p>
           </div>
@@ -286,7 +309,13 @@ const PersonalInfoForm = (props) => {
       <hr />
       <div className="row justify-content-center w-100 mb-3">
         {/* <button type="submit" className="btn btn-md full-width pop-login">Sign Up</button> */}
-        <Btn text="Submit" className="w-50" type="submit" loading={loading} test_id='submit-btn' />
+        <Btn
+          text="Submit"
+          className="w-50"
+          type="submit"
+          loading={loading}
+          test_id="submit-btn"
+        />
       </div>
     </form>
   );
