@@ -85,7 +85,6 @@ const RequestDetails = (props) => {
 
     useEffect(() => {
         if (request) {
-            console.log('req --', request)
             if (auth.user && auth.user.user.id !== request.users_permissions_user.id) {
                 notifyEmy({
                     heading: ` Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,

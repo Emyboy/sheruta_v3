@@ -17,11 +17,11 @@ const PersonalInfo = ({ userData }) => {
         {}
       )
         .then((res) => {
-          console.log("INFO --", res);
+          // console.log("INFO --", res);
           setInfo(res.data[0]);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           notification.error({ message: "Error Fetching Personal Info" });
         });
     }
@@ -35,11 +35,9 @@ const PersonalInfo = ({ userData }) => {
         {}
       )
         .then((res) => {
-          console.log("INFO --", res);
           setLocations(res.data);
         })
         .catch((err) => {
-          console.log(err);
           notification.error({ message: "Error Fetching User Locations" });
         });
     }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { func, bool, string } from 'prop-types';
+import React from "react";
+import { func, bool, string } from "prop-types";
 
 const Btn = ({
     text,
@@ -12,22 +12,30 @@ const Btn = ({
     icon,
     id,
     test_id,
-    style
+    style,
 }) => {
     return (
         <button
             id={id}
             data-cy={test_id}
-            className={` ${danger ? 'btn-danger' : 'bg-theme'} btn rounded text-white ${className ? className : ''}`}
+            className={` ${
+                danger ? "btn-danger" : "bg-theme"
+            } btn rounded text-white ${className ? className : ""}`}
             disabled={disabled || loading}
             onClick={onClick}
             type={type}
-            style={{ fontSize: '17px', ...style }}
+            style={{ fontSize: "17px", ...style }}
         >
-            {loading ? "Loading..." : <><i className={icon}></i>  {text}</>}
+            {loading ? (
+                "Loading..."
+            ) : (
+                <>
+                    <i className={icon}></i> {text}
+                </>
+            )}
         </button>
-    )
-}
+    );
+};
 
 Btn.propTypes = {
     text: func.isRequired,
@@ -36,7 +44,7 @@ Btn.propTypes = {
     disabled: bool,
     onClick: func.isRequired,
     danger: bool,
-    type: string
-}
+    type: string,
+};
 
 export default Btn;

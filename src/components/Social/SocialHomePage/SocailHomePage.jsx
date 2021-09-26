@@ -7,7 +7,7 @@ import Sticky from "react-sticky-el";
 import { PropertyCardSM } from "../../PropertyCard/PropertyCardSM";
 import { Link } from "react-router-dom";
 import Btn from "../../Btn/Btn";
-import { getUser, logout } from "../../../redux/strapi_actions/auth.actions";
+import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import Heading from "../../Heading/Heading";
 
 export default (props) => {
@@ -25,7 +25,7 @@ export default (props) => {
     if (auth.user) {
       dispatch(getUser());
     }
-  }, []);
+  }, [auth.user]);
 
   useEffect(() => {
     if (state.properties.length === 0) {
@@ -62,7 +62,7 @@ export default (props) => {
         })
         .catch((err) => {});
     }
-  }, [state]);
+  }, [state, view.personal_info.looking_for]);
   return (
     <section className="mt-0 pt-0">
       <div className="gap2 gray-bg">

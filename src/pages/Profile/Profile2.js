@@ -114,12 +114,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Layout from "../../components/Layout/Layout";
-import image from "../../social_css/images/resources/profile-image.jpg";
-import image2 from "../../social_css/images/resources/author.jpg";
+
 import { Tabs, notification } from "antd";
 import axios from "axios";
 import EachSocialRequest from "../../components/Social/EachSocialRequest";
-import { Redirect } from "react-router";
 import PageLoader from "../../components/PageLoader";
 import PageNotFound from "../PageNotFound";
 import PersonalInfo from "./PersonalInfo";
@@ -171,7 +169,6 @@ export const Profile2 = (props) => {
         process.env.REACT_APP_API_URL + `/users/?username=${params.username}`
       )
         .then((res) => {
-          console.log("USER --", res);
           if (res.data.length > 0) {
             setUserData(res.data[0]);
           } else {
@@ -180,7 +177,6 @@ export const Profile2 = (props) => {
           setLoading(false);
         })
         .catch((err) => {
-          console.log('ERROR --', err)
           notification.error({ message: "Error fetching user data" });
           setNotFound(true);
           notifyEmy({

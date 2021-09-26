@@ -145,8 +145,8 @@ class CustomImage extends PureComponent {
                     console.error('Canvas is empty');
                     return;
                 }
-                console.log('CONVERTED BLOB ---', blob)
-                console.log('CONVERTED file ---', this.fileUrl)
+                // console.log('CONVERTED BLOB ---', blob)
+                // console.log('CONVERTED file ---', this.fileUrl)
                 blob.name = fileName;
                 this.setState({ blob });
                 // console.log(blob)

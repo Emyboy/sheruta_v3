@@ -6559,7 +6559,7 @@ a.addnewforum {
 }
 /* Weather Widget */
 .weather-widget {
-    background-image: url("../images/resources/weather.jpg");
+    /* background-image: url("../images/resources/weather.jpg"); */
     float: left;
     min-height: 300px;
     text-align: center;
@@ -7675,7 +7675,7 @@ input[type="checkbox"]:checked + label{color: #000;}
 	background-position: -16px 10px;
 }
 .chosen-container-single .chosen-single div b{
-	background: rgba(0, 0, 0, 0) url("chosen-sprite.png") no-repeat scroll 0 10px;
+	background: rgba(0, 0, 0, 0) url("") no-repeat scroll 0 10px;
 }
 
 .select-options .chosen-single > span {
@@ -15956,7 +15956,7 @@ a.shopping-cart > i {
 .coming-meta > h1 {
     font-weight: 500;
     font-size: 80px;
-    background-image: url(../images/resources/text-bg.jpg);
+    /* background-image: url(../images/resources/text-bg.jpg); */
 	text-transform: capitalize;
     padding-right: 30px;
 	

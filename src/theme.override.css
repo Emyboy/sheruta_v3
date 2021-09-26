@@ -1,0 +1,5 @@
+/* ============ FOR ANT DESIGN ================= */
+
+.ant-switch-checked {
+    background-color: var(--theme-color) !important;
+}

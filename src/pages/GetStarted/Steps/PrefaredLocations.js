@@ -70,7 +70,7 @@ export const PrefaredLocations = (props) => {
             })
             .catch(err => {
                 // notification.error({ message: 'Error fetching your location' })
-                console.log(err)
+                // console.log(err)
             })
     }, []);
 

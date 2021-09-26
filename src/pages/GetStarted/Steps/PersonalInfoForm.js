@@ -59,7 +59,7 @@ const PersonalInfoForm = (props) => {
 
   useEffect(() => {
     setInfo(props.hasInfo);
-    console.log(props);
+    // console.log(props);
   }, [props.info]);
 
   return (

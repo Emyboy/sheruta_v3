@@ -71,7 +71,7 @@ const UpdateAvatar = (props) => {
         props.setStep(props.step + 1);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setUploading(false);
         notification.error({ message: "Upload Error, Please try again" });
       });

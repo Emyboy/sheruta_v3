@@ -83,15 +83,15 @@ const EachSocialRequest = (props) => {
                   <div className="more-post-optns">
                     <i className="ti-more-alt"></i>
                     <ul>
-                      <li>
+                      {/* <li>
                         <i className="fa fa-pencil-square-o"></i>Edit Post
-                      </li>
+                      </li> */}
                       <li onClick={() => setShowDelete(true)}>
                         <i className="fa fa-trash"></i>Delete Post
                       </li>
-                      <li className="text-danger">
+                      {/* <li className="text-danger">
                         <i className="fa fa-flag"></i>Report Post
-                      </li>
+                      </li> */}
                       {/* <li className="bad-report">
                       <i className="fa fa-flag-o"></i>Report Post
                     </li>
@@ -161,6 +161,9 @@ const EachSocialRequest = (props) => {
             </li>
           </ol> */}
             <div className="post-meta">
+                <Link
+                  to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+                >
               <h6>{data.heading}</h6>
               <div className="loc-cate">
                 {/* <ul className="cate">
@@ -203,9 +206,6 @@ const EachSocialRequest = (props) => {
               </div>
               <div className="description">
                 {data.body ? (
-                  <Link
-                    to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
-                  >
                     <p>
                       {data.body.length > 100 ? (
                         <>
@@ -216,9 +216,9 @@ const EachSocialRequest = (props) => {
                         data.body
                       )}
                     </p>
-                  </Link>
                 ) : null}
               </div>
+                  </Link>
               {data.image_url && data.image_url.length > 0 ? (
                 <Link
                   to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
@@ -260,7 +260,7 @@ const EachSocialRequest = (props) => {
                   </figure>
                 </Link>
               ) : null}
-              <div className="rate-n-apply">
+              <div className="rate-n-apply mt-2">
                 <div className="job-price">
                   <span>Budget:</span>
                   <ins>

@@ -61,7 +61,7 @@ export const GetStarted = (props) => {
                 }
             )
                 .then((res) => {
-                    console.log(res)
+                    // console.log(res)
                     setHasInfo(res.data);
                     dispatch({
                         type: 'SET_VIEW_STATE',

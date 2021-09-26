@@ -1,28 +1,30 @@
-
 const initialState = {
     services: [],
     categories: [],
     askForUserFeedback: false,
     showPaymentPopup: false,
-    personal_info: null
-}
+    personal_info: null,
+    payment_types: [],
+};
 
 function ViewReducer(state = initialState, { type, payload }) {
     switch (type) {
-        case 'SET_VIEW_STATE':
+        case "SET_VIEW_STATE":
             return {
                 ...state,
-                ...payload
-            }
+                ...payload,
+            };
 
-        case 'GET_ALL_SERVICES':
-            return { ...state, services: payload }
+        case "GET_ALL_SERVICES":
+            return { ...state, services: payload };
 
-        case 'GET_ALL_CATEGORIES':
-            return { ...state, categories: payload }
+        case "GET_ALL_CATEGORIES":
+            return { ...state, categories: payload };
+        case "GET_ALL_PAYMENT_TYPES":
+            return { ...state, payment_types: payload };
 
         default:
-            return state
+            return state;
     }
 }
 

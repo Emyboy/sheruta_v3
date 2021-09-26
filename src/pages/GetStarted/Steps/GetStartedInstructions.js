@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Btn from '../../../components/Btn/Btn'
 
 export default function GetStartedInstructions(props) {
-    console.log(props)
+    // console.log(props)
     return (
         <div className='pb-4 container'>
             <div className='text-center'>

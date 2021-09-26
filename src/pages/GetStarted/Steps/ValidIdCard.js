@@ -46,10 +46,10 @@ export default function ValidIdCard(props) {
         setNinData(res.data);
         setLoading(false);
         setShowUserData(true);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
-        console.log({ ...err });
+        // console.log({ ...err });
 
         setLoading(false);
         notification.error({ message: "Error, please try again " });

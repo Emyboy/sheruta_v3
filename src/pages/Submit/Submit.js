@@ -5,7 +5,7 @@ import Layout from "../../components/Layout/Layout";
 export const Submit = (props) => {
   return (
     <Layout>
-      <section className="our-dashbord dashbord bgc-f7 pb50 pt-3">
+      {/* <section className="our-dashbord dashbord bgc-f7 pb50 pt-3">
         <div className="container-fluid ovh p-0 m-0">
           <div className="">
             <div className="container mb-5">
@@ -856,7 +856,7 @@ export const Submit = (props) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </Layout>
   );
 };

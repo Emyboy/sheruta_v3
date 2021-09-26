@@ -23,10 +23,10 @@ const FinishStep = (props) => {
   useEffect(() => {
     axios(process.env.REACT_APP_API_URL + `/sheruta/verify-request/${user.user.id}`, { method: 'POST' })
       .then(res => {
-        console.log('VERIFY --', res)
+        // console.log('VERIFY --', res)
       })
       .catch(err => {
-        console.log('VEIRFY ---', err)
+        // console.log('VEIRFY ---', err)
       })
   }, [])
 
