@@ -280,7 +280,7 @@ const CraeteRequest = (props) => {
         return (
             <Layout back>
                 <div className="mt-5 pb-5">
-                    <div className="container bg-white mb-5">
+                    <div className="container bg-white mb-5 border-gray rounded">
                         <div className="pt-5 pb-5">
                             <div className="text-center">
                                 <h2>Create Request</h2>

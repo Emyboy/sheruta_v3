@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Btn from "../../Btn/Btn";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import Heading from "../../Heading/Heading";
+import { Spinner } from 'react-activity';
 
 export default (props) => {
   const auth = useSelector((state) => state.auth);
@@ -23,9 +24,10 @@ export default (props) => {
 
   useEffect(() => {
     if (auth.user) {
+      console.log('CALLING ===============')
       dispatch(getUser());
     }
-  }, [auth.user]);
+  }, []);
 
   useEffect(() => {
     if (state.properties.length === 0) {
@@ -64,30 +66,45 @@ export default (props) => {
     }
   }, [state, view.personal_info.looking_for]);
   return (
-    <section className="mt-0 pt-0">
-      <div className="gap2 gray-bg">
-        <div className="container">
-          <div className="row">
-            <div className="">
-              <div className="row merged20" id="page-contents">
-                {Global.isMobile ? null : (
-                  <div className="col-lg-3 desktop-only">
-                    <Sticky stickyStyle={{ marginTop: "80px" }}>
-                      <aside className="sidebar static left rounded">
-                        <div className="widget border-gray rounded">
-                          <h4 className="widget-title">Your page</h4>
-                          <div className="your-page">
-                            <figure>
-                              <a href="#" title="">
-                                <img src={user.avatar_url} alt="" />
-                              </a>
-                            </figure>
-                            <div className="page-meta">
-                              <Link to={`/user/${user.username}`} title="">
-                                {user.first_name} {user.last_name}
-                              </Link>
-                              <span>@{user.username}</span>
-                              {/* <span>
+      <section className="mt-0 pt-0">
+          <div className="gap2 gray-bg">
+              <div className="container">
+                  <div className="row">
+                      <div className="">
+                          <div className="row merged20" id="page-contents">
+                              {Global.isMobile ? null : (
+                                  <div className="col-lg-3 desktop-only">
+                                      <Sticky
+                                          stickyStyle={{ marginTop: "80px" }}
+                                      >
+                                          <aside className="sidebar static left rounded">
+                                              <div className="widget border-gray rounded">
+                                                  <h4 className="widget-title">
+                                                      Your page
+                                                  </h4>
+                                                  <div className="your-page">
+                                                      <figure>
+                                                          <a href="#" title="">
+                                                              <img
+                                                                  src={
+                                                                      user.avatar_url
+                                                                  }
+                                                                  alt=""
+                                                              />
+                                                          </a>
+                                                      </figure>
+                                                      <div className="page-meta">
+                                                          <Link
+                                                              to={`/user/${user.username}`}
+                                                              title=""
+                                                          >
+                                                              {user.first_name}{" "}
+                                                              {user.last_name}
+                                                          </Link>
+                                                          <span>
+                                                              @{user.username}
+                                                          </span>
+                                                          {/* <span>
                               <i className="ti-comment"></i>
                               <a href="insight.html" title="">
                                 Messages <em>9</em>
@@ -99,8 +116,8 @@ export default (props) => {
                                 Notifications <em>2</em>
                               </a>
                             </span> */}
-                            </div>
-                            {/* <ul className="page-publishes">
+                                                      </div>
+                                                      {/* <ul className="page-publishes">
                             <li>
                               <span>
                                 <i className="ti-pencil-alt"></i>Publish
@@ -122,8 +139,8 @@ export default (props) => {
                               </span>
                             </li>
                           </ul> */}
-                            <div className="page-likes">
-                              {/* <div className="tab-content">
+                                                      <div className="page-likes">
+                                                          {/* <div className="tab-content">
                               <div
                                 className="tab-pane active fade show"
                                 id="link1"
@@ -303,105 +320,152 @@ export default (props) => {
                               </div>
                             </div> */}
 
-                              <Link to={`/user/${user.username}`}>
-                                <div className="nav nav-tabs likes-btn d-flex justify-content-center">
-                                  <Btn
-                                    className="btn-sm"
-                                    text="View Profile"
-                                    onClick={() => {}}
-                                  />
-                                </div>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="widget border-gray rounded">
-                          <h4 className="widget-title">New Users</h4>
-                          <ul
-                            className="followers ps-container ps-theme-default ps-active-y"
-                            data-ps-id="dcb7159e-c79e-aac7-b46b-9ac56abf3ecd"
-                          >
-                            {
-                              newUsers.map((val, i) => {
-                                if(val.id !== auth.user.user.id){
-                                  return (
-                                    <li>
-                                      <figure>
-                                        <img
-                                          src={val.avatar_url}
-                                          alt=""
-                                        />
-                                      </figure>
-                                      <div className="friend-meta">
-                                        <h4>
-                                          <Link to={`/user/${val.username}`} title="">
-                                            {val.username}
-                                          </Link>
-                                        </h4>
-                                        <Link
-                                          to={`/user/${val.username}`}
-                                          title=""
-                                          className="underline"
-                                        >
-                                          View Profile
-                                        </Link>
-                                      </div>
-                                    </li>
-                                  );
-                                }
-                              })
-                            }
+                                                          <Link
+                                                              to={`/user/${user.username}`}
+                                                          >
+                                                              <div className="nav nav-tabs likes-btn d-flex justify-content-center">
+                                                                  <Btn
+                                                                      className="btn-sm"
+                                                                      text="View Profile"
+                                                                      onClick={() => {}}
+                                                                  />
+                                                              </div>
+                                                          </Link>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div className="widget border-gray rounded">
+                                                  <h4 className="widget-title">
+                                                      New Users
+                                                  </h4>
+                                                  <ul
+                                                      className="followers ps-container ps-theme-default ps-active-y"
+                                                      data-ps-id="dcb7159e-c79e-aac7-b46b-9ac56abf3ecd"
+                                                  >
+                                                      {newUsers.map(
+                                                          (val, i) => {
+                                                              if (
+                                                                  val.id !==
+                                                                  auth.user.user
+                                                                      .id
+                                                              ) {
+                                                                  return (
+                                                                      <li>
+                                                                          <figure>
+                                                                              <img
+                                                                                  src={
+                                                                                      val.avatar_url
+                                                                                  }
+                                                                                  alt=""
+                                                                              />
+                                                                          </figure>
+                                                                          <div className="friend-meta">
+                                                                              <h4>
+                                                                                  <Link
+                                                                                      to={`/user/${val.username}`}
+                                                                                      title=""
+                                                                                  >
+                                                                                      {
+                                                                                          val.username
+                                                                                      }
+                                                                                  </Link>
+                                                                              </h4>
+                                                                              <Link
+                                                                                  to={`/user/${val.username}`}
+                                                                                  title=""
+                                                                                  className="underline"
+                                                                              >
+                                                                                  View
+                                                                                  Profile
+                                                                              </Link>
+                                                                          </div>
+                                                                      </li>
+                                                                  );
+                                                              }
+                                                          },
+                                                      )}
 
-                            <div
-                              className="ps-scrollbar-x-rail"
-                              style={{ left: "0px", bottom: "0px" }}
-                            >
-                              <div
-                                className="ps-scrollbar-x"
-                                tabindex="0"
-                                style={{ left: "0px", width: "0px" }}
-                              ></div>
-                            </div>
-                            <div
-                              className="ps-scrollbar-y-rail"
-                              style={{
-                                top: "0px",
-                                height: "260px",
-                                right: "0px",
-                              }}
-                            >
-                              <div
-                                className="ps-scrollbar-y"
-                                tabindex="0"
-                                style={{ top: "0px", height: "233px" }}
-                              ></div>
-                            </div>
-                          </ul>
-                        </div>
-                      </aside>
-                    </Sticky>
+                                                      <div
+                                                          className="ps-scrollbar-x-rail"
+                                                          style={{
+                                                              left: "0px",
+                                                              bottom: "0px",
+                                                          }}
+                                                      >
+                                                          <div
+                                                              className="ps-scrollbar-x"
+                                                              tabindex="0"
+                                                              style={{
+                                                                  left: "0px",
+                                                                  width: "0px",
+                                                              }}
+                                                          ></div>
+                                                      </div>
+                                                      <div
+                                                          className="ps-scrollbar-y-rail"
+                                                          style={{
+                                                              top: "0px",
+                                                              height: "260px",
+                                                              right: "0px",
+                                                          }}
+                                                      >
+                                                          <div
+                                                              className="ps-scrollbar-y"
+                                                              tabindex="0"
+                                                              style={{
+                                                                  top: "0px",
+                                                                  height: "233px",
+                                                              }}
+                                                          ></div>
+                                                      </div>
+                                                  </ul>
+                                              </div>
+                                          </aside>
+                                      </Sticky>
+                                  </div>
+                              )}
+                              <div className="col-lg-5">
+                                  {state.list.map((val, i) => {
+                                      return (
+                                          <EachSocialRequest
+                                              key={i}
+                                              data={val}
+                                          />
+                                      );
+                                  })}
+                                  {state.list.length === 0 ? (
+                                      <div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
+                                          <Spinner />
+                                      </div>
+                                  ) : null}
+                              </div>
+                              {Global.isMobile ? null : (
+                                  <div className="col-lg-4 desktop-only">
+                                      <Sticky
+                                          stickyStyle={{ marginTop: "50px" }}
+                                      >
+                                          <Heading heading="Recent Apartments" />
+                                          {state.properties.length === 0 ? (
+                                              <div className="central-meta item rounded border-gray text-center d-flex justify-content-center">
+                                                  <Spinner />
+                                              </div>
+                                          ) : null}
+                                          {state.properties.map((val, i) => {
+                                              return (
+                                                  <PropertyCardSM
+                                                      val={val}
+                                                      key={i}
+                                                  />
+                                              );
+                                          })}
+                                      </Sticky>
+                                  </div>
+                              )}
+                          </div>
+                      </div>
                   </div>
-                )}
-                <div className="col-lg-5">
-                  {state.list.map((val, i) => {
-                    return <EachSocialRequest key={i} data={val} />;
-                  })}
-                </div>
-                {Global.isMobile ? null : (
-                  <div className="col-lg-4 desktop-only">
-                    <Sticky stickyStyle={{ marginTop: "50px" }}>
-                      <Heading heading="Recent Apartments" />
-                      {state.properties.map((val, i) => {
-                        return <PropertyCardSM val={val} key={i} />;
-                      })}
-                    </Sticky>
-                  </div>
-                )}
               </div>
-            </div>
           </div>
-        </div>
-      </div>
-    </section>
+      </section>
   );
 };
