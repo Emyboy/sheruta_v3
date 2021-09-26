@@ -18,6 +18,7 @@ import ImageSelect from "./ImageSelect";
 import { storage } from "../../Firebase";
 import firebase from "firebase";
 import Compressor from "compressorjs";
+import Global, { all_states } from "../../Global";
 
 const uid = Uid();
 
@@ -68,7 +69,7 @@ const CraeteRequest = (props) => {
         bedrooms: null,
         toilets: null,
         is_premium: false,
-        payment_type: null
+        payment_type: null,
     });
 
     const sendToDb = () => {
@@ -399,7 +400,7 @@ const CraeteRequest = (props) => {
                                                         onChange={(e) => {
                                                             setData({
                                                                 ...data,
-                                                                service:
+                                                                payment_type:
                                                                     e.value,
                                                             });
                                                         }}
@@ -529,6 +530,48 @@ const CraeteRequest = (props) => {
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="col-lg-6 col-md-6 col-sm-12">
+                                                <div className="form-group">
+                                                    <label>State</label>
+                                                    <Select
+                                                        placeholder="Ex. Lagos, Abuja etc"
+                                                        onChange={(e) => {
+                                                            setData({
+                                                                ...data,
+                                                                state:
+                                                                    e.value,
+                                                            });
+                                                        }}
+                                                        options={all_states.map(
+                                                            (val) => ({
+                                                                label: val,
+                                                                value: val,
+                                                            }),
+                                                        )}
+                                                        className="border rounded"
+                                                        disabled={state.loading}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-6 col-md-6 col-sm-12">
+                                                <div className="form-group">
+                                                    <label>Premium Flat?</label>
+                                                    <div className="d-flex mt-2">
+                                                        <Switch
+                                                            defaultChecked={
+                                                                data.is_premium
+                                                            }
+                                                            onChange={(e) =>
+                                                                setData({
+                                                                    ...data,
+                                                                    is_premium:
+                                                                        e,
+                                                                })
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div className="col-lg-12 col-md-12 col-sm-12">
                                                 <div className="form-group">
                                                     <label>
@@ -563,36 +606,7 @@ const CraeteRequest = (props) => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Premium Flat?</label>
-                                                    <div className="d-flex mt-2">
-                                                        <Switch
-                                                            defaultChecked={
-                                                                data.is_premium
-                                                            }
-                                                            onChange={(e) =>
-                                                                setData({
-                                                                    ...data,
-                                                                    is_premium:
-                                                                        e,
-                                                                })
-                                                            }
-                                                        />
-                                                    </div>
-                                                    {/* <input
-                            style={{ height: "40px" }}
-                            className="form-control"
-                            type="number"
-                            required
-                            defaultValue={data.bathrooms}
-                            placeholder="Eg. 2"
-                            onChange={(e) =>
-                              setData({ ...data, bathrooms: e.target.value })
-                            }
-                          /> */}
-                                                </div>
-                                            </div>
+
                                             {view.personal_info &&
                                             !view.personal_info.looking_for ? (
                                                 <>

@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 import { notifyEmy } from "../../utils/Sheruta";
 import styled from "styled-components";
 import ImageViewer from "react-simple-image-viewer";
-import { notification } from "antd";
+import { notification, Tag } from "antd";
+import { ImLocation } from "react-icons/im";
 import moment from "moment";
 const ImgContainer = styled.section`
     padding: 5em;
@@ -20,9 +21,9 @@ const ImgContainer = styled.section`
     background-repeat: no-repeat;
 `;
 export default function RequestDetails(props) {
+    localStorage.setItem("after_login", window.location.pathname);
     const { uid } = props.match.params;
     const [showImages, setShowImages] = useState(false);
-    localStorage.setItem("after_login", window.location.pathname);
     const [request, setRequest] = useState(null);
     const [state, setState] = useState({
         loading: true,
@@ -215,9 +216,113 @@ export default function RequestDetails(props) {
                                                         </button>
                                                     </ImgContainer>
                                                 ) : null}
+                                                <h1 className="display-7">
+                                                    {request.heading}
+                                                </h1>
+                                                <div className="container-fluid">
+                                                    <div className="row justify-content-between">
+                                                        <div className="d-flex">
+                                                            <span
+                                                                style={{
+                                                                    alignSelf:
+                                                                        "center",
+                                                                }}
+                                                            >
+                                                                <ImLocation />
+                                                            </span>{" "}
+                                                            {request.location}
+                                                        </div>
+                                                        <div className="">
+                                                            {request.category && (
+                                                                <Tag color="lime">
+                                                                    {
+                                                                        request
+                                                                            .category
+                                                                            .name
+                                                                    }
+                                                                </Tag>
+                                                            )}
+                                                            {request.service && (
+                                                                <Tag color="geekblue">
+                                                                    {
+                                                                        request
+                                                                            .service
+                                                                            .name
+                                                                    }
+                                                                </Tag>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="description">
                                                     <p>{request.body}</p>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="block-wrap border-gray rounded">
+                                            <div class="block-header">
+                                                <h4 class="block-title">
+                                                    Property Info
+                                                </h4>
+                                            </div>
+
+                                            <div class="block-body">
+                                                <ul class="dw-proprty-info">
+                                                    <li>
+                                                        <strong>
+                                                            Bedrooms
+                                                        </strong>
+                                                        {request.bedrooms}
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Bathrooms
+                                                        </strong>
+                                                        {request.bathrooms}
+                                                    </li>
+                                                    <li>
+                                                        <strong>Toilets</strong>
+                                                        {request.toilets}
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Is Premium?
+                                                        </strong>
+                                                        {request.is_premium
+                                                            ? "Yes"
+                                                            : "No"}
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Service Type
+                                                        </strong>
+                                                        {request.service &&
+                                                            request.service
+                                                                .name}
+                                                    </li>
+                                                    <li>
+                                                        <strong>Type</strong>
+                                                        {request.category &&
+                                                            request.category
+                                                                .name}
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Price / Budget
+                                                        </strong>
+                                                        ₦{" "}
+                                                        {window.formatedPrice.format(
+                                                            request.budget,
+                                                        )}
+                                                    </li>
+
+                                                    <li>
+                                                        <strong>
+                                                            State
+                                                        </strong>
+                                                        {request.state}
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
