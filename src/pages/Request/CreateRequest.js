@@ -657,8 +657,8 @@ const CraeteRequest = (props) => {
                                                     </div>
                                                 </>
                                             ) : null}
-
                                             <div className="col-lg-12 col-md-12 col-sm-12">
+                                            <hr />
                                                 <div className="form-group">
                                                     <Btn
                                                         type="submit"

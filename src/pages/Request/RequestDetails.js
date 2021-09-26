@@ -23,6 +23,7 @@ const ImgContainer = styled.section`
 export default function RequestDetails(props) {
     localStorage.setItem("after_login", window.location.pathname);
     const { uid } = props.match.params;
+    const { user } = useSelector((state) => state.auth);
     const [showImages, setShowImages] = useState(false);
     const [request, setRequest] = useState(null);
     const [state, setState] = useState({
@@ -48,6 +49,14 @@ export default function RequestDetails(props) {
                 notification.error({ message: "Error fetching reqeust data" });
             });
     }, []);
+
+    const handleCallRequest = () => {
+        notifyEmy({
+            heading: `Called ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}`,
+            url: window.location.pathname,
+            status: "success",
+        });
+    };
 
     useEffect(() => {
         if (request) {
@@ -221,7 +230,13 @@ export default function RequestDetails(props) {
                                                 </h1>
                                                 <div className="container-fluid">
                                                     <div className="row justify-content-between">
-                                                        <div className="d-flex">
+                                                        <div
+                                                            className="d-flex"
+                                                            style={{
+                                                                alignItems:
+                                                                    "center",
+                                                            }}
+                                                        >
                                                             <span
                                                                 style={{
                                                                     alignSelf:
@@ -232,26 +247,72 @@ export default function RequestDetails(props) {
                                                             </span>{" "}
                                                             {request.location}
                                                         </div>
-                                                        <div className="">
-                                                            {request.category && (
-                                                                <Tag color="lime">
-                                                                    {
-                                                                        request
-                                                                            .category
-                                                                            .name
+                                                        <div>
+                                                            {user ? (
+                                                                <a
+                                                                    onClick={
+                                                                        handleCallRequest
                                                                     }
-                                                                </Tag>
-                                                            )}
-                                                            {request.service && (
-                                                                <Tag color="geekblue">
-                                                                    {
-                                                                        request
-                                                                            .service
-                                                                            .name
-                                                                    }
-                                                                </Tag>
+                                                                    href={`tel:${request.users_permissions_user.phone_number}`}
+                                                                    title=""
+                                                                    className="main-btn bg-theme text-white"
+                                                                    data-ripple=""
+                                                                >
+                                                                    Call Me
+                                                                    <i className="fa fa-phone ml-2"></i>
+                                                                </a>
+                                                            ) : (
+                                                                <Link
+                                                                    to={`/signup`}
+                                                                    title=""
+                                                                    className="main-btn bg-theme text-white"
+                                                                    data-ripple=""
+                                                                >
+                                                                    Call Me
+                                                                    <i className="fa fa-phone ml-2"></i>
+                                                                </Link>
                                                             )}
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="d-flex"
+                                                    style={{
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    <h4 className="mt-3">
+                                                        ₦{" "}
+                                                        {window.formatedPrice.format(
+                                                            request.budget,
+                                                        )}{" "}
+                                                        <small className="text-muted">
+                                                            /
+                                                            {request.payment_type &&
+                                                                request
+                                                                    .payment_type
+                                                                    .name}
+                                                        </small>
+                                                    </h4>
+                                                    <div className="ml-2">
+                                                        {request.category && (
+                                                            <Tag color="lime">
+                                                                {
+                                                                    request
+                                                                        .category
+                                                                        .name
+                                                                }
+                                                            </Tag>
+                                                        )}
+                                                        {request.service && (
+                                                            <Tag color="geekblue">
+                                                                {
+                                                                    request
+                                                                        .service
+                                                                        .name
+                                                                }
+                                                            </Tag>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <div class="description">
@@ -259,72 +320,79 @@ export default function RequestDetails(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="block-wrap border-gray rounded">
-                                            <div class="block-header">
-                                                <h4 class="block-title">
-                                                    Property Info
-                                                </h4>
-                                            </div>
+                                        {request.bedrooms &&
+                                        request.bathrooms ? (
+                                            <div class="block-wrap border-gray rounded">
+                                                <div class="block-header">
+                                                    <h4 class="block-title">
+                                                        Property Info
+                                                    </h4>
+                                                </div>
 
-                                            <div class="block-body">
-                                                <ul class="dw-proprty-info">
-                                                    <li>
-                                                        <strong>
-                                                            Bedrooms
-                                                        </strong>
-                                                        {request.bedrooms}
-                                                    </li>
-                                                    <li>
-                                                        <strong>
-                                                            Bathrooms
-                                                        </strong>
-                                                        {request.bathrooms}
-                                                    </li>
-                                                    <li>
-                                                        <strong>Toilets</strong>
-                                                        {request.toilets}
-                                                    </li>
-                                                    <li>
-                                                        <strong>
-                                                            Is Premium?
-                                                        </strong>
-                                                        {request.is_premium
-                                                            ? "Yes"
-                                                            : "No"}
-                                                    </li>
-                                                    <li>
-                                                        <strong>
-                                                            Service Type
-                                                        </strong>
-                                                        {request.service &&
-                                                            request.service
-                                                                .name}
-                                                    </li>
-                                                    <li>
-                                                        <strong>Type</strong>
-                                                        {request.category &&
-                                                            request.category
-                                                                .name}
-                                                    </li>
-                                                    <li>
-                                                        <strong>
-                                                            Price / Budget
-                                                        </strong>
-                                                        ₦{" "}
-                                                        {window.formatedPrice.format(
-                                                            request.budget,
-                                                        )}
-                                                    </li>
+                                                <div class="block-body">
+                                                    <ul class="dw-proprty-info">
+                                                        <li>
+                                                            <strong>
+                                                                Bedrooms
+                                                            </strong>
+                                                            {request.bedrooms}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Bathrooms
+                                                            </strong>
+                                                            {request.bathrooms}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Toilets
+                                                            </strong>
+                                                            {request.toilets}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Is Premium?
+                                                            </strong>
+                                                            {request.is_premium
+                                                                ? "Yes"
+                                                                : "No"}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Service Type
+                                                            </strong>
+                                                            {request.service &&
+                                                                request.service
+                                                                    .name}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Type
+                                                            </strong>
+                                                            {request.category &&
+                                                                request.category
+                                                                    .name}
+                                                        </li>
+                                                        <li>
+                                                            <strong>
+                                                                Price / Budget
+                                                            </strong>
+                                                            ₦{" "}
+                                                            {window.formatedPrice.format(
+                                                                request.budget,
+                                                            )}
+                                                        </li>
 
-                                                    <li>
-                                                        <strong>
-                                                            State
-                                                        </strong>
-                                                        {request.state}
-                                                    </li>
-                                                </ul>
+                                                        <li>
+                                                            <strong>
+                                                                State
+                                                            </strong>
+                                                            {request.state}
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        ) : null}
                                     </div>
                                     <div className="col-lg-3"></div>
                                 </div>

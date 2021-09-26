@@ -87,14 +87,17 @@ const EachSocialRequest = (props) => {
                                   <i className="fa fa-pencil-square-o">
                                   </i>Edit Post
                                 </li> */}
-                                            <li
-                                                onClick={() =>
-                                                    setShowDelete(true)
-                                                }
-                                            >
-                                                <i className="fa fa-trash"></i>
-                                                Delete Post
-                                            </li>
+                                            {user.user.id ===
+                                            data.users_permissions_user.id ? (
+                                                <li
+                                                    onClick={() =>
+                                                        setShowDelete(true)
+                                                    }
+                                                >
+                                                    <i className="fa fa-trash"></i>
+                                                    Delete Post
+                                                </li>
+                                            ) : null}
                                         </ul>
                                     </div>
                                 </div>
