@@ -100,3 +100,17 @@ export const getAllPaymentTypes = () => (dispatch) => {
             notification.error({ message: "Error getting all payment types" });
         });
 };
+
+
+export const getAllStates = () => dispatch => {
+    axios(process.env.REACT_APP_API_URL + `/states`)
+        .then((res) => {
+            dispatch({
+                type: "GET_ALL_STATES",
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            notification.error({ message: "Error getting all payment types" });
+        });
+}
