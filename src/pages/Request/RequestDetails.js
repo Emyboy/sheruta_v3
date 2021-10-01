@@ -128,7 +128,7 @@ export default function RequestDetails(props) {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="row merged20">
+                                <div className="row merged20 justify-content-center">
                                     <div className="col-lg-9">
                                         <div className="central-meta item border-gray rounded">
                                             <div className="d-flex">
@@ -152,10 +152,18 @@ export default function RequestDetails(props) {
                                                         <div className="more-post-optns">
                                                             <i className="ti-more-alt"></i>
                                                             <ul>
-                                                                <li>
-                                                                    <i className="fa fa-trash"></i>
-                                                                    Delete Post
-                                                                </li>
+                                                                {user &&
+                                                                request
+                                                                    .users_permissions_user
+                                                                    .id ===
+                                                                    user.user
+                                                                        .id ? (
+                                                                    <li>
+                                                                        <i className="fa fa-trash"></i>
+                                                                        Delete
+                                                                        Post
+                                                                    </li>
+                                                                ) : null}
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -172,7 +180,7 @@ export default function RequestDetails(props) {
                                                             {/* {data.users_permissions_user.last_name} */}
                                                         </Link>{" "}
                                                         <em
-                                                            className={` ml-2${
+                                                            className={`ml-2 ${
                                                                 request
                                                                     .users_permissions_user
                                                                     .is_verified
@@ -181,13 +189,13 @@ export default function RequestDetails(props) {
                                                             }`}
                                                         >
                                                             <i
-                                                                className={
+                                                                className={`text-success ${
                                                                     !request
                                                                         .users_permissions_user
                                                                         .is_verified
                                                                         ? "ti-close"
                                                                         : "fa fa-check-circle"
-                                                                }
+                                                                }`}
                                                             ></i>{" "}
                                                             {request
                                                                 .users_permissions_user
@@ -225,7 +233,9 @@ export default function RequestDetails(props) {
                                                         </button>
                                                     </ImgContainer>
                                                 ) : null}
-                                                <h1 className="display-7">
+                                                <h1
+                                                    style={{ fontSize: "21px" }}
+                                                >
                                                     {request.heading}
                                                 </h1>
                                                 <div className="container-fluid">
@@ -394,7 +404,7 @@ export default function RequestDetails(props) {
                                             </div>
                                         ) : null}
                                     </div>
-                                    <div className="col-lg-3"></div>
+                                    {/* <div className="col-lg-3"></div> */}
                                 </div>
                             </div>
                         </div>

@@ -63,7 +63,7 @@ const PersonalInfoForm = (props) => {
   }, [props.info]);
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
+    <form onSubmit={handleSubmit} className="mt-4 mb-5">
       <div>
         <h4>Work Information</h4>
       </div>
@@ -225,9 +225,9 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: "bold", alignSelf: 'center' }}
                 >
-                  https://www.facebook.com/
+                  www.facebook.com/
                 </InputGroup.Text>
                 <FormControl
                   id="basic-url"
@@ -249,9 +249,9 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: "bold", alignSelf: 'center' }}
                 >
-                  https://www.instagram.com/
+                  www.instagram.com/
                 </InputGroup.Text>
                 <FormControl
                   id="basic-url"
@@ -274,9 +274,9 @@ const PersonalInfoForm = (props) => {
               <InputGroup className="mb-3">
                 <InputGroup.Text
                   id="basic-addon3"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: "bold", alignSelf: 'center' }}
                 >
-                  https://www.twitter.com/
+                  www.twitter.com/
                 </InputGroup.Text>
                 <FormControl
                   id="basic-url"

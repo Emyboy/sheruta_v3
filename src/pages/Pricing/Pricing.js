@@ -53,7 +53,55 @@ export default connect(
         notifyEmy({
             heading: 'Payment was sent to paystack',
             body: JSON.stringify({...reference, payment_plan_id})
+        });
+        axios(process.env.REACT_APP_API_URL + "/transactions", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${props.auth.user.jwt}`,
+            },
+            data: {
+                ...reference,
+                // ...mockRef,
+                payment_plan: payment_plan_id,
+                users_permissions_user: props.auth.user.user.id,
+            },
         })
+            .then((res) => {
+                notifyEmy({
+                    log: { message: "Sent to backend" },
+                    status: "success",
+                    url: window.location.pathname,
+                    heading: "A user made payments",
+                });
+                if (res.status === 201) {
+                    setState({
+                        ...state,
+                        paystackDone: false,
+                        message: res.data.message,
+                        messageType: "success",
+                    });
+                } else
+                    setState({
+                        ...state,
+                        paystackDone: false,
+                        message: res.data.message,
+                        messageType: "failed",
+                    });
+            })
+            .catch((err) => {
+                notifyEmy({
+                    heading: "Payment Error",
+                    log: { ...err },
+                    status: "error",
+                    url: window.location.pathname,
+                });
+                setState({
+                    ...state,
+                    paystackDone: false,
+                    message: "Server Error",
+                    messageType: "failed",
+                });
+            });
     };
 
     // you can call this function anything
@@ -76,48 +124,20 @@ export default connect(
             })
     }
 
-    const sendPaymentToBackend = () => {
-        // console.log('SENDING ----', {
-        //     ...data.reference,
-        //     // ...mockRef,
-        //     payment_plan: data.payment_plan,
-        //     users_permissions_user: props.auth.user.user.id
-        // })
-        axios(process.env.REACT_APP_API_URL + '/transactions', {
-            method: 'POST',
-            headers: {
-                Authorization:
-                    `Bearer ${props.auth.user.jwt}`,
-            },
-            data: {
-                ...data.reference,
-                // ...mockRef,
-                payment_plan: data.payment_plan,
-                users_permissions_user: props.auth.user.user.id
-            }
-        })
-            .then(res => {
-                notifyEmy({
-                    log: {message: 'Sent to backend'},
-                    status: 'success',
-                    url: window.location.pathname,
-                    heading: 'A user made payments'
-                })
-                if (res.status === 201) {
-                    setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'success' })
-                } else
-                    setState({ ...state, paystackDone: false, message: res.data.message, messageType: 'failed' })
-            })
-            .catch(err => {
-                notifyEmy({
-                    heading: "Payment Error",
-                    log: {...err},
-                    status: 'error',
-                    url: window.location.pathname
-                })
-                setState({ ...state, paystackDone: false, message: 'Server Error', messageType: 'failed' })
-            })
-    }
+    // const sendPaymentToBackend = () => {
+    //     // console.log('SENDING ----', {
+    //     //     ...data.reference,
+    //     //     // ...mockRef,
+    //     //     payment_plan: data.payment_plan,
+    //     //     users_permissions_user: props.auth.user.user.id
+    //     // })
+        
+    // }
+    // useEffect(() => {
+    //     if (state.paystackDone) {
+    //         sendPaymentToBackend()
+    //     }
+    // }, [state.paystackDone])
 
     useEffect(() => {
         getAllPaymentPlans();
@@ -127,11 +147,6 @@ export default connect(
     //     sendPaymentToBackend();
     // },[])
 
-    useEffect(() => {
-        if (state.paystackDone) {
-            sendPaymentToBackend()
-        }
-    }, [state.paystackDone])
 
     return (
         <Layout>
@@ -205,59 +220,6 @@ export default connect(
                         })
                     }
 
-                    {/* <div className="col-lg-4 col-md-4">
-                    <div className="pricing-wrap recommended">
-
-                        <div className="pricing-header">
-                            <i className="lni-diamond"></i>
-                            <h4 className="pr-title">Platinum Package</h4>
-                            <span className="pr-subtitle">Start With Platinum Package</span>
-                        </div>
-                        <div className="pricing-value">
-                            <h4 className="pr-value">149</h4>
-                        </div>
-                        <div className="pricing-body">
-                            <ul>
-                                <li>5+ Listings</li>
-                                <li>Contact With Agent</li>
-                                <li>3 Month Validity</li>
-                                <li>7x24 Fully Support</li>
-                                <li>50GB Space</li>
-                            </ul>
-                        </div>
-                        <div className="pricing-bottom">
-                            <a href="#c" className="btn-pricing text-white">Choose Plan</a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="col-lg-4 col-md-4">
-                    <div className="pricing-wrap">
-
-                        <div className="pricing-header">
-                            <i className="lni-invention"></i>
-                            <h4 className="pr-title">Standard Package</h4>
-                            <span className="pr-subtitle">Start With Standard Package</span>
-                        </div>
-                        <div className="pricing-value">
-                            <h4 className="pr-value">199</h4>
-                        </div>
-                        <div className="pricing-body">
-                            <ul>
-                                <li>5+ Listings</li>
-                                <li>Contact With Agent</li>
-                                <li>3 Month Validity</li>
-                                <li>7x24 Fully Support</li>
-                                <li>50GB Space</li>
-                            </ul>
-                        </div>
-                        <div className="pricing-bottom">
-                            <a href="#c" className="btn-pricing text-white">Choose Plan</a>
-                        </div>
-
-                    </div>
-                </div> */}
 
                 </div>
             </div>

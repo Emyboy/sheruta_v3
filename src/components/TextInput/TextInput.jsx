@@ -23,7 +23,6 @@ export default ({
    
     return (
       <Form.Group as={as} controlId={controlId}>
-        {/* <div className="form-group"> */}
         <Form.Label>
           <b className='text-muted'>{label}</b>
         </Form.Label>{" "}
@@ -46,7 +45,6 @@ export default ({
           {icon ? <i className={icon}></i> : null}
         </div>
         <span className="form-text text-danger">{errorMessage}</span>
-        {/* </div> */}
       </Form.Group>
     );
 }

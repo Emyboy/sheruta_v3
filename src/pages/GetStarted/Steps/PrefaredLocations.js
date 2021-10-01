@@ -5,6 +5,7 @@ import Btn from '../../../components/Btn/Btn';
 import { AiFillCloseCircle } from 'react-icons/ai'
 import axios from 'axios';
 import { notification } from 'antd';
+import Cookies from 'js-cookie';
 
 export const PrefaredLocations = (props) => {
 
@@ -62,7 +63,7 @@ export const PrefaredLocations = (props) => {
         axios(process.env.REACT_APP_API_URL + '/user-preferred-locations' + '/?users_permissions_user=' + props.auth.user.user.id, {
             headers: {
                 Authorization:
-                    `Bearer ${props.auth.user.jwt}`,
+                    `Bearer ${Cookies.get('token')}`,
             },
         })
             .then(res => {
@@ -70,7 +71,7 @@ export const PrefaredLocations = (props) => {
             })
             .catch(err => {
                 // notification.error({ message: 'Error fetching your location' })
-                // console.log(err)
+                console.log({...err})
             })
     }, []);
 

@@ -153,7 +153,7 @@ const Login = (props) => {
                       id="login-btn"
                       text="Login"
                       loading={state.loading}
-                      className="full-width mt-2"
+                      className="full-width mt-2 mb-3"
                       type="submit"
                     />
                     <Link

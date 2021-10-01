@@ -82,7 +82,7 @@ export const Signup = (props) => {
               }
             />
           </MetaTags>
-          <div className="modal-content m-2" id="sign-up">
+          <div className="modal-content m-2 border-gray rounded" id="sign-up">
             <Link to="/">
               <span
                 className="mod-close"
@@ -244,7 +244,7 @@ export const Signup = (props) => {
                 </form>
               </div>
               <div className="text-center">
-                <p className="mt-5">
+                <p style={{ marginTop: '7rem'}}>
                   <i className="ti-user mr-1"></i>Already Have An Account?{" "}
                   <Link to="/login" className="link">
                     Go For LogIn

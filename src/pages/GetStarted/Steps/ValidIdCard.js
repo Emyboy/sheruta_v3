@@ -7,207 +7,239 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { notification } from "antd";
 import { notifyEmy } from "../../../utils/Sheruta";
-import moment from "moment";
+import { MdClose } from "react-icons/md";
+import AuthEditForm from "../../../components/AuthEditForm/AuthEditForm";
 
 const NinInput = styled.input`
-  width: 60%;
-  text-align: center;
-  font-size: 27px;
-  border-radius: 10px;
-  border: 1px solid greenyellow;
-  height: 2em;
-  @media only screen and (max-width: 600px) {
-    width: 90%;
-  }
+    width: 60%;
+    text-align: center;
+    font-size: 27px;
+    border-radius: 10px;
+    border: 1px solid greenyellow;
+    height: 2em;
+    @media only screen and (max-width: 600px) {
+        width: 90%;
+    }
 `;
 
 export default function ValidIdCard(props) {
-  // console.log('PROPS- --', props)
-  const [nin, setNin] = useState("");
-  const { user } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
-  const [showUserData, setShowUserData] = useState(false);
-  const [ninData, setNinData] = useState(null);
-  const [hasError, setHasError] = useState(false);
-  const handleSubmit = () => {
-    setLoading(true);
-    axios(process.env.REACT_APP_API_URL + "/sheruta/verify-nin", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-      data: {
-        nin,
-        firstname: user.user.first_name,
-        lastname: user.user.last_name,
-      },
-    })
-      .then((res) => {
-        setNinData(res.data);
-        setLoading(false);
-        setShowUserData(true);
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        // console.log({ ...err });
+    // console.log('PROPS- --', props)
+    const [nin, setNin] = useState("");
+    const { user } = useSelector((state) => state.auth);
+    const [loading, setLoading] = useState(false);
+    const [showUserData, setShowUserData] = useState(false);
+    const [ninData, setNinData] = useState(null);
+    const [showEdit, setShowEdit] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const handleSubmit = () => {
+        setLoading(true);
+        axios(process.env.REACT_APP_API_URL + "/sheruta/verify-nin", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+            data: {
+                nin,
+                firstname: user.user.first_name,
+                lastname: user.user.last_name,
+            },
+        })
+            .then((res) => {
+                setNinData(res.data);
+                setLoading(false);
+                setShowUserData(true);
+                // console.log(res.data);
+            })
+            .catch((err) => {
+                // console.log({ ...err });
 
-        setLoading(false);
-        notification.error({ message: "Error, please try again " });
-        setTimeout(() => {
-          notification.info({ message: "Please check your NIN properly" });
-        }, 3000);
-      });
-  };
-
-  const returnNINDataOfBirth = (date) => {
-    const oldDate = date.split("-");
-    return `${oldDate[2]}-${oldDate[1]}-${oldDate[0]}`
-  };
-
-  const next = () => {
-    const data = {
-      gender: ninData.gender,
-      occupation: ninData.profession.toLowerCase(),
-      date_of_birth: returnNINDataOfBirth(ninData.birthdate),
-      middle_name: ninData.middlename.toLowerCase(),
-      lgaOfOrigin: ninData.lgaOfOrigin.toLowerCase(),
-      nspokenlang: ninData.nspokenlang.toLowerCase(),
-      ospokenlang: ninData.ospokenlang.toLowerCase(),
-      photo: ninData.photo,
-      religion: ninData.religion.toLowerCase(),
-      stateOfOrigin: ninData.stateOfOrigin.toLowerCase(),
-      last_name_match: ninData.fieldMatches.lastname,
+                setLoading(false);
+                notification.error({ message: "Error, please try again " });
+                setTimeout(() => {
+                    notification.info({
+                        message: "Please check your NIN properly",
+                    });
+                }, 3000);
+            });
     };
-    axios(process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`, {
-      method: "PUT",
-      data,
-    })
-      .then((res) => {
-        props.setStep(props.step + 1);
-      })
-      .catch((err) => {
-        notification.error({ message: "Error saving data" });
-        notifyEmy({
-          heading: "had issues saving data from NIN",
-          log: { ...err },
-          status: "error",
-          url: window.location.pathname,
-        });
-      });
-  };
 
-  return (
-    <div>
-      <div className="sec-heading center mt-3">
-        <h2 className="animated animate__bounceIn">
-          National Identification Number
-        </h2>
-        <p>Identity verification for security reasons.</p>
-      </div>
-      <Modal show={showUserData && ninData} size="lg">
-        {ninData && (
-          <Modal.Body>
-            <h2 className="text-center">Please Verify This Is You</h2>
-            <img
-              src={user.user.avatar_url}
-              width="200"
-              className="rounded mt-4"
-            />
-            <div>
-              <h5 className="mt-3">
-                <b className="text-muted">Name: </b>
-                {ninData.title +
-                  " " +
-                  ninData.firstname +
-                  " " +
-                  ninData.lastname +
-                  " " +
-                  ninData.middlename}
-              </h5>
-              <h5 className="mt-3">
-                <b className="text-muted">Date Of Birth: </b>
-                {ninData.birthdate}
-              </h5>
-              <h5 className="mt-3">
-                <b className="text-muted">Religion: </b>
-                {ninData.religion}
-              </h5>
-              <h5 className="mt-3">
-                <b className="text-muted">Native Language: </b>
-                {ninData.nspokenlang}
-              </h5>
-              <h5 className="mt-3">
-                <b className="text-muted">State Of Origin: </b>
-                {ninData.stateOfOrigin}
-              </h5>
-              {!ninData.fieldMatches.lastname ? (
-                <div className="alert alert-danger">
-                  <span className="lead">
-                    <b>
-                      The last name on your NIN doesn't match the last name you
-                      gave us.
-                    </b>
-                  </span>
-                  <hr />
-                  <p>
-                    <b>Continue ?</b>
-                  </p>
+    const returnNINDataOfBirth = (date) => {
+        const oldDate = date.split("-");
+        return `${oldDate[2]}-${oldDate[1]}-${oldDate[0]}`;
+    };
+
+    const next = () => {
+      setLoading(true);
+        const data = {
+            gender: ninData.gender,
+            occupation: ninData.profession.toLowerCase(),
+            date_of_birth: returnNINDataOfBirth(ninData.birthdate),
+            middle_name: ninData.middlename.toLowerCase(),
+            lgaOfOrigin: ninData.lgaOfOrigin.toLowerCase(),
+            nspokenlang: ninData.nspokenlang.toLowerCase(),
+            ospokenlang: ninData.ospokenlang.toLowerCase(),
+            photo: ninData.photo,
+            religion: ninData.religion.toLowerCase(),
+            stateOfOrigin: ninData.stateOfOrigin.toLowerCase(),
+            last_name_match: ninData.fieldMatches.lastname,
+        };
+        axios(
+            process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`,
+            {
+                method: "PUT",
+                data,
+            },
+        )
+            .then((res) => {
+                props.setStep(props.step + 1);
+                setLoading(false);
+            })
+            .catch((err) => {
+                notification.error({ message: "Error saving data" });
+                notifyEmy({
+                    heading: "had issues saving data from NIN",
+                    log: { ...err },
+                    status: "error",
+                    url: window.location.pathname,
+                });
+                setLoading(false);
+            });
+    };
+
+    return (
+        <div>
+            <Modal show={showEdit} onHide={() => setShowEdit(!showEdit)}>
+                <Modal.Body className="p-3">
+                    <Modal.Header closeButton>
+                        <h3>Edit Profile</h3>
+                    </Modal.Header>
+                    <hr />
+                    <AuthEditForm />
+                </Modal.Body>
+            </Modal>
+            <div className="sec-heading center mt-3">
+                <h2 className="animated animate__bounceIn">
+                    National Identification Number
+                </h2>
+                <p>Identity verification for security reasons.</p>
+            </div>
+            <Modal show={showUserData && ninData} size="lg">
+                {ninData && (
+                    <Modal.Body>
+                        <h2 className="text-center">
+                            Please Verify This Is You
+                        </h2>
+                        <img
+                            src={user.user.avatar_url}
+                            width="200"
+                            className="rounded mt-4"
+                        />
+                        <div>
+                            <h5 className="mt-3">
+                                <b className="text-muted">Name: </b>
+                                {ninData.title +
+                                    " " +
+                                    ninData.firstname +
+                                    " " +
+                                    ninData.lastname +
+                                    " " +
+                                    ninData.middlename}
+                            </h5>
+                            <h5 className="mt-3">
+                                <b className="text-muted">Date Of Birth: </b>
+                                {ninData.birthdate}
+                            </h5>
+                            <h5 className="mt-3">
+                                <b className="text-muted">Religion: </b>
+                                {ninData.religion}
+                            </h5>
+                            <h5 className="mt-3">
+                                <b className="text-muted">Native Language: </b>
+                                {ninData.nspokenlang}
+                            </h5>
+                            <h5 className="mt-3 mb-4">
+                                <b className="text-muted">State Of Origin: </b>
+                                {ninData.stateOfOrigin}
+                            </h5>
+                            {ninData.lastname.toLowerCase() !== user.user.last_name.toLowerCase() ? (
+                                <div className="alert alert-danger">
+                                    <span className="lead">
+                                        <b>
+                                            The name on your NIN doesn't match
+                                            the name you gave us.
+                                        </b>
+                                    </span>
+                                    <hr />
+                                    <p className="d-flex justify-content-between">
+                                        <b>Continue ? </b>
+                                        <b>OR </b>
+                                        <Btn
+                                            text="Edit Profile"
+                                            className="btn-sm"
+                                            onClick={() => setShowEdit(!showEdit)}
+                                        />
+                                    </p>
+                                </div>
+                            ) : null}
+                        </div>
+                        <hr />
+                        <div className="d-flex justify-content-between">
+                            <Btn text="Yes" onClick={next} loading={loading} />
+                            <Btn
+                                text="No"
+                                danger
+                                onClick={() => setShowUserData(false)}
+                                disabled={loading}
+                            />
+                        </div>
+                    </Modal.Body>
+                )}
+            </Modal>
+            <div className="container">
+                {process.env.NODE_ENV === "development" ? (
+                    <ul>
+                        <li>
+                            <h6>21202384433</h6>
+                        </li>
+                        <li>
+                            <h6>38010034757</h6>
+                        </li>
+                    </ul>
+                ) : null}
+                <div className="d-flex justify-content-center mb-5 mt-5">
+                    <NinInput
+                        placeholder="Ex. 10000000001"
+                        type="number"
+                        className="form-control"
+                        onChange={(e) => setNin(e.target.value)}
+                        autoFocus
+                        disabled={loading}
+                    />
                 </div>
-              ) : null}
+                <div className="text-center">
+                    <b className={`${nin.length > 11 ? "text-danger" : ""}`}>
+                        {11 - nin.length}
+                    </b>
+                    <br />
+                    {nin.length > 11 ? (
+                        <small className="text-danger">
+                            Invalid Identity Length, should be 11 characters
+                        </small>
+                    ) : null}
+                </div>
             </div>
             <hr />
-            <div className="d-flex justify-content-between">
-              <Btn text="Yes" onClick={next} />
-              <Btn text="No" danger onClick={() => setShowUserData(false)} />
+            <div className="text-center">
+                <Btn
+                    className="mb-4 w-50"
+                    text="Finish"
+                    disabled={nin.length < 11 || nin.length > 11}
+                    onClick={handleSubmit}
+                    loading={loading}
+                />
             </div>
-          </Modal.Body>
-        )}
-      </Modal>
-      <div className="container">
-        {process.env.NODE_ENV === "development" ? (
-          <ul>
-            <li>
-              <h6>21202384433</h6>
-            </li>
-            <li>
-              <h6>38010034757</h6>
-            </li>
-          </ul>
-        ) : null}
-        <div className="d-flex justify-content-center mb-5 mt-5">
-          <NinInput
-            placeholder="Ex. 10000000001"
-            type="number"
-            className="form-control"
-            onChange={(e) => setNin(e.target.value)}
-            autoFocus
-            disabled={loading}
-          />
         </div>
-        <div className="text-center">
-          <b className={`${nin.length > 11 ? "text-danger" : ""}`}>
-            {11 - nin.length}
-          </b>
-          <br />
-          {nin.length > 11 ? (
-            <small className="text-danger">
-              Invalid Identity Length, should be 11 characters
-            </small>
-          ) : null}
-        </div>
-      </div>
-      <hr />
-      <div className="text-center">
-        <Btn
-          className="mb-4 w-50"
-          text="Finish"
-          disabled={nin.length < 11 || nin.length > 11}
-          onClick={handleSubmit}
-          loading={loading}
-        />
-      </div>
-    </div>
-  );
+    );
 }
 // import { notification } from "antd";
 // import React, { useEffect, useState } from "react";

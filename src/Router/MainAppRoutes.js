@@ -32,10 +32,6 @@ import PropertySort from '../pages/Property/PropertySort'
 import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import MasterPopup from '../components/Popups/MasterPopup';
 import Home from '../pages/Home/Home';
-// import Submit from '../pages/Submit/Submit';
-// import GetStarted from '../pages/GetStarted/GetStarted';
-// import Pricing from '../pages/Pricing/Pricing';
-// import Profile2 from "../pages/Profile/Profile2";
 import CreateRequest from '../pages/Request/CreateRequest';
 import AllRequests from '../pages/Request/AllRequests'
 
