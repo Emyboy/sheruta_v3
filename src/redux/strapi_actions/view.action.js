@@ -114,3 +114,15 @@ export const getAllStates = () => dispatch => {
             notification.error({ message: "Error getting all payment types" });
         });
 }
+export const getAllWorkIndustries = () => dispatch => {
+    axios(process.env.REACT_APP_API_URL + `/work-industries`)
+        .then((res) => {
+            dispatch({
+                type: "GET_ALL_WORK_INDUSTRIES",
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            notification.error({ message: "Error with work industries" });
+        });
+}

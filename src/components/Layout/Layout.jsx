@@ -9,6 +9,7 @@ import {
     getAllCategories,
     getAllServices,
     getAllPaymentTypes,
+    getAllWorkIndustries,
 } from "../../redux/strapi_actions/view.action";
 import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
@@ -24,6 +25,7 @@ const mapActionToProps = {
     getAllCategories,
     getAllServices,
     getAllPaymentTypes,
+    getAllWorkIndustries,
 };
 
 const FooterNav = ({ text, icon, path, active }) => {
@@ -69,6 +71,7 @@ const Layout = connect(
         props.getAllCategories();
         props.getAllServices();
         props.getAllPaymentTypes();
+        props.getAllWorkIndustries();
     }, []);
 
     useEffect(() => {

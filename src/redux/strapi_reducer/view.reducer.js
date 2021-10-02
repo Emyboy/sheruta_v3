@@ -5,15 +5,26 @@ const initialState = {
     showPaymentPopup: false,
     personal_info: null,
     payment_types: [],
-    states: []
+    states: [],
+    work_industries: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {
     switch (type) {
+        case "GET_ALL_STATES":
+            return {
+                ...state,
+                states: payload,
+            };
         case "SET_VIEW_STATE":
             return {
                 ...state,
                 ...payload,
+            };
+        case "GET_ALL_WORK_INDUSTRIES":
+            return {
+                ...state,
+                work_industries: payload
             };
 
         case "GET_ALL_SERVICES":

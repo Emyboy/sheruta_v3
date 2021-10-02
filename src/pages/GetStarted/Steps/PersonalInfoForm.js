@@ -8,6 +8,7 @@ import Select from "react-select";
 import axios from "axios";
 import { notification } from "antd";
 import { AiOutlineWarning } from "react-icons/ai";
+import { notifyEmy } from "../../../utils/Sheruta";
 
 const PersonalInfoForm = (props) => {
   const [info, setInfo] = useState(props.info);
@@ -30,11 +31,21 @@ const PersonalInfoForm = (props) => {
     next_of_kin_name: info.next_of_kin_name,
     next_of_kin_phone: info.next_of_kin_phone,
     users_permissions_user: props.auth.user.user.id,
+    work_industry: info.work_industry
   });
 
   const handleSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
+    console.log(info, data)
+    if(!data.employment_status && !info.employment_status){
+      notification.error({ message: "Please select your employment status" })
+      return;
+    }
+    if(!info.work_industry){
+      notification.error({ message: "Please select your work industry" })
+      return;
+    }
+    setLoading(true);
     axios(
       process.env.REACT_APP_API_URL +
         "/personal-infos" +
@@ -48,10 +59,17 @@ const PersonalInfoForm = (props) => {
       }
     )
       .then((res) => {
+        notification.success({ message: "Updated Successfully" })
         setLoading(false);
         props.setStep(props.step + 1);
       })
       .catch((err) => {
+        notifyEmy({
+          heading: "had error updating work and social info",
+          log: {...err},
+          url: window.location.pathname,
+          status: "error"
+        })
         setLoading(false);
         notification.error({ message: "Error updating personal info" });
       });
@@ -59,7 +77,7 @@ const PersonalInfoForm = (props) => {
 
   useEffect(() => {
     setInfo(props.hasInfo);
-    // console.log(props);
+    // console.log(props.info);
   }, [props.info]);
 
   return (
@@ -104,6 +122,30 @@ const PersonalInfoForm = (props) => {
                 ]}
                 onChange={(e) =>
                   setData({ ...data, employment_status: e.value })
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-6 col-md-6">
+          <div className="form-group">
+            <div className="input-with-icon">
+              <Form.Label>
+                <b className="text-muted">Work Industry</b>
+              </Form.Label>{" "}
+              <span className="text-danger">Required *</span>
+              <Select
+                className="mt-2"
+                value={{
+                  label: info.work_industry? props.view.work_industries.filter(x => x.id === info.work_industry)[0].name : null,
+                  value: info.work_industry? props.view.work_industries.filter(x => x.id === info.work_industry)[0].id : null,
+                }}
+                options={props.view.work_industries.map((val) => ({ value: val.id, label: val.name }))}
+                onChange={(e) =>
+                  {
+                    setInfo({ ...info, work_industry: e.value });
+                    setData({ ...data, work_industry: e.value });
+                  }
                 }
               />
             </div>
@@ -161,7 +203,7 @@ const PersonalInfoForm = (props) => {
           </div>
         </div> */}
 
-        {/* <div className="col-lg-6 col-md-6">
+        <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
               <TextInput
@@ -169,14 +211,13 @@ const PersonalInfoForm = (props) => {
                 placeholder="Ex. 08081234567"
                 name="phone"
                 defaultValue={info.supervisor_number}
-                required
                 onChange={(e) =>
                   setData({ ...data, supervisor_number: e.target.value })
                 }
               />
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* <div className="col-lg-6 col-md-6">
           <div className="form-group">
@@ -323,6 +364,7 @@ const PersonalInfoForm = (props) => {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  view: state.view
 });
 
 const mapDispatchToProps = {};

@@ -1,13 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Btn from "../../../components/Btn/Btn";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { notification } from "antd";
 import { notifyEmy } from "../../../utils/Sheruta";
-import { MdClose } from "react-icons/md";
 import AuthEditForm from "../../../components/AuthEditForm/AuthEditForm";
 
 const NinInput = styled.input`
@@ -30,7 +29,7 @@ export default function ValidIdCard(props) {
     const [showUserData, setShowUserData] = useState(false);
     const [ninData, setNinData] = useState(null);
     const [showEdit, setShowEdit] = useState(false);
-    const [hasError, setHasError] = useState(false);
+
     const handleSubmit = () => {
         setLoading(true);
         axios(process.env.REACT_APP_API_URL + "/sheruta/verify-nin", {
@@ -52,7 +51,12 @@ export default function ValidIdCard(props) {
             })
             .catch((err) => {
                 // console.log({ ...err });
-
+                notifyEmy({
+                    heading: "Error verifying NIN in get started",
+                    log: {...err},
+                    status: 'error',
+                    url: window.location.pathname
+                })
                 setLoading(false);
                 notification.error({ message: "Error, please try again " });
                 setTimeout(() => {
@@ -79,10 +83,12 @@ export default function ValidIdCard(props) {
             nspokenlang: ninData.nspokenlang.toLowerCase(),
             ospokenlang: ninData.ospokenlang.toLowerCase(),
             photo: ninData.photo,
+            nin: ninData.nin,
             religion: ninData.religion.toLowerCase(),
             stateOfOrigin: ninData.stateOfOrigin.toLowerCase(),
             last_name_match: ninData.fieldMatches.lastname,
         };
+        console.log('SENDING ---', data, 'FROM ----', ninData);
         axios(
             process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`,
             {
@@ -105,6 +111,12 @@ export default function ValidIdCard(props) {
                 setLoading(false);
             });
     };
+
+    useEffect(() => {
+        if(ninData && ninData.lastname.toLowerCase() !== user.user.last_name.toLowerCase()){
+            setNinData({...ninData, last_name_match: true })
+        }
+    },[user])
 
     return (
         <div>
