@@ -542,10 +542,10 @@ const CraeteRequest = (props) => {
                                                                     e.value,
                                                             });
                                                         }}
-                                                        options={all_states.map(
+                                                        options={view.states.map(
                                                             (val) => ({
-                                                                label: val,
-                                                                value: val,
+                                                                label: val.name,
+                                                                value: val.id,
                                                             }),
                                                         )}
                                                         className="border rounded"
