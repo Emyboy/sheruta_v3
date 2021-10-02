@@ -87,7 +87,7 @@ const EachSocialRequest = (props) => {
                                   <i className="fa fa-pencil-square-o">
                                   </i>Edit Post
                                 </li> */}
-                                            {user.user.id ===
+                                            {user && user.user.id ===
                                             data.users_permissions_user.id ? (
                                                 <li
                                                     onClick={() =>
