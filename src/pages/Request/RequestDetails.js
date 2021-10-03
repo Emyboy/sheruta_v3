@@ -66,7 +66,7 @@ export default function RequestDetails(props) {
                 auth.user.user.id !== request.users_permissions_user.id
             ) {
                 notifyEmy({
-                    heading: ` Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
+                    heading: `${auth.user.user.first_name} ${auth.user.user.last_name} Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
                     url: window.location.pathname,
                 });
             } else if (!auth.user) {
@@ -77,13 +77,6 @@ export default function RequestDetails(props) {
             }
         }
     }, [request]);
-
-    const notifySherutaAboutCall = () => {
-        notifyEmy({
-            heading: ` Gave ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name} a phone call`,
-            url: window.location.pathname,
-        });
-    };
 
     if (state.loading) {
         return <PageLoader />;

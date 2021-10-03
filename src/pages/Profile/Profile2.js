@@ -181,7 +181,7 @@ export const Profile2 = (props) => {
           notification.error({ message: "Error fetching user data" });
           setNotFound(true);
           notifyEmy({
-            heading: "Error fetch user data",
+            heading: "Error fetch user data on profile page",
             log: err,
             status: "error",
             url: window.location.pathname
@@ -189,6 +189,10 @@ export const Profile2 = (props) => {
         });
     }
   }, [params]);
+
+  useEffect(() => {
+    
+  },[])
 
   if (loading) {
     return <PageLoader />

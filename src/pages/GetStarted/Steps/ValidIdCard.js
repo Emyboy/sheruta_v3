@@ -53,10 +53,15 @@ export default function ValidIdCard(props) {
                 // console.log({ ...err });
                 notifyEmy({
                     heading: "Error verifying NIN in get started",
-                    log: {...err},
-                    status: 'error',
-                    url: window.location.pathname
-                })
+                    log: {
+                        ...err,
+                        nin,
+                        firstname: user.user.first_name,
+                        lastname: user.user.last_name,
+                    },
+                    status: "error",
+                    url: window.location.pathname,
+                });
                 setLoading(false);
                 notification.error({ message: "Error, please try again " });
                 setTimeout(() => {
@@ -89,7 +94,7 @@ export default function ValidIdCard(props) {
             stateOfOrigin: ninData.stateOfOrigin && ninData.stateOfOrigin.toLowerCase(),
             last_name_match: ninData.fieldMatches.lastname,
         };
-        console.log("AFTER DATA ----", data);
+
         axios(
             process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`,
             {
@@ -106,11 +111,10 @@ export default function ValidIdCard(props) {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log("ERROR ----", { ...err });
                 notification.error({ message: "Error saving data" });
                 notifyEmy({
-                    heading: "had issues saving data from NIN",
-                    log: { ...err },
+                    heading: "had issues saving data from NIN to DB",
+                    log: { ...err, ...data },
                     status: "error",
                     url: window.location.pathname,
                 });
@@ -122,7 +126,6 @@ export default function ValidIdCard(props) {
         if(ninData && ninData.lastname.toLowerCase() !== user.user.last_name.toLowerCase()){
             setNinData({...ninData, last_name_match: true })
         }
-        console.log("USER ---", user);
     },[user])
 
     return (

@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 
-const token = Cookies.get("token") || localStorage.getItem('token');
+const token =  localStorage.getItem('token');
 
 export const notifyEmy = ({ status, url, property, log, heading }) => {
   axios(process.env.REACT_APP_API_URL + "/logs", {

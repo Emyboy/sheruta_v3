@@ -188,6 +188,11 @@ const CraeteRequest = (props) => {
                                     notification.error({
                                         message: "Upload Error",
                                     });
+                                    notifyEmy({
+                                        heading: "Error uploading request image to firebase",
+                                        log: {...error},
+                                        status: 'error'
+                                    })
                                 },
                                 () => {
                                     uploadTask.snapshot.ref
@@ -207,6 +212,12 @@ const CraeteRequest = (props) => {
                         },
                         error(err) {
                             console.log(err.message);
+                            notifyEmy({
+                                heading:
+                                    "Error uploading request image to firebase",
+                                log: { ...err },
+                                status: "error",
+                            });
                         },
                     });
                 }
@@ -282,7 +293,7 @@ const CraeteRequest = (props) => {
         );
     } else if (!props.auth.user) {
         return <Redirect to="/login" />;
-    } else console.log("VIEW ----", view);
+    } else
     return (
         <Layout back>
             <div className="mt-5 pb-5">

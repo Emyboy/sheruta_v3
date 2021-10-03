@@ -47,6 +47,12 @@ export default function AuthEditForm({ after_submit }) {
             },
         )
             .then((res) => {
+                notifyEmy({
+                    heading: `${data.first_name} ${data.last_name} Updated Profile`,
+                    log: { ...res.data },
+                    url: window.location.pathname,
+                    status: "success",
+                });
                 setLoading(false);
                 dispatch(getUser());
                 setMessageType("success");
