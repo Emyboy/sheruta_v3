@@ -212,12 +212,12 @@ export const Profile2 = (props) => {
                     <div className="row merged20" id="page-contents">
                       <div className="user-profile">
                         <figure>
-                          <div className="edit-pp">
-                            {/* <label className="fileContainer">
+                          {/* <div className="edit-pp">
+                            <label className="fileContainer">
                               <i className="fa fa-camera"></i>
                               <input type="file" />
-                            </label> */}
-                          </div>
+                            </label>
+                          </div> */}
                           <img
                             src={"https://picsum.photos/800/300/?blur"}
                             alt=""
@@ -233,12 +233,12 @@ export const Profile2 = (props) => {
                               >
                                 <div className="profile-author-thumb">
                                   <img alt="author" src={userData.avatar_url} />
-                                  <div className="edit-dp">
-                                    {/* <label className="fileContainer">
+                                  {/* <div className="edit-dp">
+                                    <label className="fileContainer">
                                       <i className="fa fa-camera"></i>
                                       <input type="file" />
-                                    </label> */}
-                                  </div>
+                                    </label>
+                                  </div> */}
                                 </div>
 
                                 <div
@@ -270,11 +270,11 @@ export const Profile2 = (props) => {
                           <TabPane tab="My Personal Info" key="2">
                             <PersonalInfo userData={userData} />
                           </TabPane>
-                          {
+                          {/* {
                             auth.user && auth.user.user.id === userData.id ? <TabPane tab="Settings" key="3">
                               <ProfileSettings />
                             </TabPane> : null
-                          }
+                          } */}
                         </Tabs>
                       </div>
                     </div>

@@ -53,8 +53,9 @@ const VerifyEmailProcess = ({ userData }) => {
                                 <div className='text-center'>
                                     <i className='fa fa-times text-center mb-2' style={{ fontSize: '100px' }}></i>
                                 </div>
+                                <h5>Didn't get an email?</h5>
                                 <Btn
-                                    text='Send Verification Email'
+                                    text='Resend Verification Email'
                                     className='full-width mt-2'
                                     onClick={verificationRequest}
                                     loading={state.loading}

@@ -70,6 +70,7 @@ const CraeteRequest = (props) => {
         toilets: null,
         is_premium: false,
         payment_type: null,
+        state: null
     });
 
     const sendToDb = () => {
@@ -134,6 +135,10 @@ const CraeteRequest = (props) => {
         }
         if (!data.service) {
             notification.error({ message: "Please add a service" });
+            return;
+        }
+        if (!data.state) {
+            notification.error({ message: "Please select a state" });
             return;
         }
         setState({ ...state, loading: true });
@@ -277,408 +282,387 @@ const CraeteRequest = (props) => {
         );
     } else if (!props.auth.user) {
         return <Redirect to="/login" />;
-    } else
-    console.log("VIEW ----", view);
-        return (
-            <Layout back>
-                <div className="mt-5 pb-5">
-                    <div className="container bg-white mb-5 border-gray rounded">
-                        <div className="pt-5 pb-5">
-                            <div className="text-center">
-                                <h2>Create Request</h2>
-                                {state.message ? (
-                                    <Alert
-                                        message={state.message}
-                                        type="success"
-                                    />
-                                ) : null}
-                            </div>
-                            <div className="comment-box submit-form bg-white border-0">
-                                {/* <h3 className="reply-title">Post Request</h3> */}
-                                <div className="comment-form mt-1">
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="row">
-                                            <div className="col-lg-12 col-md-6 col-sm-12">
-                                                <TextInput
-                                                    label="Request Heading"
-                                                    required
-                                                    maxLength={90}
-                                                    placeholder="Eg. I need a shared apartment in Ikeja"
-                                                    onChange={(e) =>
-                                                        setData({
-                                                            ...data,
-                                                            heading:
-                                                                e.target.value,
-                                                        })
-                                                    }
-                                                    defaultValue={data.heading}
-                                                />
-                                            </div>
-
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Bedrooms</label>
-                                                    <input
-                                                        style={{
-                                                            height: "40px",
-                                                        }}
-                                                        className="form-control"
-                                                        type="number"
-                                                        required
-                                                        defaultValue={
-                                                            data.bedrooms
-                                                        }
-                                                        placeholder="Eg. 300000"
-                                                        onChange={(e) =>
-                                                            setData({
-                                                                ...data,
-                                                                bedrooms:
-                                                                    e.target
-                                                                        .value,
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Toilets</label>
-                                                    <input
-                                                        style={{
-                                                            height: "40px",
-                                                        }}
-                                                        className="form-control"
-                                                        type="number"
-                                                        required
-                                                        defaultValue={
-                                                            data.toilets
-                                                        }
-                                                        placeholder="Eg. 4"
-                                                        onChange={(e) =>
-                                                            setData({
-                                                                ...data,
-                                                                toilets:
-                                                                    e.target
-                                                                        .value,
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Bathrooms</label>
-                                                    <input
-                                                        style={{
-                                                            height: "40px",
-                                                        }}
-                                                        className="form-control"
-                                                        type="number"
-                                                        required
-                                                        defaultValue={
-                                                            data.bathrooms
-                                                        }
-                                                        placeholder="Eg. 2"
-                                                        onChange={(e) =>
-                                                            setData({
-                                                                ...data,
-                                                                bathrooms:
-                                                                    e.target
-                                                                        .value,
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Payment Type</label>
-
-                                                    <Select
-                                                        placeholder="Select Service"
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                payment_type:
-                                                                    e.value,
-                                                            });
-                                                        }}
-                                                        options={view.payment_types.map(
-                                                            (val) => ({
-                                                                label: val.name,
-                                                                value: val.id,
-                                                            }),
-                                                        )}
-                                                        className="border rounded"
-                                                        disabled={state.loading}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>
-                                                        Apartment Type
-                                                    </label>
-                                                    <Select
-                                                        placeholder="Select Category"
-                                                        options={view.categories.map(
-                                                            (val) => ({
-                                                                label: val.name,
-                                                                value: val.id,
-                                                            }),
-                                                        )}
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                category:
-                                                                    e.value,
-                                                            });
-                                                        }}
-                                                        className="border rounded"
-                                                        disabled={state.loading}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>
-                                                        Select Service
-                                                    </label>
-                                                    <Select
-                                                        placeholder="Select Service"
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                service:
-                                                                    e.value,
-                                                            });
-                                                        }}
-                                                        options={view.services.map(
-                                                            (val) => ({
-                                                                label: val.name,
-                                                                value: val.id,
-                                                            }),
-                                                        )}
-                                                        className="border rounded"
-                                                        disabled={state.loading}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Area</label>
-                                                    <GooglePlacesAutocomplete
-                                                        apiKey={
-                                                            process.env
-                                                                .REACT_APP_GOOGLE_PLACES_API_KEY
-                                                        }
-                                                        apiOptions={{
-                                                            language: "en",
-                                                            region: "ng",
-                                                        }}
-                                                        selectProps={{
-                                                            // props.state.location,
-                                                            className: "border",
-                                                            onChange: (e) => {
-                                                                setData({
-                                                                    ...data,
-                                                                    google_location:
-                                                                        e,
-                                                                    location:
-                                                                        e.label,
-                                                                });
-                                                            },
-                                                            placeholder:
-                                                                "Eg: Yaba, Lekki, Okota",
-                                                        }}
-                                                        autocompletionRequest={{
-                                                            componentRestrictions:
-                                                                {
-                                                                    country: [
-                                                                        "ng",
-                                                                    ],
-                                                                },
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>
-                                                        Budget / Price
-                                                    </label>
-                                                    <input
-                                                        style={{
-                                                            height: "40px",
-                                                        }}
-                                                        className="form-control"
-                                                        type="number"
-                                                        required
-                                                        defaultValue={
-                                                            data.budget
-                                                        }
-                                                        placeholder="Eg. 300000"
-                                                        onChange={(e) =>
-                                                            setData({
-                                                                ...data,
-                                                                budget: e.target
-                                                                    .value,
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>State</label>
-                                                    <Select
-                                                        placeholder="Ex. Lagos, Abuja etc"
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                state:
-                                                                    e.value,
-                                                            });
-                                                        }}
-                                                        options={view.states.map(
-                                                            (val) => ({
-                                                                label: val.name,
-                                                                value: val.id,
-                                                            }),
-                                                        )}
-                                                        className="border rounded"
-                                                        disabled={state.loading}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Premium Flat?</label>
-                                                    <div className="d-flex mt-2">
-                                                        <Switch
-                                                            defaultChecked={
-                                                                data.is_premium
+    } else console.log("VIEW ----", view);
+    return (
+        <Layout back>
+            <div className="mt-5 pb-5">
+                <div className="container bg-white mb-5 border-gray rounded">
+                    <div className="pt-5 pb-5">
+                        <div className="text-center">
+                            <h2>Create Request</h2>
+                            {state.message ? (
+                                <Alert message={state.message} type="success" />
+                            ) : null}
+                        </div>
+                        <div className="comment-box submit-form bg-white border-0">
+                            {/* <h3 className="reply-title">Post Request</h3> */}
+                            <div className="comment-form mt-1">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="row">
+                                        <div className="col-lg-12 col-md-6 col-sm-12">
+                                            <TextInput
+                                                label="Request Heading"
+                                                required
+                                                maxLength={90}
+                                                placeholder="Eg. I need a shared apartment in Ikeja"
+                                                onChange={(e) =>
+                                                    setData({
+                                                        ...data,
+                                                        heading: e.target.value,
+                                                    })
+                                                }
+                                                defaultValue={data.heading}
+                                            />
+                                        </div>
+                                        {view.personal_info &&
+                                        view.personal_info
+                                            .looking_for ? null : (
+                                            <>
+                                                <div className="col-lg-6 col-md-6 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Bedrooms</label>
+                                                        <input
+                                                            style={{
+                                                                height: "40px",
+                                                            }}
+                                                            className="form-control"
+                                                            type="number"
+                                                            required
+                                                            defaultValue={
+                                                                data.bedrooms
                                                             }
+                                                            placeholder="Eg. 300000"
                                                             onChange={(e) =>
                                                                 setData({
                                                                     ...data,
-                                                                    is_premium:
-                                                                        e,
+                                                                    bedrooms:
+                                                                        e.target
+                                                                            .value,
                                                                 })
                                                             }
                                                         />
                                                     </div>
                                                 </div>
+
+                                                <div className="col-lg-6 col-md-6 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Toilets</label>
+                                                        <input
+                                                            style={{
+                                                                height: "40px",
+                                                            }}
+                                                            className="form-control"
+                                                            type="number"
+                                                            required
+                                                            defaultValue={
+                                                                data.toilets
+                                                            }
+                                                            placeholder="Eg. 4"
+                                                            onChange={(e) =>
+                                                                setData({
+                                                                    ...data,
+                                                                    toilets:
+                                                                        e.target
+                                                                            .value,
+                                                                })
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-lg-6 col-md-6 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Bathrooms</label>
+                                                        <input
+                                                            style={{
+                                                                height: "40px",
+                                                            }}
+                                                            className="form-control"
+                                                            type="number"
+                                                            required
+                                                            defaultValue={
+                                                                data.bathrooms
+                                                            }
+                                                            placeholder="Eg. 2"
+                                                            onChange={(e) =>
+                                                                setData({
+                                                                    ...data,
+                                                                    bathrooms:
+                                                                        e.target
+                                                                            .value,
+                                                                })
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Payment Type</label>
+
+                                                <Select
+                                                    placeholder="Select Service"
+                                                    onChange={(e) => {
+                                                        setData({
+                                                            ...data,
+                                                            payment_type:
+                                                                e.value,
+                                                        });
+                                                    }}
+                                                    options={view.payment_types.map(
+                                                        (val) => ({
+                                                            label: val.name,
+                                                            value: val.id,
+                                                        }),
+                                                    )}
+                                                    className="border rounded"
+                                                    disabled={state.loading}
+                                                />
                                             </div>
-                                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>
-                                                        Type your request....{" "}
-                                                    </label>
-                                                    <textarea
-                                                        onChange={(e) => {
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Apartment Type</label>
+                                                <Select
+                                                    placeholder="Select Category"
+                                                    options={view.categories.map(
+                                                        (val) => ({
+                                                            label: val.name,
+                                                            value: val.id,
+                                                        }),
+                                                    )}
+                                                    onChange={(e) => {
+                                                        setData({
+                                                            ...data,
+                                                            category: e.value,
+                                                        });
+                                                    }}
+                                                    className="border rounded"
+                                                    disabled={state.loading}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Select Service</label>
+                                                <Select
+                                                    placeholder="Select Service"
+                                                    onChange={(e) => {
+                                                        setData({
+                                                            ...data,
+                                                            service: e.value,
+                                                        });
+                                                    }}
+                                                    options={view.services.map(
+                                                        (val) => ({
+                                                            label: val.name,
+                                                            value: val.id,
+                                                        }),
+                                                    )}
+                                                    className="border rounded"
+                                                    disabled={state.loading}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Area</label>
+                                                <GooglePlacesAutocomplete
+                                                    apiKey={
+                                                        process.env
+                                                            .REACT_APP_GOOGLE_PLACES_API_KEY
+                                                    }
+                                                    apiOptions={{
+                                                        language: "en",
+                                                        region: "ng",
+                                                    }}
+                                                    selectProps={{
+                                                        // props.state.location,
+                                                        className: "border",
+                                                        onChange: (e) => {
                                                             setData({
                                                                 ...data,
-                                                                body_html:
-                                                                    e.target
-                                                                        .value,
-                                                                body: e.target
-                                                                    .value,
+                                                                google_location:
+                                                                    e,
+                                                                location:
+                                                                    e.label,
                                                             });
-                                                        }}
-                                                        style={{
-                                                            height: "200px",
-                                                            background:
-                                                                "#F7F7F7",
-                                                        }}
-                                                        disabled={state.loading}
-                                                        required
-                                                        name="body"
-                                                        // className="gray-bg"
-                                                        cols="30"
-                                                        rows="6"
-                                                        minLength="50"
-                                                        maxLength="900"
-                                                        placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
-                                                        defaultValue={data.body}
-                                                    />
-                                                </div>
+                                                        },
+                                                        placeholder:
+                                                            "Eg: Yaba, Lekki, Okota",
+                                                    }}
+                                                    autocompletionRequest={{
+                                                        componentRestrictions: {
+                                                            country: ["ng"],
+                                                        },
+                                                    }}
+                                                />
                                             </div>
-
-                                            {view.personal_info &&
-                                            !view.personal_info.looking_for ? (
-                                                <>
-                                                    <div className="container">
-                                                        <label className="display-7">
-                                                            Images
-                                                        </label>
-                                                    </div>
-
-                                                    <div className="">
-                                                        <div className="col-lg-12">
-                                                            <div className="row justify-content-center">
-                                                                {new Array(
-                                                                    image_count,
-                                                                )
-                                                                    .fill(null)
-                                                                    .map(
-                                                                        (
-                                                                            _,
-                                                                            i,
-                                                                        ) => {
-                                                                            return (
-                                                                                <ImageSelect
-                                                                                    index={
-                                                                                        i
-                                                                                    }
-                                                                                    image={
-                                                                                        imageFiles[
-                                                                                            `img${i}`
-                                                                                        ]
-                                                                                    }
-                                                                                    onFileChange={(
-                                                                                        e,
-                                                                                    ) => {
-                                                                                        handleImageSelect(
-                                                                                            e
-                                                                                                .target
-                                                                                                .files[0],
-                                                                                            i,
-                                                                                        );
-                                                                                    }}
-                                                                                />
-                                                                            );
-                                                                        },
-                                                                    )}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            ) : null}
-                                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                            <hr />
-                                                <div className="form-group">
-                                                    <Btn
-                                                        type="submit"
-                                                        text="Post Request"
-                                                        className="w-100 shadow"
-                                                        loading={state.loading}
-                                                        onClick={() => {}}
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Budget / Price</label>
+                                                <input
+                                                    style={{
+                                                        height: "40px",
+                                                    }}
+                                                    className="form-control"
+                                                    type="number"
+                                                    required
+                                                    defaultValue={data.budget}
+                                                    placeholder="Eg. 300000"
+                                                    onChange={(e) =>
+                                                        setData({
+                                                            ...data,
+                                                            budget: e.target
+                                                                .value,
+                                                        })
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>State</label>
+                                                <Select
+                                                    placeholder="Ex. Lagos, Abuja etc"
+                                                    onChange={(e) => {
+                                                        setData({
+                                                            ...data,
+                                                            state: e.value,
+                                                        });
+                                                    }}
+                                                    options={view.states.map(
+                                                        (val) => ({
+                                                            label: val.name,
+                                                            value: val.id,
+                                                        }),
+                                                    )}
+                                                    className="border rounded"
+                                                    disabled={state.loading}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-12">
+                                            <div className="form-group">
+                                                <label>Premium Flat?</label>
+                                                <div className="d-flex mt-2">
+                                                    <Switch
+                                                        defaultChecked={
+                                                            data.is_premium
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData({
+                                                                ...data,
+                                                                is_premium: e,
+                                                            })
+                                                        }
                                                     />
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div className="col-lg-12 col-md-12 col-sm-12">
+                                            <div className="form-group">
+                                                <label>
+                                                    Type your request....{" "}
+                                                </label>
+                                                <textarea
+                                                    onChange={(e) => {
+                                                        setData({
+                                                            ...data,
+                                                            body_html:
+                                                                e.target.value,
+                                                            body: e.target
+                                                                .value,
+                                                        });
+                                                    }}
+                                                    style={{
+                                                        height: "200px",
+                                                        background: "#F7F7F7",
+                                                    }}
+                                                    disabled={state.loading}
+                                                    required
+                                                    name="body"
+                                                    // className="gray-bg"
+                                                    cols="30"
+                                                    rows="6"
+                                                    minLength="50"
+                                                    maxLength="900"
+                                                    placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+                                                    defaultValue={data.body}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {view.personal_info &&
+                                        !view.personal_info.looking_for ? (
+                                            <>
+                                                <div className="container">
+                                                    <label className="display-7">
+                                                        Images
+                                                    </label>
+                                                </div>
+
+                                                <div className="">
+                                                    <div className="col-lg-12">
+                                                        <div className="row justify-content-center">
+                                                            {new Array(
+                                                                image_count,
+                                                            )
+                                                                .fill(null)
+                                                                .map((_, i) => {
+                                                                    return (
+                                                                        <ImageSelect
+                                                                            index={
+                                                                                i
+                                                                            }
+                                                                            image={
+                                                                                imageFiles[
+                                                                                    `img${i}`
+                                                                                ]
+                                                                            }
+                                                                            onFileChange={(
+                                                                                e,
+                                                                            ) => {
+                                                                                handleImageSelect(
+                                                                                    e
+                                                                                        .target
+                                                                                        .files[0],
+                                                                                    i,
+                                                                                );
+                                                                            }}
+                                                                        />
+                                                                    );
+                                                                })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : null}
+                                        <div className="col-lg-12 col-md-12 col-sm-12">
+                                            <hr />
+                                            <div className="form-group">
+                                                <Btn
+                                                    type="submit"
+                                                    text="Post Request"
+                                                    className="w-100 shadow"
+                                                    loading={state.loading}
+                                                    onClick={() => {}}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </Layout>
-        );
+            </div>
+        </Layout>
+    );
 };
 
 const mapStateToProps = (state) => ({
