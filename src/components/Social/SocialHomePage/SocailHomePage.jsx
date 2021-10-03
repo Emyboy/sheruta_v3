@@ -10,6 +10,7 @@ import Btn from "../../Btn/Btn";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import Heading from "../../Heading/Heading";
 import { Spinner } from 'react-activity';
+import VerifiedBadge from "../../VerifiedBadge/VerifiedBadge";
 
 export default (props) => {
   const auth = useSelector((state) => state.auth);
@@ -363,20 +364,21 @@ export default (props) => {
                                                                                   <Link
                                                                                       to={`/user/${val.username}`}
                                                                                       title=""
+                                                                                      className='d-flex'
                                                                                   >
                                                                                       {
                                                                                           val.username
-                                                                                      }
+                                                                                      }<VerifiedBadge without_text user={val} size={15} className="ml-2" />
                                                                                   </Link>
                                                                               </h4>
-                                                                              <Link
+                                                                              {/* <Link
                                                                                   to={`/user/${val.username}`}
                                                                                   title=""
                                                                                   className="underline"
                                                                               >
                                                                                   View
                                                                                   Profile
-                                                                              </Link>
+                                                                              </Link> */}
                                                                           </div>
                                                                       </li>
                                                                   );

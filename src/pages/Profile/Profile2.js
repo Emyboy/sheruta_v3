@@ -124,6 +124,7 @@ import PersonalInfo from "./PersonalInfo";
 import ProfileSettings from "./ProfileSettings";
 import { notifyEmy } from "../../utils/Sheruta";
 import MetaTags from "react-meta-tags";
+import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -226,7 +227,7 @@ export const Profile2 = (props) => {
 
                         <div className="profile-section">
                           <div className="row">
-                            <div className="col-lg-6 col-md-8">
+                            <div className="col-lg-12 col-md-12">
                               <div
                                 className="profile-author"
                                 style={{ textAlign: "start" }}
@@ -245,9 +246,12 @@ export const Profile2 = (props) => {
                                   className="author-content"
                                   style={{ textAlign: "start" }}
                                 >
-                                  <p className="h4 author-name" href="about.html">
-                                    {userData.first_name} {userData.last_name}
+                                  <div className="d-flex">
+                                    <p className="h4 author-name mr-3" style={{ alignSelf: "center" }}>
+                                    {userData.first_name} {userData.last_name} 
                                   </p>
+                                  <VerifiedBadge user={userData} />
+                                  </div>
                                   <div className="country">
                                     @{userData.username}
                                   </div>

@@ -56,9 +56,14 @@ const Login = (props) => {
       })
       .catch((err) => {
         notifyEmy({
-          heading: "Login Error",
-          log: null,
-          status: "error",
+            heading: "Login Error",
+            log: {
+                email: data.email,
+                errorMessage: err.response
+                    ? err.response.data.data[0].messages[0].message
+                    : "Server Error",
+            },
+            status: "error",
         });
         setState({
           ...state,

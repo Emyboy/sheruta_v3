@@ -45,8 +45,14 @@ export const Signup = (props) => {
       })
       .catch((err) => {
         notifyEmy({
-          heading: "Error signing Up",
-          log: null
+            heading: "Error signing Up",
+            log: {
+                email: e.email,
+                first_name: e.first_name,
+                last_name: e.last_name,
+                phone_number: e.phone_number,
+                errorMessage: err.response.data.message || "Singup Error",
+            },
         });
         setState({ ...state, loading: false });
         setState({

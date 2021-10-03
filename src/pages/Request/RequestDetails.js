@@ -13,6 +13,7 @@ import ImageViewer from "react-simple-image-viewer";
 import { notification, Tag } from "antd";
 import { ImLocation } from "react-icons/im";
 import moment from "moment";
+import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 const ImgContainer = styled.section`
     padding: 5em;
     margin-bottom: 1em;
@@ -96,9 +97,12 @@ export default function RequestDetails(props) {
                 <meta name="description" content={request.body} />
                 <meta
                     property="og:title"
-                    content={"Request | " + request.heading}
+                    content={request.heading + " | Request"}
                 />
-                <meta property="og:description" content={request.body} />
+                <meta
+                    property="og:description"
+                    content={`${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name} says: ${request.body}`}
+                />
                 <meta
                     name="keywords"
                     content={`${
@@ -167,8 +171,9 @@ export default function RequestDetails(props) {
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <ins>
+                                                    <ins className="d-flex">
                                                         <Link
+                                                            className="mr-3"
                                                             to={`/user/${request.users_permissions_user.username}`}
                                                             title=""
                                                         >
@@ -179,30 +184,12 @@ export default function RequestDetails(props) {
                                                             }{" "}
                                                             {/* {data.users_permissions_user.last_name} */}
                                                         </Link>{" "}
-                                                        <em
-                                                            className={`ml-2 ${
-                                                                request
-                                                                    .users_permissions_user
-                                                                    .is_verified
-                                                                    ? "text-theme"
-                                                                    : ""
-                                                            }`}
-                                                        >
-                                                            <i
-                                                                className={`text-success ${
-                                                                    !request
-                                                                        .users_permissions_user
-                                                                        .is_verified
-                                                                        ? "ti-close"
-                                                                        : "fa fa-check-circle"
-                                                                }`}
-                                                            ></i>{" "}
-                                                            {request
-                                                                .users_permissions_user
-                                                                .is_verified
-                                                                ? "Verified"
-                                                                : "Not Verified"}
-                                                        </em>
+                                                        <VerifiedBadge
+                                                            size={15}
+                                                            user={
+                                                                request.users_permissions_user
+                                                            }
+                                                        />
                                                     </ins>
 
                                                     <span>
@@ -214,8 +201,8 @@ export default function RequestDetails(props) {
                                                 </div>
                                             </div>
                                             <div className="post-meta">
-                                                {request.image_url && request.image_url.length >
-                                                0 ? (
+                                                {request.image_url &&
+                                                request.image_url.length > 0 ? (
                                                     <ImgContainer
                                                         style={{
                                                             backgroundImage: `url(${request.image_url[0]})`,
@@ -306,7 +293,7 @@ export default function RequestDetails(props) {
                                                     </h4>
                                                     <div className="ml-2">
                                                         {request.category && (
-                                                            <Tag color="lime">
+                                                            <Tag color="volcano">
                                                                 {
                                                                     request
                                                                         .category
@@ -315,7 +302,7 @@ export default function RequestDetails(props) {
                                                             </Tag>
                                                         )}
                                                         {request.service && (
-                                                            <Tag color="geekblue">
+                                                            <Tag color="cyan">
                                                                 {
                                                                     request
                                                                         .service

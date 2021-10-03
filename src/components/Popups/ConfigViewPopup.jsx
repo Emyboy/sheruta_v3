@@ -55,12 +55,15 @@ const ConfigViewPopup = (props) => {
         });
         setShow(false);
         notifyEmy({
-          heading: `${user.first_name} updated his status`,
+          heading: `${user.first_name} updated his status to ${isLookingFor ? "I'm Looking For": "I Have"}`,
           log: data,
         });
       })
       .catch((err) => {
         setLoading(false);
+        notifyEmy({
+          heading: "error configuring view"
+        })
       });
   };
 

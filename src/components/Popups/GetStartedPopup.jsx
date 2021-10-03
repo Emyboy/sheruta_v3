@@ -24,35 +24,51 @@ const GetStartedPopup = (props) => {
     }
   }, [auth, view.personal_info]);
 
-  return (
-    <Modal show={show && !window.location.pathname.includes("start")}>
-      <Modal.Body>
-        <h3>Join the community today.</h3>
-        <small className="text-muted display-7">Get access to verified flat mates.</small><br />
-        <small className="text-muted display-7">Find people closest to you.</small><br />
-        <small className="text-muted display-7">Be the first to get updates.</small>
-        <div className='container'>
-        <div className="row">
-          <Link to="/start">
-            <Btn
-              test_id='get_started_popup_btn'
-              text="Join Now"
-              className="mt-4"
-              onClick={() => setShow(false)}
-            />
-          </Link>
-          <span
-            style={{ alignSelf: "center" }}
-            className="mt-4 link ml-5"
-            onClick={() => setShow(false)}
-          >
-            <h6 className="text-theme">Remind me later</h6>
-          </span>
-        </div>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
+  const handleRemind = () => {
+    sessionStorage.setItem('get_started_pause', true);
+    setShow(false);
+  }
+
+  if (sessionStorage.getItem("get_started_pause")){
+    return null;
+  }
+      return (
+          <Modal show={show && !window.location.pathname.includes("start")}>
+              <Modal.Body>
+                  <h3>Join the community today.</h3>
+                  <small className="text-muted display-7">
+                      Get access to verified flat mates.
+                  </small>
+                  <br />
+                  <small className="text-muted display-7">
+                      Find people closest to you.
+                  </small>
+                  <br />
+                  <small className="text-muted display-7">
+                      Be the first to get updates.
+                  </small>
+                  <div className="container">
+                      <div className="row">
+                          <Link to="/start">
+                              <Btn
+                                  test_id="get_started_popup_btn"
+                                  text="Join Now"
+                                  className="mt-4"
+                                  onClick={() => setShow(false)}
+                              />
+                          </Link>
+                          <span
+                              style={{ alignSelf: "center" }}
+                              className="mt-4 link ml-5"
+                              onClick={handleRemind}
+                          >
+                              <h6 className="text-theme">Remind me later</h6>
+                          </span>
+                      </div>
+                  </div>
+              </Modal.Body>
+          </Modal>
+      );
 };
 
 const mapStateToProps = (state) => ({

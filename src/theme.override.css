@@ -6,3 +6,7 @@ label {
 .ant-switch-checked {
     background-color: var(--theme-color) !important;
 }
+.ant-tag {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}

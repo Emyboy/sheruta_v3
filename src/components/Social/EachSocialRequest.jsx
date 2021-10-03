@@ -10,6 +10,7 @@ import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { DeleteFirebaseImage } from "../../utils/Firebase.utils";
+import VerifiedBadge from "../VerifiedBadge/VerifiedBadge";
 
 const EachSocialRequest = (props) => {
     const { data } = props;
@@ -87,8 +88,10 @@ const EachSocialRequest = (props) => {
                                   <i className="fa fa-pencil-square-o">
                                   </i>Edit Post
                                 </li> */}
-                                            {user && user.user.id ===
-                                            data.users_permissions_user.id ? (
+                                            {user &&
+                                            user.user.id ===
+                                                data.users_permissions_user
+                                                    .id ? (
                                                 <li
                                                     onClick={() =>
                                                         setShowDelete(true)
@@ -101,35 +104,24 @@ const EachSocialRequest = (props) => {
                                         </ul>
                                     </div>
                                 </div>
-                                <ins>
+                                <ins className="">
                                     <Link
                                         to={`/user/${data.users_permissions_user.username}`}
                                         title=""
+                                        className="d-flex"
                                     >
                                         {data.users_permissions_user.first_name}{" "}
                                         {/* {data.users_permissions_user.last_name} */}
+                                        <VerifiedBadge
+                                            user={data.users_permissions_user}
+                                            size={"15"}
+                                            className="ml-2"
+                                        />
                                     </Link>
-                                    Request
                                 </ins>
-                                <em
-                                    className={`${
-                                        data.users_permissions_user.is_verified
-                                            ? "text-theme"
-                                            : ""
-                                    }`}
-                                >
-                                    <i
-                                        className={
-                                            !data.users_permissions_user
-                                                .is_verified
-                                                ? "ti-close"
-                                                : "fa fa-check-circle"
-                                        }
-                                    ></i>{" "}
-                                    {data.users_permissions_user.is_verified
-                                        ? "Verified"
-                                        : "Not Verified"}
-                                </em>
+                                <small className="text-muted">
+                                    @{data.users_permissions_user.username}
+                                </small>
                                 <span>
                                     <i className="fa fa-clock-o"></i>{" "}
                                     {moment(data.created_at).fromNow()}
@@ -141,23 +133,23 @@ const EachSocialRequest = (props) => {
                                 to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
                             >
                                 <h6>{data.heading}</h6>
-                                <div className="loc-cate">
-                                    <ul className="loc mt-2">
+                                <div>
+                                    <ul className="loc mt-2 d-flex pl-0 justify-content-between">
                                         <li>
                                             <i className="ti-location-pin"></i>{" "}
                                             {data.location}
                                         </li>
                                         {data.service ? (
                                             <li>
-                                                <Tag color="green">
-                                                    {data.service.name}
+                                                <Tag color="volcano">
+                                                    {data.service.name.toUpperCase()}
                                                 </Tag>
                                             </li>
                                         ) : null}
                                         {data.category ? (
                                             <li>
-                                                <Tag color="geekblue">
-                                                    {data.category.name}
+                                                <Tag color="cyan">
+                                                    {data.category.name.toUpperCase()}
                                                 </Tag>
                                             </li>
                                         ) : null}

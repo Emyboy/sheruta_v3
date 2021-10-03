@@ -45,6 +45,10 @@ const PersonalInfoForm = (props) => {
       notification.error({ message: "Please select your work industry" })
       return;
     }
+    if(!info.religion){
+      notification.error({ message: "Please select your religion" })
+      return;
+    }
     setLoading(true);
     axios(
       process.env.REACT_APP_API_URL +
@@ -119,6 +123,8 @@ const PersonalInfoForm = (props) => {
                   { value: "employed", label: "Employed" },
                   { value: "unemployed", label: "Unemployed" },
                   { value: "self-employed", label: "Self Employed" },
+                  { value: "student", label: "Student" },
+                  { value: "corps-member", label: "Corps Member" },
                 ]}
                 onChange={(e) =>
                   setData({ ...data, employment_status: e.value })
@@ -206,22 +212,6 @@ const PersonalInfoForm = (props) => {
         <div className="col-lg-6 col-md-6">
           <div className="form-group">
             <div className="input-with-icon">
-              <TextInput
-                label="Supervisor Phone Number"
-                placeholder="Ex. 08081234567"
-                name="phone"
-                defaultValue={info.supervisor_number}
-                onChange={(e) =>
-                  setData({ ...data, supervisor_number: e.target.value })
-                }
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="col-lg-6 col-md-6">
-          <div className="form-group">
-            <div className="input-with-icon">
               <Form.Label>
                 <b className="text-muted">Religion</b>
               </Form.Label>{" "}
@@ -237,11 +227,32 @@ const PersonalInfoForm = (props) => {
                   { value: "muslim", label: "Muslim" },
                   { value: "others", label: "Others" },
                 ]}
-                onChange={(e) => setData({ ...data, religion: e.value })}
+                onChange={(e) => {
+                  setData({ ...data, religion: e.value });
+                  setInfo({ ...info, religion: e.value });
+                }}
               />
             </div>
           </div>
-        </div> */}
+        </div>
+
+        <div className="col-lg-6 col-md-6">
+          <div className="form-group">
+            <div className="input-with-icon">
+              <TextInput
+                label="Supervisor Phone Number"
+                placeholder="Ex. 08081234567"
+                name="phone"
+                defaultValue={info.supervisor_number}
+                onChange={(e) =>
+                  setData({ ...data, supervisor_number: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        </div>
+
+        
       </div>
       <hr />
       <div>

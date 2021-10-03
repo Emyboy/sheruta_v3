@@ -92,12 +92,13 @@ const Layout = connect(
                 style={{ zIndex: 3 }}
             >
                 <div className="row justify-content-between">
-                    {back ? (
+                    {/* {back ? (
                         <IconBtn
                             icon="ti-arrow-left"
                             onClick={() => router.goBack()}
                         />
                     ) : (
+                        )} */}
                         <IconBtn
                             icon="ti-menu"
                             test_id="sidebar-toggle"
@@ -105,7 +106,6 @@ const Layout = connect(
                                 setShowNav(!showNav);
                             }}
                         />
-                    )}
                     <Link to="/">
                         <img
                             width="140"
