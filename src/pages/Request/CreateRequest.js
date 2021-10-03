@@ -278,6 +278,7 @@ const CraeteRequest = (props) => {
     } else if (!props.auth.user) {
         return <Redirect to="/login" />;
     } else
+    console.log("VIEW ----", view);
         return (
             <Layout back>
                 <div className="mt-5 pb-5">

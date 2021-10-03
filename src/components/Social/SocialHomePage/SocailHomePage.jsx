@@ -24,7 +24,6 @@ export default (props) => {
 
   useEffect(() => {
     if (auth.user) {
-      console.log('CALLING ===============')
       dispatch(getUser());
     }
   }, []);
@@ -33,7 +32,7 @@ export default (props) => {
     if (state.properties.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
-          `/properties/recent/${Global.isMobile ? "4" : "6"}`
+          `/properties/recent/${Global.isMobile ? "4" : "5"}`
       )
         .then((res) => {
           setState({ ...state, properties: res.data });
@@ -45,7 +44,7 @@ export default (props) => {
   useEffect(() => {
     axios(
       process.env.REACT_APP_API_URL +
-        `/users/?confirmed=true&_limit=7&_sort=created_at:DESC`
+        `/users/?confirmed=true&_limit=4&_sort=created_at:DESC`
     )
       .then((res) => {
         setNewUsers(res.data);

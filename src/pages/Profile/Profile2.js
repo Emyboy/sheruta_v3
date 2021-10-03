@@ -213,10 +213,10 @@ export const Profile2 = (props) => {
                       <div className="user-profile">
                         <figure>
                           <div className="edit-pp">
-                            <label className="fileContainer">
+                            {/* <label className="fileContainer">
                               <i className="fa fa-camera"></i>
                               <input type="file" />
-                            </label>
+                            </label> */}
                           </div>
                           <img
                             src={"https://picsum.photos/800/300/?blur"}
@@ -234,10 +234,10 @@ export const Profile2 = (props) => {
                                 <div className="profile-author-thumb">
                                   <img alt="author" src={userData.avatar_url} />
                                   <div className="edit-dp">
-                                    <label className="fileContainer">
+                                    {/* <label className="fileContainer">
                                       <i className="fa fa-camera"></i>
                                       <input type="file" />
-                                    </label>
+                                    </label> */}
                                   </div>
                                 </div>
 

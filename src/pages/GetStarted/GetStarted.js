@@ -71,6 +71,12 @@ export const GetStarted = (props) => {
                     })
                 })
                 .catch((error) => {
+                    dispatch({
+                        type: "SET_VIEW_STATE",
+                        payload: {
+                            configureView: true
+                        },
+                    });
                     notification.error({
                         message: "Error fetching user information",
                     });

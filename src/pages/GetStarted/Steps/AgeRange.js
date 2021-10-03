@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { notification, Slider } from "antd";
 import Btn from "../../../components/Btn/Btn";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const AgeRange = (props) => {
   const looking_for_age_range = props.info.looking_for_age_range;
@@ -12,6 +13,9 @@ export const AgeRange = (props) => {
     setLoading(true);
     axios(process.env.REACT_APP_API_URL + "/personal-infos/" + props.info.id, {
       method: "PUT",
+      headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+            },
       data: {
         looking_for_age_range: `${data[0]}-${data[1]}`,
       },

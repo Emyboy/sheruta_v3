@@ -74,33 +74,39 @@ export default function ValidIdCard(props) {
 
     const next = () => {
       setLoading(true);
+      console.log(ninData);
         const data = {
-            gender: ninData.gender,
-            occupation: ninData.profession.toLowerCase(),
-            date_of_birth: returnNINDataOfBirth(ninData.birthdate),
-            middle_name: ninData.middlename.toLowerCase(),
-            lgaOfOrigin: ninData.lgaOfOrigin.toLowerCase(),
-            nspokenlang: ninData.nspokenlang.toLowerCase(),
-            ospokenlang: ninData.ospokenlang.toLowerCase(),
-            photo: ninData.photo,
-            nin: ninData.nin,
-            religion: ninData.religion.toLowerCase(),
-            stateOfOrigin: ninData.stateOfOrigin.toLowerCase(),
+            gender: ninData.gender && ninData.gender,
+            occupation: ninData.profession && ninData.profession.toLowerCase(),
+            date_of_birth: ninData.birthdate && returnNINDataOfBirth(ninData.birthdate),
+            middle_name: ninData.middlename && ninData.middlename.toLowerCase(),
+            lgaOfOrigin: ninData.lgaOfOrigin && ninData.lgaOfOrigin.toLowerCase(),
+            nspokenlang: ninData.nspokenlang && ninData.nspokenlang.toLowerCase(),
+            ospokenlang: ninData.ospokenlang && ninData.ospokenlang.toLowerCase(),
+            photo: ninData.photo && ninData.photo,
+            nin: ninData.nin && ninData.nin,
+            religion: ninData.religion && ninData.religion.toLowerCase(),
+            stateOfOrigin: ninData.stateOfOrigin && ninData.stateOfOrigin.toLowerCase(),
             last_name_match: ninData.fieldMatches.lastname,
         };
-        console.log('SENDING ---', data, 'FROM ----', ninData);
+        console.log("AFTER DATA ----", data);
         axios(
             process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`,
             {
                 method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
                 data,
             },
         )
             .then((res) => {
+                console.log("RES ----", res);
                 props.setStep(props.step + 1);
                 setLoading(false);
             })
             .catch((err) => {
+                console.log("ERROR ----", { ...err });
                 notification.error({ message: "Error saving data" });
                 notifyEmy({
                     heading: "had issues saving data from NIN",
@@ -116,6 +122,7 @@ export default function ValidIdCard(props) {
         if(ninData && ninData.lastname.toLowerCase() !== user.user.last_name.toLowerCase()){
             setNinData({...ninData, last_name_match: true })
         }
+        console.log("USER ---", user);
     },[user])
 
     return (
@@ -153,9 +160,10 @@ export default function ValidIdCard(props) {
                                     " " +
                                     ninData.firstname +
                                     " " +
-                                    ninData.lastname +
+                                    ninData.middlename+
                                     " " +
-                                    ninData.middlename}
+                                    ninData.lastname
+                                    }
                             </h5>
                             <h5 className="mt-3">
                                 <b className="text-muted">Date Of Birth: </b>

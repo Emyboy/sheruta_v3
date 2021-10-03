@@ -6,7 +6,8 @@ const initialState = {
     personal_info: null,
     payment_types: [],
     states: [],
-    work_industries: []
+    work_industries: [],
+    configureView: false
 };
 
 function ViewReducer(state = initialState, { type, payload }) {

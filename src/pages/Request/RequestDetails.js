@@ -214,7 +214,7 @@ export default function RequestDetails(props) {
                                                 </div>
                                             </div>
                                             <div className="post-meta">
-                                                {request.image_url.length >
+                                                {request.image_url && request.image_url.length >
                                                 0 ? (
                                                     <ImgContainer
                                                         style={{
