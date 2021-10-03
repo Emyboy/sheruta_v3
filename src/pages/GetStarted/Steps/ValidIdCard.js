@@ -90,7 +90,7 @@ export default function ValidIdCard(props) {
             ospokenlang: ninData.ospokenlang && ninData.ospokenlang.toLowerCase(),
             photo: ninData.photo && ninData.photo,
             nin: ninData.nin && ninData.nin,
-            religion: ninData.religion && ninData.religion.toLowerCase(),
+            // religion: ninData.religion && ninData.religion.toLowerCase(),
             stateOfOrigin: ninData.stateOfOrigin && ninData.stateOfOrigin.toLowerCase(),
             last_name_match: ninData.fieldMatches.lastname,
         };

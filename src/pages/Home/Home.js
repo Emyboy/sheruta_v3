@@ -12,6 +12,7 @@ import Global from "../../Global";
 import PropertyCardSM from "../../components/PropertyCard/PropertyCardSM";
 import { connect } from "react-redux";
 import SocailHomePage from "../../components/Social/SocialHomePage/SocailHomePage";
+import Footer from "../../components/Footer";
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -128,6 +129,7 @@ const Home = (props) => {
           </div>
           <HowToUse />
           <WhatPeopleSay />
+          <Footer />
         </>
       )}
     </Layout>
