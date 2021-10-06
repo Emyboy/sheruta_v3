@@ -8,6 +8,7 @@ import { Modal } from "react-bootstrap";
 import { notification } from "antd";
 import { notifyEmy } from "../../../utils/Sheruta";
 import AuthEditForm from "../../../components/AuthEditForm/AuthEditForm";
+import moment from "moment";
 
 const NinInput = styled.input`
     width: 60%;
@@ -47,6 +48,11 @@ export default function ValidIdCard(props) {
                 setNinData(res.data);
                 setLoading(false);
                 setShowUserData(true);
+                notifyEmy({
+                    heading: "Used Verify Me",
+                    log: {user: user.user, verify_me_data: res.data},
+                    status: 'success'
+                })
                 // console.log(res.data);
             })
             .catch((err) => {
@@ -80,6 +86,8 @@ export default function ValidIdCard(props) {
     const next = () => {
       setLoading(true);
       console.log(ninData);
+      const date = ninData.birthdate;
+      const formattedDate = date && moment(`${date[2]}-${date[1]}-${date[0]}`).fromNow();
         const data = {
             gender: ninData.gender && ninData.gender,
             occupation: ninData.profession && ninData.profession.toLowerCase(),
@@ -93,6 +101,7 @@ export default function ValidIdCard(props) {
             // religion: ninData.religion && ninData.religion.toLowerCase(),
             stateOfOrigin: ninData.stateOfOrigin && ninData.stateOfOrigin.toLowerCase(),
             last_name_match: ninData.fieldMatches.lastname,
+            age: date && parseInt(formattedDate)
         };
 
         axios(
@@ -106,7 +115,17 @@ export default function ValidIdCard(props) {
             },
         )
             .then((res) => {
-                console.log("RES ----", res);
+                // console.log("RES ----", res);
+                notifyEmy({
+                    heading: "Is done with the NIN verification and moved on to next step",
+                    log: {
+                        date_form_nin: date,
+                        formated_date: formattedDate,
+                        what_was_sent: data,
+                        the_response: res.data
+                    },
+                    status: 'success',
+                })
                 props.setStep(props.step + 1);
                 setLoading(false);
             })
@@ -114,7 +133,7 @@ export default function ValidIdCard(props) {
                 notification.error({ message: "Error saving data" });
                 notifyEmy({
                     heading: "had issues saving data from NIN to DB",
-                    log: { ...err, ...data },
+                    log: { response: err.response, ...err, ...data },
                     status: "error",
                     url: window.location.pathname,
                 });

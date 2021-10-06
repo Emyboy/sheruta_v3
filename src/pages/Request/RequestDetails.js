@@ -82,7 +82,7 @@ export default function RequestDetails(props) {
         return <PageLoader />;
     } else if (state.notFound) {
         return <PageNotFound />;
-    } else console.log(request);
+    } else 
     return (
         <Layout>
             <MetaTags>
@@ -377,7 +377,7 @@ export default function RequestDetails(props) {
                                                             <strong>
                                                                 State
                                                             </strong>
-                                                            {request.state}
+                                                            {request.state && request.state.name}
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -21,6 +21,10 @@ const FinishStep = (props) => {
   }, []);
 
   useEffect(() => {
+    notifyEmy({
+      heading: "Finished the get started",
+      status: 'success',
+    })
     axios(process.env.REACT_APP_API_URL + `/sheruta/verify-request/${user.user.id}`, { method: 'POST' })
       .then(res => {
         // console.log('VERIFY --', res)

@@ -172,6 +172,11 @@ export const Profile2 = (props) => {
         .then((res) => {
           if (res.data.length > 0) {
             setUserData(res.data[0]);
+            const user = res.data[0];
+            notifyEmy({
+              heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
+              log: res.data[0]
+            })
           } else {
             setNotFound(true);
           }

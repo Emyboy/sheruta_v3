@@ -13,6 +13,7 @@ import PropertyCardSM from "../../components/PropertyCard/PropertyCardSM";
 import { connect } from "react-redux";
 import SocailHomePage from "../../components/Social/SocialHomePage/SocailHomePage";
 import Footer from "../../components/Footer";
+import ExploreByPopularCity from "./Graphics";
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -74,6 +75,8 @@ const Home = (props) => {
               </Link>
             </div>
           </div>
+          <ExploreByPopularCity />
+
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-8 col-md-12 col-sm-12">

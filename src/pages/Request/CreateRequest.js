@@ -81,6 +81,7 @@ const CraeteRequest = (props) => {
             users_permissions_user: props.auth.user.user.id,
             is_searching: view.personal_info.looking_for,
             image_url,
+            state: parseInt(data.state)
         };
 
         axios(process.env.REACT_APP_API_URL + "/property-requests", {
@@ -98,7 +99,7 @@ const CraeteRequest = (props) => {
             .catch((err) => {
                 notifyEmy({
                     heading: "Error Posting requests",
-                    log: { ...err },
+                    log: { response: err.response, ...err,  },
                     status: "error",
                 });
                 if (err.response.status == 426 || err.response.status === 402) {
@@ -259,6 +260,13 @@ const CraeteRequest = (props) => {
             });
         }
     }, []);
+
+    React.useEffect(() => {
+        notifyEmy({
+            heading: "Visited the create request page",
+            user: auth.user.user,
+        })
+    },[])
 
     const handleImageSelect = (file, i) => {
         setImageFiles({ ...imageFiles, [`img${i}`]: file });

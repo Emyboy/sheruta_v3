@@ -9,7 +9,7 @@ export default function PropertyCard({ data }) {
 
   return (
     <div className="col-lg-4 col-md-6 col-sm-12 mb-4 p-2">
-      <div className="bg-white rounded border border-gray p-1">
+      <div className="bg-white rounded border border-gray">
         <div
           className="card bg-white text-white"
           style={{ borderRadius: "14px" }}
@@ -19,7 +19,7 @@ export default function PropertyCard({ data }) {
             height="250"
             className="card-img"
             alt="..."
-            style={{ borderRadius: "14px" }}
+            className="rounded"
           />
           <div className="card-img-overlay">
             {/* <h5 className="card-title bg-white">Card title</h5> */}
