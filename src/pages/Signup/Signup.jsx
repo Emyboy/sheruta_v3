@@ -44,16 +44,7 @@ export const Signup = (props) => {
         // })
       })
       .catch((err) => {
-        notifyEmy({
-            heading: "Error signing Up",
-            log: {
-                email: e.email,
-                first_name: e.first_name,
-                last_name: e.last_name,
-                phone_number: e.phone_number,
-                errorMessage: err.response.data.message || "Singup Error",
-            },
-        });
+        console.log(err)
         setState({ ...state, loading: false });
         setState({
           ...state,
@@ -62,6 +53,16 @@ export const Signup = (props) => {
         setTimeout(() => {
           setState({ ...state, errorMessage: null });
         }, 3000);
+        notifyEmy({
+            heading: "Error signing Up",
+            log: {
+                email: e.email,
+                first_name: e.first_name,
+                last_name: e.last_name,
+                phone_number: e.phone_number,
+                errorMessage: err.response || "Singup Error",
+            },
+        });
       });
   };
 

@@ -10,10 +10,14 @@ import {
     getAllServices,
     getAllPaymentTypes,
     getAllWorkIndustries,
-    getAllStates
+    getAllStates,
 } from "../../redux/strapi_actions/view.action";
 import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
+import { BsPeople } from "react-icons/bs";
+import { BiBell, BiHome, BiUser } from "react-icons/bi";
+import { Badge } from "antd";
+import FooterNav from "./FooterNav";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -30,20 +34,7 @@ const mapActionToProps = {
     getAllStates,
 };
 
-const FooterNav = ({ text, icon, path, active }) => {
-    return (
-        <Link
-            className={`ml-4 mr-4 text-center ${
-                active ? "text-theme" : "text-accent"
-            }`}
-            to={path}
-        >
-            <i style={{ fontSize: "22px" }} className={icon}></i>
-            <br />
-            <small>{text}</small>
-        </Link>
-    );
-};
+
 
 const EachNav = ({ text, path, icon, onClick }) => {
     return (
@@ -99,13 +90,13 @@ const Layout = connect(
                         />
                     ) : (
                         )} */}
-                        <IconBtn
-                            icon="ti-menu"
-                            test_id="sidebar-toggle"
-                            onClick={() => {
-                                setShowNav(!showNav);
-                            }}
-                        />
+                    <IconBtn
+                        icon="ti-menu"
+                        test_id="sidebar-toggle"
+                        onClick={() => {
+                            setShowNav(!showNav);
+                        }}
+                    />
                     <Link to="/">
                         <img
                             width="140"
@@ -201,47 +192,61 @@ const Layout = connect(
             <div className="pt-5 mt-2 pb-5">{children}</div>
 
             <nav
-                className="fixed-bottom bg-white border-gray mobile-only"
+                className="fixed-bottom bg-white border-gray mobile-only p-1 pl-4 pr-4"
                 style={{ zIndex: 2 }}
             >
-                <div className="row justify-content-center mt-1">
+                <div className="row justify-content-between mt-1">
                     <FooterNav
                         icon="ti-home"
+                        IconComponent={<BiHome size={30} />}
                         text="Home"
                         path="/"
                         active={page === "home"}
                     />
 
                     <FooterNav
-                        icon="ti-search"
-                        text="Search"
-                        path="/search"
-                        active={page === "search"}
+                    count={21}
+                        IconComponent={<BsPeople size={30} />}
+                        text="Match"
+                        path="/match"
+                        active={page === "match"}
+                    />
+                    <FooterNav
+                    count={3}
+                        IconComponent={<BiBell size={30} />}
+                        text="Notifications"
+                        path="/notifications"
+                        active={page === "notifications"}
                     />
                     {user ? (
-                        <Link
-                            className={`ml-4 mr-4 text-center ${
-                                page === "profile"
-                                    ? "text-theme"
-                                    : "text-accent"
-                            }`}
-                            to={`/user/${user.username}`}
-                        >
-                            <img
-                                src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
-                                className={`${
-                                    page === "profile"
-                                        ? "border border-success"
-                                        : ""
-                                }`}
-                                width="28"
-                                style={{ borderRadius: "50px" }}
-                                alt=""
-                            />
-                            <br />
-                            <small>Profile</small>
-                        </Link>
+                        <FooterNav
+                            text="Profile"
+                            IconComponent={<BiUser size={30} />}
+                        />
                     ) : (
+                        // <Link
+                        //     className={`ml-4 mr-4 text-center ${
+                        //         page === "profile"
+                        //             ? "text-theme"
+                        //             : "text-accent"
+                        //     }`}
+                        //     to={`/user/${user.username}`}
+                        // >
+                        //     <img
+                        //         src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
+                        //         className={`${
+                        //             page === "profile"
+                        //                 ? "border border-success"
+                        //                 : ""
+                        //         }`}
+                        //         width="28"
+                        //         style={{ borderRadius: "50px" }}
+                        //         alt=""
+                        //     />
+                        //     <br />
+                        //     <small>Profile</small>
+
+                        // </Link>
                         <FooterNav
                             icon="ti-user"
                             text="Login"
