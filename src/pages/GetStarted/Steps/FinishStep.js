@@ -22,6 +22,8 @@ const FinishStep = (props) => {
   }, []);
 
   useEffect(() => {
+    Alice.suggestMeToThem();
+    Alice.suggestThemForMe();
     notifyEmy({
       heading: "Finished the get started",
       status: 'success',
@@ -29,7 +31,6 @@ const FinishStep = (props) => {
     axios(process.env.REACT_APP_API_URL + `/sheruta/verify-request/${user.user.id}`, { method: 'POST' })
       .then(res => {
         // console.log('VERIFY --', res)
-        Alice.suggestMeToThem();
       })
       .catch(err => {
         // console.log('VEIRFY ---', err)
