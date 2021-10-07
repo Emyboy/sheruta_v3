@@ -34,8 +34,6 @@ const mapActionToProps = {
     getAllStates,
 };
 
-
-
 const EachNav = ({ text, path, icon, onClick }) => {
     return (
         <Link className="border-bottom1" to={path} onClick={onClick}>
@@ -205,14 +203,14 @@ const Layout = connect(
                     />
 
                     <FooterNav
-                    count={21}
+                        count={21}
                         IconComponent={<BsPeople size={30} />}
                         text="Match"
                         path="/match"
                         active={page === "match"}
                     />
                     <FooterNav
-                    count={3}
+                        count={3}
                         IconComponent={<BiBell size={30} />}
                         text="Notifications"
                         path="/notifications"
@@ -222,33 +220,12 @@ const Layout = connect(
                         <FooterNav
                             text="Profile"
                             IconComponent={<BiUser size={30} />}
+                            path={`/user/${user.username}`}
+                            active={page === "profile"}
                         />
                     ) : (
-                        // <Link
-                        //     className={`ml-4 mr-4 text-center ${
-                        //         page === "profile"
-                        //             ? "text-theme"
-                        //             : "text-accent"
-                        //     }`}
-                        //     to={`/user/${user.username}`}
-                        // >
-                        //     <img
-                        //         src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
-                        //         className={`${
-                        //             page === "profile"
-                        //                 ? "border border-success"
-                        //                 : ""
-                        //         }`}
-                        //         width="28"
-                        //         style={{ borderRadius: "50px" }}
-                        //         alt=""
-                        //     />
-                        //     <br />
-                        //     <small>Profile</small>
-
-                        // </Link>
                         <FooterNav
-                            icon="ti-user"
+                            IconComponent={<BiUser size={30} />}
                             text="Login"
                             path="/login"
                             active={page === "login"}

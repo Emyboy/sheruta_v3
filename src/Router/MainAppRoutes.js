@@ -34,6 +34,8 @@ import MasterPopup from '../components/Popups/MasterPopup';
 import Home from '../pages/Home/Home';
 import CreateRequest from '../pages/Request/CreateRequest';
 import AllRequests from '../pages/Request/AllRequests'
+import Notifications from '../pages/Notifications/Notifications';
+import Match from '../pages/Match/Match';
 
 
 // const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
@@ -58,6 +60,8 @@ function App() {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/start" component={GetStarted} />
+                    <Route exact path="/notifications" component={Notifications} />
+                    <Route exact path="/match" component={Match} />
                     {/* <Route exact path="/submit" component={Submit} /> */}
                     <Route exact path="/what-next" component={WhatNext} />
                     <Route exact path="/start/:step" component={GetStarted} />

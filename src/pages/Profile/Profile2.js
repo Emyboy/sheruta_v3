@@ -213,7 +213,7 @@ export const Profile2 = (props) => {
           <meta property="og:title" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
           <meta property="og:description" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
         </MetaTags>
-        <Layout>
+        <Layout page="profile">
           <section className="mt-0">
             <div className="gap2 gray-bg pt-2">
               <div className="container">
