@@ -1,54 +1,49 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Btn from "../../components/Btn/Btn";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 
-export default function EachMatchCard() {
-    const { user } = useSelector(state => state.auth);
+export default function EachMatchCard({ data }) {
+    const { users_permissions_user } = data;
+    const { user } = useSelector((state) => state.auth);
     return (
         <div className="friend-box rounded border-gray w-100 mt-5">
             <div className="frnd-meta">
                 <img
                     alt=""
-                    src={user.user.avatar_url}
+                    src={users_permissions_user.avatar_url}
                     width="90"
                     style={{ zIndex: 100 }}
+                    className="shadow"
                 />
                 <div className="frnd-name">
                     <div className="d-flex">
-                        <a title="" href="#" className="text-theme">
-                            Jack Carter
-                        </a>
-                        <VerifiedBadge user={{ is_verified: true }} without_text className="ml-2" />
+                        <Link
+                            title=""
+                            to={`/user/${users_permissions_user.username}`}
+                            className="text-theme"
+                        >
+                            {users_permissions_user.first_name}{" "}
+                            {users_permissions_user.last_name}
+                        </Link>
+                        <VerifiedBadge
+                            user={users_permissions_user}
+                            without_text
+                            className="ml-2"
+                        />
                     </div>
-                    <span>@jack5000</span> <br />
-                    <Btn
-                        className="main-btn2 mt-2 btn-sm"
-                        text="View Profile"
-                    />
+                    <span>@{users_permissions_user.username}</span> <br />
+                    <Link to={`/user/${users_permissions_user.username}`}>
+                        <Btn
+                            className="main-btn2 mt-2 btn-sm"
+                            text="View Profile"
+                            onClick={() => {}}
+                        />
+                    </Link>
                 </div>
             </div>
             <ul className="menu-list pt-5">
-                <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-home"></i>Home
-                    </a>
-                </li>
-                <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa fa-check-circle-o"></i>Match Mark
-                    </a>
-                </li>
-                <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-history"></i>History
-                    </a>
-                </li>
-                <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-certificate"></i>My Dates
-                    </a>
-                </li>
                 <li>
                     <a href="#" title="" data-ripple="">
                         <i className="fa fa-fire"></i>Case Studies

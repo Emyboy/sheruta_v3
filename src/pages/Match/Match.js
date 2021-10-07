@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import EachMatchCard from "./EachMatchCard";
 import { Carousel } from "react-bootstrap";
 import styled from "styled-components";
+import Alice from "../../utils/Alice";
 
 const NavBtn = styled.button`
     background-color: white;
@@ -11,12 +12,24 @@ const NavBtn = styled.button`
     padding-right: 8px;
     border-radius: 5px;
     font-weight: bold;
-    margin-top: 70vh;
+    margin-top: -10vh;
 `;
 
 export default function Match() {
+    const [list, setList] = useState([]);
+    useEffect(() => {
+        (async () => {
+            try {
+                const all = await Alice.getAllMySuggestions();
+                setList(all.data);
+                console.log('ALL ---', all)
+            } catch (error) {
+                Promise.reject(error);
+            }
+        })();
+    }, []);
     return (
-        <Layout page={'match'}>
+        <Layout page={"match"}>
             <div className="container pt-2 pb-5">
                 <Carousel
                     indicators={false}
@@ -29,15 +42,16 @@ export default function Match() {
                         <NavBtn className="shadow border-gray">Prev</NavBtn>
                     }
                 >
-                    <Carousel.Item>
-                        <EachMatchCard />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <EachMatchCard />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <EachMatchCard />
-                    </Carousel.Item>
+                    {
+                        list.map((val, i) => {
+                            return (
+                                <Carousel.Item key={i}>
+                                    <EachMatchCard data={val} />
+                                </Carousel.Item>
+                            );
+                        })
+                    }
+                    
                 </Carousel>
             </div>
         </Layout>
