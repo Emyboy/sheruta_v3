@@ -7,8 +7,8 @@ import '../social_css/css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
 import '../assets/css/colors.css';
-// import '../v4_css/style.css';
 import '../assets/css/styles.css';
+// import '../v4_css/style.css';
 import '../App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';

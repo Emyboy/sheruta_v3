@@ -56,7 +56,6 @@ const EachSocialRequest = (props) => {
     if (deleted) {
         return null;
     } else
-        console.log('DATA --', data)
         return (
             <article
                 className="central-meta item rounded border-gray"

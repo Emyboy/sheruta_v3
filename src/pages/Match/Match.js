@@ -4,6 +4,8 @@ import EachMatchCard from "./EachMatchCard";
 import { Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import Alice from "../../utils/Alice";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMySuggestion } from "../../redux/strapi_actions/alice.actions";
 
 const NavBtn = styled.button`
     background-color: white;
@@ -12,28 +14,22 @@ const NavBtn = styled.button`
     padding-right: 8px;
     border-radius: 5px;
     font-weight: bold;
-    margin-top: -10vh;
+    margin-top: 20vh;
 `;
 
 export default function Match() {
     const [list, setList] = useState([]);
+    const { user_suggestions } = useSelector((state) => state.alice);
+    const dispatch = useDispatch();
     useEffect(() => {
-        (async () => {
-            try {
-                const all = await Alice.getAllMySuggestions();
-                setList(all.data);
-                console.log('ALL ---', all)
-            } catch (error) {
-                Promise.reject(error);
-            }
-        })();
+        dispatch(getAllMySuggestion());
     }, []);
     return (
         <Layout page={"match"}>
             <div className="container pt-2 pb-5">
                 <Carousel
                     indicators={false}
-                    interval={10000}
+                    interval={40000}
                     className="pb-3 p-3"
                     nextIcon={
                         <NavBtn className="shadow border-gray">Next</NavBtn>
@@ -42,16 +38,13 @@ export default function Match() {
                         <NavBtn className="shadow border-gray">Prev</NavBtn>
                     }
                 >
-                    {
-                        list.map((val, i) => {
-                            return (
-                                <Carousel.Item key={i}>
-                                    <EachMatchCard data={val} />
-                                </Carousel.Item>
-                            );
-                        })
-                    }
-                    
+                    {user_suggestions.map((val, i) => {
+                        return (
+                            <Carousel.Item key={i}>
+                                <EachMatchCard data={val} />
+                            </Carousel.Item>
+                        );
+                    })}
                 </Carousel>
             </div>
         </Layout>

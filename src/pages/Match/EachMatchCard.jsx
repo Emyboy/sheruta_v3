@@ -1,14 +1,45 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import Btn from "../../components/Btn/Btn";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
+import { FiCheck } from "react-icons/fi";
+import { MdClose, MdWork } from "react-icons/md";
+import { BiLockAlt } from "react-icons/bi";
+import { FaIndustry } from 'react-icons/fa'
+
+const Wrapper = styled.div`
+    .actions > div > button {
+        border: none;
+        /* background-color: pink; */
+        height: 4em;
+        width: 4em;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .actions > div {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+`;
 
 export default function EachMatchCard({ data }) {
-    const { users_permissions_user } = data;
+    const { users_permissions_user, personal_info } = data;
+    // console.log("DATA --", data);
     const { user } = useSelector((state) => state.auth);
+    const { work_industries } = useSelector((state) => state.view);
+    console.log(
+        "WORK ---",
+        work_industries.filter((x) => {
+            return x.id === personal_info.work_industry;
+        }),
+    );
     return (
-        <div className="friend-box rounded border-gray w-100 mt-5">
+        <Wrapper className="friend-box rounded border-gray w-100 mt-5">
             <div className="frnd-meta">
                 <img
                     alt=""
@@ -43,23 +74,52 @@ export default function EachMatchCard({ data }) {
                     </Link>
                 </div>
             </div>
+
             <ul className="menu-list pt-5">
                 <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-fire"></i>Case Studies
+                    <a href="#gender" title="" data-ripple="">
+                        <i className="fa fa-fire"></i>
+                        {personal_info.gender === "m" ? "Male" : "Female"}
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-sun-o"></i>Privacy &amp; Policy
+                    <a href="#profession" title="" data-ripple="">
+                        <i>
+                            <MdWork />
+                        </i>
+                        {personal_info.occupation}
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="" data-ripple="">
-                        <i className="fa fa-question-circle"></i>Help
+                    <a href="#work-industry" title="" data-ripple="">
+                        <i><FaIndustry /></i>
+                        {work_industries.length > 0 &&
+                            work_industries.filter(
+                                (x) => x.id === personal_info.work_industry,
+                            )[0].name}
                     </a>
                 </li>
             </ul>
-        </div>
+            <div className="mt-3 text-center">
+                <BiLockAlt size={50} />
+                <br />
+                <small>Show More Information</small>
+            </div>
+            <hr />
+            <div className="p-3 actions d-flex justify-content-between">
+                <div>
+                    <button className="btn-danger">
+                        <MdClose size={40} />
+                    </button>
+                    <small>Reject</small>
+                </div>
+                <div>
+                    <button className="bg-theme text-white">
+                        <FiCheck size={40} />
+                    </button>
+                    <small>Accept</small>
+                </div>
+            </div>
+        </Wrapper>
     );
 }

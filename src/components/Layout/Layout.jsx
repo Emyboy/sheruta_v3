@@ -4,7 +4,7 @@ import logo from "../../assets/img/logo.png";
 import IconBtn from "../IconBtn/IconBtn";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
     getAllCategories,
     getAllServices,
@@ -12,6 +12,9 @@ import {
     getAllWorkIndustries,
     getAllStates,
 } from "../../redux/strapi_actions/view.action";
+import {
+    getAllMySuggestion
+} from "../../redux/strapi_actions/alice.actions";
 import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
 import { BsPeople } from "react-icons/bs";
@@ -32,6 +35,7 @@ const mapActionToProps = {
     getAllPaymentTypes,
     getAllWorkIndustries,
     getAllStates,
+    getAllMySuggestion,
 };
 
 const EachNav = ({ text, path, icon, onClick }) => {
@@ -50,6 +54,7 @@ const Layout = connect(
     mapStateToProps,
     mapActionToProps,
 )((props) => {
+    const { user_suggestions } = useSelector((state) => state.alice);
     const { children, back, page, auth, view } = props;
 
     const [showNav, setShowNav] = useState(false);
@@ -64,6 +69,7 @@ const Layout = connect(
         props.getAllServices();
         props.getAllPaymentTypes();
         props.getAllWorkIndustries();
+        props.getAllMySuggestion();
     }, []);
 
     useEffect(() => {
@@ -203,7 +209,7 @@ const Layout = connect(
                     />
 
                     <FooterNav
-                        count={21}
+                        count={user_suggestions.length}
                         IconComponent={<BsPeople size={30} />}
                         text="Match"
                         path="/match"
