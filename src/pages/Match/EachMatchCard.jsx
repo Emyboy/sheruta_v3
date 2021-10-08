@@ -7,7 +7,7 @@ import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 import { FiCheck } from "react-icons/fi";
 import { MdClose, MdWork } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
-import { FaIndustry } from 'react-icons/fa'
+import { FaIndustry } from "react-icons/fa";
 
 const Wrapper = styled.div`
     .actions > div > button {
@@ -32,12 +32,6 @@ export default function EachMatchCard({ data }) {
     // console.log("DATA --", data);
     const { user } = useSelector((state) => state.auth);
     const { work_industries } = useSelector((state) => state.view);
-    console.log(
-        "WORK ---",
-        work_industries.filter((x) => {
-            return x.id === personal_info.work_industry;
-        }),
-    );
     return (
         <Wrapper className="friend-box rounded border-gray w-100 mt-5">
             <div className="frnd-meta">
@@ -90,15 +84,19 @@ export default function EachMatchCard({ data }) {
                         {personal_info.occupation}
                     </a>
                 </li>
-                <li>
-                    <a href="#work-industry" title="" data-ripple="">
-                        <i><FaIndustry /></i>
-                        {work_industries.length > 0 &&
-                            work_industries.filter(
-                                (x) => x.id === personal_info.work_industry,
-                            )[0].name}
-                    </a>
-                </li>
+                {personal_info.work_industry ? (
+                    <li>
+                        <a href="#work-industry" title="" data-ripple="">
+                            <i>
+                                <FaIndustry />
+                            </i>
+                            {work_industries.length > 0 &&
+                                work_industries.filter(
+                                    (x) => x.id === personal_info.work_industry,
+                                )[0].name}
+                        </a>
+                    </li>
+                ) : null}
             </ul>
             <div className="mt-3 text-center">
                 <BiLockAlt size={50} />
