@@ -17,6 +17,13 @@ const NavBtn = styled.button`
     margin-top: 20vh;
 `;
 
+const Wrapper = styled.div`
+    /* .carousel-control-prev {
+        background-color: pink;
+        margin-right: 4em;
+    } */
+`;
+
 export default function Match() {
     const [list, setList] = useState([]);
     const { user_suggestions } = useSelector((state) => state.alice);
@@ -26,9 +33,9 @@ export default function Match() {
     }, []);
     return (
         <Layout page={"match"}>
-            <div className="container pt-2 pb-5">
+            <Wrapper className="container pt-2 pb-5">
                 <Carousel
-                    indicators={false}
+                    // indicators={false}
                     interval={40000}
                     className="pb-3 p-3"
                     nextIcon={
@@ -46,7 +53,7 @@ export default function Match() {
                         );
                     })}
                 </Carousel>
-            </div>
+            </Wrapper>
         </Layout>
     );
 }

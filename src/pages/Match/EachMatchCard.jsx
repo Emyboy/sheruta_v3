@@ -104,7 +104,7 @@ export default function EachMatchCard({ data }) {
                 <small>Show More Information</small>
             </div>
             <hr />
-            <div className="p-3 actions d-flex justify-content-between">
+            <div className="p-3 actions d-flex justify-content-around">
                 <div>
                     <button className="btn-danger">
                         <MdClose size={40} />
