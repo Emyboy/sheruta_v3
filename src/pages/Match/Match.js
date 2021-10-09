@@ -16,6 +16,10 @@ export default function Match() {
     const { accepted_suggestions, user_suggestions } = useSelector(
         (state) => state.alice,
     );
+
+    useEffect(() => {
+        dispatch(getAllSuggestionsByStatus('accepted'))
+    }, [user_suggestions]);
     return (
         <Layout page={"match"}>
             <div className="container mt-3">

@@ -13,7 +13,8 @@ import {
     getAllStates,
 } from "../../redux/strapi_actions/view.action";
 import {
-    getAllMySuggestion
+    getAllMySuggestion,
+    getAllSuggestionsByStatus
 } from "../../redux/strapi_actions/alice.actions";
 import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
@@ -37,6 +38,7 @@ const mapActionToProps = {
     getAllWorkIndustries,
     getAllStates,
     getAllMySuggestion,
+    getAllSuggestionsByStatus,
 };
 
 const EachNav = ({ text, path, icon, onClick }) => {
@@ -65,13 +67,16 @@ const Layout = connect(
     const router = useHistory();
 
     useEffect(() => {
-        Alice.suggestThemForMe();
         props.getAllStates();
         props.getAllCategories();
         props.getAllServices();
         props.getAllPaymentTypes();
         props.getAllWorkIndustries();
-        props.getAllMySuggestion();
+        if(auth.user){
+            Alice.suggestThemForMe();
+            props.getAllMySuggestion();
+            props.getAllSuggestionsByStatus();
+        }
     }, []);
 
     useEffect(() => {
@@ -211,7 +216,7 @@ const Layout = connect(
                     />
 
                     {
-                        view.personal_info && view.personal_info.nin ?<FooterNav
+                        view.personal_info ? <FooterNav
                         count={user_suggestions.length}
                         IconComponent={<BsPeople size={30} />}
                         text="Match"

@@ -23,7 +23,7 @@ export default function AcceptedMatchList({ list }) {
                                 />
                                 {/* <span>Super Hot</span> */}
                             </figure>
-                            <div className="classic-pst-meta">
+                            <div className="classic-pst-meta w-100">
                                 {/* <div className="more">
                                     <div className="more-post-optns">
                                         <i className="ti-more-alt"></i>

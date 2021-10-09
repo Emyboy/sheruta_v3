@@ -45,13 +45,14 @@ export default function MatchList() {
     return (
         <div className="pb-5">
             {personal_info && !personal_info.nin ? (
-                <div className="text-center" style={{ marginTop: "30vh" }}>
+                <div className="text-center" style={{ marginTop: "20vh" }}>
                     <h3>🙆🏽‍♂️</h3>
                     <h6>Account Not Yet Verified</h6>
+                    <small>Verify your account and view your flat mates</small><br />
                     <Link to="/start">
                         <Btn
                             text="Get Started"
-                            className="p-1 pl-3 pr-3"
+                            className="p-1 pl-3 pr-3 mt-2"
                             onClick={() => {}}
                         />
                     </Link>
