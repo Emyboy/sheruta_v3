@@ -3,23 +3,34 @@ import Layout from "../../components/Layout/Layout";
 import MatchList from "./MatchList";
 import { Tabs } from "antd";
 import AcceptedMatchList from "./AcceptedMatchList";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSuggestionsByStatus } from "../../redux/strapi_actions/alice.actions";
 
 const { TabPane } = Tabs;
 
-function callback(key) {
-    console.log(key);
-};
-
 export default function Match() {
+    const dispatch = useDispatch();
+    function callback(key) {
+        dispatch(getAllSuggestionsByStatus("accepted"));
+    }
+    const { accepted_suggestions, user_suggestions } = useSelector(
+        (state) => state.alice,
+    );
     return (
         <Layout page={"match"}>
             <div className="container mt-3">
                 <Tabs defaultActiveKey="1" onChange={callback}>
-                    <TabPane tab="Suggested" key="1">
-                        <MatchList />
+                    <TabPane
+                        tab={`Suggested (${user_suggestions.length})`}
+                        key="1"
+                    >
+                        <MatchList list={user_suggestions} />
                     </TabPane>
-                    <TabPane tab="Accepted" key="2">
-                        <AcceptedMatchList />
+                    <TabPane
+                        tab={`Accepted (${accepted_suggestions.length})`}
+                        key="2"
+                    >
+                        <AcceptedMatchList list={accepted_suggestions} />
                     </TabPane>
                 </Tabs>
             </div>

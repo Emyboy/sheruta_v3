@@ -3,12 +3,6 @@ import Alice from "../../utils/Alice";
 
 export const getAllMySuggestion = () => async (dispatch) => {
     try {
-        // dispatch({
-        //     type: "SET_ALICE_STATE",
-        //     payload: {
-        //         loading: true,
-        //     },
-        // });
         const all = await Alice.getAllMySuggestions();
         if (all) {
             dispatch({
@@ -27,3 +21,16 @@ export const getAllMySuggestion = () => async (dispatch) => {
         return Promise.reject(error);
     }
 };
+
+export const getAllSuggestionsByStatus = status => async dispatch => {
+    try {
+        const all = await Alice.getAllMySuggestionsByStatus(status);
+        dispatch({
+            type: 'GET_SUGGESTIONS_BY_STATUS',
+            payload: all.data
+        })
+    } catch (error) {
+        notification.error({ message: "Error" })
+        Promise.reject(error);
+    }
+}

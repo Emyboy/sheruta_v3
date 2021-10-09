@@ -53,9 +53,15 @@ export default class Alice {
         return update;
     };
 
-    static async getAllMyAcceptedSuggestions(status){
+    static async getAllMySuggestionsByStatus(status){
         const accepted = await axios(
             process.env.REACT_APP_API_URL + `/alice/suggest/accepted/${status}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
         );
+        return accepted;
     }
 }
