@@ -31,6 +31,20 @@ export default function Match() {
     useEffect(() => {
         dispatch(getAllMySuggestion());
     }, []);
+
+    const handleStatusUpdate = async (suggestion_id, status) => {
+        try {
+            const rejected = await Alice.rejectThisSuggestion(
+                suggestion_id,
+                status,
+            );
+            console.log("REJECT --", rejected);
+            dispatch(getAllMySuggestion());
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    };
+
     return (
         <Layout page={"match"}>
             <Wrapper className="container pt-2 pb-5">
@@ -48,7 +62,10 @@ export default function Match() {
                     {user_suggestions.map((val, i) => {
                         return (
                             <Carousel.Item key={i}>
-                                <EachMatchCard data={val} />
+                                <EachMatchCard
+                                    data={val}
+                                    handleStatusUpdate={handleStatusUpdate}
+                                />
                             </Carousel.Item>
                         );
                     })}

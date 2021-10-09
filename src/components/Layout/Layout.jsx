@@ -199,7 +199,7 @@ const Layout = connect(
                 className="fixed-bottom bg-white border-gray mobile-only p-1 pl-4 pr-4"
                 style={{ zIndex: 2 }}
             >
-                <div className="row justify-content-between mt-1">
+                <div className="row justify-content-around mt-1">
                     <FooterNav
                         icon="ti-home"
                         IconComponent={<BiHome size={30} />}
@@ -208,20 +208,22 @@ const Layout = connect(
                         active={page === "home"}
                     />
 
-                    <FooterNav
+                    {
+                        view.personal_info && view.personal_info.nin ?<FooterNav
                         count={user_suggestions.length}
                         IconComponent={<BsPeople size={30} />}
                         text="Match"
                         path="/match"
                         active={page === "match"}
-                    />
-                    <FooterNav
+                    />:null
+                    }
+                    {/* <FooterNav
                         count={3}
                         IconComponent={<BiBell size={30} />}
                         text="Notifications"
                         path="/notifications"
                         active={page === "notifications"}
-                    />
+                    /> */}
                     {user ? (
                         <FooterNav
                             text="Profile"

@@ -27,9 +27,9 @@ const Wrapper = styled.div`
     }
 `;
 
-export default function EachMatchCard({ data }) {
+export default function EachMatchCard({ data, handleStatusUpdate }) {
     const { users_permissions_user, personal_info } = data;
-    // console.log("DATA --", data);
+    console.log("DATA --", data);
     const { user } = useSelector((state) => state.auth);
     const { work_industries } = useSelector((state) => state.view);
     return (
@@ -106,13 +106,19 @@ export default function EachMatchCard({ data }) {
             <hr />
             <div className="p-3 actions d-flex justify-content-around">
                 <div>
-                    <button className="btn-danger">
+                    <button
+                        className="btn-danger"
+                        onClick={() => handleStatusUpdate(data.id, 'rejected')}
+                    >
                         <MdClose size={40} />
                     </button>
                     <small>Reject</small>
                 </div>
                 <div>
-                    <button className="bg-theme text-white">
+                    <button
+                        className="bg-theme text-white"
+                        onClick={() => handleStatusUpdate(data.id, 'accepted')}
+                    >
                         <FiCheck size={40} />
                     </button>
                     <small>Accept</small>
