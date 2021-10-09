@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 
 export default function EachMatchCard({ data, handleStatusUpdate }) {
     const { users_permissions_user, personal_info } = data;
-    console.log("DATA --", data);
+    // console.log("DATA --", data);
     const { user } = useSelector((state) => state.auth);
     const { work_industries } = useSelector((state) => state.view);
     return (

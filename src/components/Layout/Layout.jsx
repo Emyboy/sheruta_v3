@@ -21,6 +21,7 @@ import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
 import { Badge } from "antd";
 import FooterNav from "./FooterNav";
+import Alice from "../../utils/Alice";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -64,6 +65,7 @@ const Layout = connect(
     const router = useHistory();
 
     useEffect(() => {
+        Alice.suggestThemForMe();
         props.getAllStates();
         props.getAllCategories();
         props.getAllServices();

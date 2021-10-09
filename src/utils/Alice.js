@@ -15,6 +15,7 @@ export default class Alice {
     }
 
     static async suggestThemForMe() {
+        // console.log("%c Alice is suggesting", "color: green; font-size: 25px;")
         const them = await axios(
             process.env.REACT_APP_API_URL + "/alice/suggest/them-to-me",
             {
@@ -50,5 +51,11 @@ export default class Alice {
             },
         );
         return update;
+    };
+
+    static async getAllMyAcceptedSuggestions(status){
+        const accepted = await axios(
+            process.env.REACT_APP_API_URL + `/alice/suggest/accepted/${status}`,
+        );
     }
 }

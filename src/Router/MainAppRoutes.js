@@ -10,6 +10,7 @@ import '../assets/css/colors.css';
 import '../assets/css/styles.css';
 // import '../v4_css/style.css';
 import '../App.css';
+import 'react-activity/src/Spinner/Spinner.css'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ import CreateRequest from '../pages/Request/CreateRequest';
 import AllRequests from '../pages/Request/AllRequests'
 import Notifications from '../pages/Notifications/Notifications';
 import Match from '../pages/Match/Match';
+import Profile2 from "../pages/Profile/Profile2";
 
 
 // const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
@@ -43,7 +45,7 @@ import Match from '../pages/Match/Match';
 const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
 const Pricing = React.lazy(() => import("../pages/Pricing/Pricing"));
-const Profile2 = React.lazy(() => import("../pages/Profile/Profile2"));
+// const Profile2 = React.lazy(() => import("../pages/Profile/Profile2"));
 
 function App() {
     return (
