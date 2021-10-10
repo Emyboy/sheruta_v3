@@ -437,7 +437,7 @@ export default (props) => {
                                   {view.feed.map((val, i) => {
                                       return (
                                           <EachSocialRequest
-                                              key={i}
+                                              key={i} 
                                               data={val}
                                           />
                                       );
