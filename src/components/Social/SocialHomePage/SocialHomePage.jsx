@@ -19,7 +19,7 @@ export default (props) => {
   const { user } = auth.user;
   const [state, setState] = useState({
     properties: [],
-    list: [],
+    // list: [],
   });
   const [newUsers, setNewUsers] = useState([]);
 
@@ -37,6 +37,7 @@ export default (props) => {
       )
         .then((res) => {
           setState({ ...state, properties: res.data });
+          
         })
         .catch((err) => {});
     }
@@ -53,14 +54,21 @@ export default (props) => {
       .catch((err) => {});
   }, []);
   useEffect(() => {
-    if (state.list.length === 0) {
+    if (view.feed.length === 0) {
       axios(
         process.env.REACT_APP_API_URL +
           `/property-requests/?is_searching=${!view.personal_info
             .looking_for}&_limit=25&_start=0&_sort=created_at:DESC`
       )
         .then((res) => {
-          setState({ ...state, list: res.data });
+          // setState({ ...state, list: res.data });
+          console.log('FEED -----', res.data)
+          dispatch({
+              type: "SET_VIEW_STATE",
+              payload: {
+                  feed: res.data,
+              },
+          });
         })
         .catch((err) => {});
     }
@@ -426,7 +434,7 @@ export default (props) => {
                                   </div>
                               )}
                               <div className="col-lg-5">
-                                  {state.list.map((val, i) => {
+                                  {view.feed.map((val, i) => {
                                       return (
                                           <EachSocialRequest
                                               key={i}
@@ -434,7 +442,7 @@ export default (props) => {
                                           />
                                       );
                                   })}
-                                  {state.list.length === 0 ? (
+                                  {view.feed.length === 0 ? (
                                       <div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
                                           <Spinner />
                                       </div>

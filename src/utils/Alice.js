@@ -29,7 +29,7 @@ export default class Alice {
 
     static async suggestMeToThem() {
         const data = await axios(
-            process.env.REACT_APP_API_URL + "/alice/suggest/them-to-me",
+            process.env.REACT_APP_API_URL + "/alice/suggest/me-to-them",
             {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("token")}`,

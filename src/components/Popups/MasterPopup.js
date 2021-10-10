@@ -1,28 +1,61 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import ConfigViewPopup from './ConfigViewPopup';
-import GetStartedPopup from './GetStartedPopup';
+import React, { useEffect } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import ConfigViewPopup from "./ConfigViewPopup";
+import GetStartedPopup from "./GetStartedPopup";
+import {
+    getAllStates,
+    getAllCategories,
+    getAllServices,
+    getAllPaymentTypes,
+    getAllWorkIndustries,
+} from "../../redux/strapi_actions/view.action";
+import {
+    getAllSuggestionsByStatus,
+    getAllMySuggestion,
+    suggestThemForMe,
+} from "../../redux/strapi_actions/alice.actions";
 
 const MasterPopup = (props) => {
-    const { user } = props.auth;
-    if(user){
+    const { user } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getAllStates())
+      dispatch(getAllCategories());
+      dispatch(getAllServices());
+      dispatch(getAllPaymentTypes());
+      dispatch(getAllWorkIndustries());
+      if(user){
+        dispatch(getAllMySuggestion());
+        dispatch(suggestThemForMe());
+      }
+    }, []);
+
+    useEffect(() => {
+      if (user) {
+          dispatch(getAllSuggestionsByStatus("accepted"));
+          setInterval(() => {
+            dispatch(getAllMySuggestion());
+            dispatch(suggestThemForMe());
+          }, 40000);
+      }
+    }, [user])
+
+    if (user) {
         return (
-          <>
-            <ConfigViewPopup />
-            <GetStartedPopup />
-          </>
+            <>
+                <ConfigViewPopup />
+                <GetStartedPopup />
+            </>
         );
-    }else {
-      return null
+    } else {
+        return null;
     }
-}
+};
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
-})
+    auth: state.auth,
+});
 
-const mapDispatchToProps = {
-    
-}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MasterPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(MasterPopup);

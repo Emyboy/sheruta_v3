@@ -28,10 +28,6 @@ export const Signup = (props) => {
       .then((res) => {
         if (res.status === 201) {
           notification.success({ message: "Account Created" });
-          notifyEmy({
-            heading: `${e.first_name} ${e.last_name} just signup but have not verified email = ${e.email}`,
-            log: { ...res.data },
-          });
           sessionStorage.setItem("mail", e.email);
           setState({ ...state, loading: false, goToSuccess: true });
         }

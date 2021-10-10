@@ -14,19 +14,19 @@ import {
 } from "../../redux/strapi_actions/view.action";
 import {
     getAllMySuggestion,
-    getAllSuggestionsByStatus
+    getAllSuggestionsByStatus,
 } from "../../redux/strapi_actions/alice.actions";
 import { getUser, logout } from "../../redux/strapi_actions/auth.actions";
 import { useHistory } from "react-router-dom";
 import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
-import { Badge } from "antd";
 import FooterNav from "./FooterNav";
 import Alice from "../../utils/Alice";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
     view: state.view,
+    alice: state.alice,
 });
 
 const mapActionToProps = {
@@ -58,26 +58,33 @@ const Layout = connect(
     mapActionToProps,
 )((props) => {
     const { user_suggestions } = useSelector((state) => state.alice);
-    const { children, back, page, auth, view } = props;
+    const { children, back, page, auth, view, alice } = props;
 
     const [showNav, setShowNav] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [user, setUser] = useState(null);
 
     const router = useHistory();
-
-    useEffect(() => {
-        props.getAllStates();
-        props.getAllCategories();
-        props.getAllServices();
-        props.getAllPaymentTypes();
-        props.getAllWorkIndustries();
-        if(auth.user){
-            Alice.suggestThemForMe();
-            props.getAllMySuggestion();
-            props.getAllSuggestionsByStatus();
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (view.states.length === 0) {
+    //         props.getAllStates();
+    //     }
+    //     if (view.categories.length === 0) {
+    //         props.getAllCategories();
+    //     }
+    //     if(view.services.length === 0){
+    //         props.getAllServices();
+    //     }
+    //     props.getAllPaymentTypes();
+    //     props.getAllWorkIndustries();
+    //     if (auth.user) {
+    //         Alice.suggestThemForMe();
+    //         props.getAllMySuggestion();
+    //     }
+    //     if (alice.accepted_suggestions.length === 0) {
+    //         props.getAllSuggestionsByStatus("accepted");
+    //     }
+    // }, []);
 
     useEffect(() => {
         if (props.auth.user) {
@@ -215,15 +222,15 @@ const Layout = connect(
                         active={page === "home"}
                     />
 
-                    {
-                        view.personal_info ? <FooterNav
-                        count={user_suggestions.length}
-                        IconComponent={<BsPeople size={30} />}
-                        text="Match"
-                        path="/match"
-                        active={page === "match"}
-                    />:null
-                    }
+                    {view.personal_info ? (
+                        <FooterNav
+                            count={user_suggestions.length}
+                            IconComponent={<BsPeople size={30} />}
+                            text="Match"
+                            path="/match"
+                            active={page === "match"}
+                        />
+                    ) : null}
                     {/* <FooterNav
                         count={3}
                         IconComponent={<BiBell size={30} />}
@@ -252,4 +259,4 @@ const Layout = connect(
     );
 });
 
-export default Layout;
+export default React.memo(Layout);

@@ -11,7 +11,7 @@ import EachRequest from "../../components/EachRequest/EachRequest";
 import Global from "../../Global";
 import PropertyCardSM from "../../components/PropertyCard/PropertyCardSM";
 import { connect } from "react-redux";
-import SocailHomePage from "../../components/Social/SocialHomePage/SocailHomePage";
+import SocailHomePage from "../../components/Social/SocialHomePage/SocialHomePage";
 import Footer from "../../components/Footer";
 import ExploreByPopularCity from "./Graphics";
 
