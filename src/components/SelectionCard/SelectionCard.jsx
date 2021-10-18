@@ -22,6 +22,7 @@ export default ({
             >
                 {
                     isSelected ? <MdCheckBox
+                    size={25}
                     className='text-success display-6'
                         style={{
                             position: 'absolute',

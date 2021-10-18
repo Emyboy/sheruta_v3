@@ -2,7 +2,7 @@ import { notification } from "antd";
 import Alice from "../../utils/Alice";
 
 export const getAllMySuggestion = () => async (dispatch) => {
-    console.log("GETTING ALL");
+    // console.log("GETTING ALL");
     try {
         const all = await Alice.getAllMySuggestions();
         dispatch({
@@ -10,7 +10,7 @@ export const getAllMySuggestion = () => async (dispatch) => {
             payload: all.data,
         });
     } catch (error) {
-        notification.error({ message: "Suggestion Error" });
+        // notification.error({ message: "Suggestion Error" });
         return Promise.reject(error);
     }
 };
@@ -23,7 +23,7 @@ export const getAllSuggestionsByStatus = (status) => async (dispatch) => {
             payload: all.data,
         });
     } catch (error) {
-        notification.error({ message: "Error" });
+        // notification.error({ message: "Error" });
         Promise.reject(error);
     }
 };
@@ -38,6 +38,6 @@ export const suggestThemForMe = () => async (dispatch) => {
             },
         });
     } catch (error) {
-        notification.error({ message: "Error getting suggestions" });
+        // notification.error({ message: "Error getting suggestions" });
     }
 };

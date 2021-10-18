@@ -29,13 +29,13 @@ export default function GetStartedInstructions(props) {
         <div className="pb-4 container">
             <div className="text-center">
                 <h2 className="">What You Should Know</h2>
-                <h6 className="text-muted">
+                <h5 className="text-muted">
                     For a secure flat share community, we require some
                     information about you.
-                </h6>
+                </h5>
             </div>
             <hr />
-            <ol>
+            <ul>
                 <li>
                     National Identification Number.{" "}
                     <b className="text-danger">
@@ -43,14 +43,14 @@ export default function GetStartedInstructions(props) {
                     </b>
                 </li>
                 <li>A recent photo of yourself. (profile picture)</li>
-                <li>Work information (supervisor's name, company etc)</li>
+                <li>Work information (work industry, occupation etc)</li>
                 <li>
                     Links to your social media account.{" "}
                     <b className="text-danger">You chose who can see this</b>
                 </li>
-            </ol>
+            </ul>
             <div className="text-center">
-                <h6>If you are okay with this click agree.</h6>
+                <h5>If you are okay with this click agree.</h5>
             </div>
             <hr />
             <div className="row justify-content-around">

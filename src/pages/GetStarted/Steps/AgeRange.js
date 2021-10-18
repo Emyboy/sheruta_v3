@@ -40,13 +40,13 @@ export const AgeRange = (props) => {
       </div>
       <div className="text-center">
         <h5>From</h5>
-        <h5>
+        <h2>
           <b className="display-7">{data[0]}</b>
-        </h5>
+        </h2>
         <h5>to</h5>
-        <h5>
+        <h2>
           <b className="display-7">{data[1]}</b>
-        </h5>
+        </h2>
       </div>
       <label>Slide This 👇🏽</label>
       <Slider

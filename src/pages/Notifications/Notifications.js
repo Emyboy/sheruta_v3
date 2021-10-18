@@ -4,10 +4,10 @@ import Layout from "../../components/Layout/Layout";
 
 export default function Notifications() {
     return (
-        <Layout page={'notifications'}>
-            <section className="pt-3">
-                <div>
-                    <div className="col-lg-9">
+        <Layout page={"notifications"}>
+            <section className="pt-3 container-fluid">
+                <div className="row justify-content-center">
+                    <div className="col-lg-6 col-sm-12">
                         <div className="central-meta">
                             <div className="editing-interest">
                                 <span className="create-post">

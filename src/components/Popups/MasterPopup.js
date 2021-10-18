@@ -16,29 +16,31 @@ import {
 } from "../../redux/strapi_actions/alice.actions";
 
 const MasterPopup = (props) => {
-    const { user } = useSelector(state => state.auth);
+    const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     useEffect(() => {
-      dispatch(getAllStates())
-      dispatch(getAllCategories());
-      dispatch(getAllServices());
-      dispatch(getAllPaymentTypes());
-      dispatch(getAllWorkIndustries());
-      if(user){
-        dispatch(getAllMySuggestion());
-        dispatch(suggestThemForMe());
-      }
+        dispatch(getAllStates());
+        dispatch(getAllCategories());
+        dispatch(getAllServices());
+        dispatch(getAllPaymentTypes());
+        dispatch(getAllWorkIndustries());
+        if (user) {
+            dispatch(getAllMySuggestion());
+            dispatch(suggestThemForMe());
+        }
     }, []);
 
     useEffect(() => {
-      if (user) {
-          dispatch(getAllSuggestionsByStatus("accepted"));
-          setInterval(() => {
-            dispatch(getAllMySuggestion());
-            dispatch(suggestThemForMe());
-          }, 40000);
-      }
-    }, [user])
+        if (user) {
+            dispatch(getAllSuggestionsByStatus("accepted"));
+            setInterval(() => {
+                if (user) {
+                    dispatch(getAllMySuggestion());
+                    dispatch(suggestThemForMe());
+                }
+            }, 40000);
+        }
+    }, [user]);
 
     if (user) {
         return (

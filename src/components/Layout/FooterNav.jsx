@@ -15,7 +15,7 @@ const FooterNav = ({ text, icon, path, active, IconComponent, count }) => {
     return (
         <Wrapper className="mt-1">
             <div className="text-center">
-                {count && count > 0 ? <Badge className="bg-danger ml-2">{count}</Badge> : null}
+                {count && count > 0 ? <Badge className="bg-danger ml-3">{count}</Badge> : null}
                 <Link
                     className={`ml-4 mr-4  ${
                         active ? "text-theme" : "text-accent"

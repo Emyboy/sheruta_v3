@@ -3,28 +3,34 @@ import Cookies from "js-cookie";
 
 export default class Alice {
     static async getAllMySuggestions() {
-        const allMySuggestions = await axios(
-            process.env.REACT_APP_API_URL + "/alice/suggest/mine",
-            {
-                headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
+        if(Cookies.get("token")){
+            const allMySuggestions = await axios(
+                process.env.REACT_APP_API_URL + "/alice/suggest/mine",
+                {
+                    headers: {
+                        Authorization: `Bearer ${Cookies.get("token")}`,
+                    },
                 },
-            },
-        );
-        return allMySuggestions;
+            );
+            return allMySuggestions;
+        }else {
+            return Promise.reject()
+        }
     }
 
     static async suggestThemForMe() {
         // console.log("%c Alice is suggesting", "color: green; font-size: 25px;")
-        const them = await axios(
-            process.env.REACT_APP_API_URL + "/alice/suggest/them-to-me",
-            {
-                headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
+        if(Cookies.get("token")){
+            const them = await axios(
+                process.env.REACT_APP_API_URL + "/alice/suggest/them-to-me",
+                {
+                    headers: {
+                        Authorization: `Bearer ${Cookies.get("token")}`,
+                    },
                 },
-            },
-        );
-        return them;
+            );
+            return them;
+        }
     }
 
     static async suggestMeToThem() {

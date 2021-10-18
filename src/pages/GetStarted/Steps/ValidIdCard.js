@@ -85,7 +85,10 @@ export default function ValidIdCard(props) {
 
     const next = () => {
       setLoading(true);
-      console.log(ninData);
+      console.log('NEXT ==============', {
+          ninData,
+          user: user.user
+      });
       const date = ninData.birthdate;
       const formattedDate = date && moment(`${date[2]}-${date[1]}-${date[0]}`).fromNow();
         const data = {
@@ -100,8 +103,9 @@ export default function ValidIdCard(props) {
             nin: ninData.nin && ninData.nin,
             // religion: ninData.religion && ninData.religion.toLowerCase(),
             stateOfOrigin: ninData.stateOfOrigin && ninData.stateOfOrigin.toLowerCase(),
-            last_name_match: ninData.fieldMatches.lastname,
-            age: date && parseInt(formattedDate)
+            last_name_match: user.user.last_name.toLowerCase() === ninData.lastname.toLowerCase(),
+            age: date && parseInt(formattedDate),
+            last_name: ninData.lastname
         };
 
         axios(

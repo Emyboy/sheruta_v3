@@ -68,7 +68,7 @@ const ConfigViewPopup = (props) => {
   };
 
   return (
-    <Modal show={view.configureView}>
+    <Modal show={view.configureView} size="lg">
       <Modal.Body>
         <h3>Configure what you see</h3>
         <h4 className="text-muted">How can we help?</h4>
@@ -90,7 +90,7 @@ const ConfigViewPopup = (props) => {
         </div>
         <div className="text-center">
           <Btn
-            text="Change"
+            text="Configure"
             onClick={updatePersonalInfo}
             className="mt-5"
             disabled={isLookingFor === undefined || loading}

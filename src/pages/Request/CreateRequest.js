@@ -18,7 +18,7 @@ import ImageSelect from "./ImageSelect";
 import { storage } from "../../Firebase";
 import firebase from "firebase";
 import Compressor from "compressorjs";
-import Global, { all_states } from "../../Global";
+import { Modal } from 'react-bootstrap';
 
 const uid = Uid();
 
@@ -264,7 +264,7 @@ const CraeteRequest = (props) => {
     React.useEffect(() => {
         notifyEmy({
             heading: "Visited the create request page",
-            user: auth.user.user,
+            // user: auth.user.user,
         })
     },[])
 
@@ -276,6 +276,7 @@ const CraeteRequest = (props) => {
         return (
             <Layout back>
                 {window.scrollTo({ top: 0, behavior: "smooth" })}
+                
                 <div className="mt-5 mb-5">
                     <div className="container bg-white text-center">
                         <div className="pt-5 pb-5">
@@ -304,6 +305,24 @@ const CraeteRequest = (props) => {
     } else
     return (
         <Layout back>
+            <Modal show={view.personal_info && !view.personal_info.nin} style={{ marginTop: '30vh'}} size='md'>
+                <Modal.Body className="text-center">
+                    <h3 className='text-center'>You have to join the community to post a request.</h3>
+                    <hr />
+                    <ol>
+                        <li><h4>Get verified with your NIN</h4></li>
+                        <li><h4>Request to view user's personal information</h4></li>
+                        <li><h4>Have access to verified users</h4></li>
+                        <hr />
+                        <Link to="/start">
+                            <Btn text="Get Started" onClick={() => {}} />
+                        </Link>
+                        <Link to="/" className="mt-3">
+                            <h5 className="text-success mt-3">Go Back Home</h5>
+                        </Link>
+                    </ol>
+                </Modal.Body>
+            </Modal>
             <div className="mt-5 pb-5">
                 <div className="container bg-white mb-5 border-gray rounded">
                     <div className="pt-5 pb-5">

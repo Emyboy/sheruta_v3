@@ -5,7 +5,7 @@ export default function ExploreByPopularCity() {
     return (
         <div>
             <section className="">
-                <div className="container bg-white border-gray rounded">
+                <div className="container rounded">
                     <div className="row align-items-center ">
                         <div className="col-lg-6 col-md-6">
                             <img src={image} className="img-fluid" alt="" />

@@ -6,9 +6,9 @@ import "../theme.override.css";
 import '../social_css/css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
-import '../assets/css/colors.css';
+// import '../assets/css/colors.css';
 import '../assets/css/styles.css';
-// import '../v4_css/style.css';
+import '../v4_css/style.css';
 import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 
@@ -51,9 +51,7 @@ function App() {
     return (
       <Suspense fallback={<PageLoader />}>
         <Provider store={store}>
-          <div className="App green-skin">
-            <div className="core-content">
-              <div className="main-wrapper">
+          <div className="wrapper mm-page mm-slideout">
                 <div className="clearfix"></div>
                 <BrowserRouter>
                   <FeedbackPopup />
@@ -132,8 +130,6 @@ function App() {
                   </Switch>
                 </BrowserRouter>
               </div>
-            </div>
-          </div>
         </Provider>
       </Suspense>
     );

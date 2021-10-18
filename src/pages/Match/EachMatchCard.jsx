@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -8,6 +8,9 @@ import { FiCheck } from "react-icons/fi";
 import { MdClose, MdWork } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
+import axios from "axios";
+import PersonalInfo from "../Profile/PersonalInfo";
+import { Modal } from "react-bootstrap";
 
 const Wrapper = styled.div`
     .actions > div > button {
@@ -32,8 +35,13 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
     // console.log("DATA --", data);
     const { user } = useSelector((state) => state.auth);
     const { work_industries } = useSelector((state) => state.view);
+    const [showInfo, setShowInfo] = useState(false);
+
     return (
         <Wrapper className="friend-box rounded border-gray w-100 mt-5">
+            <Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
+                <PersonalInfo userData={users_permissions_user} />
+            </Modal>
             <div className="frnd-meta">
                 <img
                     alt=""
@@ -98,17 +106,24 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
                     </li>
                 ) : null}
             </ul>
-            <div className="mt-3 text-center">
-                <BiLockAlt size={50} />
-                <br />
-                <small>Show More Information</small>
+            <div className="row justify-content-center">
+                <div
+                    className="mt-3 text-center col-6 btn p-0"
+                    onClick={() => {
+                        setShowInfo(true);
+                    }}
+                >
+                    <BiLockAlt size={50} />
+                    <br />
+                    <small>View More Information</small>
+                </div>
             </div>
             <hr />
             <div className="p-3 actions d-flex justify-content-around">
                 <div>
                     <button
                         className="btn-danger"
-                        onClick={() => handleStatusUpdate(data.id, 'rejected')}
+                        onClick={() => handleStatusUpdate(data.id, "rejected")}
                     >
                         <MdClose size={40} />
                     </button>
@@ -117,7 +132,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
                 <div>
                     <button
                         className="bg-theme text-white"
-                        onClick={() => handleStatusUpdate(data.id, 'accepted')}
+                        onClick={() => handleStatusUpdate(data.id, "accepted")}
                     >
                         <FiCheck size={40} />
                     </button>

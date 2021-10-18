@@ -4,16 +4,16 @@
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
-* {
+/* * {
     transition: 0.2s;
-}
+} */
 html,
 body,
 #root,
 .gray-bg {
     /* background-color: #f7f9fc !important; */
-    background-color: #f3f2ef !important;
-    background-image: url(./assets/img/pattern.png) !important;
+    background-color: #fdfdfd !important;
+    /* background-image: url(./assets/img/pattern.png) !important; */
     /* background-position: center; */
     background-size: 100%;
     /* background-attachment: fixed; */
@@ -91,6 +91,9 @@ div.scrollmenu div {
 svg {
     margin: 0 !important;
     display: initial !important;
+}
+.bg-gray {
+    background-color: #f7f7f7 !important;
 }
 @media only screen and (max-width: 970px) {
     .mobile-only {

@@ -42,6 +42,7 @@ export default function MatchList() {
             return Promise.reject(error);
         }
     };
+    console.log(user_suggestions);
     return (
         <div className="pb-5">
             {personal_info && !personal_info.nin ? (
@@ -77,7 +78,7 @@ export default function MatchList() {
                     ) : (
                         <Carousel
                             // indicators={false}
-                            interval={40000}
+                            interval={140000}
                             className="pb-3 p-3"
                             nextIcon={
                                 <NavBtn className="shadow border-gray">

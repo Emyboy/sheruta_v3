@@ -20,11 +20,16 @@ const Btn = ({
             data-cy={test_id}
             className={` ${
                 danger ? "btn-danger" : "bg-theme"
-            } btn rounded text-white ${className ? className : ""}`}
+            } btn btn-log text-white  ${className ? className : ""}`}
             disabled={disabled || loading}
             onClick={onClick}
             type={type}
-            style={{ fontSize: "17px", ...style }}
+            style={{
+                fontSize: "17px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+                ...style,
+            }}
         >
             {loading ? (
                 "Loading..."

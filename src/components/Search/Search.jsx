@@ -1,21 +1,23 @@
-import React from 'react';
-import './Search.css';
-import Select from 'react-select'
-import Btn from '../Btn/Btn';
-import { connect } from 'react-redux';
-import SearchForm from './SearchForm'
+import React from "react";
+import "./Search.css";
+import Select from "react-select";
+import Btn from "../Btn/Btn";
+import { connect } from "react-redux";
+import SearchForm from "./SearchForm";
 
- function Search({
-    show,
-    view
-}) {
-    if(show){
+function Search({ show, view }) {
+    if (show) {
         return (
-            <div className={`pt-1 pr-4 pr-0 w-100 animated ${show ? 'animate__slideInRight' : 'animate__slideOutRight'}`} id='search'>
-                <div className='container-fluid'>
-                    <div className='row justify-content-end'>
-                        <div className='col-lg-9 col-md-11 col-sm-12 mb-4 p-2'>
-                            <div className='card shadow'>
+            <div
+                className={`pt-1 pr-4 pr-0 w-100 animated animate__delay-0s
+                ${show ? "show" : "hide"}
+                `}
+                id="search"
+            >
+                <div className="container-fluid">
+                    <div className="row justify-content-end">
+                        <div className="col-lg-10 col-md-11 col-sm-12 mb-4 p-2">
+                            <div className="card border-gray shadow  p-2 rounded tab-content home1_adsrchfrm">
                                 <SearchForm />
                                 {/* <div className='card-body'>
                                     <h5>Search</h5>
@@ -34,15 +36,12 @@ import SearchForm from './SearchForm'
                     </div>
                 </div>
             </div>
-        )
-    }else 
-        return null;
+        );
+    } else return null;
 }
 
-const mapStateToProps = state => ({
-    view: state.view
-})
+const mapStateToProps = (state) => ({
+    view: state.view,
+});
 
-export default connect(
-    mapStateToProps
-)(Search)
+export default connect(mapStateToProps)(Search);

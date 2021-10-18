@@ -62,7 +62,7 @@ export default (props) => {
       )
         .then((res) => {
           setState({ ...state, list: res.data });
-          console.log('FEED -----', res.data)
+          // console.log('FEED -----', res.data)
           dispatch({
               type: "SET_VIEW_STATE",
               payload: {
@@ -74,8 +74,8 @@ export default (props) => {
     }
   }, [state, view.personal_info.looking_for]);
   return (
-      <section className="mt-0 pt-0">
-          <div className="gap2 gray-bg">
+      <section className="mt-0 pt-0 bgc-f7">
+          <div className="gap2 bgc-f7">
               <div className="container">
                   <div className="row">
                       <div className="">
@@ -372,11 +372,21 @@ export default (props) => {
                                                                                   <Link
                                                                                       to={`/user/${val.username}`}
                                                                                       title=""
-                                                                                      className='d-flex'
+                                                                                      className="d-flex"
                                                                                   >
                                                                                       {
                                                                                           val.username
-                                                                                      }<VerifiedBadge without_text user={val} size={15} className="ml-2" />
+                                                                                      }
+                                                                                      <VerifiedBadge
+                                                                                          without_text
+                                                                                          user={
+                                                                                              val
+                                                                                          }
+                                                                                          size={
+                                                                                              15
+                                                                                          }
+                                                                                          className="ml-2"
+                                                                                      />
                                                                                   </Link>
                                                                               </h4>
                                                                               {/* <Link
@@ -437,7 +447,7 @@ export default (props) => {
                                   {state.list.map((val, i) => {
                                       return (
                                           <EachSocialRequest
-                                              key={i} 
+                                              key={i}
                                               data={val}
                                           />
                                       );

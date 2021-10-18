@@ -84,111 +84,132 @@ const Login = (props) => {
       });
   };
 
+  useEffect(() => {
+      if(localStorage.getItem("after_login") === "/login"){
+          localStorage.setItem("after_login", "/")
+      }
+  })
+
   if (props.auth.user) {
     return <Redirect to={localStorage.getItem("after_login") || "/"} />;
   } else if (state.notVerified) {
     return <VerifyEmailProcess userData={state.userData} />;
   } else
     return (
-      <Layout back page="login">
-        <MetaTags>
-          <title>Login | Sheruta NG</title>
-          <meta
-            name="description"
-            content={
-              "Login to Sheruta and get access to shared apartments today"
-            }
-          />
-          <meta property="og:title" content={"Login | Sheruta NG"} />
-          <meta
-            property="og:description"
-            content={
-              "Login to Sheruta and get access to shared apartments today"
-            }
-          />
-        </MetaTags>
-        <div
-          className="animate__animated animate__fadeIn modal-dialog modal-dialog-centered login-pop-form mt-5"
-          role="document"
-        >
-          <div className="modal-content" id="registermodal">
-            <span className="mod-close" data-dismiss="modal" aria-hidden="true">
-              <i className="ti-close"></i>
-            </span>
-            <div className="modal-body">
-              <h4 className="modal-header-title">Log In</h4>
-              <div className="login-form">
-                {state.errorMessage ? (
-                  <div className="alert alert-danger text-center">
-                    <b className="m-0 p-0 h5">{state.errorMessage}</b>
-                  </div>
-                ) : null}
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <div className="input-with-icon">
-                      <input
-                        disabled={state.loading}
-                        autoFocus
-                        name="identifier"
-                        id="identifier"
-                        type="email"
-                        className="form-control"
-                        placeholder="Email"
-                        {...register("identifier")}
-                      />
-                      <i className="ti-user"></i>
-                    </div>
-                    {/* {errors.identifier && <p className='text-danger'>{errors.identifier.message}</p>} */}
-                  </div>
-
-                  <div className="form-group">
-                    <label>Password</label>
-                    <div className="input-with-icon">
-                      <input
-                        disabled={state.loading}
-                        name="password"
-                        id="password"
-                        type="password"
-                        className="form-control"
-                        placeholder="*******"
-                        {...register("password")}
-                      />
-                      <i className="ti-unlock"></i>
-                    </div>
-                    {/* {errors.password && <p className='text-danger'>{errors.password.message}</p>} */}
-                  </div>
-
-                  <div className="form-group">
-                    <Btn
-                      id="login-btn"
-                      text="Login"
-                      loading={state.loading}
-                      className="full-width mt-2 mb-3"
-                      type="submit"
-                    />
-                    <Link
-                      to="/password/reset/request"
-                      className="text-theme pl-0 link btn"
+        <Layout back page="login">
+            <MetaTags>
+                <title>Login | Sheruta NG</title>
+                <meta
+                    name="description"
+                    content={
+                        "Login to Sheruta and get access to shared apartments today"
+                    }
+                />
+                <meta property="og:title" content={"Login | Sheruta NG"} />
+                <meta
+                    property="og:description"
+                    content={
+                        "Login to Sheruta and get access to shared apartments today"
+                    }
+                />
+            </MetaTags>
+            <div
+                className="animate__animated animate__fadeIn modal-dialog modal-dialog-centered login-pop-form mt-5 "
+                role="document"
+            >
+                <div className="modal-content rounded shadow" id="registermodal">
+                    <span
+                        className="mod-close"
+                        data-dismiss="modal"
+                        aria-hidden="true"
                     >
-                      Forgot Password
-                    </Link>
-                    <div className="text-center mt-3">
-                      <Link
-                        id="signup-btn"
-                        to="/signup"
-                        className="text-success h5"
-                      >
-                        Signup
-                      </Link>
+                        <i className="ti-close"></i>
+                    </span>
+                    <div className="modal-body">
+                        <div className="heading">
+                            <h2 className="text-center">Login to your account</h2>
+                            <p className="text-center">
+                                Don't have an account?{" "}
+                                <Link className="text-thm" to="/signup">
+                                    Sign Up!
+                                </Link>
+                            </p>
+                        </div>
+                        {/* <h4 className="modal-header-title">Log In</h4> */}
+                        <div className="login-form">
+                            {state.errorMessage ? (
+                                <div className="alert alert-danger text-center">
+                                    <b className="m-0 p-0 h5">
+                                        {state.errorMessage}
+                                    </b>
+                                </div>
+                            ) : null}
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="form-group">
+                                    <label>Email</label>
+                                    <div className="input-with-icon">
+                                        <input
+                                            disabled={state.loading}
+                                            autoFocus
+                                            name="identifier"
+                                            id="identifier"
+                                            type="email"
+                                            className="form-control"
+                                            placeholder="Email"
+                                            {...register("identifier")}
+                                        />
+                                        <i className="ti-user"></i>
+                                    </div>
+                                    {/* {errors.identifier && <p className='text-danger'>{errors.identifier.message}</p>} */}
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <div className="input-with-icon">
+                                        <input
+                                            disabled={state.loading}
+                                            name="password"
+                                            id="password"
+                                            type="password"
+                                            className="form-control"
+                                            placeholder="*******"
+                                            {...register("password")}
+                                        />
+                                        <i className="ti-unlock"></i>
+                                    </div>
+                                    {/* {errors.password && <p className='text-danger'>{errors.password.message}</p>} */}
+                                </div>
+
+                                <div className="form-group">
+                                    <Btn
+                                        id="login-btn"
+                                        text="Login"
+                                        loading={state.loading}
+                                        className="full-width mt-2 mb-3"
+                                        type="submit"
+                                    />
+                                    <Link
+                                        to="/password/reset/request"
+                                        className="text-theme pl-0 link btn"
+                                    >
+                                        Forgot Password
+                                    </Link>
+                                    {/* <div className="text-center mt-3">
+                                        <Link
+                                            id="signup-btn"
+                                            to="/signup"
+                                            className="text-success h5"
+                                        >
+                                            Signup
+                                        </Link>
+                                    </div> */}
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-                </form>
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </Layout>
+        </Layout>
     );
 };
 

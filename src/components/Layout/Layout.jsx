@@ -22,6 +22,10 @@ import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
 import FooterNav from "./FooterNav";
 import Alice from "../../utils/Alice";
+import { CgMenuLeft } from 'react-icons/cg';
+import { AiOutlineUser } from 'react-icons/ai'
+import { GrSearch, GrFormClose } from "react-icons/gr";
+
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -110,6 +114,7 @@ const Layout = connect(
                         )} */}
                     <IconBtn
                         icon="ti-menu"
+                        iconComponent={<CgMenuLeft size={20} />}
                         test_id="sidebar-toggle"
                         onClick={() => {
                             setShowNav(!showNav);
@@ -136,12 +141,14 @@ const Layout = connect(
                                 <IconBtn
                                     className="mr-3 desktop-only"
                                     icon={"ti-user"}
+                                    iconComponent={<AiOutlineUser size={20} />}
                                     onClick={() => {}}
                                 />
                             </Link>
                         ) : null}
                         <IconBtn
                             icon={`${showSearch ? "ti-close" : "ti-search"}`}
+                            iconComponent={showSearch ?<GrFormClose size={25} /> : <GrSearch size={20} />}
                             onClick={() => {
                                 setShowSearch(!showSearch);
                             }}
@@ -207,13 +214,13 @@ const Layout = connect(
                 </div>
             </aside>
 
-            <div className="pt-5 mt-2 pb-5">{children}</div>
+            <div className="pt-5 mt-2 pb-5 bg-gray" style={{ height: '100%' }}>{children}</div>
 
             <nav
-                className="fixed-bottom bg-white border-gray mobile-only p-1 pl-4 pr-4"
+                className="fixed-bottom bg-white border-gray  p-1 pl-4 pr-4"
                 style={{ zIndex: 2 }}
             >
-                <div className="row justify-content-around mt-1">
+                <div className="row justify-content-center mt-1">
                     <FooterNav
                         icon="ti-home"
                         IconComponent={<BiHome size={30} />}
@@ -231,13 +238,13 @@ const Layout = connect(
                             active={page === "match"}
                         />
                     ) : null}
-                    {/* <FooterNav
+                    <FooterNav
                         count={3}
                         IconComponent={<BiBell size={30} />}
                         text="Notifications"
                         path="/notifications"
                         active={page === "notifications"}
-                    /> */}
+                    />
                     {user ? (
                         <FooterNav
                             text="Profile"

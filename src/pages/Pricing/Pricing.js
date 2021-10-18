@@ -139,6 +139,9 @@ export default connect(mapStateToProps)((props) => {
 
     useEffect(() => {
         getAllPaymentPlans();
+        notifyEmy({
+            heading: " Visited the payment page"
+        })
     }, []);
 
     // useEffect(() => {

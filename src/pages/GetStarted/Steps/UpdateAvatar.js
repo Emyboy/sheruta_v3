@@ -7,6 +7,7 @@ import { storage } from "../../../Firebase";
 import firebase from "firebase";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import axios from "axios";
+import { notifyEmy } from "../../../utils/Sheruta";
 
 const UpdateAvatar = (props) => {
   const [done, setDone] = useState(null);
@@ -116,6 +117,12 @@ const UpdateAvatar = (props) => {
     );
   };
 
+  useEffect(() => {
+    notifyEmy({
+      heading: " Got to the avatar upload step"
+    })
+  },[])
+
   return (
     <div>
       <div className="sec-heading center">
@@ -125,11 +132,13 @@ const UpdateAvatar = (props) => {
         <p>Its nice to put a face to the name</p>
       </div>
       {done ? (
-        <div className="d-user-avater">
+        <div className="text-center">
           <img
             src={URL.createObjectURL(img)}
             className="img-fluid avater"
             alt=""
+            width="200"
+            style={{ borderRadius: '50%' }}
           />
           <div
             onClick={() => {
@@ -147,13 +156,13 @@ const UpdateAvatar = (props) => {
           >
             <b>Change Image</b>
           </div>
-          <h4>
+          <h2 className="mt-3">
             {user.first_name} {user.last_name}
-          </h4>
+          </h2>
           <span>@{user.username}</span>
           <br />
           <hr />
-          <Btn text="Next" onClick={handleImageUpload} loading={uploading} />
+          <Btn text="Next" onClick={handleImageUpload} loading={uploading} className="mb-3" />
         </div>
       ) : (
         <>
@@ -177,7 +186,7 @@ const UpdateAvatar = (props) => {
             <div className="text-center mb-5 mt-5">
               {/* <input type="file" onChange={(e) => handleSelected(e)} /> */}
               <button
-                className="btn btn-lg text-theme"
+                className="btn btn-lg text-theme bg-gray shadow"
                 id="plus"
                 onClick={upload}
               >

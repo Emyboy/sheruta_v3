@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import SocailHomePage from "../../components/Social/SocialHomePage/SocialHomePage";
 import Footer from "../../components/Footer";
 import ExploreByPopularCity from "./Graphics";
+import HomeJumbo from "./HomeJumbo";
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -52,14 +53,14 @@ const Home = (props) => {
     
   },[user])
   return (
-    <Layout page="home">
-      {user && view.personal_info ? (
-        <div className="container-fluid">
-          <SocailHomePage />
-        </div>
-      ) : (
-        <>
-          <div
+      <Layout page="home">
+          {user && view.personal_info ? (
+              <div className="container-fluid">
+                  <SocailHomePage />
+              </div>
+          ) : (
+              <>
+                  {/* <div
             className="image-cover hero-banner mb-5"
             style={{
               background: `url("https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/project%20prism%2Fcolor%20search%20archive%2Ffdca42285757a45c50328d80460f369b415e66a3") no-repeat`,
@@ -74,68 +75,81 @@ const Home = (props) => {
                 <Btn text="Get Started" className="shadow" onClick={() => {}} />
               </Link>
             </div>
-          </div>
-          <ExploreByPopularCity />
+          </div> */}
+                  <HomeJumbo />
+                  <ExploreByPopularCity />
 
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-lg-8 col-md-12 col-sm-12">
-                <Heading
-                  heading="Recent Properties"
-                  subHeading="These are the most recent properties we have."
-                />
-                {/* <hr /> */}
-                <div className="row">
-                  {state.properties.map((val, i) => {
-                    return Global.isMobile ? (
-                      <PropertyCardSM key={i} val={val} />
-                    ) : (
-                      <PropertyCard key={i} data={val} />
-                    );
-                  })}
-                </div>
-                <Link to="/properties" className="reviews-checked theme-cl">
-                  <i className="fas fa-arrow-alt-circle-down mr-2"></i>See More
-                  Properties
-                </Link>
-                {Global.isMobile ? <hr /> : null}
-              </div>
-              <div className="col-lg-4 col-md-12 col-sm-12">
-                <Heading
-                  heading="Recent Requests"
-                  subHeading="These are the most recent requests we have."
-                />
+                  <div className="container-fluid">
+                      <div className="row bgc-f7 pt-3">
+                          <div className="col-lg-8 col-md-12 col-sm-12">
+                              <Heading
+                                  heading="Recent Properties"
+                                  subHeading="These are the most recent properties we have."
+                              />
+                              {/* <hr /> */}
+                              <div className="row">
+                                  {state.properties.map((val, i) => {
+                                      return Global.isMobile ? (
+                                          <PropertyCardSM key={i} val={val} />
+                                      ) : (
+                                          <PropertyCard key={i} data={val} />
+                                      );
+                                  })}
+                              </div>
+                              <div className="text-center">
+                                  <Link
+                                      to="/properties"
+                                      className="reviews-checked theme-cl btn text-thm"
+                                  >
+                                      <i className="fas fa-arrow-alt-circle-down mr-2"></i>
+                                      See More Properties
+                                  </Link>
+                              </div>
+                              {Global.isMobile ? <hr /> : null}
+                          </div>
+                          <div className="col-lg-4 col-md-12 col-sm-12">
+                              <Heading
+                                  heading="Recent Requests"
+                                  subHeading="These are the most recent requests we have."
+                              />
 
-                <div className=" pl-0 pr-1">
-                  <div className="block-body">
-                    <div className="author-review">
-                      <div className="comment-list">
-                        <div className="article_comments_wrap">
-                          {state.list.map((val, i) => {
-                            return <EachRequest key={i} data={val} />;
-                          })}
-                        </div>
+                              <div className=" pl-0 pr-1">
+                                  <div className="block-body">
+                                      <div className="author-review">
+                                          <div className="comment-list">
+                                              <div className="article_comments_wrap">
+                                                  {state.list.map((val, i) => {
+                                                      return (
+                                                          <EachRequest
+                                                              key={i}
+                                                              data={val}
+                                                          />
+                                                      );
+                                                  })}
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div className="text-center">
+                                          <Link
+                                              to="/requests/all"
+                                              className="reviews-checked theme-cl text-thm"
+                                          >
+                                              <i className="fas fa-arrow-alt-circle-down mr-2"></i>
+                                              See More Requests
+                                          </Link>
+                                      </div>
+                                  </div>
+                              </div>
+                              {Global.isMobile ? <hr /> : null}
+                          </div>
                       </div>
-                    </div>
-                    <Link
-                      to="/requests/all"
-                      className="reviews-checked theme-cl"
-                    >
-                      <i className="fas fa-arrow-alt-circle-down mr-2"></i>See
-                      More Requests
-                    </Link>
                   </div>
-                </div>
-                {Global.isMobile ? <hr /> : null}
-              </div>
-            </div>
-          </div>
-          <HowToUse />
-          <WhatPeopleSay />
-          <Footer />
-        </>
-      )}
-    </Layout>
+                  <HowToUse />
+                  <WhatPeopleSay />
+                  <Footer />
+              </>
+          )}
+      </Layout>
   );
 };
 

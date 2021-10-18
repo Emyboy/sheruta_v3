@@ -7,7 +7,7 @@ import Global from "../../Global";
 const PersonalInfo = ({ userData }) => {
   const [info, setInfo] = useState(null);
   const [locations, setLocations] = useState([]);
-  const [paiedInfo, setPaidInfo] = useState(null);
+  const [paiedInfo, setPaidInfo] = useState(false);
   useEffect(() => {
     if (userData) {
       axios(
@@ -46,6 +46,7 @@ const PersonalInfo = ({ userData }) => {
   if (!info) {
     return null;
   } else
+  console.log('INFO ---', info)
     return (
       <div className="central-meta w-100">
         <button
@@ -73,9 +74,9 @@ const PersonalInfo = ({ userData }) => {
           <div className="col-lg-6">
             <div className="gen-metabox">
               <span>
-                <i className="fa fa-briefcase"></i> Company Name
+                <i className="fa fa-briefcase mr-1"></i>Work Industry
               </span>
-              <p>{info.company_name}</p>
+              <p>{info.work_industry && info.work_industry.name}</p>
             </div>
             <div className="gen-metabox">
               <span>
@@ -103,31 +104,41 @@ const PersonalInfo = ({ userData }) => {
             </div>
           </div>
           {paiedInfo ? (
-            <div>
+            <div className="row">
               <div className="col-lg-6">
                 <div className="gen-metabox">
                   <span>
-                    <i className="fa fa-user-md"></i> Occupation
+                    <i className="fa fa-user"></i> Local Government
                   </span>
-                  <p>{info.occupation} </p>
+                  <p>{info.lgaOfOrigin} </p>
                 </div>
                 <div className="gen-metabox">
                   <span>
-                    <i className="fa fa-map-marker-alt"></i> Preferred Locations
+                    <i className="fa fa-user-alt"></i> Looking for ages
                   </span>
                   <p>
-                    {locations.map((val) => {
-                      return <span key={val.id}>{val.location} OR </span>;
-                    })}
+                    {info.looking_for_age_range}
                   </p>
                 </div>
               </div>
               <div className="col-lg-6">
                 <div className="gen-metabox no-margin">
                   <span>
-                    <i className="fa fa-trophy"></i> Badges
+                    <i className="fa fa-pray"></i> Religion
                   </span>
-                  <ul className="badged"></ul>
+                  <p className="badged">
+                    {info.religion}
+                  </p>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="gen-metabox no-margin">
+                  <span>
+                    <i className="fa fa-map"></i> State Of Origin
+                  </span>
+                  <p className="badged">
+                    {info.stateOfOrigin}
+                  </p>
                 </div>
               </div>
               <div className="col-lg-6">

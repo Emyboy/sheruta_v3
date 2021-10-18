@@ -63,6 +63,9 @@ const WhatNext = (props) => {
 
   useEffect(() => {
     checkPaymentStatus();
+    notifyEmy({
+      heading: " Got to the What Next Page"
+    })
   }, []);
   useEffect(() => {
     getUsersRequests();

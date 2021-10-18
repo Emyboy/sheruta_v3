@@ -128,182 +128,250 @@ import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
-  const { auth } = props;
-  const { params } = props.match;
-  const [state, setState] = useState({
-    showImageModal: false,
-    userRequests: [],
-  });
-  const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState(null);
-  const [notFound, setNotFound] = useState(false);
-  // const user = props.auth.user;
+    const { auth } = props;
+    const { params } = props.match;
+    const [state, setState] = useState({
+        showImageModal: false,
+        userRequests: [],
+    });
+    const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState(null);
+    const [notFound, setNotFound] = useState(false);
+    // const user = props.auth.user;
 
-  useEffect(() => {
-    if (userData) {
-      axios(
-        process.env.REACT_APP_API_URL +
-        "/property-requests/?users_permissions_user=" +
-        userData.id,
-        {}
-      )
-        .then((res) => {
-          setState({ ...state, userRequests: res.data });
-        })
-        .catch((err) => {
-          notification.error({ message: "Error Fetching User Data" });
-          notifyEmy({
-            heading: "Error fetch user requests",
-            log: err,
-            status: "error",
-            url: window.location.pathname
-          })
-        });
-    }
-  }, [userData]);
+    useEffect(() => {
+        if (userData) {
+            axios(
+                process.env.REACT_APP_API_URL +
+                    "/property-requests/?users_permissions_user=" +
+                    userData.id,
+                {},
+            )
+                .then((res) => {
+                    setState({ ...state, userRequests: res.data });
+                })
+                .catch((err) => {
+                    notification.error({ message: "Error Fetching User Data" });
+                    notifyEmy({
+                        heading: "Error fetch user requests",
+                        log: err,
+                        status: "error",
+                        url: window.location.pathname,
+                    });
+                });
+        }
+    }, [userData]);
 
+    useEffect(() => {
+        if (params.username) {
+            axios(
+                process.env.REACT_APP_API_URL +
+                    `/users/?username=${params.username}`,
+            )
+                .then((res) => {
+                    if (res.data.length > 0) {
+                        setUserData(res.data[0]);
+                        const user = res.data[0];
+                        notifyEmy({
+                            heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
+                            log: res.data[0],
+                        });
+                    } else {
+                        setNotFound(true);
+                    }
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    notification.error({ message: "Error fetching user data" });
+                    setNotFound(true);
+                    notifyEmy({
+                        heading: "Error fetch user data on profile page",
+                        log: err,
+                        status: "error",
+                        url: window.location.pathname,
+                    });
+                });
+        }
+    }, [params]);
 
+    useEffect(() => {}, []);
 
-  useEffect(() => {
-    if (params.username) {
-      axios(
-        process.env.REACT_APP_API_URL + `/users/?username=${params.username}`
-      )
-        .then((res) => {
-          if (res.data.length > 0) {
-            setUserData(res.data[0]);
-            const user = res.data[0];
-            notifyEmy({
-              heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
-              log: res.data[0]
-            })
-          } else {
-            setNotFound(true);
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          notification.error({ message: "Error fetching user data" });
-          setNotFound(true);
-          notifyEmy({
-            heading: "Error fetch user data on profile page",
-            log: err,
-            status: "error",
-            url: window.location.pathname
-          })
-        });
-    }
-  }, [params]);
-
-  useEffect(() => {
-    
-  },[])
-
-  if (loading) {
-    return <PageLoader />
-  } else if (notFound) {
-    return <PageNotFound />
-  } else {
-    // const user = userData;
-    return (
-      <>
-        <MetaTags>
-          <title>{`${userData.first_name} ${userData.last_name}`}'s Profile | Sheruta</title>
-          <meta name="description" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
-          <meta property="og:title" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
-          <meta property="og:description" content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`} />
-        </MetaTags>
-        <Layout page="profile">
-          <section className="mt-0">
-            <div className="gap2 gray-bg pt-2">
-              <div className="container">
-                <div className="row justify-content-center">
-                  <div className="col-lg-8">
-                    <div className="row merged20" id="page-contents">
-                      <div className="user-profile">
-                        <figure>
-                          {/* <div className="edit-pp">
+    if (loading) {
+        return <PageLoader />;
+    } else if (notFound) {
+        return <PageNotFound />;
+    } else {
+        return (
+            <>
+                <MetaTags>
+                    <title>
+                        {`${userData.first_name} ${userData.last_name}`}'s
+                        Profile | Sheruta
+                    </title>
+                    <meta
+                        name="description"
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                    />
+                    <meta
+                        property="og:title"
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                    />
+                    <meta
+                        property="og:description"
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                    />
+                </MetaTags>
+                <Layout page="profile">
+                    <section className="mt-0 bgc-f7 pb30-991">
+                        <div className="gap2  pt-2">
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-lg-8">
+                                        <div
+                                            className="row merged20"
+                                            id="page-contents"
+                                        >
+                                            <div className="user-profile">
+                                                <figure>
+                                                    {/* <div className="edit-pp">
                             <label className="fileContainer">
                               <i className="fa fa-camera"></i>
                               <input type="file" />
                             </label>
                           </div> */}
-                          <img
-                            src={"https://picsum.photos/800/300/?blur"}
-                            alt=""
-                          />
-                        </figure>
+                                                    <img
+                                                        src={
+                                                            "https://picsum.photos/800/300/?blur"
+                                                        }
+                                                        alt=""
+                                                    />
+                                                </figure>
 
-                        <div className="profile-section">
-                          <div className="row">
-                            <div className="col-lg-12 col-md-12">
-                              <div
-                                className="profile-author"
-                                style={{ textAlign: "start" }}
-                              >
-                                <div className="profile-author-thumb">
-                                  <img alt="author" src={userData.avatar_url} />
-                                  {/* <div className="edit-dp">
+                                                <div className="profile-section">
+                                                    <div className="row">
+                                                        <div className="col-lg-12 col-md-12">
+                                                            <div
+                                                                className="profile-author"
+                                                                style={{
+                                                                    textAlign:
+                                                                        "start",
+                                                                }}
+                                                            >
+                                                                <div className="profile-author-thumb">
+                                                                    <img
+                                                                        alt="author"
+                                                                        src={
+                                                                            userData.avatar_url
+                                                                        }
+                                                                    />
+                                                                    {/* <div className="edit-dp">
                                     <label className="fileContainer">
                                       <i className="fa fa-camera"></i>
                                       <input type="file" />
                                     </label>
                                   </div> */}
-                                </div>
+                                                                </div>
 
-                                <div
-                                  className="author-content"
-                                  style={{ textAlign: "start" }}
-                                >
-                                  <div className="d-flex">
-                                    <p className="h4 author-name mr-3" style={{ alignSelf: "center" }}>
-                                    {userData.first_name} {userData.last_name} 
-                                  </p>
-                                  <VerifiedBadge user={userData} />
-                                  </div>
-                                  <div className="country">
-                                    @{userData.username}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                                                                <div
+                                                                    className="author-content mb-2"
+                                                                    style={{
+                                                                        textAlign:
+                                                                            "start",
+                                                                    }}
+                                                                >
+                                                                    <div className="d-flex mb-2">
+                                                                        <p
+                                                                            className="h4 author-name mr-3 mb-0"
+                                                                            style={{
+                                                                                alignSelf:
+                                                                                    "center",
+                                                                            }}
+                                                                        >
+                                                                            {
+                                                                                userData.first_name
+                                                                            }{" "}
+                                                                            {
+                                                                                userData.last_name
+                                                                            }
+                                                                        </p>
+                                                                        <VerifiedBadge
+                                                                            user={
+                                                                                userData
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                    <div className="country">
+                                                                        @
+                                                                        {
+                                                                            userData.username
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {userData.bio ? (
+                                                    <div className="card rounded border-gray mt-4">
+                                                        <div className="card-body">
+                                                            {userData.bio}
+                                                        </div>
+                                                    </div>
+                                                ) : null}
+                                            </div>
 
-                      <div className="w-100">
-                        <Tabs defaultActiveKey="2">
-                          <TabPane tab="My Requests" key="1">
-                            <div>
-                              {state.userRequests.map((val, i) => {
-                                return <EachSocialRequest key={i} data={val} />;
-                              })}
-                            </div>
-                          </TabPane>
-                          <TabPane tab="My Personal Info" key="2">
-                            <PersonalInfo userData={userData} />
-                          </TabPane>
-                          {/* {
+                                            <div className="w-100">
+                                                <Tabs defaultActiveKey="2">
+                                                    <TabPane
+                                                        tab="My Requests"
+                                                        key="1"
+                                                    >
+                                                        <div>
+                                                            {state.userRequests.map(
+                                                                (val, i) => {
+                                                                    return (
+                                                                        <EachSocialRequest
+                                                                            key={
+                                                                                i
+                                                                            }
+                                                                            data={
+                                                                                val
+                                                                            }
+                                                                        />
+                                                                    );
+                                                                },
+                                                            )}
+                                                        </div>
+                                                    </TabPane>
+                                                    <TabPane
+                                                        tab="My Personal Info"
+                                                        key="2"
+                                                    >
+                                                        <PersonalInfo
+                                                            userData={userData}
+                                                        />
+                                                    </TabPane>
+                                                    {/* {
                             auth.user && auth.user.user.id === userData.id ? <TabPane tab="Settings" key="3">
                               <ProfileSettings />
                             </TabPane> : null
                           } */}
-                        </Tabs>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </Layout>
-      </>
-    );
-  }
+                                                </Tabs>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </Layout>
+            </>
+        );
+    }
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+    auth: state.auth,
 });
 
 const mapDispatchToProps = {};

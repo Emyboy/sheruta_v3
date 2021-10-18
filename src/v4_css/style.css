@@ -13023,7 +13023,7 @@ a.btn.btn_error{
   color: #00ba74 !important;
 }
 .text-thm2 {
-  color: #ff787c !important;
+  color: #00ba74 !important;
 }
 .text-thm3 {
   color: #006c70 !important;
@@ -13122,7 +13122,7 @@ a.btn.btn_error{
   background-color: #00ba74 !important;
 }
 .bgc-thm2 {
-  background-color: #ff787c !important;
+  background-color: #00ba74 !important;
 }
 .bgc-fb {
   background-color: #3B5998;
@@ -13405,8 +13405,8 @@ a.btn.btn_error{
   color: #ffffff;  
 }
 .btn-thm2 {
-  background-color: #ff787c;
-  border-color: #ff787c;
+  background-color: #00ba74;
+  border-color: #00ba74;
   color: #ffffff;
   border-radius: 0px;
   -webkit-transition: all 0.3s ease;
@@ -13417,8 +13417,8 @@ a.btn.btn_error{
 .btn-thm2:active,
 .btn-thm2:focus {
   background-color: #ffffff;
-  border-color: #ff787c;
-  color: #ff787c; }
+  border-color: #00ba74;
+  color: #00ba74; }
 
 .btn-thm3 {
   background-color: #ff1053;
