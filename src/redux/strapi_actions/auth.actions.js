@@ -11,9 +11,8 @@ export const setAuthState = (state) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-    localStorage.clear();
-    sessionStorage.clear();
     Cookies.remove("token");
+    localStorage.removeItem('token')
     dispatch({
         type: "LOGOUT",
     });
@@ -42,8 +41,7 @@ export const getUser = () => (dispatch) => {
             // notification.error({ message: 'Error fetching profile' })
             store.dispatch({ type: "LOGOUT" });
             Cookies.remove("token");
-            localStorage.clear();
-            sessionStorage.clear();
+            localStorage.removeItem("token");
         });
 };
 

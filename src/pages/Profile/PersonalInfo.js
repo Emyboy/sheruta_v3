@@ -46,9 +46,8 @@ const PersonalInfo = ({ userData }) => {
   if (!info) {
     return null;
   } else
-  console.log('INFO ---', info)
     return (
-      <div className="central-meta w-100">
+      <div className="central-meta w-100 border-gray rounded">
         <button
           className=" btn btn-sm bg-theme text-white shadow"
           style={{
@@ -104,7 +103,8 @@ const PersonalInfo = ({ userData }) => {
             </div>
           </div>
           {paiedInfo ? (
-            <div className="row">
+            <div className="container-fluid">
+              <div className="row">
               <div className="col-lg-6">
                 <div className="gen-metabox">
                   <span>
@@ -175,6 +175,7 @@ const PersonalInfo = ({ userData }) => {
                   </ul>
                 </div>
               </div> */}
+            </div>
             </div>
           ) : null}
         </div>

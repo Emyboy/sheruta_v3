@@ -70,9 +70,8 @@ export const getAuthPersonalInfo = () => async (dispatch) => {
         })
         .catch((err) => {
             if (err.response && err.response.status === 401) {
-                localStorage.clear();
+                localStorage.removeItem("token");
                 Cookies.remove("token");
-                sessionStorage.clear();
                 store.dispatch({
                     type: "LOGOUT",
                 });
@@ -149,14 +148,14 @@ export const showRobotMessage = (message, actionText, actionLink) => dispatch =>
             robot_action_link: actionLink
         }
     });
-    // setTimeout(() => {
-    //     dispatch({
-    //         type: "SHOW_ROBOT_MESSAGE",
-    //         payload: {
-    //             robot_message: null,
-    //             robot_action_text: null,
-    //             robot_action_link: null,
-    //         },
-    //     });
-    // }, 7000);
+    setTimeout(() => {
+        dispatch({
+            type: "SHOW_ROBOT_MESSAGE",
+            payload: {
+                robot_message: null,
+                robot_action_text: null,
+                robot_action_link: null,
+            },
+        });
+    }, 15000);
 }

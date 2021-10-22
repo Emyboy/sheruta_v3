@@ -9,18 +9,19 @@ import { showRobotMessage } from "../../../redux/strapi_actions/view.action";
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: relative;
     h5 {
         text-align: left;
-        width: ${Global.isMobile ? "75%" : "80%"};
+        /* width: ${Global.isMobile ? "75%" : "85%"}; */
         text-transform: none;
+        margin-left: 10px;
     }
     img {
         border-radius: 50%;
         height: 60px;
-        /* align-self: center; */
+        width: 60px;
     }
     svg {
         position: absolute;

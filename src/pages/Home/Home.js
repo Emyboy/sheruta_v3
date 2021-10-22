@@ -82,19 +82,23 @@ const Home = (props) => {
                   <HomeJumbo />
 
                   <ExploreByPopularCity />
-                  <div className="row justify-content-center">
-                      <div className="col-sm-12 col-md-6 mb-4">
-                          <FreeRequestAds />
-
+                  <div className="container-fluid">
+                      <div className="row justify-content-center">
+                          <div className="col-sm-12 col-md-6 mb-4">
+                              <FreeRequestAds />
+                          </div>
                       </div>
                   </div>
                   {/* {view.app_details
                       ? view.app_details.everything_free && (
                         )
                         : null} */}
+                        <div className="container">
+
                   <div className="text-center mb-5">
-                      <img src={end_sarz} className="rounded shadow" />
+                      <img src={end_sarz} className="rounded shadow" width="100%" />
                   </div>
+                        </div>
 
                   <div className="container-fluid">
                       <div className="row bgc-f7 pt-3">

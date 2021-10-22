@@ -17,16 +17,18 @@ export default function RobotMessageContainer() {
     const { robot_message, robot_action_text, robot_action_link } = useSelector(
         (state) => state.view,
     );
+    const { user } = useSelector(state => state.auth);
     useEffect(() => {
-        setTimeout(() => {
+        if(!localStorage.getItem('robot_active') && user){
             dispatch(
                 showRobotMessage(
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente enim, sequi dolor quas debitis eligendi. Expedita placee!",
-                    "login here",
-                    "/pricing",
+                    `Hi ${user.user.first_name} my name is Anita and I'm here to guid you 😊`,
+                    // "login here",
+                    // "/pricing",
                 ),
             );
-        }, 1000);
+            localStorage.setItem("robot_active", true);
+        }
     },[])
     return (
         <Wrapper
@@ -35,7 +37,7 @@ export default function RobotMessageContainer() {
             }`}
         >
             <div className="row justify-content-center mb-4 mt-3 p-2 ">
-                <div className="col-sm-12 col-lg-6">
+                <div className="col-sm-12 col-lg-4 col-md-6">
                     <RobotMessage /> 
                 </div>
             </div>
