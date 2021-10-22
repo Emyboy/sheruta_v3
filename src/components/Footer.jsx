@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default () => {
     return (
-        <footer className="dark-footer skin-dark-footer" style={{ zIndex: 0 }}>
+        <footer className="light-footer skin-light-footer" style={{ zIndex: 0 }}>
             <div>
                 <div className="container">
                     <div className="row">
@@ -90,7 +90,7 @@ export default () => {
                                             rel="noopener noreferrer"
                                             href="http://fb.me/sheruta.ng"
                                         >
-                                            <i className="ti-facebook text-white"></i>
+                                            <i className="ti-facebook text-dark"></i>
                                         </a>
                                     </li>
                                     <li>
@@ -99,7 +99,7 @@ export default () => {
                                             rel="noopener noreferrer"
                                             href="https://twitter.com/sheruta_ng"
                                         >
-                                            <i className="ti-twitter text-white"></i>
+                                            <i className="ti-twitter text-dark"></i>
                                         </a>
                                     </li>
                                     <li>
@@ -108,7 +108,7 @@ export default () => {
                                             rel="noopener noreferrer"
                                             href="https://www.instagram.com/sheruta_ng/"
                                         >
-                                            <i className="ti-instagram text-white"></i>
+                                            <i className="ti-instagram text-dark"></i>
                                         </a>
                                     </li>
                                     {/* <li><a href="#c"><i className="ti-linkedin"></i></a></li> */}

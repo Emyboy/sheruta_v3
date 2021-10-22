@@ -305,14 +305,16 @@ const CraeteRequest = (props) => {
     } else
     return (
         <Layout back>
-            <Modal show={view.personal_info && !view.personal_info.nin} style={{ marginTop: '30vh'}} size='md'>
+            <Modal show={view.personal_info && !view.personal_info.nin} style={{ marginTop: '20vh'}} size='md'>
                 <Modal.Body className="text-center">
-                    <h3 className='text-center'>You have to join the community to post a request.</h3>
+                    <h3 className='text-center'>Join the community to post a request.</h3>
                     <hr />
                     <ol>
-                        <li><h4>Get verified with your NIN</h4></li>
-                        <li><h4>Request to view user's personal information</h4></li>
-                        <li><h4>Have access to verified users</h4></li>
+                        <li><h4>Submit your NIN <small>(Only you can see this)</small></h4></li>
+                        <li><h4>Get verified</h4></li>
+                        <li><h4>Upload an image of yourself</h4></li>
+                        <li><h4>View user's information</h4></li>
+                        <li><h4>Have access to other verified users</h4></li>
                         <hr />
                         <Link to="/start">
                             <Btn text="Get Started" onClick={() => {}} />

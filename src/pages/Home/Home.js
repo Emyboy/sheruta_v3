@@ -15,6 +15,9 @@ import SocailHomePage from "../../components/Social/SocialHomePage/SocialHomePag
 import Footer from "../../components/Footer";
 import ExploreByPopularCity from "./Graphics";
 import HomeJumbo from "./HomeJumbo";
+import end_sarz from '../../assets/img/end_sarz.jpeg';
+import match from "../../assets/img/match.jpeg";
+import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -77,7 +80,21 @@ const Home = (props) => {
             </div>
           </div> */}
                   <HomeJumbo />
+
                   <ExploreByPopularCity />
+                  <div className="row justify-content-center">
+                      <div className="col-sm-12 col-md-6 mb-4">
+                          <FreeRequestAds />
+
+                      </div>
+                  </div>
+                  {/* {view.app_details
+                      ? view.app_details.everything_free && (
+                        )
+                        : null} */}
+                  <div className="text-center mb-5">
+                      <img src={end_sarz} className="rounded shadow" />
+                  </div>
 
                   <div className="container-fluid">
                       <div className="row bgc-f7 pt-3">
@@ -112,6 +129,7 @@ const Home = (props) => {
                                   heading="Recent Requests"
                                   subHeading="These are the most recent requests we have."
                               />
+                              <img src={match} className="mb-3 rounded" />
 
                               <div className=" pl-0 pr-1">
                                   <div className="block-body">

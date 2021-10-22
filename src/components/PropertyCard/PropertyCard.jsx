@@ -31,14 +31,14 @@ export default function PropertyCard({ data }) {
                             <div className="thmb_cntnt">
                                 <ul className="tag mb0">
                                     {data.statu ? (
-                                        <li className="list-inline-item">
+                                        <li className="list-inline-item" style={{ width: '100px' }}>
                                             <a>
                                                 {data.statu.name.toUpperCase()}
                                             </a>
                                         </li>
                                     ) : null}
                                     {data.categorie ? (
-                                        <li className="list-inline-item">
+                                        <li className="list-inline-item" style={{ width: '100px' }}>
                                             <a>
                                                 {data.categorie.name.toUpperCase()}
                                             </a>
@@ -57,7 +57,7 @@ export default function PropertyCard({ data }) {
                                         </a>
                                     </li>
                                 </ul> */}
-                                <a className="fp_price">
+                                <a className="fp_price" style={{ right: '20px', bottom: '15px' }}>
                                     ₦ {window.formatedPrice.format(data.price)}
                                     {data.payment_type && (
                                         <small>/{data.payment_type.name}</small>

@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { getAppDetails } from "../../utils/Sheruta";
 import store from "../store/store";
 
 export const getAllServices = () => (dispatch) => {
@@ -125,4 +126,37 @@ export const getAllWorkIndustries = () => dispatch => {
         .catch((err) => {
             notification.error({ message: "Error with work industries" });
         });
+}
+
+export const getAppDetail = () =>  async dispatch => {
+    try {
+        const app = await getAppDetails();
+        dispatch({
+            type: "GET_APP_DETAILS",
+            payload: app.data
+        });
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
+export const showRobotMessage = (message, actionText, actionLink) => dispatch => {
+    dispatch({
+        type: "SHOW_ROBOT_MESSAGE",
+        payload: {
+            robot_message: message,
+            robot_action_text: actionText,
+            robot_action_link: actionLink
+        }
+    });
+    // setTimeout(() => {
+    //     dispatch({
+    //         type: "SHOW_ROBOT_MESSAGE",
+    //         payload: {
+    //             robot_message: null,
+    //             robot_action_text: null,
+    //             robot_action_link: null,
+    //         },
+    //     });
+    // }, 7000);
 }

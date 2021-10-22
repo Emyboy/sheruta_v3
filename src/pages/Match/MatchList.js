@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Btn from "../../components/Btn/Btn";
 import { Spinner } from "react-activity";
 import styled from "styled-components";
@@ -23,6 +23,7 @@ const NavBtn = styled.button`
 export default function MatchList() {
     const { user_suggestions, loading } = useSelector((state) => state.alice);
     const { personal_info } = useSelector((state) => state.view);
+    const { user } = useSelector(state => state.auth);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -43,13 +44,16 @@ export default function MatchList() {
         }
     };
     console.log(user_suggestions);
+    if(!user){
+        return <Redirect to="/login" />
+    }
     return (
         <div className="pb-5">
             {personal_info && !personal_info.nin ? (
-                <div className="text-center" style={{ marginTop: "20vh" }}>
+                <div className="text-center" style={{ marginTop: "20vh", marginBottom: '20vh' }}>
                     <h3>🙆🏽‍♂️</h3>
-                    <h6>Account Not Yet Verified</h6>
-                    <small>Verify your account and view your flat mates</small><br />
+                    <h2>Account Not Yet Verified</h2>
+                    <h4>Verify your account and view your flat mates</h4><br />
                     <Link to="/start">
                         <Btn
                             text="Get Started"

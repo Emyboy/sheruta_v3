@@ -7,7 +7,7 @@ import Global from "../../Global";
 const PersonalInfo = ({ userData }) => {
   const [info, setInfo] = useState(null);
   const [locations, setLocations] = useState([]);
-  const [paiedInfo, setPaidInfo] = useState(false);
+  const [paiedInfo, setPaidInfo] = useState(true);
   useEffect(() => {
     if (userData) {
       axios(
@@ -141,7 +141,7 @@ const PersonalInfo = ({ userData }) => {
                   </p>
                 </div>
               </div>
-              <div className="col-lg-6">
+              {/* <div className="col-lg-6">
                 <div className="gen-metabox no-margin">
                   <span>
                     <i className="fa fa-sitemap"></i> Social Networks
@@ -174,7 +174,7 @@ const PersonalInfo = ({ userData }) => {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
           ) : null}
         </div>

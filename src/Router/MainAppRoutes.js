@@ -38,6 +38,7 @@ import AllRequests from '../pages/Request/AllRequests'
 import Notifications from '../pages/Notifications/Notifications';
 import Match from '../pages/Match/Match';
 import Profile2 from "../pages/Profile/Profile2";
+import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer';
 
 
 // const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
@@ -57,6 +58,7 @@ function App() {
                   <FeedbackPopup />
                   <PaymentPopup />
                   <MasterPopup />
+                  <RobotMessageContainer />
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/start" component={GetStarted} />

@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
 import { notifyEmy } from "../../utils/Sheruta";
+import end_sarz from "../../assets/img/end_sarz.jpeg";
+import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 
 const formatedPrice = new Intl.NumberFormat("en-NG");
 
@@ -176,7 +178,17 @@ export default connect(mapStateToProps)((props) => {
                         </div>
                     </div>
                 </div>
-
+                <div className="text-center">
+                    <h1 className="text-danger text-center">
+                        Payment is on us!
+                    </h1>
+                    <div className="text-center mb-5">
+                        <img src={end_sarz} className="rounded shadow" />
+                    </div>
+                    <div className='col-lg-6 col-sm-12'>
+                        <FreeRequestAds />
+                        </div>
+                </div>
                 <div className="row mb-5 justify-content-center pb-5">
                     {state.plans.map((val, i) => {
                         return (

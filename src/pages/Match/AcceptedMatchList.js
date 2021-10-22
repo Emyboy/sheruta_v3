@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CallBtn from "../../components/CallBtn/CallBtn";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 
 export default function AcceptedMatchList({ list }) {
@@ -56,11 +58,11 @@ export default function AcceptedMatchList({ list }) {
                                     </div>
                                 </div> */}
                                 <h4 className="d-flex">
-                                    <a href="#" title="">
+                                    <Link to={`/user/${person.username}`}>
                                         {" "}
                                         {person && person.first_name}{" "}
                                         {/* {person && person.last_name} */}
-                                    </a>
+                                    </Link>
                                     <VerifiedBadge
                                         user={person}
                                         without_text
@@ -75,9 +77,10 @@ export default function AcceptedMatchList({ list }) {
                                         <i className="fa fa-map-marker"></i>{" "}
                                         Toronto, Canada
                                     </span> */}
-                                    <a href="#" className="main-btn bg-theme" title="">
+                                    {/* <a href="#" className="main-btn bg-theme" title="">
                                         Call Me
-                                    </a>
+                                    </a> */}
+                                    <CallBtn phone_number={person.phone_number} />
                                 </div>
                             </div>
                         </div>

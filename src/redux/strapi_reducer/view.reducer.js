@@ -8,7 +8,11 @@ const initialState = {
     states: [],
     work_industries: [],
     configureView: false,
-    feed: []
+    feed: [],
+    app_details: null,
+    robot_message: null,
+    robot_action_text: null,
+    robot_action_link: null
 };
 
 function ViewReducer(state = initialState, { type, payload }) {
@@ -28,6 +32,16 @@ function ViewReducer(state = initialState, { type, payload }) {
                 ...state,
                 work_industries: payload
             };
+        case 'GET_APP_DETAILS':
+            return {
+                ...state,
+                app_details: payload
+            }
+        case "SHOW_ROBOT_MESSAGE":
+            return {
+                ...state,
+                ...payload
+            }
 
         case "GET_ALL_SERVICES":
             return { ...state, services: payload };
