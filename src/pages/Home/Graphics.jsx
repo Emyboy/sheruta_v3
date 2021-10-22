@@ -1,10 +1,15 @@
 import React from "react";
 import image from "./Newpics.png";
+import whatwedo from "../../assets/img/whatwedo_bg.svg";
+
 
 export default function ExploreByPopularCity() {
     return (
         <div>
-            <section className="">
+            <section
+                className="mb-4"
+                style={{ backgroundImage: `url(${whatwedo})` }}
+            >
                 <div className="container rounded">
                     <div className="row align-items-center ">
                         <div className="col-lg-6 col-md-6">

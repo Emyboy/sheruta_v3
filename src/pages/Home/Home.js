@@ -18,6 +18,7 @@ import HomeJumbo from "./HomeJumbo";
 import end_sarz from '../../assets/img/end_sarz.jpeg';
 import match from "../../assets/img/match.jpeg";
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
+import Partners from '../../assets/img/partners.png';
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -80,8 +81,11 @@ const Home = (props) => {
             </div>
           </div> */}
                   <HomeJumbo />
-
-                  <ExploreByPopularCity />
+                      <ExploreByPopularCity />
+                  <div className="text-center mb-5">
+                      <h1 className="text-muted">Our Partners</h1>
+                      <img src={Partners} width="800px" />
+                  </div>
                   <div className="container-fluid">
                       <div className="row justify-content-center">
                           <div className="col-sm-12 col-md-6 mb-4">
@@ -93,12 +97,15 @@ const Home = (props) => {
                       ? view.app_details.everything_free && (
                         )
                         : null} */}
-                        <div className="container">
-
-                  <div className="text-center mb-5">
-                      <img src={end_sarz} className="rounded shadow" width="100%" />
+                  <div className="container">
+                      <div className="text-center mb-5">
+                          <img
+                              src={end_sarz}
+                              className="rounded shadow"
+                              width="100%"
+                          />
+                      </div>
                   </div>
-                        </div>
 
                   <div className="container-fluid">
                       <div className="row bgc-f7 pt-3">

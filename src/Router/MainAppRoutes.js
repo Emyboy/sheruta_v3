@@ -14,39 +14,69 @@ import 'react-activity/src/Spinner/Spinner.css'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Contact from '../pages/Contact/Contact';
-import About from '../pages/About/About';
+// import Contact from '../pages/Contact/Contact';
+// import About from '../pages/About/About';
+// import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
+// import Login from '../pages/Login/Login';
+// import Signup from '../pages/Signup/Signup'
+// import CreateRequest from '../pages/Request/CreateRequest';
+// import GetStarted from "../pages/GetStarted/GetStarted";
+// import Pricing from "../pages/Pricing/Pricing";
+// import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
+// import RequestDetails from '../pages/Request/RequestDetails';
+// import SearchResults from '../pages/SearchResults/SearchResults'
+// import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
+// import PasswordReset from '../pages/ResetPassword/PasswordReset';
+// import PropertySort from '../pages/Property/PropertySort'
+// import WhatNext from '../pages/GetStarted/Steps/WhatNext';
+// import AllRequests from '../pages/Request/AllRequests'
+// import Request from "../pages/Request/Request";
+
 import PageNotFound from '../pages/PageNotFound';
-import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
-import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
-import Login from '../pages/Login/Login';
-import Signup from '../pages/Signup/Signup'
-import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
-import RequestDetails from '../pages/Request/RequestDetails';
-import SearchResults from '../pages/SearchResults/SearchResults'
 import UserFeedback from '../pages/Feedback/UserFeedback'
+import FeedbackPopup from '../pages/Feedback/FeedbackPopup';
 import PaymentPopup from '../components/Popups/PaymentPopup';
-import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
-import PasswordReset from '../pages/ResetPassword/PasswordReset';
-import PropertySort from '../pages/Property/PropertySort'
-import WhatNext from '../pages/GetStarted/Steps/WhatNext';
 import MasterPopup from '../components/Popups/MasterPopup';
 import Home from '../pages/Home/Home';
-import CreateRequest from '../pages/Request/CreateRequest';
-import AllRequests from '../pages/Request/AllRequests'
 import Notifications from '../pages/Notifications/Notifications';
 import Match from '../pages/Match/Match';
 import Profile2 from "../pages/Profile/Profile2";
 import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer';
 
-
-// const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
-// const CreateRequest = React.lazy(() => import("../pages/Request/CreateRequest"));
+const PropertyDetails = React.lazy(() =>
+    import("../pages/PropertyDetails/PropertyDetails"),
+);
+const CreateRequest = React.lazy(() =>
+    import("../pages/Request/CreateRequest"),
+);
 const GetStarted = React.lazy(() => import("../pages/GetStarted/GetStarted"));
-const Request = React.lazy(() => import("../pages/Request/Request"));
+const Login = React.lazy(() => import("../pages/Login/Login"));
+const Signup = React.lazy(() => import("../pages/Signup/Signup"));
 const Pricing = React.lazy(() => import("../pages/Pricing/Pricing"));
-// const Profile2 = React.lazy(() => import("../pages/Profile/Profile2"));
+const Contact = React.lazy(() => import("../pages/Contact/Contact"));
+const About = React.lazy(() => import("../pages/About/About"));
+const SignUpSuccess = React.lazy(() =>
+    import("../pages/SignUpSuccess/SignUpSuccess"),
+);
+const RequestDetails = React.lazy(() =>
+    import("../pages/Request/RequestDetails"),
+);
+const SearchResults = React.lazy(() =>
+    import("../pages/SearchResults/SearchResults"),
+);
+const VerifyEmail = React.lazy(() =>
+    import("../pages/VerifyEmail/VerifyEmail"),
+);
+const PasswordReset = React.lazy(() =>
+    import("../pages/ResetPassword/PasswordReset"),
+);
+const PropertySort = React.lazy(() => import("../pages/Property/PropertySort"));
+const WhatNext = React.lazy(() => import("../pages/GetStarted/Steps/WhatNext"));
+const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
+const Request = React.lazy(() => import("../pages/Request/Request"));
+
+
 
 function App() {
     return (
