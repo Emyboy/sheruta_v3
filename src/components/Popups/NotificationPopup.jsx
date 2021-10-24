@@ -63,9 +63,9 @@ export default function NotificationPopup() {
         });
     };
 
-    React.useEffect(() => {
-        handleClick();
-    }, [personal_info]);
+    // React.useEffect(() => {
+    //     handleClick();
+    // }, [personal_info]);
 
     if (done) {
         return null;
