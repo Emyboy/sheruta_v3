@@ -7,14 +7,16 @@ import { useSelector } from "react-redux";
 import { notifyEmy } from "../../utils/Sheruta";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { notification } from "antd";
 
 export default function NotificationPopup() {
     const [done, setDone] = useState(false);
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { user } = useSelector((state) => state.auth);
     const { personal_info } = useSelector((state) => state.view);
 
     const savePushToken = (token) => {
-        console.log("SAVING TOKEN ---'", token);
         axios(
             process.env.REACT_APP_API_URL +
                 `/notifications/store/${user.user.id}`,
@@ -29,17 +31,28 @@ export default function NotificationPopup() {
             },
         )
             .then((res) => {
-                console.log("Saved -----", res);
                 setDone(true);
+                setLoading(false);
+                setShow(false);
+                notifyEmy({
+                    heading: "Enabled notifications",
+                });
+                notification.success({ message: "Notification enabled" });
             })
             .catch((err) => {
                 console.log("Error saving notification", err);
                 setDone(true);
+                setLoading(false);
+                setShow(false);
+                notifyEmy({
+                    heading: "Error saving notification key to DB",
+                    log: err,
+                });
             });
     };
 
     const handleClick = () => {
-        console.log("WORKS");
+        setLoading(true);
         Notification.requestPermission().then(() => {
             const msg = firebase.messaging();
             msg.requestPermission()
@@ -47,10 +60,6 @@ export default function NotificationPopup() {
                     return msg.getToken();
                 })
                 .then((data) => {
-                    console.log(
-                        "========= NOTIFY ======================",
-                        data,
-                    );
                     savePushToken(data);
                 })
                 .catch((err) => {
@@ -63,20 +72,20 @@ export default function NotificationPopup() {
         });
     };
 
-    // React.useEffect(() => {
-    //     handleClick();
-    // }, [personal_info]);
+    React.useEffect(() => {
+        if (user && personal_info && Notification.permission !== "granted") {
+            setTimeout(() => {
+                setShow(true);
+            }, 10000);
+        }
+    }, [personal_info, user]);
 
     if (done) {
         return null;
     }
 
     return (
-        <Modal
-            show={
-                user && personal_info && Notification.permission !== "granted"
-            }
-        >
+        <Modal show={show}>
             <div className="card-body">
                 <div className="text-center">
                     <BsFillBellFill size={80} />
@@ -96,7 +105,15 @@ export default function NotificationPopup() {
                     <Btn
                         text="Allow Notifications"
                         onClick={handleClick}
-                        rounded
+                        loading={loading}
+                    />
+                    <br />
+                    <Btn
+                        text="Not Now"
+                        onClick={handleClick}
+                        loading={loading}
+                        className="mt-3 btn-sm"
+                        danger
                     />
                 </div>
             </div>
