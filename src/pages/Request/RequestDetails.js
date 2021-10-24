@@ -14,6 +14,7 @@ import { notification, Tag } from "antd";
 import { ImLocation } from "react-icons/im";
 import moment from "moment";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
+import Notifications from "../../utils/Notifications";
 const ImgContainer = styled.section`
     padding: 5em;
     margin-bottom: 1em;
@@ -43,11 +44,18 @@ export default function RequestDetails(props) {
                     setRequest(res.data[0]);
                     setState({ ...state, loading: false });
                 }
+                Notifications.notifyUser({
+                    owner: res.data[0].users_permissions_user.id,
+                    users_permissions_user: user.user.id,
+                    title: "viewed your request",
+                    sub_title: res.data[0].heading,
+                    type: 'request_view'
+                })
             })
             .catch((err) => {
-                // console.log('ERROR ------', err)
-                setState({ ...state, loading: false });
-                notification.error({ message: "Error fetching reqeust data" });
+                console.log('ERROR ------', err)
+                setState({ ...state, loading: false, notFound: true });
+                notification.error({ message: "Error fetching request data" });
             });
     }, []);
 
