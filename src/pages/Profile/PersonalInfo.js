@@ -48,7 +48,7 @@ const PersonalInfo = ({ userData }) => {
   } else
     return (
       <div className="central-meta w-100 border-gray rounded">
-        <button
+        {/* <button
           className=" btn btn-sm bg-theme text-white shadow"
           style={{
             position: "fixed",
@@ -62,7 +62,7 @@ const PersonalInfo = ({ userData }) => {
           }}
         >
           {"Call Me"} <i className="fa fa-phone"></i>
-        </button>
+        </button> */}
         <span className="create-post">
           Personal Info
           {/* <a href="#" className="p-2 bg-theme text-white rounded shadow">

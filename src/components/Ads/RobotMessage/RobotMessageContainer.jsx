@@ -22,7 +22,7 @@ export default function RobotMessageContainer() {
         if(!localStorage.getItem('robot_active') && user){
             dispatch(
                 showRobotMessage(
-                    `Hi ${user.user.first_name} my name is Anita and I'm here to guid you 😊`,
+                    `Hi ${user.user.first_name} my name is Anita and I'm here to guide you 😊`,
                     // "login here",
                     // "/pricing",
                 ),

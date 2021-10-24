@@ -11,6 +11,7 @@ import '../assets/css/styles.css';
 import '../v4_css/style.css';
 import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
+// import firebase from "../Firebase"
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -75,10 +76,24 @@ const PropertySort = React.lazy(() => import("../pages/Property/PropertySort"));
 const WhatNext = React.lazy(() => import("../pages/GetStarted/Steps/WhatNext"));
 const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
-
+const Blog = React.lazy(() => import("../pages/Blog/Blog"));
+const BlogDetails = React.lazy(() => import("../pages/Blog/BlogDetails"));
 
 
 function App() {
+  // React.useEffect(() => {
+  //     setTimeout(() => {
+  //       const msg = firebase.messaging();
+  //       msg.requestPermission()
+  //           .then(() => {
+  //               return msg.getToken();
+  //           })
+  //           .then((data) => {
+  //               console.log("========= NOTIFY ======================", data);
+  //           });
+  //     }, 10000);
+  // });
+
     return (
       <Suspense fallback={<PageLoader />}>
         <Provider store={store}>
@@ -92,10 +107,12 @@ function App() {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/start" component={GetStarted} />
+                    <Route exact path="/blog" component={Blog} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />
                     {/* <Route exact path="/submit" component={Submit} /> */}
                     <Route exact path="/what-next" component={WhatNext} />
+                    <Route exact path="/blog/:uuid/:id" component={BlogDetails} />
                     <Route exact path="/start/:step" component={GetStarted} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact" component={Contact} />

@@ -15,6 +15,7 @@ import {
     getAllMySuggestion,
     suggestThemForMe,
 } from "../../redux/strapi_actions/alice.actions";
+import NotificationPopup from "./NotificationPopup";
 
 const MasterPopup = (props) => {
     const { user } = useSelector((state) => state.auth);
@@ -49,6 +50,7 @@ const MasterPopup = (props) => {
             <>
                 <ConfigViewPopup />
                 <GetStartedPopup />
+                <NotificationPopup />
             </>
         );
     } else {
