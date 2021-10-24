@@ -110,7 +110,7 @@ export default function NotificationPopup() {
                     <br />
                     <Btn
                         text="Not Now"
-                        onClick={handleClick}
+                        onClick={() => setShow(false)}
                         loading={loading}
                         className="mt-3 btn-sm"
                         danger
