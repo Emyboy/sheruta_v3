@@ -14,7 +14,7 @@ export default function NotificationPopup() {
     const { personal_info } = useSelector((state) => state.view);
 
     const savePushToken = (token) => {
-        console.log("SAVING TOKEN ---'", token)
+        console.log("SAVING TOKEN ---'", token);
         axios(
             process.env.REACT_APP_API_URL +
                 `/notifications/store/${user.user.id}`,
@@ -40,32 +40,32 @@ export default function NotificationPopup() {
 
     const handleClick = () => {
         console.log("WORKS");
-        if (("Notification" in window)) {
-            Notification.requestPermission()
+        Notification.requestPermission().then(() => {
+            const msg = firebase.messaging();
+            msg.requestPermission()
                 .then(() => {
-                    const msg = firebase.messaging();
-                    msg.requestPermission()
-                        .then(() => {
-                            return msg.getToken();
-                        })
-                        .then((data) => {
-                            console.log("========= NOTIFY ======================", data);
-                            savePushToken(data);
-                        })
-                        .catch((err) => {
-                            console.log('ERROR --', err)
-                            notifyEmy({
-                                heading: "Error turning on notification",
-                                log: { ...err },
-                            });
-                        });
+                    return msg.getToken();
                 })
-        }
+                .then((data) => {
+                    console.log(
+                        "========= NOTIFY ======================",
+                        data,
+                    );
+                    savePushToken(data);
+                })
+                .catch((err) => {
+                    console.log("ERROR --", err);
+                    notifyEmy({
+                        heading: "Error turning on notification",
+                        log: { ...err },
+                    });
+                });
+        });
     };
 
     React.useEffect(() => {
-        handleClick()
-    },[personal_info])
+        handleClick();
+    }, [personal_info]);
 
     if (done) {
         return null;
