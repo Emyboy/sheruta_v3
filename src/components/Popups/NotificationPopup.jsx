@@ -40,22 +40,27 @@ export default function NotificationPopup() {
 
     const handleClick = () => {
         console.log("WORKS");
-        const msg = firebase.messaging();
-        msg.requestPermission()
-            .then(() => {
-                return msg.getToken();
-            })
-            .then((data) => {
-                console.log("========= NOTIFY ======================", data);
-                savePushToken(data);
-            })
-            .catch((err) => {
-                console.log('ERROR --', err)
-                notifyEmy({
-                    heading: "Error turning on notification",
-                    log: { ...err },
-                });
-            });
+        if (("Notification" in window)) {
+            Notification.requestPermission()
+                .then(() => {
+                    const msg = firebase.messaging();
+                    msg.requestPermission()
+                        .then(() => {
+                            return msg.getToken();
+                        })
+                        .then((data) => {
+                            console.log("========= NOTIFY ======================", data);
+                            savePushToken(data);
+                        })
+                        .catch((err) => {
+                            console.log('ERROR --', err)
+                            notifyEmy({
+                                heading: "Error turning on notification",
+                                log: { ...err },
+                            });
+                        });
+                })
+        }
     };
 
     React.useEffect(() => {
