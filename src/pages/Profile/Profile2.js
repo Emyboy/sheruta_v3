@@ -125,6 +125,7 @@ import ProfileSettings from "./ProfileSettings";
 import { notifyEmy } from "../../utils/Sheruta";
 import MetaTags from "react-meta-tags";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
+import Notifications from "../../utils/Notifications";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
