@@ -180,6 +180,13 @@ export const Profile2 = (props) => {
                         setNotFound(true);
                     }
                     setLoading(false);
+                    Notifications.notifyUser({
+                        owner: res.data[0].id,
+                        users_permissions_user: res.data[0].users_permissions_user.id,
+                        title: "viewed your profile",
+                        sub_title: null,
+                        type: "profile_view",
+                    });
                 })
                 .catch((err) => {
                     notification.error({ message: "Error fetching user data" });
