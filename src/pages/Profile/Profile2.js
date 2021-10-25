@@ -183,13 +183,15 @@ export const Profile2 = (props) => {
                     setLoading(false);
                     Notifications.notifyUser({
                         owner: res.data[0].id,
-                        users_permissions_user: res.data[0].users_permissions_user.id,
+                        // users_permissions_user:
+                        //     res.data[0].users_permissions_user.id,
                         title: "viewed your profile",
                         sub_title: null,
                         type: "profile_view",
                     });
                 })
                 .catch((err) => {
+                    console.log(err)
                     notification.error({ message: "Error fetching user data" });
                     setNotFound(true);
                     notifyEmy({
