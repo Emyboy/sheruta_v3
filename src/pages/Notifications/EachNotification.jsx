@@ -11,7 +11,7 @@ export default function EachNotification({ data }) {
                     <img src={data.users_permissions_user?.avatar_url} alt="" />
                 </figure>
                 <div>
-                    <h5>{data.users_permissions_user.first_name}{data.title}</h5>
+                    <h5>{data.users_permissions_user?.first_name}{data.title}</h5>
                     <small>30 mints ago</small>
                 </div>
             </div>
