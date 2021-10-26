@@ -46,7 +46,7 @@ export default function RequestDetails(props) {
                 }
                 Notifications.notifyUser({
                     owner: res.data[0].users_permissions_user.id,
-                    users_permissions_user: user.user.id,
+                    // users_permissions_user: user.user.id,
                     title: "viewed your request",
                     sub_title: res.data[0].heading,
                     type: 'request_view'

@@ -20,24 +20,23 @@ export default {
         payment_plan,
     }) => {
         const { user } = store.getState().auth;
-        if(user && user.user.id !== owner){
-            const data = await axios(
-                process.env.REACT_APP_API_URL + `/notifications/create`,
-                {
-                    method: "POST",
-                    data: {
-                        title,
-                        sub_title,
-                        owner,
-                        users_permissions_user: user ? user.user.id : null,
-                        type,
-                        property_request,
-                        payment_plan,
-                    },
+        const data = await axios(
+            process.env.REACT_APP_API_URL + `/notifications/create`,
+            {
+                method: "POST",
+                data: {
+                    title,
+                    sub_title,
+                    owner,
+                    users_permissions_user:
+                        user && user.user.id !== owner ? user.user.id : null,
+                    type,
+                    property_request,
+                    payment_plan,
                 },
-            );
-            console.log('NOTIFICATION SEND ---', data);
-            return data;
-        }
+            },
+        );
+        console.log("NOTIFICATION SEND ---", data);
+        return data;
     },
 };
