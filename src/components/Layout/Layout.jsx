@@ -238,13 +238,13 @@ const Layout = connect(
                             active={page === "match"}
                         />
                     ) : null}
-                    {/* <FooterNav
+                    <FooterNav
                         count={3}
-                        IconComponent={<BiBell size={30} />}
+                        IconComponent={<BiBell size={view.notifications && view.notifications.length} />}
                         text="Notifications"
                         path="/notifications"
                         active={page === "notifications"}
-                    /> */}
+                    />
                     {user ? (
                         <FooterNav
                             text="Profile"

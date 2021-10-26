@@ -12,7 +12,8 @@ const initialState = {
     app_details: null,
     robot_message: null,
     robot_action_text: null,
-    robot_action_link: null
+    robot_action_link: null,
+    notifications: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {
@@ -52,6 +53,12 @@ function ViewReducer(state = initialState, { type, payload }) {
             return { ...state, categories: payload };
         case "GET_ALL_PAYMENT_TYPES":
             return { ...state, payment_types: payload };
+
+        case 'GET_ALL_NOTIFICATIONS':
+            return {
+                ...state,
+                notifications: payload
+            }
 
         default:
             return state;

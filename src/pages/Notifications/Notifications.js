@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EachNotification from "./EachNotification";
 import Layout from "../../components/Layout/Layout";
+import { getAllNotifications } from "../../redux/strapi_actions/view.action";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Notifications() {
+export default function _Notifications() {
+    const dispatch = useDispatch();
+    const { notifications } = useSelector((state) => state.view);
+
+    useEffect(async () => {
+        dispatch(getAllNotifications());
+    }, []);
+    
+    console.log('NOTIFICAITION ==============', notifications)
     return (
         <Layout page={"notifications"}>
             <section className="pt-3 container-fluid">
@@ -19,12 +29,16 @@ export default function Notifications() {
                                 </span>
                                 <div className="notification-box">
                                     <ul>
-                                        <EachNotification />
-                                        <EachNotification />
-                                        <EachNotification />
-                                        <EachNotification />
-                                        <EachNotification />
-                                        <EachNotification />
+                                        {notifications && notifications.map(
+                                            (val, i) => {
+                                                return (
+                                                    <EachNotification
+                                                        key={`${i}-notification`}
+                                                        data={val}
+                                                    />
+                                                );
+                                            },
+                                        )}
                                     </ul>
                                 </div>
                             </div>

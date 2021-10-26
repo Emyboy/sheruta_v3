@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Notifications from "../../utils/Notifications";
 import { getAppDetails } from "../../utils/Sheruta";
 import store from "../store/store";
 
@@ -159,3 +160,13 @@ export const showRobotMessage = (message, actionText, actionLink) => dispatch =>
         });
     }, 15000);
 }
+
+export const getAllNotifications = () => async dispatch => {
+    const list = await Notifications.getAuthUserNotification();
+    console.log('FETCH ----', list)
+    dispatch({
+        type: 'GET_ALL_NOTIFICATIONS',
+        payload: list.data
+    })
+}
+

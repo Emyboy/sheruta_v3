@@ -39,4 +39,12 @@ export default {
         console.log("NOTIFICATION SEND ---", data);
         return data;
     },
+
+    getAuthUserNotification: async () => {
+       const list = await axios(process.env.REACT_APP_API_URL+`/notifications/?owner=${store.getState().auth.user.user.id}`)
+
+       return list;
+           
+    }
+
 };
