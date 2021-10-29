@@ -50,10 +50,10 @@ export default function BlogDetails(props) {
                                             </a>
                                         </div>
                                     )}
-                                    <h1 className="blog_sp_title">
+                                    {/* <h1 className="blog_sp_title">
                                         Redfin Ranks the Most Competitive
                                         Neighborhoods of 2020
-                                    </h1>
+                                    </h1> */}
                                     <img
                                         src={
                                             process.env.REACT_APP_API_URL +

@@ -23,9 +23,9 @@ export default function _Notifications() {
                                 <span className="create-post">
                                     <i className="ti-bell"></i> All
                                     Notifications
-                                    <a title="" href="setting.html">
+                                    {/* <a title="" href="setting.html">
                                         Notifications Setting
-                                    </a>
+                                    </a> */}
                                 </span>
                                 <div className="notification-box">
                                     <ul>

@@ -148,7 +148,13 @@ const Layout = connect(
                         ) : null}
                         <IconBtn
                             icon={`${showSearch ? "ti-close" : "ti-search"}`}
-                            iconComponent={showSearch ?<GrFormClose size={25} /> : <GrSearch size={20} />}
+                            iconComponent={
+                                showSearch ? (
+                                    <GrFormClose size={25} />
+                                ) : (
+                                    <GrSearch size={20} />
+                                )
+                            }
                             onClick={() => {
                                 setShowSearch(!showSearch);
                             }}
@@ -214,7 +220,9 @@ const Layout = connect(
                 </div>
             </aside>
 
-            <div className="pt-5 mt-2 pb-5 bg-gray" style={{ height: '100%' }}>{children}</div>
+            <div className="pt-5 mt-2 pb-5 bg-gray" style={{ height: "100%" }}>
+                {children}
+            </div>
 
             <nav
                 className="fixed-bottom bg-white border-gray  p-1 pl-4 pr-4"
@@ -239,8 +247,8 @@ const Layout = connect(
                         />
                     ) : null}
                     <FooterNav
-                        count={3}
-                        IconComponent={<BiBell size={view.notifications && view.notifications.length} />}
+                        count={view.notifications && view.notifications.length}
+                        IconComponent={<BiBell size={30} />}
                         text="Notifications"
                         path="/notifications"
                         active={page === "notifications"}

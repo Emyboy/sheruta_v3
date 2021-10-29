@@ -142,7 +142,7 @@ const EachSocialRequest = (props) => {
                                         {data.service ? (
                                             <li>
                                                 <Tag color="volcano">
-                                                    {data.service.name.toUpperCase()}
+                                                    {data.service.name}
                                                 </Tag>
                                             </li>
                                         ) : null}

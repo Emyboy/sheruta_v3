@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -12,7 +13,7 @@ export default function EachNotification({ data }) {
                 </figure>
                 <div>
                     <h5>{data.users_permissions_user?.first_name}{data.title}</h5>
-                    <small>30 mints ago</small>
+                    <small>{moment(data.created_at).fromNow()}</small>
                 </div>
             </div>
             {/* <div className="more">
