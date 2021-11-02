@@ -31,7 +31,7 @@ const Eachval = ({
     }
 
     return (
-        <article className='w-100' id={`request-${val.id}`}>
+        <article className='w-100 border border-gray rounded' id={`request-${val.id}`}>
             {
                 state.confirmDelete ? <div className="m-2 single-comment bg-dark  card shadow p-4 text-center">
                     <h6 className='text-white'>Are you sure you want to delete?</h6>

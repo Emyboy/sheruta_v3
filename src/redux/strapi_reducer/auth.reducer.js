@@ -7,7 +7,7 @@ const initialState = {
     error: false,
     agentData: null,
     agentLoading: false,
-    progress: 0
+    progress: 0,
 }
 
 export default function AuthReducer(state = initialState, { type, payload }) {

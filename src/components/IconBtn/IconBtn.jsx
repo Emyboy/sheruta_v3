@@ -1,18 +1,25 @@
-import React from 'react'
-import './IconBtn.css';
-import { Button } from 'antd';
+import React from "react";
+import "./IconBtn.css";
+import { Button } from "antd";
+
 
 export default function IconBtn({
     onClick,
-    icon
+    icon,
+    className,
+    test_id,
+    iconComponent,
 }) {
     return (
-            <Button
-                className='icon-btn btn border btn-sm'
-                
-                shape="circle"
-                onClick={onClick}>
-                <i className={`${icon} text-dark`}></i>
-            </Button>
-    )
+        <Button
+            className={`icon-btn btn border-gray btn-sm ${
+                className ? className : ""
+            }`}
+            shape="circle"
+            onClick={onClick}
+            data-cy={test_id}
+        >
+            <i>{iconComponent}</i>
+        </Button>
+    );
 }

@@ -9,7 +9,7 @@ import {
 } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import indexReducer from '../reducers/root.reducer';
+import indexReducer from '../strapi_reducer/root.reducer';
 
 //dotenv.config();
 const middleware = process.env.NODE_ENV === 'development' ? [thunk, logger]: [thunk]

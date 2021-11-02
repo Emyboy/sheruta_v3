@@ -10,7 +10,7 @@ const ResetPassword = (props) => {
 
     const { token, resetPasswordToken } = props.match.params;
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const [state, setState] = useState({
         loading: false,

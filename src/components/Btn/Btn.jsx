@@ -1,6 +1,5 @@
-import React from 'react';
-import { func, bool, string } from 'prop-types';
-import { Spinner } from 'react-activity'
+import React from "react";
+import { func, bool, string } from "prop-types";
 
 const Btn = ({
     text,
@@ -10,20 +9,38 @@ const Btn = ({
     onClick,
     danger,
     type,
-    icon
+    icon,
+    id,
+    test_id,
+    style,
 }) => {
     return (
         <button
-            className={`${className ? className : ''} ${danger ? 'btn-danger' : 'bg-theme'} btn rounded text-white`}
+            id={id}
+            data-cy={test_id}
+            className={` ${
+                danger ? "btn-danger" : "bg-theme"
+            } btn btn-log text-white  ${className ? className : ""}`}
             disabled={disabled || loading}
             onClick={onClick}
             type={type}
-            style={{ fontSize: '20px' }}
+            style={{
+                fontSize: "17px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+                ...style,
+            }}
         >
-            {loading ? <Spinner color='white' /> : <><i className={icon}></i>  {text}</>}
+            {loading ? (
+                "Loading..."
+            ) : (
+                <>
+                    <i className={icon}></i> {text}
+                </>
+            )}
         </button>
-    )
-}
+    );
+};
 
 Btn.propTypes = {
     text: func.isRequired,
@@ -32,7 +49,7 @@ Btn.propTypes = {
     disabled: bool,
     onClick: func.isRequired,
     danger: bool,
-    type: string
-}
+    type: string,
+};
 
 export default Btn;

@@ -14,7 +14,8 @@ export default ({
     name,
     autoFocus,
     icon,
-    required
+    required,
+    rows
 }) => {
     return (
         <Form.Group as={as} controlId={controlId}>
@@ -31,6 +32,8 @@ export default ({
                     type={type}
                     placeholder={placeholder}
                     className="form-control h-120"
+                    rows={`${rows}`}
+                    style={{ height: '3rem'}}
                 >
 
                 </textarea>

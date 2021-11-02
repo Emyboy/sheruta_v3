@@ -16,35 +16,37 @@ export default ({
     autoFocus,
     icon,
     required,
-    errorMessage
+    errorMessage,
+    maxLength,
+    test_id
 }) => {
    
     return (
-        <Form.Group as={as} controlId={controlId}>
-            {/* <div className="form-group"> */}
-            <Form.Label>{label}</Form.Label>
-            <div className={icon ? "input-with-icon" : ""}>
-                <Form.Control
-                     required={required}
-                      onChange={onChange? e => onChange(e): null}
-                     disabled={disabled}
-                     defaultValue={defaultValue}
-                     autoFocus={autoFocus}
-                     name={name}
-                     type={type}
-                     placeholder={placeholder}
-                     onBlur={onBlur? e => onBlur(e): null}
-                />
-                {icon ? <i className={icon}></i> : null}
-            </div>
-
-            <span className="form-text text-danger">
-                {errorMessage}
-            </span>
-           
-            {/* </div> */}
-        </Form.Group>
-    )
+      <Form.Group as={as} controlId={controlId}>
+        <Form.Label>
+          <b className='text-muted'>{label}</b>
+        </Form.Label>{" "}
+        {required ? <span className="text-danger">Required *</span> : null}
+        <div className={icon ? "input-with-icon" : ""}>
+          <Form.Control
+            data-cy={test_id}
+            className={`${!icon ? 'pl-2' : ''}`}
+            required={required}
+            onChange={onChange ? (e) => onChange(e) : null}
+            disabled={disabled}
+            defaultValue={defaultValue}
+            autoFocus={autoFocus}
+            maxLength={maxLength}
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            onBlur={onBlur ? (e) => onBlur(e) : null}
+          />
+          {icon ? <i className={icon}></i> : null}
+        </div>
+        <span className="form-text text-danger">{errorMessage}</span>
+      </Form.Group>
+    );
 }
 
 

@@ -145,6 +145,8 @@ class CustomImage extends PureComponent {
                     console.error('Canvas is empty');
                     return;
                 }
+                // console.log('CONVERTED BLOB ---', blob)
+                // console.log('CONVERTED file ---', this.fileUrl)
                 blob.name = fileName;
                 this.setState({ blob });
                 // console.log(blob)
@@ -170,6 +172,7 @@ class CustomImage extends PureComponent {
 
 
     handleImageUpload() {
+        console.log('BLOB ---', this.state.blob)
         this.setState({ loading: true })
         var uploadTask = storage.child(`images/profile/${state.auth.user.user.id}/image_0`).put(this.state.blob);
         uploadTask.on('state_changed',

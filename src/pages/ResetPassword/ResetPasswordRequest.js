@@ -10,7 +10,7 @@ import Layout from '../../components/Layout/Layout';
 export const ResetPasswordRequest = (props) => {
 
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const [state, setState] = useState({
         loading: false,

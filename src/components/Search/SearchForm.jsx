@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { Redirect } from 'react-router';
 import { notification } from 'antd';
 import { Link } from 'react-router-dom';
+import Btn from '../Btn/Btn';
 
 export default function SearchBox() {
     const [state, setState] = useState({
@@ -140,8 +141,9 @@ export default function SearchBox() {
                     <div className="col-lg-2 col-md-2 col-sm-12 small-padd">
                         <div className="form-group">
                             {
-                                state.showSearchResults ? <a href={`/search/${data.selectedCategory}/${data.selectedKeyword}/${data.selectedBedroom}`} className="btn search-btn">Search</a> :
-                                    <button disabled className="btn search-btn">Search</button>
+                                state.showSearchResults ? <a href={`/search/${data.selectedCategory}/${data.selectedKeyword}/${data.selectedBedroom}`} className="btn btn-thm">Search</a> :
+                                    // <button disabled className="btn search-btn btn-thm">Search</button>
+                                    <Btn text="Search" onClick={() => {}} disabled/>
                             }
                         </div>
                     </div>

@@ -37,7 +37,7 @@ const VerifyEmail = (props) => {
             .catch(err => {
                 notifyEmy({
                     heading: "Error verifing email",
-                    body: JSON.stringify(err)
+                    log: {...err}
                 })
                 if (err.response.status === 404) {
                     setState({

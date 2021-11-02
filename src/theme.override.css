@@ -1,0 +1,18 @@
+label {
+    font-weight: 600 !important;
+}
+/* ============ FOR ANT DESIGN ================= */
+
+.ant-switch-checked {
+    background-color: var(--theme-color) !important;
+}
+.ant-tag {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+.ant-tabs-tab-active > div {
+    color: var(--theme-color) !important;
+}
+.ant-tabs-tab-active  {
+    border-bottom-color: var(--theme-color) !important;
+}

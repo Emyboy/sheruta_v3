@@ -64,8 +64,7 @@ export const clearErrorMessage = () => dispath => {
 export const logout = () => dispatch => {
   dispatch(logoutUser());
   dispatch({ type: ADD_AGENT, payload: null })
-  localStorage.clear();
-  sessionStorage.clear();
+  localStorage.removeItem('token');
 }
 
 export const signup = data => dispatch => {
