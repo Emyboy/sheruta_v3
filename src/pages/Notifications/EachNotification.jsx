@@ -1,11 +1,22 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Notifications from "../../utils/Notifications";
 
 export default function EachNotification({ data }) {
-    const { user } = useSelector((state) => state.auth);
-    console.log(data);
+    useEffect(async () => {
+        try {
+            if (!data.seen) {
+                setTimeout(() => {
+                    Notifications.markNotificationAsSeen(data.id);
+                }, 2000);
+            }
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }, []);
+
     return (
         <li>
             <div className="notifi-meta">
@@ -22,10 +33,16 @@ export default function EachNotification({ data }) {
                                 <Link
                                     to={`/user/${data.users_permissions_user?.username}`}
                                 >
-                                    {data.users_permissions_user?.first_name}
+                                    {data.users_permissions_user?.first_name ||
+                                        "Someone"}
                                 </Link>{" "}
                                 <span style={{ fontWeight: 100 }}>
                                     {data.title}
+                                    {!data.seen && (
+                                        <span className="badge badge-info ml-2">
+                                            NEW
+                                        </span>
+                                    )}
                                 </span>
                             </h5>
                         </div>

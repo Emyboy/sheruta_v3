@@ -12,7 +12,7 @@ import Heading from "../../Heading/Heading";
 import { Spinner } from "react-activity";
 import VerifiedBadge from "../../VerifiedBadge/VerifiedBadge";
 import match from "../../../assets/img/match.jpeg";
-import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
+// import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 
 export default (props) => {
     const auth = useSelector((state) => state.auth);
@@ -456,12 +456,6 @@ export default (props) => {
                                                 <img
                                                     src={match}
                                                     className="rounded mb-3"
-                                                />
-                                            );
-                                        } else if (i === 4) {
-                                            return (
-                                                <FreeRequestAds
-                                                    key={i + "ads"}
                                                 />
                                             );
                                         }

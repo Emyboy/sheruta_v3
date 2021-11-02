@@ -250,7 +250,7 @@ const Layout = connect(
                             <FooterNav
                                 count={
                                     view.notifications &&
-                                    view.notifications.length
+                                    view.notifications.filter(x => x.seen === false).length
                                 }
                                 IconComponent={<BiBell size={30} />}
                                 text="Notifications"

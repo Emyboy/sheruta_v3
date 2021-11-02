@@ -178,7 +178,7 @@ export default connect(mapStateToProps)((props) => {
                         </div>
                     </div>
                 </div>
-                <div className="text-center">
+                {/* <div className="text-center">
                     <h1 className="text-danger text-center">
                         Payment is on us!
                     </h1>
@@ -188,7 +188,7 @@ export default connect(mapStateToProps)((props) => {
                     <div className='col-lg-6 col-sm-12'>
                         <FreeRequestAds />
                         </div>
-                </div>
+                </div> */}
                 <div className="row mb-5 justify-content-center pb-5">
                     {state.plans.map((val, i) => {
                         return (

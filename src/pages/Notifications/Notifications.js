@@ -3,16 +3,22 @@ import EachNotification from "./EachNotification";
 import Layout from "../../components/Layout/Layout";
 import { getAllNotifications } from "../../redux/strapi_actions/view.action";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 export default function _Notifications() {
+    localStorage.setItem('after_login', '/notifications')
     const dispatch = useDispatch();
     const { notifications } = useSelector((state) => state.view);
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(async () => {
         dispatch(getAllNotifications());
     }, []);
+
+    if(!user){
+        return <Redirect to='/login' />
+    }
     
-    console.log('NOTIFICAITION ==============', notifications)
     return (
         <Layout page={"notifications"}>
             <section className="pt-3 container-fluid">
@@ -31,7 +37,6 @@ export default function _Notifications() {
                                     <ul>
                                         {notifications && notifications.map(
                                             (val, i) => {
-                                                console.log('EACH NOTIFICATION =====', val);
                                                 return (
                                                     <EachNotification
                                                         key={`${i}-notification`}

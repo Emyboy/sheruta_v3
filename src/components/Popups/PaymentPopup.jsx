@@ -10,7 +10,7 @@ const PaymentPopup = (props) => {
     if (view.showPaymentPopup) {
 
         return (
-            <Modal show={view.showPaymentPopup} className='animated animate__bounceIn'>
+            <Modal show={view.showPaymentPopup} className=''>
                 <Modal.Body>
                     <div className='text-center'>
                         <i className='ti-alert display-3 text-warning'></i>

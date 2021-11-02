@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import store from "../redux/store/store";
 
 export const notificationTypes = {
@@ -20,7 +21,7 @@ export default {
         payment_plan,
     }) => {
         const { user } = store.getState().auth;
-        if(user && owner === user.user.id){
+        if (user && owner === user.user.id) {
             return;
         }
         const data = await axios(
@@ -44,13 +45,32 @@ export default {
     },
 
     getAuthUserNotification: async () => {
-        if(store.getState().auth.user){
+        if (store.getState().auth.user) {
             const list = await axios(
                 process.env.REACT_APP_API_URL +
-                    `/notifications/?owner=${store.getState().auth.user.user.id}`,
+                    `/notifications/?owner=${
+                        store.getState().auth.user.user.id
+                    }&_sort=created_at:DESC`,
             );
-    
+
             return list;
         }
+    },
+
+    markNotificationAsSeen: async (notification_id) => {
+        const seen = await axios(
+            process.env.REACT_APP_API_URL +
+                `/notifications/${notification_id}`,
+            {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+                data: {
+                    seen: true,
+                },
+            },
+        );
+        return seen;
     },
 };

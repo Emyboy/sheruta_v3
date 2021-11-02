@@ -15,9 +15,8 @@ import SocailHomePage from "../../components/Social/SocialHomePage/SocialHomePag
 import Footer from "../../components/Footer";
 import ExploreByPopularCity from "./Graphics";
 import HomeJumbo from "./HomeJumbo";
-import end_sarz from '../../assets/img/end_sarz.jpeg';
 import match from "../../assets/img/match.jpeg";
-import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
+// import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 import Partners from '../../assets/img/partners.png';
 
 const Home = (props) => {
@@ -86,18 +85,18 @@ const Home = (props) => {
                       <h1 className="text-muted">Our Partners</h1>
                       <img src={Partners} width="800px" />
                   </div>
-                  <div className="container-fluid">
+                  {/* <div className="container-fluid">
                       <div className="row justify-content-center">
                           <div className="col-sm-12 col-md-6 mb-4">
                               <FreeRequestAds />
                           </div>
                       </div>
-                  </div>
+                  </div> */}
                   {/* {view.app_details
                       ? view.app_details.everything_free && (
                         )
                         : null} */}
-                  <div className="container">
+                  {/* <div className="container">
                       <div className="text-center mb-5">
                           <img
                               src={end_sarz}
@@ -105,7 +104,7 @@ const Home = (props) => {
                               width="100%"
                           />
                       </div>
-                  </div>
+                  </div> */}
 
                   <div className="container-fluid">
                       <div className="row bgc-f7 pt-3">
