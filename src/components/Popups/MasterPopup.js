@@ -8,7 +8,8 @@ import {
     getAllServices,
     getAllPaymentTypes,
     getAllWorkIndustries,
-    getAppDetail
+    getAppDetail,
+    getAllNotifications
 } from "../../redux/strapi_actions/view.action";
 import {
     getAllSuggestionsByStatus,
@@ -30,6 +31,7 @@ const MasterPopup = (props) => {
         if (user) {
             dispatch(getAllMySuggestion());
             dispatch(suggestThemForMe());
+             dispatch(getAllNotifications());
         }
     }, []);
 
@@ -40,6 +42,7 @@ const MasterPopup = (props) => {
                 if (user) {
                     dispatch(getAllMySuggestion());
                     dispatch(suggestThemForMe());
+                    dispatch(getAllNotifications());
                 }
             }, 40000);
         }

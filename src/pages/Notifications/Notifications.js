@@ -31,6 +31,7 @@ export default function _Notifications() {
                                     <ul>
                                         {notifications && notifications.map(
                                             (val, i) => {
+                                                console.log('EACH NOTIFICATION =====', val);
                                                 return (
                                                     <EachNotification
                                                         key={`${i}-notification`}

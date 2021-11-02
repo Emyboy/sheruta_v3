@@ -20,6 +20,9 @@ export default {
         payment_plan,
     }) => {
         const { user } = store.getState().auth;
+        if(user && owner === user.user.id){
+            return;
+        }
         const data = await axios(
             process.env.REACT_APP_API_URL + `/notifications/create`,
             {
@@ -41,11 +44,13 @@ export default {
     },
 
     getAuthUserNotification: async () => {
-        const list = await axios(
-            process.env.REACT_APP_API_URL +
-                `/notifications/?owner=${store.getState().auth.user.user.id}`,
-        );
-
-        return list;
+        if(store.getState().auth.user){
+            const list = await axios(
+                process.env.REACT_APP_API_URL +
+                    `/notifications/?owner=${store.getState().auth.user.user.id}`,
+            );
+    
+            return list;
+        }
     },
 };

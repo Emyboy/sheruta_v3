@@ -22,10 +22,9 @@ import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
 import FooterNav from "./FooterNav";
 import Alice from "../../utils/Alice";
-import { CgMenuLeft } from 'react-icons/cg';
-import { AiOutlineUser } from 'react-icons/ai'
+import { CgMenuLeft } from "react-icons/cg";
+import { AiOutlineUser } from "react-icons/ai";
 import { GrSearch, GrFormClose } from "react-icons/gr";
-
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -246,20 +245,25 @@ const Layout = connect(
                             active={page === "match"}
                         />
                     ) : null}
-                    <FooterNav
-                        count={view.notifications && view.notifications.length}
-                        IconComponent={<BiBell size={30} />}
-                        text="Notifications"
-                        path="/notifications"
-                        active={page === "notifications"}
-                    />
                     {user ? (
-                        <FooterNav
-                            text="Profile"
-                            IconComponent={<BiUser size={30} />}
-                            path={`/user/${user.username}`}
-                            active={page === "profile"}
-                        />
+                        <>
+                            <FooterNav
+                                count={
+                                    view.notifications &&
+                                    view.notifications.length
+                                }
+                                IconComponent={<BiBell size={30} />}
+                                text="Notifications"
+                                path="/notifications"
+                                active={page === "notifications"}
+                            />
+                            <FooterNav
+                                text="Profile"
+                                IconComponent={<BiUser size={30} />}
+                                path={`/user/${user.username}`}
+                                active={page === "profile"}
+                            />
+                        </>
                     ) : (
                         <FooterNav
                             IconComponent={<BiUser size={30} />}
