@@ -35,10 +35,10 @@ export default function AppUpdatePopup() {
         if (app_details && localStorage.getItem("version") && user) {
             if (app_details.version !== localStorage.getItem("version")) {
                 setShow(true);
-                localStorage.setItem("version", app_details.version);
+                localStorage.setItem("version", app_details?.version);
             }
         } else {
-            localStorage.setItem("version", app_details.version);
+            localStorage.setItem("version", app_details?.version);
         }
     }, [user, app_details]);
 
