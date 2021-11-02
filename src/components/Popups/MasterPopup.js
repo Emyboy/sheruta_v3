@@ -8,7 +8,6 @@ import {
     getAllServices,
     getAllPaymentTypes,
     getAllWorkIndustries,
-    getAppDetail,
     getAllNotifications
 } from "../../redux/strapi_actions/view.action";
 import {
@@ -17,6 +16,7 @@ import {
     suggestThemForMe,
 } from "../../redux/strapi_actions/alice.actions";
 import NotificationPopup from "./NotificationPopup";
+import AppUpdatePopup from "./AppUpdatePopup";
 
 const MasterPopup = (props) => {
     const { user } = useSelector((state) => state.auth);
@@ -27,7 +27,6 @@ const MasterPopup = (props) => {
         dispatch(getAllServices());
         dispatch(getAllPaymentTypes());
         dispatch(getAllWorkIndustries());
-        dispatch(getAppDetail());
         if (user) {
             dispatch(getAllMySuggestion());
             dispatch(suggestThemForMe());
@@ -54,6 +53,7 @@ const MasterPopup = (props) => {
                 <ConfigViewPopup />
                 <GetStartedPopup />
                 <NotificationPopup />
+                <AppUpdatePopup />
             </>
         );
     } else {
