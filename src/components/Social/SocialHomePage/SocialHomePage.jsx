@@ -12,6 +12,7 @@ import Heading from "../../Heading/Heading";
 import { Spinner } from "react-activity";
 import VerifiedBadge from "../../VerifiedBadge/VerifiedBadge";
 import match from "../../../assets/img/match.jpeg";
+import PostRequestAds from "../../Ads/RequestAds/PostRequestAds";
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 
 export default (props) => {
@@ -450,14 +451,17 @@ export default (props) => {
                                     </div>
                                 )}
                                 <div className="col-lg-5">
+                                    
                                     {state.list.map((val, i) => {
-                                        if (i == 2) {
+                                        if (i == 5) {
                                             return (
                                                 <img
                                                     src={match}
                                                     className="rounded mb-3"
                                                 />
                                             );
+                                        } else if (i === 2) {
+                                            return <PostRequestAds />
                                         }
                                         return (
                                             <EachSocialRequest

@@ -76,6 +76,7 @@ const EachSocialRequest = (props) => {
                                     src={data.users_permissions_user.avatar_url}
                                     alt=""
                                     width="40"
+                                    loading="lazy"
                                     style={{ borderRadius: "50px" }}
                                 />
                             </figure>
