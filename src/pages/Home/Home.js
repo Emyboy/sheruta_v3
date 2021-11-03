@@ -18,6 +18,7 @@ import HomeJumbo from "./HomeJumbo";
 import match from "../../assets/img/match.jpeg";
 // import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 import Partners from '../../assets/img/partners.png';
+import OurServices from "../../components/OurServices/OurServices";
 
 const Home = (props) => {
   const { view, auth } = props;
@@ -172,6 +173,7 @@ const Home = (props) => {
                           </div>
                       </div>
                   </div>
+                  <OurServices />
                   <HowToUse />
                   <WhatPeopleSay />
                   <Footer />

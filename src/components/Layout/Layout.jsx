@@ -201,6 +201,7 @@ const Layout = connect(
                         text="Contact Us"
                         path="/contact"
                     />
+                    <EachNav icon="ti-shield" text="Terms" path="/terms" />
                     {!user ? (
                         <EachNav
                             icon="ti-user"
@@ -250,7 +251,9 @@ const Layout = connect(
                             <FooterNav
                                 count={
                                     view.notifications &&
-                                    view.notifications.filter(x => x.seen === false).length
+                                    view.notifications.filter(
+                                        (x) => x.seen === false,
+                                    ).length
                                 }
                                 IconComponent={<BiBell size={30} />}
                                 text="Notifications"

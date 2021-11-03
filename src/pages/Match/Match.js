@@ -18,25 +18,31 @@ export default function Match() {
     );
 
     useEffect(() => {
-        dispatch(getAllSuggestionsByStatus('accepted'))
+        dispatch(getAllSuggestionsByStatus("accepted"));
     }, [user_suggestions]);
     return (
         <Layout page={"match"}>
             <div className="container mt-3">
-                <Tabs defaultActiveKey="1" onChange={callback}>
-                    <TabPane
-                        tab={`Suggested (${user_suggestions.length})`}
-                        key="1"
-                    >
-                        <MatchList list={user_suggestions} />
-                    </TabPane>
-                    <TabPane
-                        tab={`Accepted (${accepted_suggestions.length})`}
-                        key="2"
-                    >
-                        <AcceptedMatchList list={accepted_suggestions} />
-                    </TabPane>
-                </Tabs>
+                <div className="row justify-content-center">
+                    <div className="col-sm-12 col-lg-6 ">
+                        <Tabs defaultActiveKey="1" onChange={callback}>
+                            <TabPane
+                                tab={`Suggested (${user_suggestions.length})`}
+                                key="1"
+                            >
+                                <MatchList list={user_suggestions} />
+                            </TabPane>
+                            <TabPane
+                                tab={`Accepted (${accepted_suggestions.length})`}
+                                key="2"
+                            >
+                                <AcceptedMatchList
+                                    list={accepted_suggestions}
+                                />
+                            </TabPane>
+                        </Tabs>
+                    </div>
+                </div>
             </div>
         </Layout>
     );

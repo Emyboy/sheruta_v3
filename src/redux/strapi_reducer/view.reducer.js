@@ -31,18 +31,18 @@ function ViewReducer(state = initialState, { type, payload }) {
         case "GET_ALL_WORK_INDUSTRIES":
             return {
                 ...state,
-                work_industries: payload
+                work_industries: payload,
             };
-        case 'GET_APP_DETAILS':
+        case "GET_APP_DETAILS":
             return {
                 ...state,
-                app_details: payload
-            }
+                app_details: payload,
+            };
         case "SHOW_ROBOT_MESSAGE":
             return {
                 ...state,
-                ...payload
-            }
+                ...payload,
+            };
 
         case "GET_ALL_SERVICES":
             return { ...state, services: payload };
@@ -54,11 +54,13 @@ function ViewReducer(state = initialState, { type, payload }) {
         case "GET_ALL_PAYMENT_TYPES":
             return { ...state, payment_types: payload };
 
-        case 'GET_ALL_NOTIFICATIONS':
+        case "GET_ALL_NOTIFICATIONS":
             return {
                 ...state,
-                notifications: payload
-            }
+                notifications: payload,
+            };
+        case "LOGOUT":
+            return initialState
 
         default:
             return state;
