@@ -31,7 +31,7 @@ export default function EachNotification({ data }) {
                         <div className="d-flex">
                             <h5 className="mr-2">
                                 <Link
-                                    to={`/user/${data.users_permissions_user?.username}`}
+                                    to={data.users_permissions_user ?`/user/${data.users_permissions_user?.username}`: '#'}
                                 >
                                     {data.users_permissions_user?.first_name ||
                                         "Someone"}

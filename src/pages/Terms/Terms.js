@@ -1,9 +1,22 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
+import Meta from "react-meta-tags";
 
 export default function Terms() {
     return (
         <Layout currentPage="terms">
+            <Meta>
+                <title>Terms & Conditions</title>
+                <meta
+                    name="description"
+                    content="By accessing or using Sheruta.ng you
+                                        agree to be bound by our Terms &
+                                        Conditions. If you disagree with any
+                                        part of the terms then you may not
+                                        access Sheruta.ng and the services it
+                                        offers."
+                ></meta>
+            </Meta>
             <section className="our-terms bgc-f7">
                 <div className="container" style={{ marginBottom: "10vh" }}>
                     <div className="row justify-content-center">
