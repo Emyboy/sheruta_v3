@@ -52,7 +52,7 @@ const MasterPopup = (props) => {
             <>
                 <ConfigViewPopup />
                 <GetStartedPopup />
-                <NotificationPopup />
+                {/* <NotificationPopup /> */}
                 <AppUpdatePopup />
             </>
         );
