@@ -1,10 +1,12 @@
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Notifications from "../../utils/Notifications";
 
 export default function EachNotification({ data }) {
+    localStorage.setItem('after_login', '/notifications');
+    const { user } = useSelector(state => state.auth);
     useEffect(async () => {
         try {
             if (!data.seen) {
@@ -16,6 +18,10 @@ export default function EachNotification({ data }) {
             return Promise.reject(error);
         }
     }, []);
+
+    if(!user){
+        return <Redirect to='/login' />
+    }
 
     return (
         <li>

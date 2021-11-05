@@ -5,11 +5,14 @@ import { Tabs } from "antd";
 import AcceptedMatchList from "./AcceptedMatchList";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSuggestionsByStatus } from "../../redux/strapi_actions/alice.actions";
+import { Redirect } from "react-router";
 
 const { TabPane } = Tabs;
 
 export default function Match() {
+    localStorage.setItem('after_login', '/match');
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
     function callback(key) {
         dispatch(getAllSuggestionsByStatus("accepted"));
     }
@@ -20,6 +23,11 @@ export default function Match() {
     useEffect(() => {
         dispatch(getAllSuggestionsByStatus("accepted"));
     }, [user_suggestions]);
+
+    if(!user){
+        return <Redirect to='/login' />
+    }
+
     return (
         <Layout page={"match"}>
             <div className="container mt-3">
