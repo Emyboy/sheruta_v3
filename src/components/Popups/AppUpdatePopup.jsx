@@ -11,20 +11,19 @@ export default function AppUpdatePopup() {
     const { app_details } = useSelector((state) => state.view);
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    useEffect(() => {}, []);
+    const localVersion = localStorage.getItem("version");
 
     const handleReload = async () => {
-        const data = await caches.keys().then((keyList) => {
-            Promise.all(
-                keyList.map((key) => {
-                    console.log("KEY ====", key);
-                    caches.delete(key);
-                }),
-            );
-        });
-        if (data) {
-            window.location.reload();
-        }
+        // const data = await caches.keys().then((keyList) => {
+        //     Promise.all(
+        //         keyList.map((key) => {
+        //             console.log("KEY ====", key);
+        //             caches.delete(key);
+        //         }),
+        //     );
+        // });
+        localStorage.setItem("version", app_details?.version);
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -32,18 +31,17 @@ export default function AppUpdatePopup() {
     }, []);
 
     useEffect(() => {
-        if (app_details && localStorage.getItem("version") && user) {
-            if (app_details.version !== localStorage.getItem("version")) {
+        if (app_details && localVersion && user) {
+            if (app_details.version !== localVersion && typeof localVersion !== undefined) {
                 setShow(true);
-                localStorage.setItem("version", app_details?.version);
             }
-        } else {
+        } else if(app_details){
             localStorage.setItem("version", app_details?.version);
         }
-    }, [user, app_details]);
+    }, [app_details]);
 
     return (
-        <Modal show={show} style={{ paddingTop: "30vh" }}>
+        <Modal show={show} style={{ paddingTop: "30vh", paddingRight: 0 }}>
             <div className="bg-whtie p-2 text-center rounde">
                 <AiFillWarning size={80} className="text-warning" />
                 <h3>New Version Available</h3>
@@ -54,7 +52,7 @@ export default function AppUpdatePopup() {
                 <Btn text="Reload" className="w-50" onClick={handleReload} />
                 <br />
                 <Btn
-                    className="mt-3"
+                    className="mt-3 btn-sm mb-4"
                     danger
                     text="Remind Me Later"
                     onClick={() => setShow(false)}

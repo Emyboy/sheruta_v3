@@ -23,6 +23,7 @@ export default function PropertyCard({ data }) {
                                 <img
                                     className="img-whp"
                                     src={data.image_urls[0]}
+                                    loading="lazy"
                                     alt="fp1.jpg"
                                     // height='100'
                                     // width='100'
@@ -31,14 +32,20 @@ export default function PropertyCard({ data }) {
                             <div className="thmb_cntnt">
                                 <ul className="tag mb0">
                                     {data.statu ? (
-                                        <li className="list-inline-item" style={{ width: '100px' }}>
+                                        <li
+                                            className="list-inline-item"
+                                            style={{ width: "100px" }}
+                                        >
                                             <a>
                                                 {data.statu.name.toUpperCase()}
                                             </a>
                                         </li>
                                     ) : null}
                                     {data.categorie ? (
-                                        <li className="list-inline-item" style={{ width: '100px' }}>
+                                        <li
+                                            className="list-inline-item"
+                                            style={{ width: "100px" }}
+                                        >
                                             <a>
                                                 {data.categorie.name.toUpperCase()}
                                             </a>
@@ -57,7 +64,10 @@ export default function PropertyCard({ data }) {
                                         </a>
                                     </li>
                                 </ul> */}
-                                <a className="fp_price" style={{ right: '20px', bottom: '15px' }}>
+                                <a
+                                    className="fp_price"
+                                    style={{ right: "20px", bottom: "15px" }}
+                                >
                                     ₦ {window.formatedPrice.format(data.price)}
                                     {data.payment_type && (
                                         <small>/{data.payment_type.name}</small>

@@ -78,6 +78,7 @@ const AllRequests = React.lazy(() => import("../pages/Request/AllRequests"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
 const Blog = React.lazy(() => import("../pages/Blog/Blog"));
 const BlogDetails = React.lazy(() => import("../pages/Blog/BlogDetails"));
+const Terms = React.lazy(() => import("../pages/Terms/Terms"));
 
 
 function App() {
@@ -107,6 +108,7 @@ function App() {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/start" component={GetStarted} />
+                    <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />

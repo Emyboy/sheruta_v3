@@ -164,7 +164,6 @@ export const showRobotMessage = (message, actionText, actionLink) => dispatch =>
 export const getAllNotifications = () => async dispatch => {
     if(store.getState().auth.user){
         const list = await Notifications.getAuthUserNotification();
-        console.log('FETCH ----', list)
         dispatch({
             type: 'GET_ALL_NOTIFICATIONS',
             payload: list.data
