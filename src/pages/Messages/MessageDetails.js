@@ -52,7 +52,16 @@ export default function MessageDetails() {
                     <h6 className="text-muted text-center mt-3">The End</h6>
                 </ul>
             </div>
-            <div className="mi_text ">
+            <div
+                className="mi_text "
+                style={
+                    Global.isMobile ? {
+                        position: "fixed",
+                        width: "100vw",
+                        bottom: "8vh",
+                    }:null
+                }
+            >
                 <div className="message_input">
                     <form className="form-inline">
                         <input
