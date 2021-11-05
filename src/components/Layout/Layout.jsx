@@ -227,7 +227,7 @@ const Layout = connect(
             </div>
 
             <nav
-                className="fixed-bottom bg-white border-gray  p-1 pl-1 pr-1"
+                className="fixed-bottom bg-white border-gray  p-1 pl-0 pr-0"
                 style={{ zIndex: 2 }}
             >
                 <div className="row justify-content-center mt-1">
