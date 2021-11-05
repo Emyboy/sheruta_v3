@@ -25,7 +25,8 @@ import Alice from "../../utils/Alice";
 import { CgMenuLeft } from "react-icons/cg";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrSearch, GrFormClose } from "react-icons/gr";
-import { FiMail } from 'react-icons/fi'
+import { FiMail } from "react-icons/fi";
+import Global from "../../Global";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -232,7 +233,9 @@ const Layout = connect(
                 <div className="row justify-content-center mt-1">
                     <FooterNav
                         icon="ti-home"
-                        IconComponent={<BiHome size={30} />}
+                        IconComponent={
+                            <BiHome size={Global.isMobile ? 26 : 30} />
+                        }
                         text="Home"
                         path="/"
                         active={page === "home"}
@@ -241,7 +244,9 @@ const Layout = connect(
                     {view.personal_info ? (
                         <FooterNav
                             count={user_suggestions.length}
-                            IconComponent={<BsPeople size={30} />}
+                            IconComponent={
+                                <BsPeople size={Global.isMobile ? 26 : 30} />
+                            }
                             text="Match"
                             path="/match"
                             active={page === "match"}
@@ -256,15 +261,16 @@ const Layout = connect(
                                         (x) => x.seen === false,
                                     ).length
                                 }
-                                IconComponent={<BiBell size={30} />}
+                                IconComponent={
+                                    <BiBell size={Global.isMobile ? 26 : 30} />
+                                }
                                 text="Activity"
                                 path="/notifications"
                                 active={page === "notifications"}
                             />
                             <FooterNav
-                                
                                 IconComponent={
-                                    <FiMail size={30} />
+                                    <FiMail size={Global.isMobile ? 26 : 30} />
                                 }
                                 text="Message"
                                 path="/messages"
@@ -272,14 +278,18 @@ const Layout = connect(
                             />
                             <FooterNav
                                 text="Profile"
-                                IconComponent={<BiUser size={30} />}
+                                IconComponent={
+                                    <BiUser size={Global.isMobile ? 26 : 30} />
+                                }
                                 path={`/user/${user.username}`}
                                 active={page === "profile"}
                             />
                         </>
                     ) : (
                         <FooterNav
-                            IconComponent={<BiUser size={30} />}
+                            IconComponent={
+                                <BiUser size={Global.isMobile ? 26 : 30} />
+                            }
                             text="Login"
                             path="/login"
                             active={page === "login"}
