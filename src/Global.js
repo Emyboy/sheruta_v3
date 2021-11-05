@@ -4,9 +4,7 @@ export default {
     VERIFIED_BADGE:
         "https://cdn2.iconfinder.com/data/icons/essentials-volume-i/128/verified-green-512.png",
     isMobile:
-        process.env.NODE_ENV === "production"
-            ? false
-            : window?.innerWidth < 768,
+         window?.innerWidth < 768,
     PLACEHOLDER_IMG:
         "https://oaan.org/wp-content/themes/consultix/images/no-image-found-360x250.png",
     ADD_IMG:
