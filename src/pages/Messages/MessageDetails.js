@@ -12,7 +12,10 @@ export default function MessageDetails() {
             >
                 <a href="#">
                     <div className="wrap">
-                        <span className="contact-status online"></span>
+                        <span
+                            className="contact-status online bg-danger"
+                            style={{ left: Global.isMobile ? "35px" : "25px" }}
+                        ></span>
                         <img
                             className="img-fluid"
                             src={user.user.avatar_url}
