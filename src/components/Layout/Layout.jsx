@@ -25,6 +25,7 @@ import Alice from "../../utils/Alice";
 import { CgMenuLeft } from "react-icons/cg";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrSearch, GrFormClose } from "react-icons/gr";
+import { FiMail } from 'react-icons/fi'
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -256,9 +257,18 @@ const Layout = connect(
                                     ).length
                                 }
                                 IconComponent={<BiBell size={30} />}
-                                text="Notifications"
+                                text="Activity"
                                 path="/notifications"
                                 active={page === "notifications"}
+                            />
+                            <FooterNav
+                                
+                                IconComponent={
+                                    <FiMail size={30} />
+                                }
+                                text="Message"
+                                path="/messages"
+                                active={page === "messages"}
                             />
                             <FooterNav
                                 text="Profile"
