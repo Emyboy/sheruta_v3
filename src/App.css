@@ -12,7 +12,7 @@ body,
 #root,
 .gray-bg {
     /* background-color: #f7f9fc !important; */
-    background-color: #F7F7F7 !important;
+    background-color: #f7f7f7 !important;
     /* background-image: url(./assets/img/pattern.png) !important; */
     /* background-position: center; */
     background-size: 100%;
@@ -94,6 +94,9 @@ svg {
 }
 .bg-gray {
     background-color: #f7f7f7 !important;
+}
+.inbox_chatting_box .chatting_content li.media .media-body p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 @media only screen and (max-width: 970px) {
     .mobile-only {
