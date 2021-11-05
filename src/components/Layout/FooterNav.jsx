@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     }
 `;
 
-const spacing = Global.isMobile ? "15px" : "25px";
+const spacing = Global.isMobile ? "18px" : "25px";
 
 const FooterNav = ({ text, icon, path, active, IconComponent, count }) => {
     return (
