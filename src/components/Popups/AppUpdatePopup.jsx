@@ -14,14 +14,14 @@ export default function AppUpdatePopup() {
     const localVersion = localStorage.getItem("version");
 
     const handleReload = async () => {
-        const data = await caches.keys().then((keyList) => {
-            Promise.all(
-                keyList.map((key) => {
-                    console.log("KEY ====", key);
-                    caches.delete(key);
-                }),
-            );
-        });
+        // const data = await caches.keys().then((keyList) => {
+        //     Promise.all(
+        //         keyList.map((key) => {
+        //             console.log("KEY ====", key);
+        //             caches.delete(key);
+        //         }),
+        //     );
+        // });
         localStorage.setItem("version", app_details?.version);
         window.location.reload();
     };
