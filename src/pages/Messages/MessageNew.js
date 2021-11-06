@@ -14,6 +14,7 @@ export default function MessageNew(props) {
     const [conv_id, set_conv_id] = useState(null);
 
     const createNewConversation = (owner, guest) => {
+        console.log('CREATING NEW CONV')
         axios(process.env.REACT_APP_API_URL + `/conversations`, {
             method: "POST",
             headers: {
@@ -26,7 +27,7 @@ export default function MessageNew(props) {
             },
         })
             .then((res) => {
-                console.log(res);
+                console.log('CREATED ---',res);
                 set_conv_id(res.data.uuid);
             })
             .catch((err) => {
@@ -49,8 +50,10 @@ export default function MessageNew(props) {
             if (notOwner.data.length === 0 && authIsOwner.data.length === 0) {
                 createNewConversation(user.user.id, guestUser);
             }else if(authIsOwner.data.length > 0){
+                console.log('SEEN AUTH OWN')
                 set_conv_id(authIsOwner.data[0].uuid)
             }else if(notOwner.data.length > 0){
+                console.log('SEEN OWN')
                 set_conv_id(notOwner.data[0].uuid);
             }
         } catch (error) {
