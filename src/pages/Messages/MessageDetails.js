@@ -68,7 +68,7 @@ export default function MessageDetails() {
                 <div className="message_input_">
                     <form className="form-inline border-top">
                         <input
-                            className="bg-them-light p-2 border-gray m-2 mb-3 w-100"
+                            className="bg-them-light p-2 border-gray m-2 mb-5 w-100"
                             type="text"
                             placeholder="Enter message here..."
                             aria-label="Message"
