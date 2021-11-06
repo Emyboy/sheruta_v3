@@ -7,10 +7,8 @@ export default function MessageDetails() {
     const { user } = useSelector((state) => state.auth);
     return (
         <div className="message_container border-gray rounded">
-            <div
-                className={`user_heading ${Global.isMobile && "p-2 shadow-sm"}`}
-            >
-                <a href="#">
+            <div className={`user_heading ${Global.isMobile ? "p-2":"p-3"}`}>
+                <a className="shadow">
                     <div className="wrap">
                         <span
                             className="contact-status online bg-danger"
@@ -29,7 +27,10 @@ export default function MessageDetails() {
                     </div>
                 </a>
             </div>
-            <div className="inbox_chatting_box border-bottom">
+            <div
+                className="inbox_chatting_box border-bottom bg-them-light"
+                style={{ height: "70vh" }}
+            >
                 <ul
                     className={`chatting_content ${
                         Global.isMobile ? "p-1" : ""
@@ -53,23 +54,29 @@ export default function MessageDetails() {
                 </ul>
             </div>
             <div
-                className="mi_text "
+                className="mi_text bg-white"
                 style={
-                    Global.isMobile ? {
-                        position: "fixed",
-                        width: "100vw",
-                        bottom: "8vh",
-                    }:null
+                    Global.isMobile
+                        ? {
+                              position: "fixed",
+                              width: "100vw",
+                              bottom: "11vh",
+                          }
+                        : null
                 }
             >
-                <div className="message_input">
-                    <form className="form-inline">
+                <div className="message_input_">
+                    <form className="form-inline border-top">
                         <input
-                            className="form-control rounded border-gray mt-2 p-1"
-                            type="search"
+                            className="bg-them-light p-2 border-gray m-2 mb-2 w-100"
+                            type="text"
                             placeholder="Enter message here..."
-                            aria-label="Search"
-                            style={{ zIndex: 0 }}
+                            aria-label="Message"
+                            style={{
+                                zIndex: 0,
+                                borderRadius: "50px",
+                                // backgroundColor: "#F0F5EF",
+                            }}
                         />
                         {/* <button className="btn btn-sm" type="submit">
                             Send Message

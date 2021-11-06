@@ -4,9 +4,8 @@
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
-/* * {
-    transition: 0.2s;
-} */
+
+
 html,
 body,
 #root,
@@ -24,6 +23,9 @@ body,
 }
 .bg-theme {
     background-color: var(--theme-color) !important;
+}
+.bg-them-light {
+    background-color: #F0F5EF !important;
 }
 .form-control {
     background-color: #f7f7f7 !important;

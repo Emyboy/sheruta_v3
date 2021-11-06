@@ -31,7 +31,7 @@ export default function EachMessage({ sent }) {
                     />
                     <div className="media-body ">
                         <div className="date_time">Today, 10:45</div>
-                        <p className="rounded border-gray shadow-sm">
+                        <p className="rounded border-gray shadow-sm bg-white">
                             Let's go!
                         </p>
                     </div>

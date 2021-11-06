@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Global from "../../Global";
 import { IoMail, IoCallSharp } from "react-icons/io5";
+import UserAction from "../../components/UserAction/UserAction";
 
 const PersonalInfo = ({ userData }) => {
     const [info, setInfo] = useState(null);
     const [locations, setLocations] = useState([]);
     const [paiedInfo, setPaidInfo] = useState(true);
+    const [showFloating, setShowFloating] = useState(false);
     useEffect(() => {
         if (userData) {
             axios(
@@ -54,33 +56,14 @@ const PersonalInfo = ({ userData }) => {
         return (
             <div className="central-meta w-100 border-gray rounded">
                 <div
-                    className="fixed-bottom text-center"
-                    style={{ marginBottom: Global.isMobile ? "15vh" : "10vh" }}
+                    className="fixed-bottom text-center animated animate__bounceInUp"
+                    style={{
+                        marginBottom: Global.isMobile ? "15vh" : "10vh",
+                    }}
                 >
-                    <button className="btn shadow bg-theme text-white rounded ml-2 mr-2">
-                        <IoMail className="mr-2" />
-                        Message
-                    </button>
-                    <button className="btn shadow bg-theme text-white rounded ml-2 mr-2">
-                        <IoCallSharp className="mr-2" />
-                        Call
-                    </button>
+                    <UserAction />
                 </div>
-                {/* <button
-          className=" btn btn-sm bg-theme text-white shadow"
-          style={{
-            position: "fixed",
-            bottom: "80px",
-            right: !Global.isMobile ? "60px" : "30px",
-            borderRadius: "50px",
-            height: "50px",
-            width: "150px",
-            zIndex: 2,
-            fontSize: "21px",
-          }}
-        >
-          {"Call Me"} <i className="fa fa-phone"></i>
-        </button> */}
+
                 <span className="create-post">
                     Personal Info
                     {/* <a href="#" className="p-2 bg-theme text-white rounded shadow">

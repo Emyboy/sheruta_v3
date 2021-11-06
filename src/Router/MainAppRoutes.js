@@ -4,11 +4,11 @@ import 'antd/dist/antd.css';
 import "../theme.override.css";
 // import "../social_css/css/main.min.css";
 import '../social_css/css/style.css';
-import { Provider } from "react-redux";
-import store from "../redux/store/store";
 // import '../assets/css/colors.css';
 import '../assets/css/styles.css';
 import '../v4_css/style.css';
+import { Provider } from "react-redux";
+import store from "../redux/store/store";
 import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 // import firebase from "../Firebase"
