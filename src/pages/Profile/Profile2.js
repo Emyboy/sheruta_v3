@@ -126,6 +126,8 @@ import { notifyEmy } from "../../utils/Sheruta";
 import MetaTags from "react-meta-tags";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 import Notifications from "../../utils/Notifications";
+import UserAction from "../../components/UserAction/UserAction";
+import Global from "../../Global";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -191,7 +193,7 @@ export const Profile2 = (props) => {
                     });
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err);
                     notification.error({ message: "Error fetching user data" });
                     setNotFound(true);
                     notifyEmy({
@@ -232,7 +234,18 @@ export const Profile2 = (props) => {
                     />
                 </MetaTags>
                 <Layout page="profile">
-                    <section className="mt-0 bgc-f7 pb30-991">
+                    <div
+                        className="fixed-bottom text-center"
+                        style={{
+                            marginBottom: Global.isMobile ? "15vh" : "10vh",
+                        }}
+                    >
+                        <UserAction user={userData} />
+                    </div>
+                    <section
+                        className="mt-0 bgc-f7 pb30-991"
+                        style={{ paddingBottom: "15vh" }}
+                    >
                         <div className="gap2  pt-2">
                             <div className="container">
                                 <div className="row justify-content-center">

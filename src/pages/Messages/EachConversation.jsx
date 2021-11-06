@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function EachConversation() {
     const { user } = useSelector((state) => state.auth);
     return (
         <li className="contact border-bottom">
-            <a href="#">
+            <Link to={`/messages/523-45-4-3452-34354`}>
                 <div className="wrap">
                     <span
                         className="contact-status online"
@@ -22,7 +23,7 @@ export default function EachConversation() {
                     </div>
                     <div className="m_notif">2</div>
                 </div>
-            </a>
+            </Link>
         </li>
     );
 }

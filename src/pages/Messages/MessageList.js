@@ -22,7 +22,7 @@ export default function MessageList() {
                     </form>
                 </div>
             </div>
-            <ul style={{ height: "71vh" }}>
+            <ul style={{ height: "71vh", paddingBottom: "15vh" }}>
                 <EachMessage />
                 <EachMessage />
                 <EachMessage />

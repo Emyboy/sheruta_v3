@@ -112,6 +112,7 @@ function App() {
                     <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
                     <Route exact path="/messages" component={Messages} />
+                    <Route exact path="/messages/:conversation_id" component={Messages} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />
                     {/* <Route exact path="/submit" component={Submit} /> */}

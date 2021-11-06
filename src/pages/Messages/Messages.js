@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import Global from "../../Global";
 import EachMessage from "./EachConversation";
 import MessageDetails from "./MessageDetails";
 import MessageList from "./MessageList";
 
-export default function Messages() {
+export default function Messages(props) {
+    console.log("PARAMS =====", props.match.params?.conversation_id);
+    const [showConversation, setShowConversation] = useState(false);
+
+    useEffect(() => {
+        if (props.match.params?.conversation_id) {
+            setShowConversation(true);
+        }else {
+            setShowConversation(false);
+        }
+    }, [props.match.params?.conversation_id]);
+
     return (
         <Layout page={"messages"}>
             <div style={{ overflow: "hidden" }}>
@@ -17,8 +28,11 @@ export default function Messages() {
                                 height: Global.isMobile ? "83vh" : "86vh",
                             }}
                         >
-                            {/* <MessageList /> */}
-                            <MessageDetails />
+                            {showConversation ? (
+                                <MessageDetails />
+                            ) : (
+                                <MessageList />
+                            )}
                         </div>
                     </div>
                 </div>

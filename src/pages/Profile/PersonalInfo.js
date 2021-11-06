@@ -55,14 +55,14 @@ const PersonalInfo = ({ userData }) => {
     } else
         return (
             <div className="central-meta w-100 border-gray rounded">
-                <div
-                    className="fixed-bottom text-center animated animate__bounceInUp"
+                {/* <div
+                    className="fixed-bottom text-center"
                     style={{
                         marginBottom: Global.isMobile ? "15vh" : "10vh",
                     }}
                 >
                     <UserAction />
-                </div>
+                </div> */}
 
                 <span className="create-post">
                     Personal Info
