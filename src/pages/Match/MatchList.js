@@ -6,7 +6,7 @@ import styled from "styled-components";
 import EachMatchCard from "./EachMatchCard";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Alice from "../../utils/Alice";
+import Alice from "../../services/Alice";
 import { getAllMySuggestion } from "../../redux/strapi_actions/alice.actions";
 
 

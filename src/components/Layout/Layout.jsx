@@ -21,7 +21,7 @@ import { useHistory } from "react-router-dom";
 import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
 import FooterNav from "./FooterNav";
-import Alice from "../../utils/Alice";
+import Alice from "../../services/Alice";
 import { CgMenuLeft } from "react-icons/cg";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrSearch, GrFormClose } from "react-icons/gr";

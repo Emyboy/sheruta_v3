@@ -6,7 +6,7 @@ import { Spinner } from 'react-activity'
 import { Link } from 'react-router-dom';
 import { notification } from 'antd';
 import Layout from '../../components/Layout/Layout';
-import { notifyEmy } from '../../utils/Sheruta';
+import { notifyEmy } from '../../services/Sheruta';
 
 
 const VerifyEmail = (props) => {

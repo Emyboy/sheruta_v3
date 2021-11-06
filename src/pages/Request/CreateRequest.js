@@ -12,7 +12,7 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { getUserFeedback } from "../../redux/strapi_actions/view.action";
 import Layout from "../../components/Layout/Layout";
 import store from "../../redux/store/store";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import Cookies from "js-cookie";
 import ImageSelect from "./ImageSelect";
 import { storage } from "../../Firebase";

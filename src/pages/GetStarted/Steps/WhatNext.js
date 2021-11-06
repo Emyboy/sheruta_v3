@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
 import Layout from "../../../components/Layout/Layout";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
 
 const WhatNext = (props) => {
   localStorage.setItem("after_payment", "/what-next");

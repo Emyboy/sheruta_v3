@@ -1,7 +1,18 @@
-import React from "react";
-import EachMessage from "./EachConversation";
+import React, { useEffect, useState } from "react";
+import MessageService from "../../services/MessageService";
+import EachConversation from "./EachConversation";
 
 export default function MessageList() {
+    const [conversations, setConversation] = useState([]);
+    useEffect(async () => {
+        try {
+            const convs = await MessageService.getUserConversations();
+            setConversation(convs);
+            console.log(convs);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
     return (
         <div className="inbox_user_list bg-white">
             <div className="iu_heading">
@@ -23,25 +34,11 @@ export default function MessageList() {
                 </div>
             </div>
             <ul style={{ height: "71vh", paddingBottom: "15vh" }}>
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
-                <EachMessage />
+                {
+                    conversations.map((val, i) => {
+                        return <EachConversation key={"conv-"+1} conv={val} />
+                    })
+                }
             </ul>
         </div>
     );

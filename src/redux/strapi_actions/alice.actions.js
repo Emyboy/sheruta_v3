@@ -1,5 +1,5 @@
 import { notification } from "antd";
-import Alice from "../../utils/Alice";
+import Alice from "../../services/Alice";
 
 export const getAllMySuggestion = () => async (dispatch) => {
     // console.log("GETTING ALL");

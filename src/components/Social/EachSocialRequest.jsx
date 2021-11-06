@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Badge, notification, Tag } from "antd";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import { useSelector } from "react-redux";
 import Btn from "../Btn/Btn";
 import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { DeleteFirebaseImage } from "../../utils/Firebase.utils";
+import { DeleteFirebaseImage } from "../../services/Firebase.utils";
 import VerifiedBadge from "../VerifiedBadge/VerifiedBadge";
 
 const EachSocialRequest = (props) => {

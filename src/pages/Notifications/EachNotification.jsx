@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import Notifications from "../../utils/Notifications";
+import Notifications from "../../services/Notifications";
 
 export default function EachNotification({ data }) {
     localStorage.setItem('after_login', '/notifications');

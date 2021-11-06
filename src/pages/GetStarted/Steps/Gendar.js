@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Btn from '../../../components/Btn/Btn';
 import SelectionCard from '../../../components/SelectionCard/SelectionCard';
 import Global from '../../../Global';
-import { notifyEmy } from '../../../utils/Sheruta';
+import { notifyEmy } from '../../../services/Sheruta';
 
 const mapStateToProps = state => ({
     auth: state.auth

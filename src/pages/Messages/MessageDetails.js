@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Global from "../../Global";
 import EachMessage from "./EachMessage";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoCallSharp } from "react-icons/io5";
+import { useHistory } from "react-router";
 
 export default function MessageDetails({ conversation_id }) {
     const { user } = useSelector((state) => state.auth);
     const [conversation, setConversation] = useState(null);
     const [otherUser, setOtherUser] = useState(null);
+    const history = useHistory()
     // const conversation_id = props.match.params.conversation_id;
 
     useEffect(() => {
@@ -34,31 +38,48 @@ export default function MessageDetails({ conversation_id }) {
             {otherUser && (
                 <div
                     className={`user_heading ${
-                        Global.isMobile ? "p-2" : "p-3"
+                        Global.isMobile ? "p-2" : "pl-2 p-3 "
                     }`}
                 >
                     <a className="shadow">
                         <div className="wrap">
-                            <span
+                            {/* <span
                                 className="contact-status online bg-danger"
                                 style={{
                                     left: Global.isMobile ? "35px" : "25px",
                                 }}
-                            ></span>
-                            <img
-                                className="img-fluid"
-                                src={otherUser.avatar_url}
-                                width={Global.isMobile ? "40" : "50"}
-                                alt="s5.jpg"
-                            />
-                            <div className="meta">
-                                <h5 className="name">
-                                    {otherUser.first_name} {otherUser.last_name}
-                                </h5>
-                                <p className="preview">
-                                    {/* was online today at 11:43 */}
-                                    @{otherUser.username}
-                                </p>
+                            ></span> */}
+                            <div
+                                className="d-flex justify-content-between"
+                                style={{ alignItems: "center" }}
+                            >
+                                <div
+                                    className="d-flex"
+                                    style={{ alignItems: "center" }}
+                                >
+                                    <button className="btn btn-sm pl-0" onClick={() => history.push('/messages')}>
+                                        <IoIosArrowBack size={20} />
+                                    </button>
+                                    <img
+                                        className="img-fluid"
+                                        src={otherUser.avatar_url}
+                                        width={Global.isMobile ? "40" : "50"}
+                                        alt="s5.jpg"
+                                    />
+                                    <div className="meta">
+                                        <h5 className="name">
+                                            {otherUser.first_name}{" "}
+                                            {otherUser.last_name}
+                                        </h5>
+                                        <p className="preview">
+                                            {/* was online today at 11:43 */}@
+                                            {otherUser.username}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button className="btn btn-sm">
+                                    <IoCallSharp size={25} className="text-theme" />
+                                </button>
                             </div>
                         </div>
                     </a>

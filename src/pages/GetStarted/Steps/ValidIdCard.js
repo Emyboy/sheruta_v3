@@ -6,7 +6,7 @@ import Btn from "../../../components/Btn/Btn";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { notification } from "antd";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
 import AuthEditForm from "../../../components/AuthEditForm/AuthEditForm";
 import moment from "moment";
 
@@ -292,7 +292,7 @@ export default function ValidIdCard(props) {
 // import { connect } from "react-redux";
 // import Btn from "../../../components/Btn/Btn";
 // import { storage } from "../../../Firebase";
-// import { compressImage } from "../../../utils/Sheruta";
+// import { compressImage } from "../../../services/Sheruta";
 // import Compressor from "compressorjs";
 // import { ProgressBar } from "react-bootstrap";
 // import axios from "axios";

@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Btn from '../../components/Btn/Btn'
 import store from '../../redux/store/store'
-import { notifyEmy } from '../../utils/Sheruta'
+import { notifyEmy } from '../../services/Sheruta'
 
 export const FeedbackPopup = (props) => {
     return (

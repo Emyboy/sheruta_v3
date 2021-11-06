@@ -1,8 +1,8 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Notifications from "../../utils/Notifications";
-import { getAppDetails } from "../../utils/Sheruta";
+import Notifications from "../../services/Notifications";
+import { getAppDetails } from "../../services/Sheruta";
 import store from "../store/store";
 
 export const getAllServices = () => (dispatch) => {

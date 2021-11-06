@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
-import Alice from "../../../utils/Alice";
-import { notifyEmy } from "../../../utils/Sheruta";
+import Alice from "../../../services/Alice";
+import { notifyEmy } from "../../../services/Sheruta";
 
 const FinishStep = (props) => {
   const { user } = props.auth;

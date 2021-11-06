@@ -7,14 +7,14 @@ import MetaTags from "react-meta-tags";
 import Global from "../../Global";
 import PageNotFound from "../../pages/PageNotFound";
 import { Link } from "react-router-dom";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import styled from "styled-components";
 import ImageViewer from "react-simple-image-viewer";
 import { notification, Tag } from "antd";
 import { ImLocation } from "react-icons/im";
 import moment from "moment";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
-import Notifications from "../../utils/Notifications";
+import Notifications from "../../services/Notifications";
 const ImgContainer = styled.section`
     padding: 5em;
     margin-bottom: 1em;
