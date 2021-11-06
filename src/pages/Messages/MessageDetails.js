@@ -7,7 +7,7 @@ export default function MessageDetails() {
     const { user } = useSelector((state) => state.auth);
     return (
         <div className="message_container border-gray rounded">
-            <div className={`user_heading ${Global.isMobile ? "p-2":"p-3"}`}>
+            <div className={`user_heading ${Global.isMobile ? "p-2" : "p-3"}`}>
                 <a className="shadow">
                     <div className="wrap">
                         <span
@@ -60,7 +60,7 @@ export default function MessageDetails() {
                         ? {
                               position: "fixed",
                               width: "100vw",
-                              bottom: "11vh",
+                              bottom: "9%",
                           }
                         : null
                 }
