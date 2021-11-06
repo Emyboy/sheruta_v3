@@ -45,6 +45,7 @@ import Match from '../pages/Match/Match';
 import Profile2 from "../pages/Profile/Profile2";
 import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer';
 import Messages from '../pages/Messages/Messages';
+import MessageNew from '../pages/Messages/MessageNew';
 
 const PropertyDetails = React.lazy(() =>
     import("../pages/PropertyDetails/PropertyDetails"),
@@ -112,6 +113,7 @@ function App() {
                     <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
                     <Route exact path="/messages" component={Messages} />
+                    <Route exact path="/messages/new/:user_id" component={MessageNew} />
                     <Route exact path="/messages/:conversation_id" component={Messages} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />

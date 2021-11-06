@@ -222,15 +222,15 @@ export const Profile2 = (props) => {
                     </title>
                     <meta
                         name="description"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                     <meta
                         property="og:title"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                     <meta
                         property="og:description"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                 </MetaTags>
                 <Layout page="profile">
