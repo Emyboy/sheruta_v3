@@ -61,6 +61,10 @@ export default function MessageNew(props) {
         }
     }, []);
 
+    useEffect(() => {
+        console.log('CONV ID HAS CHANGED =====', conv_id)
+    },[conv_id]);
+
     if (!user) {
         return <Redirect to="/login" />;
     }
