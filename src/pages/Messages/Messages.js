@@ -4,10 +4,13 @@ import Global from "../../Global";
 import EachMessage from "./EachConversation";
 import MessageDetails from "./MessageDetails";
 import MessageList from "./MessageList";
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 export default function Messages(props) {
     console.log("PARAMS =====", props.match.params?.conversation_id);
     const [showConversation, setShowConversation] = useState(false);
+    const { user } = useSelector(state => state.auth)
 
     useEffect(() => {
         if (props.match.params?.conversation_id) {
@@ -16,6 +19,10 @@ export default function Messages(props) {
             setShowConversation(false);
         }
     }, [props.match.params?.conversation_id]);
+
+    if(!user){
+        return <Redirect to="/login" />
+    }
 
     return (
         <Layout page={"messages"}>
@@ -29,7 +36,11 @@ export default function Messages(props) {
                             }}
                         >
                             {showConversation ? (
-                                <MessageDetails />
+                                <MessageDetails
+                                    conversation_id={
+                                        props.match.params?.conversation_id
+                                    }
+                                />
                             ) : (
                                 <MessageList />
                             )}

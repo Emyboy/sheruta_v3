@@ -1,32 +1,69 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Global from "../../Global";
 import EachMessage from "./EachMessage";
 
-export default function MessageDetails() {
+export default function MessageDetails({ conversation_id }) {
     const { user } = useSelector((state) => state.auth);
+    const [conversation, setConversation] = useState(null);
+    const [otherUser, setOtherUser] = useState(null);
+    // const conversation_id = props.match.params.conversation_id;
+
+    useEffect(() => {
+        axios(
+            process.env.REACT_APP_API_URL +
+                `/conversations/?uuid=${conversation_id}`,
+        )
+            .then((res) => {
+                console.log(res);
+                if (res.data[0].owner.id !== user.user.id) {
+                    setOtherUser(res.data[0].owner);
+                } else {
+                    setOtherUser(res.data[0].guest);
+                }
+                setConversation(res.data[0]);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <div className="message_container border-gray rounded">
-            <div className={`user_heading ${Global.isMobile ? "p-2" : "p-3"}`}>
-                <a className="shadow">
-                    <div className="wrap">
-                        <span
-                            className="contact-status online bg-danger"
-                            style={{ left: Global.isMobile ? "35px" : "25px" }}
-                        ></span>
-                        <img
-                            className="img-fluid"
-                            src={user.user.avatar_url}
-                            width={Global.isMobile ? "40" : "50"}
-                            alt="s5.jpg"
-                        />
-                        <div className="meta">
-                            <h5 className="name">Joanne Davies</h5>
-                            <p className="preview">was online today at 11:43</p>
+            {otherUser && (
+                <div
+                    className={`user_heading ${
+                        Global.isMobile ? "p-2" : "p-3"
+                    }`}
+                >
+                    <a className="shadow">
+                        <div className="wrap">
+                            <span
+                                className="contact-status online bg-danger"
+                                style={{
+                                    left: Global.isMobile ? "35px" : "25px",
+                                }}
+                            ></span>
+                            <img
+                                className="img-fluid"
+                                src={otherUser.avatar_url}
+                                width={Global.isMobile ? "40" : "50"}
+                                alt="s5.jpg"
+                            />
+                            <div className="meta">
+                                <h5 className="name">
+                                    {otherUser.first_name} {otherUser.last_name}
+                                </h5>
+                                <p className="preview">
+                                    {/* was online today at 11:43 */}
+                                    @{otherUser.username}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            )}
             <div
                 className="inbox_chatting_box border-bottom bg-them-light"
                 style={{ height: "70vh" }}
