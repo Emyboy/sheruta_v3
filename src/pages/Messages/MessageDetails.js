@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Global from "../../Global";
 import EachMessage from "./EachMessage";
@@ -10,7 +10,7 @@ import MessageService from "../../services/MessageService";
 import { useInterval } from "react-use";
 
 export default function MessageDetails({ conversation_id }) {
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const { user } = useSelector((state) => state.auth);
     const [conversation, setConversation] = useState(null);
@@ -46,12 +46,18 @@ export default function MessageDetails({ conversation_id }) {
             });
     }, []);
 
+    const scrollDown = () => {
+        console.log('HERE WE GO')
+        var objDiv = document.getElementById("chat");
+    }
+
     useEffect(async () => {
         if (conversation && conversation_id) {
             const msgs = await MessageService.getConversationMessages(
                 conversation.id,
             );
             setMessages(msgs.data);
+            scrollDown()
         }
     }, [conversation]);
 
@@ -60,14 +66,14 @@ export default function MessageDetails({ conversation_id }) {
     }, [conversation]);
 
     useInterval(() => {
-        if (conversation && conversation_id){
-            getMessages()
+        if (conversation && conversation_id) {
+            getMessages();
         }
-    },10000)
+    }, 10000);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(message === null || message === ''){
+        if (message === null || message === "") {
             return;
         }
         try {
@@ -78,9 +84,9 @@ export default function MessageDetails({ conversation_id }) {
                 seen: false,
                 conversation: conversation.id,
             });
-            if(sent){
-                messages.push(sent.data)
-                setMessage('');
+            if (sent) {
+                messages.push(sent.data);
+                setMessage("");
             }
         } catch (error) {
             console.log("ERROR ===", error);
@@ -136,12 +142,14 @@ export default function MessageDetails({ conversation_id }) {
                                         </p>
                                     </div>
                                 </div>
-                                <button className="btn btn-sm">
-                                    <IoCallSharp
-                                        size={25}
-                                        className="text-theme"
-                                    />
-                                </button>
+                                <a href={`tel:${otherUser.phone_number}`}>
+                                    <button className="btn btn-sm">
+                                        <IoCallSharp
+                                            size={25}
+                                            className="text-theme"
+                                        />
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </a>
@@ -152,6 +160,7 @@ export default function MessageDetails({ conversation_id }) {
                 style={{ height: "70vh" }}
             >
                 <ul
+                    id="chat"
                     className={`chatting_content ${
                         Global.isMobile ? "p-1" : ""
                     }`}
@@ -186,6 +195,7 @@ export default function MessageDetails({ conversation_id }) {
                             placeholder="Enter message here..."
                             aria-label="Message"
                             value={message}
+                            autoFocus
                             onChange={(e) => setMessage(e.target.value)}
                             style={{
                                 zIndex: 0,

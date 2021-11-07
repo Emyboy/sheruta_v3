@@ -11,23 +11,29 @@ export default class MessageService {
         const conv2 = await axios(
             process.env.REACT_APP_API_URL + `/conversations/?guest=${user.id}`,
         );
-        const sorted = [...conv1.data, ...conv2.data].sort((a,b) => {
-            return new Date(b.created_at) - new Date(a.created_at);
+        const allConv = await axios(
+            process.env.REACT_APP_API_URL +
+                `/conversations/?owner=${user.id}&guest=${user.id}&_sort=updated_at:DESC`,
+        );
+        const sorted = [...conv1.data, ...conv2.data].sort((a, b) => {
+            return new Date(b.last_visited) - new Date(a.last_visited);
         });
         return sorted;
-    };
+    }
 
     static async sendMessage(message) {
-        console.log('=== SENDING ====', message)
-        const sent = await axios(process.env.REACT_APP_API_URL+`/messages`, {
-            method: 'POST',
+        console.log("=== SENDING ====", message);
+        const sent = await axios(process.env.REACT_APP_API_URL + `/messages`, {
+            method: "POST",
             data: message,
             headers: {
-                authorization: `Bearer ${Cookies.get('token')}`
-            }
+                authorization: `Bearer ${Cookies.get("token")}`,
+            },
         });
-        return sent
-    };
+        console.log("MESSAGE ======", sent.data);
+        this.updateConversationTime(sent.data.conversation.id);
+        return sent;
+    }
 
     static async getConversationMessages(conv_id) {
         const messages = await axios(
@@ -40,10 +46,37 @@ export default class MessageService {
             },
         );
         return messages;
-    };
+    }
 
-    static async updateConversation(update) {
-        const done = await axios(process.env.REACT_APP_API_URL+`/conversation`)
+    static async updateConversationTime(conv_id) {
+        const done = await axios(
+            process.env.REACT_APP_API_URL + `/conversations/${conv_id}`,
+            {
+                method: "PUT",
+                data: {
+                    updated_at: new Date().toJSON(),
+                    last_visited: new Date().toJSON(),
+                },
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
+        );
+        console.log("=== UPDATING TIME ===", done);
+        return done;
+    }
+
+    static async getLatestConversationMessage(conv_id){
+        const message = await axios(
+            process.env.REACT_APP_API_URL +
+                `/messages/?conversation=${conv_id}&_sort=updated_at:DESC&_limit=1`,
+            {
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
+        );
+        return message;
     }
 
 }

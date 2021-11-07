@@ -3,12 +3,11 @@ import Layout from "../../components/Layout/Layout";
 import Global from "../../Global";
 import EachMessage from "./EachConversation";
 import MessageDetails from "./MessageDetails";
-import MessageList from "./MessageList";
+import ConversationList from "./ConversationList";
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 
 export default function Messages(props) {
-    console.log("PARAMS =====", props.match.params?.conversation_id);
     const [showConversation, setShowConversation] = useState(false);
     const { user } = useSelector(state => state.auth)
 
@@ -42,7 +41,7 @@ export default function Messages(props) {
                                     }
                                 />
                             ) : (
-                                <MessageList />
+                                <ConversationList />
                             )}
                         </div>
                     </div>

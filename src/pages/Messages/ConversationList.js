@@ -1,18 +1,24 @@
+import { notification } from "antd";
 import React, { useEffect, useState } from "react";
 import MessageService from "../../services/MessageService";
 import EachConversation from "./EachConversation";
 
 export default function MessageList() {
     const [conversations, setConversation] = useState([]);
-    useEffect(async () => {
+
+    const getConversation = async () => {
         try {
             const convs = await MessageService.getUserConversations();
             setConversation(convs);
-            console.log(convs);
         } catch (error) {
-            console.log(error);
+            notification.error({ message: "Error loading messages" });
         }
+    };
+
+    useEffect(() => {
+        getConversation();
     }, []);
+
     return (
         <div className="inbox_user_list bg-white">
             <div className="iu_heading">
@@ -23,6 +29,7 @@ export default function MessageList() {
                             type="search"
                             placeholder="Search Chat"
                             aria-label="Search"
+                            autoFocus
                         />
                         {/* <button
                                                 className="btn"
@@ -33,12 +40,12 @@ export default function MessageList() {
                     </form>
                 </div>
             </div>
-            <ul style={{ height: "71vh", paddingBottom: "15vh" }}>
-                {
-                    conversations.map((val, i) => {
-                        return <EachConversation key={"conv-"+1} conv={val} />
-                    })
-                }
+            <ul
+                style={{ height: "71vh", paddingBottom: "15vh" }}
+            >
+                {conversations.map((val, i) => {
+                    return <EachConversation key={"conv-" + i} conv={val} />;
+                })}
             </ul>
         </div>
     );

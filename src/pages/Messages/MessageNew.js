@@ -24,10 +24,11 @@ export default function MessageNew(props) {
                 owner,
                 guest,
                 uuid: uuid() + "@" + owner + "@" + guest,
+                last_visited: new Date().toJSON()
             },
         })
             .then((res) => {
-                console.log('CREATED ---',res);
+                console.log("CREATED ---", res);
                 set_conv_id(res.data.uuid);
             })
             .catch((err) => {
