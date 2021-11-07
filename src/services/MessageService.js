@@ -40,5 +40,10 @@ export default class MessageService {
             },
         );
         return messages;
+    };
+
+    static async updateConversation(update) {
+        const done = await axios(process.env.REACT_APP_API_URL+`/conversation`)
     }
+
 }

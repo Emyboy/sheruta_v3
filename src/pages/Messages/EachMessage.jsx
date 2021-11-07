@@ -8,8 +8,8 @@ export default function EachMessage({ sent, message }) {
     return (
         <>
             {message.from.id === user.user.id ? (
-                <li className="media reply">
-                    <div className="media-body text-right ">
+                <li className="media reply pb-1">
+                    <div className="media-body text-right">
                         <div className="date_time">
                             {moment(message.created_at).fromNow()}
                         </div>
@@ -21,7 +21,7 @@ export default function EachMessage({ sent, message }) {
                     </div>
                 </li>
             ) : (
-                <li className="media sent">
+                <li className="media sent pb-1">
                     <span
                         className="contact-status busy"
                         style={{ left: Global.isMobile ? "35px" : "25px" }}

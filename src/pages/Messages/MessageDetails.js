@@ -67,6 +67,9 @@ export default function MessageDetails({ conversation_id }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(message === null || message === ''){
+            return;
+        }
         try {
             const sent = await MessageService.sendMessage({
                 to: otherUser,
@@ -75,6 +78,10 @@ export default function MessageDetails({ conversation_id }) {
                 seen: false,
                 conversation: conversation.id,
             });
+            if(sent){
+                messages.push(sent.data)
+                setMessage('');
+            }
         } catch (error) {
             console.log("ERROR ===", error);
         }
@@ -178,6 +185,7 @@ export default function MessageDetails({ conversation_id }) {
                             type="text"
                             placeholder="Enter message here..."
                             aria-label="Message"
+                            value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             style={{
                                 zIndex: 0,
