@@ -50,10 +50,10 @@ export default function MessageNew(props) {
             if (notOwner.data.length === 0 && authIsOwner.data.length === 0) {
                 createNewConversation(user.user.id, guestUser);
             }else if(authIsOwner.data.length > 0){
-                console.log('SEEN AUTH OWN')
+                console.log("SEEN AUTH OWN", authIsOwner);
                 set_conv_id(authIsOwner.data[0].uuid)
             }else if(notOwner.data.length > 0){
-                console.log('SEEN OWN')
+                console.log("SEEN OWN", notOwner);
                 set_conv_id(notOwner.data[0].uuid);
             }
         } catch (error) {

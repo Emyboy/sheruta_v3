@@ -6,13 +6,27 @@ import EachMessage from "./EachMessage";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoCallSharp } from "react-icons/io5";
 import { useHistory } from "react-router";
+import MessageService from "../../services/MessageService";
+import { useInterval } from "react-use";
 
 export default function MessageDetails({ conversation_id }) {
+    const [message, setMessage] = useState(null);
+    const [messages, setMessages] = useState([]);
     const { user } = useSelector((state) => state.auth);
     const [conversation, setConversation] = useState(null);
     const [otherUser, setOtherUser] = useState(null);
-    const history = useHistory()
+    const history = useHistory();
+
     // const conversation_id = props.match.params.conversation_id;
+
+    const getMessages = async () => {
+        if (conversation && conversation_id) {
+            const msgs = await MessageService.getConversationMessages(
+                conversation.id,
+            );
+            setMessages(msgs.data);
+        }
+    };
 
     useEffect(() => {
         axios(
@@ -20,7 +34,6 @@ export default function MessageDetails({ conversation_id }) {
                 `/conversations/?uuid=${conversation_id}`,
         )
             .then((res) => {
-                console.log(res);
                 if (res.data[0].owner.id !== user.user.id) {
                     setOtherUser(res.data[0].owner);
                 } else {
@@ -32,6 +45,40 @@ export default function MessageDetails({ conversation_id }) {
                 console.log(err);
             });
     }, []);
+
+    useEffect(async () => {
+        if (conversation && conversation_id) {
+            const msgs = await MessageService.getConversationMessages(
+                conversation.id,
+            );
+            setMessages(msgs.data);
+        }
+    }, [conversation]);
+
+    useEffect(async () => {
+        getMessages();
+    }, [conversation]);
+
+    useInterval(() => {
+        if (conversation && conversation_id){
+            getMessages()
+        }
+    },10000)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const sent = await MessageService.sendMessage({
+                to: otherUser,
+                from: user.user.id,
+                message_text: message,
+                seen: false,
+                conversation: conversation.id,
+            });
+        } catch (error) {
+            console.log("ERROR ===", error);
+        }
+    };
 
     return (
         <div className="message_container border-gray rounded">
@@ -57,7 +104,12 @@ export default function MessageDetails({ conversation_id }) {
                                     className="d-flex"
                                     style={{ alignItems: "center" }}
                                 >
-                                    <button className="btn btn-sm pl-0" onClick={() => history.push('/messages')}>
+                                    <button
+                                        className="btn btn-sm pl-0"
+                                        onClick={() =>
+                                            history.push("/messages")
+                                        }
+                                    >
                                         <IoIosArrowBack size={20} />
                                     </button>
                                     <img
@@ -78,7 +130,10 @@ export default function MessageDetails({ conversation_id }) {
                                     </div>
                                 </div>
                                 <button className="btn btn-sm">
-                                    <IoCallSharp size={25} className="text-theme" />
+                                    <IoCallSharp
+                                        size={25}
+                                        className="text-theme"
+                                    />
                                 </button>
                             </div>
                         </div>
@@ -95,19 +150,9 @@ export default function MessageDetails({ conversation_id }) {
                     }`}
                     style={{ marginBottom: Global.isMobile ? "30vh" : "10vh" }}
                 >
-                    <EachMessage />
-                    <EachMessage />
-                    <EachMessage sent />
-                    <EachMessage />
-                    <EachMessage />
-                    <EachMessage sent />
-                    <EachMessage sent />
-                    <EachMessage />
-                    <EachMessage />
-                    <EachMessage sent />
-                    <EachMessage />
-                    <EachMessage />
-                    <EachMessage sent />
+                    {messages.map((val, i) => {
+                        return <EachMessage message={val} key={`msg-${i}`} />;
+                    })}
                     <h6 className="text-muted text-center mt-3">The End</h6>
                 </ul>
             </div>
@@ -124,12 +169,16 @@ export default function MessageDetails({ conversation_id }) {
                 }
             >
                 <div className="message_input_">
-                    <form className="form-inline border-top">
+                    <form
+                        className="form-inline border-top"
+                        onSubmit={handleSubmit}
+                    >
                         <input
                             className="bg-them-light p-2 border-gray m-2 mb-4 w-100"
                             type="text"
                             placeholder="Enter message here..."
                             aria-label="Message"
+                            onChange={(e) => setMessage(e.target.value)}
                             style={{
                                 zIndex: 0,
                                 borderRadius: "50px",
