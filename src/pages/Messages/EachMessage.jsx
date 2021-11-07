@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Global from "../../Global";
 
-export default function EachMessage({ sent, message }) {
+export default function EachMessage({ message }) {
     const { user } = useSelector((state) => state.auth);
     return (
         <>
@@ -23,7 +23,7 @@ export default function EachMessage({ sent, message }) {
             ) : (
                 <li className="media sent pb-1">
                     <span
-                        className="contact-status busy"
+                        className={`contact-status ${message.from?.online ? "bg-success": "bg-danger"}`}
                         style={{ left: Global.isMobile ? "35px" : "25px" }}
                     ></span>
                     <img

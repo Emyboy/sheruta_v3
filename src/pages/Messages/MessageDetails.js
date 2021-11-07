@@ -8,16 +8,29 @@ import { IoCallSharp } from "react-icons/io5";
 import { useHistory } from "react-router";
 import MessageService from "../../services/MessageService";
 import { useInterval } from "react-use";
+import { FiSend } from "react-icons/fi";
 
 export default function MessageDetails({ conversation_id }) {
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const { user } = useSelector((state) => state.auth);
     const [conversation, setConversation] = useState(null);
     const [otherUser, setOtherUser] = useState(null);
     const history = useHistory();
+    const myRef = React.createRef();
+    const [inputRows, setInputRows] = useState("1");
 
     // const conversation_id = props.match.params.conversation_id;
+
+    const executeScroll = () => {
+        console.log("HERE WE GO");
+        // myRef.current.scrollIntoView();
+        document.getElementById("end").scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+        });
+    };
 
     const getMessages = async () => {
         if (conversation && conversation_id) {
@@ -25,8 +38,30 @@ export default function MessageDetails({ conversation_id }) {
                 conversation.id,
             );
             setMessages(msgs.data);
+            // executeScroll()
         }
     };
+
+    useEffect(() => {
+        if (message.length > 90) {
+            setInputRows("3");
+        } else if (message.length > 140) {
+            setInputRows("5");
+        } else {
+            setInputRows("1");
+        }
+    }, [message]);
+
+    useEffect(() => {
+        if (messages.length > 5) {
+            setTimeout(() => {
+                executeScroll();
+            }, 90);
+        }
+        setTimeout(() => {
+            executeScroll();
+        }, 1000);
+    }, []);
 
     useEffect(() => {
         axios(
@@ -40,16 +75,12 @@ export default function MessageDetails({ conversation_id }) {
                     setOtherUser(res.data[0].guest);
                 }
                 setConversation(res.data[0]);
+                // executeScroll()
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-
-    const scrollDown = () => {
-        console.log('HERE WE GO')
-        var objDiv = document.getElementById("chat");
-    }
 
     useEffect(async () => {
         if (conversation && conversation_id) {
@@ -57,11 +88,11 @@ export default function MessageDetails({ conversation_id }) {
                 conversation.id,
             );
             setMessages(msgs.data);
-            scrollDown()
+            // executeScroll();
         }
     }, [conversation]);
 
-    useEffect(async () => {
+    useEffect(() => {
         getMessages();
     }, [conversation]);
 
@@ -87,6 +118,7 @@ export default function MessageDetails({ conversation_id }) {
             if (sent) {
                 messages.push(sent.data);
                 setMessage("");
+                executeScroll();
             }
         } catch (error) {
             console.log("ERROR ===", error);
@@ -160,7 +192,6 @@ export default function MessageDetails({ conversation_id }) {
                 style={{ height: "70vh" }}
             >
                 <ul
-                    id="chat"
                     className={`chatting_content ${
                         Global.isMobile ? "p-1" : ""
                     }`}
@@ -171,6 +202,7 @@ export default function MessageDetails({ conversation_id }) {
                     })}
                     <h6 className="text-muted text-center mt-3">The End</h6>
                 </ul>
+                <div id="end" ref={myRef}></div>
             </div>
             <div
                 className="mi_text bg-white"
@@ -189,20 +221,32 @@ export default function MessageDetails({ conversation_id }) {
                         className="form-inline border-top"
                         onSubmit={handleSubmit}
                     >
-                        <input
-                            className="bg-them-light p-2 border-gray m-2 mb-4 w-100"
-                            type="text"
-                            placeholder="Enter message here..."
-                            aria-label="Message"
-                            value={message}
-                            autoFocus
-                            onChange={(e) => setMessage(e.target.value)}
-                            style={{
-                                zIndex: 0,
-                                borderRadius: "50px",
-                                // backgroundColor: "#F0F5EF",
-                            }}
-                        />
+                        <div className="d-flex">
+                            <textarea
+                                className="bg-them-light p-2 border-gray m-2 mb-4 w-100"
+                                type="text"
+                                placeholder="Enter message here..."
+                                aria-label="Message"
+                                value={message}
+                                autoFocus
+                                cols="40"
+                                rows={inputRows}
+                                onChange={(e) => setMessage(e.target.value)}
+                                style={{
+                                    zIndex: 0,
+                                    borderRadius:
+                                        message.length > 90 ? "2px" : "50px",
+                                    // backgroundColor: "#F0F5EF",
+                                }}
+                            />
+                            <button
+                                className="btn-sm btn btn-success mb-3 mr-1"
+                                style={{ height: "40px", alignSelf: "center" }}
+                                type="submit"
+                            >
+                                <FiSend size={20} />
+                            </button>
+                        </div>
                         {/* <button className="btn btn-sm" type="submit">
                             Send Message
                         </button> */}

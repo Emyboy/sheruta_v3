@@ -22,7 +22,6 @@ export default class MessageService {
     }
 
     static async sendMessage(message) {
-        console.log("=== SENDING ====", message);
         const sent = await axios(process.env.REACT_APP_API_URL + `/messages`, {
             method: "POST",
             data: message,
@@ -30,7 +29,6 @@ export default class MessageService {
                 authorization: `Bearer ${Cookies.get("token")}`,
             },
         });
-        console.log("MESSAGE ======", sent.data);
         this.updateConversationTime(sent.data.conversation.id);
         return sent;
     }
@@ -38,7 +36,7 @@ export default class MessageService {
     static async getConversationMessages(conv_id) {
         const messages = await axios(
             process.env.REACT_APP_API_URL +
-                `/messages/?conversation=${conv_id}`,
+                `/messages/?conversation=${conv_id}&_sort=created_at:ASC`,
             {
                 headers: {
                     authorization: `Bearer ${Cookies.get("token")}`,
@@ -62,7 +60,6 @@ export default class MessageService {
                 },
             },
         );
-        console.log("=== UPDATING TIME ===", done);
         return done;
     }
 
