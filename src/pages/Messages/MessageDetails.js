@@ -221,7 +221,7 @@ export default function MessageDetails({ conversation_id }) {
                         className="form-inline border-top"
                         onSubmit={handleSubmit}
                     >
-                        <div className="d-flex">
+                        <div className="d-flex w-100">
                             <textarea
                                 className="bg-them-light p-2 border-gray ml-1 mt-2 mb-2 mr-0 mb-4 w-100"
                                 type="text"
@@ -246,8 +246,8 @@ export default function MessageDetails({ conversation_id }) {
                                 style={{
                                     height: "45px",
                                     alignSelf: "center",
-                                    borderTopRightRadius: "10px",
-                                    borderBottomRightRadius: "10px",
+                                    borderTopRightRadius: "15px",
+                                    borderBottomRightRadius: "15px",
                                     borderTopLeftRadius: "0px",
                                     borderBottomLeftRadius: "0px",
                                 }}

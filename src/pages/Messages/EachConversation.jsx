@@ -8,6 +8,7 @@ export default function EachConversation({ conv }) {
     const [otherUser, setOtherUser] = useState(null);
     const { user } = useSelector((state) => state.auth);
     const [latestMsg, setLatestMsg] = useState("");
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         if (conv.owner.id === user.user.id) {
@@ -16,6 +17,16 @@ export default function EachConversation({ conv }) {
             setOtherUser(conv.owner);
         }
     }, []);
+
+    useEffect(async() => {
+        try {
+          const _count = await  MessageService.getConversationNewMessages(conv.id)
+          setCount(_count.data)
+          console.log('COUNT ---', count);
+        } catch (error) {
+            
+        }
+    },[]);
 
     useEffect(async () => {
         try {
@@ -36,7 +47,9 @@ export default function EachConversation({ conv }) {
                 <Link to={`/messages/${conv.uuid}`}>
                     <div className="wrap">
                         <span
-                            className={`contact-status ${otherUser?.online ? "bg-success": 'bg-danger'}`}
+                            className={`contact-status ${
+                                otherUser?.online ? "bg-success" : "bg-danger"
+                            }`}
                             style={{ left: "40px" }}
                         ></span>
                         <img
@@ -56,7 +69,7 @@ export default function EachConversation({ conv }) {
                                     : latestMsg || "...."}
                             </p>
                         </div>
-                        <div className="m_notif">2</div>
+                        {count !== 0 && <div className="m_notif">{count}</div>}
                     </div>
                 </Link>
             )}

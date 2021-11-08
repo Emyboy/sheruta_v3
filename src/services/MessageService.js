@@ -89,5 +89,18 @@ export default class MessageService {
         );
         console.log('UPDATE ===', message)
         return message;
+    };
+
+    static async getConversationNewMessages(conversation_id){
+        const message = await axios(
+            process.env.REACT_APP_API_URL + `/messages/count/?conversation=${conversation_id}&seen=false`,
+            {
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
+        );
+        console.log("NEW MESSAGE ===", message);
+        return message;
     }
 }
