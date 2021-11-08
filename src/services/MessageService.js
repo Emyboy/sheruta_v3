@@ -63,7 +63,7 @@ export default class MessageService {
         return done;
     }
 
-    static async getLatestConversationMessage(conv_id){
+    static async getLatestConversationMessage(conv_id) {
         const message = await axios(
             process.env.REACT_APP_API_URL +
                 `/messages/?conversation=${conv_id}&_sort=updated_at:DESC&_limit=1`,
@@ -76,4 +76,18 @@ export default class MessageService {
         return message;
     }
 
+    static async updateMessageSeen(message_id) {
+        const message = await axios(
+            process.env.REACT_APP_API_URL + `/messages/${message_id}`,
+            {
+                data: { seen: true },
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
+        );
+        console.log('UPDATE ===', message)
+        return message;
+    }
 }

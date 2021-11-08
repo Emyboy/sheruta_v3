@@ -1,10 +1,18 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Global from "../../Global";
+import MessageService from "../../services/MessageService";
 
 export default function EachMessage({ message }) {
     const { user } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (!message.seen && message.to.id === user.user.id) {
+            MessageService.updateMessageSeen(message.id);
+        }
+    }, []);
+
     return (
         <>
             {message.from.id === user.user.id ? (
@@ -18,12 +26,19 @@ export default function EachMessage({ message }) {
                                 {message.message_text}
                             </p>
                         </div>
+                        {message.seen && (
+                            <small>
+                                <i>Seen</i>
+                            </small>
+                        )}
                     </div>
                 </li>
             ) : (
                 <li className="media sent pb-1">
                     <span
-                        className={`contact-status ${message.from?.online ? "bg-success": "bg-danger"}`}
+                        className={`contact-status ${
+                            message.from?.online ? "bg-success" : "bg-danger"
+                        }`}
                         style={{ left: Global.isMobile ? "35px" : "25px" }}
                     ></span>
                     <img

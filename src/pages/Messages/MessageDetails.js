@@ -200,7 +200,7 @@ export default function MessageDetails({ conversation_id }) {
                     {messages.map((val, i) => {
                         return <EachMessage message={val} key={`msg-${i}`} />;
                     })}
-                    <h6 className="text-muted text-center mt-3">The End</h6>
+                    <h6 className="text-muted text-center pt-3">The End</h6>
                 </ul>
                 <div id="end" ref={myRef}></div>
             </div>
@@ -223,7 +223,7 @@ export default function MessageDetails({ conversation_id }) {
                     >
                         <div className="d-flex">
                             <textarea
-                                className="bg-them-light p-2 border-gray m-2 mb-4 w-100"
+                                className="bg-them-light p-2 border-gray ml-1 mt-2 mb-2 mr-0 mb-4 w-100"
                                 type="text"
                                 placeholder="Enter message here..."
                                 aria-label="Message"
@@ -237,11 +237,20 @@ export default function MessageDetails({ conversation_id }) {
                                     borderRadius:
                                         message.length > 90 ? "2px" : "50px",
                                     // backgroundColor: "#F0F5EF",
+                                    borderTopRightRadius: 0,
+                                    borderBottomRightRadius: 0,
                                 }}
                             />
                             <button
-                                className="btn-sm btn btn-success mb-3 mr-1"
-                                style={{ height: "40px", alignSelf: "center" }}
+                                className="btn-sm btn bg-theme text-white mb-3 mr-1"
+                                style={{
+                                    height: "45px",
+                                    alignSelf: "center",
+                                    borderTopRightRadius: "10px",
+                                    borderBottomRightRadius: "10px",
+                                    borderTopLeftRadius: "0px",
+                                    borderBottomLeftRadius: "0px",
+                                }}
                                 type="submit"
                             >
                                 <FiSend size={20} />
