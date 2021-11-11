@@ -7,6 +7,7 @@ import Global from '../../Global'
 export default function EachConversation({ conv }) {
     const [otherUser, setOtherUser] = useState(null);
     const { user } = useSelector((state) => state.auth);
+    const { messages } = useSelector((state) => state.view);
     const [latestMsg, setLatestMsg] = useState("");
     const [count, setCount] = useState(0);
 
@@ -19,14 +20,15 @@ export default function EachConversation({ conv }) {
     }, []);
 
     useEffect(async() => {
-        try {
-          const _count = await  MessageService.getConversationNewMessages(conv.id)
-          setCount(_count.data)
-          console.log('COUNT ---', count);
-        } catch (error) {
+        // try {
+        //   const _count = await  MessageService.getConversationNewMessages(conv.id)
+        //   setCount(_count.data)
+        //   console.log('COUNT ---', count);
+        // } catch (error) {
             
-        }
-    },[]);
+        // }
+        setCount(messages.filter((x) => x.conversation.id === conv.id).length);
+    },[messages]);
 
     useEffect(async () => {
         try {

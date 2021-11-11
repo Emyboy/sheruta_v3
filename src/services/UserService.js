@@ -12,7 +12,6 @@ export default class UserService {
                 },
             },
         );
-        console.log('NOW ONLINE ', data)
         return data;
     }
 }

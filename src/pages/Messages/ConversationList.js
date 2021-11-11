@@ -23,7 +23,7 @@ export default function MessageList() {
         <div className="inbox_user_list bg-white">
             <div className="iu_heading">
                 <div className="candidate_revew_search_box">
-                    <form className="form-inline">
+                    {/* <form className="form-inline">
                         <input
                             className="form-control w-100 border-gray rounded"
                             type="search"
@@ -31,13 +31,7 @@ export default function MessageList() {
                             aria-label="Search"
                             autoFocus
                         />
-                        {/* <button
-                                                className="btn"
-                                                type="submit"
-                                            >
-                                                <span className="flaticon-magnifying-glass"></span>
-                                            </button> */}
-                    </form>
+                    </form> */}
                 </div>
             </div>
             <ul

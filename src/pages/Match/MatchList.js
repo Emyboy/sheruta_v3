@@ -38,14 +38,12 @@ export default function MatchList() {
                 suggestion_id,
                 status,
             );
-            console.log("REJECT --", rejected);
             dispatch(getAllMySuggestion());
             notifyEmy({ heading: `${status} someone as a suggestion`})
         } catch (error) {
             return Promise.reject(error);
         }
     };
-    console.log(user_suggestions);
     if(!user){
         return <Redirect to="/login" />
     }

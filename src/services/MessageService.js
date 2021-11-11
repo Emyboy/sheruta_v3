@@ -81,26 +81,38 @@ export default class MessageService {
             process.env.REACT_APP_API_URL + `/messages/${message_id}`,
             {
                 data: { seen: true },
-                method: 'PUT',
+                method: "PUT",
                 headers: {
                     authorization: `Bearer ${Cookies.get("token")}`,
                 },
             },
         );
-        console.log('UPDATE ===', message)
         return message;
-    };
+    }
 
-    static async getConversationNewMessages(conversation_id){
+    static async getConversationNewMessages(conversation_id) {
         const message = await axios(
-            process.env.REACT_APP_API_URL + `/messages/count/?conversation=${conversation_id}&seen=false`,
+            process.env.REACT_APP_API_URL +
+                `/messages/count/?conversation=${conversation_id}&seen=false&to=${
+                    store.getState().auth.user.user.id
+                }`,
             {
                 headers: {
                     authorization: `Bearer ${Cookies.get("token")}`,
                 },
             },
         );
-        console.log("NEW MESSAGE ===", message);
         return message;
+    }
+
+    static async getUnreadMessages() {
+        const { user } = store.getState().auth;
+        if (user) {
+            const messages = await axios(
+                process.env.REACT_APP_API_URL +
+                    `/messages/?to=${user.user?.id}&seen=false`,
+            );
+            return messages;
+        }
     }
 }

@@ -9,6 +9,7 @@ import {
     getAllPaymentTypes,
     getAllWorkIndustries,
     getAllNotifications,
+    getUnreadMessageCount,
 } from "../../redux/strapi_actions/view.action";
 import {
     getAllSuggestionsByStatus,
@@ -34,6 +35,7 @@ const MasterPopup = (props) => {
             dispatch(suggestThemForMe());
             dispatch(getAllNotifications());
             dispatch(setUserOnline());
+            dispatch(getUnreadMessageCount())
         }
     }, []);
 
@@ -44,6 +46,7 @@ const MasterPopup = (props) => {
             dispatch(suggestThemForMe());
             dispatch(getAllNotifications());
             dispatch(setUserOnline());
+            dispatch(getUnreadMessageCount());
         }
     }, 40000);
 

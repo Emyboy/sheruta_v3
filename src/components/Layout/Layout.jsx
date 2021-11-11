@@ -269,6 +269,7 @@ const Layout = connect(
                                 active={page === "notifications"}
                             />
                             <FooterNav
+                                count={view.messages.length}
                                 IconComponent={
                                     <FiMail size={Global.isMobile ? 26 : 30} />
                                 }

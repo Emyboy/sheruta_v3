@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
+import MessageService from "../../services/MessageService";
 import Notifications from "../../services/Notifications";
 import { getAppDetails } from "../../services/Sheruta";
 import store from "../store/store";
@@ -168,6 +169,20 @@ export const getAllNotifications = () => async dispatch => {
             type: 'GET_ALL_NOTIFICATIONS',
             payload: list.data
         })
+    }
+};
+
+export const getUnreadMessageCount = () => async dispatch => {
+    try {
+        const msg = await MessageService.getUnreadMessages();
+        dispatch({
+            type: 'SET_VIEW_STATE',
+            payload: {
+                messages: msg.data
+            }
+        })
+    } catch (error) {
+        return Promise.reject(error);
     }
 }
 
