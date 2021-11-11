@@ -6,13 +6,14 @@ import AcceptedMatchList from "./AcceptedMatchList";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSuggestionsByStatus } from "../../redux/strapi_actions/alice.actions";
 import { Redirect } from "react-router";
+import { notifyEmy } from "../../services/Sheruta";
 
 const { TabPane } = Tabs;
 
 export default function Match() {
-    localStorage.setItem('after_login', '/match');
+    localStorage.setItem("after_login", "/match");
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth);
+    const { user } = useSelector((state) => state.auth);
     function callback(key) {
         dispatch(getAllSuggestionsByStatus("accepted"));
     }
@@ -23,9 +24,11 @@ export default function Match() {
     useEffect(() => {
         dispatch(getAllSuggestionsByStatus("accepted"));
     }, [user_suggestions]);
-
-    if(!user){
-        return <Redirect to='/login' />
+    useEffect(() => {
+        notifyEmy({ heading: "visited the match page" });
+    }, []);
+    if (!user) {
+        return <Redirect to="/login" />;
     }
 
     return (

@@ -8,7 +8,7 @@ import Select from "react-select";
 import axios from "axios";
 import { notification } from "antd";
 import { AiOutlineWarning } from "react-icons/ai";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
 
 const PersonalInfoForm = (props) => {
   const [info, setInfo] = useState(props.info);

@@ -33,7 +33,7 @@ export default (props) => {
     }, []);
 
     useEffect(() => {
-        if (state.properties.length === 0) {
+        if (state.properties.length === 0 && !Global.isMobile) {
             axios(
                 process.env.REACT_APP_API_URL +
                     `/properties/recent/${Global.isMobile ? "4" : "5"}`,
@@ -46,14 +46,16 @@ export default (props) => {
     }, [state]);
 
     useEffect(() => {
-        axios(
-            process.env.REACT_APP_API_URL +
-                `/users/?confirmed=true&_limit=4&_sort=created_at:DESC`,
-        )
-            .then((res) => {
-                setNewUsers(res.data);
-            })
-            .catch((err) => {});
+        if (!Global.isMobile) {
+            axios(
+                process.env.REACT_APP_API_URL +
+                    `/users/?confirmed=true&_limit=4&_sort=created_at:DESC`,
+            )
+                .then((res) => {
+                    setNewUsers(res.data);
+                })
+                .catch((err) => {});
+        }
     }, []);
     useEffect(() => {
         if (state.list.length === 0) {
@@ -353,6 +355,7 @@ export default (props) => {
                                                     <h4 className="widget-title">
                                                         New Users
                                                     </h4>
+
                                                     <ul
                                                         className="followers ps-container ps-theme-default ps-active-y"
                                                         data-ps-id="dcb7159e-c79e-aac7-b46b-9ac56abf3ecd"
@@ -365,7 +368,9 @@ export default (props) => {
                                                                         .user.id
                                                                 ) {
                                                                     return (
-                                                                        <li>
+                                                                        <li
+                                                                            key={`new-user-${i}`}
+                                                                        >
                                                                             <figure>
                                                                                 <img
                                                                                     src={
@@ -451,7 +456,6 @@ export default (props) => {
                                     </div>
                                 )}
                                 <div className="col-lg-5">
-                                    
                                     {state.list.map((val, i) => {
                                         if (i == 5) {
                                             return (
@@ -461,7 +465,7 @@ export default (props) => {
                                                 />
                                             );
                                         } else if (i === 2) {
-                                            return <PostRequestAds />
+                                            return <PostRequestAds />;
                                         }
                                         return (
                                             <EachSocialRequest

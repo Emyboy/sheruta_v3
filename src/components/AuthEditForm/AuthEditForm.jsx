@@ -5,7 +5,7 @@ import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getUser } from "../../redux/strapi_actions/auth.actions";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import Btn from "../Btn/Btn";
 import TextArea from "../TextArea/TextArea";
 import TextInput from "../TextInput/TextInput";

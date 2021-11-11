@@ -4,7 +4,7 @@ import { BsFillBellFill } from "react-icons/bs";
 import Btn from "../Btn/Btn";
 import firebase from "../../Firebase";
 import { useSelector } from "react-redux";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { notification } from "antd";

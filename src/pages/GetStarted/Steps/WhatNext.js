@@ -6,13 +6,19 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
 import Layout from "../../../components/Layout/Layout";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
+import { useInterval } from 'react-use'
 
 const WhatNext = (props) => {
   localStorage.setItem("after_payment", "/what-next");
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [payment, setPayment] = useState(null);
-  const [hasRequest, setHasRequest] = useState(false)
+  const [hasRequest, setHasRequest] = useState(false);
+  const [position, setPosition] = useState(100);
+
+  useInterval(() => {
+    setPosition(position-1)
+  },[10])
 
   const checkPaymentStatus = () => {
     setPaymentLoading(true);
@@ -72,100 +78,109 @@ const WhatNext = (props) => {
   }, []);
 
   return (
-    <Layout>
-      <div className="container-fluid">
-        <div className="pt-5">
-          <div className="sec-heading center mb-4">
-            <h2 className="animated animate__bounceIn">What Next?</h2>
-            <p>
-              Read the steps below to find how to become a member of sheruta
-            </p>
+      <Layout>
+          <div className="row justify-content-center" style={{ position: "fixed", bottom: `${position}%`, zIndex: 0 }}>
+              <img src="https://www.pngkey.com/png/detail/7-79376_confetti-png-transparent-picture-party-confetti-transparent-png.png" />
+              <img src="https://www.pngkey.com/png/detail/7-79376_confetti-png-transparent-picture-party-confetti-transparent-png.png" />
           </div>
-        </div>
-        <div className="row pb-5">
-          <div className="col-lg-4 col-md-4">
-            <div className="middle-icon-features">
-              <div className="middle-icon-features-item">
-                <div className="middle-icon-large-features-box">
-                  <i className="">1</i>
-                  {/* <span className="steps bg-danger">01</span> */}
-                </div>
-                <div className="middle-icon-features-content">
-                  <h4>Subscribe</h4>
-                  <p>Subscribe to join the community of verified flat mates.</p>
-                  {payment ? (
-                    <div className="badge text-success btn-lg">
-                      <i className="ti ti-check display-7"></i>
-                    </div>
-                  ) : (
-                    <Link to="/pricing">
-                      <Btn
-                        text="Subscribe Now"
-                        disabled={paymentLoading}
-                        onClick={() => { }}
-                        className="btn-sm mt-2"
-                      />
-                    </Link>
-                  )}
-                </div>
+          <div className="container-fluid">
+              <div className="pt-5">
+                  <div className="sec-heading center mb-4">
+                      <h2 className="animated animate__bounceIn">Congratulations</h2>
+                      <p>
+                          Read the steps below to find how to become a member of
+                          sheruta
+                      </p>
+                  </div>
               </div>
-            </div>
-          </div>
+              <div className="row pb-5">
+                  <div className="col-lg-4 col-md-4">
+                      <div className="middle-icon-features">
+                          <div className="middle-icon-features-item">
+                              <div className="middle-icon-large-features-box">
+                                  <i className="">1</i>
+                                  {/* <span className="steps bg-danger">01</span> */}
+                              </div>
+                              <div className="middle-icon-features-content">
+                                  <h4>Subscribe</h4>
+                                  <p>
+                                      Subscribe to join the community of
+                                      verified flat mates.
+                                  </p>
+                                  {payment ? (
+                                      <div className="badge text-success btn-lg">
+                                          <i className="ti ti-check display-7"></i>
+                                      </div>
+                                  ) : (
+                                      <Link to="/pricing">
+                                          <Btn
+                                              text="Subscribe Now"
+                                              disabled={paymentLoading}
+                                              onClick={() => {}}
+                                              className="btn-sm mt-2"
+                                          />
+                                      </Link>
+                                  )}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-          <div className="col-lg-4 col-md-4">
-            <div className="middle-icon-features">
-              <div className="middle-icon-features-item">
-                <div className="middle-icon-large-features-box">
-                  <i className="text-success">2</i>
-                  {/* <span className="steps bg-success">02</span> */}
-                </div>
-                <div className="middle-icon-features-content">
-                  <h4>Post A Request</h4>
-                  <p>Post something for the community.</p>
-                  {
-                    hasRequest ? <div className="badge text-success btn-lg">
-                      <i className="ti ti-check display-7"></i>
-                    </div> :
-                      <Link to="/requests">
-                        <Btn
-                          onClick={() => { }}
-                          text="Upload Now"
-                          className="btn-sm mt-2"
-                        />
-                      </Link>
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
+                  <div className="col-lg-4 col-md-4">
+                      <div className="middle-icon-features">
+                          <div className="middle-icon-features-item">
+                              <div className="middle-icon-large-features-box">
+                                  <i className="text-success">2</i>
+                                  {/* <span className="steps bg-success">02</span> */}
+                              </div>
+                              <div className="middle-icon-features-content">
+                                  <h4>Post A Request</h4>
+                                  <p>Post something for the community.</p>
+                                  {hasRequest ? (
+                                      <div className="badge text-success btn-lg">
+                                          <i className="ti ti-check display-7"></i>
+                                      </div>
+                                  ) : (
+                                      <Link to="/requests">
+                                          <Btn
+                                              onClick={() => {}}
+                                              text="Upload Now"
+                                              className="btn-sm mt-2"
+                                          />
+                                      </Link>
+                                  )}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-          <div className="col-lg-4 col-md-4">
-            <div className="middle-icon-features">
-              <div className="middle-icon-features-item">
-                <div className="middle-icon-large-features-box">
-                  <i className="text-warning">3</i>
-                  {/* <span className="steps bg-warning">03</span> */}
-                </div>
-                <div className="middle-icon-features-content">
-                  <h4>feedback</h4>
-                  <p>
-                    Help us improve you experience by giving us your honest
-                    feedback.
-                  </p>
-                  <Link to="/feedback">
-                    <Btn
-                      onClick={() => { }}
-                      text="Start"
-                      className="btn-sm mt-2"
-                    />
-                  </Link>
-                </div>
+                  <div className="col-lg-4 col-md-4">
+                      <div className="middle-icon-features">
+                          <div className="middle-icon-features-item">
+                              <div className="middle-icon-large-features-box">
+                                  <i className="text-warning">3</i>
+                                  {/* <span className="steps bg-warning">03</span> */}
+                              </div>
+                              <div className="middle-icon-features-content">
+                                  <h4>feedback</h4>
+                                  <p>
+                                      Help us improve you experience by giving
+                                      us your honest feedback.
+                                  </p>
+                                  <Link to="/feedback">
+                                      <Btn
+                                          onClick={() => {}}
+                                          text="Start"
+                                          className="btn-sm mt-2"
+                                      />
+                                  </Link>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
-        </div>
-      </div>
-    </Layout>
+      </Layout>
   );
 };
 

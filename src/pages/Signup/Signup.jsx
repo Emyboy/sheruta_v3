@@ -7,7 +7,7 @@ import { Spinner } from "react-activity";
 import { notification } from "antd";
 import MetaTags from "react-meta-tags";
 import Layout from "../../components/Layout/Layout";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 
 export const Signup = (props) => {
   const { register, handleSubmit } = useForm();

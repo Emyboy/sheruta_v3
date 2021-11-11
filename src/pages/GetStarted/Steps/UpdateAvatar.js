@@ -7,7 +7,7 @@ import { storage } from "../../../Firebase";
 import firebase from "firebase";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import axios from "axios";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
 
 const UpdateAvatar = (props) => {
   const [done, setDone] = useState(null);

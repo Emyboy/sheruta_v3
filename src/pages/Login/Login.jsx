@@ -10,7 +10,7 @@ import MetaTags from "react-meta-tags";
 import { Link } from "react-router-dom";
 import VerifyEmailProcess from "../VerifyEmail/VerifyEmailProcess";
 import Layout from "../../components/Layout/Layout";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import Cookies from "js-cookie";
 
 const mapStateToProps = (state) => ({

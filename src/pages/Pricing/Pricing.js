@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import end_sarz from "../../assets/img/end_sarz.jpeg";
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
-import { notifyEmy } from "../../../utils/Sheruta";
+import { notifyEmy } from "../../../services/Sheruta";
 
 export default function GetStartedInstructions(props) {
     // console.log(props)

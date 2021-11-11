@@ -122,10 +122,12 @@ import PageLoader from "../../components/PageLoader";
 import PageNotFound from "../PageNotFound";
 import PersonalInfo from "./PersonalInfo";
 import ProfileSettings from "./ProfileSettings";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import MetaTags from "react-meta-tags";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
-import Notifications from "../../utils/Notifications";
+import Notifications from "../../services/Notifications";
+import UserAction from "../../components/UserAction/UserAction";
+import Global from "../../Global";
 const { TabPane } = Tabs;
 
 export const Profile2 = (props) => {
@@ -191,7 +193,7 @@ export const Profile2 = (props) => {
                     });
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err);
                     notification.error({ message: "Error fetching user data" });
                     setNotFound(true);
                     notifyEmy({
@@ -220,19 +222,30 @@ export const Profile2 = (props) => {
                     </title>
                     <meta
                         name="description"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                     <meta
                         property="og:title"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                     <meta
                         property="og:description"
-                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta}`}
+                        content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
                     />
                 </MetaTags>
                 <Layout page="profile">
-                    <section className="mt-0 bgc-f7 pb30-991">
+                    <div
+                        className="fixed-bottom text-center"
+                        style={{
+                            marginBottom: Global.isMobile ? "15vh" : "10vh",
+                        }}
+                    >
+                        <UserAction user={userData} />
+                    </div>
+                    <section
+                        className="mt-0 bgc-f7 pb30-991"
+                        style={{ paddingBottom: "15vh" }}
+                    >
                         <div className="gap2  pt-2">
                             <div className="container">
                                 <div className="row justify-content-center">

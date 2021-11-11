@@ -4,11 +4,11 @@ import 'antd/dist/antd.css';
 import "../theme.override.css";
 // import "../social_css/css/main.min.css";
 import '../social_css/css/style.css';
-import { Provider } from "react-redux";
-import store from "../redux/store/store";
 // import '../assets/css/colors.css';
 import '../assets/css/styles.css';
 import '../v4_css/style.css';
+import { Provider } from "react-redux";
+import store from "../redux/store/store";
 import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 // import firebase from "../Firebase"
@@ -44,6 +44,8 @@ import Notifications from '../pages/Notifications/Notifications';
 import Match from '../pages/Match/Match';
 import Profile2 from "../pages/Profile/Profile2";
 import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer';
+import Messages from '../pages/Messages/Messages';
+import MessageNew from '../pages/Messages/MessageNew';
 
 const PropertyDetails = React.lazy(() =>
     import("../pages/PropertyDetails/PropertyDetails"),
@@ -110,6 +112,9 @@ function App() {
                     <Route exact path="/start" component={GetStarted} />
                     <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
+                    <Route exact path="/messages" component={Messages} />
+                    <Route exact path="/messages/new/:user_id" component={MessageNew} />
+                    <Route exact path="/messages/:conversation_id" component={Messages} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />
                     {/* <Route exact path="/submit" component={Submit} /> */}

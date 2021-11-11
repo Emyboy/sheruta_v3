@@ -6,8 +6,9 @@ import styled from "styled-components";
 import EachMatchCard from "./EachMatchCard";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Alice from "../../utils/Alice";
+import Alice from "../../services/Alice";
 import { getAllMySuggestion } from "../../redux/strapi_actions/alice.actions";
+import { notifyEmy } from "../../services/Sheruta";
 
 
 const NavBtn = styled.button`
@@ -37,13 +38,12 @@ export default function MatchList() {
                 suggestion_id,
                 status,
             );
-            console.log("REJECT --", rejected);
             dispatch(getAllMySuggestion());
+            notifyEmy({ heading: `${status} someone as a suggestion`})
         } catch (error) {
             return Promise.reject(error);
         }
     };
-    console.log(user_suggestions);
     if(!user){
         return <Redirect to="/login" />
     }

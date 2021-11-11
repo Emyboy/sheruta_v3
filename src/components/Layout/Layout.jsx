@@ -21,10 +21,12 @@ import { useHistory } from "react-router-dom";
 import { BsPeople } from "react-icons/bs";
 import { BiBell, BiHome, BiUser } from "react-icons/bi";
 import FooterNav from "./FooterNav";
-import Alice from "../../utils/Alice";
+import Alice from "../../services/Alice";
 import { CgMenuLeft } from "react-icons/cg";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrSearch, GrFormClose } from "react-icons/gr";
+import { FiMail } from "react-icons/fi";
+import Global from "../../Global";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -225,13 +227,15 @@ const Layout = connect(
             </div>
 
             <nav
-                className="fixed-bottom bg-white border-gray  p-1 pl-4 pr-4"
+                className="fixed-bottom bg-white border-gray  p-1 pl-0 pr-0"
                 style={{ zIndex: 2 }}
             >
                 <div className="row justify-content-center mt-1">
                     <FooterNav
                         icon="ti-home"
-                        IconComponent={<BiHome size={30} />}
+                        IconComponent={
+                            <BiHome size={Global.isMobile ? 26 : 30} />
+                        }
                         text="Home"
                         path="/"
                         active={page === "home"}
@@ -240,7 +244,9 @@ const Layout = connect(
                     {view.personal_info ? (
                         <FooterNav
                             count={user_suggestions.length}
-                            IconComponent={<BsPeople size={30} />}
+                            IconComponent={
+                                <BsPeople size={Global.isMobile ? 26 : 30} />
+                            }
                             text="Match"
                             path="/match"
                             active={page === "match"}
@@ -255,21 +261,36 @@ const Layout = connect(
                                         (x) => x.seen === false,
                                     ).length
                                 }
-                                IconComponent={<BiBell size={30} />}
-                                text="Notifications"
+                                IconComponent={
+                                    <BiBell size={Global.isMobile ? 26 : 30} />
+                                }
+                                text="Activity"
                                 path="/notifications"
                                 active={page === "notifications"}
                             />
                             <FooterNav
+                                count={view.messages.length}
+                                IconComponent={
+                                    <FiMail size={Global.isMobile ? 26 : 30} />
+                                }
+                                text="Message"
+                                path="/messages"
+                                active={page === "messages"}
+                            />
+                            <FooterNav
                                 text="Profile"
-                                IconComponent={<BiUser size={30} />}
+                                IconComponent={
+                                    <BiUser size={Global.isMobile ? 26 : 30} />
+                                }
                                 path={`/user/${user.username}`}
                                 active={page === "profile"}
                             />
                         </>
                     ) : (
                         <FooterNav
-                            IconComponent={<BiUser size={30} />}
+                            IconComponent={
+                                <BiUser size={Global.isMobile ? 26 : 30} />
+                            }
                             text="Login"
                             path="/login"
                             active={page === "login"}

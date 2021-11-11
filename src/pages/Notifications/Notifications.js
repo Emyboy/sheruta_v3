@@ -4,21 +4,23 @@ import Layout from "../../components/Layout/Layout";
 import { getAllNotifications } from "../../redux/strapi_actions/view.action";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
+import { notifyEmy } from "../../services/Sheruta";
 
 export default function _Notifications() {
-    localStorage.setItem('after_login', '/notifications')
+    localStorage.setItem("after_login", "/notifications");
     const dispatch = useDispatch();
     const { notifications } = useSelector((state) => state.view);
     const { user } = useSelector((state) => state.auth);
 
     useEffect(async () => {
         dispatch(getAllNotifications());
+        notifyEmy({ heading: "Visited notifications page" });
     }, []);
 
-    if(!user){
-        return <Redirect to='/login' />
+    if (!user) {
+        return <Redirect to="/login" />;
     }
-    
+
     return (
         <Layout page={"notifications"}>
             <section className="pt-3 container-fluid">
@@ -35,16 +37,15 @@ export default function _Notifications() {
                                 </span>
                                 <div className="notification-box">
                                     <ul>
-                                        {notifications && notifications.map(
-                                            (val, i) => {
+                                        {notifications &&
+                                            notifications.map((val, i) => {
                                                 return (
                                                     <EachNotification
                                                         key={`${i}-notification`}
                                                         data={val}
                                                     />
                                                 );
-                                            },
-                                        )}
+                                            })}
                                     </ul>
                                 </div>
                             </div>

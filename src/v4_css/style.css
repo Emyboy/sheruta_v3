@@ -9,23 +9,29 @@ Tag: advanced custom search, agency, agent, business, clean, corporate, director
 
 ********/
 /* CSS Document */
-@import url(jquery-ui.min.css);
+/* @import url(jquery-ui.min.css); */
  /* @import url(font-awesome.min.css); */
- @import url(font-awesome-animation.min.css);
- @import url(menu.css); 
-@import url(ace-responsive-menu.css);
-@import url(megadropdown.css); 
-/* @import url(bootstrap-select.min.css); */
-@import url(simplebar.min.css);
- @import url(progressbar.css);
+ /* @import url(menu.css);  */
+ /* @import url(megadropdown.css);  */
+ /* @import url(bootstrap-select.min.css); */
+ /* @import url(simplebar.min.css);
+ @import url(progressbar.css); */
  /* @import url(flaticon.css); */
- @import url(animate.css);
-/* @import url(slider.css); */
-@import url(magnific-popup.css);
-@import url(timecounter.css); 
-@import url(responsive.css);
-@import url(bootstrap.min.css);
+ /* @import url(animate.css); */
+ /* @import url(slider.css); */
+ /* @import url(timecounter.css);  */
+
+
+
+ /* @import url(font-awesome-animation.min.css); */
+ @import url(bootstrap.min.css);
+ /* @import url(responsive.css);
+ @import url(ace-responsive-menu.css);
+@import url(magnific-popup.css); */
 @import url(https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&amp;display=swap);
+
+
+
 /* Table of contents */
 
 
@@ -140,12 +146,12 @@ body {
   line-height: 1.642;
   overflow-x: hidden;
   transition: inherit;
-  -webkit-font-smoothing: antialiased;
+  /* -webkit-font-smoothing: antialiased;
   -webkit-transition: all .4s ease;
   -moz-transition: all .4s ease;
   -ms-transition: all .4s ease;
   -o-transition: all .4s ease;
-  transition: all .4s ease;
+  transition: all .4s ease; */
 }
 body.body_overlay{
   position: fixed;
@@ -11942,7 +11948,7 @@ a.btn.btn_error{
 }
 .message_container .inbox_chatting_box {
   position: relative;
-  max-height: 575px !important;
+  max-height: 975px !important;
   height: auto;
   margin-right: 10px;
   max-height: calc(100% - 93px);

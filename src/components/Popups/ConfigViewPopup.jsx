@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import SelectionCard from "../SelectionCard/SelectionCard";
 import Btn from "../Btn/Btn";
 import store from "../../redux/store/store";
-import { notifyEmy } from "../../utils/Sheruta";
+import { notifyEmy } from "../../services/Sheruta";
 import { logout } from "../../redux/strapi_actions/auth.actions";
 
 import { getAuthPersonalInfo } from "../../redux/strapi_actions/view.action";
