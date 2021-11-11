@@ -111,6 +111,11 @@ export default class MessageService {
             const messages = await axios(
                 process.env.REACT_APP_API_URL +
                     `/messages/?to=${user.user?.id}&seen=false`,
+                {
+                    headers: {
+                        authorization: `Bearer ${Cookies.get("token")}`,
+                    },
+                },
             );
             return messages;
         }
