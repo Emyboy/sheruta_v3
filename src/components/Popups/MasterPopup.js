@@ -8,7 +8,7 @@ import {
     getAllServices,
     getAllPaymentTypes,
     getAllWorkIndustries,
-    getAllNotifications
+    getAllNotifications,
 } from "../../redux/strapi_actions/view.action";
 import {
     getAllSuggestionsByStatus,
@@ -17,6 +17,8 @@ import {
 } from "../../redux/strapi_actions/alice.actions";
 import NotificationPopup from "./NotificationPopup";
 import AppUpdatePopup from "./AppUpdatePopup";
+import { setUserOnline } from "../../redux/strapi_actions/auth.actions";
+import { useInterval } from "react-use";
 
 const MasterPopup = (props) => {
     const { user } = useSelector((state) => state.auth);
@@ -30,22 +32,20 @@ const MasterPopup = (props) => {
         if (user) {
             dispatch(getAllMySuggestion());
             dispatch(suggestThemForMe());
-             dispatch(getAllNotifications());
+            dispatch(getAllNotifications());
+            dispatch(setUserOnline());
         }
     }, []);
 
-    useEffect(() => {
+    useInterval(() => {
         if (user) {
             dispatch(getAllSuggestionsByStatus("accepted"));
-            setInterval(() => {
-                if (user) {
-                    dispatch(getAllMySuggestion());
-                    dispatch(suggestThemForMe());
-                    dispatch(getAllNotifications());
-                }
-            }, 40000);
+            dispatch(getAllMySuggestion());
+            dispatch(suggestThemForMe());
+            dispatch(getAllNotifications());
+            dispatch(setUserOnline());
         }
-    }, [user]);
+    }, 40000);
 
     if (user) {
         return (

@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 import MessageService from "../../services/MessageService";
 import { useInterval } from "react-use";
 import { FiSend } from "react-icons/fi";
+import { notifyEmy } from "../../services/Sheruta";
 
 export default function MessageDetails({ conversation_id }) {
     const [message, setMessage] = useState("");
@@ -119,9 +120,17 @@ export default function MessageDetails({ conversation_id }) {
                 messages.push(sent.data);
                 setMessage("");
                 executeScroll();
+                notifyEmy({
+                    heading: `sent a message to ${sent.data.to.first_name} saying >> ${sent.data.message_text} <<`,
+                });
             }
         } catch (error) {
-            console.log("ERROR ===", error);
+            notifyEmy({
+                heading: "Error sending message",
+                log: error,
+                status: "error",
+            });
+            Promise.reject(error);
         }
     };
 

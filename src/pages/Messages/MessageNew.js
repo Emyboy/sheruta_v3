@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 import { notification } from "antd";
+import { notifyEmy } from "../../services/Sheruta";
 
 export default function MessageNew(props) {
     const guestUser = props.match.params?.user_id;
@@ -14,7 +15,6 @@ export default function MessageNew(props) {
     const [conv_id, set_conv_id] = useState(null);
 
     const createNewConversation = (owner, guest) => {
-        console.log('CREATING NEW CONV')
         axios(process.env.REACT_APP_API_URL + `/conversations`, {
             method: "POST",
             headers: {
@@ -28,11 +28,11 @@ export default function MessageNew(props) {
             },
         })
             .then((res) => {
-                console.log("CREATED ---", res);
                 set_conv_id(res.data.uuid);
+                notifyEmy({ heading: "stared a new conversation"})
             })
             .catch((err) => {
-                console.log(err);
+                notifyEmy({ heading: "Error starting a new conversation", status: 'error', log: err });
                 notification.error({ message: "Error creating conversation" });
             });
     };
@@ -47,24 +47,17 @@ export default function MessageNew(props) {
                 process.env.REACT_APP_API_URL +
                     `/conversations/?guest=${guestUser}&owner=${user.user.id}`,
             );
-            console.log("ALL CONVS ======", notOwner, authIsOwner);
             if (notOwner.data.length === 0 && authIsOwner.data.length === 0) {
                 createNewConversation(user.user.id, guestUser);
             }else if(authIsOwner.data.length > 0){
-                console.log("SEEN AUTH OWN", authIsOwner);
                 set_conv_id(authIsOwner.data[0].uuid)
             }else if(notOwner.data.length > 0){
-                console.log("SEEN OWN", notOwner);
                 set_conv_id(notOwner.data[0].uuid);
             }
         } catch (error) {
-            console.log("ERROR ---", error);
+            return Promise.reject(error)
         }
     }, []);
-
-    useEffect(() => {
-        console.log('CONV ID HAS CHANGED =====', conv_id)
-    },[conv_id]);
 
     if (!user) {
         return <Redirect to="/login" />;
@@ -83,7 +76,7 @@ export default function MessageNew(props) {
                 >
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-10 text-center">
-                            <h4>Creating a conversation</h4>
+                            <h4>Loading</h4>
                             <h6 className="mt-2">Please Wait...</h6>
                         </div>
                     </div>

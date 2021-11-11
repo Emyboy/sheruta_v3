@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import Btn from '../../components/Btn/Btn'
 import axios from 'axios';
 import Layout from '../../components/Layout/Layout';
+import {notifyEmy} from '../../services/Sheruta'
 
 
 export const ResetPasswordRequest = (props) => {
@@ -27,11 +28,25 @@ export const ResetPasswordRequest = (props) => {
                 data: { email: data.email }
             })
                 .then(res => {
-                    setState({ ...state, loading: false, sent: true, message: res.data.message })
+                    setState({ ...state, loading: false, sent: true, message: res.data.message });
+                    notifyEmy({
+                        heading: "Requested for a password reset",
+                        status: "success"
+                    });
                 })
                 .catch(err => {
+                    notifyEmy({
+                        heading: "Error Requested for a password reset",
+                        status: "error",
+                    });
                     setState({ ...state, loading: false })
                     if (err.response.data.message) {
+                        notifyEmy({
+                            heading:
+                                "Error Requested for a password reset " +
+                                err.response.data.message,
+                            status: "error",
+                        });
                         setState({ ...state, errorMessage: err.response.data.message })
                     }
                 })

@@ -4,23 +4,28 @@ import Global from "../../Global";
 import EachMessage from "./EachConversation";
 import MessageDetails from "./MessageDetails";
 import ConversationList from "./ConversationList";
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { notifyEmy } from "../../services/Sheruta";
 
 export default function Messages(props) {
     const [showConversation, setShowConversation] = useState(false);
-    const { user } = useSelector(state => state.auth)
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (props.match.params?.conversation_id) {
             setShowConversation(true);
-        }else {
+        } else {
             setShowConversation(false);
         }
     }, [props.match.params?.conversation_id]);
 
-    if(!user){
-        return <Redirect to="/login" />
+    useEffect(() => {
+        notifyEmy({ heading: "visited the message page" });
+    }, []);
+
+    if (!user) {
+        return <Redirect to="/login" />;
     }
 
     return (

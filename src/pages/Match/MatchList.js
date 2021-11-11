@@ -8,6 +8,7 @@ import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Alice from "../../services/Alice";
 import { getAllMySuggestion } from "../../redux/strapi_actions/alice.actions";
+import { notifyEmy } from "../../services/Sheruta";
 
 
 const NavBtn = styled.button`
@@ -39,6 +40,7 @@ export default function MatchList() {
             );
             console.log("REJECT --", rejected);
             dispatch(getAllMySuggestion());
+            notifyEmy({ heading: `${status} someone as a suggestion`})
         } catch (error) {
             return Promise.reject(error);
         }

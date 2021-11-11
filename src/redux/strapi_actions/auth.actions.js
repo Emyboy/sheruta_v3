@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
+import UserService from "../../services/UserService";
 import store from "../store/store";
 
 export const setAuthState = (state) => (dispatch) => {
@@ -12,7 +13,7 @@ export const setAuthState = (state) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
     Cookies.remove("token");
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
     dispatch({
         type: "LOGOUT",
     });
@@ -45,3 +46,12 @@ export const getUser = () => (dispatch) => {
         });
 };
 
+export const setUserOnline = () => async (dispatch) => {
+    try {
+        console.log('SETTING ONLINE')
+        await UserService.setUserOnline();
+        dispatch(getUser());
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
