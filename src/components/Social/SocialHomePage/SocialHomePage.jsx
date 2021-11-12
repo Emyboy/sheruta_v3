@@ -49,7 +49,7 @@ export default (props) => {
         if (!Global.isMobile) {
             axios(
                 process.env.REACT_APP_API_URL +
-                    `/users/?confirmed=true&_limit=4&_sort=created_at:DESC`,
+                    `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`,
             )
                 .then((res) => {
                     setNewUsers(res.data);
