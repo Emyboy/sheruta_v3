@@ -20,18 +20,19 @@ export default function HomeJumbo() {
                             // className="home_content"
                             style={{ paddingTop: "41vh" }}
                         >
-                            <div className="home-text text-center">
+                            {/* <div className="home-text text-center mb-3"> */}
+                            <div>
                                 <h2 className="fz55">
                                     Find Verified Flatmates.
                                 </h2>
                                 <p className="fz18 color-white">
                                     Join the community today
                                 </p>
-                            </div>
                             <div className="home_adv_srch_opt text-center">
                                 <Link to="/start">
-                                    <Btn text={"Get Started"} />
+                                    <Btn text={"Get Started"} className='btn-lg' />
                                 </Link>
+                            </div>
                             </div>
                         </div>
                     </div>
