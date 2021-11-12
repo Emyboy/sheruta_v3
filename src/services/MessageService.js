@@ -7,9 +7,19 @@ export default class MessageService {
         const user = store.getState().auth.user?.user;
         const conv1 = await axios(
             process.env.REACT_APP_API_URL + `/conversations/?owner=${user.id}`,
+            {
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
         );
         const conv2 = await axios(
             process.env.REACT_APP_API_URL + `/conversations/?guest=${user.id}`,
+            {
+                headers: {
+                    authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            },
         );
         const allConv = await axios(
             process.env.REACT_APP_API_URL +
