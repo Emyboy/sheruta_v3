@@ -34,9 +34,16 @@ export default function MessageList() {
                     </form> */}
                 </div>
             </div>
-            <ul
-                style={{ height: "71vh", paddingBottom: "15vh" }}
-            >
+            <ul style={{ height: "71vh", paddingBottom: "15vh" }}>
+                {conversations.length === 0 && (
+                    <li className="text-center mt-5">
+                        <h3>Your conversations will be listed here.</h3>
+                        <h6>
+                            Click on the message button on someone's profile to
+                            start a conversation.
+                        </h6>
+                    </li>
+                )}
                 {conversations.map((val, i) => {
                     return <EachConversation key={"conv-" + i} conv={val} />;
                 })}
