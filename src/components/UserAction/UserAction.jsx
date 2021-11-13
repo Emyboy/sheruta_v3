@@ -3,12 +3,12 @@ import { IoMail, IoCallSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export default function UserAction({ user, disable }) {
+export default function UserAction({ user, disable, alignment }) {
     const auth = useSelector((state) => state.auth);
     return (
         <>
             {auth.user && auth.user.user.id === user.id ? null : (
-                <div className="d-flex justify-content-center">
+                <div className={`d-flex justify-content-${alignment || 'center'}`}>
                     <Link to={`/messages/new/${user.id}`}>
                         <button
                             disable={disable}
@@ -24,7 +24,7 @@ export default function UserAction({ user, disable }) {
                             className="btn shadow bg-theme text-white rounded ml-2 mr-2"
                         >
                             <IoCallSharp className="mr-2" />
-                            Call
+                            Call Me
                         </button>
                     </a>
                 </div>

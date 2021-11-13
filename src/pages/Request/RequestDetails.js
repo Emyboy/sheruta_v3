@@ -15,6 +15,7 @@ import { ImLocation } from "react-icons/im";
 import moment from "moment";
 import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
 import Notifications from "../../services/Notifications";
+import UserAction from "../../components/UserAction/UserAction";
 const ImgContainer = styled.section`
     padding: 5em;
     margin-bottom: 1em;
@@ -247,18 +248,23 @@ export default function RequestDetails(props) {
                                                         </div>
                                                         <div>
                                                             {user ? (
-                                                                <a
-                                                                    onClick={
-                                                                        handleCallRequest
+                                                                // <a
+                                                                //     onClick={
+                                                                //         handleCallRequest
+                                                                //     }
+                                                                //     href={`tel:${request.users_permissions_user.phone_number}`}
+                                                                //     title=""
+                                                                //     className="main-btn bg-theme text-white"
+                                                                //     data-ripple=""
+                                                                // >
+                                                                //     Call Me
+                                                                //     <i className="fa fa-phone ml-2"></i>
+                                                                // </a>
+                                                                <UserAction
+                                                                    user={
+                                                                        request.users_permissions_user
                                                                     }
-                                                                    href={`tel:${request.users_permissions_user.phone_number}`}
-                                                                    title=""
-                                                                    className="main-btn bg-theme text-white"
-                                                                    data-ripple=""
-                                                                >
-                                                                    Call Me
-                                                                    <i className="fa fa-phone ml-2"></i>
-                                                                </a>
+                                                                />
                                                             ) : (
                                                                 <Link
                                                                     to={`/signup`}
@@ -314,7 +320,13 @@ export default function RequestDetails(props) {
                                                     </div>
                                                 </div>
                                                 <div class="description">
-                                                    <p style={{ fontSize: '16px'}}>{request.body}</p>
+                                                    <p
+                                                        style={{
+                                                            fontSize: "16px",
+                                                        }}
+                                                    >
+                                                        {request.body}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
