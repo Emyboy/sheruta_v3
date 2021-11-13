@@ -49,7 +49,7 @@ const FinishStep = (props) => {
       </div>
       <hr />
       <div className="text-center">
-        <Link to='/what-next'>
+        <Link to='/requests/create'>
           <Btn
             text="Finish"
             className="mb-4"

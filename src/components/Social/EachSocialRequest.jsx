@@ -11,6 +11,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { DeleteFirebaseImage } from "../../services/Firebase.utils";
 import VerifiedBadge from "../VerifiedBadge/VerifiedBadge";
+import UserAction from "../UserAction/UserAction";
 
 const EachSocialRequest = (props) => {
     const { data } = props;
@@ -217,7 +218,7 @@ const EachSocialRequest = (props) => {
                                     </figure>
                                 </Link>
                             ) : null}
-                            <div className="rate-n-apply mt-2">
+                            <div className="rate-n-apply mt-2 d-flex justify-content-between">
                                 <div className="job-price">
                                     <span>Budget:</span>
                                     <ins>
@@ -231,16 +232,10 @@ const EachSocialRequest = (props) => {
                                     </ins>
                                 </div>
                                 {user ? (
-                                    <a
-                                        onClick={handleCallRequest}
-                                        href={`tel:${data.users_permissions_user.phone_number}`}
-                                        title=""
-                                        className="main-btn bg-theme text-white"
-                                        data-ripple=""
-                                    >
-                                        Call Me
-                                        <i className="fa fa-phone ml-2"></i>
-                                    </a>
+                                    <UserAction
+                                        user={data.users_permissions_user}
+                                        alignment={'end'}
+                                    />
                                 ) : (
                                     <Link
                                         onClick={handleCallRequest}
