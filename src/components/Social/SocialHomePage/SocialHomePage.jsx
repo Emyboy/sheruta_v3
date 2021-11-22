@@ -15,6 +15,7 @@ import match from "../../../assets/img/match.jpeg";
 import PostRequestAds from "../../Ads/RequestAds/PostRequestAds";
 import Layout from "../../Layout/Layout";
 import { Redirect } from "react-router";
+import UserFeedCard from "./UserFeedCard";
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 
 export default (props) => {
@@ -87,32 +88,34 @@ export default (props) => {
   }
 
   return (
-    <div className="main-wrapper">
-      <Layout currentPage="feed">
-        <div className="container-fluid">
-          <div className="row _feed-body">
-              <div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
-                {/* <RecentUsers data={newUsers} /> */}
-              </div>
-            <div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
-              {state.list.map((val, i) => {
-                if (i == 5) {
-                  return <img src={match} className="rounded-3 mb-3" />;
-                } else if (i === 2) {
-                  return <PostRequestAds />;
-                }
-                return <EachSocialRequest key={i + " request"} data={val} />;
-              })}
-              {state.list.length === 0 ? (
-                <div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
-                  <Spinner />
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </Layout>
-    </div>
-
-  );
+		<div className="main-wrapper">
+			<Layout currentPage="feed">
+				<div className="container-fluid">
+					<div className="row _feed-body">
+						{Global.isMobile && (
+							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+								{/* <RecentUsers data={newUsers} /> */}
+								<UserFeedCard />
+							</div>
+						)}
+						<div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
+							{state.list.map((val, i) => {
+								if (i == 5) {
+									return <img src={match} className="rounded-3 mb-3" />
+								} else if (i === 2) {
+									return <PostRequestAds />
+								}
+								return <EachSocialRequest key={i + ' request'} data={val} />
+							})}
+							{state.list.length === 0 ? (
+								<div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
+									<Spinner />
+								</div>
+							) : null}
+						</div>
+					</div>
+				</div>
+			</Layout>
+		</div>
+	)
 };
