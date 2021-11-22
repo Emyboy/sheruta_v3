@@ -186,3 +186,16 @@ export const getUnreadMessageCount = () => async dispatch => {
     }
 }
 
+export const getAllConversations = () => async (dispatch) => {
+  try {
+    const convs = await MessageService.getUserConversations();
+    dispatch({
+      type: "SET_VIEW_STATE",
+      payload: {
+        conversations: convs,
+      },
+    });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

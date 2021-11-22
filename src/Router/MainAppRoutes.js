@@ -3,7 +3,7 @@ import PageLoader from '../components/PageLoader';
 import 'antd/dist/antd.css';
 import "../theme.override.css";
 // import "../social_css/css/main.min.css";
-import '../social_css/css/style.css';
+// import '../social_css/css/style.css';
 // import '../assets/css/colors.css';
 import '../assets/css/styles.css';
 import '../v4_css/style.css';
@@ -12,26 +12,12 @@ import store from "../redux/store/store";
 import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 // import firebase from "../Firebase"
+import "../social_assets/css/feather.css";
+import "../social_assets/css/lightbox.css";
+import "../social_assets/css//themify-icons.css";
+import "../social_assets/css/style.css";
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-// import Contact from '../pages/Contact/Contact';
-// import About from '../pages/About/About';
-// import PropertyDetails from '../pages/PropertyDetails/PropertyDetails';
-// import Login from '../pages/Login/Login';
-// import Signup from '../pages/Signup/Signup'
-// import CreateRequest from '../pages/Request/CreateRequest';
-// import GetStarted from "../pages/GetStarted/GetStarted";
-// import Pricing from "../pages/Pricing/Pricing";
-// import SignUpSuccess from '../pages/SignUpSuccess/SignUpSuccess';
-// import RequestDetails from '../pages/Request/RequestDetails';
-// import SearchResults from '../pages/SearchResults/SearchResults'
-// import VerifyEmail from '../pages/VerifyEmail/VerifyEmail';
-// import PasswordReset from '../pages/ResetPassword/PasswordReset';
-// import PropertySort from '../pages/Property/PropertySort'
-// import WhatNext from '../pages/GetStarted/Steps/WhatNext';
-// import AllRequests from '../pages/Request/AllRequests'
-// import Request from "../pages/Request/Request";
 
 import PageNotFound from '../pages/PageNotFound';
 import UserFeedback from '../pages/Feedback/UserFeedback'
@@ -46,6 +32,7 @@ import Profile2 from "../pages/Profile/Profile2";
 import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer';
 import Messages from '../pages/Messages/Messages';
 import MessageNew from '../pages/Messages/MessageNew';
+import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage';
 
 const PropertyDetails = React.lazy(() =>
     import("../pages/PropertyDetails/PropertyDetails"),
@@ -109,6 +96,7 @@ function App() {
                   <RobotMessageContainer />
                   <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/feeds" component={SocialHomePage} />
                     <Route exact path="/start" component={GetStarted} />
                     <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
@@ -117,7 +105,6 @@ function App() {
                     <Route exact path="/messages/:conversation_id" component={Messages} />
                     <Route exact path="/notifications" component={Notifications} />
                     <Route exact path="/match" component={Match} />
-                    {/* <Route exact path="/submit" component={Submit} /> */}
                     <Route exact path="/what-next" component={WhatNext} />
                     <Route exact path="/blog/:uuid/:id" component={BlogDetails} />
                     <Route exact path="/start/:step" component={GetStarted} />
@@ -177,12 +164,12 @@ function App() {
                       component={CreateRequest}
                     />
                     <Route exact path="/properties" component={PropertySort} />
+                    <Route component={PageNotFound} />
                     {/* 
 
                                     <Route exact path="/share" component={Share} />
 
                                     */}
-                    <Route component={PageNotFound} />
                   </Switch>
                 </BrowserRouter>
               </div>
