@@ -13,6 +13,7 @@ import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
 import Cookies from 'js-cookie'
 import loginImg from '../../assets/img/login-bg.png'
+import Global from '../../Global'
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -122,7 +123,11 @@ const Login = (props) => {
 						></div>
 						<div className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
 							<div className="card shadow-none border-0 ms-auto me-auto login-card">
-								<div className="card-body rounded-0 text-left">
+								<div
+									className={` ${
+										Global.isMobile && 'p-0'
+									} card-body rounded-0 text-left`}
+								>
 									<h2 className="fw-700 display1-size display2-md-size mb-3">
 										Login into <br />
 										your account
