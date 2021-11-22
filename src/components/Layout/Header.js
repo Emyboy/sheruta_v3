@@ -36,7 +36,7 @@ export default function Header({
                     <Link to="/">
                         <a className="navbar-brand">
                             <img
-                                src="/assets/img/logo-text.png"
+                                src={logo}
                                 alt="sheruta logo"
                                 width="150"
                                 height="40"

@@ -9,8 +9,11 @@ import {
   MdWorkOutline,
 } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/strapi_actions/auth.actions";
 
 export default function SideNav({ show }) {
+  const dispatch = useDispatch();
   const size = 25;
   return (
     <nav className={`pb-5 navigation scroll-bar ${show && "nav-active"}`}>
@@ -125,7 +128,7 @@ export default function SideNav({ show }) {
                 </a>
               </li>
               <li>
-                <a className="nav-content-bttn open-font h-auto pt-2 pb-2">
+                <a className="nav-content-bttn open-font h-auto pt-2 pb-2" onClick={() => dispatch(logout())}>
                   <i className="font-sm feather-power me-3 text-grey-500"></i>
                   <span>Logout</span>
                 </a>
