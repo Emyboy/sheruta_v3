@@ -24,7 +24,7 @@ export default function FooterNav({ pageName }) {
 	const { notifications } = useSelector((state) => state.view)
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
-	const iconSize = 30
+	const iconSize = 25
 
 	return (
 		<div
@@ -59,7 +59,7 @@ export default function FooterNav({ pageName }) {
 				{/* <i className="text-dark feather-plus"></i> */}
 				<RiAddCircleLine
 					className={`text-${pageName === 'requests' ? 'theme' : 'dark'}`}
-					size={iconSize+5}
+					size={iconSize+10}
 				/>
 			</Link>
 			<Link to="/notifications" className="position-relative nav-content-bttn">
