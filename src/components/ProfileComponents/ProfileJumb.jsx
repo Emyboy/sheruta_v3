@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import VerifiedBadge from '../VerifiedBadge/VerifiedBadge';
 
 export default function ProfileJumb({ user }) {
 	console.log('USER --', user);
@@ -29,7 +30,10 @@ export default function ProfileJumb({ user }) {
 						/>
 					</figure>
 					<h4 className="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">
-						{user.first_name}
+						<div className="d-flex">
+							{user.first_name}
+							<VerifiedBadge user={user} className={'ml-2'} />{' '}
+						</div>
 						<span className="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">
 							@{user.username}
 						</span>
@@ -43,9 +47,7 @@ export default function ProfileJumb({ user }) {
 							<i className="feather-phone font-md"></i>
 						</a>
 						<Link to={`/messages/new/${user.id}`}>
-							<a
-								className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"
-							>
+							<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
 								<i className="feather-mail font-md"></i>
 							</a>
 						</Link>

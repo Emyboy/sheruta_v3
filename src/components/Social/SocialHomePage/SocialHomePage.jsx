@@ -92,7 +92,7 @@ export default (props) => {
 			<Layout currentPage="feed">
 				<div className="container-fluid">
 					<div className="row _feed-body">
-						{Global.isMobile && (
+						{!Global.isMobile && (
 							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
 								{/* <RecentUsers data={newUsers} /> */}
 								<UserFeedCard />
