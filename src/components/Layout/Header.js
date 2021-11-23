@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import { notification, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
-import logo from '../../assets/img/logo.png';
-import Global from '../../Global';
+import logo from '../../assets/img/logo.png'
+import Global from '../../Global'
 
 const NavWrapper = styled.ul`
 	li > a {
@@ -244,12 +244,12 @@ export default function Header({
 						return (
 							<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
 								<img
-									src={otherUser?.avatar_url}
+									src={otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR}
 									alt="user"
 									className="w40 position-absolute left-0"
 								/>
 								<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
-									{otherUser?.first_name}{' '}
+									{otherUser?.first_name || 'Someone'}{' '}
 									<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
 										{' '}
 										{moment(val?.created_at).fromNow()}
@@ -280,7 +280,7 @@ export default function Header({
 				</Link>
 
 				{user && (
-					<Link to={`/user/${user?.username}`}>
+					<Link to={`/user/${user?.user.username}`}>
 						<a className="p-0 ms-3 menu-icon">
 							<img
 								src={user.user?.avatar_url}
