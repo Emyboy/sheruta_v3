@@ -18,7 +18,7 @@ export default React.memo(({ image, onFileChange,index }) => {
       />
       <div className="w-100">
         <div
-          className="story-box"
+          className="story-box p-2 card"
           style={{
             height: "240px",
             backgroundImage: `url(${

@@ -19,6 +19,7 @@ import { storage } from "../../Firebase";
 import firebase from "firebase";
 import Compressor from "compressorjs";
 import { Modal } from 'react-bootstrap';
+import TextArea from "antd/lib/input/TextArea";
 
 const uid = Uid();
 
@@ -305,16 +306,35 @@ const CraeteRequest = (props) => {
     } else
     return (
         <Layout back>
-            <Modal show={view.personal_info && !view.personal_info.nin} style={{ marginTop: '20vh'}} size='md'>
+            <Modal
+                show={view.personal_info && !view.personal_info.nin}
+                style={{ marginTop: "20vh" }}
+                size="md"
+            >
                 <Modal.Body className="text-center">
-                    <h3 className='text-center'>Join the community to post a request.</h3>
+                    <h3 className="text-center">
+                        Join the community to post a request.
+                    </h3>
                     <hr />
                     <ol>
-                        <li><h4>Submit your NIN <small>(Only you can see this)</small></h4></li>
-                        <li><h4>Get verified</h4></li>
-                        <li><h4>Upload an image of yourself</h4></li>
-                        <li><h4>View user's information</h4></li>
-                        <li><h4>Have access to other verified users</h4></li>
+                        <li>
+                            <h4>
+                                Submit your NIN{" "}
+                                <small>(Only you can see this)</small>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>Get verified</h4>
+                        </li>
+                        <li>
+                            <h4>Upload an image of yourself</h4>
+                        </li>
+                        <li>
+                            <h4>View user's information</h4>
+                        </li>
+                        <li>
+                            <h4>Have access to other verified users</h4>
+                        </li>
                         <hr />
                         <Link to="/start">
                             <Btn text="Get Started" onClick={() => {}} />
@@ -326,7 +346,7 @@ const CraeteRequest = (props) => {
                 </Modal.Body>
             </Modal>
             <div className="mt-5 pb-5">
-                <div className="container bg-white mb-5 border-gray rounded">
+                <div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                     <div className="pt-5 pb-5">
                         <div className="text-center">
                             <h2>Create Request</h2>
@@ -343,7 +363,7 @@ const CraeteRequest = (props) => {
                                             <TextInput
                                                 label="Request Heading"
                                                 required
-                                                maxLength={90}
+                                                maxLength={70}
                                                 placeholder="Eg. I need a shared apartment in Ikeja"
                                                 onChange={(e) =>
                                                     setData({
@@ -371,7 +391,7 @@ const CraeteRequest = (props) => {
                                                             defaultValue={
                                                                 data.bedrooms
                                                             }
-                                                            placeholder="Eg. 300000"
+                                                            placeholder="Eg. 3"
                                                             onChange={(e) =>
                                                                 setData({
                                                                     ...data,
@@ -437,7 +457,6 @@ const CraeteRequest = (props) => {
                                                 </div>
                                             </>
                                         )}
-
                                         <div className="col-lg-6 col-md-6 col-sm-12">
                                             <div className="form-group">
                                                 <label>Payment Type</label>
@@ -462,7 +481,6 @@ const CraeteRequest = (props) => {
                                                 />
                                             </div>
                                         </div>
-
                                         <div className="col-lg-6 col-md-6 col-sm-12">
                                             <div className="form-group">
                                                 <label>Apartment Type</label>
@@ -604,12 +622,20 @@ const CraeteRequest = (props) => {
                                                 </div>
                                             </div>
                                         </div>
+                                        +
                                         <div className="col-lg-12 col-md-12 col-sm-12">
                                             <div className="form-group">
                                                 <label>
                                                     Type your request....{" "}
                                                 </label>
-                                                <textarea
+                                                <TextArea
+                                                    rows={6}
+                                                    placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+                                                    defaultValue={data.body}
+                                                    required
+                                                    name="body"
+                                                    minLength={50}
+                                                    maxLength={900}
                                                     onChange={(e) => {
                                                         setData({
                                                             ...data,
@@ -619,24 +645,10 @@ const CraeteRequest = (props) => {
                                                                 .value,
                                                         });
                                                     }}
-                                                    style={{
-                                                        height: "200px",
-                                                        background: "#F7F7F7",
-                                                    }}
                                                     disabled={state.loading}
-                                                    required
-                                                    name="body"
-                                                    // className="gray-bg"
-                                                    cols="30"
-                                                    rows="6"
-                                                    minLength="50"
-                                                    maxLength="900"
-                                                    placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
-                                                    defaultValue={data.body}
                                                 />
                                             </div>
                                         </div>
-
                                         {view.personal_info &&
                                         !view.personal_info.looking_for ? (
                                             <>

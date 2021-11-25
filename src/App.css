@@ -5,7 +5,6 @@
     --antd-wave-shadow-color: #00ba74;
 }
 
-
 html,
 body,
 #root,
@@ -25,7 +24,7 @@ body,
     background-color: var(--theme-color) !important;
 }
 .bg-them-light {
-    background-color: #F0F5EF !important;
+    background-color: #f0f5ef !important;
 }
 .form-control {
     background-color: #f7f7f7 !important;
@@ -98,7 +97,15 @@ svg {
     background-color: #f7f7f7 !important;
 }
 .inbox_chatting_box .chatting_content li.media .media-body p {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+.modal {
+    background: rgba(15, 26, 9, 0.433);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
+}
+.modal-content, .modal-body {
+    border-radius: 20px !important;
 }
 @media only screen and (max-width: 970px) {
     .mobile-only {

@@ -10,6 +10,7 @@ import MessageService from "../../services/MessageService";
 import { useInterval } from "react-use";
 import { FiSend } from "react-icons/fi";
 import { notifyEmy } from "../../services/Sheruta";
+import { Link } from "react-router-dom";
 
 export default function MessageDetails({ conversation_id }) {
     const [message, setMessage] = useState("");
@@ -141,28 +142,37 @@ export default function MessageDetails({ conversation_id }) {
                     className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border shadow"
                     style={{ height: "85vh" }}
                 >
-                    <div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <figure className="avatar mr-3 mb-0">
-                                <img
-                                    src={otherUser.avatar_url}
-                                    alt="image"
-                                    width="50"
-                                    className="rounded-circle"
-                                />
-                            </figure>
-                            <div>
-                                <h5 className="mb-0">
-                                    {" "}
-                                    {otherUser.first_name}
-                                </h5>
-                                <div className="time">
-                                    @{otherUser.username}
-                                </div>
+                    {otherUser && (
+                        <div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
+                            <div className="d-flex align-items-center">
+                                <figure className="avatar mr-3 mb-0">
+                                    <img
+                                        src={otherUser.avatar_url}
+                                        alt="image"
+                                        width="50"
+                                        className="rounded-circle"
+                                    />
+                                </figure>
+                                <Link to={`/user/${otherUser.username}`}>
+                                    <h4 className="mb-0">
+                                        <b> {otherUser.first_name}</b>
+                                    </h4>
+                                    <small className="time">
+                                        @{otherUser.username}
+                                    </small>
+                                </Link>
                             </div>
+                            <a href={`tel:${otherUser.phone_number}`}>
+                                <button className="btn btn-sm">
+                                    <IoCallSharp
+                                        size={25}
+                                        className="text-theme"
+                                    />
+                                </button>
+                            </a>
                         </div>
-                        call
-                    </div>
+                    )}
+
                     <div className="scroll-bar" style={{ height: "65vh" }}>
                         <div className="chat-body p-3 ">
                             <div className="messages-content pb-5">
