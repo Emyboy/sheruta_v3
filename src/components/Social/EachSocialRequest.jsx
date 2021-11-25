@@ -168,12 +168,12 @@ export default function EachRequest({ data }) {
 					</div> */}
 				</div>
 			</div>
-			<div className="card-body d-flex p-0 mt-3 mb-3">
-				<div className="d-flex align-items-center">
+			<div className="card-body d-flex p-0 mt-3 mb-3 justify-content-between">
+				<div className="d-flex align-items-center justify-content-start">
 					<div className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
-						<span className="pr-4">Budget: </span>
+						<span>Budget: </span>
 					</div>
-					<figure className="mb-0 pl-2">
+					<figure className="mb-0 pl-1">
 						{' '}
 						<b style={{ fontSize: '17px' }} className="text-grey-500">
 							{Global.currency}
@@ -181,6 +181,7 @@ export default function EachRequest({ data }) {
 						</b>
 					</figure>
 				</div>
+				<UserAction alignment="evenly" user={user} />
 				{/* <a
 					to="#"
 					className="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"
@@ -188,7 +189,7 @@ export default function EachRequest({ data }) {
 					<i className="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i>
 					<span className="d-none-xss">22 Comment</span>
 				</a> */}
-				<a
+				{/* <a
 					id="dropdownMenu21"
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
@@ -196,9 +197,8 @@ export default function EachRequest({ data }) {
 				>
 					<i className="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i>
 					<span className="d-none-xs">Share</span>
-				</a>
+				</a> */}
 			</div>
-			<UserAction alignment="evenly" user={user} />
 		</article>
 	)
 }

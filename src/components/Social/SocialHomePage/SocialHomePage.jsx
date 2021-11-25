@@ -19,6 +19,7 @@ import UserFeedCard from "./UserFeedCard";
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 
 export default (props) => {
+  localStorage.setItem('after_login', '/feeds')
   const auth = useSelector((state) => state.auth);
   const view = useSelector((state) => state.view);
   const dispatch = useDispatch();
