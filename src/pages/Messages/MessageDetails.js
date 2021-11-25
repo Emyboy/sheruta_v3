@@ -25,12 +25,12 @@ export default function MessageDetails({ conversation_id }) {
 
     const executeScroll = () => {
         console.log("HERE WE GO");
-        // myRef.current.scrollIntoView();
-        document.getElementById("end").scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-            inline: "nearest",
-        });
+        // Bring this back :
+        // document.getElementById("end").scrollIntoView({
+        //     behavior: "smooth",
+        //     block: "end",
+        //     inline: "nearest",
+        // });
     };
 
     const getMessages = async () => {
@@ -135,142 +135,301 @@ export default function MessageDetails({ conversation_id }) {
     };
 
     return (
-        <div className="message_container border-gray rounded">
-            {otherUser && (
+        <div className="row">
+            <div className="col-lg-12 position-relative">
                 <div
-                    className={`user_heading ${
-                        Global.isMobile ? "p-2" : "pl-2 p-3 "
-                    }`}
+                    className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border shadow"
+                    style={{ height: "85vh" }}
                 >
-                    <a className="shadow">
-                        <div className="wrap">
-                            {/* <span
-                                className="contact-status online bg-danger"
-                                style={{
-                                    left: Global.isMobile ? "35px" : "25px",
-                                }}
-                            ></span> */}
-                            <div
-                                className="d-flex justify-content-between"
-                                style={{ alignItems: "center" }}
-                            >
-                                <div
-                                    className="d-flex"
-                                    style={{ alignItems: "center" }}
-                                >
-                                    <button
-                                        className="btn btn-sm pl-0"
-                                        onClick={() =>
-                                            history.push("/messages")
-                                        }
-                                    >
-                                        <IoIosArrowBack size={20} />
-                                    </button>
-                                    <img
-                                        className="img-fluid"
-                                        src={otherUser.avatar_url}
-                                        width={Global.isMobile ? "40" : "50"}
-                                        alt="s5.jpg"
-                                    />
-                                    <div className="meta">
-                                        <h5 className="name">
-                                            {otherUser.first_name}{" "}
-                                            {otherUser.last_name}
-                                        </h5>
-                                        <p className="preview">
-                                            {/* was online today at 11:43 */}@
-                                            {otherUser.username}
-                                        </p>
-                                    </div>
+                    <div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                            <figure className="avatar mr-3 mb-0">
+                                <img
+                                    src={otherUser.avatar_url}
+                                    alt="image"
+                                    width="50"
+                                    className="rounded-circle"
+                                />
+                            </figure>
+                            <div>
+                                <h5 className="mb-0">
+                                    {" "}
+                                    {otherUser.first_name}
+                                </h5>
+                                <div className="time">
+                                    @{otherUser.username}
                                 </div>
-                                <a href={`tel:${otherUser.phone_number}`}>
-                                    <button className="btn btn-sm">
-                                        <IoCallSharp
-                                            size={25}
-                                            className="text-theme"
-                                        />
-                                    </button>
-                                </a>
                             </div>
                         </div>
-                    </a>
-                </div>
-            )}
-            <div
-                className="inbox_chatting_box border-bottom bg-them-light"
-                style={{ height: "70vh" }}
-            >
-                <ul
-                    className={`chatting_content ${
-                        Global.isMobile ? "p-1" : ""
-                    }`}
-                    style={{ marginBottom: Global.isMobile ? "30vh" : "10vh" }}
-                >
-                    {messages.map((val, i) => {
-                        return <EachMessage message={val} key={`msg-${i}`} />;
-                    })}
-                    <h6 className="text-muted text-center pt-3">The End</h6>
-                </ul>
-                <div id="end" ref={myRef}></div>
-            </div>
-            <div
-                className="mi_text bg-white"
-                style={
-                    Global.isMobile
-                        ? {
-                              position: "fixed",
-                              width: "100vw",
-                              bottom: "9%",
-                          }
-                        : null
-                }
-            >
-                <div className="message_input_">
-                    <form
-                        className="form-inline border-top"
-                        onSubmit={handleSubmit}
-                    >
-                        <div className="d-flex w-100">
-                            <textarea
-                                className="bg-them-light p-2 border-gray ml-1 mt-2 mb-2 mr-0 mb-4 w-100"
-                                type="text"
-                                placeholder="Enter message here..."
-                                aria-label="Message"
-                                value={message}
-                                autoFocus
-                                cols="40"
-                                rows={inputRows}
-                                onChange={(e) => setMessage(e.target.value)}
-                                style={{
-                                    zIndex: 0,
-                                    borderRadius:
-                                        message.length > 90 ? "2px" : "50px",
-                                    // backgroundColor: "#F0F5EF",
-                                    borderTopRightRadius: 0,
-                                    borderBottomRightRadius: 0,
-                                }}
-                            />
-                            <button
-                                className="btn-sm btn bg-theme text-white mb-3 mr-1"
-                                style={{
-                                    height: "45px",
-                                    alignSelf: "center",
-                                    borderTopRightRadius: "15px",
-                                    borderBottomRightRadius: "15px",
-                                    borderTopLeftRadius: "0px",
-                                    borderBottomLeftRadius: "0px",
-                                }}
-                                type="submit"
-                            >
-                                <FiSend size={20} />
-                            </button>
+                        call
+                    </div>
+                    <div className="scroll-bar" style={{ height: "65vh" }}>
+                        <div className="chat-body p-3 ">
+                            <div className="messages-content pb-5">
+                                <div className="message-item">
+                                    <div className="message-wrap">
+                                        I'm fine, how are you 😃
+                                    </div>
+                                </div>
+
+                                <div className="message-item outgoing-message">
+                                    <div className="message-user">
+                                        <figure className="avatar">
+                                            <img
+                                                src="images/user-1.png"
+                                                alt="image"
+                                            />
+                                        </figure>
+                                        <div>
+                                            <h5>Byrom Guittet</h5>
+                                            <div className="time">
+                                                01:35 PM
+                                                <i className="ti-double-check text-info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="message-wrap">
+                                        I want those files for you. I want you
+                                        to send 1 PDF and 1 image file.
+                                    </div>
+                                </div>
+
+                                <div className="message-item">
+                                    <div className="message-user">
+                                        <figure className="avatar">
+                                            <img
+                                                src="images/user-9.png"
+                                                alt="image"
+                                            />
+                                        </figure>
+                                        <div>
+                                            <h5>Byrom Guittet</h5>
+                                            <div className="time">01:35 PM</div>
+                                        </div>
+                                    </div>
+                                    <div className="message-wrap">
+                                        I've found some cool photos for our
+                                        travel app.
+                                    </div>
+                                </div>
+
+                                <div className="message-item outgoing-message">
+                                    <div className="message-user">
+                                        <figure className="avatar">
+                                            <img
+                                                src="images/user-1.png"
+                                                alt="image"
+                                            />
+                                        </figure>
+                                        <div>
+                                            <h5>Byrom Guittet</h5>
+                                            <div className="time">
+                                                01:35 PM
+                                                <i className="ti-double-check text-info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="message-wrap">
+                                        Hey mate! How are things going ?
+                                    </div>
+                                </div>
+
+                                <div className="message-item">
+                                    <div className="message-user">
+                                        <figure className="avatar">
+                                            <img
+                                                src="images/user-9.png"
+                                                alt="image"
+                                            />
+                                        </figure>
+                                        <div>
+                                            <h5>Byrom Guittet</h5>
+                                            <div className="time">01:35 PM</div>
+                                        </div>
+                                    </div>
+                                    <figure>
+                                        <img
+                                            src="images/bb-9.jpg"
+                                            className="w-25 img-fluid rounded-3"
+                                            alt="image"
+                                        />
+                                    </figure>
+                                </div>
+
+                                <div className="message-item outgoing-message">
+                                    <div className="message-user">
+                                        <figure className="avatar">
+                                            <img
+                                                src="images/user-1.png"
+                                                alt="image"
+                                            />
+                                        </figure>
+                                        <div>
+                                            <h5>Byrom Guittet</h5>
+                                            <div className="time">
+                                                01:35 PM
+                                                <i className="ti-double-check text-info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="message-wrap"
+                                        style={{ marginBottom: "90px" }}
+                                    >
+                                        Hey mate! How are things going ?
+                                    </div>
+                                </div>
+                                <div className="clearfix"></div>
+                            </div>
                         </div>
-                        {/* <button className="btn btn-sm" type="submit">
-                            Send Message
+                    </div>
+                </div>
+                <div
+                    className="chat-bottom dark-bg p-3 shadow-none theme-dark-bg"
+                    // style={{ width: "98%" }}
+                >
+                    <form className="chat-form">
+                        {/* <button className="bg-grey float-left">
+                            <i className="ti-microphone text-grey-600"></i>
                         </button> */}
+                        <div className="form-group">
+                            <input type="text" placeholder="Start typing.." />
+                        </div>
+                        <button className="bg-current">
+                            <i className="ti-arrow-right text-white"></i>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
+        // {/* <div className="card rounded-3 rounded border border-gray shadow">
+        //     {otherUser && (
+        //         <div
+        //             className={`user_heading ${
+        //                 Global.isMobile ? "p-2" : "pl-2 p-3 "
+        //             }`}
+        //         >
+        //             <a className="shadow">
+        //                 <div className="wrap">
+        //                     <div
+        //                         className="d-flex justify-content-between"
+        //                         style={{ alignItems: "center" }}
+        //                     >
+        //                         <div
+        //                             className="d-flex"
+        //                             style={{ alignItems: "center" }}
+        //                         >
+        //                             <button
+        //                                 className="btn btn-sm pl-0"
+        //                                 onClick={() =>
+        //                                     history.push("/messages")
+        //                                 }
+        //                             >
+        //                                 <IoIosArrowBack size={20} />
+        //                             </button>
+        //                             <img
+        //                                 className="img-fluid"
+        //                                 src={otherUser.avatar_url}
+        //                                 width={Global.isMobile ? "40" : "50"}
+        //                                 alt="s5.jpg"
+        //                             />
+        //                             <div className="meta">
+        //                                 <h5 className="name">
+        //                                     {otherUser.first_name}{" "}
+        //                                     {otherUser.last_name}
+        //                                 </h5>
+        //                                 <p className="preview">
+
+        //                                     {otherUser.username}
+        //                                 </p>
+        //                             </div>
+        //                         </div>
+        //                         <a href={`tel:${otherUser.phone_number}`}>
+        //                             <button className="btn btn-sm">
+        //                                 <IoCallSharp
+        //                                     size={25}
+        //                                     className="text-theme"
+        //                                 />
+        //                             </button>
+        //                         </a>
+        //                     </div>
+        //                 </div>
+        //             </a>
+        //         </div>
+        //     )}
+        //     <div
+        //         className="inbox_chatting_box border-bottom bg-them-light"
+        //         style={{ height: "70vh" }}
+        //     >
+        //         <ul
+        //             className={`chatting_content ${
+        //                 Global.isMobile ? "p-1" : ""
+        //             }`}
+        //             style={{ marginBottom: Global.isMobile ? "30vh" : "10vh" }}
+        //         >
+        //             {messages.map((val, i) => {
+        //                 return <EachMessage message={val} key={`msg-${i}`} />;
+        //             })}
+        //             <h6 className="text-muted text-center pt-3">The End</h6>
+        //         </ul>
+        //         <div id="end" ref={myRef}></div>
+        //     </div>
+        //     <div
+        //         className="mi_text bg-white"
+        //         style={
+        //             Global.isMobile
+        //                 ? {
+        //                       position: "fixed",
+        //                       width: "100vw",
+        //                       bottom: "9%",
+        //                   }
+        //                 : null
+        //         }
+        //     >
+        //         <div className="message_input_">
+        //             <form
+        //                 className="form-inline border-top"
+        //                 onSubmit={handleSubmit}
+        //             >
+        //                 <div className="d-flex w-100">
+        //                     <textarea
+        //                         className="bg-them-light p-2 border-gray ml-1 mt-2 mb-2 mr-0 mb-4 w-100"
+        //                         type="text"
+        //                         placeholder="Enter message here..."
+        //                         aria-label="Message"
+        //                         value={message}
+        //                         autoFocus
+        //                         cols="40"
+        //                         rows={inputRows}
+        //                         onChange={(e) => setMessage(e.target.value)}
+        //                         style={{
+        //                             zIndex: 0,
+        //                             borderRadius:
+        //                                 message.length > 90 ? "2px" : "50px",
+
+        //                             borderTopRightRadius: 0,
+        //                             borderBottomRightRadius: 0,
+        //                         }}
+        //                     />
+        //                     <button
+        //                         className="btn-sm btn bg-theme text-white mb-3 mr-1"
+        //                         style={{
+        //                             height: "45px",
+        //                             alignSelf: "center",
+        //                             borderTopRightRadius: "15px",
+        //                             borderBottomRightRadius: "15px",
+        //                             borderTopLeftRadius: "0px",
+        //                             borderBottomLeftRadius: "0px",
+        //                         }}
+        //                         type="submit"
+        //                     >
+        //                         <FiSend size={20} />
+        //                     </button>
+        //                 </div>
+
+        //             </form>
+        //         </div>
+        //     </div>
+        // </div> */}
     );
 }

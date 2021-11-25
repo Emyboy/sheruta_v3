@@ -24,7 +24,7 @@ export default function Layout({ currentPage, children}) {
 
 				<div className={user && 'main-content right-chat-active'}>
 					<div className={user && 'middle-sidebar-bottom pl-0 pr-0'}>
-						<div className={user && 'middle-sidebar-left pb-5 pt-4'}>
+						<div className={user && 'middle-sidebar-left'}>
 							{children}
 						</div>
 					</div>
