@@ -305,16 +305,35 @@ const CraeteRequest = (props) => {
     } else
     return (
         <Layout back>
-            <Modal show={view.personal_info && !view.personal_info.nin} style={{ marginTop: '20vh'}} size='md'>
+            <Modal
+                show={view.personal_info && !view.personal_info.nin}
+                style={{ marginTop: "20vh" }}
+                size="md"
+            >
                 <Modal.Body className="text-center">
-                    <h3 className='text-center'>Join the community to post a request.</h3>
+                    <h3 className="text-center">
+                        Join the community to post a request.
+                    </h3>
                     <hr />
                     <ol>
-                        <li><h4>Submit your NIN <small>(Only you can see this)</small></h4></li>
-                        <li><h4>Get verified</h4></li>
-                        <li><h4>Upload an image of yourself</h4></li>
-                        <li><h4>View user's information</h4></li>
-                        <li><h4>Have access to other verified users</h4></li>
+                        <li>
+                            <h4>
+                                Submit your NIN{" "}
+                                <small>(Only you can see this)</small>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>Get verified</h4>
+                        </li>
+                        <li>
+                            <h4>Upload an image of yourself</h4>
+                        </li>
+                        <li>
+                            <h4>View user's information</h4>
+                        </li>
+                        <li>
+                            <h4>Have access to other verified users</h4>
+                        </li>
                         <hr />
                         <Link to="/start">
                             <Btn text="Get Started" onClick={() => {}} />
@@ -326,7 +345,7 @@ const CraeteRequest = (props) => {
                 </Modal.Body>
             </Modal>
             <div className="mt-5 pb-5">
-                <div className="container bg-white mb-5 border-gray rounded">
+                <div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                     <div className="pt-5 pb-5">
                         <div className="text-center">
                             <h2>Create Request</h2>
@@ -610,6 +629,7 @@ const CraeteRequest = (props) => {
                                                     Type your request....{" "}
                                                 </label>
                                                 <textarea
+                                                    class="form-control"
                                                     onChange={(e) => {
                                                         setData({
                                                             ...data,
@@ -620,15 +640,15 @@ const CraeteRequest = (props) => {
                                                         });
                                                     }}
                                                     style={{
-                                                        height: "200px",
+                                                        height: "400px",
                                                         background: "#F7F7F7",
                                                     }}
                                                     disabled={state.loading}
                                                     required
                                                     name="body"
                                                     // className="gray-bg"
-                                                    cols="30"
-                                                    rows="6"
+                                                    // cols="30"
+                                                    rows={6}
                                                     minLength="50"
                                                     maxLength="900"
                                                     placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
