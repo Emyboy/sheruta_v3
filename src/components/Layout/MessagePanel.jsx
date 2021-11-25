@@ -23,7 +23,7 @@ export default function MessagePanel({ show }) {
 			className={`right-chat nav-wrap mt-2 right-scroll-bar ${
 				show && 'active-sidebar'
 			}`}
-			style={{ zIndex: 1 }}
+			style={{ zIndex: 5 }}
 		>
 			<div className="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 				{/* <div className="preloader-wrap p-3" style={{ display: 'none' }}>
