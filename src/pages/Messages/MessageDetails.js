@@ -139,7 +139,7 @@ export default function MessageDetails({ conversation_id }) {
         <div className="row">
             <div className="col-lg-12 position-relative">
                 <div
-                    className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border shadow"
+                    className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border rounded"
                     style={{ height: "85vh" }}
                 >
                     {otherUser && (
@@ -154,7 +154,7 @@ export default function MessageDetails({ conversation_id }) {
                                     />
                                 </figure>
                                 <Link to={`/user/${otherUser.username}`}>
-                                    <h4 className="mb-0">
+                                    <h4 className="mb-0 text-black">
                                         <b> {otherUser.first_name}</b>
                                     </h4>
                                     <small className="time">
@@ -295,15 +295,15 @@ export default function MessageDetails({ conversation_id }) {
                     </div>
                 </div>
                 <div
-                    className="chat-bottom dark-bg p-3 shadow-none theme-dark-bg"
-                    // style={{ width: "98%" }}
+                    className="chat-bottom dark-bg p-3 shadow-none theme-dark-bg border"
+                    style={{ width: "95%" }}
                 >
                     <form className="chat-form">
                         {/* <button className="bg-grey float-left">
                             <i className="ti-microphone text-grey-600"></i>
                         </button> */}
-                        <div className="form-group">
-                            <input type="text" placeholder="Start typing.." />
+                        <div className="form-group" style={{ width: '90%'}}>
+                            <input type="text" placeholder="Start typing.." className="text-black" />
                         </div>
                         <button className="bg-current">
                             <i className="ti-arrow-right text-white"></i>

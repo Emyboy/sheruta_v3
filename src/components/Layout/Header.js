@@ -23,6 +23,7 @@ export default function Header({
 	showNav,
 	onChatToggle,
 	showChat,
+	pageName,
 }) {
 	const { user } = useSelector((state) => state.auth)
 	const { notifications } = useSelector((state) => state.view)
@@ -182,21 +183,40 @@ export default function Header({
 				<Link to={`/feeds`}>
 					<Tooltip placement="bottom" title={'Home'}>
 						<a className="p-2 text-center ms-3 menu-icon center-menu-icon">
-							<i className="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current "></i>
+							<i
+								className={`feather-home font-lg alert-primary btn-round-lg theme-dark-bg ${
+									pageName === 'feeds'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								}`}
+							></i>
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to="/request/create">
+				<Link to="/requests/create">
 					<Tooltip placement="bottom" title={'Add A Request'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							<i className="feather-plus font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i>
+							<i
+								className={`feather-plus font-lg alert-primary btn-round-lg theme-dark-bg ${
+									pageName === 'requests'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								}`}
+							></i>
 						</a>
 					</Tooltip>
 				</Link>
+
 				<Link to="/match">
 					<Tooltip placement="bottom" title={'Your Match'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							<i className="font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 ">
+							<i
+								className={`font-lg alert-primary btn-round-lg theme-dark-bg  ${
+									pageName === 'match'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								} `}
+							>
 								<BsPeople size={iconSize} />
 							</i>
 						</a>

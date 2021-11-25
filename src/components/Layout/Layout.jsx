@@ -9,7 +9,7 @@ import Global from '../../Global'
 export default function Layout({ currentPage, children}) {
     const { user } = useSelector((state) => state.auth);
     const [showNav, setShowNav] = useState(false);
-    const [showChat, setShowChat] = useState(false);
+    const [showChat, setShowChat] = useState(!Global.isMobile)
     return (
 			<div>
 				<Header

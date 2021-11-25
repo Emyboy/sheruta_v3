@@ -91,7 +91,7 @@ export default (props) => {
 
   return (
 		<div className="main-wrapper">
-			<Layout currentPage="feed">
+			<Layout currentPage="feeds">
 				<div className="container-fluid">
 					<div className="row _feed-body">
 						{!Global.isMobile && (

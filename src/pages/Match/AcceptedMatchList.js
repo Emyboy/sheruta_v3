@@ -1,92 +1,50 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import CallBtn from "../../components/CallBtn/CallBtn";
-import VerifiedBadge from "../../components/VerifiedBadge/VerifiedBadge";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import CallBtn from '../../components/CallBtn/CallBtn'
+import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
+import UserAction from '../../components/UserAction/UserAction';
 
 export default function AcceptedMatchList({ list }) {
-    const { user } = useSelector((state) => state.auth);
-    return (
-        <div className="load-more mb-5">
-            {list.map((val, i) => {
-                const person = val.users_permissions_user;
-                return (
-                    <div
-                        className="central-meta item pr-0"
-                        style={{ display: "inline-block" }}
-                    >
-                        <div className="classic-post">
-                            <figure className="rounded">
-                                <img
-                                    src={person && person.avatar_url}
-                                    alt=""
-                                    width="70"
-                                    className="rounded"
-                                />
-                                {/* <span>Super Hot</span> */}
-                            </figure>
-                            <div className="classic-pst-meta w-100">
-                                {/* <div className="more">
-                                    <div className="more-post-optns">
-                                        <i className="ti-more-alt"></i>
-                                        <ul>
-                                            <li>
-                                                <i className="fa fa-pencil-square-o"></i>
-                                                Edit Post
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-trash-o"></i>
-                                                Delete Post
-                                            </li>
-                                            <li className="bad-report">
-                                                <i className="fa fa-flag"></i>
-                                                Report This Post
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-clock-o"></i>
-                                                Schedule Post
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-wpexplorer"></i>
-                                                Select as featured
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-bell-slash-o"></i>
-                                                Turn off Notifications
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> */}
-                                <h4 className="d-flex">
-                                    <Link to={`/user/${person.username}`}>
-                                        {" "}
-                                        {person && person.first_name}{" "}
-                                        {/* {person && person.last_name} */}
-                                    </Link>
-                                    <VerifiedBadge
-                                        user={person}
-                                        without_text
-                                        className="ml-2"
-                                    />
-                                </h4>
-                                <p>@{person && person.username}</p>
-                                {/* <span className="prise">$30,000</span> */}
-                                <div className="location-area">
-                                    {/* <i>Last Updated: Jan,12 2020</i> */}
-                                    {/* <span>
-                                        <i className="fa fa-map-marker"></i>{" "}
-                                        Toronto, Canada
-                                    </span> */}
-                                    {/* <a href="#" className="main-btn bg-theme" title="">
-                                        Call Me
-                                    </a> */}
-                                    <CallBtn phone_number={person.phone_number} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
+	const { user } = useSelector((state) => state.auth)
+	return (
+		<div className="load-more mb-5">
+			{list.map((val, i) => {
+				const person = val.users_permissions_user
+				return (
+					<div className="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3 pb-3">
+						<div
+							className="position-relative  bg-image-cover bg-image-center"
+							style={{
+								// backgroundImage: 'url(/../assets/images/bb-16.png)',
+								height: '20px',
+							}}
+						></div>
+						<div className="card-body d-block w-100 pl-10 pe-4 pb-2 pt-0  text-left position-relative">
+							<figure
+								className="avatar position-absolute w75 z-index-1"
+								style={{ left: '15px' }}
+							>
+								<img
+									src={person.avatar_url}
+									alt="image"
+									className="float-right p-1 bg-white rounded-circle w-100"
+								/>
+							</figure>
+							<div className="clearfix"></div>
+							<Link to={`/user/${person.username}`} >
+							<h4 className="fw-700 font-xsss mt-3 mb-1">
+								{person.first_name}
+							</h4>
+								<p className="fw-500 font-xsssss text-grey-500 mt-0 mb-3">
+									@{person.username}
+								</p>
+							</Link>
+						</div>
+						<UserAction user={person} alignment="end" />
+					</div>
+				)
+			})}
+		</div>
+	)
 }

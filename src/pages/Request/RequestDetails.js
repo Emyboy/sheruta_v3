@@ -233,7 +233,7 @@ export default function RequestDetails(props) {
 												<div className="container-fluid">
 													<div className="row justify-content-between">
 														<div
-															className="d-flex"
+															className="d-flex col-md-6 pl-0 text-dark"
 															style={{
 																alignItems: 'center',
 															}}
@@ -247,7 +247,7 @@ export default function RequestDetails(props) {
 															</span>{' '}
 															{request.location}
 														</div>
-														<div>
+														<div className='col-md-5'>
 															{user ? (
 																// <a
 																//     onClick={
@@ -265,6 +265,7 @@ export default function RequestDetails(props) {
 																	user={request.users_permissions_user}
 																/>
 															) : (
+																// For Those Who Aren't Logged In
 																<Link
 																	to={`/signup`}
 																	title=""
@@ -284,14 +285,6 @@ export default function RequestDetails(props) {
 														alignItems: 'center',
 													}}
 												>
-													<h4 className="mt-3">
-														₦ {window.formatedPrice.format(request.budget)}{' '}
-														<small className="text-muted">
-															/
-															{request.payment_type &&
-																request.payment_type.name}
-														</small>
-													</h4>
 													<div className="ml-2">
 														{request.category && (
 															<Tag color="volcano">{request.category.name}</Tag>
@@ -301,7 +294,7 @@ export default function RequestDetails(props) {
 														)}
 													</div>
 												</div>
-												<div class="description">
+												<div className="description mt-3">
 													<p
 														style={{
 															fontSize: '16px',
@@ -310,56 +303,62 @@ export default function RequestDetails(props) {
 														{request.body}
 													</p>
 												</div>
+												<h1 className="mt-3">
+													₦ {window.formatedPrice.format(request.budget)}{' '}
+													<small className="text-muted">
+														/{request.payment_type && request.payment_type.name}
+													</small>
+												</h1>
 											</div>
 										</div>
 										{request.bedrooms && request.bathrooms ? (
-											<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
-												<div class="block-header">
-													<h4 class="block-title">
+											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
+												<div className="block-header">
+													<h4 className="block-title">
 														<b>Property Info</b>
 													</h4>
 												</div>
 
-												<div class="block-body ml-3">
-													<ul class="dw-proprty-info row justify-content-between">
+												<div className="block-body ml-3">
+													<ul className="dw-proprty-info row justify-content-between">
 														<li className="col-4 mb-3">
-															<strong>Bedrooms:</strong>
+															<strong className='text-dark'>Bedrooms:</strong>
 															<br />
 															{request.bedrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Bathrooms:</strong>
+															<strong className='text-dark'>Bathrooms:</strong>
 															<br />
 															{request.bathrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Toilets:</strong>
+															<strong className='text-dark'>Toilets:</strong>
 															<br />
 															{request.toilets}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Is Premium?</strong>
+															<strong className='text-dark'>Is Premium?</strong>
 															<br />
 															{request.is_premium ? 'Yes' : 'No'}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Service Type:</strong>
+															<strong className='text-dark'>Service Type:</strong>
 															<br />
 															{request.service && request.service.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Type:</strong>
+															<strong className='text-dark'>Type:</strong>
 															<br />
 															{request.category && request.category.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong>Price / Budget</strong>
+															<strong className='text-dark'>Price / Budget</strong>
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}
 														</li>
 
 														<li className="col-4 mb-3">
-															<strong>State</strong>
+															<strong className='text-dark'>State</strong>
 															<br />
 															{request.state && request.state.name}
 														</li>
