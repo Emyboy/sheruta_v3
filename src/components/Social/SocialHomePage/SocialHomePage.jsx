@@ -48,23 +48,24 @@ export default (props) => {
   //     }
   // }, [state]);
 
-  useEffect(() => {
-    if (!Global.isMobile) {
-      axios(
-        process.env.REACT_APP_API_URL +
-          `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`
-      )
-        .then((res) => {
-          setNewUsers(res.data);
-        })
-        .catch((err) => {});
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!Global.isMobile) {
+  //     axios(
+  //       process.env.REACT_APP_API_URL +
+  //         `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`
+  //     )
+  //       .then((res) => {
+  //         setNewUsers(res.data);
+  //       })
+  //       .catch((err) => {});
+  //   }
+  // }, []);
   useEffect(() => {
     if (state.list.length === 0) {
+      const dev = process.env.NODE_ENV === 'development';
       axios(
         process.env.REACT_APP_API_URL +
-          `/property-requests/?_limit=50&_start=0&_sort=created_at:DESC`
+          `/property-requests/?_limit=${dev ? '30':'50'}&_start=0&_sort=created_at:DESC`
       )
         .then((res) => {
           setState({ ...state, list: res.data });
