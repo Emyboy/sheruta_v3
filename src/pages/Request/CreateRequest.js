@@ -348,7 +348,12 @@ const CraeteRequest = (props) => {
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
 							<div className="text-center">
-								<h2>Create Request</h2>
+								<h1 className="display-7">
+									{props.view.personal_info &&
+									props.view.personal_info.looking_for
+										? 'Create Request'
+										: 'Post Your Property'}
+								</h1>
 								{state.message ? (
 									<Alert message={state.message} type="success" />
 								) : null}
@@ -593,7 +598,12 @@ const CraeteRequest = (props) => {
 											+
 											<div className="col-lg-12 col-md-12 col-sm-12">
 												<div className="form-group">
-													<label>Type your request.... </label>
+													<label>
+														{props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Type your request....'
+															: 'Tell us about this property'}{' '}
+													</label>
 													<TextArea
 														rows={6}
 														placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
