@@ -65,10 +65,7 @@ export default function MessagePanel({ show }) {
 						)}
 						{conversations &&
 							conversations.map((val, i) => {
-								
-								return (
-									<EachConversation conv={val} key={`conv-${i}`} />
-								)
+								return <EachConversation conv={val} key={`conv-${i}`} />
 							})}
 					</ul>
 				</div>
@@ -79,37 +76,43 @@ export default function MessagePanel({ show }) {
 					<ul className="list-group list-group-flush">
 						{accepted_suggestions && accepted_suggestions.length === 0 && (
 							<li className="text-center">
-								<h5>No messages</h5>
+								<h5>No contacts yet</h5>
 							</li>
 						)}
 						{accepted_suggestions &&
-							accepted_suggestions.map((val, i) => {
-								const otherUser = val?.users_permissions_user
-								return (
-									<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-										<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
-											<img
-												src={otherUser?.avatar_url}
-												alt="image"
-												className="w35 rounded-3"
-											/>
-										</span>
-										<h3 className="fw-700 mb-0 mt-0">
-											<Link
-												to={`/messages/new/${otherUser?.id}`}
-												className="font-xssss text-grey-600 d-block text-dark model-popup-chat"
-											>
-												{otherUser?.first_name}
-											</Link>
-										</h3>
-										<span
-											className={`shadow bg-${
-												otherUser.online ? 'success' : 'danger'
-											} ms-auto btn-round-xss`}
-										></span>
-									</li>
+							accepted_suggestions
+								.sort(
+									(a, b) =>
+										new Date(b.updated_at).getTime() -
+										new Date(a.updated_at).getTime()
 								)
-							})}
+								.map((val, i) => {
+									const otherUser = val?.users_permissions_user
+									return (
+										<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+											<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
+												<img
+													src={otherUser?.avatar_url}
+													alt="image"
+													className="w35 rounded-3"
+												/>
+											</span>
+											<h3 className="fw-700 mb-0 mt-0">
+												<Link
+													to={`/messages/new/${otherUser?.id}`}
+													className="font-xssss text-grey-600 d-block text-dark model-popup-chat"
+												>
+													{otherUser?.first_name}
+												</Link>
+											</h3>
+											<span
+												className={`shadow bg-${
+													otherUser.online ? 'success' : 'danger'
+												} ms-auto btn-round-xss`}
+											></span>
+										</li>
+									)
+								})}
 					</ul>
 				</div>
 				{/* <div className="section full pe-3 ps-4 pt-0 pb-4 position-relative _feed-body">

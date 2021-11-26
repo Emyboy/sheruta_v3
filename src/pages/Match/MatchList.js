@@ -48,7 +48,7 @@ export default function MatchList() {
         return <Redirect to="/login" />
     }
     return (
-        <div className="pb-5">
+        <div className="pb-0">
             {personal_info && !personal_info.nin ? (
                 <div className="text-center" style={{ marginTop: "20vh", marginBottom: '20vh' }}>
                     <h3>🙆🏽‍♂️</h3>

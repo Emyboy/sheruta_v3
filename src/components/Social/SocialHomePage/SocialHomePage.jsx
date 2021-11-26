@@ -101,7 +101,7 @@ export default (props) => {
 							</div>
 						)}
 						<div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
-							{state.list.map((val, i) => {
+							{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 								if (i == 5) {
 									return <img src={match} className="rounded-3 mb-3" />
 								} else if (i === 2) {
