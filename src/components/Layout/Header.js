@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -160,9 +161,9 @@ export default function Header({
 					{/* <a className="mob-menu me-2">
 						<i className="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i>
 					</a> */}
-					<a className="me-2 menu-search-icon mob-menu">
+					<Link to={'/search'} className="me-2 menu-search-icon mob-menu">
 						<i className="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i>
-					</a>
+					</Link>
 
 					<button
 						className={`nav-menu me-0 ms-2 ${showNav && 'active'}`}
