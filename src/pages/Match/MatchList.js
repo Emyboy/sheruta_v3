@@ -83,7 +83,7 @@ export default function MatchList() {
                         <Carousel
                             // indicators={false}
                             interval={140000}
-                            className="pb-3 p-3"
+                            className="pb-3 pt-0 p-3"
                             nextIcon={
                                 <NavBtn className="shadow border-gray">
                                     Next
