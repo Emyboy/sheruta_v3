@@ -45,9 +45,11 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 				</figure>
 				<div class="clearfix"></div>
 				<div className="d-flex justify-content-center">
-					<h4 class="fw-700 font-xss mt-3 mb-0">
-						{users_permissions_user.first_name}{' '}
-					</h4>
+					<Link to={`/user/${users_permissions_user.username}`}>
+						<h4 class="fw-700 font-xss mt-3 mb-0">
+							{users_permissions_user.first_name}{' '}
+						</h4>
+					</Link>
 					<VerifiedBadge
 						user={users_permissions_user}
 						without_text
