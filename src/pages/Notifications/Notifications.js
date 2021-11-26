@@ -1,58 +1,52 @@
-import React, { useEffect } from "react";
-import EachNotification from "./EachNotification";
-import Layout from "../../components/Layout/Layout";
-import { getAllNotifications } from "../../redux/strapi_actions/view.action";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
-import { notifyEmy } from "../../services/Sheruta";
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import EachNotification from './EachNotification'
+import Layout from '../../components/Layout/Layout';
 
-export default function _Notifications() {
-    localStorage.setItem("after_login", "/notifications");
-    const dispatch = useDispatch();
-    const { notifications } = useSelector((state) => state.view);
-    const { user } = useSelector((state) => state.auth);
+export default function Notifications() {
+	const { notifications } = useSelector((state) => state.view)
+    localStorage.setItem('after_login', '/notifications')
+	return (
+		<Layout pageName="notifications">
+			<div className="container">
+				<div className="row">
+					<div className="col-xl-12">
+						<div className="chat-wrapper p-3 w-100 position-relative scroll-bar bg-white theme-dark-bg">
+							<h2 className="fw-700 mb-4 mt-2 font-md text-grey-900 d-flex align-items-center">
+								Notification
+								<span className="circle-count bg-warning text-white font-xsssss rounded-3 ms-2 ls-3 fw-600 p-2  mt-0">
+									{notifications.filter((x) => !x.seen).length}
+								</span>
+								{/* <a
+									href="#"
+									className="ms-auto btn-round-sm bg-greylight rounded-3"
+								>
+									<i className="feather-hard-drive font-xss text-grey-500"></i>
+								</a>
+								<a
+									href="#"
+									className="ms-2 btn-round-sm bg-greylight rounded-3"
+								>
+									<i className="feather-alert-circle font-xss text-grey-500"></i>
+								</a>
+								<a
+									href="#"
+									className="ms-2 btn-round-sm bg-greylight rounded-3"
+								>
+									<i className="feather-trash-2 font-xss text-grey-500"></i>
+								</a> */}
+							</h2>
 
-    useEffect(async () => {
-        dispatch(getAllNotifications());
-        notifyEmy({ heading: "Visited notifications page" });
-    }, []);
-
-    if (!user) {
-        return <Redirect to="/login" />;
-    }
-
-    return (
-        <Layout page={"notifications"}>
-            <section className="pt-3 container-fluid">
-                <div className="row justify-content-center">
-                    <div className="col-lg-6 col-sm-12">
-                        <div className="central-meta">
-                            <div className="editing-interest">
-                                <span className="create-post">
-                                    <i className="ti-bell"></i> All
-                                    Notifications
-                                    {/* <a title="" href="setting.html">
-                                        Notifications Setting
-                                    </a> */}
-                                </span>
-                                <div className="notification-box">
-                                    <ul>
-                                        {notifications &&
-                                            notifications.map((val, i) => {
-                                                return (
-                                                    <EachNotification
-                                                        key={`${i}-notification`}
-                                                        data={val}
-                                                    />
-                                                );
-                                            })}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </Layout>
-    );
+							<ul className="notification-box">
+								{notifications &&
+									notifications.map((val, i) => {
+										return <EachNotification key={`notify-${i}`} data={val} />
+									})}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Layout>
+	)
 }

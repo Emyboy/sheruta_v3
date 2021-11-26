@@ -17,7 +17,7 @@ export default function Terms() {
                                         offers."
                 ></meta>
             </Meta>
-            <section className="our-terms bgc-f7">
+            <section className="our-terms bgc-f7 pt-5">
                 <div className="container" style={{ marginBottom: "10vh" }}>
                     <div className="row justify-content-center">
                         <div className="col-lg-8 col-xl-8">
