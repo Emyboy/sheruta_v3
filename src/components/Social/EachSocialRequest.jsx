@@ -7,6 +7,7 @@ import UserAction from "../UserAction/UserAction";
 
 export default function EachRequest({ data }) {
     const user = data?.users_permissions_user;
+    console.log('DATA ---', data);
     return (
         <article className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
             <div className="card-body p-0 d-flex">
@@ -175,7 +176,7 @@ export default function EachRequest({ data }) {
                 )}
             </div>
             <div className="card-body row p-0 mt-3 mb-3 justify-content-between">
-                <div className="d-flex align-items-center justify-content-start col-md-4">
+                <div className="d-flex align-items-center justify-content-start col-md-6">
                     <div className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
                         <span>Budget: </span>
                     </div>
@@ -186,7 +187,7 @@ export default function EachRequest({ data }) {
                             className="text-grey-500"
                         >
                             {Global.currency}
-                            {window.formatedPrice.format(data.budget)}
+                            {window.formatedPrice.format(data.budget)} {data.payment_type &&<small>/{data.payment_type.abbreviation}</small>}
                         </b>
                     </figure>
                 </div>
