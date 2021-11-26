@@ -7,7 +7,6 @@ import UserAction from "../UserAction/UserAction";
 
 export default function EachRequest({ data }) {
     const user = data?.users_permissions_user;
-    console.log('DATA ---', data);
     return (
         <article className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
             <div className="card-body p-0 d-flex">

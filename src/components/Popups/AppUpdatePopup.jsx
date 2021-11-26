@@ -57,7 +57,7 @@ export default function AppUpdatePopup() {
 		<Modal show={show} style={{ paddingTop: '30vh', paddingRight: 0 }}>
 			<div className="bg-whtie p-2 text-center rounde">
 				<AiFillWarning size={80} className="text-warning" />
-				<h3>New Version Available</h3>
+				<h3>New Update Available</h3>
 				<p>The current version you are using is currently out of date.</p>
 				<p>Please reload the app to get the latest updates.</p>
 				<Btn text="Reload" className="w-50" onClick={handleReload} />

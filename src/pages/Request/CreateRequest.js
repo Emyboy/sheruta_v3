@@ -275,32 +275,37 @@ const CraeteRequest = (props) => {
 
     if (state.done) {
         return (
-            <Layout currentPage={'requests'}>
-                {window.scrollTo({ top: 0, behavior: "smooth" })}
-                
-                <div className="mt-5 mb-5">
-                    <div className="container bg-white text-center">
-                        <div className="pt-5 pb-5">
-                            <div className="text-center">
-                                <h1>
-                                    <b>Request Created</b>
-                                </h1>
-                            </div>
-                            <div className="comment-box submit-form">
-                                {/* <h3 className="reply-title">Post Request</h3> */}
-                                <div className="comment-form">
-                                    <Link
-                                        to={`/request/${data.uuid}/${props.auth.user.user.id}`}
-                                    >
-                                        <Btn text="View Request" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Layout>
-        );
+					<Layout currentPage={'requests'}>
+						{window.scrollTo({ top: 0, behavior: 'smooth' })}
+
+						<div className="mt-5 mb-5">
+							<div className="container bg-white text-center">
+								<div className="pt-5 pb-5">
+									<div className="text-center">
+										<h1>
+											<b>
+												{props.view.personal_info &&
+												props.view.personal_info.looking_for
+													? 'Request Created'
+													: 'Post was created'}
+											</b>
+										</h1>
+									</div>
+									<div className="comment-box submit-form">
+										{/* <h3 className="reply-title">Post Request</h3> */}
+										<div className="comment-form">
+											<Link
+												to={`/request/${data.uuid}/${props.auth.user.user.id}`}
+											>
+												<Btn text="View Now" />
+											</Link>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Layout>
+				)
     } else if (!props.auth.user) {
         return <Redirect to="/login" />;
     } else
@@ -365,10 +370,20 @@ const CraeteRequest = (props) => {
 										<div className="row">
 											<div className="col-lg-12 col-md-6 col-sm-12">
 												<TextInput
-													label="Request Heading"
+													label={
+														props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Request Heading'
+															: 'Property title'
+													}
 													required
 													maxLength={70}
-													placeholder="Eg. I need a shared apartment in Ikeja"
+													placeholder={
+														props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? '"Ex. I need a shared apartment in Ikeja"'
+															: 'Ex. Newly built flat available for share in Ikeja'
+													}
 													onChange={(e) =>
 														setData({
 															...data,
@@ -606,7 +621,12 @@ const CraeteRequest = (props) => {
 													</label>
 													<TextArea
 														rows={6}
-														placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+														placeholder={
+															props.view.personal_info &&
+															props.view.personal_info.looking_for
+																? "Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+																: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
+														}
 														defaultValue={data.body}
 														required
 														name="body"
@@ -658,7 +678,12 @@ const CraeteRequest = (props) => {
 												<div className="form-group">
 													<Btn
 														type="submit"
-														text="Post Request"
+														text={
+															props.view.personal_info &&
+															props.view.personal_info.looking_for
+																? 'Post Request'
+																: 'Post Property'
+														}
 														className="w-100 shadow"
 														loading={state.loading}
 														onClick={() => {}}
