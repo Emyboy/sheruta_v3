@@ -29,7 +29,7 @@ export default function EachMessage({ message }) {
 							</div>
 						</div>
 					</div>
-					<div className="message-wrap pt-1 pb-1">{message.message_text}</div>
+					<div className="message-wrap pt-1 pb-1 shadow-sm">{message.message_text}</div>
 					{/* <span className="badge badge-danger rounded-circle position-fixed p-1  mt-1">
 						<IoTrash />
 					</span> */}
@@ -42,7 +42,7 @@ export default function EachMessage({ message }) {
 							<div className="time">{moment(message.created_at).fromNow()}</div>
 						</div>
 					</div>
-					<div className="message-wrap pt-1 pb-1">{message.message_text}</div>
+					<div className="message-wrap pt-1 pb-1 shadow">{message.message_text}</div>
 				</div>
 			)}
 		</>
