@@ -35,7 +35,7 @@ export default function MessagePanel({ show }) {
 					<ul className="list-group list-group-flush">
 						{conversations && conversations.length === 0 && (
 							<li className="text-center">
-								<h5>No conversations yet</h5>
+								<h6 className='text-muted'>No conversations yet</h6>
 							</li>
 						)}
 						{conversations &&
@@ -51,7 +51,7 @@ export default function MessagePanel({ show }) {
 					<ul className="list-group list-group-flush">
 						{accepted_suggestions && accepted_suggestions.length === 0 && (
 							<li className="text-center">
-								<h5>No contacts yet</h5>
+								<h6 className='text-muted'>No contacts yet</h6>
 							</li>
 						)}
 						{accepted_suggestions &&

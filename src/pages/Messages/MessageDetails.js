@@ -17,7 +17,8 @@ export default function MessageDetails({ conversation_id }) {
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
 	const [conversation, setConversation] = useState(null)
-	const [otherUser, setOtherUser] = useState(null)
+	const [otherUser, setOtherUser] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const history = useHistory()
 	const myRef = React.createRef()
 	const [inputRows, setInputRows] = useState('2')
@@ -36,9 +37,17 @@ export default function MessageDetails({ conversation_id }) {
 
 	const getMessages = async () => {
 		if (conversation && conversation_id) {
-			const msgs = await MessageService.getConversationMessages(conversation.id)
-			setMessages(msgs.data)
-			// executeScroll()
+			try {
+				const msgs = await MessageService.getConversationMessages(
+					conversation.id
+				)
+				setMessages(msgs.data)
+				setLoading(false)
+				// executeScroll()
+				return Promise.resolve(msgs)
+			} catch (error) {
+				return Promise.reject(error);
+			}
 		}
 	}
 
@@ -64,6 +73,7 @@ export default function MessageDetails({ conversation_id }) {
 	}, [])
 
 	useEffect(() => {
+		setLoading(true);
 		axios(
 			process.env.REACT_APP_API_URL + `/conversations/?uuid=${conversation_id}`
 		)
@@ -75,9 +85,11 @@ export default function MessageDetails({ conversation_id }) {
 				}
 				setConversation(res.data[0])
 				// executeScroll()
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log(err)
+				setLoading(false);
 			})
 	}, [])
 
@@ -195,6 +207,7 @@ export default function MessageDetails({ conversation_id }) {
 								className="text-black w-100 p-1"
 								onChange={(e) => setMessage(e.target.value)}
 								// cols="40"
+								disabled={loading}
 								rows={inputRows}
 								style={{
 									borderRadius: message.length > 40 ? '7px' : '50px',
@@ -205,9 +218,10 @@ export default function MessageDetails({ conversation_id }) {
 							/>
 						</div>
 						<button
-							className="bg-current align-self-center"
+							className="bg-current align-self-center mb-2"
 							type="submit"
 							style={{ width: '50px' }}
+							disabled={loading}
 						>
 							<i className="ti-arrow-right text-white"></i>
 						</button>
