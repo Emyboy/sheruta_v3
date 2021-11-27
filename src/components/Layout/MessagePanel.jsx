@@ -26,32 +26,7 @@ export default function MessagePanel({ show }) {
 			style={{ zIndex: 5 }}
 		>
 			<div className="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
-				{/* <div className="preloader-wrap p-3" style={{ display: 'none' }}>
-					<div className="box shimmer">
-						<div className="lines">
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-						</div>
-					</div>
-					<div className="box shimmer mb-3">
-						<div className="lines">
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-						</div>
-					</div>
-					<div className="box shimmer">
-						<div className="lines">
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-							<div className="line s_shimmer"></div>
-						</div>
-					</div>
-				</div> */}
+				
 
 				<div className="section full pe-3 ps-4 pt-4 position-relative _feed-body">
 					<h4 className="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">

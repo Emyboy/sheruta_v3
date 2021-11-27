@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React, { useEffect } from 'react'
+import Global from '../../Global'
 import Notifications from '../../services/Notifications'
 
 export default function EachNotification({ data }) {
@@ -25,7 +26,7 @@ export default function EachNotification({ data }) {
 				} theme-light-bg`}
 			>
 				<img
-					src={otherUser?.avatar_url}
+					src={otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR}
 					alt="user"
 					className="w45 me-3 rounded-3"
 				/>

@@ -2,10 +2,15 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import EachNotification from './EachNotification'
 import Layout from '../../components/Layout/Layout';
+import { Redirect } from 'react-router';
 
 export default function Notifications() {
-	const { notifications } = useSelector((state) => state.view)
-    localStorage.setItem('after_login', '/notifications')
+	const { user } = useSelector(state => state.auth);
+	const { notifications } = useSelector((state) => state.view);
+    localStorage.setItem('after_login', '/notifications');
+	if(!user){
+		return <Redirect to={'/login'} />
+	}
 	return (
 		<Layout pageName="notifications">
 			<div className="container">

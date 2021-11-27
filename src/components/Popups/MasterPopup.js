@@ -32,14 +32,19 @@ const MasterPopup = (props) => {
         dispatch(getAllPaymentTypes());
         dispatch(getAllWorkIndustries());
         if (user) {
-            dispatch(getAllMySuggestion());
-            dispatch(suggestThemForMe());
-            dispatch(getAllNotifications());
-            dispatch(setUserOnline());
-            dispatch(getUnreadMessageCount());
-            dispatch(getAllConversations())
+            dispatch(setUserOnline())
         }
     }, []);
+    
+    useEffect(() => {
+        if(user){
+            dispatch(getAllNotifications());
+            dispatch(getAllMySuggestion())
+            dispatch(suggestThemForMe())
+            dispatch(getUnreadMessageCount())
+            dispatch(getAllConversations())
+        }
+    },[user])
 
     useInterval(() => {
         if (user) {

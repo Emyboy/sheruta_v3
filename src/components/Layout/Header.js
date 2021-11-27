@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -27,7 +26,7 @@ export default function Header({
 	pageName,
 }) {
 	const { user } = useSelector((state) => state.auth)
-	const { notifications } = useSelector((state) => state.view)
+	const { notifications, messages } = useSelector((state) => state.view)
 	const [showNotification, setNotification] = useState(false)
 
 	if (!user) {
@@ -152,6 +151,11 @@ export default function Header({
 						className="mob-menu ms-auto me-2 chat-active-btn"
 						onClick={onChatToggle}
 					>
+						{messages.length > 0 && (
+							<small className="badge badge-danger position-fixed">
+								{messages.length}
+							</small>
+						)}
 						<i
 							className={`${
 								showChat ? 'feather-x' : 'feather-mail'
