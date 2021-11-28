@@ -17,8 +17,8 @@ export default function MessageDetails({ conversation_id }) {
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
 	const [conversation, setConversation] = useState(null)
-	const [otherUser, setOtherUser] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [otherUser, setOtherUser] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const history = useHistory()
 	const myRef = React.createRef()
 	const [inputRows, setInputRows] = useState('2')
@@ -46,7 +46,7 @@ export default function MessageDetails({ conversation_id }) {
 				// executeScroll()
 				return Promise.resolve(msgs)
 			} catch (error) {
-				return Promise.reject(error);
+				return Promise.reject(error)
 			}
 		}
 	}
@@ -69,11 +69,11 @@ export default function MessageDetails({ conversation_id }) {
 		}
 		setTimeout(() => {
 			executeScroll()
-		}, 1000)
+		}, 1700)
 	}, [])
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading(true)
 		axios(
 			process.env.REACT_APP_API_URL + `/conversations/?uuid=${conversation_id}`
 		)
@@ -85,11 +85,11 @@ export default function MessageDetails({ conversation_id }) {
 				}
 				setConversation(res.data[0])
 				// executeScroll()
-				setLoading(false);
+				setLoading(false)
 			})
 			.catch((err) => {
 				console.log(err)
-				setLoading(false);
+				setLoading(false)
 			})
 	}, [])
 
@@ -147,7 +147,7 @@ export default function MessageDetails({ conversation_id }) {
 			<div className="col-lg-12 position-relative">
 				<div
 					className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border rounded"
-					style={{ height: '85vh' }}
+					style={{ height: Global.isMobile ? '75vh':'85vh' }}
 				>
 					{otherUser && (
 						<div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
@@ -164,7 +164,9 @@ export default function MessageDetails({ conversation_id }) {
 									<h4 className="mb-0 text-black">
 										<b> {otherUser.first_name}</b>
 									</h4>
-									<small className="time text-muted">@{otherUser.username}</small>
+									<small className="time text-muted">
+										@{otherUser.username}
+									</small>
 								</Link>
 							</div>
 							<a href={`tel:${otherUser.phone_number}`}>
@@ -182,9 +184,10 @@ export default function MessageDetails({ conversation_id }) {
 									return <EachMessage message={val} key={`msg-${i}`} />
 								})}
 
-								<div id="end" className="clearfix"></div>
+								<div className="clearfix"></div>
 							</div>
 						</div>
+						<div id="end"></div>
 					</div>
 				</div>
 				<div
