@@ -93,7 +93,7 @@ function App() {
                   <FeedbackPopup />
                   <PaymentPopup />
                   <MasterPopup />
-                  <RobotMessageContainer />
+                  {/* <RobotMessageContainer /> */}
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/feeds" component={SocialHomePage} />
