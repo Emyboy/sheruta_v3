@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/Layout/Layout'
 import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
 import AccountSettings from './settings/AccountSettings'
-import PersonalInfoSettings from './settings/PersonalInfoSettings'
+import PersonalInfoSettings from './settings/PersonalInfoSettings';
+import { Switch } from 'antd'
 
 export default function Settings({ match }) {
-	const { user } = useSelector((state) => state.auth)
-	const type = match.params?.type
+	const { user } = useSelector((state) => state.auth);
+	const [darkMode, setDarkMode] = useState(false);
+	const type = match.params?.type;
+
+	useEffect(() => {
+		if(darkMode){
+			document.getElementById('body-tag').classList.add('theme-dark')
+		}else {
+			document.getElementById('body-tag').classList.remove('theme-dark')
+		}
+	},[darkMode]);
+
 	if (!user) {
 		return <Redirect to="/login" />
 	} else
@@ -37,7 +48,7 @@ export default function Settings({ match }) {
 											<ul className="list-inline mb-4">
 												<li className="list-inline-item d-block border-bottom me-0 pl-0">
 													<Link
-                                                        to="/settings/account-settings"
+														to="/settings/account-settings"
 														className="pt-2 pb-2 d-flex align-items-center"
 													>
 														<i className="btn-round-md bg-primary-gradiant text-white feather-user font-md me-3"></i>{' '}
@@ -73,31 +84,36 @@ export default function Settings({ match }) {
 												</li>
 											</ul>
 
-											{/* <div className="nav-caption fw-600 font-xsss text-grey-500 mb-2">
-										Acount
-									</div>
-									<ul className="list-inline mb-4">
-										<li className="list-inline-item d-block border-bottom me-0">
-											<a
-												href="payment.html"
-												className="pt-2 pb-2 d-flex align-items-center"
-											>
-												<i className="btn-round-md bg-mini-gradiant text-white feather-credit-card font-md me-3"></i>{' '}
-												<h4 className="fw-600 font-xsss mb-0 mt-0">My Cards</h4>
-												<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
-											</a>
-										</li>
-										<li className="list-inline-item d-block  me-0 pl-0">
-											<a
-												href="password.html"
-												className="pt-2 pb-2 d-flex align-items-center"
-											>
-												<i className="btn-round-md bg-blue-gradiant text-white feather-inbox font-md me-3"></i>{' '}
-												<h4 className="fw-600 font-xsss mb-0 mt-0">Password</h4>
-												<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
-											</a>
-										</li>
-									</ul> */}
+											<div className="nav-caption fw-600 font-xsss text-grey-500 mb-2">
+												Application
+											</div>
+											<ul className="list-inline mb-4">
+												<li className="list-inline-item d-block border-bottom me-0">
+													<a
+														href="payment.html"
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-mini-gradiant text-white feather-file-text font-md me-3"></i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0">
+															Configure View
+														</h4>
+														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
+													</a>
+												</li>
+												<li className="list-inline-item d-block  me-0 pl-0">
+													<a
+														href="#mode"
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-blue-gradiant text-white feather-moon font-md me-3"></i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0 mr-3">
+															Dark Mode
+														</h4>
+														<Switch defaultChecked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+														{/* <i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i> */}
+													</a>
+												</li>
+											</ul>
 										</div>
 									</div>
 								</div>

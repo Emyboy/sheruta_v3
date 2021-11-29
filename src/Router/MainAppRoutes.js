@@ -9,13 +9,13 @@ import '../assets/css/styles.css';
 import '../v4_css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
-import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 // import firebase from "../Firebase"
 import "../social_assets/css/feather.css";
 import "../social_assets/css/lightbox.css";
 import "../social_assets/css//themify-icons.css";
 import "../social_assets/css/style.css";
+import '../App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 

@@ -4,18 +4,23 @@
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
-
+#root {
+    background-color: pink;
+    height: 100vh auto;
+}
 html,
 body,
 #root,
+.mm-page,
 .gray-bg {
     /* background-color: #f7f9fc !important; */
-    background-color: #f7f7f7 !important;
+    /* background-color: #f7f7f7 !important; */
     /* background-image: url(./assets/img/pattern.png) !important; */
     /* background-position: center; */
     background-size: 100%;
     /* background-attachment: fixed; */
     background-repeat: repeat;
+    /* height: 100vh auto; */
 }
 .bg-accent {
     background-color: var(--accent-color) !important;

@@ -31,7 +31,7 @@ export default ({
                 /> : null
             } */}
             <Link to={to}>
-                <h6 style={{ fontSize: '25px', lineHeight: '30px' }}>{heading}</h6>
+                <h6 style={{ fontSize: '25px', lineHeight: '30px' }} className='text-black'>{heading}</h6>
             </Link>
             {subHeading ? <p className='m-0'>{subHeading}</p> : null}
         </div>
