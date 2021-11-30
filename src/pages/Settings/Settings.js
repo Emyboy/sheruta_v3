@@ -7,6 +7,7 @@ import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
 import AccountSettings from './settings/AccountSettings'
 import PersonalInfoSettings from './settings/PersonalInfoSettings';
 import { Switch } from 'antd'
+import ConfigureViewSettings from './settings/ConfigureViewSettings'
 
 export default function Settings({ match }) {
 	const { user } = useSelector((state) => state.auth);
@@ -31,6 +32,8 @@ export default function Settings({ match }) {
 				return <PersonalInfoSettings />
 			case 'deactivate-account':
 				return <AccountDeactivationSetting />
+			case 'configure-view':
+				return <ConfigureViewSettings />
 			default:
 				return (
 					<Layout currentPage={'settings'}>
@@ -89,8 +92,8 @@ export default function Settings({ match }) {
 											</div>
 											<ul className="list-inline mb-4">
 												<li className="list-inline-item d-block border-bottom me-0">
-													<a
-														href="payment.html"
+													<Link
+														to={`/settings/configure-view`}
 														className="pt-2 pb-2 d-flex align-items-center"
 													>
 														<i className="btn-round-md bg-mini-gradiant text-white feather-file-text font-md me-3"></i>{' '}
@@ -98,7 +101,7 @@ export default function Settings({ match }) {
 															Configure View
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
-													</a>
+													</Link>
 												</li>
 												<li className="list-inline-item d-block  me-0 pl-0">
 													<a
