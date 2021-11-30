@@ -133,8 +133,8 @@ export const Profile2 = (props) => {
 				)}
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-xl-4 col-xxl-3 col-lg-4 pe-0 mt-4">
-							<ProfileAbout />
+						<div className="col-xl-4 col-xxl-3 col-lg-4 mt-4">
+							<ProfileAbout user={userData} />
 						</div>
 						<div className="col-xl-8 col-xxl-9 col-lg-8 mt-4">
 							{state.userRequests.map((val, i) => {

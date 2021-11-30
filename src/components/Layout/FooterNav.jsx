@@ -28,7 +28,7 @@ export default function FooterNav({ pageName }) {
 
 	return (
 		<div
-			className="_app-footer fixed-bottom p-2  border-0 shadow-lg card border border-gray rounded-0"
+			className="_app-footer fixed-bottom p-2  border-0 shadow-lg card border border-dark rounded-0"
 			style={{ zIndex: 80 }}
 		>
 			<div className="card-body pt-1 pb-1 d-flex justify-content-between">

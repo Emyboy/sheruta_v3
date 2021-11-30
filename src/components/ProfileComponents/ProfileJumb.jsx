@@ -43,7 +43,6 @@ export default function ProfileJumb({ user }) {
 							href={`tel:${user.phone_number}`}
 							className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
 						>
-							{/* Add Friend */}
 							<i className="feather-phone font-md"></i>
 						</a>
 						<Link to={`/messages/new/${user.id}`}>
@@ -105,7 +104,7 @@ export default function ProfileJumb({ user }) {
 					</div>
 				</div>
 
-				<div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
+				{/* <div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
 					<ul
 						className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
 						id="pills-tab"
@@ -138,44 +137,9 @@ export default function ProfileJumb({ user }) {
 								My Contacts
 							</a>
 						</li>
-						{/* <li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs4"
-								data-toggle="tab"
-							>
-								Video
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs3"
-								data-toggle="tab"
-							>
-								Group
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs1"
-								data-toggle="tab"
-							>
-								Events
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 me-sm-5 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs7"
-								data-toggle="tab"
-							>
-								Media
-							</a>
-						</li> */}
+						
 					</ul>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)
