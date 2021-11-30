@@ -7,8 +7,9 @@ export default function EachQuestionSelect({ selected, onSelect, answer }) {
 			onClick={() => onSelect(answer)}
 		>
 			<div className="card-body d-flex align-items-center">
-				<div className="col-2">
+				<div className="col-1 pr-0">
 					<div
+						style={{ width: '10px'}}
 						className={`${
 							selected ? 'bg-theme' : 'border-success'
 						} border p-2 rounded-circle`}

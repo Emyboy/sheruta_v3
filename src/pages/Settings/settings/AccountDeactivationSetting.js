@@ -36,9 +36,9 @@ export default function AccountDeactivationSetting() {
 									I understand the above warning and wish to continue
 								</span>
 							</div>
-							<a className="w-100 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">
+							<button className="w-50 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">
 								Continue
-							</a>
+							</button>
 						</div>
 					</div>
 
@@ -50,12 +50,20 @@ export default function AccountDeactivationSetting() {
 								</label>
 								<input type="password" className="form-control" />
 							</div>
-							<a className="w-100 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">
+							<button className="w-50 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">
 								Continue
-							</a>
+							</button>
 						</div>
 					</div>
 					<DeactivationQuestions />
+					<div className="container mb-5">
+						<div className="text-center">
+							<h2>So sad to see you go </h2>
+							<button className="btn w-50 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">
+								Deactivate Now
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</Layout>

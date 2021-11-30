@@ -81,13 +81,15 @@ export default function DeactivationQuestions() {
 					})}
 				</div>
 			)}
-			<button
-				disabled={firstAns === null || secondAns === null}
-				onClick={() => alert('yo')}
-				className="w-100 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
-			>
-				Continue
-			</button>
+			<div className="text-center">
+				<button
+					disabled={firstAns === null || secondAns === null}
+					onClick={() => alert('yo')}
+					className="btn w-50 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
+				>
+					Continue
+				</button>
+			</div>
 		</div>
 	)
 }
