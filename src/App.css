@@ -4,8 +4,10 @@
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
+body {
+    height: 100vh auto;
+}
 #root {
-    background-color: pink;
     height: 100vh auto;
 }
 html,
