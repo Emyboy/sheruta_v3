@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 export default function ProfileAbout({ user }) {
 	const auth = useSelector((state) => state.auth)
@@ -30,32 +31,39 @@ export default function ProfileAbout({ user }) {
 						<h4 className="fw-700 text-grey-900 font-xssss mt-0">
 							Private{' '}
 							<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-								What's up, how are you?
+								All accounts are set to private
 							</span>
 						</h4>
 					</div>
 
-					<div className="card-body d-flex pt-0">
-						<i className="feather-eye text-grey-500 me-3 font-lg"></i>
+					<Link className="card-body d-flex pt-0" to={`/settings/account-settings`}>
+						<i className="feather-edit text-grey-500 me-3 font-lg"></i>
 						<h4 className="fw-700 text-grey-900 font-xssss mt-0">
-							Visble{' '}
+							Edit Profile{' '}
 							<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-								Anyone can find you
+								Change first name, last name & phone
 							</span>
 						</h4>
-					</div>
-					<div className="card-body d-flex pt-0">
-						<i className="feather-map-pin text-grey-500 me-3 font-lg"></i>
-						<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-							Flodia, Austia{' '}
+					</Link>
+					<Link className="card-body d-flex pt-0" to={`/settings/configure-view`}>
+						<i className="feather-layout text-grey-500 me-3 font-lg"></i>
+						<h4 className="fw-700 text-grey-900 font-xssss mt-0">
+							Configure View
+							<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+								Those that have or those who are looking.
+							</span>
 						</h4>
-					</div>
-					<div className="card-body d-flex pt-0">
-						<i className="feather-users text-grey-500 me-3 font-lg"></i>
+					</Link>
+
+					<Link className="card-body d-flex pt-0" to={`/settings/deactivate-account`}>
+						<i className="feather-alert-triangle text-grey-500 me-3 font-lg"></i>
 						<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-							Genarel Group
+							Deactivate Account
+							<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+								Found a flat mate?
+							</span>
 						</h4>
-					</div>
+					</Link>
 				</>
 			)}
 		</div>
