@@ -126,12 +126,12 @@ export default function RequestDetails(props) {
 						closeOnClickOutside={true}
 					/>
 				) : null}
-				<section>
-					<div className="container">
+				<section className='pt-0'>
+					<div className={`container ${Global.isMobile && `p-0`}`}>
 						<div className="row">
 							<div className="col-lg-12">
 								<div className="row merged20 justify-content-center">
-									<div className="col-lg-9">
+									<div className={`col-lg-9 ${Global.isMobile && 'p-0'}`}>
 										<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 											<div className="d-flex">
 												<div className="card-body p-0 d-flex">
@@ -215,6 +215,13 @@ export default function RequestDetails(props) {
 												</div>
 											</div>
 											<div className="post-meta">
+												<h1
+													style={{
+														fontSize: Global.isMobile ? '18px' : '24px',
+													}}
+												>
+													{request.heading}
+												</h1>
 												{request.image_url && request.image_url.length > 0 ? (
 													<ImgContainer
 														style={{
@@ -229,7 +236,6 @@ export default function RequestDetails(props) {
 														</button>
 													</ImgContainer>
 												) : null}
-												<h1 style={{ fontSize: '24px' }}>{request.heading}</h1>
 												<div className="container-fluid">
 													<div className="row justify-content-between">
 														<div
@@ -247,7 +253,7 @@ export default function RequestDetails(props) {
 															</span>{' '}
 															{request.location}
 														</div>
-														<div className='col-md-5'>
+														<div className="col-md-5">
 															{user ? (
 																// <a
 																//     onClick={
@@ -279,21 +285,6 @@ export default function RequestDetails(props) {
 														</div>
 													</div>
 												</div>
-												<div
-													className="d-flex"
-													style={{
-														alignItems: 'center',
-													}}
-												>
-													<div className="ml-2">
-														{request.category && (
-															<Tag color="volcano">{request.category.name}</Tag>
-														)}
-														{request.service && (
-															<Tag color="cyan">{request.service.name}</Tag>
-														)}
-													</div>
-												</div>
 												<div className="description mt-3">
 													<p
 														style={{
@@ -303,12 +294,33 @@ export default function RequestDetails(props) {
 														{request.body}
 													</p>
 												</div>
-												<h1 className="mt-3">
-													₦ {window.formatedPrice.format(request.budget)}{' '}
-													<small className="text-muted">
-														/{request.payment_type && request.payment_type.name}
-													</small>
-												</h1>
+												<div className="d-flex justify-content-between">
+													<h1 className="mt-3">
+														₦ {window.formatedPrice.format(request.budget)}{' '}
+														<small className="text-muted">
+															/
+															{request.payment_type &&
+																request.payment_type.name}
+														</small>
+													</h1>
+													<div
+														className="d-flex"
+														style={{
+															alignItems: 'center',
+														}}
+													>
+														<div className="ml-2">
+															{request.category && (
+																<Tag color="volcano">
+																	{request.category.name}
+																</Tag>
+															)}
+															{request.service && (
+																<Tag color="cyan">{request.service.name}</Tag>
+															)}
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 										{request.bedrooms && request.bathrooms ? (
@@ -322,43 +334,47 @@ export default function RequestDetails(props) {
 												<div className="block-body ml-3">
 													<ul className="dw-proprty-info row justify-content-between">
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Bedrooms:</strong>
+															<strong className="text-dark">Bedrooms:</strong>
 															<br />
 															{request.bedrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Bathrooms:</strong>
+															<strong className="text-dark">Bathrooms:</strong>
 															<br />
 															{request.bathrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Toilets:</strong>
+															<strong className="text-dark">Toilets:</strong>
 															<br />
 															{request.toilets}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Is Premium?</strong>
+															<strong className="text-dark">Is Premium?</strong>
 															<br />
 															{request.is_premium ? 'Yes' : 'No'}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Service Type:</strong>
+															<strong className="text-dark">
+																Service Type:
+															</strong>
 															<br />
 															{request.service && request.service.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Type:</strong>
+															<strong className="text-dark">Type:</strong>
 															<br />
 															{request.category && request.category.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>Price / Budget</strong>
+															<strong className="text-dark">
+																Price / Budget
+															</strong>
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}
 														</li>
 
 														<li className="col-4 mb-3">
-															<strong className='text-dark'>State</strong>
+															<strong className="text-dark">State</strong>
 															<br />
 															{request.state && request.state.name}
 														</li>

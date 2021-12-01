@@ -25,6 +25,7 @@ export default function Header({
 	showChat,
 	pageName,
 }) {
+	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
 	const { notifications, messages } = useSelector((state) => state.view)
 	const [showNotification, setNotification] = useState(false)
@@ -215,6 +216,11 @@ export default function Header({
 				<Link to="/match">
 					<Tooltip placement="bottom" title={'Your Match'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
+							{user_suggestions && user_suggestions.length > 0 && (
+								<span className="badge badge-danger position-fixed">
+									{user_suggestions.length}
+								</span>
+							)}
 							<i
 								className={`font-lg alert-primary btn-round-lg theme-dark-bg  ${
 									pageName === 'match'
@@ -295,6 +301,7 @@ export default function Header({
 					className="p-2 text-center ms-3 menu-icon chat-active-btn link"
 					onClick={onChatToggle}
 				>
+					{messages.length > 0 && <span className="dot-count bg-danger"></span>}
 					<i className="feather-message-square font-xl text-current"></i>
 				</a>
 
