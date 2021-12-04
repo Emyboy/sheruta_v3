@@ -95,12 +95,13 @@ export default (props) => {
 				<div className="container-fluid">
 					<div className="row _feed-body">
 						{!Global.isMobile && (
-							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+              <div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
 								{/* <RecentUsers data={newUsers} /> */}
 								<UserFeedCard />
 							</div>
 						)}
 						<div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
+            {window.navigator.platform}
 							{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 								if (i == 5) {
 									return <img src={match} className="rounded-3 mb-3" />

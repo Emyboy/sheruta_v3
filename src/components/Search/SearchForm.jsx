@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 export default function SearchForm() {
-	const { services, categories } = useSelector(state => state.view);
+	const { services, categories } = useSelector((state) => state.view)
 	return (
 		<div className="col-lg-12 mt-4">
 			<div className="card w-100 p-4 border-0 bg-lightblue">
@@ -84,9 +84,7 @@ export default function SearchForm() {
 								)
 							})}
 						</ul>
-						<button
-							class="mt-4 p-0 btn p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current  fw-700 ls-lg text-white w-50"
-						>
+						<button className="mt-4 p-0 btn p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current  fw-700 ls-lg text-white w-50">
 							Search
 						</button>
 					</div>
