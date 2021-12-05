@@ -68,37 +68,42 @@ const ConfigViewPopup = (props) => {
   };
 
   return (
-    <Modal show={view.configureView} size="lg">
-      <Modal.Body>
-        <h3>Configure what you see</h3>
-        <h4 className="text-muted">How can we help?</h4>
-        <div className="row justify-content-center mt-5">
-          <SelectionCard
-            heading="I am looking for"
-            test_id="looking_for"
-            subHeading="Show me people who have"
-            onSelect={() => setIsLookingFor(true)}
-            isSelected={isLookingFor === true}
-          />
-          <SelectionCard
-            heading="I have for share"
-            subHeading="Show me people who are looking"
-            test_id="not_looking_for"
-            onSelect={() => setIsLookingFor(false)}
-            isSelected={isLookingFor === false}
-          />
-        </div>
-        <div className="text-center">
-          <Btn
-            text="Configure"
-            onClick={updatePersonalInfo}
-            className="mt-5"
-            disabled={isLookingFor === undefined || loading}
-          />
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
+		<Modal show={view.configureView} size="lg">
+			<Modal.Body>
+				<h3>Configure what you see</h3>
+				<h4 className="text-muted">How can we help?</h4>
+				<div className="row justify-content-center mt-5">
+					<SelectionCard
+						heading="I am looking for"
+						test_id="looking_for"
+						subHeading="Show me people who have"
+						onSelect={() => setIsLookingFor(true)}
+						isSelected={isLookingFor === true}
+					/>
+					<SelectionCard
+						heading="I have for share"
+						subHeading="Show me people who are looking"
+						test_id="not_looking_for"
+						onSelect={() => setIsLookingFor(false)}
+						isSelected={isLookingFor === false}
+					/>
+				</div>
+				<div className="alert alert-info mb-0">
+					<h5 className="mb-0 text-center">
+						<strong>You can also change this in settings</strong>
+					</h5>
+				</div>
+				<div className="text-center">
+					<Btn
+						text="Configure"
+						onClick={updatePersonalInfo}
+						className="mt-5"
+						disabled={isLookingFor === undefined || loading}
+					/>
+				</div>
+			</Modal.Body>
+		</Modal>
+	)
 };
 
 const mapStateToProps = (state) => ({
