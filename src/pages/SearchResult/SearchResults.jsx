@@ -1,12 +1,11 @@
 import React from 'react'
-import Search from '../../components/Search/Search';
 import Layout from '../../components/Layout/Layout';
 
 export default function SearchResults() {
     return (
 			<Layout>
 				<div>
-					<Search />
+					<h1>Search results</h1>
 				</div>
 			</Layout>
 		)

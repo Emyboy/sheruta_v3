@@ -1,10 +1,13 @@
 import React from 'react';
+import Layout from '../Layout/Layout';
 import SearchForm from './SearchForm';
 
 export default function Search() {
     return (
-        <div>
-            <SearchForm />
-        </div>
-    )
+			<Layout currentPage={'search'}>
+				<div>
+					<SearchForm />
+				</div>
+			</Layout>
+		)
 }
