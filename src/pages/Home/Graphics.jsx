@@ -7,7 +7,7 @@ export default function ExploreByPopularCity() {
     return (
         <div>
             <section
-                className="mb-4"
+                className="mb-5"
                 style={{ backgroundImage: `url(${whatwedo})` }}
             >
                 <div className="container rounded">
