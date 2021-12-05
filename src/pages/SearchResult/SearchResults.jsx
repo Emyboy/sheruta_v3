@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Layout/Layout';
+import Layout from '../../components/Layout/Layout'
 import EachSocialRequest from '../../components/Social/EachSocialRequest'
 
 export default function SearchResults({ match }) {
 	const { bedrooms, category, service } = match.params
-	console.log({ bedrooms, category, service });
+	console.log({ bedrooms, category, service })
 	const [list, setList] = useState([])
 
 	useEffect(() => {
@@ -14,11 +14,11 @@ export default function SearchResults({ match }) {
 				`/property-requests/search/${service}/${category}/${bedrooms || 0}`,
 			{ method: 'POST' }
 		)
-			.then(res => {
-				console.log(res.data);
+			.then((res) => {
+				console.log(res.data)
 				setList(res.data)
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.log(err)
 			})
 	}, [])
@@ -26,14 +26,18 @@ export default function SearchResults({ match }) {
 	return (
 		<Layout>
 			<div>
-				<h1>Search results</h1>
-				<div className='container'>
-					<div className='row justify-content-center'>
-						{
-							list.map((val,i) => {
+				<div className="container">
+					<div className="row justify-content-center">
+						<div className="col-md-8 col-sm-12">
+							<div className="card rounded mb-4 border-0">
+								<div className="card-body">
+									<h1>Search results</h1>
+								</div>
+							</div>
+							{list.map((val, i) => {
 								return <EachSocialRequest key={`req-${i}`} data={val} />
-							})
-						}
+							})}
+						</div>
 					</div>
 				</div>
 			</div>
