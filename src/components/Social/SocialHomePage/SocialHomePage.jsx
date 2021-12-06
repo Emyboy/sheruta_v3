@@ -61,8 +61,9 @@ export default (props) => {
         if (state.list.length === 0) {
             axios(
                 process.env.REACT_APP_API_URL +
-                    `/property-requests/?is_searching=${!view.personal_info
-                        .looking_for}&_limit=25&_start=0&_sort=created_at:DESC`,
+                    `/property-requests/?_limit=${
+                        "50"
+                    }&_start=0&_sort=created_at:DESC`,
             )
                 .then((res) => {
                     setState({ ...state, list: res.data });
