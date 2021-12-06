@@ -16,6 +16,7 @@ import moment from 'moment'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import Notifications from '../../services/Notifications'
 import UserAction from '../../components/UserAction/UserAction'
+import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
 const ImgContainer = styled.section`
 	padding: 5em;
 	margin-bottom: 1em;
@@ -34,6 +35,8 @@ export default function RequestDetails(props) {
 		notFound: false,
 	})
 	const auth = useSelector((state) => state.auth)
+	const deactivated = user?.user.deactivated;
+
 	useEffect(() => {
 		setState({ ...state, loading: true })
 
@@ -126,7 +129,7 @@ export default function RequestDetails(props) {
 						closeOnClickOutside={true}
 					/>
 				) : null}
-				<section className='pt-0'>
+				<section className="pt-0">
 					<div className={`container ${Global.isMobile && `p-0`}`}>
 						<div className="row">
 							<div className="col-lg-12">
@@ -138,7 +141,11 @@ export default function RequestDetails(props) {
 													{request.users_permissions_user && (
 														<figure className="avatar me-3">
 															<img
-																src={request.users_permissions_user.avatar_url}
+																src={
+																	deactivated
+																		? Global.USER_PLACEHOLDER_AVATAR
+																		: request.users_permissions_user.avatar_url
+																}
 																alt="image"
 																className="shadow-sm rounded-circle w45"
 															/>
@@ -149,7 +156,10 @@ export default function RequestDetails(props) {
 															to={`/user/${request.users_permissions_user.username}`}
 														>
 															<a className="text-dark">
-																{request.users_permissions_user.first_name}{' '}
+																{deactivated
+																	? '..... .....'
+																	: request.users_permissions_user
+																			.first_name}{' '}
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
@@ -217,7 +227,8 @@ export default function RequestDetails(props) {
 											<div className="post-meta">
 												<h1
 													style={{
-														fontSize: Global.isMobile ? '18px' : '24px',
+														fontSize: Global.isMobile ? '18px' : '22px',
+														fontWeight: 'bold',
 													}}
 												>
 													{request.heading}
@@ -238,21 +249,25 @@ export default function RequestDetails(props) {
 												) : null}
 												<div className="container-fluid">
 													<div className="row justify-content-between">
-														<div
-															className="d-flex col-md-6 pl-0 text-dark"
-															style={{
-																alignItems: 'center',
-															}}
-														>
-															<span
+														{deactivated ? (
+															<DeactivatedBanner />
+														) : (
+															<div
+																className="d-flex col-md-6 pl-0 text-dark"
 																style={{
-																	alignSelf: 'center',
+																	alignItems: 'center',
 																}}
 															>
-																<ImLocation />
-															</span>{' '}
-															{request.location}
-														</div>
+																<span
+																	style={{
+																		alignSelf: 'center',
+																	}}
+																>
+																	<ImLocation />
+																</span>{' '}
+																{request.location}
+															</div>
+														)}
 														<div className="col-md-5">
 															{user ? (
 																// <a

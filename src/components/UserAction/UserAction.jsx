@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 export default function UserAction({ user, disable, alignment }) {
     const auth = useSelector((state) => state.auth);
+    const deactivated = user.deactivated;
+
+    if(deactivated){
+        return null;
+    }
+
     return (
         <>
             {auth.user && auth.user.user.id === user.id ? null : (

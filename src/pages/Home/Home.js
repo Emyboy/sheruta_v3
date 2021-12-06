@@ -8,21 +8,44 @@ import community from '../../assets/img/community.svg'
 import Layout from '../../components/Layout/Layout'
 import Footer from '../../components/Footer'
 import ExploreByPopularCity from './Graphics'
+import Partners from '../../assets/img/partners.png'
+import { Redirect } from 'react-router'
+import { useSelector } from 'react-redux'
 
+const Wrapper = styled.div`
+	.jumbotron {
+		margin-top: 10vh;
+		padding-top: 30vh;
+	}
 
-const Wrapper = styled.div``
+	@media (max-width: 576px) {
+		.jumbotron {
+			margin-top: 5vh;
+			padding-top: 30vh;
+			height: 100vh;
+		}
+		.man {
+			top: 3vh;
+			left: 51vw;
+			width: 80vw;
+		}
+		.floating-balls {
+			width: 400px;
+			top: 70vh !important;
+			left: 60vw !important;
+		}
+	}
+`
 
 export default function Home() {
+	const { user } = useSelector(state => state.auth);
+	if(user){
+		return <Redirect to={'/feeds'} />
+	}
 	return (
 		<Layout>
 			<Wrapper className="mb-5">
-				<div
-					className="jumbotron bg-white home-one home1_bgi1"
-					style={{
-						marginTop: '10vh',
-						paddingTop: '30vh',
-					}}
-				>
+				<div className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
 						<div className="z-index-1">
 							<h1 style={{ fontSize: '4rem', zIndex: 5 }} className="text-dark">
@@ -33,11 +56,20 @@ export default function Home() {
 								Get Started
 							</button>
 						</div>
-						<img src={man} style={{ position: 'absolute', right: '2vw' }} />
+						<img
+							src={man}
+							style={{ position: 'absolute', right: '2vw' }}
+							className="man"
+						/>
 						<img
 							src={balls}
-							className="z-index-0"
-							style={{ position: 'absolute', left: '20vw', top: '20vh' }}
+							className="z-index-0 floating-balls"
+							style={{
+								position: 'absolute',
+								left: '10vw',
+								top: '30vh',
+								width: '70vw',
+							}}
 						/>
 					</div>
 				</div>
@@ -69,6 +101,12 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
+				<div className="text-center mb-5" style={{ marginTop: '10vh' }}>
+					<strong>
+						<h2 style={{ fontSize: '50px' }}>Our Partners</h2>
+					</strong>
+					<img src={Partners} width="800px" />{' '}
+				</div>
 			</Wrapper>
 			<Footer />
 		</Layout>
@@ -90,7 +128,7 @@ export default function Home() {
 // import SocailHomePage from '../../components/Social/SocialHomePage/SocialHomePage'
 // import match from '../../assets/img/match.jpeg'
 // // import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
-// import Partners from '../../assets/img/partners.png'
+
 // import OurServices from '../../components/OurServices/OurServices'
 // import { Redirect } from 'react-router'
 

@@ -1,10 +1,11 @@
 import { Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Global from '../../Global';
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 
 export default function ProfileJumb({ user }) {
-	console.log('USER --', user)
+	const deactivated = user.deactivated;
 	return (
 		<div className="col-lg-12 p-0">
 			<div className="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
@@ -13,7 +14,7 @@ export default function ProfileJumb({ user }) {
 					style={{ height: '10rem' }}
 				>
 					<img
-						src="https://picsum.photos/1000/400"
+						src="https://picsum.photos/300/300"
 						alt="image"
 						height="500"
 						width="1000"
@@ -25,37 +26,40 @@ export default function ProfileJumb({ user }) {
 						style={{ top: '-40px', left: '30px' }}
 					>
 						<img
-							src={user.avatar_url}
+							src={
+								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user.avatar_url
+							}
 							alt="image"
 							className="float-right p-1 bg-white rounded-circle w-100"
 						/>
 					</figure>
 					<h4 className="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">
 						<div className="d-flex">
-							{user.first_name}
+							{deactivated ? '.... ....' : user.first_name}
 							<VerifiedBadge user={user} className={'ml-2'} />{' '}
 						</div>
 						<span className="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">
-							@{user.username}
+							@{deactivated ? '......' : user.username}
 						</span>
 					</h4>
-					<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
-						<Tooltip placement="top" title={`Call ${user.first_name}`}>
-							<a
-								href={`tel:${user.phone_number}`}
-								className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
-							>
-								<i className="feather-phone font-md"></i>
-							</a>
-						</Tooltip>
-						<Tooltip placement="top" title={`Chat with ${user.first_name}`}>
-							<Link to={`/messages/new/${user.id}`}>
-								<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
-									<i className="feather-mail font-md"></i>
+					{!deactivated && (
+						<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
+							<Tooltip placement="top" title={`Call ${user.first_name}`}>
+								<a
+									href={`tel:${user.phone_number}`}
+									className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
+								>
+									<i className="feather-phone font-md"></i>
 								</a>
-							</Link>
-						</Tooltip>
-						{/* <a
+							</Tooltip>
+							<Tooltip placement="top" title={`Chat with ${user.first_name}`}>
+								<Link to={`/messages/new/${user.id}`}>
+									<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
+										<i className="feather-mail font-md"></i>
+									</a>
+								</Link>
+							</Tooltip>
+							{/* <a
 							href="#"
 							id="dropdownMenu4"
 							className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"
@@ -65,48 +69,8 @@ export default function ProfileJumb({ user }) {
 						>
 							<i className="ti-book font-md tetx-dark"></i>
 						</a> */}
-						<div
-							className="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg"
-							aria-labelledby="dropdownMenu4"
-						>
-							<div className="card-body p-0 d-flex">
-								<i className="feather-bookmark text-grey-500 me-3 font-lg"></i>
-								<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-0">
-									Save Link{' '}
-									<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-										Add this to your saved items
-									</span>
-								</h4>
-							</div>
-							<div className="card-body p-0 d-flex mt-2">
-								<i className="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-								<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-0">
-									Hide Post{' '}
-									<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-										Save to your saved items
-									</span>
-								</h4>
-							</div>
-							<div className="card-body p-0 d-flex mt-2">
-								<i className="feather-alert-octagon text-grey-500 me-3 font-lg"></i>
-								<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-0">
-									Hide all from Group{' '}
-									<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-										Save to your saved items
-									</span>
-								</h4>
-							</div>
-							<div className="card-body p-0 d-flex mt-2">
-								<i className="feather-lock text-grey-500 me-3 font-lg"></i>
-								<h4 className="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-0">
-									Unfollow Group{' '}
-									<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-										Save to your saved items
-									</span>
-								</h4>
-							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
 				{/* <div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
