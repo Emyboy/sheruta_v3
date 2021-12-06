@@ -126,6 +126,7 @@ export const Profile2 = (props) => {
 						className="fixed-bottom text-center"
 						style={{
 							marginBottom: Global.isMobile ? '15vh' : '10vh',
+							zIndex: 1
 						}}
 					>
 						<UserAction user={userData} />

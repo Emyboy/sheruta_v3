@@ -38,14 +38,14 @@ const GetStartedPopup = (props) => {
 					className="pt-5"
 				>
 					<Modal.Body className="card">
-						<h1 className="text-black">Join the community today.</h1>
-						<small className="text-muted">
+						<h1 className="text-black mb-4">
+							<strong>Join the community today.</strong>
+						</h1>
+						<small className="text-muted mb-2">
 							Get access to verified flat mates.
 						</small>
-						<br />
-						<small className="text-muted">Find people closest to you.</small>
-						<br />
-						<small className="text-muted">Be the first to get updates.</small>
+						<small className="text-muted mb-2">Find people closest to you.</small>
+						<small className="text-muted mb-2">Be the first to get updates.</small>
 						<div className="container">
 							<div className="row">
 								<Link to="/start">
@@ -58,7 +58,7 @@ const GetStartedPopup = (props) => {
 								</Link>
 								<span
 									style={{ alignSelf: 'center' }}
-									className="mt-4 link ml-5 text-theme"
+									className="mt-4 link mt-3 text-theme"
 									onClick={handleRemind}
 								>
 									<h3 className="text-current">Remind me later</h3>
