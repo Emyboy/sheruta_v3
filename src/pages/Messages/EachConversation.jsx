@@ -59,11 +59,11 @@ export default function EachConversation({ conv }) {
 							<a className="font-xssss text-grey-600 d-block text-dark model-popup-chat">
 								{otherUser?.first_name}
 							</a>
-							<small className="m-0">
+							<small className="m-0 text-muted" style={{ fontSize: '10px'}}>
 								{latestMsg.length > 27
 									? Global.isMobile
 										? latestMsg.slice(0, 27) + '....'
-										: latestMsg.slice(0, 60) + '....'
+										: latestMsg.slice(0, 27) + '....'
 									: latestMsg || '....'}
 							</small>
 						</h3>

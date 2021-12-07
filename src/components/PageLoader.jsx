@@ -4,7 +4,7 @@ import { Spinner } from 'react-activity';
 
 const PageLoader = () => {
     return (
-      <div id="preloader">
+      <div id="preloader" className='card'>
         <div
           style={{
             // position: 'absolute',

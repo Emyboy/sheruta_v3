@@ -133,10 +133,14 @@ export const Profile2 = (props) => {
 				)}
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-xl-4 col-xxl-3 col-lg-4 pe-0 mt-4">
-							<ProfileAbout />
+						<div
+							className={`col-xl-4 col-xxl-3 col-lg-4 mt-4 ${
+								Global.isMobile && 'p-0'
+							}`}
+						>
+							<ProfileAbout user={userData} />
 						</div>
-						<div className="col-xl-8 col-xxl-9 col-lg-8 mt-4">
+						<div className={`col-xl-8 col-xxl-9 col-lg-8 mt-4 ${Global.isMobile && 'p-0'}`}>
 							{state.userRequests.map((val, i) => {
 								return <EachSocialRequest key={i} data={val} />
 							})}

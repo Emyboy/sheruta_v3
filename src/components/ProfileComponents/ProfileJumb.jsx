@@ -1,9 +1,10 @@
+import { Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import VerifiedBadge from '../VerifiedBadge/VerifiedBadge';
+import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 
 export default function ProfileJumb({ user }) {
-	console.log('USER --', user);
+	console.log('USER --', user)
 	return (
 		<div className="col-lg-12 p-0">
 			<div className="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
@@ -39,19 +40,22 @@ export default function ProfileJumb({ user }) {
 						</span>
 					</h4>
 					<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
-						<a
-							href={`tel:${user.phone_number}`}
-							className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
-						>
-							{/* Add Friend */}
-							<i className="feather-phone font-md"></i>
-						</a>
-						<Link to={`/messages/new/${user.id}`}>
-							<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
-								<i className="feather-mail font-md"></i>
+						<Tooltip placement="top" title={`Call ${user.first_name}`}>
+							<a
+								href={`tel:${user.phone_number}`}
+								className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
+							>
+								<i className="feather-phone font-md"></i>
 							</a>
-						</Link>
-						<a
+						</Tooltip>
+						<Tooltip placement="top" title={`Chat with ${user.first_name}`}>
+							<Link to={`/messages/new/${user.id}`}>
+								<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
+									<i className="feather-mail font-md"></i>
+								</a>
+							</Link>
+						</Tooltip>
+						{/* <a
 							href="#"
 							id="dropdownMenu4"
 							className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"
@@ -60,7 +64,7 @@ export default function ProfileJumb({ user }) {
 							aria-expanded="false"
 						>
 							<i className="ti-book font-md tetx-dark"></i>
-						</a>
+						</a> */}
 						<div
 							className="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg"
 							aria-labelledby="dropdownMenu4"
@@ -105,7 +109,7 @@ export default function ProfileJumb({ user }) {
 					</div>
 				</div>
 
-				<div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
+				{/* <div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
 					<ul
 						className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
 						id="pills-tab"
@@ -138,44 +142,9 @@ export default function ProfileJumb({ user }) {
 								My Contacts
 							</a>
 						</li>
-						{/* <li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs4"
-								data-toggle="tab"
-							>
-								Video
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs3"
-								data-toggle="tab"
-							>
-								Group
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs1"
-								data-toggle="tab"
-							>
-								Events
-							</a>
-						</li>
-						<li className="list-inline-item me-5">
-							<a
-								className="fw-700 me-sm-5 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block"
-								href="#navtabs7"
-								data-toggle="tab"
-							>
-								Media
-							</a>
-						</li> */}
+						
 					</ul>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

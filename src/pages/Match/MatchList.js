@@ -48,7 +48,7 @@ export default function MatchList() {
         return <Redirect to="/login" />
     }
     return (
-        <div className="pb-5">
+        <div className="pb-0">
             {personal_info && !personal_info.nin ? (
                 <div className="text-center" style={{ marginTop: "20vh", marginBottom: '20vh' }}>
                     <h3>🙆🏽‍♂️</h3>
@@ -83,7 +83,7 @@ export default function MatchList() {
                         <Carousel
                             // indicators={false}
                             interval={140000}
-                            className="pb-3 p-3"
+                            className="pb-3 pt-0 p-3"
                             nextIcon={
                                 <NavBtn className="shadow border-gray">
                                     Next

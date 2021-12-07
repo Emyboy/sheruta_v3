@@ -48,23 +48,24 @@ export default (props) => {
   //     }
   // }, [state]);
 
-  useEffect(() => {
-    if (!Global.isMobile) {
-      axios(
-        process.env.REACT_APP_API_URL +
-          `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`
-      )
-        .then((res) => {
-          setNewUsers(res.data);
-        })
-        .catch((err) => {});
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!Global.isMobile) {
+  //     axios(
+  //       process.env.REACT_APP_API_URL +
+  //         `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`
+  //     )
+  //       .then((res) => {
+  //         setNewUsers(res.data);
+  //       })
+  //       .catch((err) => {});
+  //   }
+  // }, []);
   useEffect(() => {
     if (state.list.length === 0) {
+      const dev = process.env.NODE_ENV === 'development';
       axios(
         process.env.REACT_APP_API_URL +
-          `/property-requests/?_limit=50&_start=0&_sort=created_at:DESC`
+          `/property-requests/?_limit=${dev ? '10':'50'}&_start=0&_sort=created_at:DESC`
       )
         .then((res) => {
           setState({ ...state, list: res.data });
@@ -90,17 +91,18 @@ export default (props) => {
 
   return (
 		<div className="main-wrapper">
-			<Layout currentPage="feed">
+			<Layout currentPage="feeds">
 				<div className="container-fluid">
 					<div className="row _feed-body">
 						{!Global.isMobile && (
-							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+              <div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
 								{/* <RecentUsers data={newUsers} /> */}
 								<UserFeedCard />
 							</div>
 						)}
 						<div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
-							{state.list.map((val, i) => {
+            {window.navigator.platform}
+							{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 								if (i == 5) {
 									return <img src={match} className="rounded-3 mb-3" />
 								} else if (i === 2) {

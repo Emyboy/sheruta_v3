@@ -62,7 +62,6 @@ export const getAuthPersonalInfo = () => async (dispatch) => {
         },
     })
         .then((res) => {
-            console.log("PERSONAL INFO");
             store.dispatch({
                 type: "SET_VIEW_STATE",
                 payload: {

@@ -32,10 +32,10 @@ export default function Match() {
     }
 
     return (
-        <Layout page={"match"}>
+        <Layout currentPage={"match"}>
             <div className="container mt-3">
                 <div className="row justify-content-center">
-                    <div className="col-sm-12 col-lg-6 ">
+                    <div className="col-sm-12 col-lg-7 ">
                         <Tabs defaultActiveKey="1" onChange={callback}>
                             <TabPane
                                 tab={`Suggested (${user_suggestions.length})`}

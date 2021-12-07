@@ -23,9 +23,11 @@ export default function Header({
 	showNav,
 	onChatToggle,
 	showChat,
+	pageName,
 }) {
+	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
-	const { notifications } = useSelector((state) => state.view)
+	const { notifications, messages } = useSelector((state) => state.view)
 	const [showNotification, setNotification] = useState(false)
 
 	if (!user) {
@@ -150,6 +152,11 @@ export default function Header({
 						className="mob-menu ms-auto me-2 chat-active-btn"
 						onClick={onChatToggle}
 					>
+						{messages.length > 0 && (
+							<small className="badge badge-danger position-fixed">
+								{messages.length}
+							</small>
+						)}
 						<i
 							className={`${
 								showChat ? 'feather-x' : 'feather-mail'
@@ -159,9 +166,9 @@ export default function Header({
 					{/* <a className="mob-menu me-2">
 						<i className="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i>
 					</a> */}
-					<a className="me-2 menu-search-icon mob-menu">
+					<Link to={'/search'} className="me-2 menu-search-icon mob-menu">
 						<i className="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i>
-					</a>
+					</Link>
 
 					<button
 						className={`nav-menu me-0 ms-2 ${showNav && 'active'}`}
@@ -182,21 +189,45 @@ export default function Header({
 				<Link to={`/feeds`}>
 					<Tooltip placement="bottom" title={'Home'}>
 						<a className="p-2 text-center ms-3 menu-icon center-menu-icon">
-							<i className="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current "></i>
+							<i
+								className={`feather-home font-lg alert-primary btn-round-lg theme-dark-bg ${
+									pageName === 'feeds'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								}`}
+							></i>
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to="/request/create">
+				<Link to="/requests/create">
 					<Tooltip placement="bottom" title={'Add A Request'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							<i className="feather-plus font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i>
+							<i
+								className={`feather-plus font-lg alert-primary btn-round-lg theme-dark-bg ${
+									pageName === 'requests'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								}`}
+							></i>
 						</a>
 					</Tooltip>
 				</Link>
+
 				<Link to="/match">
 					<Tooltip placement="bottom" title={'Your Match'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							<i className="font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 ">
+							{user_suggestions && user_suggestions.length > 0 && (
+								<span className="badge badge-danger position-fixed">
+									{user_suggestions.length}
+								</span>
+							)}
+							<i
+								className={`font-lg alert-primary btn-round-lg theme-dark-bg  ${
+									pageName === 'match'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								} `}
+							>
 								<BsPeople size={iconSize} />
 							</i>
 						</a>
@@ -270,6 +301,7 @@ export default function Header({
 					className="p-2 text-center ms-3 menu-icon chat-active-btn link"
 					onClick={onChatToggle}
 				>
+					{messages.length > 0 && <span className="dot-count bg-danger"></span>}
 					<i className="feather-message-square font-xl text-current"></i>
 				</a>
 

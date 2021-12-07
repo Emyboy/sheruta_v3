@@ -19,6 +19,7 @@ import { storage } from "../../Firebase";
 import firebase from "firebase";
 import Compressor from "compressorjs";
 import { Modal } from 'react-bootstrap';
+import TextArea from "antd/lib/input/TextArea";
 
 const uid = Uid();
 
@@ -50,7 +51,7 @@ const CraeteRequest = (props) => {
         img4: null,
         img5: null,
     });
-    const image_count = 6;
+    const image_count = 5;
 
     const [data, setData] = React.useState({
         heading: null,
@@ -274,455 +275,430 @@ const CraeteRequest = (props) => {
 
     if (state.done) {
         return (
-            <Layout back>
-                {window.scrollTo({ top: 0, behavior: "smooth" })}
-                
-                <div className="mt-5 mb-5">
-                    <div className="container bg-white text-center">
-                        <div className="pt-5 pb-5">
-                            <div className="text-center">
-                                <h1>
-                                    <b>Request Created</b>
-                                </h1>
-                            </div>
-                            <div className="comment-box submit-form">
-                                {/* <h3 className="reply-title">Post Request</h3> */}
-                                <div className="comment-form">
-                                    <Link
-                                        to={`/request/${data.uuid}/${props.auth.user.user.id}`}
-                                    >
-                                        <Btn text="View Request" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Layout>
-        );
+					<Layout currentPage={'requests'}>
+						{window.scrollTo({ top: 0, behavior: 'smooth' })}
+
+						<div className="mt-5 mb-5">
+							<div className="container bg-white text-center">
+								<div className="pt-5 pb-5">
+									<div className="text-center">
+										<h1>
+											<b>
+												{props.view.personal_info &&
+												props.view.personal_info.looking_for
+													? 'Request Created'
+													: 'Post was created'}
+											</b>
+										</h1>
+									</div>
+									<div className="comment-box submit-form">
+										{/* <h3 className="reply-title">Post Request</h3> */}
+										<div className="comment-form">
+											<Link
+												to={`/request/${data.uuid}/${props.auth.user.user.id}`}
+											>
+												<Btn text="View Now" />
+											</Link>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Layout>
+				)
     } else if (!props.auth.user) {
         return <Redirect to="/login" />;
     } else
     return (
-        <Layout back>
-            <Modal
-                show={view.personal_info && !view.personal_info.nin}
-                style={{ marginTop: "20vh" }}
-                size="md"
-            >
-                <Modal.Body className="text-center">
-                    <h3 className="text-center">
-                        Join the community to post a request.
-                    </h3>
-                    <hr />
-                    <ol>
-                        <li>
-                            <h4>
-                                Submit your NIN{" "}
-                                <small>(Only you can see this)</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <h4>Get verified</h4>
-                        </li>
-                        <li>
-                            <h4>Upload an image of yourself</h4>
-                        </li>
-                        <li>
-                            <h4>View user's information</h4>
-                        </li>
-                        <li>
-                            <h4>Have access to other verified users</h4>
-                        </li>
-                        <hr />
-                        <Link to="/start">
-                            <Btn text="Get Started" onClick={() => {}} />
-                        </Link>
-                        <Link to="/" className="mt-3">
-                            <h5 className="text-success mt-3">Go Back Home</h5>
-                        </Link>
-                    </ol>
-                </Modal.Body>
-            </Modal>
-            <div className="mt-5 pb-5">
-                <div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
-                    <div className="pt-5 pb-5">
-                        <div className="text-center">
-                            <h2>Create Request</h2>
-                            {state.message ? (
-                                <Alert message={state.message} type="success" />
-                            ) : null}
-                        </div>
-                        <div className="comment-box submit-form bg-white border-0">
-                            {/* <h3 className="reply-title">Post Request</h3> */}
-                            <div className="comment-form mt-1">
-                                <form onSubmit={handleSubmit}>
-                                    <div className="row">
-                                        <div className="col-lg-12 col-md-6 col-sm-12">
-                                            <TextInput
-                                                label="Request Heading"
-                                                required
-                                                maxLength={90}
-                                                placeholder="Eg. I need a shared apartment in Ikeja"
-                                                onChange={(e) =>
-                                                    setData({
-                                                        ...data,
-                                                        heading: e.target.value,
-                                                    })
-                                                }
-                                                defaultValue={data.heading}
-                                            />
-                                        </div>
-                                        {view.personal_info &&
-                                        view.personal_info
-                                            .looking_for ? null : (
-                                            <>
-                                                <div className="col-lg-6 col-md-6 col-sm-12">
-                                                    <div className="form-group">
-                                                        <label>Bedrooms</label>
-                                                        <input
-                                                            style={{
-                                                                height: "40px",
-                                                            }}
-                                                            className="form-control"
-                                                            type="number"
-                                                            required
-                                                            defaultValue={
-                                                                data.bedrooms
-                                                            }
-                                                            placeholder="Eg. 300000"
-                                                            onChange={(e) =>
-                                                                setData({
-                                                                    ...data,
-                                                                    bedrooms:
-                                                                        e.target
-                                                                            .value,
-                                                                })
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
+			<Layout currentPage={'requests'}>
+				<Modal
+					show={view.personal_info && !view.personal_info.nin}
+					style={{ marginTop: '20vh' }}
+					size="md"
+				>
+					<Modal.Body className="text-center">
+						<h3 className="text-center">
+							Join the community to post a request.
+						</h3>
+						<hr />
+						<ol>
+							<li>
+								<h4>
+									Submit your NIN <small>(Only you can see this)</small>
+								</h4>
+							</li>
+							<li>
+								<h4>Get verified</h4>
+							</li>
+							<li>
+								<h4>Upload an image of yourself</h4>
+							</li>
+							<li>
+								<h4>View user's information</h4>
+							</li>
+							<li>
+								<h4>Have access to other verified users</h4>
+							</li>
+							<hr />
+							<Link to="/start">
+								<Btn text="Get Started" onClick={() => {}} />
+							</Link>
+							<Link to="/" className="mt-3">
+								<h5 className="text-success mt-3">Go Back Home</h5>
+							</Link>
+						</ol>
+					</Modal.Body>
+				</Modal>
+				<div className="mt-5 pb-5">
+					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
+						<div className="pt-5 pb-5">
+							<div className="text-center">
+								<h1 className="display-7">
+									{props.view.personal_info &&
+									props.view.personal_info.looking_for
+										? 'Create Request'
+										: 'Post Your Property'}
+								</h1>
+								{state.message ? (
+									<Alert message={state.message} type="success" />
+								) : null}
+							</div>
+							<div className="comment-box submit-form border-0">
+								{/* <h3 className="reply-title">Post Request</h3> */}
+								<div className="comment-form mt-1">
+									<form onSubmit={handleSubmit}>
+										<div className="row">
+											<div className="col-lg-12 col-md-6 col-sm-12">
+												<TextInput
+													label={
+														props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Request Heading'
+															: 'Property title'
+													}
+													required
+													maxLength={70}
+													placeholder={
+														props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? '"Ex. I need a shared apartment in Ikeja"'
+															: 'Ex. Newly built flat available for share in Ikeja'
+													}
+													onChange={(e) =>
+														setData({
+															...data,
+															heading: e.target.value,
+														})
+													}
+													defaultValue={data.heading}
+												/>
+											</div>
+											{view.personal_info &&
+											view.personal_info.looking_for ? null : (
+												<>
+													<div className="col-lg-6 col-md-6 col-sm-12">
+														<div className="form-group">
+															<label>Bedrooms</label>
+															<input
+																style={{
+																	height: '40px',
+																}}
+																className="form-control"
+																type="number"
+																required
+																defaultValue={data.bedrooms}
+																placeholder="Eg. 3"
+																onChange={(e) =>
+																	setData({
+																		...data,
+																		bedrooms: e.target.value,
+																	})
+																}
+															/>
+														</div>
+													</div>
 
-                                                <div className="col-lg-6 col-md-6 col-sm-12">
-                                                    <div className="form-group">
-                                                        <label>Toilets</label>
-                                                        <input
-                                                            style={{
-                                                                height: "40px",
-                                                            }}
-                                                            className="form-control"
-                                                            type="number"
-                                                            required
-                                                            defaultValue={
-                                                                data.toilets
-                                                            }
-                                                            placeholder="Eg. 4"
-                                                            onChange={(e) =>
-                                                                setData({
-                                                                    ...data,
-                                                                    toilets:
-                                                                        e.target
-                                                                            .value,
-                                                                })
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
+													<div className="col-lg-6 col-md-6 col-sm-12">
+														<div className="form-group">
+															<label>Toilets</label>
+															<input
+																style={{
+																	height: '40px',
+																}}
+																className="form-control"
+																type="number"
+																required
+																defaultValue={data.toilets}
+																placeholder="Eg. 4"
+																onChange={(e) =>
+																	setData({
+																		...data,
+																		toilets: e.target.value,
+																	})
+																}
+															/>
+														</div>
+													</div>
 
-                                                <div className="col-lg-6 col-md-6 col-sm-12">
-                                                    <div className="form-group">
-                                                        <label>Bathrooms</label>
-                                                        <input
-                                                            style={{
-                                                                height: "40px",
-                                                            }}
-                                                            className="form-control"
-                                                            type="number"
-                                                            required
-                                                            defaultValue={
-                                                                data.bathrooms
-                                                            }
-                                                            placeholder="Eg. 2"
-                                                            onChange={(e) =>
-                                                                setData({
-                                                                    ...data,
-                                                                    bathrooms:
-                                                                        e.target
-                                                                            .value,
-                                                                })
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )}
+													<div className="col-lg-6 col-md-6 col-sm-12">
+														<div className="form-group">
+															<label>Bathrooms</label>
+															<input
+																style={{
+																	height: '40px',
+																}}
+																className="form-control"
+																type="number"
+																required
+																defaultValue={data.bathrooms}
+																placeholder="Eg. 2"
+																onChange={(e) =>
+																	setData({
+																		...data,
+																		bathrooms: e.target.value,
+																	})
+																}
+															/>
+														</div>
+													</div>
+												</>
+											)}
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Payment Type</label>
 
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Payment Type</label>
+													<Select
+														placeholder="Select Service"
+														onChange={(e) => {
+															setData({
+																...data,
+																payment_type: e.value,
+															})
+														}}
+														options={view.payment_types.map((val) => ({
+															label: val.name,
+															value: val.id,
+														}))}
+														className="border rounded"
+														disabled={state.loading}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Apartment Type</label>
+													<Select
+														placeholder="Select Category"
+														options={view.categories.map((val) => ({
+															label: val.name,
+															value: val.id,
+														}))}
+														onChange={(e) => {
+															setData({
+																...data,
+																category: e.value,
+															})
+														}}
+														className="border rounded"
+														disabled={state.loading}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Select Service</label>
+													<Select
+														placeholder="Select Service"
+														onChange={(e) => {
+															setData({
+																...data,
+																service: e.value,
+															})
+														}}
+														options={view.services.map((val) => ({
+															label: val.name,
+															value: val.id,
+														}))}
+														className="border rounded"
+														disabled={state.loading}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Area</label>
+													<GooglePlacesAutocomplete
+														apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
+														apiOptions={{
+															language: 'en',
+															region: 'ng',
+														}}
+														selectProps={{
+															// props.state.location,
+															className: 'border',
+															onChange: (e) => {
+																setData({
+																	...data,
+																	google_location: e,
+																	location: e.label,
+																})
+															},
+															placeholder: 'Eg: Yaba, Lekki, Okota',
+														}}
+														autocompletionRequest={{
+															componentRestrictions: {
+																country: ['ng'],
+															},
+														}}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Budget / Price</label>
+													<input
+														style={{
+															height: '40px',
+														}}
+														className="form-control"
+														type="number"
+														required
+														defaultValue={data.budget}
+														placeholder="Eg. 300000"
+														onChange={(e) =>
+															setData({
+																...data,
+																budget: e.target.value,
+															})
+														}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>State</label>
+													<Select
+														placeholder="Ex. Lagos, Abuja etc"
+														onChange={(e) => {
+															setData({
+																...data,
+																state: e.value,
+															})
+														}}
+														options={view.states.map((val) => ({
+															label: val.name,
+															value: val.id,
+														}))}
+														className="border rounded"
+														disabled={state.loading}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Premium Flat?</label>
+													<div className="d-flex mt-2">
+														<Switch
+															defaultChecked={data.is_premium}
+															onChange={(e) =>
+																setData({
+																	...data,
+																	is_premium: e,
+																})
+															}
+														/>
+													</div>
+												</div>
+											</div>
+											+
+											<div className="col-lg-12 col-md-12 col-sm-12">
+												<div className="form-group">
+													<label>
+														{props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Type your request....'
+															: 'Tell us about this property'}{' '}
+													</label>
+													<TextArea
+														rows={6}
+														placeholder={
+															props.view.personal_info &&
+															props.view.personal_info.looking_for
+																? "Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+																: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
+														}
+														defaultValue={data.body}
+														required
+														name="body"
+														minLength={50}
+														maxLength={900}
+														onChange={(e) => {
+															setData({
+																...data,
+																body_html: e.target.value,
+																body: e.target.value,
+															})
+														}}
+														disabled={state.loading}
+													/>
+												</div>
+											</div>
+											{view.personal_info && !view.personal_info.looking_for ? (
+												<>
+													<div className="container">
+														<label className="display-7">Images</label>
+													</div>
 
-                                                <Select
-                                                    placeholder="Select Service"
-                                                    onChange={(e) => {
-                                                        setData({
-                                                            ...data,
-                                                            payment_type:
-                                                                e.value,
-                                                        });
-                                                    }}
-                                                    options={view.payment_types.map(
-                                                        (val) => ({
-                                                            label: val.name,
-                                                            value: val.id,
-                                                        }),
-                                                    )}
-                                                    className="border rounded"
-                                                    disabled={state.loading}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Apartment Type</label>
-                                                <Select
-                                                    placeholder="Select Category"
-                                                    options={view.categories.map(
-                                                        (val) => ({
-                                                            label: val.name,
-                                                            value: val.id,
-                                                        }),
-                                                    )}
-                                                    onChange={(e) => {
-                                                        setData({
-                                                            ...data,
-                                                            category: e.value,
-                                                        });
-                                                    }}
-                                                    className="border rounded"
-                                                    disabled={state.loading}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Select Service</label>
-                                                <Select
-                                                    placeholder="Select Service"
-                                                    onChange={(e) => {
-                                                        setData({
-                                                            ...data,
-                                                            service: e.value,
-                                                        });
-                                                    }}
-                                                    options={view.services.map(
-                                                        (val) => ({
-                                                            label: val.name,
-                                                            value: val.id,
-                                                        }),
-                                                    )}
-                                                    className="border rounded"
-                                                    disabled={state.loading}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Area</label>
-                                                <GooglePlacesAutocomplete
-                                                    apiKey={
-                                                        process.env
-                                                            .REACT_APP_GOOGLE_PLACES_API_KEY
-                                                    }
-                                                    apiOptions={{
-                                                        language: "en",
-                                                        region: "ng",
-                                                    }}
-                                                    selectProps={{
-                                                        // props.state.location,
-                                                        className: "border",
-                                                        onChange: (e) => {
-                                                            setData({
-                                                                ...data,
-                                                                google_location:
-                                                                    e,
-                                                                location:
-                                                                    e.label,
-                                                            });
-                                                        },
-                                                        placeholder:
-                                                            "Eg: Yaba, Lekki, Okota",
-                                                    }}
-                                                    autocompletionRequest={{
-                                                        componentRestrictions: {
-                                                            country: ["ng"],
-                                                        },
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Budget / Price</label>
-                                                <input
-                                                    style={{
-                                                        height: "40px",
-                                                    }}
-                                                    className="form-control"
-                                                    type="number"
-                                                    required
-                                                    defaultValue={data.budget}
-                                                    placeholder="Eg. 300000"
-                                                    onChange={(e) =>
-                                                        setData({
-                                                            ...data,
-                                                            budget: e.target
-                                                                .value,
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>State</label>
-                                                <Select
-                                                    placeholder="Ex. Lagos, Abuja etc"
-                                                    onChange={(e) => {
-                                                        setData({
-                                                            ...data,
-                                                            state: e.value,
-                                                        });
-                                                    }}
-                                                    options={view.states.map(
-                                                        (val) => ({
-                                                            label: val.name,
-                                                            value: val.id,
-                                                        }),
-                                                    )}
-                                                    className="border rounded"
-                                                    disabled={state.loading}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label>Premium Flat?</label>
-                                                <div className="d-flex mt-2">
-                                                    <Switch
-                                                        defaultChecked={
-                                                            data.is_premium
-                                                        }
-                                                        onChange={(e) =>
-                                                            setData({
-                                                                ...data,
-                                                                is_premium: e,
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12 col-md-12 col-sm-12">
-                                            <div className="form-group">
-                                                <label>
-                                                    Type your request....{" "}
-                                                </label>
-                                                <textarea
-                                                    class="form-control"
-                                                    onChange={(e) => {
-                                                        setData({
-                                                            ...data,
-                                                            body_html:
-                                                                e.target.value,
-                                                            body: e.target
-                                                                .value,
-                                                        });
-                                                    }}
-                                                    style={{
-                                                        height: "400px",
-                                                        background: "#F7F7F7",
-                                                    }}
-                                                    disabled={state.loading}
-                                                    required
-                                                    name="body"
-                                                    // className="gray-bg"
-                                                    // cols="30"
-                                                    rows={6}
-                                                    minLength="50"
-                                                    maxLength="900"
-                                                    placeholder="Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
-                                                    defaultValue={data.body}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        {view.personal_info &&
-                                        !view.personal_info.looking_for ? (
-                                            <>
-                                                <div className="container">
-                                                    <label className="display-7">
-                                                        Images
-                                                    </label>
-                                                </div>
-
-                                                <div className="">
-                                                    <div className="col-lg-12">
-                                                        <div className="row justify-content-center">
-                                                            {new Array(
-                                                                image_count,
-                                                            )
-                                                                .fill(null)
-                                                                .map((_, i) => {
-                                                                    return (
-                                                                        <ImageSelect
-                                                                            index={
-                                                                                i
-                                                                            }
-                                                                            image={
-                                                                                imageFiles[
-                                                                                    `img${i}`
-                                                                                ]
-                                                                            }
-                                                                            onFileChange={(
-                                                                                e,
-                                                                            ) => {
-                                                                                handleImageSelect(
-                                                                                    e
-                                                                                        .target
-                                                                                        .files[0],
-                                                                                    i,
-                                                                                );
-                                                                            }}
-                                                                        />
-                                                                    );
-                                                                })}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        ) : null}
-                                        <div className="col-lg-12 col-md-12 col-sm-12">
-                                            <hr />
-                                            <div className="form-group">
-                                                <Btn
-                                                    type="submit"
-                                                    text="Post Request"
-                                                    className="w-100 shadow"
-                                                    loading={state.loading}
-                                                    onClick={() => {}}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    );
+													<div className="">
+														<div className="col-lg-12">
+															<div className="row justify-content-center">
+																{new Array(image_count)
+																	.fill(null)
+																	.map((_, i) => {
+																		return (
+																			<ImageSelect
+																				index={i}
+																				image={imageFiles[`img${i}`]}
+																				onFileChange={(e) => {
+																					handleImageSelect(
+																						e.target.files[0],
+																						i
+																					)
+																				}}
+																			/>
+																		)
+																	})}
+															</div>
+														</div>
+													</div>
+												</>
+											) : null}
+											<div className="col-lg-12 col-md-12 col-sm-12">
+												<hr />
+												<div className="form-group">
+													<Btn
+														type="submit"
+														text={
+															props.view.personal_info &&
+															props.view.personal_info.looking_for
+																? 'Post Request'
+																: 'Post Property'
+														}
+														className="w-100 shadow"
+														loading={state.loading}
+														onClick={() => {}}
+													/>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</Layout>
+		)
 };
 
 const mapStateToProps = (state) => ({

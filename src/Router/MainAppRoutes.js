@@ -9,13 +9,13 @@ import '../assets/css/styles.css';
 import '../v4_css/style.css';
 import { Provider } from "react-redux";
 import store from "../redux/store/store";
-import '../App.css';
 import 'react-activity/src/Spinner/Spinner.css'
 // import firebase from "../Firebase"
 import "../social_assets/css/feather.css";
 import "../social_assets/css/lightbox.css";
 import "../social_assets/css//themify-icons.css";
 import "../social_assets/css/style.css";
+import '../App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -33,6 +33,7 @@ import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageCo
 import Messages from '../pages/Messages/Messages';
 import MessageNew from '../pages/Messages/MessageNew';
 import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage';
+import Settings from '../pages/Settings/Settings';
 
 const PropertyDetails = React.lazy(() =>
     import("../pages/PropertyDetails/PropertyDetails"),
@@ -93,7 +94,7 @@ function App() {
                   <FeedbackPopup />
                   <PaymentPopup />
                   <MasterPopup />
-                  <RobotMessageContainer />
+                  {/* <RobotMessageContainer /> */}
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/feeds" component={SocialHomePage} />
@@ -101,6 +102,8 @@ function App() {
                     <Route exact path="/terms" component={Terms} />
                     <Route exact path="/blog" component={Blog} />
                     <Route exact path="/messages" component={Messages} />
+                    <Route exact path="/settings" component={Settings} />
+                    <Route exact path="/settings/:type" component={Settings} />
                     <Route exact path="/messages/new/:user_id" component={MessageNew} />
                     <Route exact path="/messages/:conversation_id" component={Messages} />
                     <Route exact path="/notifications" component={Notifications} />
