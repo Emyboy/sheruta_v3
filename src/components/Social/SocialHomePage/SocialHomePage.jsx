@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Btn from "../../Btn/Btn";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
 import Heading from "../../Heading/Heading";
-import { Spinner } from "react-activity";
+import { Dots } from "react-activity";
 import VerifiedBadge from "../../VerifiedBadge/VerifiedBadge";
 import match from "../../../assets/img/match.jpeg";
 import PostRequestAds from "../../Ads/RequestAds/PostRequestAds";
@@ -91,7 +91,7 @@ export default (props) => {
 
   return (
 		<div className="main-wrapper">
-			<Layout currentPage="feeds">
+			<Layout currentPage="feeds" showMessages>
 				<div className="container-fluid">
 					<div className="row _feed-body">
 						{!Global.isMobile && (
@@ -112,7 +112,7 @@ export default (props) => {
 							})}
 							{state.list.length === 0 ? (
 								<div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
-									<Spinner />
+									<Dots />
 								</div>
 							) : null}
 						</div>

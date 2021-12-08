@@ -22,7 +22,7 @@ export default function SearchForm() {
 
 	return (
 		<div className="col-lg-12 mt-4 h-100">
-			<div className="card w-100 p-4 border-0 bg-lightblue">
+			<div className="card w-100 p-4 border-0 bg-lightblue rounded-xxl shadow-sm">
 				<div className="row">
 					<div className="col-lg-3">
 						<div className="form-group mb-0">
@@ -84,7 +84,7 @@ export default function SearchForm() {
 							})}
 						</ul>
 					</div>
-					<div className="col-lg-3">
+					<div className="col-lg-4">
 						<div className="form-group mb-0 mt-0">
 							<label
 								htmlFor="Search"
@@ -117,9 +117,7 @@ export default function SearchForm() {
 					<div className="col-md-4 mt-4 col-sm-12">
 						{showButton && (
 							<Link to={`/search/results/${service}/${category}/${bedrooms}`}>
-								<button
-									className="w-100 mt-4 p-0 btn p-2 lh-24 ms-1 ls-3  rounded-xl bg-current  fw-700 ls-lg text-white"
-								>
+								<button className="w-100 mt-4 p-0 btn p-2 lh-24 ms-1 ls-3  rounded-xl bg-current  fw-700 ls-lg text-white">
 									Search
 								</button>
 							</Link>

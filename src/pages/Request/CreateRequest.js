@@ -1,315 +1,299 @@
-import React, { useState } from "react";
-import Btn from "../../components/Btn/Btn";
-import Select from "react-select";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import { v4 as Uid } from "uuid";
-import { Alert, notification, Switch } from "antd";
-import { Link } from "react-router-dom";
-import TextInput from "../../components/TextInput/TextInput";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { getUserFeedback } from "../../redux/strapi_actions/view.action";
-import Layout from "../../components/Layout/Layout";
-import store from "../../redux/store/store";
-import { notifyEmy } from "../../services/Sheruta";
-import Cookies from "js-cookie";
-import ImageSelect from "./ImageSelect";
-import { storage } from "../../Firebase";
-import firebase from "firebase";
-import Compressor from "compressorjs";
-import { Modal } from 'react-bootstrap';
-import TextArea from "antd/lib/input/TextArea";
+import React, { useState } from 'react'
+import Btn from '../../components/Btn/Btn'
+import Select from 'react-select'
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import { connect, useDispatch } from 'react-redux'
+import { v4 as Uid } from 'uuid'
+import { Alert, notification, Switch } from 'antd'
+import { Link } from 'react-router-dom'
+import TextInput from '../../components/TextInput/TextInput'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import { getUserFeedback } from '../../redux/strapi_actions/view.action'
+import Layout from '../../components/Layout/Layout'
+import store from '../../redux/store/store'
+import { notifyEmy } from '../../services/Sheruta'
+import Cookies from 'js-cookie'
+import ImageSelect from './ImageSelect'
+import { storage } from '../../Firebase'
+import firebase from 'firebase'
+import Compressor from 'compressorjs'
+import { Modal } from 'react-bootstrap'
+import TextArea from 'antd/lib/input/TextArea'
 
-const uid = Uid();
+const uid = Uid()
 
 const CraeteRequest = (props) => {
-    localStorage.setItem("after_login", `${window.location.pathname}`);
-    localStorage.setItem("after_payment", `${window.location.pathname}`);
-    const [done, setDone] = useState(false);
-    const [image_url, set_image_url] = useState([]);
-    const dispatch = useDispatch();
+	localStorage.setItem('after_login', `${window.location.pathname}`)
+	localStorage.setItem('after_payment', `${window.location.pathname}`)
+	const [done, setDone] = useState(false)
+	const [image_url, set_image_url] = useState([])
+	const dispatch = useDispatch()
 
-    const { view, match, auth } = props;
+	const { view, match, auth } = props
 
-    const { params } = match;
+	const { params } = match
 
-    const [state, setState] = React.useState({
-        categories: [],
-        services: [],
-        loading: false,
-        done: false,
-        hideOptions: true,
-        message: null,
-    });
+	const [state, setState] = React.useState({
+		categories: [],
+		services: [],
+		loading: false,
+		done: false,
+		hideOptions: true,
+		message: null,
+	})
 
-    const [imageFiles, setImageFiles] = useState({
-        img0: null,
-        img1: null,
-        img2: null,
-        img3: null,
-        img4: null,
-        img5: null,
-    });
-    const image_count = 5;
+	const [imageFiles, setImageFiles] = useState({
+		img0: null,
+		img1: null,
+		img2: null,
+		img3: null,
+		img4: null,
+		img5: null,
+	})
+	const image_count = 5
 
-    const [data, setData] = React.useState({
-        heading: null,
-        body: null,
-        uuid: uid,
-        category: null,
-        service: null,
-        users_permissions_user: props.auth.user
-            ? props.auth.user.user.id
-            : null,
-        budget: null,
-        location: null,
-        google_location: null,
-        is_searching: false,
-        bathrooms: null,
-        bedrooms: null,
-        toilets: null,
-        is_premium: false,
-        payment_type: null,
-        state: null
-    });
+	const [data, setData] = React.useState({
+		heading: null,
+		body: null,
+		uuid: uid,
+		category: null,
+		service: null,
+		users_permissions_user: props.auth.user ? props.auth.user.user.id : null,
+		budget: null,
+		location: null,
+		google_location: null,
+		is_searching: false,
+		bathrooms: null,
+		bedrooms: null,
+		toilets: null,
+		is_premium: false,
+		payment_type: null,
+		state: null,
+	})
 
-    const sendToDb = () => {
-        const newRequest = {
-            ...data,
-            body_html: `<p>${data.body}</p>`,
-            uuid: uid,
-            users_permissions_user: props.auth.user.user.id,
-            is_searching: view.personal_info.looking_for,
-            image_url,
-            state: parseInt(data.state)
-        };
+	const sendToDb = () => {
+		const newRequest = {
+			...data,
+			body_html: `<p>${data.body}</p>`,
+			uuid: uid,
+			users_permissions_user: props.auth.user.user.id,
+			is_searching: view.personal_info.looking_for,
+			image_url,
+			state: parseInt(data.state),
+		}
 
-        axios(process.env.REACT_APP_API_URL + "/property-requests", {
-            method: "POST",
-            data: newRequest,
-            headers: {
-                Authorization: `Bearer ${Cookies.get("token")}`,
-            },
-        })
-            .then((res) => {
-                props.getUserFeedback();
-                localStorage.removeItem("ph_request");
-                setState({ ...state, loading: false, done: true });
-            })
-            .catch((err) => {
-                notifyEmy({
-                    heading: "Error Posting requests",
-                    log: { response: err.response, ...err,  },
-                    status: "error",
-                });
-                if (err.response.status == 426 || err.response.status === 402) {
-                    store.dispatch({
-                        type: "SET_VIEW_STATE",
-                        payload: {
-                            showPaymentPopup: true,
-                        },
-                    });
-                    dispatch(getUserFeedback);
-                    localStorage.setItem(
-                        "ph_request",
-                        JSON.stringify(newRequest),
-                    );
-                }
-                setState({ ...state, loading: false });
-                notification.error({ message: "Error creating request" });
-            });
-    };
+		axios(process.env.REACT_APP_API_URL + '/property-requests', {
+			method: 'POST',
+			data: newRequest,
+			headers: {
+				Authorization: `Bearer ${Cookies.get('token')}`,
+			},
+		})
+			.then((res) => {
+				props.getUserFeedback()
+				localStorage.removeItem('ph_request')
+				setState({ ...state, loading: false, done: true })
+			})
+			.catch((err) => {
+				notifyEmy({
+					heading: 'Error Posting requests',
+					log: { response: err.response, ...err },
+					status: 'error',
+				})
+				if (err.response.status == 426 || err.response.status === 402) {
+					store.dispatch({
+						type: 'SET_VIEW_STATE',
+						payload: {
+							showPaymentPopup: true,
+						},
+					})
+					dispatch(getUserFeedback)
+					localStorage.setItem('ph_request', JSON.stringify(newRequest))
+				}
+				setState({ ...state, loading: false })
+				notification.error({ message: 'Error creating request' })
+			})
+	}
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!state.categories) {
-            notification.error({ message: "Please select a category" });
-            return;
-        }
-        if (!data.location) {
-            notification.error({ message: "Please add a location" });
-            return;
-        }
-        if (!data.category) {
-            notification.error({ message: "Please add a category" });
-            return;
-        }
-        if (!data.service) {
-            notification.error({ message: "Please add a service" });
-            return;
-        }
-        if (!data.state) {
-            notification.error({ message: "Please select a state" });
-            return;
-        }
-        setState({ ...state, loading: true });
-        //.. Send images to firebase
-        const files = [];
-        const img_urls = [];
-        Object.values(imageFiles).map((val) => {
-            if (val) {
-                files.push(val);
-            }
-        });
-        if (files.length > 0) {
-            files.map(async (file, i) => {
-                if (file) {
-                    await new Compressor(file, {
-                        quality: 0.3,
-                        success(result) {
-                            var uploadTask = storage
-                                .child(
-                                    `images/requests/${auth.user.user.id}/${uid}/image_${i}`,
-                                )
-                                .put(result);
-                            uploadTask.on(
-                                "state_changed",
-                                (snapshot) => {
-                                    console.log(
-                                        "PROGRESS ---",
-                                        (snapshot.bytesTransferred /
-                                            snapshot.totalBytes) *
-                                            100,
-                                    );
-                                    var progress =
-                                        (snapshot.bytesTransferred /
-                                            snapshot.totalBytes) *
-                                        100;
-                                    // console.log("Upload is " + progress + "% done");
-                                    switch (snapshot.state) {
-                                        case firebase.storage.TaskState.PAUSED: // or 'paused'
-                                            console.log("Upload is paused");
-                                            break;
-                                        case firebase.storage.TaskState.RUNNING: // or 'running'
-                                            console.log("Upload is running");
-                                            break;
-                                    }
-                                },
-                                (error) => {
-                                    notification.error({
-                                        message: "Upload Error",
-                                    });
-                                    notifyEmy({
-                                        heading: "Error uploading request image to firebase",
-                                        log: {...error},
-                                        status: 'error'
-                                    })
-                                },
-                                () => {
-                                    uploadTask.snapshot.ref
-                                        .getDownloadURL()
-                                        .then((downloadURL) => {
-                                            img_urls.push(downloadURL);
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		if (!state.categories) {
+			notification.error({ message: 'Please select a category' })
+			return
+		}
+		if (!data.location) {
+			notification.error({ message: 'Please add a location' })
+			return
+		}
+		if (!data.category) {
+			notification.error({ message: 'Please add a category' })
+			return
+		}
+		if (!data.service) {
+			notification.error({ message: 'Please add a service' })
+			return
+		}
+		if (!data.state) {
+			notification.error({ message: 'Please select a state' })
+			return
+		}
+		setState({ ...state, loading: true })
+		//.. Send images to firebase
+		const files = []
+		const img_urls = []
+		Object.values(imageFiles).map((val) => {
+			if (val) {
+				files.push(val)
+			}
+		})
+		if (files.length > 0) {
+			files.map(async (file, i) => {
+				if (file) {
+					await new Compressor(file, {
+						quality: 0.3,
+						success(result) {
+							var uploadTask = storage
+								.child(`images/requests/${auth.user.user.id}/${uid}/image_${i}`)
+								.put(result)
+							uploadTask.on(
+								'state_changed',
+								(snapshot) => {
+									console.log(
+										'PROGRESS ---',
+										(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+									)
+									var progress =
+										(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+									// console.log("Upload is " + progress + "% done");
+									switch (snapshot.state) {
+										case firebase.storage.TaskState.PAUSED: // or 'paused'
+											console.log('Upload is paused')
+											break
+										case firebase.storage.TaskState.RUNNING: // or 'running'
+											console.log('Upload is running')
+											break
+									}
+								},
+								(error) => {
+									notification.error({
+										message: 'Upload Error',
+									})
+									notifyEmy({
+										heading: 'Error uploading request image to firebase',
+										log: { ...error },
+										status: 'error',
+									})
+								},
+								() => {
+									uploadTask.snapshot.ref
+										.getDownloadURL()
+										.then((downloadURL) => {
+											img_urls.push(downloadURL)
 
-                                            if (
-                                                img_urls.length === files.length
-                                            ) {
-                                                set_image_url(img_urls);
-                                                setDone(true);
-                                            }
-                                        });
-                                },
-                            );
-                        },
-                        error(err) {
-                            console.log(err.message);
-                            notifyEmy({
-                                heading:
-                                    "Error uploading request image to firebase",
-                                log: { ...err },
-                                status: "error",
-                            });
-                        },
-                    });
-                }
-            });
-        } else {
-            setDone(true);
-        }
-    };
+											if (img_urls.length === files.length) {
+												set_image_url(img_urls)
+												setDone(true)
+											}
+										})
+								}
+							)
+						},
+						error(err) {
+							console.log(err.message)
+							notifyEmy({
+								heading: 'Error uploading request image to firebase',
+								log: { ...err },
+								status: 'error',
+							})
+						},
+					})
+				}
+			})
+		} else {
+			setDone(true)
+		}
+	}
 
-    React.useEffect(() => {
-        if (done) {
-            sendToDb();
-        }
-    }, [done]);
+	React.useEffect(() => {
+		if (done) {
+			sendToDb()
+		}
+	}, [done])
 
-    React.useEffect(() => {
-        const ph_request = JSON.parse(localStorage.getItem("ph_request"));
-        if (Object.keys(params).length === 0) {
-            setState({ ...state, hideOptions: false });
-        }
-        if (Object.keys(params).length > 0) {
-            setData({
-                ...data,
-                service: parseInt(params.service_id),
-                category: parseInt(params.category_id),
-                is_searching: params.is_searching === "true",
-            });
-            setData({ ...data, ...ph_request });
-        }
-        if (ph_request) {
-            setState({ ...state, message: "Continue from where you left off" });
-            const req = JSON.parse(localStorage.getItem("ph_request"));
-            setData({
-                ...data,
-                heading: req.heading,
-                body: req.body,
-                budget: req.budget,
-                category: req.category,
-            });
-        }
-    }, []);
+	React.useEffect(() => {
+		const ph_request = JSON.parse(localStorage.getItem('ph_request'))
+		if (Object.keys(params).length === 0) {
+			setState({ ...state, hideOptions: false })
+		}
+		if (Object.keys(params).length > 0) {
+			setData({
+				...data,
+				service: parseInt(params.service_id),
+				category: parseInt(params.category_id),
+				is_searching: params.is_searching === 'true',
+			})
+			setData({ ...data, ...ph_request })
+		}
+		if (ph_request) {
+			setState({ ...state, message: 'Continue from where you left off' })
+			const req = JSON.parse(localStorage.getItem('ph_request'))
+			setData({
+				...data,
+				heading: req.heading,
+				body: req.body,
+				budget: req.budget,
+				category: req.category,
+			})
+		}
+	}, [])
 
-    React.useEffect(() => {
-        notifyEmy({
-            heading: "Visited the create request page",
-            // user: auth.user.user,
-        })
-    },[])
+	React.useEffect(() => {
+		notifyEmy({
+			heading: 'Visited the create request page',
+			// user: auth.user.user,
+		})
+	}, [])
 
-    const handleImageSelect = (file, i) => {
-        setImageFiles({ ...imageFiles, [`img${i}`]: file });
-    };
+	const handleImageSelect = (file, i) => {
+		setImageFiles({ ...imageFiles, [`img${i}`]: file })
+	}
 
-    if (state.done) {
-        return (
-					<Layout currentPage={'requests'}>
-						{window.scrollTo({ top: 0, behavior: 'smooth' })}
+	if (state.done) {
+		return (
+			<Layout currentPage={'requests'}>
+				{window.scrollTo({ top: 0, behavior: 'smooth' })}
 
-						<div className="mt-5 mb-5">
-							<div className="container bg-white text-center">
-								<div className="pt-5 pb-5">
-									<div className="text-center">
-										<h1>
-											<b>
-												{props.view.personal_info &&
-												props.view.personal_info.looking_for
-													? 'Request Created'
-													: 'Post was created'}
-											</b>
-										</h1>
-									</div>
-									<div className="comment-box submit-form">
-										{/* <h3 className="reply-title">Post Request</h3> */}
-										<div className="comment-form">
-											<Link
-												to={`/request/${data.uuid}/${props.auth.user.user.id}`}
-											>
-												<Btn text="View Now" />
-											</Link>
-										</div>
-									</div>
+				<div className="mt-5 mb-5">
+					<div className="container bg-white text-center">
+						<div className="pt-5 pb-5">
+							<div className="text-center">
+								<h1>
+									<b>
+										{props.view.personal_info &&
+										props.view.personal_info.looking_for
+											? 'Request Created'
+											: 'Post was created'}
+									</b>
+								</h1>
+							</div>
+							<div className="comment-box submit-form">
+								{/* <h3 className="reply-title">Post Request</h3> */}
+								<div className="comment-form">
+									<Link to={`/request/${data.uuid}/${props.auth.user.user.id}`}>
+										<Btn text="View Now" />
+									</Link>
 								</div>
 							</div>
 						</div>
-					</Layout>
-				)
-    } else if (!props.auth.user) {
-        return <Redirect to="/login" />;
-    } else
-    return (
+					</div>
+				</div>
+			</Layout>
+		)
+	} else if (!props.auth.user) {
+		return <Redirect to="/login" />
+	} else
+		return (
 			<Layout currentPage={'requests'}>
 				<Modal
 					show={view.personal_info && !view.personal_info.nin}
@@ -699,15 +683,15 @@ const CraeteRequest = (props) => {
 				</div>
 			</Layout>
 		)
-};
+}
 
 const mapStateToProps = (state) => ({
-    auth: state.auth,
-    view: state.view,
-});
+	auth: state.auth,
+	view: state.view,
+})
 
 const mapDispatchToProps = {
-    getUserFeedback,
-};
+	getUserFeedback,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CraeteRequest);
+export default connect(mapStateToProps, mapDispatchToProps)(CraeteRequest)

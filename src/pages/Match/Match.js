@@ -32,7 +32,7 @@ export default function Match() {
     }
 
     return (
-        <Layout currentPage={"match"}>
+        <Layout currentPage={"match"} showMessages>
             <div className="container mt-3">
                 <div className="row justify-content-center">
                     <div className="col-sm-12 col-lg-7 ">
