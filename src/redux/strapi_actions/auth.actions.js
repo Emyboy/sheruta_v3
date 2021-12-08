@@ -1,4 +1,3 @@
-import { notification } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
 import UserService from "../../services/UserService";

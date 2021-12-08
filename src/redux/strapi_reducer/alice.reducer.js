@@ -4,7 +4,7 @@ const initialState = {
     loading: false,
 };
 
-export default (state = initialState, { type, payload }) => {
+const AliceReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case "SET_ALICE_STATE":
             return { ...state, ...payload };
@@ -24,3 +24,5 @@ export default (state = initialState, { type, payload }) => {
             return state;
     }
 };
+
+export default AliceReducer;
