@@ -170,7 +170,7 @@ export default function ValidIdCard(props) {
             </div>
             <Modal show={showUserData && ninData} size="lg">
                 {ninData && (
-                    <Modal.Body>
+                    <Modal.Body className="card">
                         <h2 className="text-center">
                             Please Verify This Is You
                         </h2>

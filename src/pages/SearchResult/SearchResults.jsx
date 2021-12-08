@@ -30,7 +30,7 @@ export default function SearchResults({ match }) {
 	return (
 		<Layout>
 			<div>
-				<div className="container">
+				<div className="container h-100">
 					<div className="row justify-content-center">
 						<div className="col-md-8 col-sm-12">
 							<div className="card rounded mb-4 border-0 shadow-sm">

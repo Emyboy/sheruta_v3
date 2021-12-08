@@ -33,7 +33,7 @@ export default function Match() {
 
     return (
         <Layout currentPage={"match"} showMessages>
-            <div className="container mt-3">
+            <div className="container mt-3 h-100">
                 <div className="row justify-content-center">
                     <div className="col-sm-12 col-lg-7 ">
                         <Tabs defaultActiveKey="1" onChange={callback}>

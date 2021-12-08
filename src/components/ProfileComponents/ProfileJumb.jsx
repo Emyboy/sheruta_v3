@@ -16,7 +16,7 @@ export default function ProfileJumb({ user }) {
 					<img
 						src="https://picsum.photos/400/300"
 						alt="image"
-						height="300"
+						height="500"
 						width="100%"
 					/>
 				</div>
