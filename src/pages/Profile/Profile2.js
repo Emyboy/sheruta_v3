@@ -7,8 +7,7 @@ import axios from 'axios'
 import EachSocialRequest from '../../components/Social/EachSocialRequest'
 import PageLoader from '../../components/PageLoader'
 import PageNotFound from '../PageNotFound'
-import PersonalInfo from './PersonalInfo'
-import ProfileSettings from './ProfileSettings'
+
 import { notifyEmy } from '../../services/Sheruta'
 import MetaTags from 'react-meta-tags'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
@@ -103,48 +102,55 @@ export const Profile2 = (props) => {
 	} else {
 		return (
 			<Layout currentPage="profile">
-				<MetaTags>
-					<title>
-						{`${userData.first_name} ${userData.last_name}`}'s Profile | Sheruta
-					</title>
-					<meta
-						name="description"
-						content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
-					/>
-					<meta
-						property="og:title"
-						content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
-					/>
-					<meta
-						property="og:description"
-						content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
-					/>
-				</MetaTags>
-				{userData && <ProfileJumb user={userData} />}
-				{userData && (
-					<div
-						className="fixed-bottom text-center"
-						style={{
-							marginBottom: Global.isMobile ? '15vh' : '10vh',
-							zIndex: 1
-						}}
-					>
-						<UserAction user={userData} />
-					</div>
-				)}
-				<div className="container-fluid">
-					<div className="row">
+				<div className={!auth.user ? "container": ""} style={{ marginTop: !auth.user ? '15vh': ''}}>
+					<MetaTags>
+						<title>
+							{`${userData.first_name} ${userData.last_name}`}'s Profile |
+							Sheruta
+						</title>
+						<meta
+							name="description"
+							content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
+						/>
+						<meta
+							property="og:title"
+							content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
+						/>
+						<meta
+							property="og:description"
+							content={`${userData.first_name} ${userData.last_name}'s Profile | Sheruta`}
+						/>
+					</MetaTags>
+					{userData && <ProfileJumb user={userData} />}
+					{userData && (
 						<div
-							className={`col-xl-4 col-xxl-3 col-lg-4 mt-4 ${
-								Global.isMobile && 'p-0'
-							}`}
+							className="fixed-bottom text-center"
+							style={{
+								marginBottom: Global.isMobile ? '15vh' : '10vh',
+								zIndex: 1,
+							}}
 						>
-							<ProfileAbout user={userData} />
+							<UserAction user={userData} />
 						</div>
-						<div className={`col-xl-8 col-xxl-9 col-lg-8 mt-4 ${Global.isMobile && 'p-0'}`}>
-							{state.userRequests.map((val, i) => {
-								return <EachSocialRequest key={i} data={val} />
-							})}
+					)}
+					<div className="container-fluid">
+						<div className="row">
+							<div
+								className={`col-xl-4 col-xxl-3 col-lg-4 mt-4 ${
+									Global.isMobile && 'p-0'
+								}`}
+							>
+								<ProfileAbout user={userData} />
+							</div>
+							<div
+								className={`col-xl-8 col-xxl-9 col-lg-8 mt-4 ${
+									Global.isMobile && 'p-0'
+								}`}
+							>
+								{state.userRequests.map((val, i) => {
+									return <EachSocialRequest key={i} data={val} />
+								})}
+							</div>
 						</div>
 					</div>
 				</div>

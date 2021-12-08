@@ -279,13 +279,15 @@ export default function Header({
 									alt="user"
 									className="w40 position-absolute left-0"
 								/>
-								<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
-									{otherUser?.first_name || 'Someone'}{' '}
-									<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
-										{' '}
-										{moment(val?.created_at).fromNow()}
-									</span>
-								</h5>
+								<Link to={otherUser ? `/user/${otherUser?.username}`: '#'}>
+									<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
+										{otherUser?.first_name || 'Someone'}{' '}
+										<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
+											{' '}
+											{moment(val?.created_at).fromNow()}
+										</span>
+									</h5>
+								</Link>
 								<h6 className="text-grey-500 fw-500 font-xssss lh-4">
 									{val?.title}
 								</h6>

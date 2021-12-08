@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 
 export default function ProfileAbout({ user }) {
 	const auth = useSelector((state) => state.auth)
-	const [isOwner, setIsOwner] = useState(auth.user.user.id === user.id);
+	const [isOwner, setIsOwner] = useState(auth.user ? auth.user.user.id === user.id: false);
 
 	useEffect(() => {
-		if(user.id === auth.user.user.id){
+		console.log('USER ---', user);
+		if (auth.user && user.id === auth.user.user.id) {
 			setIsOwner(true)
-		}else {
-			setIsOwner(false);
+		} else {
+			setIsOwner(false)
 		}
 	},[user])
 

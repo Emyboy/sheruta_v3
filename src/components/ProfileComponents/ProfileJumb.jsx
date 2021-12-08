@@ -14,10 +14,10 @@ export default function ProfileJumb({ user }) {
 					style={{ height: '10rem' }}
 				>
 					<img
-						src="https://picsum.photos/300/300"
+						src="https://picsum.photos/400/300"
 						alt="image"
-						height="500"
-						width="1000"
+						height="300"
+						width="100%"
 					/>
 				</div>
 				<div className="card-body p-0 position-relative">
