@@ -5,22 +5,22 @@ import { Link } from 'react-router-dom'
 import Layout from '../../components/Layout/Layout'
 import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
 import AccountSettings from './settings/AccountSettings'
-import PersonalInfoSettings from './settings/PersonalInfoSettings';
+import PersonalInfoSettings from './settings/PersonalInfoSettings'
 import { Switch } from 'antd'
 import ConfigureViewSettings from './settings/ConfigureViewSettings'
 
 export default function Settings({ match }) {
-	const { user } = useSelector((state) => state.auth);
-	const [darkMode, setDarkMode] = useState(false);
-	const type = match.params?.type;
+	const { user } = useSelector((state) => state.auth)
+	const [darkMode, setDarkMode] = useState(false)
+	const type = match.params?.type
 
 	useEffect(() => {
-		if(darkMode){
+		if (darkMode) {
 			document.getElementById('body-tag').classList.add('theme-dark')
-		}else {
+		} else {
 			document.getElementById('body-tag').classList.remove('theme-dark')
 		}
-	},[darkMode]);
+	}, [darkMode])
 
 	if (!user) {
 		return <Redirect to="/login" />
@@ -80,7 +80,10 @@ export default function Settings({ match }) {
 													>
 														<i className="btn-round-md bg-mini-gradiant text-white feather-power font-md me-3"></i>{' '}
 														<h4 className="fw-600 font-xsss mb-0 mt-0">
-															Deactivate Account
+															{user?.user.deactivated
+																? 'Activate'
+																: 'Deactivate'}{' '}
+															Account
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3 mr-3"></i>
 													</Link>
@@ -112,7 +115,10 @@ export default function Settings({ match }) {
 														<h4 className="fw-600 font-xsss mb-0 mt-0 mr-3">
 															Dark Mode
 														</h4>
-														<Switch defaultChecked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+														<Switch
+															defaultChecked={darkMode}
+															onChange={() => setDarkMode(!darkMode)}
+														/>
 														{/* <i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i> */}
 													</a>
 												</li>

@@ -16,6 +16,10 @@ export default function ProfileAbout({ user }) {
 		}
 	},[user])
 
+	if(user && user.deactivated){
+		return null
+	}
+
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
 			<div className="card-body d-block p-4">

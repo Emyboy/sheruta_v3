@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { Spinner } from 'react-activity'
 import { notification } from 'antd'
 import MetaTags from 'react-meta-tags'
 import Layout from '../../components/Layout/Layout'
@@ -185,21 +184,21 @@ export const Signup = (props) => {
 												type="checkbox"
 												className="form-check-input mt-2"
 												id="exampleCheck2"
-                                                onChange={e => setTermsAccepted(e.target.checked)}
+												onChange={(e) => setTermsAccepted(e.target.checked)}
 											/>
 											<label
 												className="form-check-label font-xsss text-grey-500"
 												for="exampleCheck2"
 											>
-												Accept <Link to='/terms'>Term and Conditions</Link>
+												Accept <Link to="/terms">Term and Conditions</Link>
 											</label>
 										</div>
 										<div className="form-group mb-1">
 											<button
 												type="submit"
-												className="form-control text-center text-white fw-600 bg-dark border-0 p-0 "
+												className="btn  w-100 text-center text-white fw-600 bg-theme border-0 "
 											>
-												Register
+												{state.loading ? 'Loading...' : 'Register'}
 											</button>
 										</div>
 									</form>

@@ -1,4 +1,3 @@
-import { notification } from "antd";
 import Alice from "../../services/Alice";
 
 export const getAllMySuggestion = () => async (dispatch) => {

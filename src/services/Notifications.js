@@ -10,7 +10,7 @@ export const notificationTypes = {
     suggestions_accept: "suggestions_accept",
 };
 
-export default {
+const NotificationService = {
     notifyUser: async ({
         title,
         sub_title,
@@ -74,3 +74,5 @@ export default {
         return seen;
     },
 };
+
+export default NotificationService

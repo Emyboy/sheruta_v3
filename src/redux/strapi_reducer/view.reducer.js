@@ -47,8 +47,6 @@ function ViewReducer(state = initialState, { type, payload }) {
 
         case "GET_ALL_SERVICES":
             return { ...state, services: payload };
-        case "GET_ALL_STATES":
-            return { ...state, states: payload };
 
         case "GET_ALL_CATEGORIES":
             return { ...state, categories: payload };

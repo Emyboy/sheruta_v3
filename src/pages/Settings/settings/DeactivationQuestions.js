@@ -1,9 +1,15 @@
+import { notification } from 'antd'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import EachQuestionSelect from '../components/EachQuestionSelect'
 
-export default function DeactivationQuestions() {
+export default function DeactivationQuestions({ done }) {
+	const { user } = useSelector((state) => state.auth)
 	const [firstAns, setFirstAns] = useState(null)
 	const [secondAns, setSecondAns] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const firstQuests = [
 		'I found a flat mate on Sheruta NG',
 		`I found a flat mate else where`,
@@ -20,6 +26,37 @@ export default function DeactivationQuestions() {
 			setSecondAns(null)
 		}
 	}, [firstAns])
+
+	useEffect(() => {
+		console.log(
+			`I deactivated account because ${firstAns} second answer is ${secondAns}`
+		)
+	}, [firstAns, secondAns])
+
+	const submitFeedback = () => {
+		setLoading(true)
+		axios(process.env.REACT_APP_API_URL + '/user-feedbacks', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${Cookies.get('token')}`,
+			},
+			data: {
+				body: `I deactivated account because ${firstAns} second answer is ${secondAns}`,
+				heading: 'Deactivated account',
+				rating: 5,
+				users_permissions_user: user?.user.id,
+			},
+		})
+			.then((res) => {
+				setLoading(false)
+				done()
+				notification.success({ message: 'Feedback sent' })
+			})
+			.catch((err) => {
+				setLoading(false)
+				notification.error({ message: 'Error sending feedback' })
+			})
+	}
 
 	return (
 		<div className="card-body mb-5 mt-5">
@@ -83,8 +120,8 @@ export default function DeactivationQuestions() {
 			)}
 			<div className="text-center">
 				<button
-					disabled={firstAns === null || secondAns === null}
-					onClick={() => alert('yo')}
+					disabled={firstAns === null || secondAns === null || loading}
+					onClick={submitFeedback}
 					className="btn w-50 bg-danger text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
 				>
 					Continue

@@ -73,11 +73,17 @@ export default function NotificationPopup() {
     };
 
     React.useEffect(() => {
-        if (user && personal_info && Notification.permission !== "granted") {
-            setTimeout(() => {
-                setShow(true);
-            }, 10000);
-        }
+        if (
+					user &&
+					personal_info &&
+					Notification.permission !== 'granted' &&
+					!sessionStorage.getItem('notify_show')
+				) {
+					setTimeout(() => {
+						setShow(true)
+						sessionStorage.setItem('notify_show', true)
+					}, 10000)
+				}
     }, [personal_info, user]);
 
     if (done) {

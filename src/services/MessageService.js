@@ -21,10 +21,10 @@ export default class MessageService {
                 },
             },
         );
-        const allConv = await axios(
-            process.env.REACT_APP_API_URL +
-                `/conversations/?owner=${user.id}&guest=${user.id}&_sort=updated_at:DESC`,
-        );
+        // const allConv = await axios(
+        //     process.env.REACT_APP_API_URL +
+        //         `/conversations/?owner=${user.id}&guest=${user.id}&_sort=updated_at:DESC`,
+        // );
         const sorted = [...conv1.data, ...conv2.data].sort((a, b) => {
             return new Date(b.last_visited) - new Date(a.last_visited);
         });
