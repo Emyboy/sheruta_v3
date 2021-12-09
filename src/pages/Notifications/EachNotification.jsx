@@ -21,7 +21,7 @@ export default function EachNotification({ data }) {
 	return (
 		<li className="border-bottom">
 			<Link
-				to={`/user/${otherUser?.username}`}
+				to={otherUser ? `/user/${otherUser?.username}`: '#'}
 				style={{ paddingLeft: '0' }}
 				className={`d-flex align-items-center p-3 rounded-3 ${
 					!data?.seen && 'bg-lightblue'
@@ -34,7 +34,7 @@ export default function EachNotification({ data }) {
 					/>
 					{/* <i className="feather-heart text-white bg-red-gradiant me-2 font-xssss notification-react"></i> */}
 					<h6 className="font-xssss text-grey-900 text-grey-900 mb-0 mt-0 fw-500 lh-20">
-						<strong>{otherUser?.first_name}</strong>: {data?.title}{' '}
+						<strong>{otherUser?.first_name || "Someone"}</strong>: {data?.title}{' '}
 						<span className="d-block text-grey-500 font-xssss fw-600 mb-0 mt-0 0l-auto">
 							{' '}
 							{moment(data?.created_at).fromNow()}

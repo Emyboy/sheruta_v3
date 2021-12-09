@@ -247,13 +247,13 @@ export default function RequestDetails(props) {
 														</button>
 													</ImgContainer>
 												) : null}
-												<div className="container-fluid">
+												<div className="container-fluid pl-3">
 													<div className="row justify-content-between">
 														{deactivated ? (
 															<DeactivatedBanner />
 														) : (
 															<div
-																className="d-flex col-md-6 pl-0 text-dark"
+																className="d-flex col-md-8 pl-0 text-dark"
 																style={{
 																	alignItems: 'center',
 																}}
@@ -268,36 +268,6 @@ export default function RequestDetails(props) {
 																{request.location}
 															</div>
 														)}
-														<div className="col-md-5">
-															{user ? (
-																// <a
-																//     onClick={
-																//         handleCallRequest
-																//     }
-																//     href={`tel:${request.users_permissions_user.phone_number}`}
-																//     title=""
-																//     className="main-btn bg-theme text-white"
-																//     data-ripple=""
-																// >
-																//     Call Me
-																//     <i className="fa fa-phone ml-2"></i>
-																// </a>
-																<UserAction
-																	user={request.users_permissions_user}
-																/>
-															) : (
-																// For Those Who Aren't Logged In
-																<Link
-																	to={`/signup`}
-																	title=""
-																	className="main-btn bg-theme text-white"
-																	data-ripple=""
-																>
-																	Call Me
-																	<i className="fa fa-phone ml-2"></i>
-																</Link>
-															)}
-														</div>
 													</div>
 												</div>
 												<div className="description mt-3">
@@ -335,6 +305,34 @@ export default function RequestDetails(props) {
 															)}
 														</div>
 													</div>
+												</div>
+												<div className="col-md-5 mt-4">
+													{user ? (
+														// <a
+														//     onClick={
+														//         handleCallRequest
+														//     }
+														//     href={`tel:${request.users_permissions_user.phone_number}`}
+														//     title=""
+														//     className="main-btn bg-theme text-white"
+														//     data-ripple=""
+														// >
+														//     Call Me
+														//     <i className="fa fa-phone ml-2"></i>
+														// </a>
+														<UserAction user={request.users_permissions_user} />
+													) : (
+														// For Those Who Aren't Logged In
+														<Link
+															to={`/signup`}
+															title=""
+															className="main-btn bg-theme text-white"
+															data-ripple=""
+														>
+															Call Me
+															<i className="fa fa-phone ml-2"></i>
+														</Link>
+													)}
 												</div>
 											</div>
 										</div>

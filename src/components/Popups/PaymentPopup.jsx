@@ -11,16 +11,16 @@ const PaymentPopup = (props) => {
 
         return (
             <Modal show={view.showPaymentPopup} className=''>
-                <Modal.Body>
+                <Modal.Body className='card'>
                     <div className='text-center'>
                         <i className='ti-alert display-3 text-warning'></i>
-                        <h4><b>No or invalid subscription plan</b></h4>
+                        <h1><b>No or invalid subscription plan</b></h1>
                     </div>
                     <hr className='text-muted' />
                     <label><b>Why you are seeing this.</b></label>
                     <ol>
-                        <li>Your subscription may have expired</li>
-                        <li>Your subscription type doesn't enable you perform this action</li>
+                        <li>1. Your subscription may have expired</li>
+                        <li>2. Your subscription type doesn't enable you perform this action</li>
                     </ol>
                     <span className='text-danger'><b>NOTE: </b></span><span>If this is a mistake, don't fail to contact us</span>
                     <hr className='text-muted' />
@@ -40,18 +40,15 @@ const PaymentPopup = (props) => {
                             />
                         </Link>
                         <br />
-                        <Btn
-                            text='Close'
-                            className='btn-sm mt-4 bg-light text-danger'
-                            onClick={() => {
+                      
+                        <button onClick={() => {
                                 store.dispatch({
                                     type: 'SET_VIEW_STATE',
                                     payload: {
                                         showPaymentPopup: false
                                     }
                                 })
-                            }}
-                        />
+                            }} className='btn text-danger mt-4'>Close</button>
                     </div>
                 </Modal.Body>
             </Modal>

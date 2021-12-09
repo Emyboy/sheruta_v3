@@ -6,10 +6,12 @@ import MessagePanel from './MessagePanel'
 import SideNav from './SideNav'
 import Global from '../../Global'
 
-export default function Layout({ currentPage, children }) {
+export default function Layout({ currentPage, children, showMessages }) {
 	const { user } = useSelector((state) => state.auth)
 	const [showNav, setShowNav] = useState(false)
-	const [showChat, setShowChat] = useState(!Global.isMobile)
+	const [showChat, setShowChat] = useState(
+		showMessages && window.innerWidth > 700
+	)
 	return (
 		<div>
 			<Header

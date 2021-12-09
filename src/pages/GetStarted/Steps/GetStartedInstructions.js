@@ -28,7 +28,7 @@ export default function GetStartedInstructions(props) {
     return (
         <div className="pb-4 container">
             <div className="text-center">
-                <h2 className="">What You Should Know</h2>
+                <h1 className="">What You Should Know</h1>
                 <h5 className="text-muted">
                     For a secure flat share community, we require some
                     information about you.
@@ -53,13 +53,14 @@ export default function GetStartedInstructions(props) {
                 <h5>If you are okay with this click agree.</h5>
             </div>
             <hr />
-            <div className="row justify-content-around">
-                <Btn id="agree-btn" text="Agree" onClick={handleAgree} />
+            <div className="text-center">
+                <Btn id="agree-btn" text="Agree" onClick={handleAgree} className="w-50 mb-4" /><br />
                 <Btn
                     id="cancel-btn"
                     text="Cancel"
                     danger
                     onClick={handleDisagree}
+                    className="w-50"
                 />
             </div>
         </div>
