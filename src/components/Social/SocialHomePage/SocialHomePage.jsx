@@ -21,13 +21,14 @@ import UserFeedCard from './UserFeedCard'
 export default (props) => {
 	localStorage.setItem('after_login', '/feeds')
 	const auth = useSelector((state) => state.auth)
-	const view = useSelector((state) => state.view)
+	const view = useSelector((state) => state.view);
+	const { personal_info } = view;
 	const dispatch = useDispatch()
 	const [state, setState] = useState({
 		properties: [],
 		list: [],
 	})
-	const [newUsers, setNewUsers] = useState([])
+	const [filter, setFilter] = useState('all')
 
 	useEffect(() => {
 		if (auth.user) {
@@ -112,18 +113,22 @@ export default (props) => {
 									>
 										<li className="active list-inline-item me-5">
 											<a
-												className="fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block active"
-												href="#navtabs1"
+												className={`fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block ${
+													filter === 'all' && 'active'
+												}`}
 												data-toggle="tab"
+												onClick={() => setFilter('all')}
 											>
 												All
 											</a>
 										</li>
 										<li className="list-inline-item me-5">
 											<a
-												className="fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block"
-												href="#navtabs2"
+												className={`fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block ${
+													filter === 'for you' && 'active'
+												}`}
 												data-toggle="tab"
+												onClick={() => setFilter('for you')}
 											>
 												For You
 											</a>
@@ -132,14 +137,34 @@ export default (props) => {
 								</div>
 							</div>
 
-							{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
-								if (i == 5) {
-									return <img src={match} className="rounded-3 mb-3" />
-								} else if (i === 2) {
-									return <PostRequestAds />
-								}
-								return <EachSocialRequest key={i + ' request'} data={val} />
-							})}
+							{filter === 'all' && (
+								<>
+									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
+										if (i == 5) {
+											return <img src={match} className="rounded-3 mb-3" />
+										} else if (i === 2) {
+											return <PostRequestAds />
+										}
+										return <EachSocialRequest key={i + ' request'} data={val} />
+									})}
+								</>
+							)}
+							{filter === 'for you' && (
+								<>
+									{(view['feed'] ? view['feed'] : state.list)
+										.filter((x) => x.is_searching == !personal_info.looking_for)
+										.map((val, i) => {
+											if (i == 5) {
+												return <img src={match} className="rounded-3 mb-3" />
+											} else if (i === 2) {
+												return <PostRequestAds />
+											}
+											return (
+												<EachSocialRequest key={i + ' request'} data={val} />
+											)
+										})}
+								</>
+							)}
 							{state.list.length === 0 ? (
 								<div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
 									<Dots />

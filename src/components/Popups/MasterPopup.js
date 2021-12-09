@@ -11,6 +11,7 @@ import {
 	getAllNotifications,
 	getUnreadMessageCount,
 	getAllConversations,
+	getUserPaymentPlan,
 } from '../../redux/strapi_actions/view.action'
 import {
 	getAllSuggestionsByStatus,
@@ -34,6 +35,7 @@ const MasterPopup = (props) => {
 		dispatch(getAllWorkIndustries())
 		if (user) {
 			dispatch(setUserOnline())
+			dispatch(getUserPaymentPlan())
 		}
 	}, [])
 
@@ -45,6 +47,7 @@ const MasterPopup = (props) => {
 			dispatch(getUnreadMessageCount())
 			dispatch(getAllConversations())
 			dispatch(getAllSuggestionsByStatus('accepted'))
+			dispatch(getUserPaymentPlan())
 		}
 	}, [user])
 
@@ -58,7 +61,7 @@ const MasterPopup = (props) => {
 	// }, 60000)
 	useInterval(() => {
 		if (user) {
-			dispatch(setUserOnline())
+			dispatch(setUserOnline());
 		}
 	}, 100000)
 

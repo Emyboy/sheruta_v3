@@ -5,6 +5,8 @@ const initialState = {
     showPaymentPopup: false,
     personal_info: null,
     payment_types: [],
+    payment_plan: null,
+    payment_plan_loading: false,
     states: [],
     work_industries: [],
     configureView: false,
