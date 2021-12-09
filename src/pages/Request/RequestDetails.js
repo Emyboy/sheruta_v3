@@ -155,11 +155,11 @@ export default function RequestDetails(props) {
 														<Link
 															to={`/user/${request.users_permissions_user.username}`}
 														>
-															<a className="text-dark">
+															<a className="text-dark d-flex">
 																{deactivated
 																	? '..... .....'
 																	: request.users_permissions_user
-																			.first_name}{' '}
+																			.first_name}{' '}<VerifiedBadge user={request.users_permissions_user} className={'ml-2'} size={'15'} />
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
