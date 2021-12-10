@@ -54,7 +54,7 @@ export default function Header({
 						<span className="navbar-toggler-icon"></span>
 					</button>
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<NavWrapper className="navbar-nav me-auto mb-2 mb-lg-0">
+						<NavWrapper className="mt-2 navbar-nav me-auto mb-2 mb-lg-0">
 							<li className="nav-item">
 								<Link to="/">
 									<a className="nav-link" aria-current="page">
@@ -113,12 +113,12 @@ export default function Header({
 						</NavWrapper>
 						<form className="d-flex">
 							<Link to="/login">
-								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss p-3 ms-auto w100 text-center lh-20 rounded-xl">
+								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
 									Login
 								</a>
 							</Link>
 							<Link to="/signup">
-								<a className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss p-3 ms-2 w100 text-center lh-20 rounded-xl">
+								<a className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss ms-2 w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
 									Register
 								</a>
 							</Link>

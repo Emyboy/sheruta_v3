@@ -20,9 +20,11 @@ const Wrapper = styled.section`
 
 export default function HowToUse() {
 	return (
-		<Wrapper>
-			<div className="text-center heading">
-				<h2>How It Works</h2>
+		<Wrapper className="container-fluid mb-5">
+			<div className="text-center heading mb-4">
+				<h2 style={{ fontSize: '40px'}}>
+					<b>How It Works</b>
+				</h2>
 			</div>
 
 			<div className="row justify-content-center">

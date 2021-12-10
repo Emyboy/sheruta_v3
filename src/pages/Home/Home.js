@@ -11,35 +11,45 @@ import ExploreByPopularCity from './Graphics'
 import Partners from '../../assets/img/partners.png'
 import { Redirect } from 'react-router'
 import { useSelector } from 'react-redux'
+import Global from '../../Global'
+import { Link } from 'react-router-dom';
+import WhatPeopleSay from './WhatPeopleSay'
 
 const Wrapper = styled.div`
 	.jumbotron {
 		margin-top: 10vh;
 		padding-top: 30vh;
+		height: 90vh;
 	}
 
-	@media (max-width: 576px) {
+	@media (max-width: 1476px) {
 		.jumbotron {
+			margin-top: 0;
 			margin-top: 5vh;
-			padding-top: 30vh;
-			height: 100vh;
+			padding-top: 20vh;
+			height: ${Global.isMobile ? '70vh' : '100vh'};
+			background-image: url('https://www.pngkit.com/png/full/11-114242_technology-pattern-png-png-freeuse-vancouver.png');
+			img {
+				display: none;
+			}
 		}
-		.man {
+		/* .man {
 			top: 3vh;
 			left: 51vw;
 			width: 80vw;
+			position: absolute;
 		}
 		.floating-balls {
 			width: 400px;
 			top: 70vh !important;
 			left: 60vw !important;
-		}
+		} */
 	}
 `
 
 export default function Home() {
-	const { user } = useSelector(state => state.auth);
-	if(user){
+	const { user } = useSelector((state) => state.auth)
+	if (user) {
 		return <Redirect to={'/feeds'} />
 	}
 	return (
@@ -48,13 +58,24 @@ export default function Home() {
 				<div className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
 						<div className="z-index-1">
-							<h1 style={{ fontSize: '4rem', zIndex: 5 }} className="text-dark">
-								Find A Verified Flat Mate
+							<h1
+								style={{
+									fontSize: Global.isMobile ? '2rem' : '4rem',
+									zIndex: 5,
+								}}
+								className="text-dark"
+							>
+								<b>Find A Verified Flat Mate</b>
 							</h1>
-							<h2 style={{ fontSize: '2rem' }}>Submit your property today.</h2>
-							<button className="btn bg-current text-white shadow btn-lg mt-3">
+							<h2 style={{ fontSize: Global.isMobile ? '' : '2rem' }}>
+								Submit your property today.
+							</h2>
+							<Link
+								className="btn bg-theme text-white btn-lg shadow mt-3"
+								to="/start"
+							>
 								Get Started
-							</button>
+							</Link>
 						</div>
 						<img
 							src={man}
@@ -75,7 +96,7 @@ export default function Home() {
 				</div>
 				<HowToUse />
 				<ExploreByPopularCity />
-				<div className="container mt-6 card border-0 rounded shadow">
+				<div className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
 							backgroundPosition: 'top',
@@ -91,21 +112,29 @@ export default function Home() {
 									Join the community, post a request and peer with other like
 									minded individuals
 								</h3>
-								<button className="btn btn-lg bg-theme shadow text-white mt-2">
+								<Link
+									className="btn bg-theme text-white btn-lg shadow"
+									to="/start"
+								>
 									Get Started
-								</button>
+								</Link>
 							</div>
 							<div className="col-lg-5 col-sm-12 mt-3 mb-3">
-								<img src={community} />
+								<img src={community} width={'90%'} className='mt-4' />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div className="text-center mb-5" style={{ marginTop: '10vh' }}>
-					<strong>
-						<h2 style={{ fontSize: '50px' }}>Our Partners</h2>
-					</strong>
-					<img src={Partners} width="800px" />{' '}
+				<div className='container mt-5'>
+					<WhatPeopleSay />
+				</div>
+				<div className="container">
+					<div className="text-center mb-5" style={{ marginTop: '10vh' }}>
+						<h2 className="mb-3 text-gray" style={{ fontSize: '40px' }}>
+							<b>Our Partners</b>
+						</h2>
+						<img src={Partners} width="90%" />{' '}
+					</div>
 				</div>
 			</Wrapper>
 			<Footer />
