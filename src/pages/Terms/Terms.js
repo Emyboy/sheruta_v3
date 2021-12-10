@@ -18,7 +18,7 @@ export default function Terms() {
                 ></meta>
             </Meta>
             <section className="our-terms bgc-f7 pt-5">
-                <div className="container" style={{ marginBottom: "10vh" }}>
+                <div className="container card rounded-xl shadow-sm pt-5 pb-5" style={{ marginBottom: "10vh" }}>
                     <div className="row justify-content-center">
                         <div className="col-lg-8 col-xl-8">
                             <div className="terms_condition_grid">

@@ -31,6 +31,7 @@ export default function UserAction({ user, disable, alignment }) {
 					<Link
 						to={payment_plan ? `/messages/new/${user.id}` : '#'}
 						onClick={handleButtonClicks}
+						className='mr-3'
 					>
 						<button
 							disable={disable}
@@ -39,12 +40,12 @@ export default function UserAction({ user, disable, alignment }) {
 							<IoMail className="mr-2" />
 							Message
 						</button>
-					</Link>
-					<a href={payment_plan ? `tel:${user?.phone_number}`: `#call-error`}>
+					</Link>{' '}
+					<a href={payment_plan ? `tel:${user?.phone_number}`: `#call-error`} className='ml-3'>
 						<button
 							disabled={disable}
                             onClick={handleButtonClicks}
-							className="btn shadow bg-theme text-white rounded ml-2 mr-2"
+							className="btn shadow bg-theme text-white rounded mr-2"
 						>
 							<IoCallSharp className="mr-2" />
 							Call Me

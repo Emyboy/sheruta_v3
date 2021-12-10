@@ -21,8 +21,8 @@ import UserFeedCard from './UserFeedCard'
 export default (props) => {
 	localStorage.setItem('after_login', '/feeds')
 	const auth = useSelector((state) => state.auth)
-	const view = useSelector((state) => state.view);
-	const { personal_info } = view;
+	const view = useSelector((state) => state.view)
+	const { personal_info } = view
 	const dispatch = useDispatch()
 	const [state, setState] = useState({
 		properties: [],
@@ -103,7 +103,13 @@ export default (props) => {
 								<UserFeedCard />
 							</div>
 						)}
-						<div className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1">
+						<div
+							className="col-xl-8 col-xxl-8 col-lg-8 pl-1 pr-1"
+							style={{
+								paddingLeft: Global.isMobile ? 0 : 2,
+								paddingRight: Global.isMobile ? 0 : 2,
+							}}
+						>
 							<div className="card shadow-sm rounded-xxl border-0 mb-3 mt-3">
 								<div className="card-body d-block w-100 shadow-none mb-0 p-0 ">
 									<ul
@@ -141,7 +147,9 @@ export default (props) => {
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 										if (i == 5) {
-											return <img src={match} className="rounded-3 mb-3" />
+											return (
+												<img src={match} className="rounded-3 mb-3 col-12" />
+											)
 										} else if (i === 2) {
 											return <PostRequestAds />
 										}
@@ -155,7 +163,9 @@ export default (props) => {
 										.filter((x) => x.is_searching == !personal_info.looking_for)
 										.map((val, i) => {
 											if (i == 5) {
-												return <img src={match} className="rounded-3 mb-3" />
+												return (
+													<img src={match} className="rounded-3 mb-3 col-12" />
+												)
 											} else if (i === 2) {
 												return <PostRequestAds />
 											}

@@ -6,7 +6,8 @@ import { notification, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
 import logo from '../../assets/img/logo.png'
-import Global from '../../Global'
+import Global from '../../Global';
+import PaymentAlert from '../PaymentAlert/PaymentAlert'
 
 const NavWrapper = styled.ul`
 	li > a {
@@ -27,7 +28,9 @@ export default function Header({
 }) {
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
-	const { notifications, messages } = useSelector((state) => state.view)
+	const { notifications, messages, payment_plan } = useSelector(
+		(state) => state.view
+	)
 	const [showNotification, setNotification] = useState(false)
 
 	if (!user) {
@@ -266,37 +269,45 @@ export default function Header({
 					style={{ right: '9vw', width: '250px' }}
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
-					{notifications.map((val, i) => {
-						if (i > 6) {
-							return null
-						}
-						const otherUser = val?.users_permissions_user
-						const user = val?.owner
-						return (
-							<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
-								<img
-									src={otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR}
-									alt="user"
-									className="w40 position-absolute left-0"
-								/>
-								<Link to={otherUser ? `/user/${otherUser?.username}`: '#'}>
-									<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
-										{otherUser?.first_name || 'Someone'}{' '}
-										<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
-											{' '}
-											{moment(val?.created_at).fromNow()}
-										</span>
-									</h5>
-								</Link>
-								<h6 className="text-grey-500 fw-500 font-xssss lh-4">
-									{val?.title}
-								</h6>
+					{!payment_plan ? (
+						<PaymentAlert />
+					) : (
+						<>
+							{notifications.map((val, i) => {
+								if (i > 6) {
+									return null
+								}
+								const otherUser = val?.users_permissions_user
+								const user = val?.owner
+								return (
+									<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+										<img
+											src={
+												otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
+											}
+											alt="user"
+											className="w40 position-absolute left-0"
+										/>
+										<Link to={otherUser ? `/user/${otherUser?.username}` : '#'}>
+											<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
+												{otherUser?.first_name || 'Someone'}{' '}
+												<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
+													{' '}
+													{moment(val?.created_at).fromNow()}
+												</span>
+											</h5>
+										</Link>
+										<h6 className="text-grey-500 fw-500 font-xssss lh-4">
+											{val?.title}
+										</h6>
+									</div>
+								)
+							})}
+							<div className="text-center">
+								<Link to="/notifications">View All</Link>
 							</div>
-						)
-					})}
-					<div className="text-center">
-						<Link to="/notifications">View All</Link>
-					</div>
+						</>
+					)}
 				</div>
 
 				<a
