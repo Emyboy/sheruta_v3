@@ -10,7 +10,7 @@ export default function UserFeedCard() {
 		<div className="card w-100 shadow-xss rounded-xxl overflow-hidden border-0 mb-3 mt-3 pb-3">
 			<div
 				className="card-body position-relative h150 bg-image-cover bg-image-center"
-				style={{ backgroundImage: `url("https://picsum.photos/400/400")` }}
+				style={{ backgroundImage: `url("https://picsum.photos/200/200")` }}
 			></div>
 			<Link to={`/user/${user.user.username}`}>
 				<div className="card-body d-block pt-4 text-center">

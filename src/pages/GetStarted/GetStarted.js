@@ -99,7 +99,7 @@ export const GetStarted = (props) => {
                 </MetaTags>
 
                 <secion>
-                    <div className='card container bg-white mt-5 mb-4 border-success border rounded'
+                    <div className='card container bg-white mt-5 mb-4 border-success border rounded pt-3 pb-5'
                     >
                         {/* <div className="row mb-3">
                             <div className="col text-center">

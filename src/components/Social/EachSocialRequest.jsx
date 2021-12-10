@@ -25,16 +25,12 @@ export default function EachRequest({ data }) {
 						/>
 					</figure>
 				)}
-				<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-					<Link to={`/user/${user.username}`}>
-						<a className="text-dark d-flex">
+				<h4 className="fw-700 text-grey-900 font-xssss mt-1 w-50">
+					<Link to={`/user/${user.username}`} className=" d-flex justify-context-evenly">
+						<a className="text-dark" >
 							{deactivated ? '.... ....' : user.first_name}{' '}
-							<VerifiedBadge
-								user={user}
-								className={'ml-2'}
-								size={15}
-							/>
-						</a>
+						</a>{' '}
+						<VerifiedBadge user={user} className={'ml-2'} size={15} />
 					</Link>
 					<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
 						{moment(data.created_at).fromNow()}
@@ -203,7 +199,7 @@ export default function EachRequest({ data }) {
 						</b>
 					</figure>
 				</div>
-				<div className="col-md-5">
+				<div className="col-md-6">
 					<UserAction alignment="end" user={user} />
 				</div>
 			</div>
