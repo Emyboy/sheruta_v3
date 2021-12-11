@@ -78,6 +78,14 @@ export default function SideNav({ show }) {
 						</div>
 						<ul className="mb-3">
 							<li>
+								<a className="nav-content-bttn open-font">
+									<i className="font-xl text-current me-3">
+										<RiUserSearchLine />
+									</i>
+									<span>How It Works</span>
+								</a>
+							</li>
+							<li>
 								<Link to="/about" className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">
 										<MdWorkOutline />
@@ -93,14 +101,6 @@ export default function SideNav({ show }) {
 									</i>
 									<span>Term and Conditions </span>
 								</Link>
-							</li>
-							<li>
-								<a className="nav-content-bttn open-font">
-									<i className="font-xl text-current me-3">
-										<RiUserSearchLine />
-									</i>
-									<span>How It Works</span>
-								</a>
 							</li>
 							{/* <li>
 								<a className="nav-content-bttn open-font">

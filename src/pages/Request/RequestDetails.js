@@ -308,18 +308,6 @@ export default function RequestDetails(props) {
 												</div>
 												<div className="col-md-5 mt-4">
 													{user ? (
-														// <a
-														//     onClick={
-														//         handleCallRequest
-														//     }
-														//     href={`tel:${request.users_permissions_user.phone_number}`}
-														//     title=""
-														//     className="main-btn bg-theme text-white"
-														//     data-ripple=""
-														// >
-														//     Call Me
-														//     <i className="fa fa-phone ml-2"></i>
-														// </a>
 														<UserAction user={request.users_permissions_user} />
 													) : (
 														// For Those Who Aren't Logged In
