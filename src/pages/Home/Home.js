@@ -26,9 +26,11 @@ const Wrapper = styled.div`
 		.jumbotron {
 			margin-top: 0;
 			margin-top: 5vh;
-			padding-top: 20vh;
-			height: ${Global.isMobile ? '70vh' : '100vh'};
+			padding-top: 30vh;
+			height: ${Global.isMobile ? '90vh' : '100vh'};
 			background-image: url('https://www.pngkit.com/png/full/11-114242_technology-pattern-png-png-freeuse-vancouver.png');
+			background-position: 36vw;
+			background-repeat: no-repeat;
 			img {
 				display: none;
 			}
@@ -63,15 +65,18 @@ export default function Home() {
 									fontSize: Global.isMobile ? '2rem' : '4rem',
 									zIndex: 5,
 								}}
-								className="text-dark"
+								className="text-dark animate__animated animate__fadeInLeft"
 							>
 								<b>Find A Verified Flat Mate</b>
 							</h1>
-							<h2 style={{ fontSize: Global.isMobile ? '' : '2rem' }}>
+							<h2
+								style={{ fontSize: Global.isMobile ? '' : '2rem' }}
+								className="animate__animated animate__fadeInUp"
+							>
 								Submit your property today.
 							</h2>
 							<Link
-								className="btn bg-theme text-white btn-lg shadow mt-3"
+								className="btn bg-theme text-white btn-lg shadow mt-3 animate__animated animate__fadeInUp"
 								to="/start"
 							>
 								Get Started
@@ -80,11 +85,11 @@ export default function Home() {
 						<img
 							src={man}
 							style={{ position: 'absolute', right: '2vw' }}
-							className="man"
+							className="man animate__animated animate__fadeInRight"
 						/>
 						<img
 							src={balls}
-							className="z-index-0 floating-balls"
+							className="z-index-0 floating-balls animate__animated animate__fadeInUp"
 							style={{
 								position: 'absolute',
 								left: '10vw',
@@ -120,12 +125,12 @@ export default function Home() {
 								</Link>
 							</div>
 							<div className="col-lg-5 col-sm-12 mt-3 mb-3">
-								<img src={community} width={'90%'} className='mt-4' />
+								<img src={community} width={'90%'} className="mt-4" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div className='container mt-5'>
+				<div className="container mt-5">
 					<WhatPeopleSay />
 				</div>
 				<div className="container">
