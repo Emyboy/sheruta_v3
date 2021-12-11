@@ -57,7 +57,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<Wrapper className="mb-5">
-				<div className="jumbotron bg-white home-one home1_bgi1">
+				<article className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
 						<div className="z-index-1">
 							<h1
@@ -98,10 +98,10 @@ export default function Home() {
 							}}
 						/>
 					</div>
-				</div>
+				</article>
 				<HowToUse />
 				<ExploreByPopularCity />
-				<div className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
+				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
 							backgroundPosition: 'top',
@@ -129,7 +129,7 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-				</div>
+				</article>
 				<div className="container mt-5">
 					<WhatPeopleSay />
 				</div>

@@ -5,7 +5,7 @@ import Global from '../../Global'
 
 const EachQuote = ({ full_name, review_text, role }) => {
 	return (
-		<div className="card rounded-xl shadow-sm" style={{ height: Global.isMobile ?'50vh': "35vh" }}>
+		<article className="card rounded-xl shadow-sm" style={{ height: Global.isMobile ?'50vh': "35vh" }}>
 			<div className="card-body">
 				<div className="testimonial_post">
 					<div className="thumb d-flex">
@@ -30,7 +30,7 @@ const EachQuote = ({ full_name, review_text, role }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 	)
 }
 

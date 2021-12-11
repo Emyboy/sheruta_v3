@@ -4,7 +4,7 @@ import auth from '../../assets/img/auth.svg'
 import verify from '../../assets/img/verify.svg'
 import post from '../../assets/img/post.svg'
 
-const Wrapper = styled.section`
+const Wrapper = styled.article`
 	margin-top: 20vh;
 	.heading > h2 {
 		font-size: 60px;

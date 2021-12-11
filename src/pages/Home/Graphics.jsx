@@ -5,8 +5,7 @@ import whatwedo from "../../assets/img/whatwedo_bg.svg";
 
 export default function ExploreByPopularCity() {
     return (
-        <div>
-            <section
+            <article
                 className="mb-5"
                 style={{ backgroundImage: `url(${whatwedo})` }}
             >
@@ -43,7 +42,6 @@ export default function ExploreByPopularCity() {
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </article>
     );
 }
