@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import HowToUse from './HowToUse'
 import man from '../../assets/img/man-sitting.svg'
-import floatLarge from '../../assets/img/float-large.svg'
+// import floatLarge from '../../assets/img/float-large.svg'
 import balls from '../../assets/img/floating-pebbles.svg'
 import community from '../../assets/img/community.svg'
 import Layout from '../../components/Layout/Layout'
@@ -26,9 +26,11 @@ const Wrapper = styled.div`
 		.jumbotron {
 			margin-top: 0;
 			margin-top: 5vh;
-			padding-top: 20vh;
-			height: ${Global.isMobile ? '70vh' : '100vh'};
+			padding-top: 30vh;
+			height: ${Global.isMobile ? '90vh' : '100vh'};
 			background-image: url('https://www.pngkit.com/png/full/11-114242_technology-pattern-png-png-freeuse-vancouver.png');
+			background-position: 36vw;
+			background-repeat: no-repeat;
 			img {
 				display: none;
 			}
@@ -55,7 +57,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<Wrapper className="mb-5">
-				<div className="jumbotron bg-white home-one home1_bgi1">
+				<article className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
 						<div className="z-index-1">
 							<h1
@@ -63,15 +65,18 @@ export default function Home() {
 									fontSize: Global.isMobile ? '2rem' : '4rem',
 									zIndex: 5,
 								}}
-								className="text-dark"
+								className="text-dark animate__animated animate__fadeInLeft"
 							>
 								<b>Find A Verified Flat Mate</b>
 							</h1>
-							<h2 style={{ fontSize: Global.isMobile ? '' : '2rem' }}>
+							<h2
+								style={{ fontSize: Global.isMobile ? '' : '2rem' }}
+								className="animate__animated animate__fadeInUp"
+							>
 								Submit your property today.
 							</h2>
 							<Link
-								className="btn bg-theme text-white btn-lg shadow mt-3"
+								className="btn bg-theme text-white btn-lg shadow mt-3 animate__animated animate__fadeInUp"
 								to="/start"
 							>
 								Get Started
@@ -80,11 +85,11 @@ export default function Home() {
 						<img
 							src={man}
 							style={{ position: 'absolute', right: '2vw' }}
-							className="man"
+							className="man animate__animated animate__fadeInRight"
 						/>
 						<img
 							src={balls}
-							className="z-index-0 floating-balls"
+							className="z-index-0 floating-balls animate__animated animate__fadeInUp"
 							style={{
 								position: 'absolute',
 								left: '10vw',
@@ -93,10 +98,10 @@ export default function Home() {
 							}}
 						/>
 					</div>
-				</div>
+				</article>
 				<HowToUse />
 				<ExploreByPopularCity />
-				<div className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
+				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
 							backgroundPosition: 'top',
@@ -120,12 +125,12 @@ export default function Home() {
 								</Link>
 							</div>
 							<div className="col-lg-5 col-sm-12 mt-3 mb-3">
-								<img src={community} width={'90%'} className='mt-4' />
+								<img src={community} width={'90%'} className="mt-4" />
 							</div>
 						</div>
 					</div>
-				</div>
-				<div className='container mt-5'>
+				</article>
+				<div className="container mt-5">
 					<WhatPeopleSay />
 				</div>
 				<div className="container">

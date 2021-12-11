@@ -107,7 +107,7 @@ svg {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 .modal {
-    background: rgba(15, 26, 9, 0.433);
+    /* background: rgba(15, 26, 9, 0.433); */
     backdrop-filter: blur(10.5px);
     -webkit-backdrop-filter: blur(10.5px);
 }

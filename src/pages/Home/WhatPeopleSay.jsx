@@ -1,22 +1,27 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
 import Heading from '../../components/Heading/Heading'
+import Global from '../../Global'
 
 const EachQuote = ({ full_name, review_text, role }) => {
 	return (
-		<div className="card rounded-xl shadow-sm" style={{ height: '380px' }}>
+		<article className="card rounded-xl shadow-sm" style={{ height: Global.isMobile ?'50vh': "35vh" }}>
 			<div className="card-body">
 				<div className="testimonial_post">
-					<div className="thumb">
+					<div className="thumb d-flex">
 						<img
 							src="https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2F878597_user_512x512.png?alt=media&token=34573067-2e82-4b7f-8765-ee7b20ff0ba9"
 							alt="1.jpg"
 							style={{ height: '90px', marginTop: '10px' }}
 						/>
-						<h2 className="title mt-3">{full_name}</h2>
-						<small className="text-thm">{role}</small>
+						<div className="ml-3">
+							<h2 className="title mt-3">
+								<b>{full_name}</b>
+							</h2>
+							<small className="text-thm">{role}</small>
+						</div>
 					</div>
-                    <hr />
+					<hr />
 					<div className="details">
 						<div className="icon text-thm">
 							<span className="fa fa-quote-left"></span>
@@ -25,18 +30,18 @@ const EachQuote = ({ full_name, review_text, role }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 	)
 }
 
 export default function WhatPeopleSay() {
 	return (
-		<article className="bgc-f7 pb-4 pt-4 bg-accent rounded-xl">
+		<article className="bgc-f7 pb-5 pt-4 bg-accent rounded-xl">
 			<div className="container ">
-				<h1 className="mt-2 mb-4 text-white">
+				<h1 className="mt-2 mb-4 text-white text-center h1">
 					<b>What People Say</b>
 				</h1>
-				<div className="row">
+				<div className="row justify-content-center">
 					<div className="col-lg-6 col-md-7">
 						<div
 							className="smart-textimonials smart-light slick-initialized slick-slider"
