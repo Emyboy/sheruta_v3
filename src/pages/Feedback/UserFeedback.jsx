@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
+import { FaRegAngry, FaRegFrown, FaRegMeh, FaRegSmileBeam } from 'react-icons/fa';
 
 const UserFeedback = (props) => {
 
@@ -61,17 +62,17 @@ const UserFeedback = (props) => {
         return (
             <Layout>
                 <div className='container'>
-                    <div className='bg-white mt-5 mb-5 rounded'>
+                    <div className='card mt-5 mb-5 rounded'>
                         <div className='card-body'>
                             {
                                 state.step === 1 ? <div className='text-center animated animate__fadeIn'>
                                     <h2 className='mb-4'><b>Hi there.</b></h2>
                                     <h4>Kindly rate your experience so far.</h4>
                                     <div className='row justify-content-center mt-2'>
-                                        <i className={`link m-2 fa fa-smile-beam display-5 ${data.rating === 4 ? 'text-theme' : ''}`} onClick={() => setData({ ...data, rating: 4 })}></i>
-                                        <i className={`link m-2 fa fa-meh display-5 ${data.rating === 3 ? 'text-warning' : ''}`} onClick={() => setData({ ...data, rating: 3 })}></i>
-                                        <i className={`link m-2 fa fa-frown display-5 ${data.rating === 2 ? 'text-info' : ''}`} onClick={() => setData({ ...data, rating: 2 })}></i>
-                                        <i className={`link m-2 fa fa-angry display-5 ${data.rating === 1 ? 'text-danger' : ''}`} onClick={() => setData({ ...data, rating: 1 })}></i>
+                                        <i className={`link m-2 fa fa-smile-beam display-5 ${data.rating === 4 ? 'text-theme' : ''}`} onClick={() => setData({ ...data, rating: 4 })}><FaRegSmileBeam /></i>
+                                        <i className={`link m-2 fa fa-meh display-5 ${data.rating === 3 ? 'text-warning' : ''}`} onClick={() => setData({ ...data, rating: 3 })}><FaRegMeh /></i>
+                                        <i className={`link m-2 fa fa-frown display-5 ${data.rating === 2 ? 'text-info' : ''}`} onClick={() => setData({ ...data, rating: 2 })}><FaRegFrown /></i>
+                                        <i className={`link m-2 fa fa-angry display-5 ${data.rating === 1 ? 'text-danger' : ''}`} onClick={() => setData({ ...data, rating: 1 })}><FaRegAngry /></i>
                                     </div>
                                 </div> : null
                             }

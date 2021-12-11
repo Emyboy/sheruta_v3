@@ -27,17 +27,18 @@ import FeedbackPopup from '../pages/Feedback/FeedbackPopup'
 import PaymentPopup from '../components/Popups/PaymentPopup'
 import ResetPasswordRequest from '../pages/ResetPassword/ResetPasswordRequest'
 import MasterPopup from '../components/Popups/MasterPopup'
-import Home from '../pages/Home/Home'
+// import Home from '../pages/Home/Home'
 import Notifications from '../pages/Notifications/Notifications'
 import Match from '../pages/Match/Match'
 import Profile2 from '../pages/Profile/Profile2'
-import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer'
+// import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer'
 import Messages from '../pages/Messages/Messages'
 import MessageNew from '../pages/Messages/MessageNew'
 import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
 import Settings from '../pages/Settings/Settings'
 import Search from '../components/Search/Search'
 
+const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
 	import('../pages/PropertyDetails/PropertyDetails')
 )
