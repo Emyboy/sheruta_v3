@@ -26,8 +26,11 @@ export default function EachRequest({ data }) {
 					</figure>
 				)}
 				<h4 className="fw-700 text-grey-900 font-xssss mt-1 w-50">
-					<Link to={`/user/${user.username}`} className=" d-flex justify-context-evenly">
-						<a className="text-dark" >
+					<Link
+						to={`/user/${user.username}`}
+						className=" d-flex justify-context-evenly"
+					>
+						<a className="text-dark">
 							{deactivated ? '.... ....' : user.first_name}{' '}
 						</a>{' '}
 						<VerifiedBadge user={user} className={'ml-2'} size={15} />
@@ -140,46 +143,55 @@ export default function EachRequest({ data }) {
 					<div className="row ps-2 pe-2 mt-4">
 						{data.image_url &&
 							data.image_url.map((img, i) => {
-								return (
-									<div className="col-xs-4 col-sm-4 p-1">
-										<Link to={`/request/${data.uuid}/${user?.id}`}>
-											<a data-lightbox="roadtrip">
+								if (i > 2) {
+									return null
+								} else if (i === 2 && data.image_url.length > 2) {
+									return (
+										<div className="col-xs-4 col-sm-4 p-1">
+											<Link
+												to={`/request/${data.uuid}/${user?.id}`}
+												data-lightbox="roadtrip"
+												className="position-relative d-block"
+											>
 												<img
-													src={data.image_url[i]}
+													src={data.image_url[0]}
 													className="rounded-3 w-100"
 													alt="image"
 												/>
-											</a>
-										</Link>
-									</div>
-								)
+												{data.image_url.length > 3 && (
+													<span className="img-count font-sm text-white ls-3 fw-600">
+														<b>+{data.image_url.length - 3}</b>
+													</span>
+												)}
+											</Link>
+										</div>
+									)
+								} else
+									return (
+										<div className="col-xs-4 col-sm-4 p-1">
+											<Link to={`/request/${data.uuid}/${user?.id}`}>
+												<a data-lightbox="roadtrip">
+													<img
+														src={img}
+														className="rounded-3 w-100"
+														alt="image"
+													/>
+												</a>
+											</Link>
+										</div>
+									)
 							})}
 
 						{/* <div className="col-xs-4 col-sm-4 p-1">
-						<a to="images/t-11.jpg" data-lightbox="roadtrip">
-							<img
-								src="images/t-11.jpg"
-								className="rounded-3 w-100"
-								alt="image"
-							/>
-						</a>
-					</div>
-					<div className="col-xs-4 col-sm-4 p-1">
-						<a
-							to="images/t-12.jpg"
-							data-lightbox="roadtrip"
-							className="position-relative d-block"
-						>
-							<img
-								src="images/t-12.jpg"
-								className="rounded-3 w-100"
-								alt="image"
-							/>
-							<span className="img-count font-sm text-white ls-3 fw-600">
-								<b>+2</b>
-							</span>
-						</a>
-					</div> */}
+							<a to="images/t-11.jpg" data-lightbox="roadtrip">
+								<img
+									src={data.image_url[0]}
+									className="rounded-3 w-100"
+									alt="image"
+								/>
+							</a>
+						</div> */}
+						
 					</div>
 				)}
 			</div>

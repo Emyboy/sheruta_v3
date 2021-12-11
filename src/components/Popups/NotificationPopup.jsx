@@ -82,7 +82,7 @@ export default function NotificationPopup() {
 					setTimeout(() => {
 						setShow(true)
 						sessionStorage.setItem('notify_show', true)
-					}, 10000)
+					}, 20000)
 				}
     }, [personal_info, user]);
 

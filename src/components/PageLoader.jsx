@@ -5,13 +5,13 @@ import { Dots } from 'react-activity'
 
 const PageLoader = () => {
     return (
-			<div id="preloader" className="card h-100">
+			<div id="preloader" className="">
 				<div
 					style={{
 						// position: 'absolute',
 						// top: '40%',
 						// left: '40vw'
-						height: '100vh',
+						height: '50vh',
 						marginTop: '40vh',
 					}}
 				>
