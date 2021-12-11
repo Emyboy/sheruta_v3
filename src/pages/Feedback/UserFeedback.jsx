@@ -63,12 +63,12 @@ const UserFeedback = (props) => {
             <Layout>
                 <div className='container'>
                     <div className='card mt-5 mb-5 rounded'>
-                        <div className='card-body'>
+                        <div className='card-body p-5'>
                             {
                                 state.step === 1 ? <div className='text-center animated animate__fadeIn'>
                                     <h2 className='mb-4'><b>Hi there.</b></h2>
                                     <h4>Kindly rate your experience so far.</h4>
-                                    <div className='row justify-content-center mt-2'>
+                                    <div className='d-flex justify-content-center mt-2'>
                                         <i className={`link m-2 fa fa-smile-beam display-5 ${data.rating === 4 ? 'text-theme' : ''}`} onClick={() => setData({ ...data, rating: 4 })}><FaRegSmileBeam /></i>
                                         <i className={`link m-2 fa fa-meh display-5 ${data.rating === 3 ? 'text-warning' : ''}`} onClick={() => setData({ ...data, rating: 3 })}><FaRegMeh /></i>
                                         <i className={`link m-2 fa fa-frown display-5 ${data.rating === 2 ? 'text-info' : ''}`} onClick={() => setData({ ...data, rating: 2 })}><FaRegFrown /></i>
