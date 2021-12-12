@@ -71,14 +71,12 @@ export default function EachRequest({ data }) {
 								navigator
 									.share({
 										title: data.heading,
-										url: 'the URL',
+										url:
+											window?.location?.host +
+											`/request/${data.uuid}/${user?.id}`,
+										text: data.body,
 									})
-									.then(() => {
-										console.log('Thanks for sharing!')
-									})
-									.catch(console.error)
-							} else {
-								// fallback
+									.catch((err) => Promise.reject(err))
 							}
 						}}
 					>
