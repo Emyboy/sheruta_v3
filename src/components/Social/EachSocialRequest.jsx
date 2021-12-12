@@ -6,10 +6,14 @@ import Global from '../../Global'
 import UserAction from '../UserAction/UserAction'
 import DeactivatedBanner from '../DeactivatedBanner/DeactivatedBanner'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
+import { useSelector } from 'react-redux'
 
 export default function EachRequest({ data }) {
 	const user = data?.users_permissions_user
 	const deactivated = user.deactivated
+	const auth = useSelector((state) => state.auth);
+	const authUser = auth.user;
+
 
 	return (
 		<article className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
@@ -67,12 +71,14 @@ export default function EachRequest({ data }) {
 								navigator
 									.share({
 										title: data.heading,
-										url:
-											window?.location?.host +
-											`/request/${data.uuid}/${user?.id}`,
-										text: data.body,
+										url: 'the URL',
 									})
-									.catch((err) => Promise.reject(err))
+									.then(() => {
+										console.log('Thanks for sharing!')
+									})
+									.catch(console.error)
+							} else {
+								// fallback
 							}
 						}}
 					>
@@ -139,7 +145,7 @@ export default function EachRequest({ data }) {
 				</Link>
 			</div>
 			<div className="card-body d-block p-0">
-				{data.image_url && data.image_url.length > 0 && (
+				{!authUser.user.deactivated && data.image_url && data.image_url.length > 0 && (
 					<div className="row ps-2 pe-2 mt-4">
 						{data.image_url &&
 							data.image_url.map((img, i) => {
@@ -191,7 +197,6 @@ export default function EachRequest({ data }) {
 								/>
 							</a>
 						</div> */}
-						
 					</div>
 				)}
 			</div>

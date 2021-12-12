@@ -179,7 +179,7 @@ export default function AccountDeactivationSetting() {
 								}`}
 							>
 								<h3>
-									Your account is{' '}
+									Your account is currently{' '}
 									{user?.user.deactivated ? 'inactive' : 'active'}
 								</h3>
 							</div>

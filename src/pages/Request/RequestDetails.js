@@ -159,7 +159,12 @@ export default function RequestDetails(props) {
 																{deactivated
 																	? '..... .....'
 																	: request.users_permissions_user
-																			.first_name}{' '}<VerifiedBadge user={request.users_permissions_user} className={'ml-2'} size={'15'} />
+																			.first_name}{' '}
+																<VerifiedBadge
+																	user={request.users_permissions_user}
+																	className={'ml-2'}
+																	size={'15'}
+																/>
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
@@ -233,7 +238,7 @@ export default function RequestDetails(props) {
 												>
 													{request.heading}
 												</h1>
-												{request.image_url && request.image_url.length > 0 ? (
+												{!request.users_permissions_user.deactivated && request.image_url && request.image_url.length > 0 ? (
 													<ImgContainer
 														style={{
 															backgroundImage: `url(${request.image_url[0]})`,
