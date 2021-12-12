@@ -70,6 +70,10 @@ export const Signup = (props) => {
 			})
 	}
 
+	if(props.auth.user){
+		return <Redirect to='/feeds' />
+	}
+
 	if (state.goToSuccess) {
 		// return <SignUpSuccess />
 		return <Redirect to="/signup/success" />

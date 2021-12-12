@@ -2,31 +2,45 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Layout from '../../components/Layout/Layout'
 import MetaTags from 'react-meta-tags'
+import { useSelector } from 'react-redux'
 
 const Section = styled.section`
 	padding-top: 5vh;
 `
 
 export default function Services({ match }) {
-    const [service, setService] = useState(null);
+	localStorage.setItem('after_login', window.location.pathname)
+	const [service, setService] = useState(null);
+	const { user } = useSelector(state => state.auth);
 
-    useEffect(() => {
-        if(match.params?.service){
-            setService(match.params.service)
-        }else {
-            setService(null);
-        }
-    },[match.params])
+	useEffect(() => {
+		if (match.params?.service) {
+			setService(match.params.service)
+			document.getElementById(match.params.service).scrollIntoView({
+				behavior: 'smooth',
+				block: 'end',
+				inline: 'nearest',
+			})
+		} else {
+			setService(null)
+		}
+	}, [match.params]);
 
+	const formatService = text => {
+		return text.replace('_',' ').toUpperCase()
+	}
 
 	return (
 		<Layout>
 			<MetaTags>
-				<title>Services | Sheruta NG</title>
+				<title>{!service ? "Services": formatService(service)} | Sheruta NG</title>
 				<meta property="og:title" content="Services" />
 			</MetaTags>
-			<Section>
-				<div className="row justify-content-center">
+			<Section className='container'>
+				<div
+					className={`row justify-content-center`}
+					style={{ paddingTop: !user ? '10vh' : '' }}
+				>
 					<div className="col-lg-9 col-sm-12">
 						<div className="card shadow-sm rounded-xxl">
 							<div className="card-body">
@@ -42,7 +56,12 @@ export default function Services({ match }) {
 								</h2>
 							</div>
 						</div>
-						<div className="card shadow-sm rounded-xxl mt-3">
+						<div
+							className={`card shadow-sm rounded-xxl mt-3 ${
+								service && service === 'for_share' && 'border-3 border-success'
+							}`}
+							id="for_share"
+						>
 							<div className="card-body">
 								<article>
 									<h1>
@@ -104,7 +123,12 @@ export default function Services({ match }) {
 								</article>
 							</div>
 						</div>
-						<div className="card shadow-sm rounded-xxl mt-3">
+						<div
+							className={`card shadow-sm rounded-xxl mt-3 ${
+								service && service === 'join_paddy' && 'border-3 border-success'
+							}`}
+							id="join_paddy"
+						>
 							<div className="card-body">
 								<article>
 									<h1>
@@ -162,7 +186,12 @@ export default function Services({ match }) {
 								</article>
 							</div>
 						</div>
-						<div className="card shadow-sm rounded-xxl mt-3">
+						<div
+							className={`card shadow-sm rounded-xxl mt-3 ${
+								service && service === 'carry_over' && 'border-3 border-success'
+							}`}
+							id="carry_over"
+						>
 							<div className="card-body">
 								<article>
 									<h1>

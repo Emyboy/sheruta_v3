@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { connect, useSelector } from 'react-redux'
 import MetaTags from 'react-meta-tags';
-import SelectionCard from '../../components/SelectionCard/SelectionCard';
-import Btn from '../../components/Btn/Btn';
 import Layout from '../../components/Layout/Layout'
 import LinkSelectCard from '../../components/LinkSelectCard/LinkSelectCard';
 
 export const Request = (props) => {
     localStorage.setItem('after_login', '/requests');
+    const { user } = useSelector(state => state.auth);
     return (
         <Layout
             back
@@ -19,7 +17,7 @@ export const Request = (props) => {
                 <meta property="og:title" content={'Requests | Sheruta NG'} />
                 <meta property="og:description" content={'Make apartment requests so everyone can see it'} />
             </MetaTags>
-            <div className='container card pt-5 pb-5 mt-4 rounded shadow border'>
+            <div className='container card pt-5 pb-5 rounded shadow border' style={{ marginTop: !user ? '20vh':'10vh'}}>
                 <div className='text-center'>
                     <h2><b className='text-muted'>Requests Page</b></h2>
                 </div>
@@ -30,7 +28,7 @@ export const Request = (props) => {
                             <LinkSelectCard to="/requests/create" isSelected heading="Create A Requests" onSelect={() => { }} />
                         </div>
                         <div className="col-md-4 col-sm-12">
-                            <LinkSelectCard to="/requests/all" isSelected heading="View All Requests" onSelect={() => { }} />
+                            <LinkSelectCard to="/feeds" isSelected heading="View All Requests" onSelect={() => { }} />
                         </div>
                     </div>
                 </div>

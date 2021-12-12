@@ -76,10 +76,10 @@ export default connect(mapStateToProps)(function EachRequest({ data, auth }) {
                     </div>
                 </div>
             ) : (
-                <article className="bg-white p-2 rounded border mb-3 border-gray ">
+                <article className="card rounded-xxl shadow p-2 rounded border mb-3 border-gray ">
                     <div className="comment-details pl-3">
                         {data.users_permissions_user ? (
-                            <div className="comment-meta row">
+                            <div className="comment-meta d-flex">
                                 <div
                                     className="article_comments_thumb"
                                     style={{ width: "60px" }}
@@ -117,7 +117,7 @@ export default connect(mapStateToProps)(function EachRequest({ data, auth }) {
                             </div>
                         ) : null}
                         <div className="container">
-                            <div className="mt-2 row">
+                            <div className="mt-2 d-flex">
                                 {data.category ? (
                                     <Tag color="volcano">
                                         {data.category.name.toUpperCase()}
