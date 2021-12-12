@@ -17,6 +17,7 @@ import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import Notifications from '../../services/Notifications'
 import UserAction from '../../components/UserAction/UserAction'
 import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
+import { Redirect } from 'react-router'
 const ImgContainer = styled.section`
 	padding: 5em;
 	margin-bottom: 1em;
@@ -35,7 +36,7 @@ export default function RequestDetails(props) {
 		notFound: false,
 	})
 	const auth = useSelector((state) => state.auth)
-	const deactivated = user?.user.deactivated;
+	const deactivated = user?.user.deactivated
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
@@ -90,6 +91,10 @@ export default function RequestDetails(props) {
 		}
 	}, [request])
 
+	if (!auth.user) {
+		return <Redirect to="/signup" />
+	}
+
 	if (state.loading) {
 		return <PageLoader />
 	} else if (state.notFound) {
@@ -129,7 +134,10 @@ export default function RequestDetails(props) {
 						closeOnClickOutside={true}
 					/>
 				) : null}
-				<section className="pt-0">
+				<section
+					className="pt-0"
+					style={{ paddingTop: !auth.user ? '20vh' : '10vh' }}
+				>
 					<div className={`container ${Global.isMobile && `p-0`}`}>
 						<div className="row">
 							<div className="col-lg-12">
@@ -238,14 +246,16 @@ export default function RequestDetails(props) {
 												>
 													{request.heading}
 												</h1>
-												{!request.users_permissions_user.deactivated && request.image_url && request.image_url.length > 0 ? (
+												{!request.users_permissions_user.deactivated &&
+												request.image_url &&
+												request.image_url.length > 0 ? (
 													<ImgContainer
 														style={{
 															backgroundImage: `url(${request.image_url[0]})`,
 														}}
 													>
 														<button
-															className="btn btn-dark btn-sm rounded"
+															className="btn btn-dark btn-sm rounded shadow-lg"
 															onClick={() => setShowImages(!showImages)}
 														>
 															Show All Images

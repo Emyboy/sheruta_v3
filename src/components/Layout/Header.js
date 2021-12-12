@@ -82,19 +82,23 @@ export default function Header({
 									aria-labelledby="navbarDropdown"
 								>
 									<li>
-										<a className="dropdown-item">For Share</a>
+										<Link className="dropdown-item" to="/services/for_share">
+											For Share
+										</Link>
 									</li>
 									<li>
-										<a className="dropdown-item">Join Paddy</a>
+										<Link className="dropdown-item" to="/services/join_paddy">
+											Join Paddy
+										</Link>
 									</li>
 									<li>
-										<a className="dropdown-item">Carry Over</a>
+										<Link className="dropdown-item" to='/services/carry_over'>Carry Over</Link>
 									</li>
 									<li>
 										<hr className="dropdown-divider" />
 									</li>
 									<li>
-										<a className="dropdown-item" to="tel:08138154470">
+										<a className="dropdown-item" href="tel:08138154470">
 											Call Us
 										</a>
 									</li>

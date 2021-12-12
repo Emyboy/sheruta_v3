@@ -6,7 +6,7 @@ export default function WhatWeDo(){
 			<Layout>
 				<section>
 					<div className="container card rounded-xl pt-5 pb-5">
-						<div className="row">
+						<div className="row mb-3">
 							<div className="col text-center">
 								<div className="sec-heading center">
 									<h2>
@@ -27,7 +27,7 @@ export default function WhatWeDo(){
 						<div className="row mt-5">
 							<div className="col-lg-4 col-md-4">
 								<div className="middle-icon-features">
-									<div className="middle-icon-features-item">
+									<div className="middle-icon-features-item mb-3">
 										<div className="middle-icon-large-features-box">
 											{/* <i className="ti-user text-danger"></i> */}
 											<b className="text-black p-3 shadow rounded-xl steps bg-danger">
@@ -49,7 +49,7 @@ export default function WhatWeDo(){
 
 							<div className="col-lg-4 col-md-4">
 								<div className="middle-icon-features">
-									<div className="middle-icon-features-item">
+									<div className="middle-icon-features-item mb-3">
 										<div className="middle-icon-large-features-box">
 											{/* <i className="ti-search text-success"></i> */}
 											<b className="text-black p-3 shadow rounded-xl steps bg-success">
@@ -72,7 +72,7 @@ export default function WhatWeDo(){
 
 							<div className="col-lg-4 col-md-4">
 								<div className="middle-icon-features">
-									<div className="middle-icon-features-item">
+									<div className="middle-icon-features-item mb-3">
 										<div className="middle-icon-large-features-box">
 											{/* <i className="ti-location-arrow text-warning"></i> */}
 											<b className="text-black p-3 shadow rounded-xl steps bg-warning">

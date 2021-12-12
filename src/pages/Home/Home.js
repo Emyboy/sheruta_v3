@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import HowToUse from './HowToUse'
 import man from '../../assets/img/man-sitting.svg'
@@ -12,8 +12,11 @@ import Partners from '../../assets/img/partners.png'
 import { Redirect } from 'react-router'
 import { useSelector } from 'react-redux'
 import Global from '../../Global'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import WhatPeopleSay from './WhatPeopleSay'
+import PropertyCardSM from '../../components/PropertyCard/PropertyCardSM'
+import axios from 'axios';
+import HomePageRequests from './HomePageRequests/HomePageRequests';
 
 const Wrapper = styled.div`
 	.jumbotron {
@@ -51,6 +54,9 @@ const Wrapper = styled.div`
 
 export default function Home() {
 	const { user } = useSelector((state) => state.auth)
+	
+
+	
 	if (user) {
 		return <Redirect to={'/feeds'} />
 	}
@@ -101,6 +107,7 @@ export default function Home() {
 				</article>
 				<HowToUse />
 				<ExploreByPopularCity />
+				<HomePageRequests />
 				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
@@ -155,9 +162,9 @@ export default function Home() {
 // import axios from 'axios'
 // import { Link } from 'react-router-dom'
 // import Btn from '../../components/Btn/Btn'
+// import PropertyCardSM from '../../components/PropertyCard/PropertyCardSM'
 // import EachRequest from '../../components/EachRequest/EachRequest'
 // import Global from '../../Global'
-// import PropertyCardSM from '../../components/PropertyCard/PropertyCardSM'
 // import { connect } from 'react-redux'
 // import SocailHomePage from '../../components/Social/SocialHomePage/SocialHomePage'
 // import match from '../../assets/img/match.jpeg'

@@ -5,7 +5,7 @@ import Global from '../../Global'
 
 const EachQuote = ({ full_name, review_text, role }) => {
 	return (
-		<article className="card rounded-xl shadow-sm" style={{ height: Global.isMobile ?'50vh': "35vh" }}>
+		<article className="card rounded-xl shadow-sm" style={{ height: Global.isMobile ?'54vh': "35vh" }}>
 			<div className="card-body">
 				<div className="testimonial_post">
 					<div className="thumb d-flex">
@@ -38,8 +38,8 @@ export default function WhatPeopleSay() {
 	return (
 		<article className="bgc-f7 pb-5 pt-4 bg-accent rounded-xl">
 			<div className="container ">
-				<h1 className="mt-2 mb-4 text-white text-center h1">
-					<b>What People Say</b>
+				<h1 className="mt-2 mb-4 text-white text-center display-5">
+					<b>Testimonials</b>
 				</h1>
 				<div className="row justify-content-center">
 					<div className="col-lg-6 col-md-7">
