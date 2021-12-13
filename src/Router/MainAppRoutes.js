@@ -125,6 +125,7 @@ function App() {
 							<Route exact path="/contact" component={Contact} />
 							<Route exact path="/about" component={About} />
 							<Route exact path="/requests" component={Request} />
+							<Route exact path="/requests/edit/:request_id" component={CreateRequest} />
 							<Route exact path="/requests/all" component={AllRequests} />
 							<Route exact path="/user/:username" component={Profile2} />
 							<Route

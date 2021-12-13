@@ -19,6 +19,7 @@ import ProfileAbout from '../../components/ProfileComponents/ProfileAbout'
 const { TabPane } = Tabs
 
 export const Profile2 = (props) => {
+	localStorage.setItem('after_login', window.location.pathname)
 	const { auth } = props
 	const { params } = props.match
 	const [state, setState] = useState({

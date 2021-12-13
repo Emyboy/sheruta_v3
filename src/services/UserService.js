@@ -1,17 +1,35 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import store from '../redux/store/store'
 
 export default class UserService {
-    static async setUserOnline() {
-        const data = await axios(
-            process.env.REACT_APP_API_URL + `/users-permissions/auth/online`,
-            {
-                method: "POST",
-                headers: {
-                    authorization: `Bearer ${Cookies.get("token")}`,
-                },
-            },
-        );
-        return data;
-    }
+	static async setUserOnline() {
+		const data = await axios(
+			process.env.REACT_APP_API_URL + `/users-permissions/auth/online`,
+			{
+				method: 'POST',
+				headers: {
+					authorization: `Bearer ${Cookies.get('token')}`,
+				},
+			}
+		)
+		return data
+	}
+
+	static async updateProfile(update) {
+		const data = await axios(
+			process.env.REACT_APP_API_URL +
+				`/users-permissions/auth/local/edit/${
+					store.getState().auth.user.user.id
+				}`,
+			{
+				headers: {
+					authorization: `Bearer ${Cookies.get('token')}`,
+				},
+				method: 'POST',
+				data: update,
+			}
+		)
+		return data
+	}
 }

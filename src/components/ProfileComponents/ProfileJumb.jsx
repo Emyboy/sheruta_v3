@@ -2,10 +2,13 @@ import { Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../Global';
-import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
+import VerifiedBadge from '../VerifiedBadge/VerifiedBadge';
+import store from '../../redux/store/store'
 
 export default function ProfileJumb({ user }) {
 	const deactivated = user.deactivated;
+	const auth = store.getState().auth;
+
 	return (
 		<div className="col-lg-12 p-0">
 			<div className="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
@@ -42,7 +45,7 @@ export default function ProfileJumb({ user }) {
 							@{deactivated ? '......' : user.username}
 						</span>
 					</h4>
-					{!deactivated && (
+					{!deactivated && auth.user ? (
 						<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
 							<Tooltip placement="top" title={`Call ${user.first_name}`}>
 								<a
@@ -69,6 +72,10 @@ export default function ProfileJumb({ user }) {
 						>
 							<i className="ti-book font-md tetx-dark"></i>
 						</a> */}
+						</div>
+					) : (
+						<div className="badge badge-success d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
+							Login To Call
 						</div>
 					)}
 				</div>

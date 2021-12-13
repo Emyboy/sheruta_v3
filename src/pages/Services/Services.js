@@ -18,8 +18,8 @@ export default function Services({ match }) {
 			setService(match.params.service)
 			document.getElementById(match.params.service).scrollIntoView({
 				behavior: 'smooth',
-				block: 'end',
-				inline: 'nearest',
+				block: 'start',
+				inline: 'start',
 			})
 		} else {
 			setService(null)
@@ -42,7 +42,7 @@ export default function Services({ match }) {
 					style={{ paddingTop: !user ? '10vh' : '' }}
 				>
 					<div className="col-lg-9 col-sm-12">
-						<div className="card shadow-sm rounded-xxl">
+						<div className="card shadow-sm rounded-xxl mb-5">
 							<div className="card-body">
 								<h1>
 									<b>
@@ -57,7 +57,7 @@ export default function Services({ match }) {
 							</div>
 						</div>
 						<div
-							className={`card shadow-sm rounded-xxl mt-3 ${
+							className={`card shadow-sm rounded-xxl mb-5 ${
 								service && service === 'for_share' && 'border-3 border-success'
 							}`}
 							id="for_share"
@@ -124,7 +124,7 @@ export default function Services({ match }) {
 							</div>
 						</div>
 						<div
-							className={`card shadow-sm rounded-xxl mt-3 ${
+							className={`card shadow-sm rounded-xxl mb-5 ${
 								service && service === 'join_paddy' && 'border-3 border-success'
 							}`}
 							id="join_paddy"
@@ -187,7 +187,7 @@ export default function Services({ match }) {
 							</div>
 						</div>
 						<div
-							className={`card shadow-sm rounded-xxl mt-3 ${
+							className={`card shadow-sm rounded-xxl mb-5 ${
 								service && service === 'carry_over' && 'border-3 border-success'
 							}`}
 							id="carry_over"

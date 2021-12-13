@@ -17,6 +17,7 @@ import WhatPeopleSay from './WhatPeopleSay'
 import PropertyCardSM from '../../components/PropertyCard/PropertyCardSM'
 import axios from 'axios';
 import HomePageRequests from './HomePageRequests/HomePageRequests';
+import { MetaTags } from 'react-meta-tags'
 
 const Wrapper = styled.div`
 	.jumbotron {
@@ -62,6 +63,11 @@ export default function Home() {
 	}
 	return (
 		<Layout>
+			<MetaTags>
+				<title>
+					Home | Sheruta NG
+				</title>
+			</MetaTags>
 			<Wrapper className="mb-5">
 				<article className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
@@ -121,7 +127,7 @@ export default function Home() {
 								</h2>
 								<h2>We've got you covered</h2>
 								<h3 className="mt-3 mb-3">
-									Join the community, post a request and peer with other like
+									Join the community, post a request and pair with other like
 									minded individuals
 								</h3>
 								<Link
