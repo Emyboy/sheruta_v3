@@ -172,7 +172,7 @@ export default function MessageDetails({ conversation_id }) {
                                         width={Global.isMobile ? "40" : "50"}
                                         alt="s5.jpg"
                                     />
-                                    <div className="meta">
+                                    <Link className="meta" to={`/user/${otherUser.username}`}>
                                         <h5 className="name">
                                             {otherUser.first_name}{" "}
                                             {otherUser.last_name}
@@ -181,7 +181,7 @@ export default function MessageDetails({ conversation_id }) {
                                             {/* was online today at 11:43 */}@
                                             {otherUser.username}
                                         </p>
-                                    </div>
+                                    </Link>
                                 </div>
                                 <a href={`tel:${otherUser.phone_number}`}>
                                     <button className="btn btn-sm">
