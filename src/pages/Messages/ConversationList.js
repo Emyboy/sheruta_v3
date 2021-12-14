@@ -34,7 +34,7 @@ export default function MessageList() {
                     </form> */}
                 </div>
             </div>
-            <ul style={{ height: "71vh", paddingBottom: "15vh" }}>
+            <ul style={{ paddingBottom: "15vh" }}>
                 {conversations.length === 0 && (
                     <li className="text-center mt-5">
                         <h3>Your conversations will be listed here.</h3>

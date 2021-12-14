@@ -64,14 +64,6 @@ export default function RequestDetails(props) {
 			})
 	}, [])
 
-	const handleCallRequest = () => {
-		notifyEmy({
-			heading: `Called ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}`,
-			url: window.location.pathname,
-			status: 'success',
-		})
-	}
-
 	useEffect(() => {
 		if (request) {
 			if (
