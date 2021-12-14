@@ -10,6 +10,7 @@ import MessageService from "../../services/MessageService";
 import { useInterval } from "react-use";
 import { FiSend } from "react-icons/fi";
 import { notifyEmy } from "../../services/Sheruta";
+import { Link } from "react-router-dom";
 
 export default function MessageDetails({ conversation_id }) {
     const [message, setMessage] = useState("");
