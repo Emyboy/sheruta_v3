@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import MessageService from '../../services/MessageService'
-import Global from '../../Global'
+import Global from '../../Global';
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
 
 export default function EachConversation({ conv }) {
 	const [otherUser, setOtherUser] = useState(null)
@@ -46,10 +48,11 @@ export default function EachConversation({ conv }) {
 	return (
 		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom">
 			{otherUser && (
-				<div className='d-flex justify-content-between'>
+				<div className="d-flex justify-content-between">
 					<>
 						<figure className="avatar float-left mb-0 me-2">
-							<img
+							<LazyLoadImage
+								effect='blur'
 								src={otherUser?.avatar_url}
 								alt="image"
 								className="w35 rounded-3"

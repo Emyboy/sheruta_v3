@@ -5,6 +5,8 @@ import EachConversation from '../../pages/Messages/EachConversation'
 import { getAllSuggestionsByStatus } from '../../redux/strapi_actions/alice.actions'
 import { getAllConversations } from '../../redux/strapi_actions/view.action'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
 
 export default function MessagePanel({ show }) {
 	const dispatch = useDispatch()
@@ -68,7 +70,8 @@ export default function MessagePanel({ show }) {
 										return (
 											<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
 												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
-													<img
+													<LazyLoadImage
+														effect='blur'
 														src={otherUser?.avatar_url}
 														alt="image"
 														className="w35 rounded-3"

@@ -83,9 +83,9 @@ export default function RequestDetails(props) {
 		}
 	}, [request])
 
-	if (!auth.user) {
-		return <Redirect to="/signup" />
-	}
+	// if (!auth.user) {
+	// 	return <Redirect to="/signup" />
+	// }
 
 	if (state.loading) {
 		return <PageLoader />

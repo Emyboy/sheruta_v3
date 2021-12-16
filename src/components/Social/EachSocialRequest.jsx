@@ -7,7 +7,8 @@ import UserAction from '../UserAction/UserAction'
 import DeactivatedBanner from '../DeactivatedBanner/DeactivatedBanner'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import { useSelector } from 'react-redux'
-import EachRequestOptions from './EachRequestOptions'
+import EachRequestOptions from './EachRequestOptions';
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function EachRequest({ data }) {
 	const user = data?.users_permissions_user
@@ -25,12 +26,13 @@ export default function EachRequest({ data }) {
 			<div className="card-body p-0 d-flex">
 				{user && (
 					<figure className="avatar me-3">
-						<img
+						<LazyLoadImage
 							src={
 								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user.avatar_url
 							}
-							alt="image"
+							alt={user.first_name}
 							className="shadow-sm rounded-circle w45"
+							effect='blur'
 						/>
 					</figure>
 				)}
@@ -56,7 +58,11 @@ export default function EachRequest({ data }) {
 				>
 					<i className="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i>
 				</a>
-				<EachRequestOptions data={data} deleted={deleted} setDeleted={setDeleted} />
+				<EachRequestOptions
+					data={data}
+					deleted={deleted}
+					setDeleted={setDeleted}
+				/>
 			</div>
 			<div className="">
 				<div className="row justify-content-between">
@@ -101,50 +107,55 @@ export default function EachRequest({ data }) {
 				</Link>
 			</div>
 			<div className="card-body d-block p-0">
-				{authUser && !authUser.user.deactivated && data.image_url && data.image_url.length > 0 && (
-					<div className="row ps-2 pe-2 mt-4">
-						{data.image_url &&
-							data.image_url.map((img, i) => {
-								if (i > 2) {
-									return null
-								} else if (i === 2 && data.image_url.length > 2) {
-									return (
-										<div className="col-xs-4 col-sm-4 p-1">
-											<Link
-												to={`/request/${data.uuid}/${user?.id}`}
-												data-lightbox="roadtrip"
-												className="position-relative d-block"
-											>
-												<img
-													src={data.image_url[0]}
-													className="rounded-3 w-100"
-													alt="image"
-												/>
-												{data.image_url.length > 3 && (
-													<span className="img-count font-sm text-white ls-3 fw-600">
-														<b>+{data.image_url.length - 3}</b>
-													</span>
-												)}
-											</Link>
-										</div>
-									)
-								} else
-									return (
-										<div className="col-xs-4 col-sm-4 p-1">
-											<Link to={`/request/${data.uuid}/${user?.id}`}>
-												<a data-lightbox="roadtrip">
-													<img
-														src={img}
+				{authUser &&
+					!authUser.user.deactivated &&
+					data.image_url &&
+					data.image_url.length > 0 && (
+						<div className="row ps-2 pe-2 mt-4">
+							{data.image_url &&
+								data.image_url.map((img, i) => {
+									if (i > 2) {
+										return null
+									} else if (i === 2 && data.image_url.length > 2) {
+										return (
+											<div className="col-xs-4 col-sm-4 p-1">
+												<Link
+													to={`/request/${data.uuid}/${user?.id}`}
+													data-lightbox="roadtrip"
+													className="position-relative d-block"
+												>
+													<LazyLoadImage
+														src={data.image_url[0]}
 														className="rounded-3 w-100"
-														alt="image"
+														alt={data?.heading}
+														effect='blur'
 													/>
-												</a>
-											</Link>
-										</div>
-									)
-							})}
+													{data.image_url.length > 3 && (
+														<span className="img-count font-sm text-white ls-3 fw-600">
+															<b>+{data.image_url.length - 3}</b>
+														</span>
+													)}
+												</Link>
+											</div>
+										)
+									} else
+										return (
+											<div className="col-xs-4 col-sm-4 p-1">
+												<Link to={`/request/${data.uuid}/${user?.id}`}>
+													<a data-lightbox="roadtrip">
+														<LazyLoadImage
+															src={img}
+															className="rounded-3 w-100"
+															alt="image"
+															effect='blur'
+														/>
+													</a>
+												</Link>
+											</div>
+										)
+								})}
 
-						{/* <div className="col-xs-4 col-sm-4 p-1">
+							{/* <div className="col-xs-4 col-sm-4 p-1">
 							<a to="images/t-11.jpg" data-lightbox="roadtrip">
 								<img
 									src={data.image_url[0]}
@@ -153,8 +164,8 @@ export default function EachRequest({ data }) {
 								/>
 							</a>
 						</div> */}
-					</div>
-				)}
+						</div>
+					)}
 			</div>
 			<div className="card-body row p-0 mt-3 mb-3 justify-content-between">
 				<div className="d-flex align-items-center justify-content-start col-md-6">

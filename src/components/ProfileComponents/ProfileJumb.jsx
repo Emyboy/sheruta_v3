@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Global from '../../Global';
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge';
 import store from '../../redux/store/store'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function ProfileJumb({ user }) {
 	const deactivated = user.deactivated;
@@ -16,11 +17,12 @@ export default function ProfileJumb({ user }) {
 					className="card-body p-0 rounded-xxl overflow-hidden m-3"
 					style={{ height: '10rem' }}
 				>
-					<img
+					<LazyLoadImage
 						src="https://picsum.photos/400/300"
 						alt="image"
 						height="500"
 						width="100%"
+						effect="blur"
 					/>
 				</div>
 				<div className="card-body p-0 position-relative">
@@ -28,11 +30,12 @@ export default function ProfileJumb({ user }) {
 						className="avatar position-absolute w100 z-index-0"
 						style={{ top: '-40px', left: '30px' }}
 					>
-						<img
+						<LazyLoadImage
 							src={
 								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user.avatar_url
 							}
 							alt="image"
+							effect='blur'
 							className="float-right p-1 bg-white rounded-circle w-100"
 						/>
 					</figure>
