@@ -144,7 +144,6 @@ export default connect(mapStateToProps)((props) => {
 		notifyEmy({
 			heading: ' Visited the payment page',
 		})
-		console.log('KEY ----', process.env.REACT_APP_PAYSTACK_PUBLIC_KEY)
 	}, [])
 
 	// useEffect(() => {
