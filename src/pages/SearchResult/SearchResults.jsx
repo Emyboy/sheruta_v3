@@ -1,35 +1,37 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
-import EachSocialRequest from '../../components/Social/EachSocialRequest';
+import EachSocialRequest from '../../components/Social/EachSocialRequest'
 import { Dots } from 'react-activity'
+import { useSelector } from 'react-redux'
 
 export default function SearchResults({ match }) {
-	const { bedrooms, category, service } = match.params;
+	const { bedrooms, category, service } = match.params
 	console.log({ bedrooms, category, service })
-	const [list, setList] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [list, setList] = useState([])
+	const [loading, setLoading] = useState(true)
+	const { user } = useSelector((state) => state.auth)
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading(true)
 		axios(
 			process.env.REACT_APP_API_URL +
-			`/property-requests/search/${service}/${category}/${bedrooms || 0}`,
+				`/property-requests/search/${service}/${category}/${bedrooms || 0}`,
 			{ method: 'POST' }
-			)
+		)
 			.then((res) => {
 				console.log(res.data)
 				setList(res.data)
-				setLoading(false);
+				setLoading(false)
 			})
 			.catch((err) => {
-				setLoading(false);
+				setLoading(false)
 			})
 	}, [])
 
 	return (
 		<Layout>
-			<div>
+			<div style={{ paddingTop: !user ? '14vh' : '' }}>
 				<div className="container h-100">
 					<div className="row justify-content-center">
 						<div className="col-md-9 col-sm-12">

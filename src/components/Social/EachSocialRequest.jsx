@@ -143,7 +143,7 @@ export default function EachRequest({ data }) {
 				</Link>
 			</div>
 			<div className="card-body d-block p-0">
-				{!authUser.user.deactivated && data.image_url && data.image_url.length > 0 && (
+				{authUser && !authUser.user.deactivated && data.image_url && data.image_url.length > 0 && (
 					<div className="row ps-2 pe-2 mt-4">
 						{data.image_url &&
 							data.image_url.map((img, i) => {
