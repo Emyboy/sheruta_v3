@@ -72,9 +72,9 @@ export default function MessageDetails({ conversation_id }) {
 		setTimeout(() => {
 			executeScroll()
 		}, 1700)
-	}, [])
+	}, []);
 
-	useEffect(() => {
+	const getConversation = () => {
 		setLoading(true)
 		axios(
 			process.env.REACT_APP_API_URL + `/conversations/?uuid=${conversation_id}`
@@ -93,7 +93,11 @@ export default function MessageDetails({ conversation_id }) {
 				console.log(err)
 				setLoading(false)
 			})
-	}, [])
+	}
+
+	useEffect(() => {
+		getConversation()
+	}, [conversation_id])
 
 	useEffect(async () => {
 		if (conversation && conversation_id) {

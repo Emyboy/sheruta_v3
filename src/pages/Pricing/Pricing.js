@@ -189,7 +189,7 @@ export default connect(mapStateToProps)((props) => {
 					{state.plans.map((val, i) => {
 						return (
 							<div className="col-lg-4 col-md-4" key={i}>
-								<div className="card mb-4 rounded-xs shadow-lg rounded">
+								<article className="card mb-4 rounded-xs shadow-lg rounded">
 									<div className="pricing-wrap card-body rounded-xl shadow-lx">
 										<div className="pricing-header pb-2">
 											<i className="lni-layers"></i>
@@ -302,7 +302,7 @@ export default connect(mapStateToProps)((props) => {
 											)}
 										</div>
 									</div>
-								</div>
+								</article>
 							</div>
 						)
 					})}

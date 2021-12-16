@@ -83,7 +83,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 							.share({
 								title: data.heading,
 								url:
-									window?.location?.host + `/request/${data.uuid}/${user?.id}`,
+									`/request/${data.uuid}/${user?.id}`,
 								text: data.body,
 							})
 							.catch((err) => Promise.reject(err))

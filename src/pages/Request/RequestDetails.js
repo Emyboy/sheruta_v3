@@ -18,6 +18,7 @@ import Notifications from '../../services/Notifications'
 import UserAction from '../../components/UserAction/UserAction'
 import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
 import { Redirect } from 'react-router'
+import EachRequestOptions from '../../components/Social/EachRequestOptions'
 const ImgContainer = styled.section`
 	padding: 5em;
 	margin-bottom: 1em;
@@ -179,54 +180,7 @@ export default function RequestDetails(props) {
 													>
 														<i className="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i>
 													</a>
-													<div
-														className="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg"
-														aria-labelledby="dropdownMenu2"
-													>
-														<div className="card-body p-0 d-flex link">
-															<i className="feather-edit text-grey-500 me-3 font-lg"></i>
-															<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-4">
-																Edit{' '}
-																<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-																	Now you can edit your posts
-																</span>
-															</h4>
-														</div>
-														<div
-															className="card-body p-0 d-flex mt-2 link"
-															onClick={() => {
-																if (navigator.share) {
-																	navigator
-																		.share({
-																			title: request.heading,
-																			url:
-																				window?.location?.host +
-																				`/request/${request.uuid}/${user?.id}`,
-																			text: request.body,
-																		})
-																		.catch((err) => Promise.reject(err))
-																}
-															}}
-														>
-															<i className="feather-share text-grey-500 me-3 font-lg"></i>
-															<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-4">
-																Share{' '}
-																<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-																	Share this post with your friends
-																</span>
-															</h4>
-														</div>
-														<hr />
-														<div className="card-body p-0 d-flex mt-2 link">
-															<i className="feather-trash text-grey-500 me-3 font-lg"></i>
-															<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-4">
-																Delete Post{' '}
-																<span className="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">
-																	Delete your post from sheruta
-																</span>
-															</h4>
-														</div>
-													</div>
+													<EachRequestOptions data={request}  />
 												</div>
 											</div>
 											<div className="post-meta">

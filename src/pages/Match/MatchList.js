@@ -50,9 +50,9 @@ export default function MatchList() {
     return (
         <div className="pb-0">
             {personal_info && !personal_info.nin ? (
-                <div className="text-center" style={{ marginTop: "20vh", marginBottom: '20vh' }}>
-                    <h3>🙆🏽‍♂️</h3>
-                    <h2>Account Not Yet Verified</h2>
+                <div className="text-center" style={{ marginTop: "15vh", marginBottom: '20vh' }}>
+                    <h1 className="display-4">😢</h1>
+                    <h2><b>Account Not Yet Verified</b></h2>
                     <h4>Verify your account and view your flat mates</h4><br />
                     <Link to="/start">
                         <Btn
