@@ -46,34 +46,36 @@ export default function EachConversation({ conv }) {
 	return (
 		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom">
 			{otherUser && (
-				<>
-					<figure className="avatar float-left mb-0 me-2">
-						<img
-							src={otherUser?.avatar_url}
-							alt="image"
-							className="w35 rounded-3"
-						/>
-					</figure>
-					<Link to={`/messages/${conv.uuid}`}>
-						<h3 className="fw-700 mb-0 mt-0">
-							<a className="font-xssss text-grey-600 d-block text-dark model-popup-chat">
-								{otherUser?.first_name}
-							</a>
-							<small className="m-0 text-muted" style={{ fontSize: '10px'}}>
-								{latestMsg.length > 27
-									? Global.isMobile
-										? latestMsg.slice(0, 27) + '....'
-										: latestMsg.slice(0, 27) + '....'
-									: latestMsg || '....'}
-							</small>
-						</h3>
-					</Link>
+				<div className='d-flex justify-content-between'>
+					<>
+						<figure className="avatar float-left mb-0 me-2">
+							<img
+								src={otherUser?.avatar_url}
+								alt="image"
+								className="w35 rounded-3"
+							/>
+						</figure>
+						<Link to={`/messages/${conv.uuid}`}>
+							<h3 className="fw-700 mb-0 mt-0">
+								<a className="font-xssss text-grey-600 d-block text-dark model-popup-chat">
+									{otherUser?.first_name}
+								</a>
+								<small className="m-0 text-muted" style={{ fontSize: '10px' }}>
+									{latestMsg.length > 27
+										? Global.isMobile
+											? latestMsg.slice(0, 27) + '....'
+											: latestMsg.slice(0, 27) + '....'
+										: latestMsg || '....'}
+								</small>
+							</h3>
+						</Link>
+					</>
 					{count !== 0 && (
 						<span className="badge badge-primary text-white badge-pill fw-500 mt-0">
 							{count}
 						</span>
 					)}
-				</>
+				</div>
 			)}
 		</li>
 
