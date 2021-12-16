@@ -14,6 +14,7 @@ import { notifyEmy } from '../../services/Sheruta'
 import Cookies from 'js-cookie'
 import loginImg from '../../assets/img/login-bg.png'
 import Global from '../../Global'
+import UserService from '../../services/UserService'
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -34,7 +35,16 @@ const Login = (props) => {
 
 	// }, [state.userData]);
 
-	const { register, handleSubmit, errors } = useForm()
+	const { register, handleSubmit, errors } = useForm();
+
+	const updateLastSeen = async() => {
+		try {
+			const update = await UserService.updateProfile({ last_seen: new Date() });
+			return Promise.resolve(update);
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
 
 	const onSubmit = (data) => {
 		setState({ ...state, loading: true })
@@ -58,6 +68,7 @@ const Login = (props) => {
 					props.setAuthState({
 						user: res.data,
 					})
+					updateLastSeen();
 				} else {
 					setState({ ...state, notVerified: true, userData: res.data })
 				}

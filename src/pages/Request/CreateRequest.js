@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Btn from '../../components/Btn/Btn'
 import Select from 'react-select'
 import axios from 'axios'
@@ -29,10 +29,11 @@ const CraeteRequest = (props) => {
 	const [done, setDone] = useState(false)
 	const [image_url, set_image_url] = useState([])
 	const dispatch = useDispatch()
+	const [edit, setEdit] = useState(false)
 
 	const { view, match, auth } = props
 
-	const { params } = match
+	// const { params } = match
 
 	const [state, setState] = React.useState({
 		categories: [],
@@ -115,6 +116,28 @@ const CraeteRequest = (props) => {
 				notification.error({ message: 'Error creating request' })
 			})
 	}
+
+	useEffect(() => {
+		if (match.params?.request_id) {
+			setState({ ...state, loading: true })
+			axios(
+				process.env.REACT_APP_API_URL +
+					`/property-requests/?id=${match.params.request_id}`
+			)
+				.then((res) => {
+					console.log('DATA ---', res.data[0])
+					setData(res.data[0])
+					setEdit(true)
+					setState({ ...state, loading: false })
+				})
+				.catch((err) => {
+					setEdit(false)
+					notification.error({ message: 'Error fetching data' })
+					setState({ ...state, loading: false })
+					return Promise.reject(err)
+				})
+		}
+	}, [match.params])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -221,32 +244,32 @@ const CraeteRequest = (props) => {
 		}
 	}, [done])
 
-	React.useEffect(() => {
-		const ph_request = JSON.parse(localStorage.getItem('ph_request'))
-		if (Object.keys(params).length === 0) {
-			setState({ ...state, hideOptions: false })
-		}
-		if (Object.keys(params).length > 0) {
-			setData({
-				...data,
-				service: parseInt(params.service_id),
-				category: parseInt(params.category_id),
-				is_searching: params.is_searching === 'true',
-			})
-			setData({ ...data, ...ph_request })
-		}
-		if (ph_request) {
-			setState({ ...state, message: 'Continue from where you left off' })
-			const req = JSON.parse(localStorage.getItem('ph_request'))
-			setData({
-				...data,
-				heading: req.heading,
-				body: req.body,
-				budget: req.budget,
-				category: req.category,
-			})
-		}
-	}, [])
+	// React.useEffect(() => {
+	// 	const ph_request = JSON.parse(localStorage.getItem('ph_request'))
+	// 	if (Object.keys(params).length === 0) {
+	// 		setState({ ...state, hideOptions: false })
+	// 	}
+	// 	if (Object.keys(params).length > 0) {
+	// 		setData({
+	// 			...data,
+	// 			service: parseInt(params.service_id),
+	// 			category: parseInt(params.category_id),
+	// 			is_searching: params.is_searching === 'true',
+	// 		})
+	// 		setData({ ...data, ...ph_request })
+	// 	}
+	// 	if (ph_request) {
+	// 		setState({ ...state, message: 'Continue from where you left off' })
+	// 		const req = JSON.parse(localStorage.getItem('ph_request'))
+	// 		setData({
+	// 			...data,
+	// 			heading: req.heading,
+	// 			body: req.body,
+	// 			budget: req.budget,
+	// 			category: req.category,
+	// 		})
+	// 	}
+	// }, [])
 
 	React.useEffect(() => {
 		notifyEmy({
@@ -337,11 +360,15 @@ const CraeteRequest = (props) => {
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
 							<div className="text-center">
-								<h1 className="display-7">
-									{props.view.personal_info &&
-									props.view.personal_info.looking_for
-										? 'Create Request'
-										: 'Post Your Property'}
+								<h1 className="display-6 mb-5">
+									<b>
+										{props.view.personal_info &&
+										props.view.personal_info.looking_for
+											? edit
+												? 'Edit Request'
+												: 'Create Request'
+											: 'Post Your Property'}
+									</b>
 								</h1>
 								{state.message ? (
 									<Alert message={state.message} type="success" />
@@ -612,6 +639,7 @@ const CraeteRequest = (props) => {
 																: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
 														}
 														defaultValue={data.body}
+														value={data.body}
 														required
 														name="body"
 														minLength={50}
@@ -627,7 +655,9 @@ const CraeteRequest = (props) => {
 													/>
 												</div>
 											</div>
-											{view.personal_info && !view.personal_info.looking_for ? (
+											{(view.personal_info &&
+												!view.personal_info.looking_for) ||
+											(edit && data.image_url.length > 0) ? (
 												<>
 													<div className="container">
 														<label className="display-7">Images</label>
@@ -636,22 +666,23 @@ const CraeteRequest = (props) => {
 													<div className="">
 														<div className="col-lg-12">
 															<div className="row justify-content-center">
-																{new Array(image_count)
-																	.fill(null)
-																	.map((_, i) => {
-																		return (
-																			<ImageSelect
-																				index={i}
-																				image={imageFiles[`img${i}`]}
-																				onFileChange={(e) => {
-																					handleImageSelect(
-																						e.target.files[0],
-																						i
-																					)
-																				}}
-																			/>
-																		)
-																	})}
+																{!edit
+																	? new Array(image_count).fill(null)
+																	: data.image_url.map((_, i) => {
+																			return (
+																				<ImageSelect
+																					index={i}
+																					edit={edit}
+																					image={!edit ? imageFiles[`img${i}`]: data.image_url[i]}
+																					onFileChange={(e) => {
+																						handleImageSelect(
+																							e.target.files[0],
+																							i
+																						)
+																					}}
+																				/>
+																			)
+																	  })}
 															</div>
 														</div>
 													</div>

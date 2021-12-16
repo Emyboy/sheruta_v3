@@ -88,9 +88,9 @@ export default (props) => {
 		return <Redirect to="/login" />
 	}
 
-	if (!view.personal_info) {
-		return null
-	}
+	// if (!view.personal_info) {
+	// 	return null
+	// }
 
 	return (
 		<div className="main-wrapper">

@@ -1,7 +1,7 @@
 import React from 'react'
 import Global from '../../Global';
 
-export default React.memo(({ image, onFileChange,index }) => {
+export default React.memo(({ image, onFileChange,index, edit }) => {
   return (
     <label for={`upload-${index}`} style={{ width: "140px" }} className="m-2">
       <span
@@ -22,6 +22,7 @@ export default React.memo(({ image, onFileChange,index }) => {
           style={{
             height: "240px",
             backgroundImage: `url(${
+              edit ? image :
               (image && URL.createObjectURL(image)) || Global.PLACEHOLDER_IMG
             })`,
             backgroundPosition: "center",

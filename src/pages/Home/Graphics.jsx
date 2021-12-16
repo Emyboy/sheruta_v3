@@ -25,7 +25,7 @@ export default function ExploreByPopularCity() {
                                     providing Nigerians with easier and safer
                                     housing through shared apartments and more,
                                     Our mission is to help reduce cost of rent
-                                    for young Nigeians in the urban sides of the
+                                    for young Nigerians in the urban sides of the
                                     country
                                 </p>
                                 <p>

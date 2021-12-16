@@ -22,7 +22,7 @@ const PaymentPopup = (props) => {
                         <li>1. Your subscription may have expired</li>
                         <li>2. Your subscription type doesn't enable you perform this action</li>
                     </ol>
-                    <span className='text-danger'><b>NOTE: </b></span><span>If this is a mistake, don't fail to contact us</span>
+                    <span className='text-danger'><b>NOTE: </b></span><span>If this is a mistake, don't fail to contact us or try refreshing this page.</span>
                     <hr className='text-muted' />
                     <div className='text-center'>
                         <Link to='/pricing'>
