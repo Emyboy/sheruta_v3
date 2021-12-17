@@ -12,6 +12,7 @@ import { FiSend } from 'react-icons/fi'
 import { notifyEmy } from '../../services/Sheruta'
 import { Link } from 'react-router-dom'
 import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
+import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 
 export default function MessageDetails({ conversation_id }) {
 	const [message, setMessage] = useState('')
@@ -72,7 +73,7 @@ export default function MessageDetails({ conversation_id }) {
 		setTimeout(() => {
 			executeScroll()
 		}, 1700)
-	}, []);
+	}, [])
 
 	const getConversation = () => {
 		setLoading(true)
@@ -130,6 +131,7 @@ export default function MessageDetails({ conversation_id }) {
 				seen: false,
 				conversation: conversation.id,
 			})
+			Analytics.create({ user_id: otherUser, type: AnalyticsTypes.message })
 			if (sent) {
 				messages.push(sent.data)
 				setMessage('')
@@ -151,8 +153,8 @@ export default function MessageDetails({ conversation_id }) {
 	return (
 		<div className="row">
 			{!payment_plan ? (
-				<div className="col-lg-12 position-relative mt-5" id='end'>
-				<PaymentAlert message={'Subscribe to send messages'} />
+				<div className="col-lg-12 position-relative mt-5" id="end">
+					<PaymentAlert message={'Subscribe to send messages'} />
 				</div>
 			) : (
 				<div className="col-lg-12 position-relative">

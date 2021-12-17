@@ -66,9 +66,9 @@ export default function Settings({ match }) {
 														to="/settings/personal-info"
 														className="pt-2 pb-2 d-flex align-items-center"
 													>
-														<i className="btn-round-md bg-gold-gradiant text-white feather-map-pin font-md me-3"></i>{' '}
+														<i className="btn-round-md bg-gold-gradiant text-white feather-briefcase font-md me-3"></i>{' '}
 														<h4 className="fw-600 font-xsss mb-0 mt-0">
-															Personal Info
+															Update Personal Info
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>

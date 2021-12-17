@@ -26,7 +26,7 @@ export default function ProfileAbout({ user }) {
 			<div className="card-body d-block p-4">
 				<h4 className="fw-700 mb-3 font-xsss text-grey-900">About</h4>
 				<p className="fw-500 text-grey-500 lh-24 font-xssss mb-0">
-					{user.bio || `Hi my name is ${user.first_name}`}
+					{user.bio || `Hi my name is ${user.first_name} and I use Sheruta NG`}
 				</p>
 			</div>
 			{isOwner && (

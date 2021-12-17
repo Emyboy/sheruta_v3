@@ -10,6 +10,7 @@ import axios from "axios";
 import { notifyEmy } from "../../../services/Sheruta";
 
 const UpdateAvatar = (props) => {
+  const { ended } = props;
   const [done, setDone] = useState(null);
   const [blob, setBlob] = useState(null);
   const [img, setImg] = useState(null);
@@ -69,10 +70,13 @@ const UpdateAvatar = (props) => {
         props.getUser();
         setUploading(false);
         notification.success({ message: "Image Updated" });
-        props.setStep(props.step + 1);
+        if(ended){
+          ended()
+        }
+        if (props.setStep) props.setStep(props.step + 1)
       })
       .catch((err) => {
-        // console.log(err);
+        console.log('UPDATE ERROR ---',err);
         setUploading(false);
         notification.error({ message: "Upload Error, Please try again" });
       });

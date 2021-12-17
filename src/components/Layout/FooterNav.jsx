@@ -31,7 +31,7 @@ export default function FooterNav({ pageName }) {
 			className="_app-footer fixed-bottom p-2  border-0 shadow-lg card border border-dark rounded-0"
 			style={{ zIndex: 80 }}
 		>
-			<div className="card-body pt-1 pb-1 d-flex justify-content-between">
+			<div className="card-body pt-1 pb-1 d-flex justify-content-between align-items-center">
 				<Link
 					to={`/feeds`}
 					className="position-relative nav-content-bttn nav-center active"
@@ -60,7 +60,7 @@ export default function FooterNav({ pageName }) {
 					{/* <i className="text-dark feather-plus"></i> */}
 					<RiAddCircleLine
 						className={`text-${pageName === 'requests' ? 'theme' : 'dark'}`}
-						size={iconSize + 10}
+						size={iconSize + 20}
 					/>
 				</Link>
 				<Link

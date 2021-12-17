@@ -4,14 +4,17 @@ import Layout from '../../../components/Layout/Layout'
 import VerifiedBadge from '../../../components/VerifiedBadge/VerifiedBadge'
 import SettingsHeader from '../components/SettingsHeader'
 import axios from 'axios'
-import Cookies from 'js-cookie';
-import { notification } from 'antd';
+import Cookies from 'js-cookie'
+import { notification } from 'antd'
+import { Modal } from 'react-bootstrap'
+import UpdateAvatar from '../../GetStarted/Steps/UpdateAvatar'
 
 export default function AccountSettings() {
 	const { user } = useSelector((state) => state.auth)
 	const _user = user.user
 	const [userData, setUserData] = useState(_user)
 	const [loading, setLoading] = useState(false)
+	const [showImgEdit, setShowImgEdit] = useState(false)
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -39,6 +42,17 @@ export default function AccountSettings() {
 
 	return (
 		<Layout>
+			<Modal show={showImgEdit} size="lg">
+				<Modal.Body className="text-center">
+					<UpdateAvatar ended={() => setShowImgEdit(false)} />
+					<button
+						className="btn text-danger mt-4"
+						onClick={() => setShowImgEdit(false)}
+					>
+						Cancel
+					</button>
+				</Modal.Body>
+			</Modal>
 			<div className="middle-wrap pb-5">
 				<div className="card w-100 border-0 bg-white shadow-xs p-0 mb-4">
 					<SettingsHeader heading={'Change Account Information'} />
@@ -47,7 +61,7 @@ export default function AccountSettings() {
 							<div className="col-lg-4 text-center">
 								<figure className="avatar ms-auto me-auto mb-0 mt-2 w100 position-relative">
 									<img
-										src={userData.avatar_url}
+										src={user?.user?.avatar_url}
 										alt="image"
 										className="shadow-sm rounded-3 w-100"
 									/>
@@ -55,6 +69,7 @@ export default function AccountSettings() {
 										href="#"
 										className="shadow mr-4 p-1 position-absolute alert-primary text-dark font-xsss fw-500 mt-2 rounded-3"
 										style={{ right: '40px', width: '5rem' }}
+										onClick={() => setShowImgEdit(true)}
 									>
 										Change
 									</a>

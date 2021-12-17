@@ -19,6 +19,7 @@ import UserAction from '../../components/UserAction/UserAction'
 import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
 import { Redirect } from 'react-router'
 import EachRequestOptions from '../../components/Social/EachRequestOptions'
+import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 const ImgContainer = styled.section`
 	padding: 5em;
 	margin-bottom: 1em;
@@ -41,13 +42,18 @@ export default function RequestDetails(props) {
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
-
 		axios(process.env.REACT_APP_API_URL + '/property-requests/?uuid=' + uid)
 			.then((res) => {
 				if (res.data.length === 0) {
 					setState({ ...state, notFound: true, loading: false })
+					
 				} else {
 					setRequest(res.data[0])
+					Analytics.create({
+						request_id: res.data[0].id,
+						user_id: res.data[0].users_permissions_user.id,
+						type: AnalyticsTypes.requestView
+					})
 					setState({ ...state, loading: false })
 				}
 				Notifications.notifyUser({

@@ -16,6 +16,7 @@ import UserAction from '../../components/UserAction/UserAction'
 import Global from '../../Global'
 import ProfileJumb from '../../components/ProfileComponents/ProfileJumb'
 import ProfileAbout from '../../components/ProfileComponents/ProfileAbout'
+import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 const { TabPane } = Tabs
 
 export const Profile2 = (props) => {
@@ -63,6 +64,10 @@ export const Profile2 = (props) => {
 					if (res.data.length > 0) {
 						setUserData(res.data[0])
 						const user = res.data[0]
+						Analytics.create({
+							type: AnalyticsTypes.profileView,
+							user_id: res.data[0].id,
+						})
 						notifyEmy({
 							heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
 							log: res.data[0],
@@ -103,7 +108,10 @@ export const Profile2 = (props) => {
 	} else {
 		return (
 			<Layout currentPage="profile">
-				<div className={!auth.user ? "container": ""} style={{ marginTop: !auth.user ? '15vh': ''}}>
+				<div
+					className={!auth.user ? 'container' : ''}
+					style={{ marginTop: !auth.user ? '15vh' : '' }}
+				>
 					<MetaTags>
 						<title>
 							{`${userData.first_name} ${userData.last_name}`}'s Profile |
