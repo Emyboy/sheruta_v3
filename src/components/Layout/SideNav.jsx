@@ -78,12 +78,12 @@ export default function SideNav({ show }) {
 						</div>
 						<ul className="mb-3">
 							<li>
-								<a className="nav-content-bttn open-font">
+								<Link to={`/how-it-works`} className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">
 										<RiUserSearchLine />
 									</i>
 									<span>How It Works</span>
-								</a>
+								</Link>
 							</li>
 							<li>
 								<Link to="/about" className="nav-content-bttn open-font">

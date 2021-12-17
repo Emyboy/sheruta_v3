@@ -152,14 +152,22 @@ export default connect(mapStateToProps)((props) => {
 
 	return (
 		<Layout>
-			<div className="container pb-5" style={{ marginTop: !props.auth.user ? '15vh': '3vh'}}>
-				<Modal show={state.message ? true : false}>
+			<div
+				className="container pb-5"
+				style={{ marginTop: !props.auth.user ? '15vh' : '3vh' }}
+			>
+				<Modal
+					show={state.message ? true : false}
+					style={{ paddingTop: '20vh' }}
+				>
 					<Modal.Body>
 						<div className="text-center">
-							<i className="fa fa-check display-5"></i>
-							<h3>{state.message}</h3>
+							<i className="ti ti-check display-5"></i>
+							<h2 className='mb-3'>
+								<b>{state.message}</b>
+							</h2>
 							<Link to={localStorage.getItem('after_payment') || '/'}>
-								<button className="btn bg-theme">Continue</button>
+								<button className="btn bg-theme text-black">Continue</button>
 							</Link>
 						</div>
 					</Modal.Body>
@@ -219,7 +227,7 @@ export default connect(mapStateToProps)((props) => {
 													<b>{val.duration_in_days} Days Access To</b>
 												</li>
 												{/* <li className='border-bottom mt-3'>{val.property_count} Property Upload</li> */}
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Flatmate Requests{' '}
 													{val.requests ? (
 														<i className="ti ti-check text-theme"></i>
@@ -227,7 +235,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Email Updates{' '}
 													{val.email_update ? (
 														<i className="ti ti-check text-theme"></i>
@@ -235,7 +243,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Contact Verified Agents
 													{val.agent_contact ? (
 														<i className="ti ti-check text-theme"></i>
@@ -243,7 +251,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Access Join paddy
 													{val.join_paddy ? (
 														<i className="ti ti-check text-theme"></i>
@@ -251,7 +259,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Property Inspection
 													{val.inspection_fee ? (
 														<i className="ti ti-check text-theme"></i>
@@ -259,7 +267,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Contact Users
 													{val.user_contacts ? (
 														<i className="ti ti-check text-theme"></i>
@@ -267,7 +275,7 @@ export default connect(mapStateToProps)((props) => {
 														<i className="ti ti-close text-danger"></i>
 													)}
 												</li>
-												<li className='border-bottom mt-3'>
+												<li className="border-bottom mt-3">
 													Property Upload{' '}
 													{val.upload_property ? (
 														<i className="ti ti-check text-theme"></i>
@@ -279,7 +287,10 @@ export default connect(mapStateToProps)((props) => {
 										</div>
 										<div className="pricing-bottom">
 											{!props.auth.user ? (
-												<Link to="/login" className="btn shadow-sm bg-theme mt-3">
+												<Link
+													to="/login"
+													className="btn shadow-sm bg-theme mt-3"
+												>
 													Login To Pay
 												</Link>
 											) : (

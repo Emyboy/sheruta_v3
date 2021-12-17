@@ -48,11 +48,11 @@ export default function EachConversation({ conv }) {
 	return (
 		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom">
 			{otherUser && (
-				<div className="d-flex justify-content-between">
-					<>
+				<div className="d-flex justify-content-between w-100 align-items-center">
+					<div className="d-flex">
 						<figure className="avatar float-left mb-0 me-2">
 							<LazyLoadImage
-								effect='blur'
+								effect="blur"
 								src={otherUser?.avatar_url}
 								alt="image"
 								className="w35 rounded-3"
@@ -60,8 +60,13 @@ export default function EachConversation({ conv }) {
 						</figure>
 						<Link to={`/messages/${conv.uuid}`}>
 							<h3 className="fw-700 mb-0 mt-0">
-								<a className="font-xssss text-grey-600 d-block text-dark model-popup-chat">
-									{otherUser?.first_name}
+								<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat">
+									<b className='mr-2'>{otherUser?.first_name}</b>
+									<span
+										className={`shadow bg-${
+											otherUser.online ? 'success' : 'danger'
+										} ms-auto btn-round-xss`}
+									></span>
 								</a>
 								<small className="m-0 text-muted" style={{ fontSize: '10px' }}>
 									{latestMsg.length > 27
@@ -72,9 +77,9 @@ export default function EachConversation({ conv }) {
 								</small>
 							</h3>
 						</Link>
-					</>
+					</div>
 					{count !== 0 && (
-						<span className="badge badge-primary text-white badge-pill fw-500 mt-0">
+						<span className="badge badge-danger text-white badge-pill mt-0">
 							{count}
 						</span>
 					)}

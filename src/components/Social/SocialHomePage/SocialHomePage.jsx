@@ -67,7 +67,7 @@ export default (props) => {
 			axios(
 				process.env.REACT_APP_API_URL +
 					`/property-requests/?_limit=${
-						dev ? '10' : '50'
+						dev ? '20' : '50'
 					}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {

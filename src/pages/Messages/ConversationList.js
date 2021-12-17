@@ -20,10 +20,17 @@ export default function MessageList() {
     }, []);
 
     return (
-        <div className="inbox_user_list bg-white">
-            <div className="iu_heading">
-                <div className="candidate_revew_search_box">
-                    {/* <form className="form-inline">
+			<div className="card mt-4">
+				<div className="card-header">
+					<h1>
+						<b className="text-muted">Conversations</b>
+					</h1>
+				</div>
+                <div className="card-body">
+
+				<div className="iu_heading">
+					<div className="candidate_revew_search_box">
+						{/* <form className="form-inline"> 
                         <input
                             className="form-control w-100 border-gray rounded"
                             type="search"
@@ -32,22 +39,23 @@ export default function MessageList() {
                             autoFocus
                         />
                     </form> */}
+					</div>
+				</div>
+				<ul style={{ paddingBottom: '15vh' }}>
+					{conversations.length === 0 && (
+						<li className="text-center mt-5">
+							<h3>Your conversations will be listed here.</h3>
+							<h6>
+								Click on the message button on someone's profile to start a
+								conversation.
+							</h6>
+						</li>
+					)}
+					{conversations.map((val, i) => {
+						return <EachConversation key={'conv-' + i} conv={val} />
+					})}
+				</ul>
                 </div>
-            </div>
-            <ul style={{ paddingBottom: "15vh" }}>
-                {conversations.length === 0 && (
-                    <li className="text-center mt-5">
-                        <h3>Your conversations will be listed here.</h3>
-                        <h6>
-                            Click on the message button on someone's profile to
-                            start a conversation.
-                        </h6>
-                    </li>
-                )}
-                {conversations.map((val, i) => {
-                    return <EachConversation key={"conv-" + i} conv={val} />;
-                })}
-            </ul>
-        </div>
-    );
+			</div>
+		)
 }

@@ -37,6 +37,7 @@ import MessageNew from '../pages/Messages/MessageNew'
 import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
 import Settings from '../pages/Settings/Settings'
 import Search from '../components/Search/Search'
+import HowItWorks from '../pages/HowItWorks/HowItWorks'
 
 const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
@@ -98,6 +99,7 @@ function App() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
+							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
 							<Route exact path="/terms" component={Terms} />
 							<Route exact path="/blog" component={Blog} />

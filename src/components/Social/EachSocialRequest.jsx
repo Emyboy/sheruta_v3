@@ -22,7 +22,11 @@ export default function EachRequest({ data }) {
 	}
 
 	return (
-		<article className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
+		<article
+			className={`card w-100 shadow-xss rounded-xxl ${
+				!data.is_searching && ' border-2 border-success'
+			} p-4 mb-3`}
+		>
 			<div className="card-body p-0 d-flex">
 				{user && (
 					<figure className="avatar me-3">
@@ -32,7 +36,7 @@ export default function EachRequest({ data }) {
 							}
 							alt={user.first_name}
 							className="shadow-sm rounded-circle w45"
-							effect='blur'
+							effect="blur"
 						/>
 					</figure>
 				)}
@@ -128,7 +132,7 @@ export default function EachRequest({ data }) {
 														src={data.image_url[0]}
 														className="rounded-3 w-100"
 														alt={data?.heading}
-														effect='blur'
+														effect="blur"
 													/>
 													{data.image_url.length > 3 && (
 														<span className="img-count font-sm text-white ls-3 fw-600">
@@ -147,7 +151,7 @@ export default function EachRequest({ data }) {
 															src={img}
 															className="rounded-3 w-100"
 															alt="image"
-															effect='blur'
+															effect="blur"
 														/>
 													</a>
 												</Link>
