@@ -55,7 +55,7 @@ export default function ConfigureViewSettings() {
 											}`}
 										>
 											<div className="card-body">
-												<h2>I have an apartment</h2>
+												<h2 className='fw-700'>I have an apartment</h2>
 												<p>
 													Show me those who are looking for an apartment to
 													share
@@ -71,7 +71,7 @@ export default function ConfigureViewSettings() {
 											}`}
 										>
 											<div className="card-body">
-												<h2>I am looking for an apartment</h2>
+												<h2 className='fw-700'>I am looking for</h2>
 												<p>Show me those who have apartments for share.</p>
 											</div>
 										</div>

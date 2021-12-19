@@ -161,7 +161,7 @@ const CraeteRequest = (props) => {
 			notification.error({ message: 'Please select a state' })
 			return
 		}
-		setState({ ...state, loading: true })
+		
 		//.. Send images to firebase
 		const files = []
 		const img_urls = []
@@ -170,6 +170,14 @@ const CraeteRequest = (props) => {
 				files.push(val)
 			}
 		})
+		if (!view.personal_info.looking_for && files.length === 0) {
+			notification.error({ message: 'Please add an image' })
+			return
+		}else if (!view.personal_info.looking_for && files.length < 3) {
+			notification.error({ message: 'Please add at least 3 images' });
+			return;
+		}
+		setState({ ...state, loading: true })
 		if (files.length > 0) {
 			files.map(async (file, i) => {
 				if (file) {
@@ -666,23 +674,23 @@ const CraeteRequest = (props) => {
 													<div className="">
 														<div className="col-lg-12">
 															<div className="row justify-content-center">
-																{!edit
-																	? new Array(image_count).fill(null)
-																	: data.image_url.map((_, i) => {
-																			return (
-																				<ImageSelect
-																					index={i}
-																					edit={edit}
-																					image={!edit ? imageFiles[`img${i}`]: data.image_url[i]}
-																					onFileChange={(e) => {
-																						handleImageSelect(
-																							e.target.files[0],
-																							i
-																						)
-																					}}
-																				/>
-																			)
-																	  })}
+																{new Array(image_count)
+																	.fill(null)
+																	.map((_, i) => {
+																		return (
+																			<ImageSelect
+																				index={i}
+																				edit={edit}
+																				image={imageFiles[`img${i}`]}
+																				onFileChange={(e) => {
+																					handleImageSelect(
+																						e.target.files[0],
+																						i
+																					)
+																				}}
+																			/>
+																		)
+																	})}
 															</div>
 														</div>
 													</div>

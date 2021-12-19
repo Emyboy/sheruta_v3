@@ -94,9 +94,9 @@ export default function PropertyDetails({ match }) {
 										if (navigator.share) {
 											navigator
 												.share({
-													title: data.heading,
+													title: data.name,
 													url: window.location.pathname,
-													text: data.body,
+													text: data.description,
 												})
 												.catch((err) => Promise.reject(err))
 										}

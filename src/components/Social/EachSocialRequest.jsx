@@ -7,17 +7,17 @@ import UserAction from '../UserAction/UserAction'
 import DeactivatedBanner from '../DeactivatedBanner/DeactivatedBanner'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import { useSelector } from 'react-redux'
-import EachRequestOptions from './EachRequestOptions';
+import EachRequestOptions from './EachRequestOptions'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function EachRequest({ data }) {
 	const user = data?.users_permissions_user
 	const deactivated = user.deactivated
-	const auth = useSelector((state) => state.auth);
-	const authUser = auth.user;
-	const [deleted, setDeleted] = useState(false);
+	const auth = useSelector((state) => state.auth)
+	const authUser = auth.user
+	const [deleted, setDeleted] = useState(false)
 
-	if(deleted){
+	if (deleted) {
 		return null
 	}
 
@@ -46,7 +46,7 @@ export default function EachRequest({ data }) {
 						className=" d-flex justify-context-evenly"
 					>
 						<a className="text-dark">
-							{deactivated ? '.... ....' : user.first_name}{' '}
+							{deactivated ? '.... ....' : user.first_name.split(' ')[0]}{' '}
 						</a>{' '}
 						<VerifiedBadge user={user} className={'ml-2'} size={15} />
 					</Link>

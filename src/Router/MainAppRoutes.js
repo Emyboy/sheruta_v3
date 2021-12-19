@@ -35,11 +35,13 @@ import Profile2 from '../pages/Profile/Profile2'
 import Messages from '../pages/Messages/Messages'
 import MessageNew from '../pages/Messages/MessageNew'
 import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
-import Settings from '../pages/Settings/Settings'
 import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
-import Properties from '../pages/Properties/Properties'
+// import Settings from '../pages/Settings/Settings'
+// import Properties from '../pages/Properties/Properties'
 
+const Properties = React.lazy(() => import('../pages/Properties/Properties'))
+const Settings = React.lazy(() => import('../pages/Settings/Settings'))
 const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
 	import('../pages/PropertyDetails/PropertyDetails')
