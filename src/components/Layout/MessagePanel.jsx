@@ -7,7 +7,6 @@ import { getAllConversations } from '../../redux/strapi_actions/view.action'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-
 export default function MessagePanel({ show }) {
 	const dispatch = useDispatch()
 	const { conversations, payment_plan } = useSelector((state) => state.view)
@@ -29,7 +28,10 @@ export default function MessagePanel({ show }) {
 			style={{ zIndex: 5 }}
 		>
 			{!payment_plan ? (
-				<PaymentAlert message={"Can't view messages"} className={'shadow mt-5'} />
+				<PaymentAlert
+					message={"Can't view messages"}
+					className={'shadow mt-5'}
+				/>
 			) : (
 				<div className="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 					<div className="section full pe-3 ps-4 pt-4 position-relative _feed-body">
@@ -71,19 +73,22 @@ export default function MessagePanel({ show }) {
 											<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
 												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
 													<LazyLoadImage
-														effect='blur'
+														effect="blur"
 														src={otherUser?.avatar_url}
 														alt="image"
 														className="w35 rounded-3"
 													/>
 												</span>
-												<h3 className="fw-700 mb-0 mt-0">
+												<h3 className="fw-700 mb-0 mt-1">
 													<Link
 														to={`/messages/new/${otherUser?.id}`}
 														className="font-xssss text-grey-600 d-block text-dark model-popup-chat"
 													>
 														{otherUser?.first_name}
 													</Link>
+													<small style={{ fontSize: '10px' }} className='text-muted'>
+														@{otherUser?.username}
+													</small>
 												</h3>
 												<span
 													className={`shadow bg-${

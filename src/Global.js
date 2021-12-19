@@ -13,6 +13,7 @@ export default {
 	APP_URL: 'http://localhost:3000',
 	API_URL: 'http://localhost:1337',
 	PLATFORM: window.navigator?.platform,
+	currency: '₦',
 }
 
 export const all_states = [

@@ -23,6 +23,7 @@ import AppUpdatePopup from './AppUpdatePopup'
 import { setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 import Global from '../../Global'
+import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -33,6 +34,7 @@ const MasterPopup = (props) => {
 		dispatch(getAllServices())
 		dispatch(getAllPaymentTypes())
 		dispatch(getAllWorkIndustries())
+		dispatch(getAllRecentProperties())
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())

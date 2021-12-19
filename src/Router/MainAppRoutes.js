@@ -38,6 +38,7 @@ import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
 import Settings from '../pages/Settings/Settings'
 import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
+import Properties from '../pages/Properties/Properties'
 
 const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
@@ -48,7 +49,6 @@ const GetStarted = React.lazy(() => import('../pages/GetStarted/GetStarted'))
 const Login = React.lazy(() => import('../pages/Login/Login'))
 const Signup = React.lazy(() => import('../pages/Signup/Signup'))
 const Pricing = React.lazy(() => import('../pages/Pricing/Pricing'))
-const Contact = React.lazy(() => import('../pages/Contact/Contact'))
 const About = React.lazy(() => import('../pages/About/About'))
 const SignUpSuccess = React.lazy(() =>
 	import('../pages/SignUpSuccess/SignUpSuccess')
@@ -63,7 +63,6 @@ const VerifyEmail = React.lazy(() => import('../pages/VerifyEmail/VerifyEmail'))
 const PasswordReset = React.lazy(() =>
 	import('../pages/ResetPassword/PasswordReset')
 )
-const PropertySort = React.lazy(() => import('../pages/Property/PropertySort'))
 const WhatNext = React.lazy(() => import('../pages/GetStarted/Steps/WhatNext'))
 const AllRequests = React.lazy(() => import('../pages/Request/AllRequests'))
 const Request = React.lazy(() => import('../pages/Request/Request'))
@@ -99,6 +98,7 @@ function App() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
+							<Route exact path="/properties" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
 							<Route exact path="/terms" component={Terms} />
@@ -124,7 +124,6 @@ function App() {
 							<Route exact path="/blog/:uuid/:id" component={BlogDetails} />
 							<Route exact path="/start/:step" component={GetStarted} />
 							<Route exact path="/login" component={Login} />
-							<Route exact path="/contact" component={Contact} />
 							<Route exact path="/about" component={About} />
 							<Route exact path="/requests" component={Request} />
 							<Route exact path="/requests/edit/:request_id" component={CreateRequest} />
@@ -132,7 +131,7 @@ function App() {
 							<Route exact path="/user/:username" component={Profile2} />
 							<Route
 								exact
-								path="/property/:name/:property_id"
+								path="/property/:uid/:property_id"
 								component={PropertyDetails}
 							/>
 							<Route exact path="/signup" component={Signup} />
@@ -171,7 +170,6 @@ function App() {
 								component={PasswordReset}
 							/>
 							<Route exact path="/requests/create" component={CreateRequest} />
-							<Route exact path="/properties" component={PropertySort} />
 							<Route component={PageNotFound} />
 							{/* 
 

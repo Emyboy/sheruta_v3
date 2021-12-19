@@ -3,11 +3,8 @@ import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
 import { IoPricetagsOutline } from 'react-icons/io5'
 import { RiUserSearchLine } from 'react-icons/ri'
-import {
-	MdElectricalServices,
-	MdOutlineLocationOn,
-	MdWorkOutline,
-} from 'react-icons/md'
+import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
+import { BsHouseDoor } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
@@ -62,11 +59,11 @@ export default function SideNav({ show }) {
 								</Link>
 							</li>
 							<li>
-								<Link to="/locations" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-gold-gradiant me-3">
-										<MdOutlineLocationOn size={size} />
+								<Link to="/properties" className="nav-content-bttn open-font">
+									<i className="btn-round-md bg-primary-gradiant me-3">
+										<BsHouseDoor size={size} />
 									</i>
-									<span>Locations</span>
+									<span>Properties</span>
 								</Link>
 							</li>
 						</ul>
@@ -78,7 +75,10 @@ export default function SideNav({ show }) {
 						</div>
 						<ul className="mb-3">
 							<li>
-								<Link to={`/how-it-works`} className="nav-content-bttn open-font">
+								<Link
+									to={`/how-it-works`}
+									className="nav-content-bttn open-font"
+								>
 									<i className="font-xl text-current me-3">
 										<RiUserSearchLine />
 									</i>

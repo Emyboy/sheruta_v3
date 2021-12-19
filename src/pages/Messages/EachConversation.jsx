@@ -65,7 +65,7 @@ export default function EachConversation({ conv }) {
 									<span
 										className={`shadow bg-${
 											otherUser.online ? 'success' : 'danger'
-										} ms-auto btn-round-xss`}
+										}  btn-round-xss`}
 									></span>
 								</a>
 								<small className="m-0 text-muted" style={{ fontSize: '10px' }}>
