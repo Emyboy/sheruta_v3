@@ -43,16 +43,16 @@ export default function Notifications() {
 								</a> */}
 							</h2>
 
-							{
-								payment_plan ? 
-							<ul className="notification-box">
-								{notifications &&
-									notifications.map((val, i) => {
-										return <EachNotification key={`notify-${i}`} data={val} />
-									})}
-							</ul>: <PaymentAlert message={"Subscribe to view notifications"} />
-							}
-
+							{payment_plan ? (
+								<ul className="notification-box">
+									{notifications &&
+										notifications.map((val, i) => {
+											return <EachNotification key={`notify-${i}`} data={val} />
+										})}
+								</ul>
+							) : (
+								<PaymentAlert message={'Subscribe to view notifications'} />
+							)}
 						</div>
 					</div>
 				</div>

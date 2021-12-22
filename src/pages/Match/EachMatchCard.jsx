@@ -7,7 +7,8 @@ import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import { FiCheck } from 'react-icons/fi'
 import { MdClose, MdWork } from 'react-icons/md'
 import { FaIndustry } from 'react-icons/fa'
-import { Modal } from 'bootstrap'
+import { Modal } from 'react-bootstrap'
+import PersonalInfo from '../Profile/PersonalInfo'
 
 const Wrapper = styled.div`
 	.actions > div > button {
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
 
 export default function EachMatchCard({ data, handleStatusUpdate }) {
 	const { users_permissions_user, personal_info } = data
-	console.log("DATA --", data);
+	console.log('DATA --', data)
 	const { user } = useSelector((state) => state.auth)
 	const { work_industries } = useSelector((state) => state.view)
 	const [showInfo, setShowInfo] = useState(false)
@@ -37,7 +38,22 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 	return (
 		<Wrapper className="card d-block border shadow-xss rounded-3 overflow-hidden mb-3">
 			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
-				<PersonalInfo userData={users_permissions_user} />
+				{user && user.user.is_verified ? (
+					<PersonalInfo userData={users_permissions_user} />
+				) : (
+					<div className="text-center pt-5 pb-5">
+						<h1 className="font-xxl">😢</h1>
+						<h2 className="fw-bold">Only verified users can view this</h2>
+						<Link to={`/start`}>
+							<button className="btn bg-theme text-white mt-3">
+								Verify Your Account
+							</button>
+						</Link>
+					</div>
+				)}
+				<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
+					close
+				</button>
 			</Modal>
 			<div className="card-body d-block w-100 p-4 text-center">
 				<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
@@ -81,6 +97,13 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							)[0].name}
 					</li>
 				</ul>
+				<button
+					className="text-center mt-3 btn fw-bold"
+					onClick={() => setShowInfo(true)}
+				>
+					<i className="ti-lock font-xs mr-2"></i>
+					<span>Show More Info</span>
+				</button>
 			</div>
 			{/* <div>
 				<div className="frnd-name">

@@ -39,7 +39,7 @@ export default function FooterNav({ pageName }) {
 					<BiHomeAlt
 						size={iconSize}
 						className={`text-${
-							pageName === 'feed' ? 'theme' : 'dark'
+							pageName === 'feeds' ? 'theme' : 'dark'
 						} feather-home`}
 					/>
 				</Link>
@@ -60,7 +60,7 @@ export default function FooterNav({ pageName }) {
 					{/* <i className="text-dark feather-plus"></i> */}
 					<RiAddCircleLine
 						className={`text-${pageName === 'requests' ? 'theme' : 'dark'}`}
-						size={iconSize + 20}
+						size={iconSize + 10}
 					/>
 				</Link>
 				<Link
@@ -73,9 +73,8 @@ export default function FooterNav({ pageName }) {
 
 					<FiBell
 						size={iconSize}
-						className={`text-${
-							pageName === 'notifications' ? 'theme' : 'dark'
-						} feather-bell`}
+						className={`text-${pageName === 'notifications' ? 'theme' : 'dark'
+						} `}
 					/>
 				</Link>
 				<Link
