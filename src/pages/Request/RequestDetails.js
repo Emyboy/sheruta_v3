@@ -33,6 +33,7 @@ export default function RequestDetails(props) {
 	const { user } = useSelector((state) => state.auth)
 	const [showImages, setShowImages] = useState(false)
 	const [request, setRequest] = useState(null)
+	const [deleted, setDelete] = useState(false)
 	const [state, setState] = useState({
 		loading: true,
 		notFound: false,
@@ -46,13 +47,12 @@ export default function RequestDetails(props) {
 			.then((res) => {
 				if (res.data.length === 0) {
 					setState({ ...state, notFound: true, loading: false })
-					
 				} else {
 					setRequest(res.data[0])
 					Analytics.create({
 						request_id: res.data[0].id,
 						user_id: res.data[0].users_permissions_user.id,
-						type: AnalyticsTypes.requestView
+						type: AnalyticsTypes.requestView,
 					})
 					setState({ ...state, loading: false })
 				}
@@ -90,9 +90,10 @@ export default function RequestDetails(props) {
 		}
 	}, [request])
 
-	// if (!auth.user) {
-	// 	return <Redirect to="/signup" />
-	// }
+	if (deleted) {
+		notification.success({ message: "Request Deleted"})
+		return <Redirect to="/" />
+	}
 
 	if (state.loading) {
 		return <PageLoader />
@@ -186,7 +187,11 @@ export default function RequestDetails(props) {
 													>
 														<i className="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i>
 													</a>
-													<EachRequestOptions data={request}  />
+													<EachRequestOptions
+														data={request}
+														deleted={deleted}
+														setDeleted={() => setDelete(true)}
+													/>
 												</div>
 											</div>
 											<div className="post-meta">
@@ -322,9 +327,7 @@ export default function RequestDetails(props) {
 															{request.is_premium ? 'Yes' : 'No'}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">
-																Service:
-															</strong>
+															<strong className="text-dark">Service:</strong>
 															<br />
 															{request.service && request.service.name}
 														</li>
@@ -334,9 +337,7 @@ export default function RequestDetails(props) {
 															{request.category && request.category.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">
-																Rent
-															</strong>
+															<strong className="text-dark">Rent</strong>
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}
 														</li>
