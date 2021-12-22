@@ -91,7 +91,6 @@ export default function RequestDetails(props) {
 	}, [request])
 
 	if (deleted) {
-		notification.success({ message: "Request Deleted"})
 		return <Redirect to="/" />
 	}
 
