@@ -14,6 +14,7 @@ export const notifyEmy = ({ status, url, property, log, heading, user }) => {
             heading,
         },
     });
+    return;
 };
 
 export const getAppDetails = async () => {
