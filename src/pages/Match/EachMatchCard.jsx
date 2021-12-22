@@ -7,6 +7,7 @@ import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import { FiCheck } from 'react-icons/fi'
 import { MdClose, MdWork } from 'react-icons/md'
 import { FaIndustry } from 'react-icons/fa'
+import { Modal } from 'bootstrap'
 
 const Wrapper = styled.div`
 	.actions > div > button {
@@ -35,6 +36,9 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 
 	return (
 		<Wrapper className="card d-block border shadow-xss rounded-3 overflow-hidden mb-3">
+			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
+				<PersonalInfo userData={users_permissions_user} />
+			</Modal>
 			<div className="card-body d-block w-100 p-4 text-center">
 				<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
 					<img
