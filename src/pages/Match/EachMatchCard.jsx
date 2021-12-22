@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 
 export default function EachMatchCard({ data, handleStatusUpdate }) {
 	const { users_permissions_user, personal_info } = data
-	// console.log("DATA --", data);
+	console.log("DATA --", data);
 	const { user } = useSelector((state) => state.auth)
 	const { work_industries } = useSelector((state) => state.view)
 	const [showInfo, setShowInfo] = useState(false)
@@ -36,17 +36,17 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 	return (
 		<Wrapper className="card d-block border shadow-xss rounded-3 overflow-hidden mb-3">
 			<div className="card-body d-block w-100 p-4 text-center">
-				<figure class="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
+				<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
 					<img
 						src={users_permissions_user.avatar_url}
 						alt="image"
-						class="float-right p-1 bg-white rounded-circle w-100"
+						className="float-right p-1 bg-white rounded-circle w-100"
 					/>
 				</figure>
-				<div class="clearfix"></div>
+				<div className="clearfix"></div>
 				<div className="d-flex justify-content-center">
 					<Link to={`/user/${users_permissions_user.username}`}>
-						<h4 class="fw-700 font-xss mt-3 mb-0">
+						<h4 className="fw-700 font-xss mt-3 mb-0">
 							{users_permissions_user.first_name}{' '}
 						</h4>
 					</Link>
@@ -57,20 +57,20 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 					/>
 				</div>
 
-				<p class="fw-500 font-xssss text-grey-500 mt-0 mb-3">
+				<p className="fw-500 font-xssss text-grey-500 mt-0 mb-3">
 					@{users_permissions_user.username}
 				</p>
-				<ul class="product-feature-list mt-1">
-					<li class="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b class="text-grey-900 mr-2"> Gender: </b>
+				<ul className="product-feature-list mt-1">
+					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+						<b className="text-grey-900 mr-2"> Gender: </b>
 						{personal_info.gender === 'm' ? 'Male' : 'Female'}
 					</li>
-					<li class="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b class="text-grey-900 mr-2">Occupation: </b>
+					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+						<b className="text-grey-900 mr-2">Occupation: </b>
 						{personal_info.occupation}
 					</li>
-					<li class="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b class="text-grey-900 mr-2"> Industry: </b>
+					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+						<b className="text-grey-900 mr-2"> Industry: </b>
 						{work_industries.length > 0 &&
 							work_industries.filter(
 								(x) => x.id === personal_info.work_industry

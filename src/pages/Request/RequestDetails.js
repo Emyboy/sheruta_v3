@@ -323,7 +323,7 @@ export default function RequestDetails(props) {
 														</li>
 														<li className="col-4 mb-3">
 															<strong className="text-dark">
-																Service Type:
+																Service:
 															</strong>
 															<br />
 															{request.service && request.service.name}
@@ -335,7 +335,7 @@ export default function RequestDetails(props) {
 														</li>
 														<li className="col-4 mb-3">
 															<strong className="text-dark">
-																Price / Budget
+																Rent
 															</strong>
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}

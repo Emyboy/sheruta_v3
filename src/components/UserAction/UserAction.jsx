@@ -6,7 +6,7 @@ import store from '../../redux/store/store'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import { notifyEmy } from '../../services/Sheruta'
 
-export default function UserAction({ user, disable, alignment }) {
+export default function UserAction({ user, disable, alignment, className }) {
 	const auth = useSelector((state) => state.auth)
 	const { payment_plan } = useSelector((state) => state.view)
 	const deactivated = user.deactivated
@@ -42,7 +42,7 @@ export default function UserAction({ user, disable, alignment }) {
 	return (
 		<>
 			{auth.user && auth.user.user.id === user.id ? null : (
-				<div className={`d-flex justify-content-${alignment || 'center'}`}>
+				<div className={`d-flex justify-content-${alignment || 'center'} ${className && className}`}>
 					<Link
 						to={payment_plan ? `/messages/new/${user.id}` : '#'}
 						onClick={() => handleButtonClicks('message')}

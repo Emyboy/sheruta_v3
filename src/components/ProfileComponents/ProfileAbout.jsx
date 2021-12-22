@@ -9,7 +9,6 @@ export default function ProfileAbout({ user }) {
 	const [isOwner, setIsOwner] = useState(auth.user ? auth.user.user.id === user.id: false);
 
 	useEffect(() => {
-		console.log('USER ---', user);
 		if (auth.user && user.id === auth.user.user.id) {
 			setIsOwner(true)
 		} else {

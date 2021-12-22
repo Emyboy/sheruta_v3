@@ -25,7 +25,7 @@ export default function EachRequest({ data }) {
 		<article
 			className={`card w-100 shadow-xss rounded-xxl ${
 				!data.is_searching && ' border-2 border-success'
-			} p-4 mb-3`}
+			} p-3 mb-3`}
 		>
 			<div className="card-body p-0 d-flex">
 				{user && (
@@ -174,11 +174,13 @@ export default function EachRequest({ data }) {
 			<div className="card-body row p-0 mt-3 mb-3 justify-content-between">
 				<div className="d-flex align-items-center justify-content-start col-md-6">
 					<div className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
-						<span>Budget: </span>
+						<span className="font-xss text-gray-600">
+							{data.is_searching ? 'Budget' : 'Rent'}:{' '}
+						</span>
 					</div>
 					<figure className="mb-0 pl-1">
 						{' '}
-						<b style={{ fontSize: '17px' }} className="text-grey-500">
+						<b style={{ fontSize: '17px' }} className="text-grey-600">
 							{Global.currency}
 							{window.formatedPrice.format(data.budget)}{' '}
 							{data.payment_type && (
@@ -188,7 +190,11 @@ export default function EachRequest({ data }) {
 					</figure>
 				</div>
 				<div className="col-md-6">
-					<UserAction alignment="end" user={user} />
+					<UserAction
+						alignment={!Global.isMobile ? 'end' : 'center'}
+						className={Global.isMobile && 'mt-4'}
+						user={user}
+					/>
 				</div>
 			</div>
 		</article>

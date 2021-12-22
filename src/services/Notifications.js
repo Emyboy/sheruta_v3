@@ -40,7 +40,6 @@ const NotificationService = {
                 },
             },
         );
-        console.log("NOTIFICATION SEND ---", data);
         return data;
     },
 
