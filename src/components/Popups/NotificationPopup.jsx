@@ -84,7 +84,7 @@ export default function NotificationPopup() {
 				sessionStorage.setItem('notify_show', true)
 			}, 20000)
 		}
-	}, [personal_info])
+	}, [])
 
 	if (done) {
 		return null

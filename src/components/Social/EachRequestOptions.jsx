@@ -61,7 +61,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 				handleClose={() => setShowDelete(false)}
 				loading={deleteLoading}
 			/>
-			{isOwner && (
+			{/* {isOwner && (
 				<Link
 					to={`/requests/edit/${data.id}`}
 					className="card-body p-0 d-flex link"
@@ -74,7 +74,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 						</span>
 					</h4>
 				</Link>
-			)}
+			)} */}
 			<div
 				className="card-body p-0 d-flex mt-2 link"
 				onClick={() => {
