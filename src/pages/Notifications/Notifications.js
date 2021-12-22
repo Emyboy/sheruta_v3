@@ -6,9 +6,9 @@ import { Redirect } from 'react-router';
 import PaymentAlert from '../../components/PaymentAlert/PaymentAlert';
 
 export default function Notifications() {
+    localStorage.setItem('after_login', '/notifications');
 	const { user } = useSelector(state => state.auth);
 	const { notifications, payment_plan } = useSelector((state) => state.view);
-    localStorage.setItem('after_login', '/notifications');
 	if(!user){
 		return <Redirect to={'/login'} />
 	}

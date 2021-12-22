@@ -26,9 +26,9 @@ export default function Match() {
 	useEffect(() => {
 		dispatch(getAllSuggestionsByStatus('accepted'))
 	}, [user_suggestions])
-	useEffect(() => {
-		notifyEmy({ heading: 'visited the match page' })
-	}, [])
+	// useEffect(() => {
+	// 	notifyEmy({ heading: 'visited the match page' })
+	// }, [])
 	if (!user) {
 		return <Redirect to="/login" />
 	}
