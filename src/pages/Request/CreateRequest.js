@@ -279,13 +279,6 @@ const CraeteRequest = (props) => {
 	// 	}
 	// }, [])
 
-	React.useEffect(() => {
-		notifyEmy({
-			heading: 'Visited the create request page',
-			// user: auth.user.user,
-		})
-	}, [])
-
 	const handleImageSelect = (file, i) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}

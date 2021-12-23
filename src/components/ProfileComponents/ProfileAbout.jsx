@@ -26,7 +26,7 @@ export default function ProfileAbout({ user }) {
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
 			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
-				{user && user.is_verified ? (
+				{auth.user && auth.user?.user.is_verified ? (
 					<PersonalInfo userData={user} />
 				) : (
 					<div className="text-center pt-5 pb-5">
