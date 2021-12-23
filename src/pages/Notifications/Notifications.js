@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import EachNotification from './EachNotification'
 import Layout from '../../components/Layout/Layout';
 import { Redirect } from 'react-router';
-import PaymentAlert from '../../components/PaymentAlert/PaymentAlert';
 
 export default function Notifications() {
     localStorage.setItem('after_login', '/notifications');
@@ -43,16 +42,13 @@ export default function Notifications() {
 								</a> */}
 							</h2>
 
-							{payment_plan ? (
 								<ul className="notification-box">
 									{notifications &&
 										notifications.map((val, i) => {
 											return <EachNotification key={`notify-${i}`} data={val} />
 										})}
 								</ul>
-							) : (
-								<PaymentAlert message={'Subscribe to view notifications'} />
-							)}
+							
 						</div>
 					</div>
 				</div>
