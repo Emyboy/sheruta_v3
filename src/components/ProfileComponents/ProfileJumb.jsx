@@ -48,7 +48,7 @@ export default function ProfileJumb({ user }) {
 							@{deactivated ? '......' : user.username}
 						</span>
 					</h4>
-					{!deactivated && auth.user ? (
+					{!deactivated && auth.user && auth.user?.user?.id !== user.id ? (
 						<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
 							<Tooltip placement="top" title={`Call ${user.first_name}`}>
 								<a
@@ -78,7 +78,7 @@ export default function ProfileJumb({ user }) {
 						</div>
 					) : (
 						<div className="badge badge-success d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
-							Login To Call
+							
 						</div>
 					)}
 				</div>
