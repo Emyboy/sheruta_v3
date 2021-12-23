@@ -1,12 +1,15 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
+import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import PersonalInfo from '../../pages/Profile/PersonalInfo';
 
 export default function ProfileAbout({ user }) {
 	const auth = useSelector((state) => state.auth)
 	const [isOwner, setIsOwner] = useState(auth.user ? auth.user.user.id === user.id: false);
+	const [showInfo, setShowInfo] = useState(false);
 
 	useEffect(() => {
 		if (auth.user && user.id === auth.user.user.id) {
@@ -22,11 +25,36 @@ export default function ProfileAbout({ user }) {
 
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
+				{user && user.is_verified ? (
+					<PersonalInfo userData={user} />
+				) : (
+					<div className="text-center pt-5 pb-5">
+						<h1 className="font-xxl">😢</h1>
+						<h2 className="fw-bold">Only verified users can view this</h2>
+						<Link to={`/start`}>
+							<button className="btn bg-theme text-white mt-3">
+								Verify Your Account
+							</button>
+						</Link>
+					</div>
+				)}
+				<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
+					close
+				</button>
+			</Modal>
 			<div className="card-body d-block p-4">
 				<h4 className="fw-700 mb-3 font-xsss text-grey-900">About</h4>
 				<p className="fw-500 text-grey-500 lh-24 font-xssss mb-0">
 					{user.bio || `Hi my name is ${user.first_name} and I use Sheruta NG`}
 				</p>
+				<button
+					className="text-center mt-3 btn fw-bold"
+					onClick={() => setShowInfo(true)}
+				>
+					<i className="ti-lock font-xss mr-2"></i>
+					<small>Show More Info</small>
+				</button>
 			</div>
 			{isOwner && (
 				<>
@@ -40,7 +68,10 @@ export default function ProfileAbout({ user }) {
 						</h4>
 					</div>
 
-					<Link className="card-body d-flex pt-0" to={`/settings/account-settings`}>
+					<Link
+						className="card-body d-flex pt-0"
+						to={`/settings/account-settings`}
+					>
 						<i className="feather-edit text-grey-500 me-3 font-lg"></i>
 						<h4 className="fw-700 text-grey-900 font-xssss mt-0">
 							Edit Profile{' '}
@@ -49,7 +80,10 @@ export default function ProfileAbout({ user }) {
 							</span>
 						</h4>
 					</Link>
-					<Link className="card-body d-flex pt-0" to={`/settings/configure-view`}>
+					<Link
+						className="card-body d-flex pt-0"
+						to={`/settings/configure-view`}
+					>
 						<i className="feather-layout text-grey-500 me-3 font-lg"></i>
 						<h4 className="fw-700 text-grey-900 font-xssss mt-0">
 							Configure View
@@ -59,7 +93,10 @@ export default function ProfileAbout({ user }) {
 						</h4>
 					</Link>
 
-					<Link className="card-body d-flex pt-0" to={`/settings/deactivate-account`}>
+					<Link
+						className="card-body d-flex pt-0"
+						to={`/settings/deactivate-account`}
+					>
 						<i className="feather-alert-triangle text-grey-500 me-3 font-lg"></i>
 						<h4 className="fw-700 text-grey-900 font-xssss mt-1">
 							Deactivate Account

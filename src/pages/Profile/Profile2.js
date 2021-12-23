@@ -17,6 +17,8 @@ import Global from '../../Global'
 import ProfileJumb from '../../components/ProfileComponents/ProfileJumb'
 import ProfileAbout from '../../components/ProfileComponents/ProfileAbout'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
+import { Modal } from 'react-bootstrap'
+import PersonalInfo from './PersonalInfo'
 const { TabPane } = Tabs
 
 export const Profile2 = (props) => {
@@ -30,6 +32,7 @@ export const Profile2 = (props) => {
 	const [loading, setLoading] = useState(true)
 	const [userData, setUserData] = useState(null)
 	const [notFound, setNotFound] = useState(false)
+	const [showInfo, setShowInfo] = useState(false);
 	// const user = props.auth.user;
 
 	useEffect(() => {
@@ -108,6 +111,7 @@ export const Profile2 = (props) => {
 	} else {
 		return (
 			<Layout currentPage="profile">
+				
 				<div
 					className={!auth.user ? 'container' : ''}
 					style={{ marginTop: !auth.user ? '15vh' : '' }}
