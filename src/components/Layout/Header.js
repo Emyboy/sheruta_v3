@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { notification, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/img/canta-logo.png'
 import Global from '../../Global';
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 
@@ -149,7 +149,7 @@ export default function Header({
 										src={logo}
 										alt="sheruta logo"
 										width={Global.isMobile ? '150' : '180'}
-										height={Global.isMobile ? '30' : '50'}
+										height={Global.isMobile ? '30' : '45'}
 									/>
 								</span>{' '}
 							</span>

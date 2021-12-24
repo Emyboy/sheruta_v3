@@ -22,11 +22,13 @@ export default function Layout({ currentPage, children, showMessages }) {
 				pageName={currentPage}
 			/>
 			{user && <SideNav show={showNav} />}
-			{user && <MessagePanel show={showChat} pageName={currentPage} />}
+			{user && (
+				<MessagePanel show={showChat} pageName={currentPage} togglePanel={() => setShowChat(!showChat)} />
+			)}
 
 			<div
 				className={user && 'main-content right-chat-active'}
-				style={{ paddingBottom: !user ? "0vh":'21vh' }}
+				style={{ paddingBottom: !user ? '0vh' : '21vh' }}
 			>
 				<div className={user && 'middle-sidebar-bottom pl-0 pr-0'}>
 					<div className={user && 'middle-sidebar-left'}>{children}</div>

@@ -7,7 +7,7 @@ import { getAllConversations } from '../../redux/strapi_actions/view.action'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-export default function MessagePanel({ show }) {
+export default function MessagePanel({ show, togglePanel }) {
 	const dispatch = useDispatch()
 	const { conversations, payment_plan } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
@@ -46,7 +46,13 @@ export default function MessagePanel({ show }) {
 							)}
 							{conversations &&
 								conversations.map((val, i) => {
-									return <EachConversation conv={val} key={`conv-${i}`} />
+									return (
+										<EachConversation
+											conv={val}
+											key={`conv-${i}`}
+											onClick={togglePanel}
+										/>
+									)
 								})}
 						</ul>
 					</div>
@@ -70,7 +76,10 @@ export default function MessagePanel({ show }) {
 									.map((val, i) => {
 										const otherUser = val?.users_permissions_user
 										return (
-											<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+											<li
+												className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center"
+												onClick={togglePanel}
+											>
 												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
 													<LazyLoadImage
 														effect="blur"
@@ -86,7 +95,10 @@ export default function MessagePanel({ show }) {
 													>
 														{otherUser?.first_name}
 													</Link>
-													<small style={{ fontSize: '10px' }} className='text-muted'>
+													<small
+														style={{ fontSize: '10px' }}
+														className="text-muted"
+													>
 														@{otherUser?.username}
 													</small>
 												</h3>

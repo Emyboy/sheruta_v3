@@ -102,7 +102,7 @@ export default function EachRequest({ data }) {
 			<div className="card-body p-0 me-lg-5 pt-2">
 				<Link to={`/request/${data.uuid}/${user?.id}`}>
 					<p
-						className="fw-500 text-grey-500 lh-26  w-100 mb-0"
+						className="fw-500 text-grey-600 lh-26  w-100 mb-0"
 						style={{ fontSize: '16px' }}
 					>
 						{data.body.slice(0, 120)}

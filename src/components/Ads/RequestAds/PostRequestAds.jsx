@@ -22,7 +22,11 @@ export default function PostRequestAds() {
 										: 'Have a flat to share?'}
 								</b>
 							</h1>
-							<p className="text-white">Post a request today. 🚀</p>
+							<p className="text-white">
+								{view.personal_info.is_looking_for
+									? 'Post a request for free '
+									: 'Upload your flat for free '}🚀
+							</p>
 							<Link to="/requests/create">
 								<Btn text="Post Now" className="btn-sm" onClick={() => {}} />
 							</Link>

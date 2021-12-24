@@ -6,7 +6,7 @@ import Global from '../../Global';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 
-export default function EachConversation({ conv }) {
+export default function EachConversation({ conv, onClick }) {
 	const [otherUser, setOtherUser] = useState(null)
 	const { user } = useSelector((state) => state.auth)
 	const { messages } = useSelector((state) => state.view)
@@ -46,7 +46,7 @@ export default function EachConversation({ conv }) {
 	}, [])
 
 	return (
-		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom">
+		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom" onClick={() => onClick ? onClick(): {}}>
 			{otherUser && (
 				<div className="d-flex justify-content-between w-100 align-items-center">
 					<div className="d-flex">
