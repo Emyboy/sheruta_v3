@@ -8,6 +8,7 @@ import AccountSettings from './settings/AccountSettings'
 import PersonalInfoSettings from './settings/PersonalInfoSettings'
 import { Switch } from 'antd'
 import ConfigureViewSettings from './settings/ConfigureViewSettings'
+import PreferredLocationSetting from './settings/PreferredLocationSetting'
 
 export default function Settings({ match }) {
 	const { user } = useSelector((state) => state.auth)
@@ -34,6 +35,8 @@ export default function Settings({ match }) {
 				return <AccountDeactivationSetting />
 			case 'configure-view':
 				return <ConfigureViewSettings />
+			case 'locations-settings':
+				return <PreferredLocationSetting />
 			default:
 				return (
 					<Layout currentPage={'settings'}>
@@ -86,6 +89,18 @@ export default function Settings({ match }) {
 															Account
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3 mr-3"></i>
+													</Link>
+												</li>
+												<li className="list-inline-item d-block border-bottom me-0 pl-0">
+													<Link
+														to="/settings/locations-settings"
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-gold-gradiant text-white ti-location-pin font-md me-3"></i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0">
+															Preferred Location(s)
+														</h4>
+														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>
 												</li>
 											</ul>

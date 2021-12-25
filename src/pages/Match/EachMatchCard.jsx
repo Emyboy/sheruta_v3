@@ -36,76 +36,85 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 	const [showInfo, setShowInfo] = useState(false)
 
 	return (
-		<Wrapper className="card d-block border shadow-xss rounded-3 overflow-hidden mb-3">
-			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
-				{user && user.user.is_verified ? (
-					<PersonalInfo userData={users_permissions_user} />
-				) : (
-					<div className="text-center pt-5 pb-5">
-						<h1 className="font-xxl">😢</h1>
-						<h2 className="fw-bold">Only verified users can view this</h2>
-						<Link to={`/start`}>
-							<button className="btn bg-theme text-white mt-3">
-								Verify Your Account
-							</button>
-						</Link>
+		<>
+			<Modal show={showInfo} onHide={() => setShowInfo(false)}>
+				<Modal.Body>
+					<div className="card-header d-flex justify-content-between align-items-center">
+						<span className="h1 font-xl fw-bold text-center">More Info</span>
+						<button className="btn fw-700" onClick={() => setShowInfo(false)}>
+							x
+						</button>
 					</div>
-				)}
-				<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
-					close
-				</button>
+					{user && user.user.is_verified ? (
+						<PersonalInfo userData={users_permissions_user} />
+					) : (
+						<div className="text-center pt-5 pb-5">
+							<h1 className="font-xxl">😢</h1>
+							<h2 className="fw-bold">Only verified users can view this</h2>
+							<Link to={`/start`}>
+								<button className="btn bg-theme text-white mt-3">
+									Verify Your Account
+								</button>
+							</Link>
+						</div>
+					)}
+					<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
+						close
+					</button>
+				</Modal.Body>
 			</Modal>
-			<div className="card-body d-block w-100 p-4 text-center">
-				<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
-					<img
-						src={users_permissions_user.avatar_url}
-						alt="image"
-						className="float-right p-1 bg-white rounded-circle w-100"
-					/>
-				</figure>
-				<div className="clearfix"></div>
-				<div className="d-flex justify-content-center">
-					<Link to={`/user/${users_permissions_user.username}`}>
-						<h4 className="fw-700 font-xss mt-3 mb-0">
-							{users_permissions_user.first_name}{' '}
-						</h4>
-					</Link>
-					<VerifiedBadge
-						user={users_permissions_user}
-						without_text
-						className="ml-2 mt-2"
-					/>
-				</div>
+			<Wrapper className="card d-block border  rounded-xxl overflow-hidden mb-3">
+				<div className="card-body d-block w-100 p-4 text-center">
+					<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
+						<img
+							src={users_permissions_user.avatar_url}
+							alt="image"
+							className="float-right p-1 bg-white rounded-circle w-100"
+						/>
+					</figure>
+					<div className="clearfix"></div>
+					<div className="d-flex justify-content-center">
+						<Link to={`/user/${users_permissions_user.username}`}>
+							<h4 className="fw-700 font-xss mt-3 mb-0">
+								{users_permissions_user.first_name}{' '}
+							</h4>
+						</Link>
+						<VerifiedBadge
+							user={users_permissions_user}
+							without_text
+							className="ml-2 mt-2"
+						/>
+					</div>
 
-				<p className="fw-500 font-xssss text-grey-500 mt-0 mb-3">
-					@{users_permissions_user.username}
-				</p>
-				<ul className="product-feature-list mt-1">
-					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b className="text-grey-900 mr-2"> Gender: </b>
-						{personal_info.gender === 'm' ? 'Male' : 'Female'}
-					</li>
-					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b className="text-grey-900 mr-2">Occupation: </b>
-						{personal_info.occupation}
-					</li>
-					<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-						<b className="text-grey-900 mr-2"> Industry: </b>
-						{work_industries.length > 0 &&
-							work_industries.filter(
-								(x) => x.id === personal_info.work_industry
-							)[0].name}
-					</li>
-				</ul>
-				<button
-					className="text-center mt-3 btn fw-bold"
-					onClick={() => setShowInfo(true)}
-				>
-					<i className="ti-lock font-xs mr-2"></i>
-					<span>Show More Info</span>
-				</button>
-			</div>
-			{/* <div>
+					<p className="fw-500 font-xssss text-grey-500 mt-0 mb-3">
+						@{users_permissions_user.username}
+					</p>
+					<ul className="product-feature-list mt-1">
+						<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+							<b className="text-grey-900 mr-2"> Gender: </b>
+							{personal_info.gender === 'm' ? 'Male' : 'Female'}
+						</li>
+						<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+							<b className="text-grey-900 mr-2">Occupation: </b>
+							{personal_info.occupation}
+						</li>
+						<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+							<b className="text-grey-900 mr-2"> Industry: </b>
+							{work_industries.length > 0 &&
+								work_industries.filter(
+									(x) => x.id === personal_info.work_industry
+								)[0].name}
+						</li>
+					</ul>
+					<button
+						className="text-center mt-3 btn fw-bold"
+						onClick={() => setShowInfo(true)}
+					>
+						<i className="ti-lock font-xs mr-2"></i>
+						<span>Show More Info</span>
+					</button>
+				</div>
+				{/* <div>
 				<div className="frnd-name">
 					<Link to={`/user/${users_permissions_user.username}`}>
 						<Btn
@@ -117,7 +126,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 				</div>
 			</div> */}
 
-			{/* <ul className="menu-list pt-1">
+				{/* <ul className="menu-list pt-1">
 				<li>
 					<a href="#gender" title="" data-ripple="">
 						<i className="fa fa-fire"></i>
@@ -146,27 +155,28 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 					</li>
 				) : null}
 			</ul> */}
-			<hr />
-			<div className="p-3 actions d-flex justify-content-around">
-				<div>
-					<button
-						className="btn-danger"
-						onClick={() => handleStatusUpdate(data.id, 'rejected')}
-					>
-						<MdClose size={40} />
-					</button>
-					<small>Reject</small>
+				<hr />
+				<div className="p-3 actions d-flex justify-content-around">
+					<div>
+						<button
+							className="btn-danger"
+							onClick={() => handleStatusUpdate(data.id, 'rejected')}
+						>
+							<MdClose size={40} />
+						</button>
+						<small>Reject</small>
+					</div>
+					<div>
+						<button
+							className="bg-theme text-white"
+							onClick={() => handleStatusUpdate(data.id, 'accepted')}
+						>
+							<FiCheck size={40} />
+						</button>
+						<small>Accept</small>
+					</div>
 				</div>
-				<div>
-					<button
-						className="bg-theme text-white"
-						onClick={() => handleStatusUpdate(data.id, 'accepted')}
-					>
-						<FiCheck size={40} />
-					</button>
-					<small>Accept</small>
-				</div>
-			</div>
-		</Wrapper>
+			</Wrapper>
+		</>
 	)
 }

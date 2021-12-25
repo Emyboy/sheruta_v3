@@ -55,9 +55,7 @@ const PersonalInfo = ({ userData }) => {
 	} else
 		return (
 			<div className="central-meta w-100">
-				<div className="card-header d-flex justify-content-between align-items-center">
-					<span className="h1 font-xl fw-bold text-center">Personal Info</span>
-				</div>
+				
                 <div className='card-body'>
 
 				<div className="row">

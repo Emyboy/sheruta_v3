@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 
 export const PrefaredLocations = (props) => {
 
-    const { setStep, step } = props;
+    const { setStep, step, standAlone } = props;
 
     const [data, setData] = React.useState({
         location: null,
@@ -76,64 +76,77 @@ export const PrefaredLocations = (props) => {
     }, []);
 
     return (
-        <div>
-            <div className="sec-heading center">
-                <h2 className='animated animate__bounceIn'>What are your Preferred locations?</h2>
-                <p>Add multiple locations of your choice</p>
-            </div>
-            <div className='container'>
-                {
-                    locaitons.map((val, i) => {
-                        return <div className='card shadow border border-success mb-2' key={i}>
-                            <div className='pl-2 d-flex justify-content-between'>
-                                <p className='mb-0' style={{ fontSize: '20px' }}>{val.location}</p>
-                                <button className='btn btn-sm text-danger' onClick={() => removeAddressFromList(val.id)}>
-                                    <AiFillCloseCircle size={25} />
-                                </button>
-                            </div>
-                        </div>
-                    })
-                }
-                <hr />
-                <div className="">
-                    <div className="form-group text-center">
-                        <label className='display-6'>Location</label>
-                        <GooglePlacesAutocomplete
-                            data-cy='google-places'
-                            apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
-                            apiOptions={{ language: 'en', region: 'ng' }}
-                            selectProps={{
-                                // props.state.location,
-                                className: 'border',
-                                onChange: e => {
-                                    setData({ ...data, google_location: e, location: e.label })
-                                },
-                                placeholder:
-                                    'Type in any location here.',
-                            }}
-                            autocompletionRequest={{
-                                componentRestrictions: {
-                                    country: ['ng'],
-                                },
-                            }}
-                        />
-                        <button disabled={!data.location || loading} className='btn w-50 text-success mt-3' onClick={handleAddLocation}>
-                            {loading ? "Loading..." : "Add +"}
-                        </button>
-                        <br />
-                        <hr />
-                        <Btn
-                            text="I'm done"
-                            className='mt-3'
-                            disabled={locaitons.length === 0 || loading}
-                            style={{ backgroundColor: null }}
-                            onClick={() => setStep(step + 1)}
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+			<div>
+				<div className="sec-heading center">
+					<h2 className="animated animate__bounceIn h1 fw-700">
+						What are your Preferred locations?
+					</h2>
+					<p>Add multiple locations of your choice</p>
+				</div>
+				<div className="container">
+					{locaitons.map((val, i) => {
+						return (
+							<div className="card shadow border border-success mb-2" key={i}>
+								<div className="pl-2 d-flex justify-content-between">
+									<p className="mb-0" style={{ fontSize: '20px' }}>
+										{val.location}
+									</p>
+									<button
+										className="btn btn-sm text-danger"
+										onClick={() => removeAddressFromList(val.id)}
+									>
+										<AiFillCloseCircle size={25} />
+									</button>
+								</div>
+							</div>
+						)
+					})}
+					<hr />
+					<div className="">
+						<div className="form-group text-center pt-3">
+							<label>Location</label>
+							<GooglePlacesAutocomplete
+								data-cy="google-places"
+								apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
+								apiOptions={{ language: 'en', region: 'ng' }}
+								selectProps={{
+									// props.state.location,
+									className: 'border',
+									onChange: (e) => {
+										setData({ ...data, google_location: e, location: e.label })
+									},
+									placeholder: 'Type in any location here.',
+								}}
+								autocompletionRequest={{
+									componentRestrictions: {
+										country: ['ng'],
+									},
+								}}
+							/>
+							<button
+								disabled={!data.location || loading}
+								className="btn w-50 text-success mt-3"
+								onClick={handleAddLocation}
+							>
+								{loading ? 'Loading...' : 'Add +'}
+							</button>
+							<br />
+							<hr />
+							{!standAlone &&
+							<Btn
+								text="I'm done"
+								className="mt-3"
+								disabled={locaitons.length === 0 || loading}
+								style={{ backgroundColor: null }}
+								onClick={() => setStep(step + 1)}
+							/>
+                            
+                            }
+						</div>
+					</div>
+				</div>
+			</div>
+		)
 }
 
 const mapStateToProps = (state) => ({

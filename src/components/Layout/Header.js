@@ -243,7 +243,13 @@ export default function Header({
 				<Link to="/search">
 					<Tooltip placement="bottom" title={'Search'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							<i className="feather-search font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i>
+							<i
+								className={`feather-search font-lg alert-primary btn-round-lg theme-dark-bg ${
+									pageName === 'search'
+										? 'text-current'
+										: 'text-grey-500 bg-greylight'
+								} `}
+							></i>
 						</a>
 					</Tooltip>
 				</Link>
@@ -270,7 +276,7 @@ export default function Header({
 						showNotification && 'show'
 					}`}
 					aria-labelledby="dropdownMenu3"
-					style={{ right: '9vw', width: '250px' }}
+					style={{ right: '9vw', width: '350px' }}
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
 					{!payment_plan ? (
