@@ -58,14 +58,14 @@ export default function SideNav({ show }) {
 									<span>Services</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link to="/properties" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-primary-gradiant me-3">
 										<BsHouseDoor size={size} />
 									</i>
 									<span>Properties</span>
 								</Link>
-							</li>
+							</li> */}
 						</ul>
 					</div>
 
