@@ -16,11 +16,15 @@ import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-	.card-footer {
-		position: fixed;
-		bottom: 10vh;
-		width: 100%;
-		z-index: 40
+	@media (max-width: 576px) {
+		.card-footer {
+			position: fixed;
+			bottom: 10vh;
+			width: 100%;
+			z-index: 40;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
 	}
 `
 
@@ -164,7 +168,7 @@ export default function MessageDetails({ conversation_id }) {
 		return null
 	}
 	return (
-		<Wrapper className="row h-100">
+		<Wrapper className="row h-100 justify-content-center">
 			<div className="col-lg-12">
 				<div className="card h-100">
 					<div className="card-header pl-0 pr-0 pb-0">
@@ -194,7 +198,7 @@ export default function MessageDetails({ conversation_id }) {
 							</a>
 						</div>
 					</div>
-					<div className="card-body">
+					<div className="card-body pt-0 pb-0">
 						<div className="scroll-bar" style={{ height: '65vh', zIndex: 0 }}>
 							<div className="chat-body p-3 ">
 								<div className="messages-content pb-5">
@@ -209,7 +213,7 @@ export default function MessageDetails({ conversation_id }) {
 						</div>
 					</div>
 					<form
-						className="card-footer bg-light chat-form d-flex justify-content-between align-items-center"
+						className="card-footer chat-form d-flex justify-content-between align-items-center"
 						onSubmit={handleSubmit}
 					>
 						<textarea
