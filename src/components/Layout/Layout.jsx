@@ -6,7 +6,13 @@ import MessagePanel from './MessagePanel'
 import SideNav from './SideNav'
 import Global from '../../Global'
 
-export default function Layout({ currentPage, children, showMessages }) {
+export default function Layout({
+	currentPage,
+	children,
+	showMessages,
+	noBottomSpacing,
+	noScroll
+}) {
 	const { user } = useSelector((state) => state.auth)
 	const [showNav, setShowNav] = useState(false)
 	const [showChat, setShowChat] = useState(
@@ -23,12 +29,19 @@ export default function Layout({ currentPage, children, showMessages }) {
 			/>
 			{user && <SideNav show={showNav} />}
 			{user && (
-				<MessagePanel show={showChat} pageName={currentPage} togglePanel={() => setShowChat(!showChat)} />
+				<MessagePanel
+					show={showChat}
+					pageName={currentPage}
+					togglePanel={() => setShowChat(!showChat)}
+				/>
 			)}
 
 			<div
 				className={user && 'main-content right-chat-active'}
-				style={{ paddingBottom: !user ? '0vh' : '21vh' }}
+				style={{
+					paddingBottom: !user || noBottomSpacing ? '0vh' : '21vh',
+					overflow: noScroll && 'hidden',
+				}}
 			>
 				<div className={user && 'middle-sidebar-bottom pl-0 pr-0'}>
 					<div className={user && 'middle-sidebar-left'}>{children}</div>

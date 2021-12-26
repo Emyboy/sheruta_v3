@@ -30,7 +30,7 @@ export default function Messages(props) {
     }
 
     return (
-        <Layout page={"messages"}>
+        <Layout page={"messages"} noBottomSpacing noScroll>
             <div style={{ overflow: "hidden" }}>
                 <div className={`container ${Global.isMobile && "p-0 m-0"}`}>
                     <div className="row justify-content-center">
