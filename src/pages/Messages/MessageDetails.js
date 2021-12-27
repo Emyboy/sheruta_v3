@@ -139,6 +139,7 @@ export default function MessageDetails({ conversation_id }) {
 			return
 		}
 		try {
+			setLoading(true)
 			const sent = await MessageService.sendMessage({
 				to: otherUser,
 				from: user.user.id,
@@ -148,6 +149,7 @@ export default function MessageDetails({ conversation_id }) {
 			})
 			Analytics.create({ user_id: otherUser, type: AnalyticsTypes.message })
 			if (sent) {
+				setLoading(false)
 				messages.push(sent.data)
 				setMessage('')
 				executeScroll()
@@ -156,6 +158,7 @@ export default function MessageDetails({ conversation_id }) {
 				})
 			}
 		} catch (error) {
+			setLoading(false)
 			notifyEmy({
 				heading: 'Error sending message',
 				log: error,
