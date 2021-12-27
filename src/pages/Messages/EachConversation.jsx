@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import MessageService from '../../services/MessageService'
-import Global from '../../Global';
+import Global from '../../Global'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-
 
 export default function EachConversation({ conv, onClick }) {
 	const [otherUser, setOtherUser] = useState(null)
@@ -46,22 +45,25 @@ export default function EachConversation({ conv, onClick }) {
 	}, [])
 
 	return (
-		<li className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom" onClick={() => onClick ? onClick(): {}}>
-			{otherUser && (
-				<div className="d-flex justify-content-between w-100 align-items-center">
-					<div className="d-flex">
-						<figure className="avatar float-left mb-0 me-2">
-							<LazyLoadImage
-								effect="blur"
-								src={otherUser?.avatar_url}
-								alt="image"
-								className="w35 rounded-3"
-							/>
-						</figure>
-						<Link to={`/messages/${conv.uuid}`}>
+		<li
+			className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom"
+			onClick={() => (onClick ? onClick() : {})}
+		>
+			<Link to={`/messages/${conv.uuid}`} className='w-100'>
+				{otherUser && (
+					<div className="d-flex justify-content-between w-100 align-items-center">
+						<div className="d-flex">
+							<figure className="avatar float-left mb-0 me-2">
+								<LazyLoadImage
+									effect="blur"
+									src={otherUser?.avatar_url}
+									alt="image"
+									className="w35 rounded-3"
+								/>
+							</figure>
 							<h3 className="fw-700 mb-0 mt-0">
 								<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat">
-									<b className='mr-2'>{otherUser?.first_name}</b>
+									<b className="mr-2">{otherUser?.first_name}</b>
 									<span
 										className={`shadow bg-${
 											otherUser.online ? 'success' : 'danger'
@@ -76,15 +78,15 @@ export default function EachConversation({ conv, onClick }) {
 										: latestMsg || '....'}
 								</small>
 							</h3>
-						</Link>
+						</div>
+						{count !== 0 && (
+							<span className="badge badge-danger text-white badge-pill mt-0">
+								{count}
+							</span>
+						)}
 					</div>
-					{count !== 0 && (
-						<span className="badge badge-danger text-white badge-pill mt-0">
-							{count}
-						</span>
-					)}
-				</div>
-			)}
+				)}
+			</Link>
 		</li>
 
 		// <li className="contact border-bottom">

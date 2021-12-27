@@ -35,7 +35,7 @@ export default function Messages(props) {
                 <div className={`container ${Global.isMobile && "p-0 m-0"}`}>
                     <div className="row justify-content-center">
                         <div
-                            className="col-lg-7 col-xl-8 maxw100flex-992"
+                            className="p-0 col-lg-7 col-xl-8 maxw100flex-992"
                             style={{
                                 height: Global.isMobile ? "83vh" : "86vh",
                             }}

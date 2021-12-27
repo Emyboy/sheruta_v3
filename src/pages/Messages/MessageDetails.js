@@ -14,6 +14,7 @@ import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
 import { notifyEmy } from '../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import styled from 'styled-components'
+import { Dots } from 'react-activity';
 
 const Wrapper = styled.div`
 	@media (max-width: 576px) {
@@ -165,12 +166,14 @@ export default function MessageDetails({ conversation_id }) {
 	}
 
 	if (!otherUser) {
-		return null
+		return <div className='d-flex text-center justify-content-center' id='end' style={{ paddingTop: '30vh'}}>
+			<Dots />
+		</div>
 	}
 	return (
 		<Wrapper className="row h-100 justify-content-center">
 			<div className="col-lg-12">
-				<div className="card h-100">
+				<div className="card h-100 shadow-md rounded-xxl">
 					<div className="card-header pl-0 pr-0 pb-0">
 						<div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
 							<div className="d-flex align-items-center">
