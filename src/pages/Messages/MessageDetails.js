@@ -14,7 +14,7 @@ import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
 import { notifyEmy } from '../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import styled from 'styled-components'
-import { Dots } from 'react-activity';
+import { Dots } from 'react-activity'
 
 const Wrapper = styled.div`
 	@media (max-width: 576px) {
@@ -166,85 +166,97 @@ export default function MessageDetails({ conversation_id }) {
 	}
 
 	if (!otherUser) {
-		return <div className='d-flex text-center justify-content-center' id='end' style={{ paddingTop: '30vh'}}>
-			<Dots />
-		</div>
+		return (
+			<div
+				className="d-flex text-center justify-content-center"
+				id="end"
+				style={{ paddingTop: '30vh' }}
+			>
+				<Dots />
+			</div>
+		)
 	}
 	return (
 		<Wrapper className="row h-100 justify-content-center">
 			<div className="col-lg-12">
-				<div className="card h-100 shadow-md rounded-xxl">
-					<div className="card-header pl-0 pr-0 pb-0">
-						<div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
-							<div className="d-flex align-items-center">
-								<figure className="avatar mr-3 mb-0">
-									<img
-										src={otherUser.avatar_url}
-										alt="image"
-										width="50"
-										className="rounded-circle"
-									/>
-								</figure>
-								<Link to={`/user/${otherUser.username}`}>
-									<h4 className="mb-0 text-black">
-										<b> {otherUser.first_name}</b>
-									</h4>
-									<small className="time text-muted">
-										@{otherUser.username}
-									</small>
-								</Link>
-							</div>
-							<a href={`tel:${otherUser.phone_number}`}>
-								<button className="btn btn-sm">
-									<IoCallSharp size={25} className="text-theme" />
-								</button>
-							</a>
-						</div>
+				{!payment_plan ? (
+					<div id="end">
+						<PaymentAlert message={`Can't view message`} />
 					</div>
-					<div className="card-body pt-0 pb-0">
-						<div className="scroll-bar" style={{ height: '65vh', zIndex: 0 }}>
-							<div className="chat-body p-3 ">
-								<div className="messages-content pb-5">
-									{messages.map((val, i) => {
-										return <EachMessage message={val} key={`msg-${i}`} />
-									})}
-
-									<div className="clearfix"></div>
+				) : (
+					<div className="card h-100 shadow-md rounded-xxl">
+						<div className="card-header pl-0 pr-0 pb-0">
+							<div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
+								<div className="d-flex align-items-center">
+									<figure className="avatar mr-3 mb-0">
+										<img
+											src={otherUser.avatar_url}
+											alt="image"
+											width="50"
+											className="rounded-circle"
+										/>
+									</figure>
+									<Link to={`/user/${otherUser.username}`}>
+										<h4 className="mb-0 text-black">
+											<b> {otherUser.first_name}</b>
+										</h4>
+										<small className="time text-muted">
+											@{otherUser.username}
+										</small>
+									</Link>
 								</div>
+								<a href={`tel:${otherUser.phone_number}`}>
+									<button className="btn btn-sm">
+										<IoCallSharp size={25} className="text-theme" />
+									</button>
+								</a>
 							</div>
-							<div id="end"></div>
 						</div>
-					</div>
-					<form
-						className="card-footer chat-form d-flex justify-content-between align-items-center"
-						onSubmit={handleSubmit}
-					>
-						<textarea
-							type="text"
-							value={message}
-							autoFocus
-							placeholder="Start typing.."
-							className="text-black w-100 p-1"
-							onChange={(e) => setMessage(e.target.value)}
-							// cols="40"
-							disabled={loading}
-							rows={inputRows}
-							style={{
-								borderRadius: message.length > 40 ? '7px' : '50px',
-								// borderTopRightRadius: 0,
-								// borderBottomRightRadius: 0,
-							}}
-						/>
-						<button
-							className="bg-current align-self-center"
-							type="submit"
-							style={{ width: '50px' }}
-							disabled={loading}
+						<div className="card-body pt-0 pb-0">
+							<div className="scroll-bar" style={{ height: '65vh', zIndex: 0 }}>
+								<div className="chat-body p-3 ">
+									<div className="messages-content pb-5">
+										{messages.map((val, i) => {
+											return <EachMessage message={val} key={`msg-${i}`} />
+										})}
+
+										<div className="clearfix"></div>
+									</div>
+								</div>
+								<div id="end"></div>
+							</div>
+						</div>
+						<form
+							className="card-footer chat-form d-flex justify-content-between align-items-center"
+							onSubmit={handleSubmit}
 						>
-							<i className="ti-arrow-right text-white"></i>
-						</button>
-					</form>
-				</div>
+							<textarea
+								type="text"
+								value={message}
+								autoFocus
+								placeholder="Start typing.."
+								className="text-black w-100 p-1"
+								onChange={(e) => setMessage(e.target.value)}
+								// cols="40"
+								disabled={loading}
+								rows={inputRows}
+								style={{
+									borderRadius: message.length > 40 ? '7px' : '50px',
+									// borderTopRightRadius: 0,
+									// borderBottomRightRadius: 0,
+								}}
+							/>
+							<button
+								className="bg-current align-self-center"
+								type="submit"
+								style={{ width: '50px' }}
+								disabled={loading}
+							>
+								<i className="ti-arrow-right text-white"></i>
+							</button>
+						</form>
+					</div>
+				)}
 			</div>
 		</Wrapper>
 	)

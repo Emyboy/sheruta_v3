@@ -10,6 +10,7 @@ import { notifyEmy } from "../../services/Sheruta";
 
 export default function Messages(props) {
     localStorage.setItem('after_login', window.location.pathname)
+    localStorage.setItem('after_payment', window.location.pathname)
     const [showConversation, setShowConversation] = useState(false);
     const { user } = useSelector((state) => state.auth);
 
@@ -32,7 +33,7 @@ export default function Messages(props) {
     return (
         <Layout page={"messages"} noBottomSpacing noScroll>
             <div style={{ overflow: "hidden" }}>
-                <div className={`container ${Global.isMobile && "p-0 m-0"}`}>
+                <div className={`container ${Global.isMobile && " m-0"}`}>
                     <div className="row justify-content-center">
                         <div
                             className="p-0 col-lg-7 col-xl-8 maxw100flex-992"

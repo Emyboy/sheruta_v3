@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store from '../../redux/store/store'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
+import NotificationService from '../../services/Notifications'
 import { notifyEmy } from '../../services/Sheruta'
 
 export default function UserAction({ user, disable, alignment, className }) {
@@ -26,6 +27,11 @@ export default function UserAction({ user, disable, alignment, className }) {
 			recordCallAnalytics(AnalyticsTypes.declinedCalls);
 			notifyEmy({
 				heading: ` ${action} ${user.first_name} ${user.last_name} but hasn't paid ( Blocked )`,
+			})
+			NotificationService.notifyUser({
+				owner: user.id,
+				sub_title: 'this action was blocked',
+				type: `${action === 'message' ? 'message_attempt' : 'call_attempt'}`,
 			})
 		} else {
 			recordCallAnalytics(AnalyticsTypes.calls);

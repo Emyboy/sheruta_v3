@@ -63,6 +63,7 @@ export default function NotificationPopup() {
 					savePushToken(data)
 				})
 				.catch((err) => {
+					setShow(false)
 					console.log('ERROR --', err)
 					notifyEmy({
 						heading: 'Error turning on notification',
@@ -73,18 +74,20 @@ export default function NotificationPopup() {
 	}
 
 	React.useEffect(() => {
-		if (
-			user &&
-			personal_info &&
-			Notification.permission !== 'granted' &&
-			!sessionStorage.getItem('notify_show')
-		) {
-			setTimeout(() => {
-				setShow(true)
-				sessionStorage.setItem('notify_show', true)
-			}, 20000)
-		}
-	}, [])
+		setTimeout(() => {
+			if (
+				user &&
+				personal_info &&
+				Notification.permission !== 'granted' &&
+				!sessionStorage.getItem('notify_show')
+			) {
+				setTimeout(() => {
+					setShow(true)
+					sessionStorage.setItem('notify_show', true)
+				}, 20000)
+			}
+		}, 5000)
+	}, [personal_info])
 
 	if (done) {
 		return null
