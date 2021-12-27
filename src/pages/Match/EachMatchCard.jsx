@@ -9,6 +9,8 @@ import { MdClose, MdWork } from 'react-icons/md'
 import { FaIndustry } from 'react-icons/fa'
 import { Modal } from 'react-bootstrap'
 import PersonalInfo from '../Profile/PersonalInfo'
+import NotificationService from '../../services/Notifications'
+import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 
 const Wrapper = styled.div`
 	.actions > div > button {
@@ -33,7 +35,29 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 	console.log('DATA --', data)
 	const { user } = useSelector((state) => state.auth)
 	const { work_industries } = useSelector((state) => state.view)
-	const [showInfo, setShowInfo] = useState(false)
+	const [showInfo, setShowInfo] = useState(false);
+
+	useEffect(() => {
+		if(showInfo){
+			Analytics.create({
+				user_id: users_permissions_user.id,
+				type: AnalyticsTypes.personalInfoView,
+			})
+			if( user && user?.user?.is_verified){
+				NotificationService.notifyUser({
+					owner: users_permissions_user.id,
+					type: 'personal_info_view',
+					
+				})
+			}else if( user && !user?.user?.is_verified){
+				NotificationService.notifyUser({
+					owner: users_permissions_user.id,
+					type: 'personal_info_view_attempt',
+					sub_title: 'This user wasn\'t verified'
+				})
+			}
+		}
+	},[showInfo])
 
 	return (
 		<>

@@ -8,7 +8,8 @@ export const AnalyticsTypes = {
     declinedCalls: 'declined-call',
     requestView: 'request-view',
     profileView: 'profile-view',
-	message: 'message'
+	message: 'message',
+	personalInfoView: 'personal-info-view'
 }
 
 export default class Analytics {
