@@ -80,12 +80,12 @@ export const ResetPasswordRequest = (props) => {
     } else
         return (
             <Layout>
-                <div >
+                <div style={{paddingTop: '30vh'}}>
                     <div className="animate__animated animate__fadeIn modal-dialog modal-dialog-centered login-pop-form" role="document">
                         <div className="modal-content" id="registermodal">
                             {/* <span className="mod-close" data-dismiss="modal" aria-hidden="true"><i className="ti-close"></i></span> */}
                             <div className="modal-body">
-                                <h4 className="modal-header-title" style={{ lineHeight: '50px'}}>Password Reset</h4>
+                                <h1 className="modal-header-title fw-bold" style={{ lineHeight: '50px'}}>Password Reset</h1>
                                 <div className="login-form">
                                     {state.errorMessage ? <div className='alert alert-danger text-center'>
                                         <b className='m-0 p-0 h5'>{state.errorMessage}</b>
@@ -96,7 +96,6 @@ export const ResetPasswordRequest = (props) => {
                                             <label>Your Email</label>
                                             <div className="input-with-icon">
                                                 <input disabled={state.loading} autoFocus name='email' type="email" className="form-control" placeholder="Ex. youmain@mail.com" {...register("email")} />
-                                                <i className="ti-user"></i>
                                             </div>
                                             {/* {errors.identifier && <p className='text-danger'>{errors.identifier.message}</p>} */}
                                         </div>
