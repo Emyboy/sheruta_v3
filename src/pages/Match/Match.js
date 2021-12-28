@@ -31,6 +31,8 @@ export default function Match() {
 	// }, [])
 	if (!user) {
 		return <Redirect to="/login" />
+	}else if(user && user?.user?.deactivated){
+		return <Redirect to="/settings/deactivate-account" />
 	}
 
 	return (

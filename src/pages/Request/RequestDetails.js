@@ -39,7 +39,7 @@ export default function RequestDetails(props) {
 		notFound: false,
 	})
 	const auth = useSelector((state) => state.auth)
-	const deactivated = user?.user.deactivated
+	const deactivated = request?.users_permissions_user.deactivated
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
@@ -133,12 +133,12 @@ export default function RequestDetails(props) {
 						closeOnClickOutside={true}
 					/>
 				) : null}
-				<section
-					className="pt-0"
-					style={{ paddingTop: !auth.user ? '20vh' : '10vh' }}
-				>
+				<section className="pt-0">
 					<div className={`container ${Global.isMobile && `p-0`}`}>
-						<div className="row">
+						<div
+							className="row"
+							style={{ paddingTop: !auth.user ? '15vh' : '10vh' }}
+						>
 							<div className="col-lg-12">
 								<div className="row merged20 justify-content-center">
 									<div className={`col-lg-9 ${Global.isMobile && 'p-0'}`}>
@@ -285,7 +285,7 @@ export default function RequestDetails(props) {
 														<Link
 															to={`/signup`}
 															title=""
-															className="main-btn bg-theme text-white"
+															className="btn main-btn bg-theme text-white"
 															data-ripple=""
 														>
 															Call Me

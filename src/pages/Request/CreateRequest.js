@@ -283,6 +283,10 @@ const CraeteRequest = (props) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
 
+	if(auth?.user && auth?.user?.user?.deactivated){
+		return <Redirect to="/settings/deactivate-account" />
+	}
+
 	if (state.done) {
 		return (
 			<Layout currentPage={'requests'}>

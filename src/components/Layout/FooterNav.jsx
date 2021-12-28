@@ -31,6 +31,14 @@ export default function FooterNav({ pageName }) {
 			className="_app-footer fixed-bottom p-2  border-0 shadow-lg card border border-dark rounded-0"
 			style={{ zIndex: 80 }}
 		>
+			{user && user?.user?.deactivated && (
+				<div className="p-0 alert alert-danger">
+					<marquee behavior="scroll" direction="left">
+						WARNING! Your account has been deactivated, some features might not
+						work properly, please go to settings to activate your account.
+					</marquee>
+				</div>
+			)}
 			<div className="card-body pt-1 pb-1 d-flex justify-content-between align-items-center">
 				<Link
 					to={`/feeds`}
@@ -73,7 +81,8 @@ export default function FooterNav({ pageName }) {
 
 					<FiBell
 						size={iconSize}
-						className={`text-${pageName === 'notifications' ? 'theme' : 'dark'
+						className={`text-${
+							pageName === 'notifications' ? 'theme' : 'dark'
 						} `}
 					/>
 				</Link>

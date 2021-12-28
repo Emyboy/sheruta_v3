@@ -24,6 +24,9 @@ const NotificationService = {
         if (user && owner === user.user.id) {
             return;
         }
+        if(user && user?.user?.deactivated){
+            return null;
+        }
         const data = await axios(
             process.env.REACT_APP_API_URL + `/notifications/create`,
             {

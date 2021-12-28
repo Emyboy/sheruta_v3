@@ -41,7 +41,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 		}
 	}
 
-	if (deactivated) {
+	if (deactivated || auth.user && auth.user?.user?.deactivated) {
 		return null
 	}
 

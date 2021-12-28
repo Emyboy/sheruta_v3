@@ -10,6 +10,8 @@ export default function Notifications() {
 	const { notifications, payment_plan } = useSelector((state) => state.view);
 	if(!user){
 		return <Redirect to={'/login'} />
+	}else if(user && user?.user?.deactivated){
+		return <Redirect to="/settings/deactivate-account" />
 	}
 	return (
 		<Layout pageName="notifications">

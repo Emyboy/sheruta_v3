@@ -19,7 +19,7 @@ export default function ProfileAbout({ user }) {
 		}
 	},[user])
 
-	if(user && user.deactivated){
+	if(user && user.deactivated || auth.user && auth.user?.user?.deactivated){
 		return null
 	}
 
