@@ -53,7 +53,7 @@ const MasterPopup = (props) => {
 	}
 
 	useEffect(() => {
-		getForViews()
+		// getForViews()
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())

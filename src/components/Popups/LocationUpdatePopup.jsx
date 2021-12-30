@@ -15,12 +15,13 @@ export default function LocationUpdatePopup() {
 		// 	JSON.parse(user.user.geo_location).latitude !== latitude
 		// ) {
 		// }
-		setTimeout(() => {
+		if (!sessionStorage.getItem('loc-set')) {
 			UserService.updateProfile({
 				geo_location: JSON.stringify({ longitude, latitude }),
 			})
-			setShow(false)
-		}, 10000)
+			sessionStorage.setItem('loc-set', true)
+		}
+		setShow(false)
 	}
 
 	const enableLocation = () => {
@@ -40,12 +41,12 @@ export default function LocationUpdatePopup() {
 			)
 			// setTimeout(() => {
 			// }, 70000);
-			// navigator.geolocation.getCurrentPosition((e) => {
-			// 	let longitude = e.coords.longitude
-			// 	let latitude = e.coords.latitude
-			// 	saveLocation(longitude, latitude)
-			// 	setShow(false)
-			// })
+			navigator.geolocation.getCurrentPosition((e) => {
+				let longitude = e.coords.longitude
+				let latitude = e.coords.latitude
+				saveLocation(longitude, latitude)
+				setShow(false)
+			})
 		} else {
 			setShow(false)
 		}
