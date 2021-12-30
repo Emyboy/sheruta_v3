@@ -15,33 +15,37 @@ export default function LocationUpdatePopup() {
 		// 	JSON.parse(user.user.geo_location).latitude !== latitude
 		// ) {
 		// }
-		UserService.updateProfile({
-			geo_location: JSON.stringify({ longitude, latitude }),
-		})
-		setShow(false)
+		setTimeout(() => {
+			UserService.updateProfile({
+				geo_location: JSON.stringify({ longitude, latitude }),
+			})
+			setShow(false)
+		}, 10000)
 	}
 
 	const enableLocation = () => {
 		if (navigator.geolocation) {
-			setTimeout(() => {
-				navigator.geolocation.watchPosition(
-					function (position) {
-						let longitude = position.coords.longitude
-						let latitude = position.coords.latitude
+			navigator.geolocation.watchPosition(
+				function (position) {
+					let longitude = position.coords.longitude
+					let latitude = position.coords.latitude
 
-						saveLocation(longitude, latitude)
-					},
-					function (error) {
-						if (error.code == error.PERMISSION_DENIED) setShow(true)
+					saveLocation(longitude, latitude)
+				},
+				function (error) {
+					if (error.code == error.PERMISSION_DENIED) {
+						setShow(true)
 					}
-				)
-			}, 70000);
-			navigator.geolocation.getCurrentPosition((e) => {
-				let longitude = e.coords.longitude
-				let latitude = e.coords.latitude
-				saveLocation(longitude, latitude)
-				setShow(false)
-			})
+				}
+			)
+			// setTimeout(() => {
+			// }, 70000);
+			// navigator.geolocation.getCurrentPosition((e) => {
+			// 	let longitude = e.coords.longitude
+			// 	let latitude = e.coords.latitude
+			// 	saveLocation(longitude, latitude)
+			// 	setShow(false)
+			// })
 		} else {
 			setShow(false)
 		}
@@ -51,7 +55,7 @@ export default function LocationUpdatePopup() {
 		setTimeout(() => {
 			if (user && !user.user.geo_location) {
 				setShow(true)
-			} 
+			}
 		}, 15000)
 	}, [])
 
