@@ -9,8 +9,8 @@ import { Redirect } from "react-router-dom";
 import { notifyEmy } from "../../services/Sheruta";
 
 export default function Messages(props) {
-    localStorage.setItem('after_login', window.location.pathname)
-    localStorage.setItem('after_payment', window.location.pathname)
+    localStorage.setItem('after_login', '/messages')
+    localStorage.setItem('after_payment', '/messages')
     const [showConversation, setShowConversation] = useState(false);
     const { user } = useSelector((state) => state.auth);
 

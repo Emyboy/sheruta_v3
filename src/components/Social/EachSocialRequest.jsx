@@ -73,7 +73,7 @@ export default function EachRequest({ data }) {
 					{deactivated ? (
 						<DeactivatedBanner />
 					) : (
-						<li className="col-sm-6 text-grey-500">
+						<li className="col-sm-8 text-grey-500">
 							<i className="ti-location-pin"></i> {data.location}
 						</li>
 					)}

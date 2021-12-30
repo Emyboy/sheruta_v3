@@ -4,12 +4,15 @@ import store from '../redux/store/store';
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const AnalyticsTypes = {
-    calls: 'call',
-    declinedCalls: 'declined-call',
-    requestView: 'request-view',
-    profileView: 'profile-view',
+	calls: 'call',
+	declinedCalls: 'declined-call',
+	requestView: 'request-view',
+	profileView: 'profile-view',
 	message: 'message',
-	personalInfoView: 'personal-info-view'
+	personalInfoView: 'personal-info-view',
+	search: 'search',
+	matchAccept: 'match-accept',
+	matchRejected: 'match-rejected',
 }
 
 export default class Analytics {

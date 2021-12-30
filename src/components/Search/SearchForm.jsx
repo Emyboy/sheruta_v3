@@ -2,7 +2,8 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import AnalyticsService from '../../services/Analytics'
 
 export default function SearchForm() {
 	const { services, categories } = useSelector((state) => state.view)
@@ -17,7 +18,13 @@ export default function SearchForm() {
 		} else {
 			setShowButton(false)
 		}
-	}, [bedrooms, category, service])
+	}, [bedrooms, category, service]);
+
+	const recordSearch = () => {
+		AnalyticsService.create({
+			type: 'search',
+		})
+	}
 
 
 	return (
@@ -116,7 +123,10 @@ export default function SearchForm() {
 					</div>
 					<div className="col-md-4 mt-4 col-sm-12">
 						{showButton && (
-							<Link to={`/search/results/${service}/${category}/${bedrooms}`}>
+							<Link
+								to={`/search/results/${service}/${category}/${bedrooms}`}
+								onClick={recordSearch}
+							>
 								<button className="w-100 mt-4 p-0 btn p-2 lh-24 ms-1 ls-3  rounded-xl bg-current  fw-700 ls-lg text-white">
 									Search
 								</button>

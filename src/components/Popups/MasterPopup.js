@@ -24,6 +24,7 @@ import { setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 import Global from '../../Global'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
+import LocationUpdatePopup from './LocationUpdatePopup'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -63,7 +64,7 @@ const MasterPopup = (props) => {
 	// }, 60000)
 	useInterval(() => {
 		if (user) {
-			dispatch(setUserOnline());
+			dispatch(setUserOnline())
 		}
 	}, 100000)
 
@@ -72,7 +73,13 @@ const MasterPopup = (props) => {
 			<>
 				<ConfigViewPopup />
 				<GetStartedPopup />
-				{Global.PLATFORM !== 'iPhone' && <NotificationPopup />}
+				{Global.PLATFORM !== 'iPhone' && (
+					<>
+						{' '}
+						<NotificationPopup />
+						<LocationUpdatePopup />
+					</>
+				)}
 				<AppUpdatePopup />
 			</>
 		)

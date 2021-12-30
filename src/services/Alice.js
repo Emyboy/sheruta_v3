@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import Analytics, { AnalyticsTypes } from "./Analytics";
 
 export default class Alice {
     static async getAllMySuggestions() {
@@ -56,6 +57,12 @@ export default class Alice {
                 },
             },
         );
+        Analytics.create({
+					type:
+						status === 'accepted'
+							? AnalyticsTypes.matchAccept
+							: AnalyticsTypes.matchRejected,
+				})
         return update;
     };
 
