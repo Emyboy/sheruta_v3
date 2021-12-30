@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 
 export default function SearchResults({ match }) {
 	const { bedrooms, category, service } = match.params
-	console.log({ bedrooms, category, service })
 	const [list, setList] = useState([])
 	const [loading, setLoading] = useState(true)
 	const { user } = useSelector((state) => state.auth)
@@ -20,7 +19,6 @@ export default function SearchResults({ match }) {
 			{ method: 'POST' }
 		)
 			.then((res) => {
-				console.log(res.data)
 				setList(res.data)
 				setLoading(false)
 			})

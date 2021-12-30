@@ -25,7 +25,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const getUser = () => (dispatch) => {
-    console.log("%cgetting user --", "color: red; font-size: 30px;");
+    // console.log("%cgetting user --", "color: red; font-size: 30px;");
     axios(process.env.REACT_APP_API_URL + "/users/me", {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +47,6 @@ export const getUser = () => (dispatch) => {
 
 export const setUserOnline = () => async (dispatch) => {
     try {
-        console.log('SETTING ONLINE')
         await UserService.setUserOnline();
         dispatch(getUser());
     } catch (error) {
