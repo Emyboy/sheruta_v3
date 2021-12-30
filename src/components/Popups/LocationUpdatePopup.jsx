@@ -10,30 +10,32 @@ export default function LocationUpdatePopup() {
 	const { user } = useSelector((state) => state.auth)
 
 	const saveLocation = (longitude, latitude) => {
-		if (
-			user.user.geo_location && JSON.parse(user.user.geo_location).longitude !== longitude &&
-			JSON.parse(user.user.geo_location).latitude !== latitude
-		) {
-			UserService.updateProfile({
-				geo_location: JSON.stringify({ longitude, latitude }),
-			})
-            setShow(false)
-		}
+		// if (
+		// 	user.user.geo_location && JSON.parse(user.user.geo_location).longitude !== longitude &&
+		// 	JSON.parse(user.user.geo_location).latitude !== latitude
+		// ) {
+		// }
+		UserService.updateProfile({
+			geo_location: JSON.stringify({ longitude, latitude }),
+		})
+		setShow(false)
 	}
 
 	const enableLocation = () => {
 		if (navigator.geolocation) {
-			navigator.geolocation.watchPosition(
-				function (position) {
-					let longitude = position.coords.longitude
-					let latitude = position.coords.latitude
+			setTimeout(() => {
+				navigator.geolocation.watchPosition(
+					function (position) {
+						let longitude = position.coords.longitude
+						let latitude = position.coords.latitude
 
-					saveLocation(longitude, latitude)
-				},
-				function (error) {
-					if (error.code == error.PERMISSION_DENIED) setShow(true)
-				}
-			)
+						saveLocation(longitude, latitude)
+					},
+					function (error) {
+						if (error.code == error.PERMISSION_DENIED) setShow(true)
+					}
+				)
+			}, 70000);
 			navigator.geolocation.getCurrentPosition((e) => {
 				let longitude = e.coords.longitude
 				let latitude = e.coords.latitude
@@ -49,9 +51,7 @@ export default function LocationUpdatePopup() {
 		setTimeout(() => {
 			if (user && !user.user.geo_location) {
 				setShow(true)
-			} else {
-				enableLocation()
-			}
+			} 
 		}, 15000)
 	}, [])
 
