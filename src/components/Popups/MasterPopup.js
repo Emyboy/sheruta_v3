@@ -25,17 +25,35 @@ import { useInterval } from 'react-use'
 import Global from '../../Global'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 import LocationUpdatePopup from './LocationUpdatePopup'
+import UserService from '../../services/UserService'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
+	const { services, categories } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
-	useEffect(() => {
+
+	const getForViews = () => {
 		dispatch(getAllStates())
 		dispatch(getAllCategories())
 		dispatch(getAllServices())
 		dispatch(getAllPaymentTypes())
 		dispatch(getAllWorkIndustries())
 		dispatch(getAllRecentProperties())
+	}
+
+	const getForUser = () => {
+		dispatch(getAllNotifications())
+		dispatch(getAllMySuggestion())
+		dispatch(suggestThemForMe())
+		dispatch(getUnreadMessageCount())
+		dispatch(getAllConversations())
+		dispatch(getAllSuggestionsByStatus('accepted'))
+		dispatch(getUserPaymentPlan())
+		UserService.updateProfile({ last_seen: new Date() })
+	}
+
+	useEffect(() => {
+		getForViews()
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())
@@ -43,14 +61,16 @@ const MasterPopup = (props) => {
 	}, [])
 
 	useEffect(() => {
+		setInterval(() => {
+			if (services.length === 0 && categories.length === 0) {
+				getForViews()
+			}
+		}, 10000)
+	}, [services, categories])
+
+	useEffect(() => {
 		if (user) {
-			dispatch(getAllNotifications())
-			dispatch(getAllMySuggestion())
-			dispatch(suggestThemForMe())
-			dispatch(getUnreadMessageCount())
-			dispatch(getAllConversations())
-			dispatch(getAllSuggestionsByStatus('accepted'))
-			dispatch(getUserPaymentPlan())
+			getForUser()
 		}
 	}, [user])
 

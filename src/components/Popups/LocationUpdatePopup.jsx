@@ -11,7 +11,7 @@ export default function LocationUpdatePopup() {
 
 	const saveLocation = (longitude, latitude) => {
 		if (
-			JSON.parse(user.user.geo_location).longitude !== longitude &&
+			user.user.geo_location && JSON.parse(user.user.geo_location).longitude !== longitude &&
 			JSON.parse(user.user.geo_location).latitude !== latitude
 		) {
 			UserService.updateProfile({
