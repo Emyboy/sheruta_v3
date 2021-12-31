@@ -571,7 +571,7 @@ const CraeteRequest = (props) => {
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>Budget / Price</label>
+													<label>Budget / Rent</label>
 													<input
 														style={{
 															height: '40px',

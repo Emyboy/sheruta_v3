@@ -157,6 +157,23 @@ export default function AccountSettings() {
 										/>
 									</div>
 								</div>
+								<div className="col-lg-6 mb-3">
+									<div className="form-group">
+										<label className="mont-font fw-600 font-xsss">Budget</label>
+										<input
+											onChange={(e) =>
+												setUserData({
+													...userData,
+													budget: parseInt(e.target.value),
+												})
+											}
+											defaultValue={userData.budget}
+											type="number"
+											className="form-control"
+											required
+										/>
+									</div>
+								</div>
 							</div>
 
 							<div className="row">

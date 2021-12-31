@@ -88,10 +88,22 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 			</Modal>
 			<Wrapper className="card d-block border  rounded-xxl overflow-hidden mb-3">
 				{users_permissions_user?.deactivated ? (
-					<div className="card-body text-center align-items-center d-flex justify-content-center " style={{ height: '500px' }}>
+					<div
+						className="card-body text-center align-items-center d-flex justify-content-center "
+						style={{ height: '500px' }}
+					>
 						<div className="mt-5 mb-5">
 							<h5 className="fw-bold">This account has been deactivated</h5>
-							<h6>Press next to view the rest</h6>
+							<h6>Press the remove button</h6>
+							<div>
+								<button
+									className="btn-danger btn mt-5 mb-2"
+									onClick={() => handleStatusUpdate(data.id, 'rejected')}
+								>
+									<MdClose size={40} />
+								</button><br />
+								<small className='fw-bold'>Remove</small>
+							</div>
 						</div>
 					</div>
 				) : (
