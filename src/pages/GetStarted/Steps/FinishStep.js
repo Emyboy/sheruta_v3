@@ -40,7 +40,7 @@ const FinishStep = (props) => {
   return (
     <div className="container">
       <div className="text-center">
-        <h2>Congratulations</h2>
+        <h2 className="fw-bold">Congratulations</h2>
         <h5>You are all done</h5>
         <img
           src="https://i.makeagif.com/media/4-13-2015/9Otr4j.gif"

@@ -163,7 +163,7 @@ export default function ValidIdCard(props) {
                 </Modal.Body>
             </Modal>
             <div className="sec-heading center mt-3">
-                <h2 className="animated animate__bounceIn">
+                <h2 className="animated animate__bounceIn fw-bold">
                     National Identification Number
                 </h2>
                 <p>Identity verification for security reasons.</p>
