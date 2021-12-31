@@ -71,7 +71,8 @@ const Request = React.lazy(() => import('../pages/Request/Request'))
 const Blog = React.lazy(() => import('../pages/Blog/Blog'))
 const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
-const Services = React.lazy(() => import('../pages/Services/Services'))
+const Services = React.lazy(() => import('../pages/Services/Services'));
+const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'));
 
 function App() {
 	// React.useEffect(() => {
@@ -106,6 +107,7 @@ function App() {
 							<Route exact path="/terms" component={Terms} />
 							<Route exact path="/blog" component={Blog} />
 							<Route exact path="/services" component={Services} />
+							<Route exact path="/join-paddy" component={JoinPaddy} />
 							<Route exact path="/services/:service" component={Services} />
 							<Route exact path="/messages" component={Messages} />
 							<Route exact path="/settings" component={Settings} />
