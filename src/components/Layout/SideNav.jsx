@@ -73,6 +73,7 @@ export default function SideNav({ show }) {
 										<IoIosPeople size={size} />
 									</i>
 									<span>Join Paddy</span>
+									<span className="circle-count bg-success font-xssss mt-0">NEW</span>
 								</Link>
 							</li>
 						</ul>
