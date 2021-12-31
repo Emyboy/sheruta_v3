@@ -21,6 +21,7 @@ export default function CreateJoinPaddy() {
 						</h4>
 					</div>
 					<div className="card-body p-lg-5 p-4 w-100 border-0">
+                        
 						<div className="row">
 							{accepted_suggestions
 								.filter((x) => !x.users_permissions_user.deactivated)
