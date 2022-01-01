@@ -37,6 +37,7 @@ import MessageNew from '../pages/Messages/MessageNew'
 import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
 import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
+import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 // import Settings from '../pages/Settings/Settings'
 // import Properties from '../pages/Properties/Properties'
 
@@ -71,7 +72,8 @@ const Request = React.lazy(() => import('../pages/Request/Request'))
 const Blog = React.lazy(() => import('../pages/Blog/Blog'))
 const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
-const Services = React.lazy(() => import('../pages/Services/Services'))
+const Services = React.lazy(() => import('../pages/Services/Services'));
+const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'));
 
 function App() {
 	// React.useEffect(() => {
@@ -106,6 +108,8 @@ function App() {
 							<Route exact path="/terms" component={Terms} />
 							<Route exact path="/blog" component={Blog} />
 							<Route exact path="/services" component={Services} />
+							<Route exact path="/join-paddy" component={JoinPaddy} />
+							<Route exact path="/join-paddy/create" component={CreateJoinPaddy} />
 							<Route exact path="/services/:service" component={Services} />
 							<Route exact path="/messages" component={Messages} />
 							<Route exact path="/settings" component={Settings} />

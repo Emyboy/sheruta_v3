@@ -15,6 +15,7 @@ import AgeRange from './Steps/AgeRange';
 import UpdateAvatar from './Steps/UpdateAvatar';
 import ValidIdCard from './Steps/ValidIdCard';
 import FinishStep from './Steps/FinishStep';
+import Budget from './Steps/Budget';
 
 const RenderStep = ({ props, step }) => {
     // console.log('BUT RENDERED ---', { props, step })
@@ -27,6 +28,7 @@ const RenderStep = ({ props, step }) => {
       <AgeRange {...props} />,
       <UpdateAvatar {...props} />,
       <PersonalInfoForm {...props} />,
+      <Budget {...props} />,
       <FinishStep {...props} />,
     ];
     return allSteps[step-1]
