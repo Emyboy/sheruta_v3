@@ -29,7 +29,7 @@ export const getAllCategories = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error fetching categories' })
+			notification.error({ message: 'Poor internet connection' })
 		})
 }
 
@@ -99,7 +99,7 @@ export const getAllPaymentTypes = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error getting all payment types' })
+			notification.error({ message: 'Poor internet connection' })
 		})
 }
 
@@ -112,7 +112,7 @@ export const getAllStates = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error getting all payment types' })
+			notification.error({ message: 'Poor internet connection' })
 		})
 }
 export const getAllWorkIndustries = () => (dispatch) => {
@@ -124,7 +124,7 @@ export const getAllWorkIndustries = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error with work industries' })
+			// notification.error({ message: 'Error with work industries' })
 		})
 }
 

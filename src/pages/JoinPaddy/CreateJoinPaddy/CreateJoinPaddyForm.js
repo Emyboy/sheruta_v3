@@ -127,7 +127,7 @@ export default function CreateJoinPaddyForm() {
 					</div>
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">Category</label>
+							<label className="mont-font fw-600 font-xsss">Type</label>
 							<input
 								required
 								type="number"
@@ -156,6 +156,7 @@ export default function CreateJoinPaddyForm() {
 								type="text"
 								name="comment-name"
 								className="form-control"
+								defaultValue={state.budget}
 							/>
 						</div>
 					</div>
