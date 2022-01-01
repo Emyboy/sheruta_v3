@@ -42,14 +42,16 @@ const MasterPopup = (props) => {
 	}
 
 	const getForUser = () => {
-		dispatch(getAllNotifications())
-		dispatch(getAllMySuggestion())
-		dispatch(suggestThemForMe())
-		dispatch(getUnreadMessageCount())
-		dispatch(getAllConversations())
-		dispatch(getAllSuggestionsByStatus('accepted'))
-		dispatch(getUserPaymentPlan())
-		UserService.updateProfile({ last_seen: new Date() })
+		if(user && !user?.user?.deactivated){
+			dispatch(getAllNotifications())
+			dispatch(getAllMySuggestion())
+			dispatch(suggestThemForMe())
+			dispatch(getUnreadMessageCount())
+			dispatch(getAllConversations())
+			dispatch(getAllSuggestionsByStatus('accepted'))
+			dispatch(getUserPaymentPlan())
+			UserService.updateProfile({ last_seen: new Date() })
+		}
 	}
 
 	useEffect(() => {

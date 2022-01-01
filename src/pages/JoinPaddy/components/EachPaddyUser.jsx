@@ -4,10 +4,15 @@ import ProfileAbout from '../../../components/ProfileComponents/ProfileAbout'
 import ProfileJumb from '../../../components/ProfileComponents/ProfileJumb'
 import VerifiedBadge from '../../../components/VerifiedBadge/VerifiedBadge'
 
-export default function EachPaddyUser({ user }) {
-	const [showProfile, setShowProfile] = useState(false)
+export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
+	const [showProfile, setShowProfile] = useState(false);
+
 	return (
-		<div className="card-body bg-transparent-card d-flex p-3 bg-greylight ms-3 me-3 rounded-3 mb-1 align-items-center">
+		<div
+			className={`card-body bg-transparent-card d-flex p-3 bg-greylight ms-3 me-3 rounded-3 mb-1 align-items-center ${
+				selected && 'border border-success shadow'
+			}`}
+		>
 			<Modal show={showProfile} onHide={() => setShowProfile(false)} size="lg">
 				<Modal.Header>
 					<button
@@ -45,8 +50,19 @@ export default function EachPaddyUser({ user }) {
 				</span>
 			</h4>
 			<a
-				href="#"
-				className="btn-round-sm bg-white text-grey-900 feather-plus font-xss ms-auto mt-2"
+				onClick={() => {
+					if(selected){
+						unSelect(user);
+					}else {
+						onSelect(user)
+					}
+				}}
+				href="#add"
+				className={`btn-round-sm ${
+					selected
+						? 'bg-danger text-white ti-close'
+						: 'bg-white text-grey-900 feather-plus'
+				}   font-xss ms-auto mt-2`}
 			></a>
 		</div>
 	)
