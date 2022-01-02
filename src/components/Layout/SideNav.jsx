@@ -67,7 +67,7 @@ export default function SideNav({ show }) {
 									<span>Properties</span>
 								</Link>
 							</li> */}
-							{/* <li>
+							<li>
 								<Link to="/join-paddy" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-red-gradiant me-3">
 										<IoIosPeople size={size} />
@@ -75,7 +75,7 @@ export default function SideNav({ show }) {
 									<span>Join Paddy</span>
 									<span className="circle-count bg-success font-xssss mt-0">NEW</span>
 								</Link>
-							</li> */}
+							</li>
 						</ul>
 					</div>
 

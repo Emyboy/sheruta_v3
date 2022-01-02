@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { notification, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
-import logo from '../../assets/img/canta-logo.png'
+import logo from '../../assets/img/logo.png'
 import Global from '../../Global';
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 
