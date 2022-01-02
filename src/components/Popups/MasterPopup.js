@@ -12,6 +12,7 @@ import {
 	getUnreadMessageCount,
 	getAllConversations,
 	getUserPaymentPlan,
+	getAllAmenities,
 } from '../../redux/strapi_actions/view.action'
 import {
 	getAllSuggestionsByStatus,
@@ -39,6 +40,7 @@ const MasterPopup = (props) => {
 		dispatch(getAllPaymentTypes())
 		dispatch(getAllWorkIndustries())
 		dispatch(getAllRecentProperties())
+		dispatch(getAllAmenities())
 	}
 
 	const getForUser = () => {
@@ -55,7 +57,7 @@ const MasterPopup = (props) => {
 	}
 
 	useEffect(() => {
-		// getForViews()
+		getForViews()
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())
