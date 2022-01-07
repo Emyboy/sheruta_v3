@@ -40,17 +40,17 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 	useEffect(() => {
 		if (showInfo) {
 			Analytics.create({
-				user_id: users_permissions_user.id,
+				user_id: users_permissions_user?.id,
 				type: AnalyticsTypes.personalInfoView,
 			})
 			if (user && user?.user?.is_verified) {
 				NotificationService.notifyUser({
-					owner: users_permissions_user.id,
+					owner: users_permissions_user?.id,
 					type: 'personal_info_view',
 				})
 			} else if (user && !user?.user?.is_verified) {
 				NotificationService.notifyUser({
-					owner: users_permissions_user.id,
+					owner: users_permissions_user?.id,
 					type: 'personal_info_view_attempt',
 					sub_title: "This user wasn't verified",
 				})
@@ -68,7 +68,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							x
 						</button>
 					</div>
-					{user && user.user.is_verified ? (
+					{user && user?.user?.is_verified ? (
 						<PersonalInfo userData={users_permissions_user} />
 					) : (
 						<div className="text-center pt-5 pb-5">
@@ -98,7 +98,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							<div>
 								<button
 									className="btn-danger btn mt-5 mb-2"
-									onClick={() => handleStatusUpdate(data.id, 'rejected')}
+									onClick={() => handleStatusUpdate(data?.id, 'rejected')}
 								>
 									<MdClose size={40} />
 								</button><br />
@@ -111,16 +111,16 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 						<div className="card-body d-block w-100 p-4 text-center">
 							<figure className="avatar ms-auto me-auto mb-0 position-relative w90 z-index-1">
 								<img
-									src={users_permissions_user.avatar_url}
+									src={users_permissions_user?.avatar_url}
 									alt="image"
 									className="float-right p-1 bg-white rounded-circle w-100"
 								/>
 							</figure>
 							<div className="clearfix"></div>
 							<div className="d-flex justify-content-center">
-								<Link to={`/user/${users_permissions_user.username}`}>
+								<Link to={`/user/${users_permissions_user?.username}`}>
 									<h4 className="fw-700 font-xss mt-3 mb-0">
-										{users_permissions_user.first_name}{' '}
+										{users_permissions_user?.first_name}{' '}
 									</h4>
 								</Link>
 								<VerifiedBadge
@@ -131,27 +131,27 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							</div>
 
 							<p className="fw-500 font-xssss text-grey-500 mt-0 mb-3">
-								@{users_permissions_user.username}
+								@{users_permissions_user?.username}
 							</p>
 							<ul className="product-feature-list mt-1">
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Gender: </b>
-									{personal_info.gender === 'm' ? 'Male' : 'Female'}
+									{personal_info?.gender === 'm' ? 'Male' : 'Female'}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2">Occupation: </b>
-									{personal_info.occupation}
+									{personal_info?.occupation}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Industry: </b>
 									{work_industries.length > 0 &&
 										work_industries.filter(
-											(x) => x.id === personal_info.work_industry
-										)[0].name}
+											(x) => x?.id === personal_info?.work_industry
+										)[0]?.name}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Joined: </b>
-									{moment(users_permissions_user.created_at).fromNow()}
+									{moment(users_permissions_user?.created_at).fromNow()}
 								</li>
 							</ul>
 							<button
@@ -168,7 +168,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							<div>
 								<button
 									className="btn-danger"
-									onClick={() => handleStatusUpdate(data.id, 'rejected')}
+									onClick={() => handleStatusUpdate(data?.id, 'rejected')}
 								>
 									<MdClose size={40} />
 								</button>
@@ -177,7 +177,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 							<div>
 								<button
 									className="bg-theme text-white"
-									onClick={() => handleStatusUpdate(data.id, 'accepted')}
+									onClick={() => handleStatusUpdate(data?.id, 'accepted')}
 								>
 									<FiCheck size={40} />
 								</button>

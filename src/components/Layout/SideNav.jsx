@@ -4,12 +4,10 @@ import { BsShieldCheck } from 'react-icons/bs'
 import { IoPricetagsOutline } from 'react-icons/io5'
 import { RiUserSearchLine } from 'react-icons/ri'
 import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
-import { BsHouseDoor } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { IoIosPeople } from 'react-icons/io'
 
 export default function SideNav({ show }) {
 	const dispatch = useDispatch()
