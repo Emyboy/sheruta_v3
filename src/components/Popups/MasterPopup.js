@@ -27,6 +27,7 @@ import Global from '../../Global'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 import LocationUpdatePopup from './LocationUpdatePopup'
 import UserService from '../../services/UserService'
+import GetMoreInfoPopup from './GetMoreInfoPopup'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -90,13 +91,14 @@ const MasterPopup = (props) => {
 		if (user) {
 			dispatch(setUserOnline())
 		}
-	}, 100000)
+	}, 300000)
 
 	if (user) {
 		return (
 			<>
 				<ConfigViewPopup />
 				<GetStartedPopup />
+				<GetMoreInfoPopup />
 				{Global.PLATFORM !== 'iPhone' && (
 					<>
 						{' '}

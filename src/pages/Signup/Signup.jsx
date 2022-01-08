@@ -20,13 +20,10 @@ export const Signup = (props) => {
 	const [termsAccepted, setTermsAccepted] = useState(false)
 
 	const onSubmit = (e) => {
-		console.log('SENDING ---', {
-			...e,
-			username: e.username.replace(/\s/g, ''),
-		})
+		// console.log(e)
 		if (!termsAccepted) {
 			notification.info({ message: 'You need to accept the terms' })
-            return;
+			return
 		}
 		setState({ ...state, loading: true })
 		axios(process.env.REACT_APP_API_URL + '/auth/local/register', {
@@ -70,8 +67,8 @@ export const Signup = (props) => {
 			})
 	}
 
-	if(props.auth.user){
-		return <Redirect to='/feeds' />
+	if (props.auth.user) {
+		return <Redirect to="/feeds" />
 	}
 
 	if (state.goToSuccess) {
@@ -161,6 +158,18 @@ export const Signup = (props) => {
 												{...register('email')}
 												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
 												placeholder="Your Email Address"
+											/>
+										</div>
+										<div className="form-group icon-input mb-3">
+											<i className="font-sm ti-mobile text-grey-500 pe-0"></i>
+											<input
+												required
+												type="number"
+												name="phone_number"
+												id="phone_number"
+												{...register('phone_number')}
+												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
+												placeholder="Phone Number"
 											/>
 										</div>
 										<div className="form-group icon-input mb-3">
