@@ -120,7 +120,7 @@ export default function EachRequest({ data }) {
 								data.image_url.map((img, i) => {
 									if (i > 2) {
 										return null
-									} else if (i === 2 && data.image_url.length > 2) {
+									} else if (i === 3 && data.image_url.length > 2) {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link

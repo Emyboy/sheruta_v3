@@ -20,6 +20,7 @@ import firebase from 'firebase'
 import Compressor from 'compressorjs'
 import { Modal } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea'
+import Global from '../../Global'
 
 const uid = Uid()
 
@@ -71,6 +72,7 @@ const CraeteRequest = (props) => {
 		is_premium: false,
 		payment_type: null,
 		state: null,
+		rent_per_room: null
 	})
 
 	const sendToDb = () => {
@@ -161,7 +163,7 @@ const CraeteRequest = (props) => {
 			notification.error({ message: 'Please select a state' })
 			return
 		}
-		
+
 		//.. Send images to firebase
 		const files = []
 		const img_urls = []
@@ -173,9 +175,9 @@ const CraeteRequest = (props) => {
 		if (!view.personal_info.looking_for && files.length === 0) {
 			notification.error({ message: 'Please add an image' })
 			return
-		}else if (!view.personal_info.looking_for && files.length < 3) {
-			notification.error({ message: 'Please add at least 3 images' });
-			return;
+		} else if (!view.personal_info.looking_for && files.length < 3) {
+			notification.error({ message: 'Please add at least 3 images' })
+			return
 		}
 		setState({ ...state, loading: true })
 		if (files.length > 0) {
@@ -283,7 +285,7 @@ const CraeteRequest = (props) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
 
-	if(auth?.user && auth?.user?.user?.deactivated){
+	if (auth?.user && auth?.user?.user?.deactivated) {
 		return <Redirect to="/settings/deactivate-account" />
 	}
 
@@ -559,7 +561,7 @@ const CraeteRequest = (props) => {
 																	location: e.label,
 																})
 															},
-															placeholder: 'Eg: Yaba, Lekki, Okota',
+															placeholder: 'Eg: Yaba, Lekki, Surulere',
 														}}
 														autocompletionRequest={{
 															componentRestrictions: {
@@ -571,7 +573,16 @@ const CraeteRequest = (props) => {
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>Budget / Rent</label>
+													<label>
+														{props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Maximum Budget'
+															: 'Total Rent'}{' '}
+														(
+														{`${Global.currency}` +
+															window.formatedPrice.format(data.budget)}
+														)
+													</label>
 													<input
 														style={{
 															height: '40px',
@@ -585,6 +596,36 @@ const CraeteRequest = (props) => {
 															setData({
 																...data,
 																budget: e.target.value,
+															})
+														}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>
+														{props.view.personal_info &&
+														props.view.personal_info.looking_for
+															? 'Minimum Budget'
+															: 'Rent Per Room'}{' '}
+														(
+														{`${Global.currency}` +
+															window.formatedPrice.format(data.rent_per_room)}
+														)
+													</label>
+													<input
+														style={{
+															height: '40px',
+														}}
+														className="form-control"
+														type="number"
+														required
+														defaultValue={data.rent_per_room}
+														placeholder="Eg. 120000"
+														onChange={(e) =>
+															setData({
+																...data,
+																rent_per_room: e.target.value,
 															})
 														}
 													/>

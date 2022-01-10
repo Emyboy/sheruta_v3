@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import Global from '../../../Global'
 import UserService from '../../../services/UserService'
 
 export default function Budget(props) {
 	const { step, setStep, info } = props
-	const [budget, setBudget] = useState(0)
+	const [budget, setBudget] = useState(0);
+	const { user } = useSelector(state => state.auth);
 
 	const handleSubmit = async () => {
 		try {
@@ -19,7 +21,7 @@ export default function Budget(props) {
 	}
 
 	useEffect(() => {
-		if (!info.looking_for) {
+		if (user && user?.user?.budget) {
 			setStep(step + 1)
 		}
 	}, [])

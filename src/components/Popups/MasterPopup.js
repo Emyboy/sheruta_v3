@@ -35,17 +35,19 @@ const MasterPopup = (props) => {
 	const dispatch = useDispatch()
 
 	const getForViews = () => {
-		dispatch(getAllStates())
-		dispatch(getAllCategories())
-		dispatch(getAllServices())
-		dispatch(getAllPaymentTypes())
-		dispatch(getAllWorkIndustries())
-		dispatch(getAllRecentProperties())
-		dispatch(getAllAmenities())
+		if (services.length === 0 && categories.length === 0) {
+			dispatch(getAllStates())
+			dispatch(getAllCategories())
+			dispatch(getAllServices())
+			dispatch(getAllPaymentTypes())
+			dispatch(getAllWorkIndustries())
+			dispatch(getAllRecentProperties())
+			dispatch(getAllAmenities())
+		}
 	}
 
 	const getForUser = () => {
-		if(user && !user?.user?.deactivated){
+		if (user && !user?.user?.deactivated) {
 			dispatch(getAllNotifications())
 			dispatch(getAllMySuggestion())
 			dispatch(suggestThemForMe())
@@ -67,15 +69,15 @@ const MasterPopup = (props) => {
 
 	useEffect(() => {
 		setInterval(() => {
-			if (services.length === 0 && categories.length === 0) {
-				getForViews()
-			}
+			getForViews()
 		}, 10000)
 	}, [services, categories])
 
 	useEffect(() => {
 		if (user) {
 			getForUser()
+		}else {
+			getForViews()
 		}
 	}, [user])
 
@@ -91,7 +93,7 @@ const MasterPopup = (props) => {
 		if (user) {
 			dispatch(setUserOnline())
 		}
-	}, 300000)
+	}, 200000)
 
 	if (user) {
 		return (

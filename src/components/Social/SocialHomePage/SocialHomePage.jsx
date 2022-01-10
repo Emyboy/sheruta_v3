@@ -72,6 +72,12 @@ export default (props) => {
 					dispatch({
 						type: 'SET_VIEW_STATE',
 						payload: {
+							feed: [],
+						},
+					})
+					dispatch({
+						type: 'SET_VIEW_STATE',
+						payload: {
 							feed: res.data,
 						},
 					})

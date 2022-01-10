@@ -28,7 +28,7 @@ export default function EachConversation({ conv, onClick }) {
 		// } catch (error) {
 
 		// }
-		setCount(messages.filter((x) => x.conversation.id === conv.id).length)
+		setCount(messages.filter((x) => x.conversation?.id === conv?.id).length)
 	}, [messages])
 
 	useEffect(async () => {

@@ -208,6 +208,12 @@ export const getAllConversations = () => async (dispatch) => {
 		dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {
+				conversations: [],
+			},
+		})
+		dispatch({
+			type: 'SET_VIEW_STATE',
+			payload: {
 				conversations: convs,
 			},
 		})
