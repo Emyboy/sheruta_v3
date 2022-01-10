@@ -118,9 +118,7 @@ export default function EachRequest({ data }) {
 						<div className="row ps-2 pe-2 mt-4">
 							{data.image_url &&
 								data.image_url.map((img, i) => {
-									if (i > 2) {
-										return null
-									} else if (i === 3 && data.image_url.length > 2) {
+									 if (i === 2 ) {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link
@@ -129,7 +127,7 @@ export default function EachRequest({ data }) {
 													className="position-relative d-block"
 												>
 													<LazyLoadImage
-														src={data.image_url[0]}
+														src={data.image_url[i]}
 														className="rounded-3 w-100"
 														alt={data?.heading}
 														effect="blur"
@@ -142,7 +140,9 @@ export default function EachRequest({ data }) {
 												</Link>
 											</div>
 										)
-									} else
+									}else if (i > 2){
+										return null
+									} else{
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link to={`/request/${data.uuid}/${user?.id}`}>
@@ -157,7 +157,11 @@ export default function EachRequest({ data }) {
 												</Link>
 											</div>
 										)
-								})}
+									}
+										
+								}
+								
+								)}
 
 							{/* <div className="col-xs-4 col-sm-4 p-1">
 							<a to="images/t-11.jpg" data-lightbox="roadtrip">
