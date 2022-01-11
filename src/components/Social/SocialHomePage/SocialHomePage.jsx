@@ -153,7 +153,12 @@ export default (props) => {
 												<img src={match} className="rounded-3 mb-3 col-12" />
 											)
 										} else if (i === 2) {
-											return <PostRequestAds />
+											return (
+												<>
+													<PostRequestAds />
+													<EachSocialRequest key={i + ' request'} data={val} />
+												</>
+											)
 										}
 										return <EachSocialRequest key={i + ' request'} data={val} />
 									})}
