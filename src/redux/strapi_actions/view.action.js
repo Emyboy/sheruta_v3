@@ -16,7 +16,7 @@ export const getAllServices = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error fetching services' })
+			return Promise.reject(err)
 		})
 }
 
@@ -31,6 +31,7 @@ export const getAllAmenities = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
+			return Promise.reject(err)
 			console.log('ERROR GETTING')
 			// notification.error({ message: 'Error fetching services' })
 		})
@@ -115,7 +116,7 @@ export const getAllPaymentTypes = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Poor internet connection' })
+			return Promise.reject(err)
 		})
 }
 
@@ -128,7 +129,7 @@ export const getAllStates = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Poor internet connection' })
+			return Promise.reject(err)
 		})
 }
 export const getAllWorkIndustries = () => (dispatch) => {
@@ -140,6 +141,7 @@ export const getAllWorkIndustries = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
+			return Promise.reject(err)
 			// notification.error({ message: 'Error with work industries' })
 		})
 }
@@ -249,7 +251,6 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 			},
 		})
 	} catch (error) {
-		notification.error({ message: 'Error fetching subscription' })
 		store.dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {

@@ -111,14 +111,14 @@ export default function EachRequest({ data }) {
 				</Link>
 			</div>
 			<div className="card-body d-block p-0">
-				{authUser &&
-					!authUser.user.deactivated &&
-					data.image_url &&
-					data.image_url.length > 0 && (
+				{
+					// (authUser &&
+					// 	!authUser.user.deactivated) &&
+					data.image_url && data.image_url.length > 0 && (
 						<div className="row ps-2 pe-2 mt-4">
 							{data.image_url &&
 								data.image_url.map((img, i) => {
-									 if (i === 2 ) {
+									if (i === 2) {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link
@@ -140,9 +140,9 @@ export default function EachRequest({ data }) {
 												</Link>
 											</div>
 										)
-									}else if (i > 2){
+									} else if (i > 2) {
 										return null
-									} else{
+									} else {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link to={`/request/${data.uuid}/${user?.id}`}>
@@ -158,10 +158,7 @@ export default function EachRequest({ data }) {
 											</div>
 										)
 									}
-										
-								}
-								
-								)}
+								})}
 
 							{/* <div className="col-xs-4 col-sm-4 p-1">
 							<a to="images/t-11.jpg" data-lightbox="roadtrip">
@@ -173,20 +170,21 @@ export default function EachRequest({ data }) {
 							</a>
 						</div> */}
 						</div>
-					)}
+					)
+				}
 			</div>
 			<div className="card-body row p-0 mt-3 mb-3 justify-content-between">
 				<div className="d-flex align-items-center justify-content-start col-md-6">
 					<div className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
 						<span className="font-xss text-gray-600">
-							{data.is_searching ? 'Budget' : 'Rent'}:{' '}
+							{data.is_searching ? 'Budget' : data.rent_per_room ? 'A Room' : 'Rent'}:{' '}
 						</span>
 					</div>
 					<figure className="mb-0 pl-1">
 						{' '}
 						<b style={{ fontSize: '17px' }} className="text-grey-600">
 							{Global.currency}
-							{window.formatedPrice.format(data.budget)}{' '}
+							{window.formatedPrice.format(data.rent_per_room ? data.rent_per_room : data.budget)}{' '}
 							{data.payment_type && (
 								<small>/{data.payment_type.abbreviation}</small>
 							)}

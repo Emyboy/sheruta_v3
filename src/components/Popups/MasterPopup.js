@@ -46,13 +46,19 @@ const MasterPopup = (props) => {
 		}
 	}
 
+	const getMessageStuffs = () => {
+		if (user && !user?.user?.deactivated) {
+			dispatch(getUnreadMessageCount())
+			dispatch(getAllConversations())
+		}
+	}
+
 	const getForUser = () => {
 		if (user && !user?.user?.deactivated) {
 			dispatch(getAllNotifications())
 			dispatch(getAllMySuggestion())
 			dispatch(suggestThemForMe())
-			dispatch(getUnreadMessageCount())
-			dispatch(getAllConversations())
+
 			dispatch(getAllSuggestionsByStatus('accepted'))
 			dispatch(getUserPaymentPlan())
 			UserService.updateProfile({ last_seen: new Date() })
@@ -64,19 +70,20 @@ const MasterPopup = (props) => {
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())
+			getMessageStuffs()
 		}
 	}, [])
 
 	useEffect(() => {
 		setInterval(() => {
 			getForViews()
-		}, 10000)
+		}, 20000)
 	}, [services, categories])
 
 	useEffect(() => {
 		if (user) {
 			getForUser()
-		}else {
+		} else {
 			getForViews()
 		}
 	}, [user])
@@ -92,6 +99,7 @@ const MasterPopup = (props) => {
 	useInterval(() => {
 		if (user) {
 			dispatch(setUserOnline())
+			getMessageStuffs()
 		}
 	}, 200000)
 
