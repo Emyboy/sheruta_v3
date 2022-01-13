@@ -72,7 +72,7 @@ const CraeteRequest = (props) => {
 		is_premium: false,
 		payment_type: null,
 		state: null,
-		rent_per_room: null
+		rent_per_room: null,
 	})
 
 	const sendToDb = () => {
@@ -88,7 +88,10 @@ const CraeteRequest = (props) => {
 
 		axios(process.env.REACT_APP_API_URL + '/property-requests', {
 			method: 'POST',
-			data: newRequest,
+			data: {
+				body: newRequest,
+				personal_info: props.view?.personal_info
+			},
 			headers: {
 				Authorization: `Bearer ${Cookies.get('token')}`,
 			},
@@ -285,6 +288,9 @@ const CraeteRequest = (props) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
 
+	if (!props.view.personal_info) {
+		return null
+	}
 	if (auth?.user && auth?.user?.user?.deactivated) {
 		return <Redirect to="/settings/deactivate-account" />
 	}
