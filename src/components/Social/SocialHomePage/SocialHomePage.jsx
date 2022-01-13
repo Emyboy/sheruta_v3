@@ -12,6 +12,7 @@ import PostRequestAds from '../../Ads/RequestAds/PostRequestAds'
 import Layout from '../../Layout/Layout'
 import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
+import SocialFeedsAds from './SocialFeedsAds'
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 
 export default (props) => {
@@ -148,22 +149,12 @@ export default (props) => {
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
-										if (i == 5) {
-											return (
-												<>
-													<img src={match} className="rounded-3 mb-3 col-12" />
-													<EachSocialRequest key={i + ' request'} data={val} />
-												</>
-											)
-										} else if (i === 2) {
-											return (
-												<>
-													<PostRequestAds />
-													<EachSocialRequest key={i + ' request'} data={val} />
-												</>
-											)
-										}
-										return <EachSocialRequest key={i + ' request'} data={val} />
+										return (
+											<>
+												<SocialFeedsAds index={i} />
+												<EachSocialRequest key={i + ' request'} data={val} />
+											</>
+										)
 									})}
 								</>
 							)}
@@ -172,15 +163,11 @@ export default (props) => {
 									{(view['feed'] ? view['feed'] : state.list)
 										.filter((x) => x.is_searching == !personal_info.looking_for)
 										.map((val, i) => {
-											if (i == 5) {
-												return (
-													<img src={match} className="rounded-3 mb-3 col-12" />
-												)
-											} else if (i === 2) {
-												return <PostRequestAds />
-											}
 											return (
-												<EachSocialRequest key={i + ' request'} data={val} />
+												<>
+													<SocialFeedsAds index={i} />
+													<EachSocialRequest key={i + ' request'} data={val} />
+												</>
 											)
 										})}
 								</>

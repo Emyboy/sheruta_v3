@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import Global from '../../Global'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
 import PersonalInfoService from '../../services/PersonalInfoService'
 import UserService from '../../services/UserService'
@@ -77,8 +78,12 @@ export default function GetMoreInfoPopup() {
 									<div className="form-group">
 										<label className="mont-font fw-600 font-xsss">
 											{personal_info.looking_for
-												? 'Budget'
-												: 'Room Cost (cost per room)'}
+												? `Budget ${
+														Global.currency
+												  } ${window.formatedPrice.format(budget)}`
+												: `Room Cost ${
+														Global.currency
+												  } ${window.formatedPrice.format(budget)}`}
 										</label>
 										<input
 											required

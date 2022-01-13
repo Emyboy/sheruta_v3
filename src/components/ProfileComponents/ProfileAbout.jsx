@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
-import { Modal } from 'react-bootstrap';
+import { Modal } from 'antd';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import PersonalInfo from '../../pages/Profile/PersonalInfo';
@@ -25,7 +25,7 @@ export default function ProfileAbout({ user }) {
 
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-			<Modal show={showInfo} size="lg" onHide={() => setShowInfo(false)}>
+			<Modal visible={showInfo} onCancel={() => setShowInfo(false)} footer={null}>
 				{auth.user && auth.user?.user.is_verified ? (
 					<PersonalInfo userData={user} />
 				) : (

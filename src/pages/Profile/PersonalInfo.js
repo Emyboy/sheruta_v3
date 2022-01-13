@@ -16,7 +16,7 @@ const PersonalInfo = ({ userData }) => {
 			axios(
 				process.env.REACT_APP_API_URL +
 					'/personal-infos/?users_permissions_user=' +
-					userData.id,
+					userData?.id,
 				{}
 			)
 				.then((res) => {
@@ -36,7 +36,7 @@ const PersonalInfo = ({ userData }) => {
 			axios(
 				process.env.REACT_APP_API_URL +
 					'/user-preferred-locations/?users_permissions_user=' +
-					userData.id,
+					userData?.id,
 				{}
 			)
 				.then((res) => {
@@ -64,13 +64,13 @@ const PersonalInfo = ({ userData }) => {
 							<span className='fw-bold'>
 								<i className="fa fa-briefcase mr-1"></i>Work Industry
 							</span>
-							<p>{info.work_industry && info.work_industry.name}</p>
+							<p>{info?.work_industry && info?.work_industry.name}</p>
 						</div>
 						<div className="gen-metabox">
 							<span className='fw-bold'>
 								<i className="fa fa-venus-mars"></i> Gender
 							</span>
-							<p>{info.gender && info.gender.toUpperCase()}</p>
+							<p>{info?.gender && info?.gender.toUpperCase()}</p>
 						</div>
 					</div>
 					<div className="col-lg-6">
@@ -78,7 +78,7 @@ const PersonalInfo = ({ userData }) => {
 							<span className='fw-bold'>
 								<i className="fa fa-user-md"></i> Occupation
 							</span>
-							<p>{info.occupation} </p>
+							<p>{info?.occupation} </p>
 						</div>
 						<div className="gen-metabox">
 							<span className='fw-bold'>
@@ -104,13 +104,13 @@ const PersonalInfo = ({ userData }) => {
 										<span className='fw-bold'>
 											<i className="fa fa-user"></i> Local Government
 										</span>
-										<p>{info.lgaOfOrigin} </p>
+										<p>{info?.lgaOfOrigin} </p>
 									</div>
 									<div className="gen-metabox">
 										<span className='fw-bold'>
 											<i className="fa fa-user-alt"></i> Looking for ages
 										</span>
-										<p>{info.looking_for_age_range}</p>
+										<p>{info?.looking_for_age_range}</p>
 									</div>
 								</div>
 								<div className="col-lg-6">
@@ -118,7 +118,7 @@ const PersonalInfo = ({ userData }) => {
 										<span className='fw-bold'>
 											<i className="fa fa-pray"></i> Religion
 										</span>
-										<p className="badged">{info.religion}</p>
+										<p className="badged">{info?.religion}</p>
 									</div>
 								</div>
 								<div className="col-lg-6">
@@ -126,7 +126,15 @@ const PersonalInfo = ({ userData }) => {
 										<span className='fw-bold'>
 											<i className="fa fa-map"></i> State Of Origin
 										</span>
-										<p className="badged">{info.stateOfOrigin}</p>
+										<p className="badged">{info?.stateOfOrigin}</p>
+									</div>
+								</div>
+								<div className="col-lg-6">
+									<div className="gen-metabox no-margin">
+										<span className='fw-bold'>
+											<i className="fa fa-map"></i> About
+										</span>
+										<p className="badged">{userData?.bio}</p>
 									</div>
 								</div>
 							
