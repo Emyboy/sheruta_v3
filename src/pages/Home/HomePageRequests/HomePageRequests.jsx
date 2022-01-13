@@ -31,7 +31,10 @@ export default function ControlledCarousel() {
 	}
 
 	return (
-		<div className="container card bg-dark rounded-xxl shadow pt-4 pb-5" style={{ marginTop: '100px', marginBottom: '100px' }}>
+		<div
+			className="container card bg-dark rounded-xxl shadow pt-4 pb-5"
+			style={{ marginTop: '100px', marginBottom: '100px' }}
+		>
 			<div className="text-center">
 				<h2 className="display-5 mb-5 text-light">
 					<b>What the community is saying</b>
@@ -40,15 +43,17 @@ export default function ControlledCarousel() {
 
 			<Carousel activeIndex={index} onSelect={handleSelect}>
 				{state.list.map((val, i) => {
-					return (
-						<Carousel.Item key={i}>
-							<div className="row justify-content-center">
-								<div className="col-lg-6 col-md-12 pb-4">
-									<EachRequest key={i} data={val} />
+					if (!val.users_permissions_user?.deactivated) {
+						return (
+							<Carousel.Item key={i}>
+								<div className="row justify-content-center">
+									<div className="col-lg-6 col-md-12 pb-4">
+										<EachRequest key={i} data={val} />
+									</div>
 								</div>
-							</div>
-						</Carousel.Item>
-					)
+							</Carousel.Item>
+						)
+					}
 				})}
 			</Carousel>
 		</div>

@@ -129,6 +129,14 @@ const PersonalInfo = ({ userData }) => {
 										<p className="badged">{info.stateOfOrigin}</p>
 									</div>
 								</div>
+								<div className="col-lg-6">
+									<div className="gen-metabox no-margin">
+										<span className='fw-bold'>
+											<i className="fa fa-map"></i> About
+										</span>
+										<p className="badged">{userData.bio}</p>
+									</div>
+								</div>
 							
 							</div>
 						</div>

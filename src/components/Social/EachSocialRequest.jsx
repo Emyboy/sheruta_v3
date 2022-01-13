@@ -17,7 +17,7 @@ export default function EachRequest({ data }) {
 	const authUser = auth.user
 	const [deleted, setDeleted] = useState(false)
 
-	if (deleted) {
+	if (deleted || data.users_permissions_user?.deactivated) {
 		return null
 	}
 

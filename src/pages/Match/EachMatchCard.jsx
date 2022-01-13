@@ -7,11 +7,12 @@ import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import { FiCheck } from 'react-icons/fi'
 import { MdClose, MdWork } from 'react-icons/md'
 import { FaIndustry } from 'react-icons/fa'
-import { Modal } from 'react-bootstrap'
+import { Modal } from 'antd'
 import PersonalInfo from '../Profile/PersonalInfo'
 import NotificationService from '../../services/Notifications'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import moment from 'moment'
+import Global from '../../Global'
 
 const Wrapper = styled.div`
 	.actions > div > button {
@@ -56,35 +57,33 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 				})
 			}
 		}
-	}, [showInfo])
+	}, [showInfo]);
 
 	return (
 		<>
-			<Modal show={showInfo} onHide={() => setShowInfo(false)}>
-				<Modal.Body>
-					<div className="card-header d-flex justify-content-between align-items-center">
-						<span className="h1 font-xl fw-bold text-center">More Info</span>
-						<button className="btn fw-700" onClick={() => setShowInfo(false)}>
-							x
-						</button>
-					</div>
-					{user && user?.user?.is_verified ? (
-						<PersonalInfo userData={users_permissions_user} />
-					) : (
-						<div className="text-center pt-5 pb-5">
-							<h1 className="font-xxl">😢</h1>
-							<h2 className="fw-bold">Only verified users can view this</h2>
-							<Link to={`/start`}>
-								<button className="btn bg-theme text-white mt-3">
-									Verify Your Account
-								</button>
-							</Link>
-						</div>
-					)}
-					<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
-						close
+			<Modal visible={showInfo} onCancel={() => setShowInfo(false)} footer={null}>
+				{/* <div className="card-header d-flex justify-content-between align-items-center">
+					<span className="h1 font-xl fw-bold text-center">More Info</span>
+					<button className="btn fw-700" onClick={() => setShowInfo(false)}>
+						x
 					</button>
-				</Modal.Body>
+				</div> */}
+				{user && user?.user?.is_verified ? (
+					<PersonalInfo userData={users_permissions_user} />
+				) : (
+					<div className="text-center pt-5 pb-5">
+						<h1 className="font-xxl">😢</h1>
+						<h2 className="fw-bold">Only verified users can view this</h2>
+						<Link to={`/start`}>
+							<button className="btn bg-theme text-white mt-3">
+								Verify Your Account
+							</button>
+						</Link>
+					</div>
+				)}
+				<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
+					close
+				</button>
 			</Modal>
 			<Wrapper className="card d-block border  rounded-xxl overflow-hidden mb-3">
 				{users_permissions_user?.deactivated ? (
@@ -101,8 +100,9 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 									onClick={() => handleStatusUpdate(data?.id, 'rejected')}
 								>
 									<MdClose size={40} />
-								</button><br />
-								<small className='fw-bold'>Remove</small>
+								</button>
+								<br />
+								<small className="fw-bold">Remove</small>
 							</div>
 						</div>
 					</div>
@@ -148,6 +148,11 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 										work_industries.filter(
 											(x) => x?.id === personal_info?.work_industry
 										)[0]?.name}
+								</li>
+								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
+									<b className="text-grey-900 mr-2"> Budget: </b>
+									{Global.currency}
+									{window.formatedPrice.format(users_permissions_user?.budget)}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Joined: </b>
