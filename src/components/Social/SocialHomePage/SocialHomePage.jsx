@@ -150,7 +150,10 @@ export default (props) => {
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 										if (i == 5) {
 											return (
-												<img src={match} className="rounded-3 mb-3 col-12" />
+												<>
+													<img src={match} className="rounded-3 mb-3 col-12" />
+													<EachSocialRequest key={i + ' request'} data={val} />
+												</>
 											)
 										} else if (i === 2) {
 											return (

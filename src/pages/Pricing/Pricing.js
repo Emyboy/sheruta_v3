@@ -15,6 +15,7 @@ const formatedPrice = new Intl.NumberFormat('en-NG')
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
+	view: state.view,
 })
 
 export default connect(mapStateToProps)((props) => {
@@ -150,6 +151,16 @@ export default connect(mapStateToProps)((props) => {
 	//     sendPaymentToBackend();
 	// },[])
 
+	const formatPrice = (price) => {
+		if (props.view?.personal_info) {
+			const looking = props.view?.personal_info?.looking_for;
+			if(looking === false){
+				return parseInt(price)+ 1000;
+			}
+		}
+		return price;
+	}
+
 	return (
 		<Layout>
 			<div
@@ -163,7 +174,7 @@ export default connect(mapStateToProps)((props) => {
 					<Modal.Body>
 						<div className="text-center">
 							<i className="ti ti-check display-5"></i>
-							<h2 className='mb-3'>
+							<h2 className="mb-3">
 								<b>{state.message}</b>
 							</h2>
 							<Link to={localStorage.getItem('after_payment') || '/'}>
@@ -195,6 +206,7 @@ export default connect(mapStateToProps)((props) => {
                 </div> */}
 				<div className="row mb-5 justify-content-center">
 					{state.plans.map((val, i) => {
+						console.log(val)
 						return (
 							<div className="col-lg-4 col-md-4" key={i}>
 								<article className="card mb-4 rounded-xs shadow-lg rounded">
@@ -209,13 +221,15 @@ export default connect(mapStateToProps)((props) => {
 										<div className="pricing-value">
 											{val.discount_price ? (
 												<h5 className="mb-0 line-through  text-danger">
-													{formatedPrice.format(val.price)}
+													{formatedPrice.format(formatPrice(val.price))}
 												</h5>
 											) : null}
 											<h1 className="pr-value display-3">
 												<b>
 													{formatedPrice.format(
-														val.discount_price ? val.discount_price : val.price
+														val.discount_price
+															? formatPrice(val.discount_price)
+															: formatPrice(val.price)
 													)}
 												</b>
 											</h1>
@@ -301,8 +315,8 @@ export default connect(mapStateToProps)((props) => {
 														text: 'Pay Now',
 														amount: `${
 															val.discount_price
-																? val.discount_price + '00'
-																: val.price + '00'
+																? formatPrice(val.discount_price) + '00'
+																: formatPrice(val.price) + '00'
 														}`,
 														email: props.auth.user.user.email,
 														onSuccess: (reference) =>
