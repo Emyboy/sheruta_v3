@@ -250,15 +250,22 @@ export default function RequestDetails(props) {
 														{request.body}
 													</p>
 												</div>
-												<div className="d-flex justify-content-between">
-													<h1 className="mt-3">
-														₦ {window.formatedPrice.format(request.budget)}{' '}
-														<small className="text-muted">
-															/
-															{request.payment_type &&
-																request.payment_type.name}
+												<div className="d-flex justify-content-between align-items-center">
+													<div>
+														<small className="mb-0">
+															{request.is_searching
+																? 'My Budget:'
+																: 'Total Rent:'}
 														</small>
-													</h1>
+														<h2 className="mt-1 fw-700">
+															₦ {window.formatedPrice.format(request.budget)}{' '}
+															<small className="text-muted">
+																/
+																{request.payment_type &&
+																	request.payment_type.name}
+															</small>
+														</h2>
+													</div>
 													<div
 														className="d-flex"
 														style={{
@@ -277,6 +284,28 @@ export default function RequestDetails(props) {
 														</div>
 													</div>
 												</div>
+												{request.rent_per_room && (
+													<div className="d-flex justify-content-between align-items-center">
+														<div>
+															<small className="mb-0">
+																{request.is_searching
+																	? 'Min Budget:'
+																	: 'Rent Per Room:'}
+															</small>
+															<h2 className="mt-1 fw-700">
+																₦{' '}
+																{window.formatedPrice.format(
+																	request.rent_per_room
+																)}{' '}
+																<small className="text-muted">
+																	/
+																	{request.payment_type &&
+																		request.payment_type.name}
+																</small>
+															</h2>
+														</div>
+													</div>
+												)}
 												<div className="col-md-5 mt-4">
 													{user ? (
 														<UserAction user={request.users_permissions_user} />
@@ -340,6 +369,15 @@ export default function RequestDetails(props) {
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}
 														</li>
+														{request.rent_per_room && (
+															<li className="col-4 mb-3">
+																<strong className="text-dark">Per Room</strong>
+																<br />₦{' '}
+																{window.formatedPrice.format(
+																	request.rent_per_room
+																)}
+															</li>
+														)}
 
 														<li className="col-4 mb-3">
 															<strong className="text-dark">State</strong>

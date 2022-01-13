@@ -15,6 +15,7 @@ import { notifyEmy } from '../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import styled from 'styled-components'
 import { Dots } from 'react-activity'
+import moment from 'moment';
 
 const Wrapper = styled.div`
 	@media (max-width: 576px) {
@@ -209,7 +210,7 @@ export default function MessageDetails({ conversation_id }) {
 												<b> {otherUser.first_name}</b>
 											</h4>
 											<small className="time text-muted">
-												@{otherUser.username}
+												last seen: {moment(otherUser.updated_at).fromNow()}
 											</small>
 										</Link>
 									</div>

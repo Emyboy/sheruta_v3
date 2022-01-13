@@ -16,7 +16,24 @@ export const getAllServices = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error fetching services' })
+			return Promise.reject(err)
+		})
+}
+
+export const getAllAmenities = () => (dispatch) => {
+	axios(process.env.REACT_APP_API_URL + '/amenities')
+		.then((res) => {
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					amenities: res.data
+				}
+			})
+		})
+		.catch((err) => {
+			return Promise.reject(err)
+			console.log('ERROR GETTING')
+			// notification.error({ message: 'Error fetching services' })
 		})
 }
 
@@ -29,7 +46,7 @@ export const getAllCategories = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error fetching categories' })
+			notification.error({ message: 'Poor internet connection' })
 		})
 }
 
@@ -99,7 +116,7 @@ export const getAllPaymentTypes = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error getting all payment types' })
+			return Promise.reject(err)
 		})
 }
 
@@ -112,7 +129,7 @@ export const getAllStates = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error getting all payment types' })
+			return Promise.reject(err)
 		})
 }
 export const getAllWorkIndustries = () => (dispatch) => {
@@ -124,7 +141,8 @@ export const getAllWorkIndustries = () => (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			notification.error({ message: 'Error with work industries' })
+			return Promise.reject(err)
+			// notification.error({ message: 'Error with work industries' })
 		})
 }
 
@@ -192,6 +210,12 @@ export const getAllConversations = () => async (dispatch) => {
 		dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {
+				conversations: [],
+			},
+		})
+		dispatch({
+			type: 'SET_VIEW_STATE',
+			payload: {
 				conversations: convs,
 			},
 		})
@@ -227,7 +251,6 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 			},
 		})
 	} catch (error) {
-		notification.error({ message: 'Error fetching subscription' })
 		store.dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {

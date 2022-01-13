@@ -4,7 +4,8 @@ import { AiFillWarning } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getAppDetail } from '../../redux/strapi_actions/view.action'
-import Btn from '../Btn/Btn'
+import Btn from '../Btn/Btn';
+import Cookies from 'js-cookie';
 
 export default function AppUpdatePopup() {
 	const [show, setShow] = useState(false)
@@ -22,6 +23,9 @@ export default function AppUpdatePopup() {
 		//         }),
 		//     );
 		// });
+		Cookies.remove('token')
+		localStorage.clear();
+		sessionStorage.clear();
 		caches
 			.keys()
 			.then((cacheNames) => {

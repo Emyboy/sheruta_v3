@@ -1,8 +1,10 @@
 import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import MessageService from '../../services/MessageService';
+import MessageService from '../../services/MessageService'
 import { IoTrash } from 'react-icons/io5'
+import ReactHtmlParser from 'react-html-parser'
+
 
 export default function EachMessage({ message }) {
 	const { user } = useSelector((state) => state.auth)
@@ -29,7 +31,14 @@ export default function EachMessage({ message }) {
 							</div>
 						</div>
 					</div>
-					<div className="message-wrap pt-1 pb-1 shadow-sm">{message.message_text}</div>
+					<div
+						className="message-wrap pt-1 pb-1 shadow-sm "
+						// style={{ background: 'pink' }}
+					>
+						{message.message_html
+							? ReactHtmlParser(message.message_html)
+							: message.message_text}
+					</div>
 					{/* <span className="badge badge-danger rounded-circle position-fixed p-1  mt-1">
 						<IoTrash />
 					</span> */}
@@ -42,7 +51,11 @@ export default function EachMessage({ message }) {
 							<div className="time">{moment(message.created_at).fromNow()}</div>
 						</div>
 					</div>
-					<div className="message-wrap pt-1 pb-1 shadow">{message.message_text}</div>
+					<div className="message-wrap pt-1 pb-1 shadow">
+						{message.message_html
+							? ReactHtmlParser(message.message_html)
+							: message.message_text}
+					</div>
 				</div>
 			)}
 		</>

@@ -12,6 +12,7 @@ import {
 	getUnreadMessageCount,
 	getAllConversations,
 	getUserPaymentPlan,
+	getAllAmenities,
 } from '../../redux/strapi_actions/view.action'
 import {
 	getAllSuggestionsByStatus,
@@ -26,6 +27,7 @@ import Global from '../../Global'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 import LocationUpdatePopup from './LocationUpdatePopup'
 import UserService from '../../services/UserService'
+import GetMoreInfoPopup from './GetMoreInfoPopup'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -33,21 +35,30 @@ const MasterPopup = (props) => {
 	const dispatch = useDispatch()
 
 	const getForViews = () => {
-		dispatch(getAllStates())
-		dispatch(getAllCategories())
-		dispatch(getAllServices())
-		dispatch(getAllPaymentTypes())
-		dispatch(getAllWorkIndustries())
-		dispatch(getAllRecentProperties())
+		if (services.length === 0 && categories.length === 0) {
+			dispatch(getAllStates())
+			dispatch(getAllCategories())
+			dispatch(getAllServices())
+			dispatch(getAllPaymentTypes())
+			dispatch(getAllWorkIndustries())
+			dispatch(getAllRecentProperties())
+			dispatch(getAllAmenities())
+		}
+	}
+
+	const getMessageStuffs = () => {
+		if (user && !user?.user?.deactivated) {
+			dispatch(getUnreadMessageCount())
+			dispatch(getAllConversations())
+		}
 	}
 
 	const getForUser = () => {
-		if(user && !user?.user?.deactivated){
+		if (user && !user?.user?.deactivated) {
 			dispatch(getAllNotifications())
 			dispatch(getAllMySuggestion())
 			dispatch(suggestThemForMe())
-			dispatch(getUnreadMessageCount())
-			dispatch(getAllConversations())
+
 			dispatch(getAllSuggestionsByStatus('accepted'))
 			dispatch(getUserPaymentPlan())
 			UserService.updateProfile({ last_seen: new Date() })
@@ -55,24 +66,25 @@ const MasterPopup = (props) => {
 	}
 
 	useEffect(() => {
-		// getForViews()
+		getForViews()
 		if (user) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())
+			getMessageStuffs()
 		}
 	}, [])
 
 	useEffect(() => {
 		setInterval(() => {
-			if (services.length === 0 && categories.length === 0) {
-				getForViews()
-			}
-		}, 10000)
+			getForViews()
+		}, 20000)
 	}, [services, categories])
 
 	useEffect(() => {
 		if (user) {
 			getForUser()
+		} else {
+			getForViews()
 		}
 	}, [user])
 
@@ -87,14 +99,16 @@ const MasterPopup = (props) => {
 	useInterval(() => {
 		if (user) {
 			dispatch(setUserOnline())
+			getMessageStuffs()
 		}
-	}, 100000)
+	}, 200000)
 
 	if (user) {
 		return (
 			<>
 				<ConfigViewPopup />
 				<GetStartedPopup />
+				<GetMoreInfoPopup />
 				{Global.PLATFORM !== 'iPhone' && (
 					<>
 						{' '}

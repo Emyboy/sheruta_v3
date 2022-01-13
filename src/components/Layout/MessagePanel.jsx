@@ -46,15 +46,24 @@ export default function MessagePanel({ show, togglePanel }) {
 							)}
 							{conversations &&
 								conversations.map((val, i) => {
-									return (
-										<EachConversation
-											conv={val}
-											key={`conv-${i}`}
-											onClick={togglePanel}
-										/>
-									)
+									if (i < 8) {
+										return (
+											<EachConversation
+												conv={val}
+												key={`conv-${i}`}
+												onClick={togglePanel}
+											/>
+										)
+									}
 								})}
 						</ul>
+						{conversations && conversations.length > 7 && (
+							<div className="text-center mt-3">
+								<Link to="/messages" className="text-center text-theme ">
+									<small>View All</small>
+								</Link>
+							</div>
+						)}
 					</div>
 					<div className="section full pe-3 ps-4 pt-4 pb-4 position-relative _feed-body">
 						<h4 className="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">

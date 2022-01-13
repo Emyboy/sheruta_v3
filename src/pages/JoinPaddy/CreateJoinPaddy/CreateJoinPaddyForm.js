@@ -3,8 +3,13 @@ import RequestService from '../../../services/RequestService'
 import { Dots } from 'react-activity'
 import { Radio } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
+import Select from 'react-select'
+import { useSelector } from 'react-redux'
 
 export default function CreateJoinPaddyForm() {
+	const { amenities, payment_types, categories, states } = useSelector(
+		(state) => state.view
+	)
 	const [request, setRequest] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [state, setState] = useState({
@@ -106,44 +111,57 @@ export default function CreateJoinPaddyForm() {
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
 							<label className="mont-font fw-600 font-xsss">Amenities</label>
-							<input
+							{/* <input
 								required
 								type="number"
 								name="comment-name"
 								className="form-control"
+							/> */}
+							<Select
+								options={
+									amenities &&
+									amenities.map((val) => ({
+										value: val.id,
+										label: val.name,
+									}))
+								}
+								multi
 							/>
 						</div>
 					</div>
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
 							<label className="mont-font fw-600 font-xsss">Payment Type</label>
-							<input
-								required
-								type="number"
-								name="comment-name"
-								className="form-control"
+							<Select
+								options={payment_types.map((val) => ({
+									value: val.id,
+									label: val.name,
+								}))}
+								multi
 							/>
 						</div>
 					</div>
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">Category</label>
-							<input
-								required
-								type="number"
-								name="comment-name"
-								className="form-control"
+							<label className="mont-font fw-600 font-xsss">Type</label>
+							<Select
+								options={categories.map((val) => ({
+									value: val.id,
+									label: val.name,
+								}))}
+								multi
 							/>
 						</div>
 					</div>
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
 							<label className="mont-font fw-600 font-xsss">State</label>
-							<input
-								required
-								type="number"
-								name="comment-name"
-								className="form-control"
+							<Select
+								options={states.map((val) => ({
+									value: val.id,
+									label: val.name,
+								}))}
+								multi
 							/>
 						</div>
 					</div>
@@ -156,6 +174,7 @@ export default function CreateJoinPaddyForm() {
 								type="text"
 								name="comment-name"
 								className="form-control"
+								defaultValue={state.budget}
 							/>
 						</div>
 					</div>
