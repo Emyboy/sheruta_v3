@@ -101,8 +101,8 @@ export const Signup = (props) => {
 						></div>
 						<div className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
 							<div className="card shadow-none border-0 ms-auto me-auto login-card">
-								<div className="card-body rounded-0 text-left">
-									<h2 className="fw-700 display1-size display2-md-size mb-4">
+								<div className="card-body rounded-0 text-left p-1">
+									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-5">
 										Create <br />
 										your account
 									</h2>
@@ -209,7 +209,7 @@ export const Signup = (props) => {
 										<div className="form-group mb-1">
 											<button
 												type="submit"
-												className="btn  w-100 text-center text-white fw-600 bg-theme border-0 "
+												className="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0"
 											>
 												{state.loading ? 'Loading...' : 'Register'}
 											</button>

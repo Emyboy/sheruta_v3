@@ -6,10 +6,11 @@ import TextArea from 'antd/lib/input/TextArea'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 
-export default function CreateJoinPaddyForm() {
+export default function JoinPaddyDetailsFrom() {
 	const { amenities, payment_types, categories, states } = useSelector(
 		(state) => state.view
 	)
+	const { user } = useSelector(state => state.auth);
 	const [request, setRequest] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [state, setState] = useState({
@@ -23,7 +24,7 @@ export default function CreateJoinPaddyForm() {
 	useEffect(async () => {
 		try {
 			setLoading(true)
-			const res = await RequestService.getAllUsersRequests()
+			const res = await RequestService.getUserRequestByUserId(user?.user?.id)
 			setRequest(res.data[0])
 			console.log('REQUEST --', res.data[0])
 			setLoading(false)

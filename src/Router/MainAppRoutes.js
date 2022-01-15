@@ -2,22 +2,16 @@ import React, { Suspense } from 'react'
 import PageLoader from '../components/PageLoader'
 import 'antd/dist/antd.css'
 import '../theme.override.css'
-// import "../social_css/css/main.min.css";
-// import '../social_css/css/style.css';
-// import '../assets/css/colors.css';
-// import '../assets/css/styles.css'
-// import '../v4_css/style.css'
 import { Provider } from 'react-redux'
 import store from '../redux/store/store'
+
 import 'react-activity/dist/Spinner.css'
 import 'react-activity/dist/Dots.css'
-// import firebase from "../Firebase"
 import '../social_assets/css/feather.css'
 import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import '../social_assets/css/style.css'
 import '../App.css'
+import '../social_assets/css/style.css'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 

@@ -19,7 +19,7 @@ export const Request = (props) => {
             </MetaTags>
             <div className='container card pt-5 pb-5 rounded shadow border' style={{ marginTop: !user ? '20vh':'10vh'}}>
                 <div className='text-center'>
-                    <h2><b className='text-muted'>Requests Page</b></h2>
+                    <h1 className='fw-700'>Requests Page</h1>
                 </div>
                 <hr />
                 <div className='container-fluid'>

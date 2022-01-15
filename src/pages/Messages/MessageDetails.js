@@ -210,7 +210,7 @@ export default function MessageDetails({ conversation_id }) {
 												<b> {otherUser.first_name}</b>
 											</h4>
 											<small className="time text-muted">
-												last seen: {moment(otherUser.updated_at).fromNow()}
+												last seen: {moment(otherUser.last_seen).fromNow()}
 											</small>
 										</Link>
 									</div>

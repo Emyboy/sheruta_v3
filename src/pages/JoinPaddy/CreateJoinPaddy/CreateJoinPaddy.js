@@ -3,23 +3,32 @@ import { useSelector } from 'react-redux'
 import Layout from '../../../components/Layout/Layout'
 
 import ContactSelect from './ContactSelect'
-import CreateJoinPaddyForm from './CreateJoinPaddyForm'
+import CreateJoinPaddyForm from './SelectRequest';
+import { v4 as Uid } from 'uuid'
+import  PrefaredLocations from '../../GetStarted/Steps/PrefaredLocations';
+import JoinPaddyDetailsFrom from './JoinPaddyDetailsForm';
 
 export default function CreateJoinPaddy() {
 	const { user } = useSelector((state) => state.auth)
 	const [step, setStep] = useState(0)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
+	const { personal_info } = useSelector(state => state.view);
 	const [data, setData] = useState({
 		guests: [],
 		owner: user?.user?.id,
 		country: process.env.REACT_APP_COUNTRY_ID,
+		property_requests: [],
+		personal_info: personal_info,
+		user_preferred_locations: [],
+		uuid: `${Uid()}@${user?.user?.id}@${personal_info?.id}`
 	})
-	const [nextBtnDisabled, setNextBtnDisabled] = useState(false)
+	const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
 	const stepProps = {
 		next: () => setStep(step + 1),
 		previous: () => setStep(step - 1),
 		setLoading: (e) => setLoading(e),
 		setData: (e) => setData(e),
+		stopNext: e => setNextBtnDisabled(e),
 		data,
 	}
 	const allSteps = [
@@ -33,7 +42,9 @@ export default function CreateJoinPaddy() {
 			}
 			selected={(e) => setNextBtnDisabled(!e)}
 		/>,
-		<CreateJoinPaddyForm {...stepProps} />,
+		<CreateJoinPaddyForm {...stepProps} done={(e) => setNextBtnDisabled(!e)} />,
+		<PrefaredLocations standAlone />,
+		<JoinPaddyDetailsFrom {...stepProps} />,
 	]
 	return (
 		<Layout>

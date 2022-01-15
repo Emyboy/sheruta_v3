@@ -7,7 +7,8 @@ import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
-import Global from '../../Global'
+import Global from '../../Global';
+import { IoIosPeople } from 'react-icons/io'
 
 export default function SideNav({ show }) {
 	const dispatch = useDispatch()

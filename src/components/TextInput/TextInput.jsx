@@ -24,7 +24,7 @@ export default ({
     return (
       <Form.Group as={as} controlId={controlId}>
         <Form.Label>
-          <b className='text-muted'>{label}</b>
+          <b>{label}</b>
         </Form.Label>{" "}
         {required ? <span className="text-danger">Required *</span> : null}
         <div className={icon ? "input-with-icon" : ""}>

@@ -10,4 +10,10 @@ export default class RequestService {
 		)
         return res;
 	}
+	static async getUserRequestByUserId(user_id) {
+		const res = await axios(
+			API_URL + `/property-requests?users_permissions_user=${user_id}`
+		)
+        return res;
+	}
 }

@@ -90,7 +90,7 @@ const CraeteRequest = (props) => {
 			method: 'POST',
 			data: {
 				body: newRequest,
-				personal_info: props.view?.personal_info
+				personal_info: props.view?.personal_info,
 			},
 			headers: {
 				Authorization: `Bearer ${Cookies.get('token')}`,
@@ -288,6 +288,9 @@ const CraeteRequest = (props) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
 
+	if (!auth?.user) {
+		return <Redirect to="/login" />
+	}
 	if (!props.view.personal_info) {
 		return null
 	}
@@ -373,7 +376,7 @@ const CraeteRequest = (props) => {
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
 							<div className="text-center">
-								<h1 className="display-6 mb-5">
+								<h1 className="display-6 mb-3">
 									<b>
 										{props.view.personal_info &&
 										props.view.personal_info.looking_for
@@ -383,6 +386,14 @@ const CraeteRequest = (props) => {
 											: 'Post Your Property'}
 									</b>
 								</h1>
+								<div className="row justify-content-center mb-5">
+									<div className="col-lg-6 col-sm-12">
+										<div className="alert alert-warning rounded-xxl">
+											<h2 className="fw-700 text-warning">Warning</h2>
+											<h5 className="mb-0">Once posted can't edit</h5>
+										</div>
+									</div>
+								</div>
 								{state.message ? (
 									<Alert message={state.message} type="success" />
 								) : null}

@@ -197,7 +197,7 @@ const Login = (props) => {
 											<button
 												type="submit"
 												disabled={state.loading}
-												className="btn  w-100 text-center text-white fw-600 bg-theme border-0 "
+												className="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 "
 											>
 												{state.loading ? 'Loading...' : 'Login'}
 											</button>

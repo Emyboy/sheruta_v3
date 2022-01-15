@@ -33,10 +33,10 @@ body,
 .bg-them-light {
     background-color: #f0f5ef !important;
 }
-.form-control {
+/* .form-control {
     background-color: #f7f7f7 !important;
     height: 45px !important;
-}
+} */
 
 .text-theme {
     color: var(--theme-color) !important;
