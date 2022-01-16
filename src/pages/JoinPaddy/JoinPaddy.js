@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Heading from '../../components/Heading/Heading'
 import Layout from '../../components/Layout/Layout'
+import JoinPaddyService from '../../services/JoinPaddyService'
+import EachPaddyCard from './components/EachPaddyCard'
 
 export default function JoinPaddy() {
+	const [list, setList] = useState([])
+
+	const getAllJoinPaddy = useCallback(async () => {
+		try {
+			const res = await JoinPaddyService.getAllJoinPaddy()
+			setList(res.data)
+			console.log(res.data)
+		} catch (error) {
+			console.log(error)
+			return Promise.reject(error)
+		}
+	}, [])
+
+	useEffect(() => {
+		getAllJoinPaddy()
+	}, [getAllJoinPaddy])
+
 	return (
 		<Layout>
 			<div>
@@ -23,6 +42,15 @@ export default function JoinPaddy() {
 							></a>
 						</div>
 					</Link>
+				</div>
+				<div className="row mt-5">
+					{list.map((val, i) => {
+						return (
+							<div className="col-lg-4 col-md-6 pe-2 ps-2" key={`item-${i}`}>
+								<EachPaddyCard data={val} />
+							</div>
+						)
+					})}
 				</div>
 			</div>
 		</Layout>

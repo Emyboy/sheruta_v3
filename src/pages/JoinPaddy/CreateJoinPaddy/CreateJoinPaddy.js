@@ -9,14 +9,17 @@ import PrefaredLocations from '../../GetStarted/Steps/PrefaredLocations'
 import JoinPaddyDetailsFrom from './JoinPaddyDetailsForm'
 import Selectors from './Selectors'
 import FinalJoinPaddyStep from './FinalJoinPaddyStep'
-import JoinPaddyService from '../../../services/JonPaddyService'
+import JoinPaddyService from '../../../services/JoinPaddyService'
 import moment from 'moment'
+import { notification } from 'antd'
+import { Redirect } from 'react-router'
 
 export default function CreateJoinPaddy() {
 	const { user } = useSelector((state) => state.auth)
 	const [step, setStep] = useState(0)
 	const [loading, setLoading] = useState(false)
 	const { personal_info } = useSelector((state) => state.view)
+	const [newPaddy, setNewPaddy] = useState(null)
 	const [data, setData] = useState({
 		guests: [],
 		owner: user?.user?.id,
@@ -42,9 +45,9 @@ export default function CreateJoinPaddy() {
 		setData({ ...data, personal_info: personal_info?.id })
 	}, [personal_info])
 
-	useEffect(() => {
-		console.log('UPDATE ---', data)
-	}, [data])
+	// useEffect(() => {
+	// 	console.log('UPDATE ---', data)
+	// }, [data])
 
 	const [nextBtnDisabled, setNextBtnDisabled] = useState(false)
 	const stepProps = {
@@ -88,13 +91,18 @@ export default function CreateJoinPaddy() {
 
 	const handleSubmit = async () => {
 		try {
-			console.log('SENDING --', data)
 			const res = await JoinPaddyService.create(data)
-			console.log(res.data)
+			setNewPaddy(res.data)
+			notification.success({ message: 'Group created' })
 		} catch (error) {
-			console.log(error)
+			notification.error({ message: 'Error create new group' })
+			notification.info({ message: 'Please try again' })
 			return Promise.reject(error)
 		}
+	}
+
+	if(newPaddy && newPaddy?.uuid){
+		return <Redirect to={`/join-paddy/${newPaddy.uuid}`} />
 	}
 
 	return (
@@ -136,7 +144,7 @@ export default function CreateJoinPaddy() {
 									onClick={handleSubmit}
 									disabled={nextBtnDisabled || loading}
 								>
-									Finish
+									{loading ? 'Loading...' : 'Finish'}
 								</button>
 							)}
 						</div>
