@@ -35,7 +35,7 @@ export default function ContactSelect({
 							<div className="col-sm-12 col-md-6">
 								<EachPaddyUser
 									user={user}
-									selected={selectedContacts.includes(user)}
+									selected={selectedContacts.includes(user?.id)}
 									onSelect={(user) => onSelect(user)}
 									unSelect={(user) => unSelect(user)}
 								/>

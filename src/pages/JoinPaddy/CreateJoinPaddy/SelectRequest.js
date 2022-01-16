@@ -77,14 +77,14 @@ export default function SelectRequest({ setData, data, done }) {
 						<div className="col-lg-6 col-sm-12">
 							<div
 								onClick={() => {
-									if (selected.includes(val)) {
+									if (selected.includes(val?.id)) {
 										setSelected([])
 									} else {
-										setSelected([val])
+										setSelected([val?.id])
 									}
 								}}
 								className={`link mb-3 ${
-									selected.includes(val)
+									selected.includes(val?.id)
 										? 'border border-success border-2 shadow rounded-xxl'
 										: ''
 								}`}

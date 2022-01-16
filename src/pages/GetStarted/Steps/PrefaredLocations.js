@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 
 export const PrefaredLocations = (props) => {
 
-    const { setStep, step, standAlone } = props;
+    const { setStep, step, standAlone, done } = props;
 
     const [data, setData] = React.useState({
         location: null,
@@ -35,7 +35,7 @@ export const PrefaredLocations = (props) => {
         })
             .then(res => {
                 setLoading(false)
-                setLocations([...locaitons, res.data])
+                setLocations([...locaitons, res.data]);
             })
             .catch(err => {
                 setLoading(false);
@@ -74,6 +74,12 @@ export const PrefaredLocations = (props) => {
                 console.log({...err})
             })
     }, []);
+
+	React.useEffect(() => {
+		if(locaitons.length > 0 && done){
+			done(locaitons)
+		}
+	},[locaitons])
 
     return (
 			<div>

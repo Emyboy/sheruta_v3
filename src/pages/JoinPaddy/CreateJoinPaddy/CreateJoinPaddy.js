@@ -3,12 +3,14 @@ import { useSelector } from 'react-redux'
 import Layout from '../../../components/Layout/Layout'
 
 import ContactSelect from './ContactSelect'
-import CreateJoinPaddyForm from './SelectRequest'
+import RequestSelector from './SelectRequest'
 import { v4 as Uid } from 'uuid'
 import PrefaredLocations from '../../GetStarted/Steps/PrefaredLocations'
 import JoinPaddyDetailsFrom from './JoinPaddyDetailsForm'
 import Selectors from './Selectors'
 import FinalJoinPaddyStep from './FinalJoinPaddyStep'
+import JoinPaddyService from '../../../services/JonPaddyService'
+import moment from 'moment'
 
 export default function CreateJoinPaddy() {
 	const { user } = useSelector((state) => state.auth)
@@ -29,6 +31,11 @@ export default function CreateJoinPaddy() {
 		change_budget: true,
 		newly_built: false,
 		agenda: 'Lets all come together to find an apartment we can share',
+		budget: null,
+		bedrooms: null,
+		toilets: null,
+		bathrooms: null,
+		settingrooms: null,
 	})
 
 	useEffect(() => {
@@ -52,15 +59,20 @@ export default function CreateJoinPaddy() {
 		<ContactSelect
 			heading={'Select Contacts To Join'}
 			subHeading={'You can select as many contacts as you want to join'}
-			onSelect={(e) => setData({ ...data, guests: [...data.guests, e] })}
+			onSelect={(e) => setData({ ...data, guests: [...data.guests, e?.id] })}
 			selectedContacts={data.guests}
 			unSelect={(e) =>
 				setData({ ...data, guests: data.guests.filter((x) => x !== e) })
 			}
 			selected={(e) => setNextBtnDisabled(!e)}
 		/>,
-		<CreateJoinPaddyForm {...stepProps} done={(e) => setNextBtnDisabled(!e)} />,
-		<PrefaredLocations standAlone />,
+		<RequestSelector {...stepProps} done={(e) => setNextBtnDisabled(!e)} />,
+		<PrefaredLocations
+			standAlone
+			done={(e) =>
+				setData({ ...data, user_preferred_locations: e.map((val) => val?.id) })
+			}
+		/>,
 		<JoinPaddyDetailsFrom
 			{...stepProps}
 			joinPaddyData={data}
@@ -73,6 +85,18 @@ export default function CreateJoinPaddy() {
 		/>,
 		<FinalJoinPaddyStep />,
 	]
+
+	const handleSubmit = async () => {
+		try {
+			console.log('SENDING --', data)
+			const res = await JoinPaddyService.create(data)
+			console.log(res.data)
+		} catch (error) {
+			console.log(error)
+			return Promise.reject(error)
+		}
+	}
+
 	return (
 		<Layout>
 			<div>
@@ -82,7 +106,7 @@ export default function CreateJoinPaddy() {
 							<i className="ti-arrow-left font-sm text-white"></i>
 						</a> */}
 						<h4 className="font-xs text-white fw-600 ms-4 mb-0 mt-2">
-							Create Join Paddy Group
+							Create Join Paddy Group ({step + 1} / {allSteps.length})
 						</h4>
 					</div>
 					<div className="card-body p-lg-5 p-4 w-100 border-0">
@@ -109,7 +133,7 @@ export default function CreateJoinPaddy() {
 							) : (
 								<button
 									className="btn bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 "
-									onClick={() => console.log(data)}
+									onClick={handleSubmit}
 									disabled={nextBtnDisabled || loading}
 								>
 									Finish
