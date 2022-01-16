@@ -6,11 +6,11 @@ import TextArea from 'antd/lib/input/TextArea'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 
-export default function JoinPaddyDetailsFrom() {
+export default function JoinPaddyDetailsFrom({ joinPaddyData, setData, done }) {
 	const { amenities, payment_types, categories, states } = useSelector(
 		(state) => state.view
 	)
-	const { user } = useSelector(state => state.auth);
+	const { user } = useSelector((state) => state.auth)
 	const [request, setRequest] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [state, setState] = useState({
@@ -33,6 +33,13 @@ export default function JoinPaddyDetailsFrom() {
 			return Promise.reject(error)
 		}
 	}, [])
+
+	useEffect(() => {
+		const { bedrooms, toilets, budget, agenda } = joinPaddyData
+		if (bedrooms && toilets && budget && agenda) {
+			done()
+		}
+	}, [joinPaddyData])
 
 	useEffect(() => {
 		if (request) {
@@ -109,70 +116,13 @@ export default function JoinPaddyDetailsFrom() {
 							/>
 						</div>
 					</div>
-					<div className="col-lg-6 mb-3">
-						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">Amenities</label>
-							{/* <input
-								required
-								type="number"
-								name="comment-name"
-								className="form-control"
-							/> */}
-							<Select
-								options={
-									amenities &&
-									amenities.map((val) => ({
-										value: val.id,
-										label: val.name,
-									}))
-								}
-								multi
-							/>
-						</div>
-					</div>
-					<div className="col-lg-6 mb-3">
-						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">Payment Type</label>
-							<Select
-								options={payment_types.map((val) => ({
-									value: val.id,
-									label: val.name,
-								}))}
-								multi
-							/>
-						</div>
-					</div>
-					<div className="col-lg-6 mb-3">
-						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">Type</label>
-							<Select
-								options={categories.map((val) => ({
-									value: val.id,
-									label: val.name,
-								}))}
-								multi
-							/>
-						</div>
-					</div>
-					<div className="col-lg-6 mb-3">
-						<div className="form-group">
-							<label className="mont-font fw-600 font-xsss">State</label>
-							<Select
-								options={states.map((val) => ({
-									value: val.id,
-									label: val.name,
-								}))}
-								multi
-							/>
-						</div>
-					</div>
 
 					<div className="col-lg-6 mb-3">
 						<div className="form-group">
 							<label className="mont-font fw-600 font-xsss">Budget</label>
 							<input
 								required
-								type="text"
+								type="number"
 								name="comment-name"
 								className="form-control"
 								defaultValue={state.budget}
@@ -188,11 +138,13 @@ export default function JoinPaddyDetailsFrom() {
 							<br />
 							<Radio.Group
 								options={[
-									{ label: 'Yes', value: 'Yes' },
-									{ label: 'No', value: 'No' },
+									{ label: 'Yes', value: true },
+									{ label: 'No', value: false },
 								]}
-								onChange={() => {}}
-								value={'Yes'}
+								onChange={(e) => {
+									setData({ ...joinPaddyData, change_budget: e.target.value })
+								}}
+								value={joinPaddyData?.change_budget}
 								optionType="button"
 							/>
 						</div>
@@ -204,11 +156,13 @@ export default function JoinPaddyDetailsFrom() {
 							<br />
 							<Radio.Group
 								options={[
-									{ label: 'Yes', value: 'Yes' },
-									{ label: 'No', value: 'No' },
+									{ label: 'Yes', value: true },
+									{ label: 'No', value: false },
 								]}
-								onChange={() => {}}
-								value={'No'}
+								onChange={(e) =>
+									setData({ ...joinPaddyData, newly_built: e.target.value })
+								}
+								value={joinPaddyData?.newly_built}
 								optionType="button"
 							/>
 						</div>
@@ -218,10 +172,12 @@ export default function JoinPaddyDetailsFrom() {
 							<label className="mont-font fw-600 font-xsss">Agenda</label>
 							<TextArea
 								showCount
-								defaultValue={state.body}
+								defaultValue={joinPaddyData?.agenda}
 								maxLength={400}
 								style={{ height: 100 }}
-								onChange={() => {}}
+								onChange={(e) =>
+									setData({ ...joinPaddyData, agenda: e.target.value })
+								}
 								required
 							/>
 							{/* <p>{state.body}</p> */}

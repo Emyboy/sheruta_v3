@@ -1,34 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Layout from '../../../components/Layout/Layout'
 
 import ContactSelect from './ContactSelect'
-import CreateJoinPaddyForm from './SelectRequest';
+import CreateJoinPaddyForm from './SelectRequest'
 import { v4 as Uid } from 'uuid'
-import  PrefaredLocations from '../../GetStarted/Steps/PrefaredLocations';
-import JoinPaddyDetailsFrom from './JoinPaddyDetailsForm';
+import PrefaredLocations from '../../GetStarted/Steps/PrefaredLocations'
+import JoinPaddyDetailsFrom from './JoinPaddyDetailsForm'
+import Selectors from './Selectors'
+import FinalJoinPaddyStep from './FinalJoinPaddyStep'
 
 export default function CreateJoinPaddy() {
 	const { user } = useSelector((state) => state.auth)
 	const [step, setStep] = useState(0)
-	const [loading, setLoading] = useState(false);
-	const { personal_info } = useSelector(state => state.view);
+	const [loading, setLoading] = useState(false)
+	const { personal_info } = useSelector((state) => state.view)
 	const [data, setData] = useState({
 		guests: [],
 		owner: user?.user?.id,
-		country: process.env.REACT_APP_COUNTRY_ID,
+		country: parseInt(process.env.REACT_APP_COUNTRY_ID),
 		property_requests: [],
 		personal_info: personal_info,
 		user_preferred_locations: [],
-		uuid: `${Uid()}@${user?.user?.id}@${personal_info?.id}`
+		uuid: `${Uid()}@${user?.user?.id}@${
+			new Date().toISOString().split('T')[1]
+		}`,
+		status: 'inactive',
+		change_budget: true,
+		newly_built: false,
+		agenda: 'Lets all come together to find an apartment we can share',
 	})
-	const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+
+	useEffect(() => {
+		setData({ ...data, personal_info: personal_info?.id })
+	}, [personal_info])
+
+	useEffect(() => {
+		console.log('UPDATE ---', data)
+	}, [data])
+
+	const [nextBtnDisabled, setNextBtnDisabled] = useState(false)
 	const stepProps = {
 		next: () => setStep(step + 1),
 		previous: () => setStep(step - 1),
 		setLoading: (e) => setLoading(e),
 		setData: (e) => setData(e),
-		stopNext: e => setNextBtnDisabled(e),
+		stopNext: (e) => setNextBtnDisabled(e),
 		data,
 	}
 	const allSteps = [
@@ -44,7 +61,17 @@ export default function CreateJoinPaddy() {
 		/>,
 		<CreateJoinPaddyForm {...stepProps} done={(e) => setNextBtnDisabled(!e)} />,
 		<PrefaredLocations standAlone />,
-		<JoinPaddyDetailsFrom {...stepProps} />,
+		<JoinPaddyDetailsFrom
+			{...stepProps}
+			joinPaddyData={data}
+			done={() => setNextBtnDisabled(false)}
+		/>,
+		<Selectors
+			done={() => setNextBtnDisabled(false)}
+			data={data}
+			setData={(e) => setData({ ...data, ...e })}
+		/>,
+		<FinalJoinPaddyStep />,
 	]
 	return (
 		<Layout>
@@ -71,13 +98,21 @@ export default function CreateJoinPaddy() {
 									Previous
 								</button>
 							)}
-							{step !== allSteps.length - 1 && (
+							{step !== allSteps.length - 1 ? (
 								<button
 									className="btn bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 "
 									onClick={stepProps.next}
 									disabled={nextBtnDisabled || loading}
 								>
 									Next
+								</button>
+							) : (
+								<button
+									className="btn bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 "
+									onClick={() => console.log(data)}
+									disabled={nextBtnDisabled || loading}
+								>
+									Finish
 								</button>
 							)}
 						</div>
