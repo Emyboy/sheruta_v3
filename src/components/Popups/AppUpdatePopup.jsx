@@ -51,10 +51,6 @@ export default function AppUpdatePopup() {
 				typeof localVersion !== undefined
 			) {
 				setShow(true);
-				Cookies.remove('token')
-				localStorage.clear()
-				sessionStorage.clear()
-				window.location.reload()
 			}
 		} else if (app_details) {
 			localStorage.setItem('version', app_details?.version)
