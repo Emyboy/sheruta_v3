@@ -112,7 +112,7 @@ const MasterPopup = (props) => {
 				{Global.PLATFORM !== 'iPhone' && (
 					<>
 						{' '}
-						<NotificationPopup />
+						{/* <NotificationPopup /> */}
 						<LocationUpdatePopup />
 					</>
 				)}
