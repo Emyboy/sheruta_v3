@@ -25,11 +25,11 @@ export default function VerifiedBadge({ user, size, className, without_text }) {
         <Wrapper
             size={size}
             className={className}
-            is_verified={user.is_verified}
+            is_verified={user?.is_verified}
         >
-            {user.is_verified ? <GoVerified /> : <IoClose />}{" "}
+            {user?.is_verified ? <GoVerified /> : <IoClose />}{" "}
             {without_text ? null :
-            <span>{user.is_verified ? "Verified" : "Not Verified"}</span>
+            <span>{user?.is_verified ? "Verified" : "Not Verified"}</span>
             }
         </Wrapper>
     );

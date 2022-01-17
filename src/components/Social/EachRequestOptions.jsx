@@ -17,7 +17,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 
 	const handleDelete = () => {
 		setDeleteLoading(true)
-		axios(process.env.REACT_APP_API_URL + `/property-requests/${data.id}`, {
+		axios(process.env.REACT_APP_API_URL + `/property-requests/${data?.id}`, {
 			method: 'DELETE',
 			headers: {
 				Authorization: `Bearer ${Cookies.get('token')}`,
@@ -25,10 +25,10 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 		})
 			.then((res) => {
 				setDeleteLoading(false)
-				if (data.image_url) {
-					data.image_url.map((val, i) => {
+				if (data?.image_url) {
+					data?.image_url.map((val, i) => {
 						DeleteFirebaseImage(
-							`images/requests/${data.users_permissions_user.id}/${data.uuid}/image_${i}`
+							`images/requests/${data?.users_permissions_user?.id}/${data?.uuid}/image_${i}`
 						)
 					})
 				}
@@ -42,7 +42,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 	}
 
 	useEffect(() => {
-		if (auth.user && auth.user.user.id === user.id) {
+		if (auth?.user && auth?.user?.user?.id === user?.id) {
 			setIsOwner(true)
 		} else {
 			setIsOwner(false)
@@ -63,7 +63,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 			/>
 			{/* {isOwner && (
 				<Link
-					to={`/requests/edit/${data.id}`}
+					to={`/requests/edit/${data?.id}`}
 					className="card-body p-0 d-flex link"
 				>
 					<i className="feather-edit text-grey-500 me-3 font-lg"></i>
@@ -81,10 +81,10 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 					if (navigator.share) {
 						navigator
 							.share({
-								title: data.heading,
+								title: data?.heading,
 								url:
-									`/request/${data.uuid}/${user?.id}`,
-								text: data.body,
+									`/request/${data?.uuid}/${user?.id}`,
+								text: data?.body,
 							})
 							.catch((err) => Promise.reject(err))
 					}

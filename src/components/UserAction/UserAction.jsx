@@ -10,10 +10,10 @@ import { notifyEmy } from '../../services/Sheruta'
 export default function UserAction({ user, disable, alignment, className }) {
 	const auth = useSelector((state) => state.auth)
 	const { payment_plan } = useSelector((state) => state.view)
-	const deactivated = user.deactivated
+	const deactivated = user?.deactivated
 
 	const recordCallAnalytics = (type) => {
-		Analytics.create({ user_id: user.id, type })
+		Analytics.create({ user_id: user?.id, type })
 	}
 
 	const handleButtonClicks = (action) => {
@@ -26,17 +26,17 @@ export default function UserAction({ user, disable, alignment, className }) {
 			})
 			recordCallAnalytics(AnalyticsTypes.declinedCalls);
 			notifyEmy({
-				heading: ` ${action} ${user.first_name} ${user.last_name} but hasn't paid ( Blocked )`,
+				heading: ` ${action} ${user?.first_name} ${user?.last_name} but hasn't paid ( Blocked )`,
 			})
 			NotificationService.notifyUser({
-				owner: user.id,
+				owner: user?.id,
 				sub_title: 'this action was blocked',
 				type: `${action === 'message' ? 'message_attempt' : 'call_attempt'}`,
 			})
 		} else {
 			recordCallAnalytics(AnalyticsTypes.calls);
 			notifyEmy({
-				heading: ` ${action} ${user.first_name} ${user.last_name}`,
+				heading: ` ${action} ${user?.first_name} ${user?.last_name}`,
 			})
 		}
 	}
@@ -47,10 +47,10 @@ export default function UserAction({ user, disable, alignment, className }) {
 
 	return (
 		<>
-			{auth.user && auth.user.user.id === user.id ? null : (
+			{auth.user && auth.user?.user?.id === user?.id ? null : (
 				<div className={`d-flex justify-content-${alignment || 'center'} ${className && className}`}>
 					<Link
-						to={payment_plan ? `/messages/new/${user.id}` : '#'}
+						to={payment_plan ? `/messages/new/${user?.id}` : '#'}
 						onClick={() => handleButtonClicks('message')}
 						className="mr-3"
 					>

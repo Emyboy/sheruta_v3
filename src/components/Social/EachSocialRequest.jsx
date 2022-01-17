@@ -12,19 +12,23 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function EachRequest({ data }) {
 	const user = data?.users_permissions_user
-	const deactivated = user.deactivated
+	const deactivated = user?.deactivated
 	const auth = useSelector((state) => state.auth)
 	const authUser = auth.user
 	const [deleted, setDeleted] = useState(false)
 
-	if (deleted || data.users_permissions_user?.deactivated) {
+	// if(!data?.heading){
+	// 	return null
+	// }
+
+	if (deleted || data?.users_permissions_user?.deactivated) {
 		return null
 	}
 
 	return (
 		<article
 			className={`card w-100 shadow-xss rounded-xxl ${
-				!data.is_searching && ' border-2 border-success'
+				!data?.is_searching && ' border-2 border-success'
 			} p-3 mb-3`}
 		>
 			<div className="card-body p-0 d-flex">
@@ -32,9 +36,9 @@ export default function EachRequest({ data }) {
 					<figure className="avatar me-3">
 						<LazyLoadImage
 							src={
-								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user.avatar_url
+								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user?.avatar_url
 							}
-							alt={user.first_name}
+							alt={user?.first_name}
 							className="shadow-sm rounded-circle w45"
 							effect="blur"
 						/>
@@ -42,16 +46,16 @@ export default function EachRequest({ data }) {
 				)}
 				<h4 className="fw-700 text-grey-900 font-xssss mt-1 w-50">
 					<Link
-						to={`/user/${user.username}`}
+						to={`/user/${user?.username}`}
 						className=" d-flex justify-context-evenly"
 					>
 						<a className="text-dark">
-							{deactivated ? '.... ....' : user.first_name.split(' ')[0]}{' '}
+							{deactivated ? '.... ....' : user?.first_name.split(' ')[0]}{' '}
 						</a>{' '}
 						<VerifiedBadge user={user} className={'ml-2'} size={15} />
 					</Link>
 					<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-						{moment(data.created_at).fromNow()}
+						{moment(data?.created_at).fromNow()}
 					</span>
 				</h4>
 				<a
@@ -74,25 +78,25 @@ export default function EachRequest({ data }) {
 						<DeactivatedBanner />
 					) : (
 						<li className="col-sm-8 text-grey-500">
-							<i className="ti-location-pin"></i> {data.location}
+							<i className="ti-location-pin"></i> {data?.location}
 						</li>
 					)}
 					<div className="col-sm-4">
 						<div className="d-flex">
-							{data.category ? (
-								<Tag color="cyan">{data.category.name.toUpperCase()}</Tag>
+							{data?.category ? (
+								<Tag color="cyan">{data?.category.name.toUpperCase()}</Tag>
 							) : null}
-							{data.service ? (
-								<Tag color="volcano">{data.service.name}</Tag>
+							{data?.service ? (
+								<Tag color="volcano">{data?.service.name}</Tag>
 							) : null}
-							{/* {data.service ? (
+							{/* {data?.service ? (
 								<h6 className="d-inline-block p-2 text-light bg-theme fw-600 font-xssss rounded-3 me-2">
-									{data.service.name}
+									{data?.service.name}
 								</h6>
 							) : null}
-							{data.category ? (
+							{data?.category ? (
 								<h6 className="d-inline-block p-2 text-dark badge-secondary fw-600 font-xssss rounded-3 me-2">
-									{data.category.name}
+									{data?.category.name}
 								</h6>
 							) : null} */}
 						</div>
@@ -100,12 +104,12 @@ export default function EachRequest({ data }) {
 				</div>
 			</div>
 			<div className="card-body p-0 me-lg-5 pt-2">
-				<Link to={`/request/${data.uuid}/${user?.id}`}>
+				<Link to={`/request/${data?.uuid}/${user?.id}`}>
 					<p
 						className="fw-500 text-grey-600 lh-26  w-100 mb-0"
 						style={{ fontSize: '16px' }}
 					>
-						{data.body.slice(0, 120)}
+						{data?.body && data?.body?.slice(0, 120)}
 						<a className="fw-600 text-theme ms-2">See more</a>
 					</p>
 				</Link>
@@ -113,28 +117,28 @@ export default function EachRequest({ data }) {
 			<div className="card-body d-block p-0">
 				{
 					// (authUser &&
-					// 	!authUser.user.deactivated) &&
-					data.image_url && data.image_url.length > 0 && (
+					// 	!authUser?.user?.deactivated) &&
+					data?.image_url && data?.image_url.length > 0 && (
 						<div className="row ps-2 pe-2 mt-4">
-							{data.image_url &&
-								data.image_url.map((img, i) => {
+							{data?.image_url &&
+								data?.image_url.map((img, i) => {
 									if (i === 2) {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link
-													to={`/request/${data.uuid}/${user?.id}`}
+													to={`/request/${data?.uuid}/${user?.id}`}
 													data-lightbox="roadtrip"
 													className="position-relative d-block"
 												>
 													<LazyLoadImage
-														src={data.image_url[i]}
+														src={data?.image_url[i]}
 														className="rounded-3 w-100"
 														alt={data?.heading}
 														effect="blur"
 													/>
-													{data.image_url.length > 3 && (
+													{data?.image_url.length > 3 && (
 														<span className="img-count font-sm text-white ls-3 fw-600">
-															<b>+{data.image_url.length - 3}</b>
+															<b>+{data?.image_url.length - 3}</b>
 														</span>
 													)}
 												</Link>
@@ -145,7 +149,7 @@ export default function EachRequest({ data }) {
 									} else {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
-												<Link to={`/request/${data.uuid}/${user?.id}`}>
+												<Link to={`/request/${data?.uuid}/${user?.id}`}>
 													<a data-lightbox="roadtrip">
 														<LazyLoadImage
 															src={img}
@@ -163,7 +167,7 @@ export default function EachRequest({ data }) {
 							{/* <div className="col-xs-4 col-sm-4 p-1">
 							<a to="images/t-11.jpg" data-lightbox="roadtrip">
 								<img
-									src={data.image_url[0]}
+									src={data?.image_url[0]}
 									className="rounded-3 w-100"
 									alt="image"
 								/>
@@ -177,16 +181,23 @@ export default function EachRequest({ data }) {
 				<div className="d-flex align-items-center justify-content-start col-md-6">
 					<div className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
 						<span className="font-xss text-gray-600">
-							{data.is_searching ? 'Budget' : data.rent_per_room ? 'A Room' : 'Rent'}:{' '}
+							{data?.is_searching
+								? 'Budget'
+								: data?.rent_per_room
+								? 'A Room'
+								: 'Rent'}
+							:{' '}
 						</span>
 					</div>
 					<figure className="mb-0 pl-1">
 						{' '}
 						<b style={{ fontSize: '17px' }} className="text-grey-600">
 							{Global.currency}
-							{window.formatedPrice.format(data.rent_per_room ? data.rent_per_room : data.budget)}{' '}
-							{data.payment_type && (
-								<small>/{data.payment_type.abbreviation}</small>
+							{window.formatedPrice.format(
+								data?.rent_per_room ? data?.rent_per_room : data?.budget
+							)}{' '}
+							{data?.payment_type && (
+								<small>/{data?.payment_type.abbreviation}</small>
 							)}
 						</b>
 					</figure>
@@ -227,7 +238,7 @@ export default function EachRequest({ data }) {
 
 //     const handleCallRequest = () => {
 //         notifyEmy({
-//             heading: `Called ${data.users_permissions_user.first_name} ${data.users_permissions_user.last_name}`,
+//             heading: `Called ${data?.users_permissions_user?.first_name} ${data?.users_permissions_user?.last_name}`,
 //             url: window.location.pathname,
 //             status: "success",
 //         });
@@ -235,7 +246,7 @@ export default function EachRequest({ data }) {
 
 //     const handleDelete = () => {
 //         setDeleteLoading(true);
-//         axios(process.env.REACT_APP_API_URL + `/property-requests/${data.id}`, {
+//         axios(process.env.REACT_APP_API_URL + `/property-requests/${data?.id}`, {
 //             method: "DELETE",
 //             headers: {
 //                 Authorization: `Bearer ${Cookies.get("token")}`,
@@ -243,10 +254,10 @@ export default function EachRequest({ data }) {
 //         })
 //             .then((res) => {
 //                 setDeleteLoading(false);
-//                 if (data.image_url) {
-//                     data.image_url.map((val, i) => {
+//                 if (data?.image_url) {
+//                     data?.image_url.map((val, i) => {
 //                         DeleteFirebaseImage(
-//                             `images/requests/${data.users_permissions_user.id}/${data.uuid}/image_${i}`,
+//                             `images/requests/${data?.users_permissions_user?.id}/${data?.uuid}/image_${i}`,
 //                         );
 //                     });
 //                 }
@@ -279,7 +290,7 @@ export default function EachRequest({ data }) {
 //                         <div className="d-flex">
 //                             <figure>
 //                                 <img
-//                                     src={data.users_permissions_user.avatar_url}
+//                                     src={data?.users_permissions_user?.avatar_url}
 //                                     alt=""
 //                                     width="40"
 //                                     loading="lazy"
@@ -292,8 +303,8 @@ export default function EachRequest({ data }) {
 //                                         <i className="ti-more-alt"></i>
 //                                         <ul>
 //                                             {user &&
-//                                             user.user.id ===
-//                                                 data.users_permissions_user
+//                                             user?.user?.id ===
+//                                                 data?.users_permissions_user
 //                                                     .id ? (
 //                                                 <li
 //                                                     onClick={() =>
@@ -309,86 +320,86 @@ export default function EachRequest({ data }) {
 //                                 </div>
 //                                 <ins className="">
 //                                     <Link
-//                                         to={`/user/${data.users_permissions_user.username}`}
+//                                         to={`/user/${data?.users_permissions_user?.username}`}
 //                                         title=""
 //                                         className="d-flex"
 //                                     >
-//                                         {data.users_permissions_user.first_name}{" "}
-//                                         {/* {data.users_permissions_user.last_name} */}
+//                                         {data?.users_permissions_user?.first_name}{" "}
+//                                         {/* {data?.users_permissions_user?.last_name} */}
 //                                         <VerifiedBadge
-//                                             user={data.users_permissions_user}
+//                                             user={data?.users_permissions_user}
 //                                             size={"15"}
 //                                             className="ml-2"
 //                                         />
 //                                     </Link>
 //                                 </ins>
 //                                 <small className="text-muted">
-//                                     @{data.users_permissions_user.username}
+//                                     @{data?.users_permissions_user?.username}
 //                                 </small>
 //                                 <span>
 //                                     <i className="fa fa-clock-o"></i>{" "}
-//                                     {moment(data.created_at).fromNow()}
+//                                     {moment(data?.created_at).fromNow()}
 //                                 </span>
 //                             </div>
 //                         </div>
 //                         <div className="post-meta">
 //                             <Link
-//                                 to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+//                                 to={`/request/${data?.uuid}/${data?.users_permissions_user?.id}`}
 //                             >
-//                                 <h6>{data.heading}</h6>
+//                                 <h6>{data?.heading}</h6>
 //                                 <div>
 //                                     <ul className="loc mt-2 d-flex pl-0 justify-content-between">
 //                                         <li>
 //                                             <i className="ti-location-pin"></i>{" "}
-//                                             {data.location}
+//                                             {data?.location}
 //                                         </li>
-//                                         {data.service ? (
+//                                         {data?.service ? (
 //                                             <li>
 //                                                 <Tag color="volcano">
-//                                                     {data.service.name}
+//                                                     {data?.service.name}
 //                                                 </Tag>
 //                                             </li>
 //                                         ) : null}
-//                                         {data.category ? (
+//                                         {data?.category ? (
 //                                             <li>
 //                                                 <Tag color="cyan">
-//                                                     {data.category.name.toUpperCase()}
+//                                                     {data?.category.name.toUpperCase()}
 //                                                 </Tag>
 //                                             </li>
 //                                         ) : null}
 //                                     </ul>
 //                                 </div>
 //                                 <div className="description">
-//                                     {data.body ? (
+//                                     {data?.body ? (
 //                                         <p>
-//                                             {data.body.length > 100 ? (
+//                                             {data?.body.length > 100 ? (
 //                                                 <>
-//                                                     {data.body.slice(0, 100)}...{" "}
+//                                                     {data?.body.slice(0, 100)}...{" "}
 //                                                     <b className="text-theme">
 //                                                         Read More
 //                                                     </b>
 //                                                 </>
 //                                             ) : (
-//                                                 data.body
+//                                                 data?.body
 //                                             )}
 //                                         </p>
 //                                     ) : null}
 //                                 </div>
 //                             </Link>
-//                             {data.image_url && data.image_url.length > 0 ? (
+//                             {data?.image_url && data?.image_url.length > 0 ? (
 //                                 <Link
-//                                     to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+//                                     to={`/request/${data?.uuid}/${data?.users_permissions_user?.id}`}
 //                                 >
 //                                     <figure>
 //                                         <div className="img-bunch">
-//                                             {data.image_url && (
+//                                             {data?.image_url && (
 //                                                 <div>
 //                                                     <div
 //                                                         className="card"
 //                                                         data-strip-group-options="loop: false"
 //                                                         data-strip-group="mygroup"
 //                                                         style={{
-//                                                             backgroundImage: `url(${data.image_url[0]})`,
+//                                                             backgroundImage: `url(${data?.image_url[0]})`,
 //                                                             height: "160px",
 //                                                             width: "100%",
 //                                                             backgroundSize:
@@ -427,14 +438,14 @@ export default function EachRequest({ data }) {
 //                                         <b>
 //                                             ₦
 //                                             {window.formatedPrice.format(
-//                                                 data.budget,
+//                                                 data?.budget,
 //                                             )}
 //                                         </b>
 //                                     </ins>
 //                                 </div>
 //                                 {user ? (
 //                                     <UserAction
-//                                         user={data.users_permissions_user}
+//                                         user={data?.users_permissions_user}
 //                                         alignment={'end'}
 //                                     />
 //                                 ) : (
