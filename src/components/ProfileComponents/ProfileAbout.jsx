@@ -93,7 +93,7 @@ export default function ProfileAbout({ user }) {
 						</h4>
 					</Link>
 
-					<Link
+					{/* <Link
 						className="card-body d-flex pt-0"
 						to={`/settings/deactivate-account`}
 					>
@@ -104,7 +104,7 @@ export default function ProfileAbout({ user }) {
 								Found a flat mate?
 							</span>
 						</h4>
-					</Link>
+					</Link> */}
 				</>
 			)}
 		</div>

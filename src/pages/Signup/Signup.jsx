@@ -8,6 +8,7 @@ import MetaTags from 'react-meta-tags'
 import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
 import loginImg from '../../assets/img/login-bg.png'
+import Global from '../../Global'
 
 export const Signup = (props) => {
 	const { register, handleSubmit } = useForm()
@@ -99,12 +100,18 @@ export const Signup = (props) => {
 							className="col-xl-5 d-none d-xl-block p-0 vh-100 bg-image-cover bg-no-repeat"
 							style={{ backgroundImage: `url(${loginImg})` }}
 						></div>
-						<div className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
+						<div
+							className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 "
+							style={{
+								paddingTop: Global.isMobile ? '60%' : '10%',
+								overflow: Global.isMobile ? 'scroll' : 'auto',
+								paddingBottom: '10vh',
+							}}
+						>
 							<div className="card shadow-none border-0 ms-auto me-auto login-card">
 								<div className="card-body rounded-0 text-left p-1">
 									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-5">
-										Create <br />
-										your account
+										Register
 									</h2>
 									<form onSubmit={handleSubmit(onSubmit)}>
 										{state.errorMessage ? (
