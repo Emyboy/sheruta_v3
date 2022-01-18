@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import MessageService from '../../services/MessageService'
 import Global from '../../Global'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-export default function EachConversation({ conv, onClick }) {
+function EachConversation({ conv, onClick }) {
 	const [otherUser, setOtherUser] = useState(null)
 	const { user } = useSelector((state) => state.auth)
 	const { messages } = useSelector((state) => state.view)
@@ -129,3 +129,6 @@ export default function EachConversation({ conv, onClick }) {
 	}
 
 }
+
+
+export default memo(EachConversation)

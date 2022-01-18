@@ -23,7 +23,7 @@ export default connect(mapStateToProps)(function EachRequest({
 
 	const handleDelete = () => {
 		setState({ ...state, loading: true })
-		axios(process.env.REACT_APP_API_URL + '/property-requests/' + data.id, {
+		axios(process.env.REACT_APP_API_URL + '/property-requests/' + data?.id, {
 			method: 'DELETE',
 			headers: {
 				Authorization: 'Bearer ' + auth.user.jwt,
@@ -80,7 +80,7 @@ export default connect(mapStateToProps)(function EachRequest({
 					} border-gray `}
 				>
 					<div className="comment-details pl-3">
-						{data.users_permissions_user ? (
+						{data?.users_permissions_user ? (
 							<div className="comment-meta d-flex">
 								<div
 									className="article_comments_thumb"
@@ -90,11 +90,11 @@ export default connect(mapStateToProps)(function EachRequest({
 										to={
 											standalone
 												? '#'
-												: `/user/${data.users_permissions_user.username}`
+												: `/user/${data?.users_permissions_user.username}`
 										}
 									>
 										<Avatar
-											src={data.users_permissions_user.avatar_url}
+											src={data?.users_permissions_user.avatar_url}
 											size={50}
 										/>
 									</Link>
@@ -104,45 +104,45 @@ export default connect(mapStateToProps)(function EachRequest({
 										to={
 											standalone
 												? '#'
-												: `/user/${data.users_permissions_user.username}`
+												: `/user/${data?.users_permissions_user.username}`
 										}
 									>
 										<h4
 											className="author-name mb-1"
 											style={{ fontSize: '20px' }}
 										>
-											{data.users_permissions_user.first_name}
+											{data?.users_permissions_user.first_name}
 										</h4>
 									</Link>
 									<div className="comment-date">
-										{moment(data.created_at).fromNow()}
+										{moment(data?.created_at).fromNow()}
 									</div>
 								</div>
 							</div>
 						) : null}
 						<div className="container">
 							<div className="mt-2 d-flex">
-								{data.category ? (
-									<Tag color="volcano">{data.category.name.toUpperCase()}</Tag>
+								{data?.category ? (
+									<Tag color="volcano">{data?.category.name.toUpperCase()}</Tag>
 								) : null}
-								{data.service ? (
-									<Tag color="cyan">{data.service.name.toUpperCase()}</Tag>
+								{data?.service ? (
+									<Tag color="cyan">{data?.service.name.toUpperCase()}</Tag>
 								) : null}
 							</div>
 						</div>
 						<div className="comment-text mt-1">
 							<p>
-								{data.body.length > 90
-									? data.body.slice(0, 90) + '...'
-									: data.body}
+								{data?.body?.length > 90
+									? data?.body.slice(0, 90) + '...'
+									: data?.body}
 							</p>
 						</div>
 						{!standalone && <hr className="mt-1 mb-1" />}
-						{data.users_permissions_user && !standalone ? (
+						{data?.users_permissions_user && !standalone ? (
 							<div className="d-flex justify-content-between">
 								<>
 									{auth.user &&
-									auth.user.user.id === data.users_permissions_user.id ? (
+									auth.user.user.id === data?.users_permissions_user.id ? (
 										<span>
 											<i
 												onClick={() =>
@@ -155,7 +155,7 @@ export default connect(mapStateToProps)(function EachRequest({
 											></i>
 										</span>
 									) : (
-										<a href={`tel:${data.users_permissions_user.phone_number}`}>
+										<a href={`tel:${data?.users_permissions_user.phone_number}`}>
 											{auth.user ? (
 												<span
 													className="badge badge-danger"
@@ -177,7 +177,7 @@ export default connect(mapStateToProps)(function EachRequest({
 								</>
 								{!standalone && (
 									<Link
-										to={`/request/${data.uuid}/${data.users_permissions_user.id}`}
+										to={`/request/${data?.uuid}/${data?.users_permissions_user.id}`}
 										className="text-theme"
 									>
 										View More Details

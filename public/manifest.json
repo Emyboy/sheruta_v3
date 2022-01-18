@@ -1,19 +1,19 @@
 {
   "short_name": "Sheruta",
-  "name": "Sheruta",
+  "name": "",
   "icons": [
     {
-      "src": "./logo_fill.svg",
+      "src": "./logos/logo_fill.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "./logo_fill.svg",
+      "src": "./logos/logo_fill.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./logo_fill.svg",
+      "src": "./logos/logo_fill.svg",
       "type": "image/png",
       "sizes": "512x512"
     }

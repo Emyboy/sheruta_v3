@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Tag } from 'antd'
@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import EachRequestOptions from './EachRequestOptions'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-export default function EachRequest({ data }) {
+function EachRequest({ data }) {
 	const user = data?.users_permissions_user
 	const deactivated = user?.deactivated
 	const auth = useSelector((state) => state.auth)
@@ -213,6 +213,8 @@ export default function EachRequest({ data }) {
 		</article>
 	)
 }
+
+export default memo(EachRequest)
 
 // import moment from "moment";
 // import React, { useState, useEffect } from "react";
