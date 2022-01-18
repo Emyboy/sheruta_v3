@@ -3,7 +3,7 @@
     "background_color": "#ffff",
     "display": "standalone",
     "scope": "/",
-    "start_url": ".",
+    "start_url": "/",
     "name": "Sheruta",
     "description": "Fastest growing P2P real estate platform",
     "short_name": "Sheruta",
