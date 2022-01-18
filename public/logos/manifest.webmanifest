@@ -3,28 +3,28 @@
     "background_color": "#ffff",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/",
+    "start_url": ".",
     "name": "Sheruta",
     "description": "Fastest growing P2P real estate platform",
     "short_name": "Sheruta",
     "icons": [
         {
-            "src": "/icon-192x192.png",
+            "src": "./logos/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/icon-256x256.png",
+            "src": "./logos/icon-256x256.png",
             "sizes": "256x256",
             "type": "image/png"
         },
         {
-            "src": "/icon-384x384.png",
+            "src": "./logos/icon-384x384.png",
             "sizes": "384x384",
             "type": "image/png"
         },
         {
-            "src": "/icon-512x512.png",
+            "src": "./logos/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
