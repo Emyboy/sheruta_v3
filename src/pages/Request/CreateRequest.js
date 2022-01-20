@@ -117,7 +117,7 @@ const CraeteRequest = (props) => {
 					dispatch(getUserFeedback)
 					localStorage.setItem('ph_request', JSON.stringify(newRequest))
 				}
-				setState({ ...state, loading: false })
+				setState({ ...state, loading: false , done: false })
 				notification.error({ message: 'Error creating request' })
 			})
 	}

@@ -42,42 +42,63 @@ const VerifyEmailProcess = ({ userData }) => {
     }
 
     return (
-        <Layout page='login'>
-            <div className="animate__animated animate__fadeIn modal-dialog container mt-5 mb-5 login-pop-form" role="document">
-                <div className="modal-content" id="sign-up-success">
-                    <div className="modal-body">
-                        {
-                            state.display === 'verify' ? <>
-                                <h4 className="modal-header-title" style={{ lineHeight: '46px' }}>Please Verify You Email</h4>
+			<Layout page="login">
+				<div
+					className="animate__animated animate__fadeIn modal-dialog container mt-5 mb-5 login-pop-form"
+					role="document"
+				>
+					<div
+						className="modal-content"
+						id="sign-up-success"
+						style={{ marginTop: '30vh' }}
+					>
+						<div className="modal-body text-center">
+							{state.display === 'verify' ? (
+								<>
+									<h4
+										className="modal-header-title fw-700"
+										style={{ lineHeight: '46px' }}
+									>
+										Please Verify You Email
+									</h4>
 
-                                <div className='text-center'>
-                                    <i className='fa fa-times text-center mb-2' style={{ fontSize: '100px' }}></i>
-                                </div>
-                                <h5>Didn't get an email?</h5>
-                                <Btn
-                                    text='Resend Verification Email'
-                                    className='full-width mt-2'
-                                    onClick={verificationRequest}
-                                    loading={state.loading}
-                                />
-                            </> : null
-                        }
-                        {
-                            state.display === 'sent' ? <>
-                                <h4 className="modal-header-title" style={{ lineHeight: '46px' }}>Email Has Been Sent</h4>
-                                <p className="text-center">
-                                    {userData.user.email}
-                                </p>
-                                <div className='text-center'>
-                                    <i className='fa fa-check text-center mb-2' style={{ fontSize: '100px' }}></i>
-                                </div>
-                            </> : null
-                        }
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    )
+									<div className="text-center">
+										<i
+											className="fa fa-times text-center mb-2"
+											style={{ fontSize: '100px' }}
+										></i>
+									</div>
+									<h5>Didn't get an email?</h5>
+									<Btn
+										text="Resend Verification Email"
+										className="full-width mt-2"
+										onClick={verificationRequest}
+										loading={state.loading}
+									/>
+								</>
+							) : null}
+							{state.display === 'sent' ? (
+								<>
+									<h4
+										className="modal-header-title"
+										style={{ lineHeight: '46px' }}
+									>
+										Email Has Been Sent
+									</h4>
+									<p className="text-center">{userData.user.email}</p>
+									<div className="text-center">
+										<i
+											className="fa fa-check text-center mb-2"
+											style={{ fontSize: '100px' }}
+										></i>
+									</div>
+								</>
+							) : null}
+						</div>
+					</div>
+				</div>
+			</Layout>
+		)
 }
 
 const mapStateToProps = (state) => ({
