@@ -98,12 +98,12 @@ const MasterPopup = (props) => {
 	}, [user])
 
 	useInterval(() => {
-		if(user){
+		if (user) {
 			getMessageStuffs()
-			dispatch(setUserOnline())
 			dispatch(getUser())
+			dispatch(setUserOnline())
 		}
-	}, 200000)
+	}, 120000)
 
 	if (user) {
 		return (
