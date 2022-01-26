@@ -55,12 +55,12 @@ const VerifyEmailProcess = ({ userData }) => {
 						<div className="modal-body text-center">
 							{state.display === 'verify' ? (
 								<>
-									<h4
+									<h2
 										className="modal-header-title fw-700"
 										style={{ lineHeight: '46px' }}
 									>
 										Please Verify You Email
-									</h4>
+									</h2>
 
 									<div className="text-center">
 										<i
@@ -71,7 +71,7 @@ const VerifyEmailProcess = ({ userData }) => {
 									<h5>Didn't get an email?</h5>
 									<Btn
 										text="Resend Verification Email"
-										className="full-width mt-2"
+										className="full-width mt-4 mb-4"
 										onClick={verificationRequest}
 										loading={state.loading}
 									/>

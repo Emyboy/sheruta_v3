@@ -9,6 +9,7 @@ import {
 } from '.';
 import { storage } from '../../Firebase';
 import $ from 'jquery'
+import Cookies from 'js-cookie';
 
 export const getAllAgents = () => dispatch => {
     dispatch({ type: AGENT_LOADING, payload: true });
@@ -52,7 +53,7 @@ export const addNewProperty = data => dispatch => {
                         method: 'POST',
                         data: { ...data, uuid: id, image_urls },
                         headers: { 
-                            authorization: localStorage.getItem('token')
+                            authorization: Cookies.get('token')
                         }
                     })
                         .then(res => {

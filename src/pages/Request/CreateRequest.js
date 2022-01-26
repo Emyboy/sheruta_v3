@@ -84,6 +84,7 @@ const CraeteRequest = (props) => {
 			is_searching: view.personal_info.looking_for,
 			image_url,
 			state: parseInt(data.state),
+			country: process.env.REACT_APP_COUNTRY_ID,
 		}
 
 		axios(process.env.REACT_APP_API_URL + '/property-requests', {

@@ -80,7 +80,7 @@ const VerifyEmail = (props) => {
 								<>
 									<div className="text-center">
 										<i
-											className="fa fa-check text-success mb-2"
+											className="ti ti-check text-success mb-2"
 											style={{ fontSize: '100px' }}
 										></i>
 									</div>

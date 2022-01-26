@@ -71,10 +71,10 @@ export const Profile2 = (props) => {
 							type: AnalyticsTypes.profileView,
 							user_id: res.data[0].id,
 						})
-						notifyEmy({
-							heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
-							log: res.data[0],
-						})
+						// notifyEmy({
+						// 	heading: `Visited ${user.first_name} ${user.last_name}'s Profile'`,
+						// 	log: res.data[0],
+						// })
 					} else {
 						setNotFound(true)
 					}

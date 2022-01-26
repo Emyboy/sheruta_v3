@@ -21,9 +21,9 @@ export default function EachPaddyCard({ data }) {
 				<div className="bg-greylight me-3 p-3 border-light-md rounded-xxl theme-dark-bg">
 					<h4 className="fw-700 font-lg ls-3 text-grey-900 mb-0">
 						<span className="ls-3 d-block font-xsss text-grey-500 fw-500">
-							FEB
+							#
 						</span>
-						22
+						{data?.id}
 					</h4>
 				</div>
 				<h2 className="fw-700 lh-3 font-xss">
@@ -34,7 +34,7 @@ export default function EachPaddyCard({ data }) {
 						{data?.user_preferred_locations.map(
 							(val,i) =>
 								renderLocations(val.location) +
-								`${i !== data?.user_preferred_locations.length - 1 && ' & '}`
+								`${i !== data?.user_preferred_locations.length - 1 ? " & ": ''}`
 						)}{' '}
 					</span>
 				</h2>

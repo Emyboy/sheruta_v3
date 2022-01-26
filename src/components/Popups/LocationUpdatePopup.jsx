@@ -57,7 +57,7 @@ export default function LocationUpdatePopup() {
 			if (user && !user.user.geo_location) {
 				setShow(true)
 			}
-		}, 15000)
+		}, 35000)
 	}, [])
 
 	return (

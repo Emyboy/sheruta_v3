@@ -55,8 +55,8 @@ export default function GetMoreInfoPopup() {
 						<p>These information are required moving forward</p>
 					</div>
 					<form onSubmit={handleSubmit}>
-						<div className="row">
-							{!user.phone_number && (
+						<div className="row justify-content-center">
+							{!user?.user.phone_number && (
 								<div className="col-lg-6 mb-3">
 									<div className="form-group">
 										<label className="mont-font fw-600 font-xsss">
@@ -83,13 +83,14 @@ export default function GetMoreInfoPopup() {
 												  } ${window.formatedPrice.format(budget)}`
 												: `Room Cost ${
 														Global.currency
-												  } ${window.formatedPrice.format(budget)}`}
+												  } ${window.formatedPrice.format(budget || 0)}`}
 										</label>
 										<input
 											required
 											name="budget"
 											type="number"
 											className="form-control"
+											placeholder='Ex. 250000'
 											onChange={(e) => setBudget(e.target.value)}
 										/>
 									</div>

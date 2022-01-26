@@ -21,7 +21,7 @@ import {
 } from '../../redux/strapi_actions/alice.actions'
 import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
-import { setUserOnline } from '../../redux/strapi_actions/auth.actions'
+import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 import Global from '../../Global'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
@@ -66,6 +66,10 @@ const MasterPopup = (props) => {
 	}
 
 	useEffect(() => {
+		if(localStorage.getItem('token')){
+			localStorage.removeItem('token')
+			dispatch(logout())
+		}
 		getForViews()
 		if (user) {
 			dispatch(setUserOnline())
@@ -99,7 +103,7 @@ const MasterPopup = (props) => {
 	useInterval(() => {
 		if (user) {
 			dispatch(setUserOnline())
-			getMessageStuffs()
+			// getMessageStuffs()
 		}
 	}, 200000)
 

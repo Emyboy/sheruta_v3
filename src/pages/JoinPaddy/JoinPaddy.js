@@ -25,7 +25,7 @@ export default function JoinPaddy() {
 
 	return (
 		<Layout>
-			<div>
+			<div className='container-fluid'>
 				<div className="col-md-4 col-sm-2">
 					<Link to={`/join-paddy/create`}>
 						<div

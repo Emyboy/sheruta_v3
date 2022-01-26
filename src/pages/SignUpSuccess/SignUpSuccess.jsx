@@ -57,24 +57,16 @@ const SignUpSuccess = () => {
             <div
                 className="animate__animated animate__fadeIn modal-dialog modal-dialog-centered login-pop-form"
                 role="document"
+                style={{ marginTop: '15vh'}}
             >
                 <div className="modal-content" id="sign-up-success">
-                    <Link to="/">
-                        <span
-                            className="mod-close"
-                            data-dismiss="modal"
-                            aria-hidden="true"
-                        >
-                            <i className="ti-close"></i>
-                        </span>
-                    </Link>
-                    <div className="modal-body">
-                        <h4
-                            className="modal-header-title mt-5"
+                    <div className="modal-body text-center">
+                        <h1
+                            className="modal-header-title mt-4 mb-3 fw-700"
                             style={{ lineHeight: "40px" }}
                         >
                             Activate Account
-                        </h4>
+                        </h1>
                         <p className="text-center">
                             Your account has been created. An activation link
                             has been sent to your registration email. Use the
@@ -86,7 +78,7 @@ const SignUpSuccess = () => {
                                 className="fa fa-envelope"
                                 style={{ fontSize: "100px" }}
                             ></i>
-                            <p>{sessionStorage.getItem("mail")}</p>
+                            <p className="fw-700">{sessionStorage.getItem("mail")}</p>
                         </div>
                         {state.showResend ? (
                             <div className="text-center">
@@ -99,7 +91,7 @@ const SignUpSuccess = () => {
                                 />
                                 <h6>OR</h6>
                                 <p className="mt-5">
-                                    <Link to="/login" className="link">
+                                    <Link to="/login" className="link text-success">
                                         Go For Log In
                                     </Link>
                                 </p>
