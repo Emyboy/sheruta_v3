@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Heading from '../../components/Heading/Heading'
 import Layout from '../../components/Layout/Layout'
 import JoinPaddyService from '../../services/JoinPaddyService'
-import EachPaddyCard from './components/EachPaddyCard'
+import EachPaddyCard from './components/EachPaddyCard';
+import { Redirect } from 'react-router-dom'
 
 export default function JoinPaddy() {
+	const { user } = useSelector(state => state.auth);
 	const [list, setList] = useState([])
 
 	const getAllJoinPaddy = useCallback(async () => {
@@ -21,7 +24,11 @@ export default function JoinPaddy() {
 
 	useEffect(() => {
 		getAllJoinPaddy()
-	}, [getAllJoinPaddy])
+	}, [getAllJoinPaddy]);
+
+	if(!user){
+		return <Redirect to='/login' />
+	}
 
 	return (
 		<Layout>

@@ -61,10 +61,9 @@ const Login = (props) => {
 						status: 'success',
 						log: res.data.user,
 					})
-					Cookies.set('token', res.data.jwt, { expires: 5 })
+					Cookies.set('token', res.data.jwt, { expires: 7 })
 					setState({ ...state, loading: false })
 					notification.success({ message: 'Welcome' })
-					localStorage.setItem('token', res.data.jwt)
 					props.setAuthState({
 						user: res.data,
 					})

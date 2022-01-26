@@ -17,19 +17,22 @@ export default class UserService {
 	}
 
 	static async updateProfile(update) {
-		const data = await axios(
-			process.env.REACT_APP_API_URL +
-				`/users-permissions/auth/local/edit/${
-					store.getState().auth.user.user.id
-				}`,
-			{
-				headers: {
-					authorization: `Bearer ${Cookies.get('token')}`,
-				},
-				method: 'POST',
-				data: update,
-			}
-		)
-		return data
+		const token = Cookies.get("token");
+		if(token){
+			const data = await axios(
+				process.env.REACT_APP_API_URL +
+					`/users-permissions/auth/local/edit/${
+						store.getState().auth.user.user.id
+					}`,
+				{
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+					method: 'POST',
+					data: update,
+				}
+			)
+			return data
+		}
 	}
 }

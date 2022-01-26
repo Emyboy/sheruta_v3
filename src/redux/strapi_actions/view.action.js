@@ -191,16 +191,18 @@ export const getAllNotifications = () => async (dispatch) => {
 }
 
 export const getUnreadMessageCount = () => async (dispatch) => {
-	try {
-		const msg = await MessageService.getUnreadMessages()
-		dispatch({
-			type: 'SET_VIEW_STATE',
-			payload: {
-				messages: msg.data,
-			},
-		})
-	} catch (error) {
-		return Promise.reject(error)
+	if(Cookies.get('token')){
+		try {
+			const msg = await MessageService.getUnreadMessages()
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					messages: msg.data,
+				},
+			})
+		} catch (error) {
+			return Promise.reject(error)
+		}
 	}
 }
 

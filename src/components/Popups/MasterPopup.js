@@ -19,6 +19,9 @@ import {
 	getAllMySuggestion,
 	suggestThemForMe,
 } from '../../redux/strapi_actions/alice.actions'
+import {
+	getUser
+} from '../../redux/strapi_actions/auth.actions'
 import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
 import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
@@ -28,11 +31,19 @@ import { getAllRecentProperties } from '../../redux/strapi_actions/properties.ac
 import LocationUpdatePopup from './LocationUpdatePopup'
 import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
+import Cookies from 'js-cookie'
 
 const MasterPopup = (props) => {
+	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
 	const { services, categories } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (!Cookies.get('token')) {
+			dispatch(logout())
+		}
+	}, [])
 
 	const getForViews = () => {
 		if (services.length === 0 && categories.length === 0) {
@@ -54,56 +65,43 @@ const MasterPopup = (props) => {
 	}
 
 	const getForUser = () => {
-		if (user && !user?.user?.deactivated) {
+		if (user && !user?.user?.deactivated && token) {
 			dispatch(getAllNotifications())
 			dispatch(getAllMySuggestion())
 			dispatch(suggestThemForMe())
 
 			dispatch(getAllSuggestionsByStatus('accepted'))
 			dispatch(getUserPaymentPlan())
-			UserService.updateProfile({ last_seen: new Date() })
 		}
 	}
 
 	useEffect(() => {
-		if(localStorage.getItem('token')){
+		const _token = Cookies.get('token')
+		if (localStorage.getItem('token')) {
 			localStorage.removeItem('token')
 			dispatch(logout())
 		}
+
 		getForViews()
-		if (user) {
+		if (user && _token) {
 			dispatch(setUserOnline())
 			dispatch(getUserPaymentPlan())
 			getMessageStuffs()
+			getForUser()
 		}
 	}, [])
 
 	useEffect(() => {
-		setInterval(() => {
-			getForViews()
-		}, 20000)
-	}, [services, categories])
-
-	useEffect(() => {
-		if (user) {
-			getForUser()
-		} else {
-			getForViews()
+		if(user){
+			dispatch(getUserPaymentPlan())
 		}
 	}, [user])
 
-	// useInterval(() => {
-	// 	if (user) {
-	// 		// dispatch(getAllMySuggestion())
-	// 		// dispatch(suggestThemForMe())
-	// 		// dispatch(getAllNotifications())
-	// 		// dispatch(getUnreadMessageCount())
-	// 	}
-	// }, 60000)
 	useInterval(() => {
-		if (user) {
+		if(user){
+			getMessageStuffs()
 			dispatch(setUserOnline())
-			// getMessageStuffs()
+			dispatch(getUser())
 		}
 	}, 200000)
 
