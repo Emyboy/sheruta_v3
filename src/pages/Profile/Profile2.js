@@ -135,7 +135,7 @@ export const Profile2 = (props) => {
 						/>
 					</MetaTags>
 					{userData && <ProfileJumb user={userData} />}
-					{userData && (
+					{userData && Global.isMobile && (
 						<div
 							className="fixed-bottom text-center"
 							style={{

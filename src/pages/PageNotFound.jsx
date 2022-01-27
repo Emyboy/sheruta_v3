@@ -14,9 +14,9 @@ import Layout from '../components/Layout/Layout'
                             <div className="text-center">
 
                                 <img src={image} className="img-fluid" alt="" />
-                                <h3>Page Not Found </h3>
+                                <h2 className='fw-700'>Page Not Found </h2>
                                 <p><span className="font-weight-bold">Oops!</span> The page you are looking for does not exist</p>
-                                <Link className="btn btn-theme" to="/">Back To Home</Link>
+                                <Link className="btn text-theme mb-4 mt-3 fw-700" to="/">Back To Home</Link>
 
                             </div>
                         </div>

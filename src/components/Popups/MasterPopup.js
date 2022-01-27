@@ -78,8 +78,10 @@ const MasterPopup = (props) => {
 	useEffect(() => {
 		const _token = Cookies.get('token')
 		if (localStorage.getItem('token')) {
-			localStorage.removeItem('token')
+			localStorage.clear()
+			sessionStorage.clear()
 			dispatch(logout())
+			window.location.reload()
 		}
 
 		getForViews()

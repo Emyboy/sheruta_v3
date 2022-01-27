@@ -20,4 +20,11 @@ export default class JoinPaddyService {
 		)
 		return res
 	}
+
+	static async getJoinPaddyByUid(uuid) {
+		const res = axios(
+			API_URL + `/join-paddies/?uuid=${uuid}`
+		)
+		return res
+	}
 }

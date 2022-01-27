@@ -32,6 +32,7 @@ import SocialHomePage from '../components/Social/SocialHomePage/SocialHomePage'
 import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
+import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
 // import Settings from '../pages/Settings/Settings'
 // import Properties from '../pages/Properties/Properties'
 
@@ -104,6 +105,7 @@ function App() {
 							<Route exact path="/services" component={Services} />
 							<Route exact path="/join-paddy" component={JoinPaddy} />
 							<Route exact path="/join-paddy/create" component={CreateJoinPaddy} />
+							<Route exact path="/join-paddy/:uuid" component={JoinPaddyDetails} />
 							<Route exact path="/services/:service" component={Services} />
 							<Route exact path="/messages" component={Messages} />
 							<Route exact path="/settings" component={Settings} />

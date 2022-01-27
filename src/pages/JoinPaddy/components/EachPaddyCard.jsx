@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function EachPaddyCard({ data }) {
 	console.log(data)
@@ -26,18 +27,22 @@ export default function EachPaddyCard({ data }) {
 						{data?.id}
 					</h4>
 				</div>
-				<h2 className="fw-700 lh-3 font-xss">
-					{data?.owner?.first_name.split(' ')[0]}'s group
-					<span className="d-flex font-xssss fw-500 mt-2 lh-3 text-grey-500">
-						{' '}
-						<i className="ti-location-pin me-1"></i>{' '}
-						{data?.user_preferred_locations.map(
-							(val,i) =>
-								renderLocations(val.location) +
-								`${i !== data?.user_preferred_locations.length - 1 ? " & ": ''}`
-						)}{' '}
-					</span>
-				</h2>
+				<Link to={`/join-paddy/${data?.uuid}`}>
+					<h2 className="fw-700 lh-3 font-xss">
+						{data?.owner?.first_name.split(' ')[0]}'s group
+						<span className="d-flex font-xssss fw-500 mt-2 lh-3 text-grey-500">
+							{' '}
+							<i className="ti-location-pin me-1"></i>{' '}
+							{data?.user_preferred_locations.map(
+								(val, i) =>
+									renderLocations(val.location) +
+									`${
+										i !== data?.user_preferred_locations.length - 1 ? ' & ' : ''
+									}`
+							)}{' '}
+						</span>
+					</h2>
+				</Link>
 			</div>
 			<div className="card-body p-0">
 				<ul className="memberlist mt-4 mb-2 ms-0 d-inline-block">

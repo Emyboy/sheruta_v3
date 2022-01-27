@@ -3,6 +3,8 @@ import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
 import { IoPricetagsOutline } from 'react-icons/io5'
 import { RiUserSearchLine } from 'react-icons/ri'
+import { BsHash } from 'react-icons/bs'
+import { BiHelpCircle } from 'react-icons/bi'
 import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -16,10 +18,7 @@ export default function SideNav({ show }) {
 	return (
 		<nav className={`pb-5 navigation scroll-bar ${show && 'nav-active'}`}>
 			<div className="container ps-0 pe-0">
-				<div
-					className="nav-content mb-5"
-					style={{ overflowY: 'auto', height: '100vh' }}
-				>
+				<div className="nav-content mb-5" style={{ height: '100vh' }}>
 					<div className="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
 						<div className="nav-caption fw-600 font-xssss text-grey-500">
 							<span>Get </span>Started
@@ -87,6 +86,26 @@ export default function SideNav({ show }) {
 							<span>More </span>Pages
 						</div>
 						<ul className="mb-3">
+							{process.env.NODE_ENV === 'development' && (
+								<>
+									<li>
+										<Link to={`/trends`} className="nav-content-bttn open-font">
+											<i className="font-xl text-current me-3">
+												<BsHash />
+											</i>
+											<span>Trends</span>
+										</Link>
+									</li>
+									<li>
+										<Link to={`/help`} className="nav-content-bttn open-font">
+											<i className="font-xl text-current me-3">
+												<BiHelpCircle />
+											</i>
+											<span>Help</span>
+										</Link>
+									</li>
+								</>
+							)}
 							<li>
 								<Link
 									to={`/how-it-works`}
