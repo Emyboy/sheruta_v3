@@ -3,13 +3,13 @@ import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/Layout/Layout'
-import AgentService from '../../services/AgentService';
+import AgentService from '../../services/AgentService'
 import { Redirect } from 'react-router-dom'
 
 export default function AgentPending() {
-	const { user } = useSelector((state) => state.auth);
+	const { user } = useSelector((state) => state.auth)
 
-	const sendRequest = useCallback(async() => {
+	const sendRequest = useCallback(async () => {
 		try {
 			const res = await AgentService.sendPendingRequest(user?.user)
 			if (res.data) {
@@ -20,14 +20,14 @@ export default function AgentPending() {
 			notification.error({ message: 'Error sending request' })
 			return Promise.reject(error)
 		}
-	})
+	}, [])
 
 	useEffect(() => {
 		sendRequest()
 	}, [sendRequest])
 
-	if(!user){
-		return <Redirect to='/' />
+	if (!user) {
+		return <Redirect to="/" />
 	}
 
 	return (
@@ -59,6 +59,11 @@ export default function AgentPending() {
 									<li>4. Office address</li>
 									<li>5. Valid ID card.</li>
 								</ul>
+								<div className="alert alert-info mt-4">
+									<h4 className="fw-bold">
+										Call us if you don't hear from us in 2 business days
+									</h4>
+								</div>
 							</div>
 							<div className="text-center mb-4 mt-3">
 								<Link to="/services">

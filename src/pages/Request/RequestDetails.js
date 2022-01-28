@@ -324,7 +324,7 @@ export default function RequestDetails(props) {
 												</div>
 											</div>
 										</div>
-										{request.bedrooms && request.bathrooms ? (
+										{request.bedrooms || request.bathrooms ? (
 											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
 												<div className="block-header">
 													<h4 className="block-title">

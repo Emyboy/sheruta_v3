@@ -36,7 +36,7 @@ import Cookies from 'js-cookie'
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
-	const { services, categories } = useSelector((state) => state.view)
+	const { services, categories, personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -106,6 +106,12 @@ const MasterPopup = (props) => {
 			dispatch(setUserOnline())
 		}
 	}, 120000)
+
+	useEffect(() => {
+		if(personal_info && personal_info?.nin){
+			Cookies.set('has_nin',true)
+		}
+	}, [personal_info])
 
 	if (user) {
 		return (
