@@ -6,6 +6,7 @@ export default class AgentService {
 	static async sendPendingRequest(userData) {
 		const res = await axios(API_URL + '/agents/request/pending', {
 			method: 'POST',
+			data: userData,
 			headers: {
 				authorization: `Bearer ${Cookies.get('token')}`,
 			},

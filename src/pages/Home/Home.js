@@ -15,7 +15,8 @@ import Global from '../../Global'
 import { Link } from 'react-router-dom'
 import WhatPeopleSay from './WhatPeopleSay'
 import HomePageRequests from './HomePageRequests/HomePageRequests';
-import { MetaTags } from 'react-meta-tags'
+import { MetaTags } from 'react-meta-tags';
+import home_bg from './home_bg.png';
 
 const Wrapper = styled.div`
 	.jumbotron {
@@ -30,9 +31,10 @@ const Wrapper = styled.div`
 			margin-top: 5vh;
 			padding-top: 30vh;
 			height: ${Global.isMobile ? '90vh' : '100vh'};
-			background-image: url('https://www.pngkit.com/png/full/11-114242_technology-pattern-png-png-freeuse-vancouver.png');
-			background-position: 36vw;
+			background-image: url(${home_bg});
+			background-position: -8vw;
 			background-repeat: no-repeat;
+			background-size: cover;
 			img {
 				display: none;
 			}
