@@ -53,13 +53,13 @@ export default () => {
 											</Link>
 										</li>
 										<li>
-											<Link className="text-muted" to="/contact">
-												Contact Us
+											<Link className="text-muted" to="/about">
+												About Us
 											</Link>
 										</li>
 										<li>
-											<Link className="text-muted" to="/about">
-												About Us
+											<Link className="text-muted" to="/agents">
+												Partner With Us
 											</Link>
 										</li>
 									</ul>

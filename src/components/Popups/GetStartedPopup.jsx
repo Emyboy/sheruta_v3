@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import Btn from "../Btn/Btn";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const GetStartedPopup = (props) => {
   const { view, auth } = props;
@@ -29,7 +30,7 @@ const GetStartedPopup = (props) => {
     setShow(false);
   }
 
-  if (sessionStorage.getItem("get_started_pause")){
+  if (sessionStorage.getItem("get_started_pause") || Cookies.get('ag')){
     return null;
   }
       return (

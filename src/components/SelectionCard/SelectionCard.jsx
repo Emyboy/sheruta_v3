@@ -48,7 +48,7 @@ export default ({
                         src={'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/green-checkmark.png'}
                     /> : null
                 } */}
-				<h6 style={{ fontSize: '25px', lineHeight: '30px' }}>{heading}</h6>
+				<h6 className='fw-700' style={{ fontSize: '25px', lineHeight: '30px' }}>{heading}</h6>
 				{subHeading ? <p className="m-0">{subHeading}</p> : null}
 			</div>
 		</div>

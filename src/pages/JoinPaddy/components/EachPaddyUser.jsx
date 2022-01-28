@@ -5,7 +5,7 @@ import ProfileJumb from '../../../components/ProfileComponents/ProfileJumb'
 import VerifiedBadge from '../../../components/VerifiedBadge/VerifiedBadge'
 
 export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
-	const [showProfile, setShowProfile] = useState(false);
+	const [showProfile, setShowProfile] = useState(false)
 
 	return (
 		<div
@@ -39,7 +39,7 @@ export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
 				onClick={() => setShowProfile(true)}
 			>
 				<div className="d-flex">
-					{user.first_name}
+					{user.first_name.split(' ')[0]}
 					<VerifiedBadge user={user} size={10} className={'ml-1'} />
 				</div>
 				{/* <span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-700">
@@ -51,17 +51,18 @@ export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
 			</h4>
 			<a
 				onClick={() => {
-					if(selected){
-						unSelect(user);
-					}else {
+					if (selected) {
+						unSelect(user)
+					} else {
 						onSelect(user)
 					}
 				}}
-				href="#add"
-				className={`btn-round-sm ${
+				style={{ width: '35px', height: '35px' }}
+				// href="#add"
+				className={`btn-round-sm fw-bold ${
 					selected
 						? 'bg-danger text-white ti-close'
-						: 'bg-white text-grey-900 feather-plus'
+						: 'bg-white text-grey-900 feather-plus shadow-sm'
 				}   font-xss ms-auto mt-2`}
 			></a>
 		</div>

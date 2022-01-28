@@ -11,7 +11,7 @@ import Layout from '../components/Layout/Layout'
                     <div className="row justify-content-center">
 
                         <div className="col-lg-6 col-md-10">
-                            <div className="text-center">
+                            <div className="text-center pt-5">
 
                                 <img src={image} className="img-fluid" alt="" />
                                 <h2 className='fw-700'>Page Not Found </h2>

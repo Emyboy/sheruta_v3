@@ -33,6 +33,8 @@ import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
+import Agent from '../pages/Agent/Agent'
+import AgentPending from '../pages/Agent/AgentPending'
 // import Settings from '../pages/Settings/Settings'
 // import Properties from '../pages/Properties/Properties'
 
@@ -97,6 +99,8 @@ function App() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
+							<Route exact path="/agents" component={Agent} />
+							<Route exact path="/agents/pending" component={AgentPending} />
 							<Route exact path="/properties" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
