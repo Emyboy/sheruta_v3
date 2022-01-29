@@ -67,9 +67,9 @@ const ConfigViewPopup = (props) => {
       });
   };
 
-  if(Cookies.get('has_nin')){
-    return null
-  }
+  if (Cookies.get('has_nin') || view.personal_info) {
+		return null
+	}
 
   return (
 		<Modal show={view.configureView} size="lg">

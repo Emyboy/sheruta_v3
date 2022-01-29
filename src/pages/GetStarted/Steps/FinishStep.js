@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
 import Alice from "../../../services/Alice";
 import { notifyEmy } from "../../../services/Sheruta";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../../redux/strapi_actions/auth.actions";
 
 const FinishStep = (props) => {
   const { user } = props.auth;
+  const dispatch = useDispatch()
   useEffect(() => {
     notifyEmy({
       heading: `${user.user.first_name} Finished updating personal info`,
@@ -31,6 +34,7 @@ const FinishStep = (props) => {
     axios(process.env.REACT_APP_API_URL + `/sheruta/verify-request/${user.user.id}`, { method: 'POST' })
       .then(res => {
         // console.log('VERIFY --', res)
+        dispatch(getUser())
       })
       .catch(err => {
         // console.log('VEIRFY ---', err)

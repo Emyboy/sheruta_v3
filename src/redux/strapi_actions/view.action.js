@@ -235,7 +235,7 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 	})
 	try {
 		const res = await PaymentService.getUserSubscription()
-		if (res.data.length === 0) {
+		if (res?.data?.length === 0) {
 			store.dispatch({
 				type: 'SET_VIEW_STATE',
 				payload: {

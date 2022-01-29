@@ -97,7 +97,7 @@ export default function MatchList() {
                         >
                             {user_suggestions.map((val, i) => {
                                 return (
-                                    <Carousel.Item key={i}>
+                                    <Carousel.Item key={`items-${i}`}>
                                         <EachMatchCard
                                             data={val}
                                             handleStatusUpdate={
