@@ -32,7 +32,6 @@ export const getAllAmenities = () => (dispatch) => {
 		})
 		.catch((err) => {
 			return Promise.reject(err)
-			console.log('ERROR GETTING')
 			// notification.error({ message: 'Error fetching services' })
 		})
 }

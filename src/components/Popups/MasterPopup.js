@@ -68,7 +68,7 @@ const MasterPopup = (props) => {
 		if (user && !user?.user?.deactivated && token) {
 			dispatch(getAllNotifications())
 			dispatch(getAllMySuggestion())
-			dispatch(suggestThemForMe())
+			dispatch(suggestThemForMe(user?.user?.id))
 
 			dispatch(getAllSuggestionsByStatus('accepted'))
 			dispatch(getUserPaymentPlan())

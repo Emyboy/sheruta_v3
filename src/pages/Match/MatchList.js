@@ -28,7 +28,7 @@ export default function MatchList() {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        Alice.suggestThemForMe();
+        Alice.suggestThemForMe(user?.user?.id);
         dispatch(getAllMySuggestion());
     }, []);
 

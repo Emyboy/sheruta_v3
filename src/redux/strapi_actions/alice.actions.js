@@ -27,9 +27,9 @@ export const getAllSuggestionsByStatus = (status) => async (dispatch) => {
     }
 };
 
-export const suggestThemForMe = () => async (dispatch) => {
+export const suggestThemForMe = (user_id) => async (dispatch) => {
     try {
-        const all = await Alice.suggestThemForMe();
+        const all = await Alice.suggestThemForMe(user_id)
         dispatch({
             type: "SET_USER_STATE",
             payload: {
