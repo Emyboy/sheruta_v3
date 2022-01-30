@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import Global from "../Global";
 import store from "../redux/store/store";
 
 export const notificationTypes = {
@@ -21,7 +22,11 @@ const NotificationService = {
         payment_plan,
     }) => {
         const { user } = store.getState().auth;
+        
         if (user && owner === user.user.id) {
+            return;
+        }
+        if (user && user?.user?.id == Global.ADMIN_ID) {
             return;
         }
         if(user && user?.user?.deactivated){

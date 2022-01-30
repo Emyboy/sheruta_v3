@@ -107,6 +107,11 @@ const MasterPopup = (props) => {
 		}
 	}, 120000)
 
+	// FOR THINGS THAT COME IN FREQUENTLY
+	useInterval(() => {
+		getForUser()
+	},[60000])
+
 	useEffect(() => {
 		if(personal_info && personal_info?.nin){
 			Cookies.set('has_nin',true)

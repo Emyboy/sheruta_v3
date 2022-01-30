@@ -2,10 +2,12 @@ import React from 'react'
 import { IoMail, IoCallSharp } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Global from '../../Global'
 import store from '../../redux/store/store'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import NotificationService from '../../services/Notifications'
 import { notifyEmy } from '../../services/Sheruta'
+
 
 export default function UserAction({ user, disable, alignment, className }) {
 	const auth = useSelector((state) => state.auth)
@@ -17,6 +19,10 @@ export default function UserAction({ user, disable, alignment, className }) {
 	}
 
 	const handleButtonClicks = (action) => {
+		if(user?.id == Global.ADMIN_ID){
+			recordCallAnalytics(AnalyticsTypes.calls)
+			return
+		}
 		if (!payment_plan) {
 			store.dispatch({
 				type: 'SET_VIEW_STATE',
@@ -24,7 +30,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 					showPaymentPopup: true,
 				},
 			})
-			recordCallAnalytics(AnalyticsTypes.declinedCalls);
+			recordCallAnalytics(AnalyticsTypes.declinedCalls)
 			notifyEmy({
 				heading: ` ${action} ${user?.first_name} ${user?.last_name} but hasn't paid ( Blocked )`,
 			})
@@ -34,7 +40,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 				type: `${action === 'message' ? 'message_attempt' : 'call_attempt'}`,
 			})
 		} else {
-			recordCallAnalytics(AnalyticsTypes.calls);
+			recordCallAnalytics(AnalyticsTypes.calls)
 			notifyEmy({
 				heading: ` ${action} ${user?.first_name} ${user?.last_name}`,
 			})
@@ -50,7 +56,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 			{auth.user && auth.user?.user?.id === user?.id ? null : (
 				<div className={`d-flex justify-content-${alignment || 'center'} ${className && className}`}>
 					<Link
-						to={payment_plan ? `/messages/new/${user?.id}` : '#'}
+						to={payment_plan || user?.id == Global.ADMIN_ID  ? `/messages/new/${user?.id}` : '#'}
 						onClick={() => handleButtonClicks('message')}
 						className="mr-3"
 					>
@@ -63,7 +69,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 						</button>
 					</Link>{' '}
 					<a
-						href={payment_plan ? `tel:${user?.phone_number}` : `#call-error`}
+						href={payment_plan || user?.id == Global.ADMIN_ID  ? `tel:${user?.phone_number}` : `#call-error`}
 						className="ml-3"
 					>
 						<button

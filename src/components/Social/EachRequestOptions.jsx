@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { DeleteFirebaseImage } from '../../services/Firebase.utils'
 import ConfirmPopup from '../ConfirmPopup/ConfirmPopup'
+import Global from '../../Global'
 
 export default function EachRequestOptions({ data, deleted, setDeleted }) {
 	const auth = useSelector((state) => state.auth)
@@ -42,7 +43,11 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 	}
 
 	useEffect(() => {
-		if (auth?.user && auth?.user?.user?.id === user?.id) {
+		if (
+			auth?.user &&
+			auth?.user?.user?.id === user?.id ||
+			auth?.user?.user?.id == Global.ADMIN_ID
+		) {
 			setIsOwner(true)
 		} else {
 			setIsOwner(false)

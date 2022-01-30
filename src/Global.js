@@ -14,6 +14,7 @@ export default {
 	API_URL: 'http://localhost:1337',
 	PLATFORM: window.navigator?.platform,
 	currency: '₦',
+	ADMIN_ID: process.env.REACT_APP_ADMIN_ID,
 }
 
 export const all_states = [

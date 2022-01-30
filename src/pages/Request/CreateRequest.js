@@ -341,7 +341,7 @@ const CraeteRequest = (props) => {
 					size="md"
 				>
 					<Modal.Body className="text-center">
-						<h3 className="text-center">
+						<h3 className="text-center fw-700">
 							Join the community to post a request.
 						</h3>
 						<hr />

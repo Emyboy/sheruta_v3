@@ -12,7 +12,10 @@ import logger from 'redux-logger';
 import indexReducer from '../strapi_reducer/root.reducer';
 
 //dotenv.config();
-const middleware = process.env.NODE_ENV === 'development' ? [thunk, logger]: [thunk]
+const middleware = process.env.NODE_ENV === 'development' ? [
+    thunk, 
+    // logger
+]: [thunk]
 
 const configureStore = (settings = {}) => createStore(
     indexReducer, settings,
