@@ -88,7 +88,7 @@ export default function MessageDetails({ conversation_id }) {
 		}
 		setTimeout(() => {
 			executeScroll()
-		}, 1700)
+		}, 2000)
 	}, [])
 
 	const getConversation = () => {
@@ -237,7 +237,7 @@ export default function MessageDetails({ conversation_id }) {
 							</div>
 						</div>
 						<form
-							className="card-footer chat-form d-flex justify-content-between align-items-center"
+							className="shadow card-footer chat-form d-flex justify-content-between align-items-center bg-light"
 							onSubmit={handleSubmit}
 						>
 							{otherUser?.deactivated ? (

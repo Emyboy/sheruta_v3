@@ -5,6 +5,7 @@ import { Tag } from 'antd'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Global from '../../Global'
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -76,10 +77,10 @@ export default connect(mapStateToProps)(function EachRequest({
 			) : (
 				<article
 					className={`card rounded-xxl  p-2 rounded border ${
-						!standalone ? 'mb-3': 'shadow'
+						!standalone ? 'mb-3' : 'shadow'
 					} border-gray `}
 				>
-					<div className="comment-details pl-3">
+					<div className="comment-details pl-3" style={{ height: Global.isMobile ? '250px':'200px' }}>
 						{data?.users_permissions_user ? (
 							<div className="comment-meta d-flex">
 								<div
@@ -155,7 +156,9 @@ export default connect(mapStateToProps)(function EachRequest({
 											></i>
 										</span>
 									) : (
-										<a href={`tel:${data?.users_permissions_user.phone_number}`}>
+										<a
+											href={`tel:${data?.users_permissions_user.phone_number}`}
+										>
 											{auth.user ? (
 												<span
 													className="badge badge-danger"

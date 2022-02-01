@@ -114,7 +114,7 @@ export default function Home() {
 				<ExploreByPopularCity />
 				<HomePageRequests />
 				<section
-					className={`${!Global.isMobile && 'container-fluid'} mt-5 mb-5`}
+					className={`${!Global.isMobile ? 'container': "container-fluid"} mt-5 mb-5 p-0`}
 				>
 					<HomeListings />
 				</section>

@@ -15,9 +15,7 @@ export default function ControlledCarousel() {
 		if (state.list.length === 0) {
 			axios(
 				process.env.REACT_APP_API_URL +
-					`/property-requests/?_limit=${
-						dev ? '3' : '10'
-					}&_start=0&_sort=created_at:DESC`
+					`/property-requests/?_limit=${'10'}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {
 					setState({ ...state, list: res.data })
