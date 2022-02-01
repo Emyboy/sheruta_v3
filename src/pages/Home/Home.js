@@ -17,6 +17,7 @@ import WhatPeopleSay from './WhatPeopleSay'
 import HomePageRequests from './HomePageRequests/HomePageRequests';
 import { MetaTags } from 'react-meta-tags';
 import home_bg from './home_bg.png';
+import HomeListings from './HomeListings/HomeListings'
 
 const Wrapper = styled.div`
 	.jumbotron {
@@ -64,9 +65,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<MetaTags>
-				<title>
-					Home | Sheruta NG
-				</title>
+				<title>Home | Sheruta NG</title>
 			</MetaTags>
 			<Wrapper className="mb-5">
 				<article className="jumbotron bg-white home-one home1_bgi1">
@@ -114,6 +113,9 @@ export default function Home() {
 				<HowToUse />
 				<ExploreByPopularCity />
 				<HomePageRequests />
+				<div className="container-fluid mt-5 mb-5">
+					<HomeListings />
+				</div>
 				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
@@ -123,7 +125,9 @@ export default function Home() {
 						<div className="card-body row justify-content-between align-items-center">
 							<div className="col-lg-6 col-sm-12">
 								<h2 style={{ fontSize: '40px' }}>
-									<strong>Looking for a flat to share?</strong>
+									<strong className="text-gray-700">
+										Looking for a flat to share?
+									</strong>
 								</h2>
 								<h2>We've got you covered</h2>
 								<h3 className="mt-3 mb-3">

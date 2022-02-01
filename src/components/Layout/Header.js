@@ -109,11 +109,11 @@ export default function Header({
 									<a className="nav-link">About Us</a>
 								</Link>
 							</li>
-							<li className="nav-item">
+							{/* <li className="nav-item">
 								<Link to={`/pricing`}>
 									<a className="nav-link">Pricing</a>
 								</Link>
-							</li>
+							</li> */}
 						</NavWrapper>
 						<form className="d-flex">
 							<Link to="/login">

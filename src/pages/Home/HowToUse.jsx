@@ -23,7 +23,7 @@ export default function HowToUse() {
 	return (
 		<Wrapper className="container-fluid mb-5">
 			<div className="text-center heading mb-5">
-				<h2 style={{ fontSize: '40px'}}>
+				<h2 style={{ fontSize: '40px' }} className="text-gray-200">
 					<b>How It Works</b>
 				</h2>
 			</div>
