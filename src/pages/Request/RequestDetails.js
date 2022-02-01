@@ -327,51 +327,51 @@ export default function RequestDetails(props) {
 										{request.bedrooms || request.bathrooms ? (
 											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
 												<div className="block-header">
-													<h4 className="block-title">
+													<h2 className="block-title">
 														<b>Property Info</b>
-													</h4>
+													</h2>
 												</div>
 
 												<div className="block-body ml-3">
 													<ul className="dw-proprty-info row justify-content-between">
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Bedrooms:</strong>
+															<strong className="text-dark font-xssss">Bedrooms:</strong>
 															<br />
 															{request.bedrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Bathrooms:</strong>
+															<strong className="text-dark font-xssss">Bathrooms:</strong>
 															<br />
 															{request.bathrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Toilets:</strong>
+															<strong className="text-dark font-xssss">Toilets:</strong>
 															<br />
 															{request.toilets}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Is Premium?</strong>
+															<strong className="text-dark font-xssss">Is Premium?</strong>
 															<br />
 															{request.is_premium ? 'Yes' : 'No'}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Service:</strong>
+															<strong className="text-dark font-xssss">Service:</strong>
 															<br />
 															{request.service && request.service.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Type:</strong>
+															<strong className="text-dark font-xssss">Type:</strong>
 															<br />
 															{request.category && request.category.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark">Rent</strong>
+															<strong className="text-dark font-xssss">Rent</strong>
 															<br />₦{' '}
 															{window.formatedPrice.format(request.budget)}
 														</li>
 														{request.rent_per_room && (
 															<li className="col-4 mb-3">
-																<strong className="text-dark">Per Room</strong>
+																<strong className="text-dark font-xssss">Per Room</strong>
 																<br />₦{' '}
 																{window.formatedPrice.format(
 																	request.rent_per_room
@@ -380,7 +380,7 @@ export default function RequestDetails(props) {
 														)}
 
 														<li className="col-4 mb-3">
-															<strong className="text-dark">State</strong>
+															<strong className="text-dark font-xssss">State</strong>
 															<br />
 															{request.state && request.state.name}
 														</li>
