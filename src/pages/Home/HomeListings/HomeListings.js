@@ -79,7 +79,7 @@ function App() {
 								data-bs-toggle="modal"
 								data-bs-target="#Modalstory"
 								className="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden cursor-pointer mb-3 mt-3"
-								style={{ backgroundImage: `url(${val?.image_url[0]})` }}
+								style={{ backgroundImage: `url(${val?.image_url[0]})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
 							>
 								<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
 									<a href="#">

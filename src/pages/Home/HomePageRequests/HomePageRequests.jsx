@@ -36,9 +36,9 @@ export default function ControlledCarousel() {
 			style={{ marginTop: '100px', marginBottom: '100px' }}
 		>
 			<div className="text-center">
-				<h2 className="display-5 mb-5 text-gray-700">
-					<b>What the community is saying</b>
-				</h2>
+				<h4 className="display-5 mb-5 text-light fs-xxl">
+					What the community is saying
+				</h4>
 			</div>
 
 			<Carousel activeIndex={index} onSelect={handleSelect}>
