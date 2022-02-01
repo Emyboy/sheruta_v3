@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
+import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
 // NOTE: embrace power of CSS flexbox!
@@ -64,40 +65,50 @@ function App() {
 	}, [state])
 
 	return (
-		<div className='card p-3 rounded-xxl'>
+		<div className="card p-3 rounded-xxl">
 			<h1 className="fw-bold text-grey-700">Available Properties</h1>
 			<Wrapper>
 				<ScrollMenu
 					// LeftArrow={() => <button>Left</button>}
 					// RightArrow={() => <button>Right</button>}
-                    wrapperClassName='wrapper'
+					wrapperClassName="wrapper"
 					onWheel={onWheel}
 				>
 					{state.list.map((val) => (
-						<div className="item mr-4">
-							<div
-								data-bs-toggle="modal"
-								data-bs-target="#Modalstory"
-								className="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden cursor-pointer mb-3 mt-3"
-								style={{ backgroundImage: `url(${val?.image_url[0]})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+						<article className="item mr-2">
+							<Link
+								to={`/request/${val?.uuid}/${val?.users_permissions_user?.id}`}
 							>
-								<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-									<a href="#">
-										<figure className="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1">
-											<img
-												src={val?.users_permissions_user?.avatar_url}
-												alt="image"
-												className="float-right p-0 bg-white rounded-circle w-100 shadow-xss"
-											/>
-										</figure>
-										<div className="clearfix"></div>
-										<h4 className="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">
-											{val?.users_permissions_user?.first_name?.split(' ')[0]}
-										</h4>
-									</a>
+								<div
+									data-bs-toggle="modal"
+									data-bs-target="#Modalstory"
+									className="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden cursor-pointer mb-3 mt-3"
+									style={{
+										backgroundImage: `url(${val?.image_url[0]})`,
+										backgroundSize: 'cover',
+										backgroundPosition: 'center',
+									}}
+								>
+									<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
+										<Link
+											to={`/request/${val?.uuid}/${val?.users_permissions_user?.id}`}
+										>
+											<figure className="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1">
+												<img
+													src={val?.users_permissions_user?.avatar_url}
+													alt="image"
+													className="float-right p-0 bg-white rounded-circle w-100 shadow-xss"
+												/>
+											</figure>
+											<div className="clearfix"></div>
+											<h4 className="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">
+												{val?.users_permissions_user?.first_name?.split(' ')[0]}
+											</h4>
+										</Link>
+									</div>
 								</div>
-							</div>
-						</div>
+							</Link>
+						</article>
 					))}
 				</ScrollMenu>
 			</Wrapper>

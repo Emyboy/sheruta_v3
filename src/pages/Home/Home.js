@@ -113,9 +113,11 @@ export default function Home() {
 				<HowToUse />
 				<ExploreByPopularCity />
 				<HomePageRequests />
-				<div className="container-fluid mt-5 mb-5">
+				<section
+					className={`${!Global.isMobile && 'container-fluid'} mt-5 mb-5`}
+				>
 					<HomeListings />
-				</div>
+				</section>
 				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div
 						style={{
