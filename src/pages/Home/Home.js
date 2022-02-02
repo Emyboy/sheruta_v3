@@ -64,9 +64,9 @@ export default function Home() {
 	}
 	return (
 		<Layout>
-			<MetaTags>
+			{/* <MetaTags>
 				<title>Home | Sheruta NG</title>
-			</MetaTags>
+			</MetaTags> */}
 			<Wrapper className="mb-5">
 				<article className="jumbotron bg-white home-one home1_bgi1">
 					<div className="container-fluid d-flex justify-content-start align-items-center">
