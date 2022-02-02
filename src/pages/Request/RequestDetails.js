@@ -101,7 +101,7 @@ export default function RequestDetails(props) {
 	} else
 		return (
 			<Layout>
-				<MetaTags>
+				{/* <MetaTags>
 					<title>{`${
 						request?.is_searching ? `Looking for ${request?.category ? request?.category.name : 'mini flat, '} in` : `${request?.category ? request?.category.name : 'mini flat, '} for share in`
 					} ${request.location.split(',')[0]} ? - ${
@@ -138,9 +138,8 @@ export default function RequestDetails(props) {
 						} ${request?.location?.split(' ').map(val => (` ${val}`))?.join().replace(',,',',')}`}
 					/>
 					<script type="application/ld+json">
-						{/* {makeJobSchema(request)} */}
 					</script>
-				</MetaTags>
+				</MetaTags> */}
 				{showImages ? (
 					<ImageViewer
 						src={request?.image_url}
