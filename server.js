@@ -82,6 +82,31 @@ app.get(['/index.html', '/'], (req, res, next) => {
 		return res.send('<h1>Server Error</h1>')
 	}
 })
+
+app.use(express.static(path.resolve(__dirname, 'build')))
+
+app.get('/feeds', (req, res, next) => {
+	try {
+		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
+			if (err) {
+				console.error('Error during file reading', err)
+				return res.status(404).end()
+			}
+
+			// if (!post) return res.status(404).send('Post not found')
+
+			// inject meta tags
+			htmlData = metaUtils.renderMetaTags({
+				htmlString: htmlData,
+				image_url: './logos/logo.png',
+				title: "Feeds - Sheruta"
+			})
+			return res.send(htmlData)
+		})
+	} catch (error) {
+		return res.send('<h1>Server Error</h1>')
+	}
+})
 app.get('*', (req, res, next) => {
 	try {
 		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
