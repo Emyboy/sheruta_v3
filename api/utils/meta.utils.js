@@ -26,4 +26,9 @@ module.exports = {
 		// .replace('__LOGO__', image_url)
 	},
 
+	renderRequestTitle: (request) => {
+		return `${request?.is_searching ? `Looking for` : `Available`} ${
+			request?.category ? request?.category?.name : ''
+		} in ${request?.location.split(', ')[0]}`
+	},
 }

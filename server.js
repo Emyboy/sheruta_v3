@@ -27,6 +27,8 @@ app.listen(PORT, (error) => {
 app.get('/request/:title/:id', (req, res, next) => {
 	try {
 		fs.readFile(indexPath, 'utf8', async (err, htmlData) => {
+			// console.log('STRING --', htmlData)
+			const theString = htmlData;
 			if (err) {
 				console.error('Error during file reading', err)
 				return res.status(404).end()
@@ -40,13 +42,14 @@ app.get('/request/:title/:id', (req, res, next) => {
 			const data = _res.data.length === 0 ? null : _res.data[0]
 
 			// if (!post) return res.status(404).send('Post not found')
-			console.log('REQUEST --', data)
+			// console.log('REQUEST --', data)
 			// inject meta tags
 			if (data) {
 				htmlData = metaUtils.renderMetaTags({
-					htmlString: htmlData,
+					htmlString: theString,
 					image_url: './logos/logo.png',
-					title: data?.heading,
+					title: metaUtils.renderRequestTitle(data),
+					description: data?.body,
 				})
 			}
 			return res.send(htmlData)
@@ -58,27 +61,27 @@ app.get('/request/:title/:id', (req, res, next) => {
 	}
 })
 
-// app.get(['/index.html', '/'], (req, res, next) => {
-// 	try {
-// 		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
-// 			if (err) {
-// 				console.error('Error during file reading', err)
-// 				return res.status(404).end()
-// 			}
+app.get(['/index.html', '/'], (req, res, next) => {
+	try {
+		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
+			if (err) {
+				console.error('Error during file reading', err)
+				return res.status(404).end()
+			}
 
-// 			// if (!post) return res.status(404).send('Post not found')
+			// if (!post) return res.status(404).send('Post not found')
 
-// 			// inject meta tags
-// 			htmlData = metaUtils.renderMetaTags({
-// 				htmlString: htmlData,
-// 				image_url: './logos/logo.png',
-// 			})
-// 			return res.send(htmlData)
-// 		})
-// 	} catch (error) {
-// 		return res.send('<h1>Server Error</h1>')
-// 	}
-// })
+			// inject meta tags
+			htmlData = metaUtils.renderMetaTags({
+				htmlString: htmlData,
+				image_url: './logos/logo.png',
+			})
+			return res.send(htmlData)
+		})
+	} catch (error) {
+		return res.send('<h1>Server Error</h1>')
+	}
+})
 app.get('*', (req, res, next) => {
 	try {
 		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
