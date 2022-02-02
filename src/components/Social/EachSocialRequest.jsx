@@ -9,7 +9,7 @@ import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import { useSelector } from 'react-redux'
 import EachRequestOptions from './EachRequestOptions'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-
+import requestUtils from '../../utils/request.utils'
 function EachRequest({ data }) {
 	const user = data?.users_permissions_user
 	const deactivated = user?.deactivated
@@ -104,7 +104,7 @@ function EachRequest({ data }) {
 				</div>
 			</div>
 			<div className="card-body p-0 me-lg-5 pt-2">
-				<Link to={`/request/${data?.uuid}/${user?.id}`}>
+				<Link to={requestUtils.renderRequestURL(data)}>
 					<p
 						className="fw-500 text-grey-600 lh-26  w-100 mb-0"
 						style={{ fontSize: '16px' }}
@@ -126,7 +126,7 @@ function EachRequest({ data }) {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
 												<Link
-													to={`/request/${data?.uuid}/${user?.id}`}
+													to={requestUtils.renderRequestURL(data)}
 													data-lightbox="roadtrip"
 													className="position-relative d-block"
 												>
@@ -149,7 +149,7 @@ function EachRequest({ data }) {
 									} else {
 										return (
 											<div className="col-xs-4 col-sm-4 p-1">
-												<Link to={`/request/${data?.uuid}/${user?.id}`}>
+												<Link to={requestUtils.renderRequestURL(data)}>
 													<a data-lightbox="roadtrip">
 														<LazyLoadImage
 															src={img}

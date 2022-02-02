@@ -5,6 +5,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
+import requestUtils from '../../../utils/request.utils'
 // NOTE: embrace power of CSS flexbox!
 // import "./arrowsOnBottomOrTop.css";
 // import "./firstItemMargin.css";
@@ -77,7 +78,7 @@ function App() {
 					{state.list.map((val) => (
 						<article className="item mr-2">
 							<Link
-								to={`/request/${val?.uuid}/${val?.users_permissions_user?.id}`}
+								to={requestUtils.renderRequestURL(val)}
 							>
 								<div
 									data-bs-toggle="modal"
@@ -91,7 +92,7 @@ function App() {
 								>
 									<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
 										<Link
-											to={`/request/${val?.uuid}/${val?.users_permissions_user?.id}`}
+											to={requestUtils.renderRequestURL(val)}
 										>
 											<figure className="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1">
 												<img

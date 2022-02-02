@@ -142,14 +142,14 @@ function App() {
 							/>
 							<Route exact path="/signup" component={Signup} />
 							<Route exact path="/signup/success" component={SignUpSuccess} />
-							<Route
+							{/* <Route
 								exact
 								path="/requests/create/:service_id/:category_id/:is_searching"
 								component={CreateRequest}
-							/>
+							/> */}
 							<Route
 								exact
-								path="/request/:uid/:user_id"
+								path="/request/:title/:id"
 								component={RequestDetails}
 							/>
 							<Route exact path="/search" component={Search} />

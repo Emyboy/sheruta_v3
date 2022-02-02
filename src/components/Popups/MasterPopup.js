@@ -109,7 +109,8 @@ const MasterPopup = (props) => {
 
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {
-		getForUser()
+		getForUser();
+		getMessageStuffs();
 	},[60000])
 
 	useEffect(() => {

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Global from '../../Global'
+import requestUtils from '../../utils/request.utils'
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -180,7 +181,7 @@ export default connect(mapStateToProps)(function EachRequest({
 								</>
 								{!standalone && (
 									<Link
-										to={`/request/${data?.uuid}/${data?.users_permissions_user.id}`}
+										to={requestUtils.renderRequestURL(data)}
 										className="text-theme"
 									>
 										View More Details

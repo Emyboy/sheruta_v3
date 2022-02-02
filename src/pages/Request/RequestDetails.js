@@ -29,7 +29,7 @@ const ImgContainer = styled.section`
 `
 export default function RequestDetails(props) {
 	localStorage.setItem('after_login', window.location.pathname)
-	const { uid } = props.match.params
+	const { id } = props.match.params
 	const { user } = useSelector((state) => state.auth)
 	const [showImages, setShowImages] = useState(false)
 	const [request, setRequest] = useState(null)
@@ -43,7 +43,7 @@ export default function RequestDetails(props) {
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
-		axios(process.env.REACT_APP_API_URL + '/property-requests/?uuid=' + uid)
+		axios(process.env.REACT_APP_API_URL + '/property-requests/?id=' + id)
 			.then((res) => {
 				if (res.data.length === 0) {
 					setState({ ...state, notFound: true, loading: false })
@@ -75,15 +75,15 @@ export default function RequestDetails(props) {
 		if (request) {
 			if (
 				auth.user &&
-				auth.user.user.id !== request.users_permissions_user.id
+				auth.user.user.id !== request?.users_permissions_user.id
 			) {
 				notifyEmy({
-					heading: `${auth.user.user.first_name} ${auth.user.user.last_name} Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
+					heading: `${auth.user.user.first_name} ${auth.user.user.last_name} Viewed ${request?.users_permissions_user.first_name} ${request?.users_permissions_user.last_name}'s Request`,
 					url: window.location.pathname,
 				})
 			} else if (!auth.user) {
 				notifyEmy({
-					heading: `Someone Viewed ${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name}'s Request`,
+					heading: `Someone Viewed ${request?.users_permissions_user.first_name} ${request?.users_permissions_user.last_name}'s Request`,
 					url: window.location.pathname,
 				})
 			}
@@ -102,18 +102,40 @@ export default function RequestDetails(props) {
 		return (
 			<Layout>
 				<MetaTags>
-					<title>{request.heading} | Request</title>
-					<meta name="description" content={request.body} />
-					<meta property="og:title" content={request.heading + ' | Request'} />
+					<title>{`${
+						request?.is_searching ? `Looking for ${request?.category ? request?.category.name : 'mini flat, '} in` : `${request?.category ? request?.category.name : 'mini flat, '} for share in`
+					} ${request.location.split(',')[0]} ? - ${
+						request?.category.name
+					}`}</title>
+					<meta
+						name="description"
+						content={`${
+							request?.is_searching
+								? 'Searching for a flat in'
+								: 'Available flat in'
+						} ${request.location}`}
+					/>
+					<meta
+						property="og:title"
+						content={`${
+							request?.is_searching
+								? 'Looking for flat in'
+								: 'Flat for share in'
+						} ${request.location.split(',')[0]} - ${request?.category.name}`}
+					/>
 					<meta
 						property="og:description"
-						content={`${request.users_permissions_user.first_name} ${request.users_permissions_user.last_name} says: ${request.body}`}
+						content={`${
+							request?.is_searching
+								? 'I am looking for a flat in'
+								: 'There is an available flat in'
+						} ${request.location}`}
 					/>
 					<meta
 						name="keywords"
-						content={`${request.category ? request.category.name : null}, ${
-							request.service ? request.service.name : null
-						}`}
+						content={`${request?.category ? request?.category.name : 'mini flat, '}, ${
+							request?.service ? request?.service.name+"," : 'for share, '
+						} ${request?.location?.split(' ').map(val => (` ${val}`))?.join().replace(',,',',')}`}
 					/>
 					<script type="application/ld+json">
 						{/* {makeJobSchema(request)} */}
@@ -121,7 +143,7 @@ export default function RequestDetails(props) {
 				</MetaTags>
 				{showImages ? (
 					<ImageViewer
-						src={request.image_url}
+						src={request?.image_url}
 						currentIndex={0}
 						onClose={() => {
 							setShowImages(!showImages)
@@ -145,13 +167,13 @@ export default function RequestDetails(props) {
 										<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 											<div className="d-flex">
 												<div className="card-body p-0 d-flex">
-													{request.users_permissions_user && (
+													{request?.users_permissions_user && (
 														<figure className="avatar me-3">
 															<img
 																src={
 																	deactivated
 																		? Global.USER_PLACEHOLDER_AVATAR
-																		: request.users_permissions_user.avatar_url
+																		: request?.users_permissions_user.avatar_url
 																}
 																alt="image"
 																className="shadow-sm rounded-circle w45"
@@ -160,22 +182,22 @@ export default function RequestDetails(props) {
 													)}
 													<h4 className="fw-700 text-grey-900 font-xssss mt-1">
 														<Link
-															to={`/user/${request.users_permissions_user.username}`}
+															to={`/user/${request?.users_permissions_user.username}`}
 														>
 															<a className="text-dark d-flex">
 																{deactivated
 																	? '..... .....'
-																	: request.users_permissions_user
+																	: request?.users_permissions_user
 																			.first_name}{' '}
 																<VerifiedBadge
-																	user={request.users_permissions_user}
+																	user={request?.users_permissions_user}
 																	className={'ml-2'}
 																	size={'15'}
 																/>
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-															{moment(request.created_at).fromNow()}
+															{moment(request?.created_at).fromNow()}
 														</span>
 													</h4>
 													<a
@@ -200,14 +222,14 @@ export default function RequestDetails(props) {
 														fontWeight: 'bold',
 													}}
 												>
-													{request.heading}
+													{request?.heading}
 												</h1>
-												{!request.users_permissions_user.deactivated &&
-												request.image_url &&
-												request.image_url.length > 0 ? (
+												{!request?.users_permissions_user.deactivated &&
+												request?.image_url &&
+												request?.image_url.length > 0 ? (
 													<ImgContainer
 														style={{
-															backgroundImage: `url(${request.image_url[0]})`,
+															backgroundImage: `url(${request?.image_url[0]})`,
 														}}
 													>
 														<button
@@ -236,7 +258,7 @@ export default function RequestDetails(props) {
 																>
 																	<ImLocation />
 																</span>{' '}
-																{request.location}
+																{request?.location}
 															</div>
 														)}
 													</div>
@@ -247,22 +269,22 @@ export default function RequestDetails(props) {
 															fontSize: '16px',
 														}}
 													>
-														{request.body}
+														{request?.body}
 													</p>
 												</div>
 												<div className="d-flex justify-content-between align-items-center">
 													<div>
 														<small className="mb-0">
-															{request.is_searching
+															{request?.is_searching
 																? 'My Budget:'
 																: 'Total Rent:'}
 														</small>
 														<h2 className="mt-1 fw-700">
-															₦ {window.formatedPrice.format(request.budget)}{' '}
+															₦ {window.formatedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
-																{request.payment_type &&
-																	request.payment_type.name}
+																{request?.payment_type &&
+																	request?.payment_type.name}
 															</small>
 														</h2>
 													</div>
@@ -273,34 +295,34 @@ export default function RequestDetails(props) {
 														}}
 													>
 														<div className="ml-2">
-															{request.category && (
+															{request?.category && (
 																<Tag color="volcano">
-																	{request.category.name}
+																	{request?.category.name}
 																</Tag>
 															)}
-															{request.service && (
-																<Tag color="cyan">{request.service.name}</Tag>
+															{request?.service && (
+																<Tag color="cyan">{request?.service.name}</Tag>
 															)}
 														</div>
 													</div>
 												</div>
-												{request.rent_per_room && (
+												{request?.rent_per_room && (
 													<div className="d-flex justify-content-between align-items-center">
 														<div>
 															<small className="mb-0">
-																{request.is_searching
+																{request?.is_searching
 																	? 'Min Budget:'
 																	: 'Rent Per Room:'}
 															</small>
 															<h2 className="mt-1 fw-700">
 																₦{' '}
 																{window.formatedPrice.format(
-																	request.rent_per_room
+																	request?.rent_per_room
 																)}{' '}
 																<small className="text-muted">
 																	/
-																	{request.payment_type &&
-																		request.payment_type.name}
+																	{request?.payment_type &&
+																		request?.payment_type.name}
 																</small>
 															</h2>
 														</div>
@@ -308,7 +330,9 @@ export default function RequestDetails(props) {
 												)}
 												<div className="col-md-5 mt-4">
 													{user ? (
-														<UserAction user={request.users_permissions_user} />
+														<UserAction
+															user={request?.users_permissions_user}
+														/>
 													) : (
 														// For Those Who Aren't Logged In
 														<Link
@@ -324,7 +348,7 @@ export default function RequestDetails(props) {
 												</div>
 											</div>
 										</div>
-										{request.bedrooms || request.bathrooms ? (
+										{request?.bedrooms || request?.bathrooms ? (
 											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
 												<div className="block-header">
 													<h2 className="block-title">
@@ -335,54 +359,72 @@ export default function RequestDetails(props) {
 												<div className="block-body ml-3">
 													<ul className="dw-proprty-info row justify-content-between">
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Bedrooms:</strong>
+															<strong className="text-dark font-xssss">
+																Bedrooms:
+															</strong>
 															<br />
-															{request.bedrooms}
+															{request?.bedrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Bathrooms:</strong>
+															<strong className="text-dark font-xssss">
+																Bathrooms:
+															</strong>
 															<br />
-															{request.bathrooms}
+															{request?.bathrooms}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Toilets:</strong>
+															<strong className="text-dark font-xssss">
+																Toilets:
+															</strong>
 															<br />
-															{request.toilets}
+															{request?.toilets}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Is Premium?</strong>
+															<strong className="text-dark font-xssss">
+																Is Premium?
+															</strong>
 															<br />
-															{request.is_premium ? 'Yes' : 'No'}
+															{request?.is_premium ? 'Yes' : 'No'}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Service:</strong>
+															<strong className="text-dark font-xssss">
+																Service:
+															</strong>
 															<br />
-															{request.service && request.service.name}
+															{request?.service && request?.service.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Type:</strong>
+															<strong className="text-dark font-xssss">
+																Type:
+															</strong>
 															<br />
-															{request.category && request.category.name}
+															{request?.category && request?.category.name}
 														</li>
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">Rent</strong>
+															<strong className="text-dark font-xssss">
+																Rent
+															</strong>
 															<br />₦{' '}
-															{window.formatedPrice.format(request.budget)}
+															{window.formatedPrice.format(request?.budget)}
 														</li>
-														{request.rent_per_room && (
+														{request?.rent_per_room && (
 															<li className="col-4 mb-3">
-																<strong className="text-dark font-xssss">Per Room</strong>
+																<strong className="text-dark font-xssss">
+																	Per Room
+																</strong>
 																<br />₦{' '}
 																{window.formatedPrice.format(
-																	request.rent_per_room
+																	request?.rent_per_room
 																)}
 															</li>
 														)}
 
 														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">State</strong>
+															<strong className="text-dark font-xssss">
+																State
+															</strong>
 															<br />
-															{request.state && request.state.name}
+															{request?.state && request?.state.name}
 														</li>
 													</ul>
 												</div>

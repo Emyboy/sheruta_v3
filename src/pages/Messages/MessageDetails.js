@@ -45,7 +45,7 @@ export default function MessageDetails({ conversation_id }) {
 	// const conversation_id = props.match.params.conversation_id;
 
 	const executeScroll = () => {
-		console.log('HERE WE GO')
+		// console.log('HERE WE GO')
 		// Bring this back :
 		document.getElementById('end').scrollIntoView({
 			behavior: 'smooth',
@@ -88,7 +88,7 @@ export default function MessageDetails({ conversation_id }) {
 		}
 		setTimeout(() => {
 			executeScroll()
-		}, 2000)
+		}, 2600)
 	}, [])
 
 	const getConversation = () => {
