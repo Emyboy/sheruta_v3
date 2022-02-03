@@ -60,7 +60,7 @@ function RecentRequests() {
 		if (state?.list?.length === 0) {
 			axios(
 				process.env.REACT_APP_API_URL +
-					`/property-requests/?is_searching=false&_limit=${'3'}&_start=0&_sort=created_at:DESC`
+					`/property-requests/?is_searching=true&_limit=${'3'}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {
 					setState({ ...state, list: res.data })
