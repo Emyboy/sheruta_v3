@@ -8,7 +8,9 @@ import OurNumbers from './components/OurNumbers'
 import OurServices from './components/OurServices'
 import styled from 'styled-components';
 import '../../joel_ui/css/app.css';
+import RecentRequests from './components/RecentRequests/RecentRequests'
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+const HomeListing = React.lazy(() => import('./components/HomeListings/HomeListings'))
 
 const Wrapper = styled.div`
 	@import url(css);
@@ -23,6 +25,8 @@ export default function HomeNew() {
 					<AboutUs />
 					<OurServices />
 					<HowItWorks />
+					<HomeListing />
+					<RecentRequests />
 					<LookingForFlat />
 					<OurNumbers />
 				</div>

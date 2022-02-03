@@ -66,7 +66,7 @@ function App() {
 	}, [state])
 
 	return (
-		<div className="card p-3 rounded-xxl">
+		<section className="bg-light p-3 rounded-xxl section section-padding customer-review-area pt-2">
 			<h1 className="fw-bold text-grey-700">Available Properties</h1>
 			<Wrapper>
 				<ScrollMenu
@@ -77,9 +77,7 @@ function App() {
 				>
 					{state.list.map((val) => (
 						<article className="item mr-2">
-							<Link
-								to={requestUtils.renderRequestURL(val)}
-							>
+							<Link to={requestUtils.renderRequestURL(val)}>
 								<div
 									data-bs-toggle="modal"
 									data-bs-target="#Modalstory"
@@ -91,9 +89,7 @@ function App() {
 									}}
 								>
 									<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-										<Link
-											to={requestUtils.renderRequestURL(val)}
-										>
+										<Link to={requestUtils.renderRequestURL(val)}>
 											<figure className="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1">
 												<img
 													src={val?.users_permissions_user?.avatar_url}
@@ -113,7 +109,7 @@ function App() {
 					))}
 				</ScrollMenu>
 			</Wrapper>
-		</div>
+		</section>
 	)
 }
 export default App

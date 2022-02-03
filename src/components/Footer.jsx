@@ -114,11 +114,14 @@ export default () => {
 								</div>
 								<div className="col-sm-3">
 									<div className="footer-widget">
-										<h6 className="widget-title">Resourses</h6>
+										<h6 className="widget-title">Resources</h6>
 										<div className="footer-menu-link">
 											<ul className="list-unstyled">
 												<li>
 													<a href="blog.html">Blog</a>
+												</li>
+												<li>
+													<a href="blog.html">Partner With Us</a>
 												</li>
 											</ul>
 										</div>

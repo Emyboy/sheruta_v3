@@ -44,7 +44,40 @@ export default connect(mapStateToProps)(function EachRequest({
 
 	return (
 		<>
-			{state.confirmDelete ? (
+			<div className="col-lg-4">
+				<div className="testimonial-grid bg-white p-3 rounded-xxl">
+					{data?.category && (
+						<span className="social-media text-theme">
+							{data?.category.name.toUpperCase()}
+						</span>
+					)}
+					<p>
+						“{' '}
+						{data?.body?.length > 90
+							? data?.body.slice(0, 90) + '...'
+							: data?.body}{' '}
+						”
+					</p>
+					<div className="author-info">
+						<div className="thumb">
+							<img
+								src={data?.users_permissions_user?.avatar_url}
+								width="60"
+								alt="Google Review"
+							/>
+						</div>
+						<div className="content">
+							<span className="name">
+								{data?.users_permissions_user?.first_name}
+							</span>
+							<span className="designation">
+								@{data?.users_permissions_user?.username}
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/* {state.confirmDelete ? (
 				<div
 					className={` single-comment bg-dark  card  p-4 text-center m-2 shadow ${
 						state.deleted ? 'animated animate__fadeOutRightBig' : 'show'
@@ -191,7 +224,7 @@ export default connect(mapStateToProps)(function EachRequest({
 						) : null}
 					</div>
 				</article>
-			)}
+			)} */}
 		</>
 	)
 })
