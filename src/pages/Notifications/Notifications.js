@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import EachNotification from './EachNotification'
-import Layout from '../../components/Layout/Layout';
+// import Layout from '../../components/Layout/Layout';
 import { Redirect } from 'react-router';
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+
 
 export default function Notifications() {
     localStorage.setItem('after_login', '/notifications');

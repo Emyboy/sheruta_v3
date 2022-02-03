@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import FooterNav from './FooterNav'
-import Header from './Header'
-import MessagePanel from './MessagePanel'
-import SideNav from './SideNav'
+// import FooterNav from './FooterNav'
+// import Header from './Header'
+// import MessagePanel from './MessagePanel'
+// import SideNav from './SideNav'
 import Global from '../../Global'
+// import Footer from '../Footer'
+const Footer = React.lazy(() => import('../Footer'))
+const FooterNav = React.lazy(() => import('./FooterNav'))
+const Header = React.lazy(() => import('./Header'))
+const MessagePanel = React.lazy(() => import('./MessagePanel'))
+const SideNav = React.lazy(() => import('./SideNav'))
+
 
 export default function Layout({
 	currentPage,
@@ -48,6 +55,7 @@ export default function Layout({
 				</div>
 			</div>
 			{user && Global.isMobile && <FooterNav pageName={currentPage} />}
+			{!user && <Footer />}
 		</div>
 	)
 }

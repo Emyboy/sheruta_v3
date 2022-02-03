@@ -2,13 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
-import Layout from '../../components/Layout/Layout'
-import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
-import AccountSettings from './settings/AccountSettings'
+// import Layout from '../../components/Layout/Layout'
+// import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
+// import AccountSettings from './settings/AccountSettings'
 import PersonalInfoSettings from './settings/PersonalInfoSettings'
 import { Switch } from 'antd'
-import ConfigureViewSettings from './settings/ConfigureViewSettings'
-import PreferredLocationSetting from './settings/PreferredLocationSetting'
+// import ConfigureViewSettings from './settings/ConfigureViewSettings'
+// import PreferredLocationSetting from './settings/PreferredLocationSetting';
+
+const AccountDeactivationSetting = React.lazy(() =>
+	import('./settings/AccountDeactivationSetting')
+)
+const AccountSettings = React.lazy(() => import('./settings/AccountSettings'))
+const ConfigureViewSettings = React.lazy(() =>
+	import('./settings/ConfigureViewSettings')
+)
+const PreferredLocationSetting = React.lazy(() =>
+	import('./settings/PreferredLocationSetting')
+)
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 export default function Settings({ match }) {
 	const { user } = useSelector((state) => state.auth)

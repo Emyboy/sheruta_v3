@@ -9,11 +9,12 @@ import { Dots } from 'react-activity'
 import VerifiedBadge from '../../VerifiedBadge/VerifiedBadge'
 import match from '../../../assets/img/match.jpeg'
 import PostRequestAds from '../../Ads/RequestAds/PostRequestAds'
-import Layout from '../../Layout/Layout'
+// import Layout from '../../Layout/Layout'
 import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
+const Layout = React.lazy(() => import('../../Layout/Layout'))
 
 export default (props) => {
 	localStorage.setItem('after_login', '/feeds')

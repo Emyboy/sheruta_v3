@@ -5,11 +5,12 @@ import { usePaystackPayment, PaystackButton } from 'react-paystack'
 import { connect, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap'
-import Layout from '../../components/Layout/Layout'
+// import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
 import end_sarz from '../../assets/img/end_sarz.jpeg'
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
-import Global from '../../Global'
+import Global from '../../Global';
+const Layout = React.lazy(() => import("../../components/Layout/Layout"))
 
 const formatedPrice = new Intl.NumberFormat('en-NG')
 
@@ -206,7 +207,6 @@ export default connect(mapStateToProps)((props) => {
                 </div> */}
 				<div className="row mb-5 justify-content-center">
 					{state.plans.map((val, i) => {
-						console.log(val)
 						return (
 							<div className="col-lg-4 col-md-4" key={i}>
 								<article className="card mb-4 rounded-xs shadow-lg rounded">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Layout/Layout'
+// import Layout from '../../components/Layout/Layout'
 import MatchList from './MatchList'
 import { Tabs } from 'antd'
 import AcceptedMatchList from './AcceptedMatchList'
@@ -8,6 +8,7 @@ import { getAllSuggestionsByStatus } from '../../redux/strapi_actions/alice.acti
 import { Redirect } from 'react-router'
 import { notifyEmy } from '../../services/Sheruta'
 import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const { TabPane } = Tabs
 

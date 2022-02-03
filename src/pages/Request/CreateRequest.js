@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import TextInput from '../../components/TextInput/TextInput'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { getUserFeedback } from '../../redux/strapi_actions/view.action'
-import Layout from '../../components/Layout/Layout'
+// import Layout from '../../components/Layout/Layout'
 import store from '../../redux/store/store'
 import { notifyEmy } from '../../services/Sheruta'
 import Cookies from 'js-cookie'
@@ -20,7 +20,9 @@ import firebase from 'firebase'
 import Compressor from 'compressorjs'
 import { Modal } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea'
-import Global from '../../Global'
+import Global from '../../Global';
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+
 
 const uid = Uid()
 

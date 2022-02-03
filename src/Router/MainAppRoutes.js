@@ -5,13 +5,24 @@ import '../theme.override.css'
 import { Provider } from 'react-redux'
 import store from '../redux/store/store'
 
+// JOEL UI 
+// import '../joel_ui/css/vendor/sal.css';
+// import '../joel_ui/css/vendor/slick.css';
+// import '../joel_ui/css/vendor/slick-theme.css';
+// import '../joel_ui/css/vendor/bootstrap.min.css';
+
+// OUR OWN UI
 import 'react-activity/dist/Spinner.css'
 import 'react-activity/dist/Dots.css'
 import '../social_assets/css/feather.css'
 import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
-import '../App.css'
 import '../social_assets/css/style.css'
+import '../App.css'
+// JOEL CSS 👇🏽
+// import '../joel_ui/css/app.css';
+
+
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
@@ -34,13 +45,15 @@ import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
 import Agent from '../pages/Agent/Agent'
-import AgentPending from '../pages/Agent/AgentPending'
-// import Settings from '../pages/Settings/Settings'
-// import Properties from '../pages/Properties/Properties'
+import AgentPending from '../pages/Agent/AgentPending';
+// import AOS from 'aos';
+// import 'aos/dist/aos.css'
 
+
+const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
-const Home = React.lazy(() => import('../pages/Home/Home'))
+// const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
 	import('../pages/PropertyDetails/PropertyDetails')
 )
@@ -73,18 +86,24 @@ const Services = React.lazy(() => import('../pages/Services/Services'));
 const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'));
 
 function App() {
-	// React.useEffect(() => {
-	//     setTimeout(() => {
-	//       const msg = firebase.messaging();
-	//       msg.requestPermission()
-	//           .then(() => {
-	//               return msg.getToken();
-	//           })
-	//           .then((data) => {
-	//               console.log("========= NOTIFY ======================", data);
-	//           });
-	//     }, 10000);
-	// });
+	React.useEffect(() => {
+	    // setTimeout(() => {
+	    //   const msg = firebase.messaging();
+	    //   msg.requestPermission()
+	    //       .then(() => {
+	    //           return msg.getToken();
+	    //       })
+	    //       .then((data) => {
+	    //           console.log("========= NOTIFY ======================", data);
+	    //       });
+	    // }, 10000);
+		// AOS.init({
+
+		// 	duration: 2000,
+		// })
+	},[]);
+
+	
 
 	return (
 		<Suspense fallback={<PageLoader />}>
@@ -97,7 +116,7 @@ function App() {
 						<MasterPopup />
 						{/* <RobotMessageContainer /> */}
 						<Switch>
-							<Route exact path="/" component={Home} />
+							<Route exact path="/" component={HomeNew} />
 							<Route exact path="/feeds" component={SocialHomePage} />
 							<Route exact path="/agents" component={Agent} />
 							<Route exact path="/agents/pending" component={AgentPending} />

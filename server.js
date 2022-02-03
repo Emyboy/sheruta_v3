@@ -38,7 +38,7 @@ app.get('/request/:title/:id', (req, res, next) => {
 			const url = process.env.REACT_APP_API_URL + '/property-requests/?id=' + id
 			const _res = await axios(url)
             console.log('url ==', url)
-			console.log('RES --', _res.data)
+			// console.log('RES --', _res.data)
 			const data = _res.data.length === 0 ? null : _res.data[0]
 
 			// if (!post) return res.status(404).send('Post not found')
@@ -47,7 +47,7 @@ app.get('/request/:title/:id', (req, res, next) => {
 			if (data) {
 				htmlData = metaUtils.renderMetaTags({
 					htmlString: theString,
-					image_url: './logos/logo.png',
+					image_url: data?.users_permissions_user?.avatar_url,
 					title: metaUtils.renderRequestTitle(data),
 					description: data?.body,
 				})

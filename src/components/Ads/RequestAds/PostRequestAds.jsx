@@ -15,13 +15,13 @@ export default function PostRequestAds() {
 						}}
 					>
 						<div className="card-body">
-							<h1 className="text-white">
+							<h4 className="text-white">
 								<b>
 									{view.personal_info.is_looking_for
 										? 'Looking for a flat to share?'
 										: 'Have a flat to share?'}
 								</b>
-							</h1>
+							</h4>
 							<p className="text-white">
 								{view.personal_info.is_looking_for
 									? 'Post a request for free '

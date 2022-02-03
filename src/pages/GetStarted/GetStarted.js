@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect, useSelector, useDispatch } from 'react-redux'
-import Layout from '../../components/Layout/Layout';
+// import Layout from '../../components/Layout/Layout';
 import MetaTags from 'react-meta-tags';
 import { Redirect } from 'react-router';
 import Gender from './Steps/Gendar'
@@ -16,6 +16,7 @@ import UpdateAvatar from './Steps/UpdateAvatar';
 import ValidIdCard from './Steps/ValidIdCard';
 import FinishStep from './Steps/FinishStep';
 import Budget from './Steps/Budget';
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const RenderStep = ({ props, step }) => {
     // console.log('BUT RENDERED ---', { props, step })

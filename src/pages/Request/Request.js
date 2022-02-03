@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { connect, useSelector } from 'react-redux'
 import MetaTags from 'react-meta-tags';
-import Layout from '../../components/Layout/Layout'
+// import Layout from '../../components/Layout/Layout'
 import LinkSelectCard from '../../components/LinkSelectCard/LinkSelectCard';
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 export const Request = (props) => {
     localStorage.setItem('after_login', '/requests');

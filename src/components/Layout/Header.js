@@ -117,7 +117,7 @@ export default function Header({
 						</NavWrapper>
 						<form className="d-flex">
 							<Link to="/login">
-								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
+								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
 									Login
 								</a>
 							</Link>
