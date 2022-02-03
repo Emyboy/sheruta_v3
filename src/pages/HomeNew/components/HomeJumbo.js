@@ -2,9 +2,12 @@ import React from 'react'
 import banner7 from '../../../joel_ui/media/banner/banner-thumb-7.png'
 import bobble29 from '../../../joel_ui/media/others/bubble-29.png'
 import line7 from '../../../joel_ui/media/others/line-7.png'
-// import man from '../../../assets/img/man-sitting.svg'
+import man from '../../../assets/img/man-sitting.svg'
 import { Link } from 'react-router-dom'
 import bannerImg from '../assets/home_bg.png'
+import Global from '../../../Global';
+import styled from 'styled-components'
+
 
 export default function HomeJumbo() {
 	return (
@@ -14,10 +17,11 @@ export default function HomeJumbo() {
 				backgroundImage: `url(${bannerImg})`,
 				backgroundSize: 'cover',
 				backgroundPosition: 'center',
+				paddingTop: Global.isMobile ? '30vh':'50vh'
 			}}
 		>
-			<div className="container-fluid pt-5">
-				<div className="banner-content pl-3 pt-5">
+			<div className="container-fluid pb-5">
+				<div className="banner-content pl-3 pt-0">
 					<h1
 						className="title animate__animated animate__fadeInLeft mb-2"
 						data-sal="slide-up"
@@ -47,16 +51,16 @@ export default function HomeJumbo() {
 						</Link>
 					</div>
 				</div>
-				{/* <div className="banner-thumbnail">
+				<div className="banner-thumbnail pt-5">
 					<div
-						className="large-thumb sal-animate"
+						className="large-thumb sal-animate desktop-only"
 						data-sal="slide-left"
 						data-sal-duration="800"
 						data-sal-delay="400"
 					>
 						<img className="paralax-image mr-5 mt-5" src={man} alt="Shape" />
 					</div>
-				</div> */}
+				</div>
 				{/* <div
 					className="banner-social sal-animate"
 					data-sal="slide-up"

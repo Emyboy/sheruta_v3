@@ -5,7 +5,7 @@ export default function OurServices() {
 		<div className="section section-padding bg-color-light" id="section2">
 			<div className="container">
 				<div className="section-heading heading-left">
-					<span className="subtitle">Want to know more?</span>
+					<span className="subtitle text-theme">Want to know more?</span>
 					<h2 className="title">How it all works</h2>
 				</div>
 				<div className="row">

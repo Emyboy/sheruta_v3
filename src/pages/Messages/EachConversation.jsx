@@ -65,7 +65,7 @@ function EachConversation({ conv, onClick }) {
 								</figure>
 								<h3 className="fw-700 mb-0 mt-0">
 									<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat">
-										<b className="mr-2">{otherUser?.first_name}</b>
+										<b className="mr-2">{otherUser?.first_name?.split(' ')[0]}</b>
 										<span
 											className={`shadow bg-${
 												otherUser.online ? 'success' : 'danger'

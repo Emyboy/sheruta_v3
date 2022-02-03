@@ -15,7 +15,7 @@ export default function AboutUs() {
 					<div className="col-xl-5 col-lg-6" data-aos="fade-left">
 						<div className="case-study-featured">
 							<div className="section-heading heading-left">
-								<span className="subtitle">Who we are</span>
+								<span className="subtitle text-theme">Who we are</span>
 								<h2 className="title">About Us</h2>
 								<p>
 									We are an online housing assistance platform providing
