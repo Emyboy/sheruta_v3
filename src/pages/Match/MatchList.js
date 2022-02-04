@@ -73,11 +73,12 @@ export default function MatchList() {
                         </div>
                     ) : user_suggestions.length === 0 ? (
                         <div
-                            className="d-flex justify-content-center"
-                            style={{ marginTop: "30vh" }}
+                            // className="d-flex justify-content-center"
+                            className="text-center"
+                            style={{ marginTop: "20vh" }}
                         >
-                            <h4>You have no more suggestions</h4>
                             <h1>😔</h1>
+                            <h4>You have no more suggestions</h4>
                         </div>
                     ) : (
                         <Carousel

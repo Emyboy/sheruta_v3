@@ -50,7 +50,7 @@ export default connect(
 
     return (
         <>
-            <div className="sec-heading center">
+            <div className="sec-heading text-center mb-4">
                 <h2 className='animated animate__bounceIn fw-bold'>What gender are you looking for?</h2>
                 <p>We will need to match you up with the gender of your choosing </p>
             </div>

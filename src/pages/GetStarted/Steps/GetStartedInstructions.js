@@ -28,7 +28,7 @@ export default function GetStartedInstructions(props) {
     return (
         <div className="pb-4 container">
             <div className="text-center">
-                <h1 className="">What You Should Know</h1>
+                <h1 className="fs-xxxl fw-700">What You Should Know</h1>
                 <h5 className="text-muted">
                     For a secure flat share community, we require some
                     information about you.

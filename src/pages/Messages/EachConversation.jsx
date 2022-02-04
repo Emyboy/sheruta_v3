@@ -63,7 +63,7 @@ function EachConversation({ conv, onClick }) {
 										className="w35 rounded-3"
 									/>
 								</figure>
-								<h3 className="fw-700 mb-0 mt-0">
+								<div className="fw-700 mb-0 mt-0">
 									<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat">
 										<b className="mr-2">{otherUser?.first_name?.split(' ')[0]}</b>
 										<span
@@ -79,7 +79,7 @@ function EachConversation({ conv, onClick }) {
 												: latestMsg.slice(0, 27) + '....'
 											: latestMsg || '....'}
 									</small>
-								</h3>
+								</div>
 							</div>
 							{count !== 0 && (
 								<span className="badge badge-danger text-white badge-pill mt-0">

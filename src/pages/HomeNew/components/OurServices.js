@@ -6,6 +6,7 @@ import bobble2 from '../../../joel_ui/media/others/bubble-1.png'
 import message from '../assets/message.svg'
 import match from '../assets/match.svg'
 import care from '../assets/Care.svg'
+import { Link } from 'react-router-dom'
 
 export default function HowItWorks() {
 	return (
@@ -26,15 +27,15 @@ export default function HowItWorks() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-design.html">Messaging</a>
+									<Link to="/services">Messaging</Link>
 								</h5>
 								<p>
 									Send realtime messages to potential flatmates using our
 									messaging service
 								</p>
-								<a href="service-design.html" className="more-btn">
+								<Link to="/services" className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -49,15 +50,15 @@ export default function HowItWorks() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-development.html">Matching</a>
+									<Link to={"/services"}>Matching</Link>
 								</h5>
 								<p>
 									Our advanced algorithms helps you find the ideal flatmate you
 									are looking for.
 								</p>
-								<a href="service-development.html" className="more-btn">
+								<Link to={"/services"} className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -74,15 +75,15 @@ export default function HowItWorks() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-content-strategy.html">24/7 Support</a>
+									<Link to={"/services"}>24/7 Support</Link>
 								</h5>
 								<p>
 									Can't find what you are looking for? We are always online and
 									ready to go
 								</p>
-								<a href="service-content-strategy.html" className="more-btn">
+								<Link to={"/services"} className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>

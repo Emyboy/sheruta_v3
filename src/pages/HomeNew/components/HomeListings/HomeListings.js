@@ -77,7 +77,7 @@ function App() {
 		<section className='section mt-5'>
 			<div className="p-3 bottom-radius-4 container mb-3">
 				<div className="d-flex align-items-center justify-content-between mb-3">
-					<h3 className="fw-bold text-grey-700 mb-0">Available Properties</h3>
+					<h3 className="fw-bold text-grey-700 mb-0">Our Properties</h3>
 					<Link to="/feeds" className="fw-bold text-theme">
 						More {'>'}
 					</Link>

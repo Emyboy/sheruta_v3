@@ -4,7 +4,7 @@ import '../joel_ui/css/app.css';
 
 export default () => {
 	return (
-		<footer className="footer-area">
+		<footer className="footer-area mt-5 bg-white">
 			<div className="container">
 				<div className="footer-top">
 					<div className="footer-social-link">

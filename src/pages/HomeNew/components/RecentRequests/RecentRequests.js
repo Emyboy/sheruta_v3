@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
 import requestUtils from '../../../../utils/request.utils'
+import line from '../../../../joel_ui/media/others/line-6.png'
+import circle from '../../../../joel_ui/media/others/bubble-9.png'
 // NOTE: embrace power of CSS flexbox!
 // import "./arrowsOnBottomOrTop.css";
 // import "./firstItemMargin.css";
@@ -70,37 +72,47 @@ function RecentRequests() {
 	}, [state])
 
 	return (
-        <section className="section section-padding customer-review-area pt-5 mt-5 bg-color-light">
-            <div className="container mb-5">
-                <div className="row">
-                    <div className="col-lg-8">
-                        <div className="section-heading heading-left">
-                            <h2 className="title">Recent Requests</h2>
-                            <p>Don't be left out. Login and post your request and get matched with your potential flat mate.</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="review-site-logo">
-                            <a href="#"><img src="assets/media/icon/google.png" alt="Google"/></a>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    {
-                        state.list.map((val,i) => {
-                            return <EachRequest data={val} key={`req-${i}`} />
-                        })
-                    }
-                </div>
-            </div>
+		<section className="section section-padding customer-review-area pt-5 mt-5 bg-color-light">
+			<div className="container mb-5">
+				<div className="row">
+					<div className="col-lg-8">
+						<div className="section-heading heading-left">
+							<h2 className="title">Recent Requests</h2>
+							<p>
+								Don't be left out. Login and post your request and get matched
+								with a potential flat mate.
+							</p>
+						</div>
+					</div>
+					<div className="col-lg-4 desktop-only">
+						<div className="review-site-logo">
+							<img src={circle} alt="Google" width="270" />
+						</div>
+					</div>
+				</div>
+				<div className="row">
+					{state.list.map((val, i) => {
+						return <EachRequest data={val} key={`req-${i}`} />
+					})}
+				</div>
+				<div className="row justify-content-center mt-5">
+					<Link to="/signup">
+						<strong type="submit" className="text-theme" name="submit-btn">
+							SHOW MORE
+						</strong>
+					</Link>
+				</div>
+			</div>
 
-            <ul className="shape-group-11 list-unstyled">
-                <li className="shape shape-1"><img src="assets/media/others/line-6.png" alt="line"/></li>
-                <li className="shape shape-2"><img src="assets/media/others/circle-3.png" alt="line"/></li>
-            </ul>
-        </section>
-
-
+			<ul className="shape-group-11 list-unstyled">
+				<li className="shape shape-1">
+					<img src={line} alt="line" />
+				</li>
+				<li className="shape shape-2">
+					<img src={circle} alt="line" />
+				</li>
+			</ul>
+		</section>
 	)
 		 {/* <div className="p-3 rounded-xxl container mb-3">
 			<div className="d-flex align-items-center justify-content-between mb-3">

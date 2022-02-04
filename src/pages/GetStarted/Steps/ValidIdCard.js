@@ -162,7 +162,7 @@ export default function ValidIdCard(props) {
                     <AuthEditForm />
                 </Modal.Body>
             </Modal>
-            <div className="sec-heading center mt-3">
+            <div className="sec-heading text-center mt-3">
                 <h2 className="animated animate__bounceIn fw-bold">
                     National Identification Number
                 </h2>

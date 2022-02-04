@@ -83,7 +83,7 @@ export const PrefaredLocations = (props) => {
 
     return (
 			<div>
-				<div className="sec-heading center">
+				<div className="sec-heading text-center mb-4">
 					<h2 className="animated animate__bounceIn h1 fw-700">
 						What are your Preferred locations?
 					</h2>

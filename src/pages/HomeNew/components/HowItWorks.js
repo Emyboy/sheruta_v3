@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function OurServices() {
 	return (
@@ -23,14 +24,14 @@ export default function OurServices() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-development.html">Sinup</a>
+									<Link to={'/services'}>Sinup</Link>
 								</h5>
 								<p>
 									Describe yourself or let us know the kind of person you are or what exactly you're looking for
 								</p>
-								<a href="service-development.html" className="more-btn">
+								<Link to={'/services'} className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -48,14 +49,14 @@ export default function OurServices() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-development.html">Verify account</a>
+									<Link to={'/services'}>Verify account</Link>
 								</h5>
 								<p>
 									Once your account is verified, you'll have access to all the features we offer on the platform
 								</p>
-								<a href="service-development.html" className="more-btn">
+								<Link to={'/services'} className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -73,14 +74,14 @@ export default function OurServices() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<a href="service-development.html">Post a request</a>
+									<Link to={'/services'}>Post a request</Link>
 								</h5>
 								<p>
 									Join the community poster request and let people know what you're looking for exactly
 								</p>
-								<a href="service-development.html" className="more-btn">
+								<Link to={'/services'} className="more-btn">
 									Find out more
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>

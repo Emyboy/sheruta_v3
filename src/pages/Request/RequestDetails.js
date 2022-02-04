@@ -265,7 +265,7 @@ export default function RequestDetails(props) {
 												<div className="description mt-3">
 													<p
 														style={{
-															fontSize: '16px',
+															fontSize: '18px',
 														}}
 													>
 														{request?.body}
@@ -278,14 +278,14 @@ export default function RequestDetails(props) {
 																? 'My Budget:'
 																: 'Total Rent:'}
 														</small>
-														<h2 className="mt-1 fw-700">
+														<h5 className="mt-1 fw-700">
 															₦ {window.formatedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
 																	request?.payment_type.name}
 															</small>
-														</h2>
+														</h5>
 													</div>
 													<div
 														className="d-flex"
@@ -313,7 +313,7 @@ export default function RequestDetails(props) {
 																	? 'Min Budget:'
 																	: 'Rent Per Room:'}
 															</small>
-															<h2 className="mt-1 fw-700">
+															<h5 className="mt-1 fw-700">
 																₦{' '}
 																{window.formatedPrice.format(
 																	request?.rent_per_room
@@ -323,7 +323,7 @@ export default function RequestDetails(props) {
 																	{request?.payment_type &&
 																		request?.payment_type.name}
 																</small>
-															</h2>
+															</h5>
 														</div>
 													</div>
 												)}
@@ -350,9 +350,9 @@ export default function RequestDetails(props) {
 										{request?.bedrooms || request?.bathrooms ? (
 											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
 												<div className="block-header">
-													<h2 className="block-title">
+													<h5 className="block-title">
 														<b>Property Info</b>
-													</h2>
+													</h5>
 												</div>
 
 												<div className="block-body ml-3">

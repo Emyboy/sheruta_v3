@@ -129,7 +129,7 @@ const UpdateAvatar = (props) => {
 
   return (
     <div>
-      <div className="sec-heading center">
+      <div className="sec-heading text-center mb-4">
         <h2 className="animated animate__bounceIn fw-bold">
           Upload am image of yourself
         </h2>

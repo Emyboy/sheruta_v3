@@ -32,8 +32,8 @@ export const AgeRange = (props) => {
 
   return (
     <div>
-      <div className="sec-heading center mb-4">
-        <h2 className="animated animate__bounceIn">
+      <div className="sec-heading text-center mb-4">
+        <h2 className="animated animate__bounceIn fw-700">
           What age range are you looking for?
         </h2>
         {/* <p>We will need to match you up with the gender of your choosing </p> */}
