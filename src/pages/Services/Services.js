@@ -13,6 +13,7 @@ import line2 from '../../joel_ui/media/others/line-5.png'
 import Layout from '../../components/Layout/Layout'
 import '../../joel_ui/css/app.css'
 import { useSelector } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 const imageSize = '450'
 
@@ -20,6 +21,11 @@ export default function Services({ match }) {
 	// localStorage.setItem('after_login', window.location.pathname)
 	const [service, setService] = useState(null)
 	const { user } = useSelector((state) => state.auth)
+
+	const formatService = (text) => {
+		return text.replace('_', ' ').toUpperCase()
+	}
+
 	useEffect(() => {
 		if (match.params?.service) {
 			setService(match.params.service)
@@ -29,7 +35,7 @@ export default function Services({ match }) {
 				inline: 'start',
 			})
 		} else {
-			document.getElementById("top").scrollIntoView({
+			document.getElementById('top').scrollIntoView({
 				behavior: 'smooth',
 				block: 'start',
 				inline: 'start',
@@ -37,8 +43,18 @@ export default function Services({ match }) {
 			setService(null)
 		}
 	}, [match.params])
+
 	return (
 		<Layout>
+			<Helmet>
+				<title>
+					{!service ? 'Services' : formatService(service)} | Sheruta NG
+				</title>
+				<meta
+					name="description"
+					content="These are the services we offer customers"
+				/>
+			</Helmet>
 			<section
 				className="section section-padding bg-color-light pb--70"
 				id="top"

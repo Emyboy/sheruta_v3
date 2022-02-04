@@ -55,8 +55,8 @@ export default connect(mapStateToProps)(function EachRequest({
 					<Link to={standalone ? '#' : requestUtils.renderRequestURL(data)}>
 						<p className="mb-2">
 							“{' '}
-							{data?.body?.length > 60
-								? data?.body.slice(0, 60) + '...'
+							{data?.body?.length > 70
+								? data?.body.slice(0, 70) + '...'
 								: data?.body}{' '}
 							<small className="text-theme">Read More</small>”
 						</p>

@@ -294,6 +294,7 @@ const CraeteRequest = (props) => {
 
 	useEffect(() => {
 		dispatch(getAllViewOptions())
+		window.scrollTo(0, 0)
 	},[])
 
 	const handleImageSelect = (file, i) => {

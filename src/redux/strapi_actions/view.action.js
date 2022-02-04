@@ -9,7 +9,6 @@ import store from '../store/store'
 import {
 	getAllMySuggestion,
 	getAllSuggestionsByStatus,
-	suggestThemForMe,
 } from './alice.actions'
 
 export const getAllServices = () => (dispatch) => {
@@ -226,7 +225,7 @@ export const getAllConversations = () => async (dispatch) => {
 		// 		conversations: convs,
 		// 	},
 		// })
-		if (conversations.length > 0 && conversations[0].id === convs[0].id) {
+		if (conversations?.length > 0 && conversations[0]?.id === convs[0]?.id) {
 			dispatch({
 				type: 'SET_VIEW_STATE',
 				payload: {

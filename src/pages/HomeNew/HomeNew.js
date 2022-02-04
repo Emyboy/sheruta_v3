@@ -8,7 +8,10 @@ import OurNumbers from './components/OurNumbers'
 import OurServices from './components/OurServices'
 import styled from 'styled-components';
 import '../../joel_ui/css/app.css';
-import RecentRequests from './components/RecentRequests/RecentRequests'
+import RecentRequests from './components/RecentRequests/RecentRequests';
+import { Helmet } from 'react-helmet'
+
+
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 const HomeListing = React.lazy(() => import('./components/HomeListings/HomeListings'))
 
@@ -19,6 +22,10 @@ const Wrapper = styled.div`
 export default function HomeNew() {
 	return (
 		<Layout>
+			<Helmet>
+				<title>Home | Sheruta NG</title>
+				<meta name="description" content="Fine verified flat mates today." />
+			</Helmet>
 			<Wrapper className="main-wrapper" id="main-wrapper">
 				<div className="pt-5">
 					<HomeJumbo />

@@ -81,9 +81,9 @@ export default () => {
 												value="+2348138154470"
 												disabled
 											/>
-											<button className="subscribe-btn" type="submit">
+											<a href='tel:+2348138154470' className="subscribe-btn" type="submit">
 												Call Now
-											</button>
+											</a>
 										</div>
 									</form>
 								</div>

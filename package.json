@@ -31,6 +31,7 @@
     "react-easy-crop": "^3.5.2",
     "react-google-places-autocomplete": "^3.3.1",
     "react-grid-gallery": "^0.5.5",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.10.1",
     "react-horizontal-scrolling-menu": "^2.7.0",
     "react-html-parser": "^2.0.2",

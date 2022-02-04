@@ -24,7 +24,7 @@ export default function OurServices() {
 							<div className="content">
 								<h5 className="title">
 									{' '}
-									<Link to={'/services'}>Sinup</Link>
+									<Link to={'/services'}>Signup</Link>
 								</h5>
 								<p>
 									Describe yourself or let us know the kind of person you are or what exactly you're looking for

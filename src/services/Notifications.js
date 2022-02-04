@@ -26,7 +26,7 @@ const NotificationService = {
         if (user && owner === user.user.id) {
             return;
         }
-        if (user && user?.user?.id == Global.ADMIN_ID) {
+        if (user && user?.user?.id === Global.ADMIN_ID) {
             return;
         }
         if(user && user?.user?.deactivated){

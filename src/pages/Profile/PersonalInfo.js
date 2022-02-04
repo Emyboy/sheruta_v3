@@ -2,15 +2,13 @@ import { notification } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Global from '../../Global'
-import { IoMail, IoCallSharp } from 'react-icons/io5'
-import UserAction from '../../components/UserAction/UserAction'
+
 
 const PersonalInfo = ({ userData }) => {
 	const [info, setInfo] = useState(null)
 	const [locations, setLocations] = useState([])
-	const [paiedInfo, setPaidInfo] = useState(true)
-	const [showFloating, setShowFloating] = useState(false)
+	const [paiedInfo, setPaidInfo] = useState(true);
+	
 	useEffect(() => {
 		if (userData) {
 			axios(

@@ -6,7 +6,7 @@ export default class PersonalInfoService {
 	static async updatePersonalInfo(update) {
 		const info = store.getState().view?.personal_info
 		if (info) {
-			const update = await axios(
+			const _update = await axios(
 				process.env.REACT_APP_API_URL + `/personal-infos/${info?.id}`,
 				{
 					headers: {
@@ -16,7 +16,7 @@ export default class PersonalInfoService {
                     data: update
 				}
 			)
-			return update
+			return _update
 		} else {
 			return null
 		}
