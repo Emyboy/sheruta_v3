@@ -152,7 +152,7 @@ export default (props) => {
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 										return (
 											<>
-												<SocialFeedsAds index={i} />
+												<SocialFeedsAds index={i} key={`ad-${i}`}/>
 												<EachSocialRequest key={i + ' request'} data={val} />
 											</>
 										)
@@ -166,7 +166,7 @@ export default (props) => {
 										.map((val, i) => {
 											return (
 												<>
-													<SocialFeedsAds index={i} />
+													<SocialFeedsAds index={i} key={`ad-${i}`} />
 													<EachSocialRequest key={i + ' request'} data={val} />
 												</>
 											)

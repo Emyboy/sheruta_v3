@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux'
 const imageSize = '450'
 
 export default function Services({ match }) {
-	localStorage.setItem('after_login', window.location.pathname)
+	// localStorage.setItem('after_login', window.location.pathname)
 	const [service, setService] = useState(null)
 	const { user } = useSelector((state) => state.auth)
 	useEffect(() => {

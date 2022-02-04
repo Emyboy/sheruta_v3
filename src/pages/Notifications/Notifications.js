@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import EachNotification from './EachNotification'
 // import Layout from '../../components/Layout/Layout';
 import { Redirect } from 'react-router';
+import { getRealTimeStuffs } from '../../redux/strapi_actions/view.action';
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 
 export default function Notifications() {
+	const dispatch = useDispatch();
     localStorage.setItem('after_login', '/notifications');
 	const { user } = useSelector(state => state.auth);
 	const { notifications, payment_plan } = useSelector((state) => state.view);
+
+
+	useEffect(() => {
+		setTimeout(() => {
+			dispatch(getRealTimeStuffs())
+		}, 5000);
+	},[])
+
 	if(!user){
 		return <Redirect to={'/login'} />
 	}else if(user && user?.user?.deactivated){

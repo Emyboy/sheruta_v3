@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Redirect } from 'react-router'
 import { setAuthState } from '../../redux/strapi_actions/auth.actions'
-import Btn from '../../components/Btn/Btn'
 import axios from 'axios'
 import { notification } from 'antd'
 import MetaTags from 'react-meta-tags'
@@ -63,11 +62,12 @@ const Login = (props) => {
 					})
 					Cookies.set('token', res.data.jwt, { expires: 7 })
 					setState({ ...state, loading: false })
-					notification.success({ message: 'Welcome' })
+					notification.success({ message: 'Welcome' });
 					props.setAuthState({
 						user: res.data,
 					})
 					updateLastSeen();
+					window.location.reload()
 				} else {
 					setState({ ...state, notVerified: true, userData: res.data })
 				}

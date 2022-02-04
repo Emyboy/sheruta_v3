@@ -278,14 +278,14 @@ export default function RequestDetails(props) {
 																? 'My Budget:'
 																: 'Total Rent:'}
 														</small>
-														<h5 className="mt-1 fw-700">
+														<h4 className="mt-1 fw-700">
 															₦ {window.formatedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
 																	request?.payment_type.name}
 															</small>
-														</h5>
+														</h4>
 													</div>
 													<div
 														className="d-flex"

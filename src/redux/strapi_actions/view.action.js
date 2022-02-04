@@ -6,6 +6,11 @@ import Notifications from '../../services/Notifications'
 import PaymentService from '../../services/PaymentService'
 import { getAppDetails } from '../../services/Sheruta'
 import store from '../store/store'
+import {
+	getAllMySuggestion,
+	getAllSuggestionsByStatus,
+	suggestThemForMe,
+} from './alice.actions'
 
 export const getAllServices = () => (dispatch) => {
 	axios(process.env.REACT_APP_API_URL + '/services')
@@ -26,8 +31,8 @@ export const getAllAmenities = () => (dispatch) => {
 			dispatch({
 				type: 'SET_VIEW_STATE',
 				payload: {
-					amenities: res.data
-				}
+					amenities: res.data,
+				},
 			})
 		})
 		.catch((err) => {
@@ -190,7 +195,7 @@ export const getAllNotifications = () => async (dispatch) => {
 }
 
 export const getUnreadMessageCount = () => async (dispatch) => {
-	if(Cookies.get('token')){
+	if (Cookies.get('token')) {
 		try {
 			const msg = await MessageService.getUnreadMessages()
 			dispatch({
@@ -208,18 +213,40 @@ export const getUnreadMessageCount = () => async (dispatch) => {
 export const getAllConversations = () => async (dispatch) => {
 	try {
 		const convs = await MessageService.getUserConversations()
-		dispatch({
-			type: 'SET_VIEW_STATE',
-			payload: {
-				conversations: [],
-			},
-		})
-		dispatch({
-			type: 'SET_VIEW_STATE',
-			payload: {
-				conversations: convs,
-			},
-		})
+		const { conversations } = store.getState().view
+
+		// console.log({
+		// 	currentFirstConv: conversations[0],
+		// 	newCurrentConv: convs[0]
+		// })
+
+		// dispatch({
+		// 	type: 'SET_VIEW_STATE',
+		// 	payload: {
+		// 		conversations: convs,
+		// 	},
+		// })
+		if (conversations.length > 0 && conversations[0].id === convs[0].id) {
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					conversations: convs,
+				},
+			})
+		} else {
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					conversations: [],
+				},
+			})
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					conversations: convs,
+				},
+			})
+		}
 	} catch (error) {
 		return Promise.reject(error)
 	}
@@ -261,4 +288,27 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 		})
 		return Promise.reject(error)
 	}
+}
+
+export const getRealTimeStuffs = () => (dispatch) => {
+	dispatch(getAllConversations())
+	dispatch(getUnreadMessageCount())
+	dispatch(getAllNotifications())
+	dispatch(getUserPaymentPlan())
+}
+
+export const getAllViewOptions = () => (dispatch) => {
+	dispatch(getAllWorkIndustries())
+	dispatch(getAllPaymentTypes())
+	dispatch(getAllCategories())
+	dispatch(getAllAmenities())
+	dispatch(getAllServices())
+	dispatch(getAllStates())
+}
+
+export const getOtherStuffs = () => (dispatch) => {
+	dispatch(getAppDetail())
+	dispatch(getAuthPersonalInfo())
+	dispatch(getAllMySuggestion())
+	dispatch(getAllSuggestionsByStatus('accepted'))
 }

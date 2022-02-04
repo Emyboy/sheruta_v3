@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../../components/Layout/Layout'
 
 import ContactSelect from './ContactSelect'
@@ -13,9 +13,11 @@ import JoinPaddyService from '../../../services/JoinPaddyService'
 import moment from 'moment'
 import { notification } from 'antd'
 import { Redirect } from 'react-router'
+import { getAllViewOptions } from '../../../redux/strapi_actions/view.action'
 
 export default function CreateJoinPaddy() {
-	const { user } = useSelector((state) => state.auth)
+	const dispatch = useDispatch()
+	const { user } = useSelector((state) => state.auth);
 	const [step, setStep] = useState(0)
 	const [loading, setLoading] = useState(false)
 	const { personal_info } = useSelector((state) => state.view)
@@ -43,7 +45,11 @@ export default function CreateJoinPaddy() {
 
 	useEffect(() => {
 		setData({ ...data, personal_info: personal_info?.id })
-	}, [personal_info])
+	}, [personal_info]);
+
+	useEffect(() => {
+		dispatch(getAllViewOptions())
+	},[])
 
 	// useEffect(() => {
 	// 	console.log('UPDATE ---', data)

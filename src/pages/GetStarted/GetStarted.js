@@ -16,6 +16,10 @@ import UpdateAvatar from './Steps/UpdateAvatar'
 import ValidIdCard from './Steps/ValidIdCard'
 import FinishStep from './Steps/FinishStep'
 import Budget from './Steps/Budget'
+import {
+	getAllViewOptions,
+	getOtherStuffs,
+} from '../../redux/strapi_actions/view.action'
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const RenderStep = ({ props, step }) => {
@@ -82,6 +86,11 @@ export const GetStarted = (props) => {
 				})
 		}
 	}, [step])
+
+	useEffect(() => {
+		dispatch(getAllViewOptions())
+		dispatch(getOtherStuffs())
+	}, [])
 
 	// if (personal_info && personal_info.id_back_img_url && personal_info.id_front_img_url) {
 	//     return <Redirect to='/' />

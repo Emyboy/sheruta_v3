@@ -90,7 +90,7 @@ function App() {
 						onWheel={onWheel}
 					>
 						{state.list.map((val) => (
-							<EachProperty className="item mr-2">
+							<EachProperty className="item mr-2" key={`prop-${val?.id}`}>
 								<Link to={requestUtils.renderRequestURL(val)}>
 									<div
 										data-bs-toggle="modal"

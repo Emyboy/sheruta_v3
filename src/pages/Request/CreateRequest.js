@@ -9,7 +9,7 @@ import { Alert, notification, Switch } from 'antd'
 import { Link } from 'react-router-dom'
 import TextInput from '../../components/TextInput/TextInput'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
-import { getUserFeedback } from '../../redux/strapi_actions/view.action'
+import { getAllViewOptions, getUserFeedback } from '../../redux/strapi_actions/view.action'
 // import Layout from '../../components/Layout/Layout'
 import store from '../../redux/store/store'
 import { notifyEmy } from '../../services/Sheruta'
@@ -21,8 +21,8 @@ import Compressor from 'compressorjs'
 import { Modal } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea'
 import Global from '../../Global';
-const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const uid = Uid()
 
@@ -103,6 +103,11 @@ const CraeteRequest = (props) => {
 				props.getUserFeedback()
 				localStorage.removeItem('ph_request')
 				setState({ ...state, loading: false, done: true })
+				notification.success({ message: 'You post has been created' })
+				setTimeout(() => {
+					notification.info({ message: 'Check the home page' })
+				}, 3700);
+				
 			})
 			.catch((err) => {
 				notifyEmy({
@@ -120,7 +125,7 @@ const CraeteRequest = (props) => {
 					dispatch(getUserFeedback)
 					localStorage.setItem('ph_request', JSON.stringify(newRequest))
 				}
-				setState({ ...state, loading: false , done: false })
+				setState({ ...state, loading: false, done: false })
 				notification.error({ message: 'Error creating request' })
 			})
 	}
@@ -287,6 +292,10 @@ const CraeteRequest = (props) => {
 	// 	}
 	// }, [])
 
+	useEffect(() => {
+		dispatch(getAllViewOptions())
+	},[])
+
 	const handleImageSelect = (file, i) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
@@ -302,36 +311,7 @@ const CraeteRequest = (props) => {
 	}
 
 	if (state.done) {
-		return (
-			<Layout currentPage={'requests'}>
-				{window.scrollTo({ top: 0, behavior: 'smooth' })}
-
-				<div className="mt-5 mb-5">
-					<div className="container bg-white text-center">
-						<div className="pt-5 pb-5">
-							<div className="text-center">
-								<h1>
-									<b>
-										{props.view.personal_info &&
-										props.view.personal_info.looking_for
-											? 'Request Created'
-											: 'Post was created'}
-									</b>
-								</h1>
-							</div>
-							<div className="comment-box submit-form">
-								{/* <h3 className="reply-title">Post Request</h3> */}
-								<div className="comment-form">
-									<Link to={`/request/${data.uuid}/${props.auth.user.user.id}`}>
-										<Btn text="View Now" />
-									</Link>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</Layout>
-		)
+		return <Redirect to="/feeds" />
 	} else if (!props.auth.user) {
 		return <Redirect to="/login" />
 	} else
@@ -392,7 +372,12 @@ const CraeteRequest = (props) => {
 								<div className="row justify-content-center mb-5">
 									<div className="col-lg-6 col-sm-12">
 										<div className="alert alert-warning rounded-xxl">
-											<h2 className="fw-700 text-warning">Warning</h2>
+											<h2
+												className="fw-700 text-warning mb-2"
+												style={{ fontSize: '30px' }}
+											>
+												Warning
+											</h2>
 											<h5 className="mb-0">Once posted can't edit</h5>
 										</div>
 									</div>
