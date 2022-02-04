@@ -1,23 +1,28 @@
 {
   "short_name": "Sheruta",
-  "name": "",
+  "name": "sheruta",
   "icons": [
-    {
-      "src": "./logos/logo_fill.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "./logos/logo_fill.svg",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "./logos/logo_fill.svg",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+		{
+			"src": "./logos/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "./logos/icon-256x256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "./logos/icon-384x384.png",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "./logos/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "white",
