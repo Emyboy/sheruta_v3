@@ -27,7 +27,8 @@ export default function OurServices() {
 									<Link to={'/services'}>Signup</Link>
 								</h5>
 								<p>
-									Describe yourself or let us know the kind of person you are or what exactly you're looking for
+									Fill up the required information to access our community,
+									let's get to know you.
 								</p>
 								<Link to={'/services'} className="more-btn">
 									Find out more
@@ -52,7 +53,8 @@ export default function OurServices() {
 									<Link to={'/services'}>Verify account</Link>
 								</h5>
 								<p>
-									Once your account is verified, you'll have access to all the features we offer on the platform
+									Let's be sure we can identify you. Get verified and have
+									access to all our amazing features
 								</p>
 								<Link to={'/services'} className="more-btn">
 									Find out more
@@ -77,7 +79,8 @@ export default function OurServices() {
 									<Link to={'/services'}>Post a request</Link>
 								</h5>
 								<p>
-									Join the community poster request and let people know what you're looking for exactly
+									Post your shared room or apartment for share. Connect with
+									users like you who need. what you have
 								</p>
 								<Link to={'/services'} className="more-btn">
 									Find out more
