@@ -102,7 +102,7 @@ const PersonalInfo = ({ userData }) => {
 								<div className="col-lg-6">
 									<div className="gen-metabox">
 										<span className='fw-bold'>
-											<i className="fa fa-user"></i> Local Government
+											<i className="fa fa-map"></i> Local Government
 										</span>
 										<p>{info?.lgaOfOrigin} </p>
 									</div>
@@ -132,7 +132,7 @@ const PersonalInfo = ({ userData }) => {
 								<div className="col-lg-6">
 									<div className="gen-metabox no-margin">
 										<span className='fw-bold'>
-											<i className="fa fa-map"></i> About
+											<i className="fa fa-pen"></i> About
 										</span>
 										<p className="badged">{userData?.bio}</p>
 									</div>

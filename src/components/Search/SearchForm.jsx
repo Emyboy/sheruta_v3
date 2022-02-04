@@ -1,11 +1,13 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import AnalyticsService from '../../services/Analytics'
+import { getAllViewOptions} from '../../redux/strapi_actions/view.action'
 
 export default function SearchForm() {
+	const dispatch = useDispatch();
 	const { services, categories } = useSelector((state) => state.view)
 	const [bedrooms, setBedrooms] = useState(null)
 	const [service, setService] = useState(null)
@@ -20,6 +22,10 @@ export default function SearchForm() {
 		}
 	}, [bedrooms, category, service]);
 
+	useEffect(() => {
+		dispatch(getAllViewOptions())
+	},[])
+
 	const recordSearch = () => {
 		AnalyticsService.create({
 			type: 'search',
@@ -30,6 +36,7 @@ export default function SearchForm() {
 	return (
 		<div className="col-lg-12 mt-4 h-100">
 			<div className="card w-100 p-4 border-0 bg-lightblue rounded-xxl shadow-sm">
+				<h5 className='mb-5 fw-700 text-muted'>Select what you are looking and hit search</h5>
 				<div className="row">
 					<div className="col-lg-3">
 						<div className="form-group mb-0">
