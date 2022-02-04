@@ -1,88 +1,122 @@
-import React from 'react'
-import process1 from '../../joel_ui/media/others/process-1.png'
-import process2 from '../../'
-import process3 from '../../'
-import process4 from '../../'
-import Layout from '../../components/Layout/Layout'
-import '../../joel_ui/css/app.css';
+import React, { useEffect, useState } from 'react'
 
-export default function Services() {
+import share from './img/colabo.svg'
+import group from './img/group.svg'
+import carry from './img/carry.svg'
+
+import bobble1 from '../../joel_ui/media/others/bubble-24.png'
+import bobble2 from '../../joel_ui/media/others/bubble-23.png'
+
+import line1 from '../../joel_ui/media/others/line-4.png'
+import line2 from '../../joel_ui/media/others/line-5.png'
+
+import Layout from '../../components/Layout/Layout'
+import '../../joel_ui/css/app.css'
+import { useSelector } from 'react-redux'
+
+const imageSize = '450'
+
+export default function Services({ match }) {
+	localStorage.setItem('after_login', window.location.pathname)
+	const [service, setService] = useState(null)
+	const { user } = useSelector((state) => state.auth)
+	useEffect(() => {
+		if (match.params?.service) {
+			setService(match.params.service)
+			document.getElementById(match.params.service).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'start',
+			})
+		} else {
+			document.getElementById("top").scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'start',
+			})
+			setService(null)
+		}
+	}, [match.params])
 	return (
 		<Layout>
-			<section className="section section-padding bg-color-light pb--70">
+			<section
+				className="section section-padding bg-color-light pb--70"
+				id="top"
+			>
 				<div className="container">
 					<div className="section-heading mb--90">
-						<span className="subtitle">Process</span>
-						<h2 className="title">Our logo design process</h2>
-						<p>
-							Our comprehensive logo design strategy ensures a perfectly crafted
-							logo for your business.
-						</p>
+						<span className="subtitle text-theme">How We Can Help</span>
+						<h2 className="title">Our Services</h2>
+						<p>These are the services we offer customers.</p>
 					</div>
 					<div
-						className="process-work sal-animate"
+						id="join_paddy"
+						className="process-work sal-animate animate__animated  animate__bounceInLeft"
 						data-sal="slide-right"
 						data-sal-duration="1000"
 						data-sal-delay="100"
 					>
 						<div className="thumbnail paralax-image">
-							<img src={process1} alt="Thumbnail" />
+							<img src={group} alt="Thumbnail" width={imageSize} />
 						</div>
 						<div className="content">
-							<span className="subtitle">Step One</span>
-							<h3 className="title">Discover</h3>
+							<span className="subtitle text-theme">For Groups</span>
+							<h3 className="title">Join Paddy</h3>
 							<p>
-								Donec metus lorem, vulputate at sapien sit amet, auctor iaculis
-								lorem. In vel hendrerit nisi. Vestibulum eget risus velit.
-								Aliquam tristique libero at dui sodales, et placerat orci
-								lobortis. Maecenas ipsum neque, elementum id dignissim et,
-								imperdiet vitae mauris.
+								Joinpaddy is a new service that gives users the ability to //
+								tag unoccupied spaces still in the market and also, it gives //
+								users the opportunity to connect with other users interested //
+								in finding unoccupied spaces together within a particular //
+								location.
 							</p>
 						</div>
 					</div>
 					<div
-						className="process-work content-reverse sal-animate"
+						className="process-work content-reverse sal-animate animate__animated  animate__bounceInRight"
 						data-sal="slide-left"
 						data-sal-duration="1000"
 						data-sal-delay="100"
+						id="for_share"
 					>
 						<div className="thumbnail paralax-image">
-							<img src="joel_ui/media/others/process-2.png" alt="Thumbnail" />
+							<img src={share} alt="Thumbnail" width={imageSize} />
 						</div>
 						<div className="content">
-							<span className="subtitle">Step Two</span>
-							<h3 className="title">Prototype</h3>
+							<span className="subtitle text-theme">Quick Share</span>
+							<h3 className="title">For Share</h3>
 							<p>
-								Donec metus lorem, vulputate at sapien sit amet, auctor iaculis
-								lorem. In vel hendrerit nisi. Vestibulum eget risus velit.
-								Aliquam tristique libero at dui sodales, et placerat orci
-								lobortis. Maecenas ipsum neque, elementum id dignissim et,
-								imperdiet vitae mauris.
+								For share — Tag your available spaces or free room(s) in your
+								apartment for share using this service tag. Match and connect
+								with possible flatmates interested in your post. You can also
+								use this tag to post a request for the need of a private room or
+								space in a flat and get contacted by users interested in your
+								request..
 							</p>
 						</div>
 					</div>
 					<div
-						className="process-work sal-animate"
+						className="process-work sal-animate animate__animated  animate__bounceInLeft"
 						data-sal="slide-right"
 						data-sal-duration="1000"
 						data-sal-delay="100"
+						id="carry_over"
 					>
 						<div className="thumbnail paralax-image">
-							<img src="joel_ui/media/others/process-3.png" alt="Thumbnail" />
+							<img src={carry} alt="Thumbnail" width={imageSize} />
 						</div>
 						<div className="content">
-							<span className="subtitle">Step Three</span>
-							<h3 className="title">Test</h3>
+							<span className="subtitle text-theme">Transfer Ownership</span>
+							<h3 className="title">Carry Over</h3>
 							<p>
-								Donec metus lorem, vulputate at sapien sit amet, auctor iaculis
-								lorem. In vel hendrerit nisi. Vestibulum eget risus velit.
-								Aliquam tristique libero at dui sodales, et placerat orci
-								lobortis. Maecenas ipsum neque, elementum id dignissim et,
-								imperdiet vitae mauris.
+								Carry over is a new service that gives users the ability to tag
+								“soon to be empty spaces” and apartments, this is best suited
+								for users who plan on relocating and need someone to take over
+								the space. It also gives the opportunity to earn a commission of
+								10%.
 							</p>
 						</div>
 					</div>
-					<div
+					{/* <div
 						className="process-work content-reverse sal-animate"
 						data-sal="slide-left"
 						data-sal-duration="1000"
@@ -102,26 +136,26 @@ export default function Services() {
 								imperdiet vitae mauris.
 							</p>
 						</div>
-					</div>
+					</div> */}
 				</div>
 				<ul className="shape-group-17 list-unstyled">
 					<li className="shape shape-1">
-						<img src="joel_ui/media/others/bubble-24.png" alt="Bubble" />
+						<img src={bobble1} alt="Bubble" />
 					</li>
 					<li className="shape shape-2">
-						<img src="joel_ui/media/others/bubble-23.png" alt="Bubble" />
+						<img src={bobble2} alt="Bubble" />
 					</li>
 					<li className="shape shape-3">
-						<img src="joel_ui/media/others/line-4.png" alt="Line" />
+						<img src={line1} alt="Line" />
 					</li>
 					<li className="shape shape-4">
-						<img src="joel_ui/media/others/line-5.png" alt="Line" />
+						<img src={line2} alt="Line" />
 					</li>
 					<li className="shape shape-5">
-						<img src="joel_ui/media/others/line-4.png" alt="Line" />
+						<img src={line1} alt="Line" />
 					</li>
 					<li className="shape shape-6">
-						<img src="joel_ui/media/others/line-5.png" alt="Line" />
+						<img src={line2} alt="Line" />
 					</li>
 				</ul>
 			</section>

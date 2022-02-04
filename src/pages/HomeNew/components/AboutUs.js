@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import study from '../../../joel_ui/media/others/case-study-4.png'
 import wewe from '../assets/Newpics.png';
 
@@ -29,9 +30,9 @@ export default function AboutUs() {
 									class members. We also provide peer to peer rentals to help
 									secure that apartment with little or no stress required.
 								</p>
-								<a href="#" className="axil-btn btn-fill-primary btn-large">
+								<Link to="/services" className="axil-btn btn-fill-primary btn-large">
 									Read More
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>

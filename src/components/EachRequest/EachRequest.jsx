@@ -49,7 +49,7 @@ export default connect(mapStateToProps)(function EachRequest({
 				<div className="testimonial-grid bg-white p-3 rounded-xxl mb-3">
 					{data?.category && (
 						<span className="social-media text-theme">
-							{data?.category.name.toUpperCase().split(' ')[0]}
+							{data?.category.name.toUpperCase()}
 						</span>
 					)}
 					<Link to={standalone ? '#' : requestUtils.renderRequestURL(data)}>

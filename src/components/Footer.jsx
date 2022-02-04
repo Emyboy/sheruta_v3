@@ -78,9 +78,11 @@ export default () => {
 												type="email"
 												className="form-control"
 												placeholder="Email address"
+												value="+2348138154470"
+												disabled
 											/>
 											<button className="subscribe-btn" type="submit">
-												Subscribe
+												Call Now
 											</button>
 										</div>
 									</form>
@@ -100,13 +102,13 @@ export default () => {
 										<div className="footer-menu-link">
 											<ul className="list-unstyled">
 												<li>
-													<a href="service-design.html">For Share</a>
+													<Link to="/services/for_share">For Share</Link>
 												</li>
 												<li>
-													<a href="service-development.html">Join Paddy</a>
+													<Link to={'/services/join_paddy'}>Join Paddy</Link>
 												</li>
 												<li>
-													<a href="service-development.html">Carry Over</a>
+													<Link to={"/services/carry_over"}>Carry Over</Link>
 												</li>
 											</ul>
 										</div>
@@ -118,10 +120,10 @@ export default () => {
 										<div className="footer-menu-link">
 											<ul className="list-unstyled">
 												<li>
-													<a href="blog.html">Blog</a>
+													<Link to={'/blog'}>Blog</Link>
 												</li>
 												<li>
-													<a href="blog.html">Partner With Us</a>
+													<Link to={"/agents"}>Join Us</Link>
 												</li>
 											</ul>
 										</div>
@@ -133,13 +135,13 @@ export default () => {
 										<div className="footer-menu-link">
 											<ul className="list-unstyled">
 												<li>
-													<a href="contact.html">Contact</a>
+													<Link to="contact.html">Contact</Link>
 												</li>
 												<li>
-													<a href="privacy-policy.html">Call Now</a>
+													<Link to="privacy-policy.html">Call Now</Link>
 												</li>
 												<li>
-													<a href="terms-of-use.html">Terms of Use</a>
+													<Link to="terms-of-use.html">Terms of Use</Link>
 												</li>
 											</ul>
 										</div>
@@ -160,7 +162,7 @@ export default () => {
 							<div className="footer-copyright">
 								<span className="copyright-text">
 									© {new Date().getFullYear()}. All rights reserved.{' '}
-									{/* <a href="https://axilthemes.com/">Axilthemes</a>. */}
+									{/* <Link to="https://axilthemes.com/">Axilthemes</Link>. */}
 								</span>
 							</div>
 						</div>
@@ -168,10 +170,10 @@ export default () => {
 							<div className="footer-bottom-link">
 								<ul className="list-unstyled">
 									<li>
-										<a href="privacy-policy.html">Privacy Policy</a>
+										<Link to="/help">Help</Link>
 									</li>
 									<li>
-										<a href="terms-of-use.html">Terms of Use</a>
+										<Link to="/terms">Terms of Use</Link>
 									</li>
 								</ul>
 							</div>
