@@ -63,8 +63,12 @@ export default function LocationUpdatePopup() {
 	return (
 		<Modal show={show}>
 			<Modal.Body className="text-center">
-				<h1 className="fw-bold mt-3">Enable Location</h1>
-				<h2>Help us find the best flatmate in your region</h2>
+				<h1 className="fw-bold mt-3" style={{ fontSize: '40px' }}>
+					Enable Location
+				</h1>
+				<h2 style={{ fontSize: '20px' }}>
+					Help us find the best flatmate in your region
+				</h2>
 				{/* <div className='badge badge-info mb-3'>Get the best out of Sheruta</div><br /> */}
 				<i
 					className="ti ti-location-pin fw-bold"
