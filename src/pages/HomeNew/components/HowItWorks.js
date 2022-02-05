@@ -80,7 +80,7 @@ export default function OurServices() {
 								</h5>
 								<p>
 									Post your shared room or apartment for share. Connect with
-									users like you who need. what you have
+									users interested in what you have.
 								</p>
 								<Link to={'/services'} className="more-btn">
 									Find out more

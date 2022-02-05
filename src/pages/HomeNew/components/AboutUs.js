@@ -19,18 +19,24 @@ export default function AboutUs() {
 								<span className="subtitle text-theme">Who we are</span>
 								<h2 className="title">About Us</h2>
 								<p>
-									We are an online housing assistance platform providing
-									Nigerians with easier and safer housing through shared
-									apartments and more, Our mission is to help reduce cost of
-									rent for young Nigerians in the urban sides of the country.
+									We are redefining apartment search within our urban cities,
+									providing users with easier, and more personalized apartment
+									search through peer-peer, Our mission is to improve the rental
+									experience of the flat share community while having
+									affordability in mind.
 								</p>
 								<p>
-									Flatmate search made better. Co-living is here to stay and we
-									are building a community of verified or verifiable working
-									class members. We also provide peer to peer rentals to help
-									secure that apartment with little or no stress required.
+									We provide marketplace features and use advanced algorithms to
+									give roommate suggestions. Our subscribers' are our top
+									priority and that's why our human reviewers use their actual
+									eyeballs and organic brains to review all roommate
+									submissions. We apply a 3 phase security check to ensure the
+									safety of our community members.
 								</p>
-								<Link to="/services" className="axil-btn btn-fill-primary btn-large">
+								<Link
+									to="/services"
+									className="axil-btn btn-fill-primary btn-large"
+								>
 									Read More
 								</Link>
 							</div>
