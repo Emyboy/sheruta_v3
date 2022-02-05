@@ -10,7 +10,10 @@ import styled from 'styled-components';
 import '../../joel_ui/css/app.css';
 import RecentRequests from './components/RecentRequests/RecentRequests';
 import { Helmet } from 'react-helmet'
+import { useSelector } from 'react-redux'
 
+import SocialHomePage from '../../components/Social/SocialHomePage/SocialHomePage'
+import { Redirect } from 'react-router'
 
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 const HomeListing = React.lazy(() => import('./components/HomeListings/HomeListings'))
@@ -20,6 +23,13 @@ const Wrapper = styled.div`
 `
 
 export default function HomeNew() {
+
+	const {user} =  useSelector(state => state.auth);
+
+	if(user){
+		return <Redirect to='/feeds' />
+	}
+
 	return (
 		<Layout>
 			<Helmet>
