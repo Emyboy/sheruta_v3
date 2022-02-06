@@ -6,10 +6,7 @@ import Notifications from '../../services/Notifications'
 import PaymentService from '../../services/PaymentService'
 import { getAppDetails } from '../../services/Sheruta'
 import store from '../store/store'
-import {
-	getAllMySuggestion,
-	getAllSuggestionsByStatus,
-} from './alice.actions'
+import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions'
 
 export const getAllServices = () => (dispatch) => {
 	axios(process.env.REACT_APP_API_URL + '/services')
@@ -289,6 +286,24 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 	}
 }
 
+export const getRecentUsers = () => async (dispatch) => {
+	try {
+		const res = await axios(
+			process.env.REACT_APP_API_URL +
+				`/users/?is_verified=true&_limit=10&_start=0&_sort=created_at:DESC`
+		)
+		
+		dispatch({
+			type: 'SET_VIEW_STATE',
+			payload: {
+				recent_users: res.data,
+			},
+		})
+	} catch (error) {
+		return Promise.reject(error)
+	}
+}
+
 export const getRealTimeStuffs = () => (dispatch) => {
 	dispatch(getAllConversations())
 	dispatch(getUnreadMessageCount())
@@ -306,8 +321,9 @@ export const getAllViewOptions = () => (dispatch) => {
 }
 
 export const getOtherStuffs = () => (dispatch) => {
+	dispatch(getAllSuggestionsByStatus('accepted'))
 	dispatch(getAppDetail())
 	dispatch(getAuthPersonalInfo())
 	dispatch(getAllMySuggestion())
-	dispatch(getAllSuggestionsByStatus('accepted'))
+	dispatch(getRecentUsers())
 }

@@ -152,97 +152,100 @@ export default function ValidIdCard(props) {
     },[user])
 
     return (
-        <div>
-            <Modal show={showEdit} onHide={() => setShowEdit(!showEdit)}>
-                <Modal.Body className="p-3">
-                    <Modal.Header closeButton>
-                        <h3>Edit Profile</h3>
-                    </Modal.Header>
-                    <hr />
-                    <AuthEditForm />
-                </Modal.Body>
-            </Modal>
-            <div className="sec-heading text-center mt-3">
-                <h2 className="animated animate__bounceIn fw-bold">
-                    National Identification Number
-                </h2>
-                <p>Identity verification for security reasons.</p>
-            </div>
-            <Modal show={showUserData && ninData} size="lg">
-                {ninData && (
-                    <Modal.Body className="card">
-                        <h2 className="text-center">
-                            Please Verify This Is You
-                        </h2>
-                        <img
-                            src={user.user.avatar_url}
-                            width="200"
-                            className="rounded mt-4"
-                        />
-                        <div>
-                            <h5 className="mt-3">
-                                <b className="text-muted">Name: </b>
-                                {ninData.title +
-                                    " " +
-                                    ninData.firstname +
-                                    " " +
-                                    ninData.middlename+
-                                    " " +
-                                    ninData.lastname
-                                    }
-                            </h5>
-                            <h5 className="mt-3">
-                                <b className="text-muted">Date Of Birth: </b>
-                                {ninData.birthdate}
-                            </h5>
-                            <h5 className="mt-3">
-                                <b className="text-muted">Religion: </b>
-                                {ninData.religion}
-                            </h5>
-                            <h5 className="mt-3">
-                                <b className="text-muted">Native Language: </b>
-                                {ninData.nspokenlang}
-                            </h5>
-                            <h5 className="mt-3 mb-4">
-                                <b className="text-muted">State Of Origin: </b>
-                                {ninData.stateOfOrigin}
-                            </h5>
-                            {ninData.lastname.toLowerCase() !== user.user.last_name.toLowerCase() ? (
-                                <div className="alert alert-danger">
-                                    <span className="lead">
-                                        <b>
-                                            The name on your NIN doesn't match
-                                            the name you gave us.
-                                        </b>
-                                    </span>
-                                    <hr />
-                                    <p className="d-flex justify-content-between">
-                                        <b>Continue ? </b>
-                                        <b>OR </b>
-                                        <Btn
-                                            text="Edit Profile"
-                                            className="btn-sm"
-                                            onClick={() => setShowEdit(!showEdit)}
-                                        />
-                                    </p>
-                                </div>
-                            ) : null}
-                        </div>
-                        <hr />
-                        <div className="d-flex justify-content-between">
-                            <Btn text="Yes" onClick={next} loading={loading} />
-                            <Btn
-                                text="No"
-                                danger
-                                onClick={() => setShowUserData(false)}
-                                disabled={loading}
-                            />
-                        </div>
-                    </Modal.Body>
-                )}
-            </Modal>
-            <div className="container">
-                {process.env.NODE_ENV === "development" ? (
+			<div>
+				<Modal show={showEdit} onHide={() => setShowEdit(!showEdit)}>
+					<Modal.Body className="p-3">
+						<Modal.Header closeButton>
+							<h3>Edit Profile</h3>
+						</Modal.Header>
+						<hr />
+						<AuthEditForm />
+					</Modal.Body>
+				</Modal>
+				<div className="sec-heading text-center mt-3">
+					<h2 className="animated animate__bounceIn fw-bold">
+						National Identification Number
+					</h2>
+					<p>Identity verification for security reasons.</p>
+					<h6
+						className="fw-700 text-theme link"
+						onClick={() => props.setStep(props.step + 1)}
+					>
+						SKIP
+					</h6>
+				</div>
+				<Modal show={showUserData && ninData} size="lg">
+					{ninData && (
+						<Modal.Body className="card">
+							<h2 className="text-center">Please Verify This Is You</h2>
+							<img
+								src={user.user.avatar_url}
+								width="200"
+								className="rounded mt-4"
+							/>
+							<div>
+								<h5 className="mt-3">
+									<b className="text-muted">Name: </b>
+									{ninData.title +
+										' ' +
+										ninData.firstname +
+										' ' +
+										ninData.middlename +
+										' ' +
+										ninData.lastname}
+								</h5>
+								<h5 className="mt-3">
+									<b className="text-muted">Date Of Birth: </b>
+									{ninData.birthdate}
+								</h5>
+								<h5 className="mt-3">
+									<b className="text-muted">Religion: </b>
+									{ninData.religion}
+								</h5>
+								<h5 className="mt-3">
+									<b className="text-muted">Native Language: </b>
+									{ninData.nspokenlang}
+								</h5>
+								<h5 className="mt-3 mb-4">
+									<b className="text-muted">State Of Origin: </b>
+									{ninData.stateOfOrigin}
+								</h5>
+								{ninData.lastname.toLowerCase() !==
+								user.user.last_name.toLowerCase() ? (
+									<div className="alert alert-danger">
+										<span className="lead">
+											<b>
+												The name on your NIN doesn't match the name you gave us.
+											</b>
+										</span>
+										<hr />
+										<p className="d-flex justify-content-between">
+											<b>Continue ? </b>
+											<b>OR </b>
+											<Btn
+												text="Edit Profile"
+												className="btn-sm"
+												onClick={() => setShowEdit(!showEdit)}
+											/>
+										</p>
+									</div>
+								) : null}
+							</div>
+							<hr />
+							<div className="d-flex justify-content-between">
+								<Btn text="Yes" onClick={next} loading={loading} />
+								<Btn
+									text="No"
+									danger
+									onClick={() => setShowUserData(false)}
+									disabled={loading}
+								/>
+							</div>
+						</Modal.Body>
+					)}
+				</Modal>
+				<div className="container">
+					{/* {process.env.NODE_ENV === "development" ? (
                     <ul>
                         <li>
                             <h6>21202384433</h6>
@@ -251,41 +254,41 @@ export default function ValidIdCard(props) {
                             <h6>38010034757</h6>
                         </li>
                     </ul>
-                ) : null}
-                <div className="d-flex justify-content-center mb-5 mt-5">
-                    <NinInput
-                        placeholder="Ex. 10000000001"
-                        type="number"
-                        className="form-control"
-                        onChange={(e) => setNin(e.target.value)}
-                        autoFocus
-                        disabled={loading}
-                    />
-                </div>
-                <div className="text-center">
-                    <b className={`${nin.length > 11 ? "text-danger" : ""}`}>
-                        {11 - nin.length}
-                    </b>
-                    <br />
-                    {nin.length > 11 ? (
-                        <small className="text-danger">
-                            Invalid Identity Length, should be 11 characters
-                        </small>
-                    ) : null}
-                </div>
-            </div>
-            <hr />
-            <div className="text-center">
-                <Btn
-                    className="mb-4 w-50"
-                    text="Finish"
-                    disabled={nin.length < 11 || nin.length > 11}
-                    onClick={handleSubmit}
-                    loading={loading}
-                />
-            </div>
-        </div>
-    );
+                ) : null} */}
+					<div className="d-flex justify-content-center mb-5 mt-5">
+						<NinInput
+							placeholder="Ex. 10000000001"
+							type="number"
+							className="form-control"
+							onChange={(e) => setNin(e.target.value)}
+							autoFocus
+							disabled={loading}
+						/>
+					</div>
+					<div className="text-center">
+						<b className={`${nin.length > 11 ? 'text-danger' : ''}`}>
+							{11 - nin.length}
+						</b>
+						<br />
+						{nin.length > 11 ? (
+							<small className="text-danger">
+								Invalid Identity Length, should be 11 characters
+							</small>
+						) : null}
+					</div>
+				</div>
+				<hr />
+				<div className="text-center">
+					<Btn
+						className="mb-4 w-50"
+						text="Finish"
+						disabled={nin.length < 11 || nin.length > 11}
+						onClick={handleSubmit}
+						loading={loading}
+					/>
+				</div>
+			</div>
+		)
 }
 // import { notification } from "antd";
 // import React, { useEffect, useState } from "react";

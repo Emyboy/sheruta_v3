@@ -40,11 +40,11 @@ const GetStartedPopup = (props) => {
 				>
 					<Modal.Body className="card">
 						<h1 className="text-black mb-4">
-							<strong>Join the community today.</strong>
+							<strong>Get verified today.</strong>
 						</h1>
-						<small className="text-muted mb-2">
+						{/* <small className="text-muted mb-2">
 							Get access to verified flat mates.
-						</small>
+						</small> */}
 						<small className="text-muted mb-2">Find people closest to you.</small>
 						<small className="text-muted mb-2">Be the first to get updates.</small>
 						<div className="container">

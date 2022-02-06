@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import Layout from '../../components/Layout/Layout'
 
-import { Tabs, notification } from 'antd'
+import { notification } from 'antd'
 import axios from 'axios'
 import EachSocialRequest from '../../components/Social/EachSocialRequest'
 import PageLoader from '../../components/PageLoader'
@@ -17,9 +17,8 @@ import Global from '../../Global'
 import ProfileJumb from '../../components/ProfileComponents/ProfileJumb'
 import ProfileAbout from '../../components/ProfileComponents/ProfileAbout'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
-import { Modal } from 'react-bootstrap'
-import PersonalInfo from './PersonalInfo'
-const { TabPane } = Tabs
+import PersonalInfo from '../../pages/Profile/PersonalInfo'
+import PreferredLocationList from '../../components/PreferredLocationList/PreferredLocationList'
 
 export const Profile2 = (props) => {
 	localStorage.setItem('after_login', window.location.pathname)
@@ -32,7 +31,8 @@ export const Profile2 = (props) => {
 	const [loading, setLoading] = useState(true)
 	const [userData, setUserData] = useState(null)
 	const [notFound, setNotFound] = useState(false)
-	const [showInfo, setShowInfo] = useState(false);
+	const tabs = ['Requests', 'More Info', 'Location(s)']
+	const [currentTab, setCurrentTab] = useState(tabs[0])
 	// const user = props.auth.user;
 
 	useEffect(() => {
@@ -110,8 +110,7 @@ export const Profile2 = (props) => {
 		return <PageNotFound />
 	} else {
 		return (
-			<Layout currentPage="profile">
-				
+			<Layout currentPage="profile" showMessages>
 				<div
 					className={!auth.user ? 'container' : ''}
 					style={{ marginTop: !auth.user ? '15vh' : '' }}
@@ -160,9 +159,48 @@ export const Profile2 = (props) => {
 									Global.isMobile && 'p-0'
 								}`}
 							>
-								{state.userRequests.map((val, i) => {
-									return <EachSocialRequest key={i} data={val} />
-								})}
+								<div className="card d-block w-100 shadow-sm rounded-xxl mb-3 mb-0 p-0 border-top-xs">
+									<ul
+										className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
+										id="pills-tab"
+										role="tablist"
+									>
+										{tabs.map((val, i) => {
+											return (
+												<li
+													className={`${
+														currentTab === val && 'active'
+													} list-inline-item me-5`}
+													key={`tab-${i}`}
+													onClick={() => setCurrentTab(val)}
+												>
+													<a
+														className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
+															currentTab === val && 'active'
+														}`}
+														data-toggle="tab"
+													>
+														{val}
+													</a>
+												</li>
+											)
+										})}
+									</ul>
+								</div>
+								{currentTab === 'Requests' &&
+									state.userRequests.map((val, i) => {
+										return <EachSocialRequest key={i} data={val} />
+									})}
+								{currentTab === 'More Info' && (
+									<div className="card" style={{ minHeight: '500px' }}>
+										<PersonalInfo userData={userData} />
+									</div>
+								)}
+								{currentTab === 'Location(s)' && (
+									<div className="card">
+										<PreferredLocationList userData={userData} />
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

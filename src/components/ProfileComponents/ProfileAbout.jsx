@@ -1,32 +1,42 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import { useState } from 'react'
-import { Modal } from 'antd';
+import { Modal } from 'antd'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
-import PersonalInfo from '../../pages/Profile/PersonalInfo';
+import { Link } from 'react-router-dom'
+import PersonalInfo from '../../pages/Profile/PersonalInfo'
+import Global from '../../Global'
 
 export default function ProfileAbout({ user }) {
 	const auth = useSelector((state) => state.auth)
-	const [isOwner, setIsOwner] = useState(auth.user ? auth.user.user.id === user.id: false);
-	const [showInfo, setShowInfo] = useState(false);
+	const [isOwner, setIsOwner] = useState(
+		auth.user ? auth.user?.user?.id === user?.id : false
+	)
+	const [showInfo, setShowInfo] = useState(false)
 
 	useEffect(() => {
-		if (auth.user && user.id === auth.user.user.id) {
+		if (auth.user && user?.id === auth.user?.user?.id) {
 			setIsOwner(true)
 		} else {
 			setIsOwner(false)
 		}
-	},[user])
+	}, [user])
 
-	if(user && user.deactivated || auth.user && auth.user?.user?.deactivated){
+	if (
+		(user && user?.deactivated) ||
+		(auth.user && auth.user?.user?.deactivated)
+	) {
 		return null
 	}
 
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-			<Modal visible={showInfo} onCancel={() => setShowInfo(false)} footer={null}>
-				{auth.user && auth.user?.user.is_verified ? (
+			<Modal
+				visible={showInfo}
+				onCancel={() => setShowInfo(false)}
+				footer={null}
+			>
+				{auth.user && auth.user?.user?.is_verified ? (
 					<PersonalInfo userData={user} />
 				) : (
 					<div className="text-center pt-5 pb-5">
@@ -46,7 +56,13 @@ export default function ProfileAbout({ user }) {
 			<div className="card-body d-block p-4">
 				<h4 className="fw-700 mb-3 font-xsss text-grey-900">About</h4>
 				<p className="fw-500 text-grey-500 lh-24 font-xssss mb-0">
-					{user.bio || `Hi my name is ${user.first_name} and I use Sheruta NG`}
+					{user?.bio ||
+						`Hi my name is ${user?.first_name} and I use Sheruta NG`}
+				</p>
+				<h4 className="fw-700 font-xsss text-grey-900 mt-3 mb-1">Budget</h4>
+				<p className="fw-500 text-grey-500 lh-24 font-xxxl mb-0">
+					{Global?.currency}
+					{window.formatedPrice.format(user?.budget)}
 				</p>
 				<button
 					className="text-center mt-3 btn fw-bold"

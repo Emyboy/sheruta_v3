@@ -31,41 +31,50 @@ export const AgeRange = (props) => {
   };
 
   return (
-    <div>
-      <div className="sec-heading text-center mb-4">
-        <h2 className="animated animate__bounceIn fw-700">
-          What age range are you looking for?
-        </h2>
-        {/* <p>We will need to match you up with the gender of your choosing </p> */}
-      </div>
-      <div className="text-center">
-        <h5>From</h5>
-        <h2>
-          <b className="display-7">{data[0]}</b>
-        </h2>
-        <h5>to</h5>
-        <h2>
-          <b className="display-7">{data[1]}</b>
-        </h2>
-      </div>
-      <label>Slide This 👇🏽</label>
-      <Slider
-        trackStyle={{ color: "green" }}
-        min={18}
-        range
-        defaultValue={data}
-        onChange={(e) => setData(e)}
-        //   onAfterChange={e => console.log(e)}
-      />
-      <hr />
-      <Btn
-        text="Continue"
-        className="mb-3"
-        onClick={handleSubmit}
-        loading={loading}
-      />
-    </div>
-  );
+		<div>
+			<div className="sec-heading text-center mb-4">
+				<h2 className="animated animate__bounceIn fw-700">
+					What age range are you looking for?
+				</h2>
+				{/* <p>We will need to match you up with the gender of your choosing </p> */}
+			</div>
+			<div className="text-center d-flex justify-content-center">
+				<div>
+					<h5>From</h5>
+					<h2>
+						<b className="display-7">{data[0]}</b>
+					</h2>
+				</div>
+				<div className="ml-3">
+					<h5>to</h5>
+					<h2>
+						<b className="display-7">{data[1]}</b>
+					</h2>
+				</div>
+			</div>
+			<div className="d-flex justify-content-center">
+				<div className="col-4 col-md-5">
+					<label>Slide This 👇🏽</label>
+					<Slider
+						trackStyle={{ color: 'green' }}
+						min={18}
+						max={70}
+						range
+						defaultValue={data}
+						onChange={(e) => setData(e)}
+						//   onAfterChange={e => console.log(e)}
+					/>
+				</div>
+			</div>
+			<hr />
+			<Btn
+				text="Continue"
+				className="mb-3"
+				onClick={handleSubmit}
+				loading={loading}
+			/>
+		</div>
+	)
 };
 
 const mapStateToProps = (state) => ({});

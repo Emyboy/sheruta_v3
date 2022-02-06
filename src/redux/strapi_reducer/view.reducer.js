@@ -17,7 +17,8 @@ const initialState = {
     robot_action_link: null,
     notifications: [],
     messages: [],
-    amenities: []
+    amenities: [],
+    recent_users: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {

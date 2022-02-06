@@ -13,6 +13,7 @@ import PostRequestAds from '../../Ads/RequestAds/PostRequestAds'
 import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
+import RecentUsersList from '../../RecentUsersList/RecentUsersList'
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
 
@@ -34,31 +35,6 @@ export default (props) => {
 		}
 	}, [])
 
-	// useEffect(() => {
-	//     if (state.properties.length === 0 && !Global.isMobile) {
-	//         axios(
-	//             process.env.REACT_APP_API_URL +
-	//                 `/properties/recent/${Global.isMobile ? "4" : "5"}`,
-	//         )
-	//             .then((res) => {
-	//                 setState({ ...state, properties: res.data });
-	//             })
-	//             .catch((err) => {});
-	//     }
-	// }, [state]);
-
-	// useEffect(() => {
-	//   if (!Global.isMobile) {
-	//     axios(
-	//       process.env.REACT_APP_API_URL +
-	//         `/users/?confirmed=true&is_verified=true&_limit=4&_sort=created_at:DESC`
-	//     )
-	//       .then((res) => {
-	//         setNewUsers(res.data);
-	//       })
-	//       .catch((err) => {});
-	//   }
-	// }, []);
 	useEffect(() => {
 		if (state.list.length === 0) {
 			const dev = process.env.NODE_ENV === 'development'
@@ -146,13 +122,14 @@ export default (props) => {
 									</ul>
 								</div>
 							</div>
+							{personal_info && <RecentUsersList />}
 
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
 										return (
 											<>
-												<SocialFeedsAds index={i} key={`ad-${i}`}/>
+												<SocialFeedsAds index={i} key={`ad-${i}`} />
 												<EachSocialRequest key={i + ' request'} data={val} />
 											</>
 										)

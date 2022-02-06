@@ -20,12 +20,13 @@ const Wrapper = styled.span`
     }
 `;
 
-export default function VerifiedBadge({ user, size, className, without_text }) {
+export default function VerifiedBadge({ user, size, className, without_text, style }) {
     return (
         <Wrapper
             size={size}
             className={className}
             is_verified={user?.is_verified}
+            style={style}
         >
             {user?.is_verified ? <GoVerified /> : <IoClose />}{" "}
             {without_text ? null :

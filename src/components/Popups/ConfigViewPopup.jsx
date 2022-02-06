@@ -75,8 +75,8 @@ const ConfigViewPopup = (props) => {
 		<Modal show={view.configureView} size="lg">
 			<Modal.Body>
 				<div className="text-center">
-					<h3 className="fw-bold">Configure what you see</h3>
-					<h4 className="text-muted">How can we help?</h4>
+					<h3 className="fw-bold">How can we help?</h3>
+					<h5 className="text-muted">Select on below</h5>
 				</div>
 				<div className="row justify-content-center mt-5">
 					<SelectionCard

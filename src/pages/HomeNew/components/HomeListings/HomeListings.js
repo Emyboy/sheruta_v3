@@ -18,7 +18,7 @@ const getItems = () =>
 		.fill(0)
 		.map((_, ind) => ({ id: getId(ind) }))
 
-const Wrapper = styled.div`
+export const HorizontalScrollWrapper = styled.div`
 	.wrapper > div {
 		/* width */
 		::-webkit-scrollbar {
@@ -82,7 +82,7 @@ function App() {
 						More {'>'}
 					</Link>
 				</div>
-				<Wrapper>
+				<HorizontalScrollWrapper>
 					<ScrollMenu
 						// LeftArrow={() => <button>Left</button>}
 						// RightArrow={() => <button>Right</button>}
@@ -126,7 +126,7 @@ function App() {
 							</EachProperty>
 						))}
 					</ScrollMenu>
-				</Wrapper>
+				</HorizontalScrollWrapper>
 			</div>
 		</section>
 	)
