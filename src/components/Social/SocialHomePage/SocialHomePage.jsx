@@ -122,11 +122,19 @@ export default (props) => {
 									</ul>
 								</div>
 							</div>
-							{personal_info && <RecentUsersList />}
+							
 
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
+										if(i === 2 ){
+											return (
+												<>
+													<h5 className="fw-700 text-grey-600 mb-1 ml-2 mt-4">Recent Users</h5>
+													{personal_info && <RecentUsersList />}
+												</>
+											)
+										}
 										return (
 											<>
 												<SocialFeedsAds index={i} key={`ad-${i}`} />

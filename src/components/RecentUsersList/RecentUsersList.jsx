@@ -7,7 +7,7 @@ import EachUserListCard from './EachUserListCard'
 export default function RecentUsersList() {
 	const { recent_users } = useSelector((state) => state?.view)
 	return (
-		<div className="mb-4">
+		<div className="mb-5">
 			<HorizontalScrollWrapper>
 				<ScrollMenu
 					// LeftArrow={() => <button>Left</button>}

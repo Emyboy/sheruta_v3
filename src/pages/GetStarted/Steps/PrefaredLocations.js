@@ -1,144 +1,157 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import Btn from '../../../components/Btn/Btn';
+import { connect } from 'react-redux'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import Btn from '../../../components/Btn/Btn'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import axios from 'axios';
-import { notification } from 'antd';
-import Cookies from 'js-cookie';
+import axios from 'axios'
+import { notification } from 'antd'
+import Cookies from 'js-cookie'
+import Global from '../../../Global'
 
 export const PrefaredLocations = (props) => {
+	const { setStep, step, standAlone, done } = props
 
-    const { setStep, step, standAlone, done } = props;
+	const [data, setData] = React.useState({
+		location: null,
+		google_location: null,
+	})
 
-    const [data, setData] = React.useState({
-        location: null,
-        google_location: null,
-    });
+	const [locaitons, setLocations] = React.useState([])
+	const [loading, setLoading] = React.useState(false)
 
-    const [locaitons, setLocations] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
+	const handleAddLocation = () => {
+		setLoading(true)
+		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${props.auth.user.jwt}`,
+			},
+			data: {
+				...data,
+				users_permissions_user: props.auth.user.user.id,
+				personal_info: props.hasInfo?.id || null,
+			},
+		})
+			.then((res) => {
+				setLoading(false)
+				setLocations([...locaitons, res.data])
+			})
+			.catch((err) => {
+				setLoading(false)
+				notification.error({ message: 'Error adding location' })
+			})
+	}
 
-    const handleAddLocation = () => {
-        setLoading(true)
-        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
-            method: 'POST',
-            headers: {
-                Authorization:
-                    `Bearer ${props.auth.user.jwt}`,
-            },
-            data: {
-                ...data,
-                users_permissions_user: props.auth.user.user.id,
-                personal_info: props.hasInfo?.id || null
-            }
-        })
-            .then(res => {
-                setLoading(false)
-                setLocations([...locaitons, res.data]);
-            })
-            .catch(err => {
-                setLoading(false);
-                notification.error({ message: 'Error adding location' })
-            })
-    };
-
-    const removeAddressFromList = (id) => {
-        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations/' + id, {
-            method: 'DELETE',
-            headers: {
-                Authorization:
-                    `Bearer ${props.auth.user.jwt}`,
-            },
-        })
-            .then(res => {
-                setLocations([...locaitons.filter(x => x.id !== res.data.id)])
-            })
-            .catch(err => {
-                notification.error({ message: 'Error deleting location' })
-            })
-    };
-
-    React.useEffect(() => {
-        axios(process.env.REACT_APP_API_URL + '/user-preferred-locations' + '/?users_permissions_user=' + props.auth.user.user.id, {
-            headers: {
-                Authorization:
-                    `Bearer ${Cookies.get('token')}`,
-            },
-        })
-            .then(res => {
-                setLocations(res.data)
-            })
-            .catch(err => {
-                // notification.error({ message: 'Error fetching your location' })
-                console.log({...err})
-            })
-    }, []);
+	const removeAddressFromList = (id) => {
+		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations/' + id, {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${props.auth.user.jwt}`,
+			},
+		})
+			.then((res) => {
+				setLocations([...locaitons.filter((x) => x.id !== res.data.id)])
+			})
+			.catch((err) => {
+				notification.error({ message: 'Error deleting location' })
+			})
+	}
 
 	React.useEffect(() => {
-		if(locaitons.length > 0 && done){
+		axios(
+			process.env.REACT_APP_API_URL +
+				'/user-preferred-locations' +
+				'/?users_permissions_user=' +
+				props.auth.user.user.id,
+			{
+				headers: {
+					Authorization: `Bearer ${Cookies.get('token')}`,
+				},
+			}
+		)
+			.then((res) => {
+				setLocations(res.data)
+			})
+			.catch((err) => {
+				// notification.error({ message: 'Error fetching your location' })
+				console.log({ ...err })
+			})
+	}, [])
+
+	React.useEffect(() => {
+		if (locaitons.length > 0 && done) {
 			done(locaitons)
 		}
-	},[locaitons])
+	}, [locaitons])
 
-    return (
-			<div>
-				<div className="sec-heading text-center mb-4">
-					<h2 className="animated animate__bounceIn h1 fw-700">
-						What are your Preferred locations?
-					</h2>
-					<p>Add multiple locations of your choice</p>
-				</div>
-				<div className="container">
-					{locaitons.map((val, i) => {
-						return (
-							<div className="card shadow border border-success mb-2" key={i}>
-								<div className="pl-2 d-flex justify-content-between">
-									<p className="mb-0" style={{ fontSize: '20px' }}>
-										{val.location}
-									</p>
-									<button
-										className="btn btn-sm text-danger"
-										onClick={() => removeAddressFromList(val.id)}
-									>
-										<AiFillCloseCircle size={25} />
-									</button>
-								</div>
+	return (
+		<div>
+			<div className="sec-heading text-center mb-4">
+				<h2 className="animated animate__bounceIn h1 fw-700">
+					Preferred location(s)?
+				</h2>
+				<p>
+					Add <b>3</b> locations of your choice
+				</p>
+			</div>
+			<div className="container">
+				{locaitons.map((val, i) => {
+					return (
+						<div className="card shadow border border-success mb-2" key={i}>
+							<div className="pl-2 d-flex justify-content-between">
+								<p className="mb-0" style={{ fontSize: '20px' }}>
+									{val.location.slice(0, Global.isMobile ? 20 : 40)}...
+								</p>
+								<button
+									className="btn btn-sm text-danger"
+									onClick={() => removeAddressFromList(val.id)}
+								>
+									<AiFillCloseCircle size={25} />
+								</button>
 							</div>
-						)
-					})}
-					<hr />
-					<div className="">
-						<div className="form-group text-center pt-3">
-							<label>Location</label>
-							<GooglePlacesAutocomplete
-								data-cy="google-places"
-								apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
-								apiOptions={{ language: 'en', region: 'ng' }}
-								selectProps={{
-									// props.state.location,
-									className: 'border',
-									onChange: (e) => {
-										setData({ ...data, google_location: e, location: e.label })
-									},
-									placeholder: 'Type in any location here.',
-								}}
-								autocompletionRequest={{
-									componentRestrictions: {
-										country: ['ng'],
-									},
-								}}
-							/>
-							<button
-								disabled={!data.location || loading}
-								className="btn w-50 text-success mt-3"
-								onClick={handleAddLocation}
-							>
-								{loading ? 'Loading...' : 'Add +'}
-							</button>
-							<br />
-							<hr />
-							{!standAlone &&
+						</div>
+					)
+				})}
+				<hr />
+				<div className="">
+					<div className="form-group text-center pt-3">
+						{locaitons.length < 3 ? (
+							<>
+								<label>Location</label>
+								<GooglePlacesAutocomplete
+									data-cy="google-places"
+									apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
+									apiOptions={{ language: 'en', region: 'ng' }}
+									selectProps={{
+										// props.state.location,
+										className: 'border',
+										onChange: (e) => {
+											setData({
+												...data,
+												google_location: e,
+												location: e.label,
+											})
+										},
+										placeholder: 'Type in any location here.',
+									}}
+									autocompletionRequest={{
+										componentRestrictions: {
+											country: ['ng'],
+										},
+									}}
+								/>
+								<button
+									disabled={!data.location || loading}
+									className="btn w-50 text-success mt-3"
+									onClick={handleAddLocation}
+								>
+									{loading ? 'Loading...' : 'Add +'}
+								</button>
+							</>
+						): <small className='text-danger'>You have reach maximum of 3</small>}
+						<br />
+						<hr />
+						{!standAlone && (
 							<Btn
 								text="I'm done"
 								className="mt-3"
@@ -146,21 +159,18 @@ export const PrefaredLocations = (props) => {
 								style={{ backgroundColor: null }}
 								onClick={() => setStep(step + 1)}
 							/>
-                            
-                            }
-						</div>
+						)}
 					</div>
 				</div>
 			</div>
-		)
+		</div>
+	)
 }
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+	auth: state.auth,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrefaredLocations)
