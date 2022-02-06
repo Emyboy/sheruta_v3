@@ -109,7 +109,7 @@ const MasterPopup = (props) => {
 		return (
 			<>
 				<ConfigViewPopup />
-				<GetStartedPopup />
+				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
 				{Global.PLATFORM !== 'iPhone' && (
 					<>

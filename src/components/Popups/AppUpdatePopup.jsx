@@ -59,7 +59,7 @@ export default function AppUpdatePopup() {
 	}, [app_details])
 
 	return (
-		<Modal show={show} style={{ paddingTop: '20vh', paddingRight: 0 }}>
+		<Modal show={show} style={{ paddingTop: '10vh', paddingRight: 0 }}>
 			<div className="bg-whtie p-2 text-center rounde">
 				<AiFillWarning size={80} className="text-warning" />
 				<h3 className="fw-700" style={{ fontSize: '40px' }}>

@@ -51,7 +51,7 @@ export default function GetMoreInfoPopup() {
 			<Modal show={show} size="lg" className="pt-5">
 				<Modal.Body>
 					<div className="text-center">
-						<h1 className="fw-700">Sorry</h1>
+						<h1 style={{ fontSize: '30px'}} className="fw-700">Sorry</h1>
 						<p>These information are required moving forward</p>
 					</div>
 					<form onSubmit={handleSubmit}>
