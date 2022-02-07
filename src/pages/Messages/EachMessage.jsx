@@ -11,6 +11,8 @@ import Global from '../../Global'
 const MgsWrapper = styled.div`
 	p {
 		margin-bottom: 0 !important;
+		color: black !important;
+		font-weight: 600;
 	}
 	ul,
 	li {
@@ -81,7 +83,7 @@ export default function EachMessage({ message }) {
 							<div className="time">{moment(message.created_at).fromNow()}</div>
 						</div>
 					</div>
-					<MgsWrapper className="bg-them-light rounded p-2 shadow">
+					<MgsWrapper className="bg-them-light rounded p-2 shadow text-black">
 						{message.message_html ? (
 							ReactHtmlParser(message.message_html)
 						) : (
