@@ -1,182 +1,123 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import '../joel_ui/css/app.css';
+import { Link } from 'react-router-dom'
 
 export default () => {
 	return (
-		<footer className="footer-area mt-5 bg-white">
-			<div className="container">
-				<div className="footer-top">
-					<div className="footer-social-link">
-						<ul className="list-unstyled">
-							<li>
-								<a
-									href="https://web.facebook.com/sheruta.ng"
-									data-sal="slide-up"
-									data-sal-duration="500"
-									data-sal-delay="100"
-									className="sal-animate"
-								>
-									<i className="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a
-									href="https://twitter.com/sheruta_ng"
-									data-sal="slide-up"
-									data-sal-duration="500"
-									data-sal-delay="200"
-									className="sal-animate"
-								>
-									<i className="fab fa-twitter"></i>
-								</a>
-							</li>
-
-							<li>
-								<a
-									href="https://www.linkedin.com/company/sheruta-online-accommodations-solution/"
-									data-sal="slide-up"
-									data-sal-duration="500"
-									data-sal-delay="400"
-									className="sal-animate"
-								>
-									<i className="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-							<li>
-								<a
-									href="https://www.instagram.com/sheruta_ng"
-									data-sal="slide-up"
-									data-sal-duration="500"
-									data-sal-delay="500"
-									className="sal-animate"
-								>
-									<i className="fab fa-instagram"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div className="footer-main">
+		<footer className="light-footer skin-light-footer" style={{ zIndex: 0 }}>
+			<div>
+				<div className="container">
 					<div className="row">
-						<div
-							className="col-xl-6 col-lg-5 sal-animate"
-							data-sal="slide-right"
-							data-sal-duration="800"
-							data-sal-delay="100"
-						>
-							<div className="footer-widget border-end">
-								<div className="footer-newsletter">
-									<h2 className="title">Get in touch!</h2>
-									<p>
-										Be the first to get updates on flat sharing opportunities.
-										Submit your email below to join our mailing list.
-									</p>
-									<form>
-										<div className="input-group">
-											<input
-												type="email"
-												className="form-control"
-												placeholder="Email address"
-												value="+2348138154470"
-												disabled
-											/>
-											<a href='tel:+2348138154470' className="subscribe-btn" type="submit">
-												Call Now
-											</a>
-										</div>
-									</form>
-								</div>
+						<div className="col-lg-3 col-md-6">
+							<div className="footer-widget">
+								<h4 className="widget-title">About Us</h4>
+								<p>
+									Why use sheruta? Have access to hundreds of potential
+									apartments, earn an alternative source of income. All possible
+									flatmates are verified ensuring your safety. We provide
+									different payment plans that supports both long-term and
+									short-term. lets be your medium, connecting you to your new
+									apartment or that special place you can call home for
+									long-term, short-term and flatshare
+								</p>
+								{/* <a href="#c" className="other-store-link">
+                                    <div className="other-store-app">
+                                        <div className="os-app-icon">
+                                            <i className="ti-android"></i>
+                                        </div>
+                                        <div className="os-app-caps">
+                                            Google Store
+											</div>
+                                    </div>
+                                </a> */}
 							</div>
 						</div>
-						<div
-							className="col-xl-6 col-lg-7 sal-animate"
-							data-sal="slide-left"
-							data-sal-duration="800"
-							data-sal-delay="100"
-						>
-							<div className="row">
-								<div className="col-sm-6">
-									<div className="footer-widget">
-										<h6 className="widget-title">Services</h6>
-										<div className="footer-menu-link">
-											<ul className="list-unstyled">
-												<li>
-													<Link to="/services/for_share">For Share</Link>
-												</li>
-												<li>
-													<Link to={'/services/join_paddy'}>Join Paddy</Link>
-												</li>
-												<li>
-													<Link to={"/services/carry_over"}>Carry Over</Link>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div className="col-sm-3">
-									<div className="footer-widget">
-										<h6 className="widget-title">Resources</h6>
-										<div className="footer-menu-link">
-											<ul className="list-unstyled">
-												<li>
-													<Link to={'/blog'}>Blog</Link>
-												</li>
-												<li>
-													<Link to={"/agents"}>Join Us</Link>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div className="col-sm-3">
-									<div className="footer-widget">
-										<h6 className="widget-title">Support</h6>
-										<div className="footer-menu-link">
-											<ul className="list-unstyled">
-												<li>
-													<Link to="contact.html">Contact</Link>
-												</li>
-												<li>
-													<Link to="privacy-policy.html">Call Now</Link>
-												</li>
-												<li>
-													<Link to="terms-of-use.html">Terms of Use</Link>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div
-					className="footer-bottom sal-animate"
-					data-sal="slide-up"
-					data-sal-duration="500"
-					data-sal-delay="100"
-				>
-					<div className="row">
-						<div className="col-md-6">
-							<div className="footer-copyright">
-								<span className="copyright-text">
-									© {new Date().getFullYear()}. All rights reserved.{' '}
-									{/* <Link to="https://axilthemes.com/">Axilthemes</Link>. */}
-								</span>
-							</div>
-						</div>
-						<div className="col-md-6">
-							<div className="footer-bottom-link">
-								<ul className="list-unstyled">
+						<div className="col-lg-3 col-md-6">
+							<div className="footer-widget">
+								<h4 className="widget-title">Useful links</h4>
+								<ul className="footer-menu">
 									<li>
-										<Link to="/help">Help</Link>
+										<Link to="/about">About Us</Link>
 									</li>
 									<li>
-										<Link to="/terms">Terms of Use</Link>
+										<Link to="/blog">Blog</Link>
+									</li>
+									<li>
+										<Link to="/contact">Contact Us</Link>
+									</li>
+									<li>
+										<Link to="/about">About Us</Link>
 									</li>
 								</ul>
 							</div>
+						</div>
+
+						<div className="col-lg-3 col-md-6">
+							<div className="footer-widget">
+								<h4 className="widget-title">Get in Touch</h4>
+								<div className="fw-address-wrap">
+									<div className="fw fw-location">
+										No: 181, Ago Palace Way, Okota, Lagos.
+									</div>
+									<div className="fw fw-mail">info@sheruta.ng</div>
+									<div className="fw fw-call">+2348138154470</div>
+									{/* <div className="fw fw-skype">
+                                        drizvato77
+										</div> */}
+									<div className="fw fw-web">http://www.sheruta.ng/</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="col-lg-3 col-md-6">
+							<div className="footer-widget">
+								<h4 className="widget-title">Follow Us</h4>
+								<p>Follow us on socail media.</p>
+								<ul className="footer-bottom-social" style={{ color: 'white' }}>
+									<li>
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href="http://fb.me/sheruta.ng"
+										>
+											<i className="ti-facebook text-dark"></i>
+										</a>
+									</li>
+									<li>
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href="https://twitter.com/sheruta_ng"
+										>
+											<i className="ti-twitter text-dark"></i>
+										</a>
+									</li>
+									<li>
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href="https://www.instagram.com/sheruta_ng/"
+										>
+											<i className="ti-instagram text-dark"></i>
+										</a>
+									</li>
+									{/* <li><a href="#c"><i className="ti-linkedin"></i></a></li> */}
+								</ul>
+
+								{/* <form className="f-newsletter mt-4">
+                                    <input type="email" className="form-control sigmup-me" placeholder="Your Email Address" required="required" />
+                                    <button type="submit" className="btn"><i className="ti-arrow-right"></i></button>
+                                </form> */}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="footer-bottom">
+				<div className="container">
+					<div className="row align-items-center">
+						<div className="col-lg-12 col-md-12 text-center">
+							<p className="mb-0">© 2021 Sheruta NG</p>
 						</div>
 					</div>
 				</div>

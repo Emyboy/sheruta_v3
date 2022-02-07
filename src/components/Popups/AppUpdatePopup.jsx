@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import { Modal } from 'antd'
 import { AiFillWarning } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -59,10 +59,10 @@ export default function AppUpdatePopup() {
 	}, [app_details])
 
 	return (
-		<Modal show={show} style={{ paddingTop: '10vh', paddingRight: 0 }}>
+		<Modal visible={show} onCancel={() => setShow(false)} footer={false} >
 			<div className="bg-whtie p-2 text-center rounde">
 				<AiFillWarning size={80} className="text-warning" />
-				<h3 className="fw-700" style={{ fontSize: '40px' }}>
+				<h3 className="fw-700" style={{ fontSize: '30px' }}>
 					New Update Available
 				</h3>
 				<p>The current version you are using is currently out of date.</p>

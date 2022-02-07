@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import { Modal } from 'antd'
 import { useSelector } from 'react-redux'
 import UserService from '../../services/UserService'
 
@@ -61,9 +61,9 @@ export default function LocationUpdatePopup() {
 	}, [])
 
 	return (
-		<Modal show={show}>
+		<Modal visible={show} footer={null} onCancel={() => setShow(false)} >
 			<Modal.Body className="text-center">
-				<h1 className="fw-bold mt-3" style={{ fontSize: '40px' }}>
+				<h1 className="fw-bold mt-3" style={{ fontSize: '30px' }}>
 					Enable Location
 				</h1>
 				<h2 style={{ fontSize: '20px' }}>

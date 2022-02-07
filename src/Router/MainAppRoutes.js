@@ -50,10 +50,10 @@ import AgentPending from '../pages/Agent/AgentPending';
 // import 'aos/dist/aos.css'
 
 
-const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
+// const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
-// const Home = React.lazy(() => import('../pages/Home/Home'))
+const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
 	import('../pages/PropertyDetails/PropertyDetails')
 )
@@ -116,7 +116,7 @@ function App() {
 						<MasterPopup />
 						{/* <RobotMessageContainer /> */}
 						<Switch>
-							<Route exact path="/" component={HomeNew} />
+							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
 							<Route exact path="/agents" component={Agent} />
 							<Route exact path="/agents/pending" component={AgentPending} />

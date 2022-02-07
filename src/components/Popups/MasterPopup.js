@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import ConfigViewPopup from './ConfigViewPopup'
-import GetStartedPopup from './GetStartedPopup'
+// import GetStartedPopup from './GetStartedPopup'
 import {
 	getUserPaymentPlan,
 	getAllAmenities,
@@ -10,8 +10,6 @@ import {
 	getAllViewOptions,
 } from '../../redux/strapi_actions/view.action'
 import {
-	getAllSuggestionsByStatus,
-	getAllMySuggestion,
 	suggestThemForMe,
 } from '../../redux/strapi_actions/alice.actions'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
@@ -19,10 +17,10 @@ import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
 import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
-import Global from '../../Global'
-import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
-import LocationUpdatePopup from './LocationUpdatePopup'
-import UserService from '../../services/UserService'
+// import Global from '../../Global'
+// import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
+// import LocationUpdatePopup from './LocationUpdatePopup'
+// import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
 import Cookies from 'js-cookie'
 
@@ -111,13 +109,12 @@ const MasterPopup = (props) => {
 				<ConfigViewPopup />
 				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
-				{Global.PLATFORM !== 'iPhone' && (
+				{/* {Global.PLATFORM !== 'iPhone' && (
 					<>
-						{' '}
-						{/* <NotificationPopup /> */}
+						<NotificationPopup />
 						<LocationUpdatePopup />
 					</>
-				)}
+				)} */}
 				<AppUpdatePopup />
 			</>
 		)

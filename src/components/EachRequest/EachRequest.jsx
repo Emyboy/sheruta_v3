@@ -45,58 +45,8 @@ export default connect(mapStateToProps)(function EachRequest({
 
 	return (
 		<>
-			<article className="col-lg-4">
-				<div className="testimonial-grid bg-white p-3 rounded-xxl mb-3">
-					{data?.category && (
-						<span className="social-media text-theme">
-							{data?.category.name.toUpperCase()}
-						</span>
-					)}
-					<Link to={standalone ? '#' : requestUtils.renderRequestURL(data)}>
-						<p className="mb-2">
-							“{' '}
-							{data?.body?.length > 70
-								? data?.body.slice(0, 70) + '...'
-								: data?.body}{' '}
-							<small className="text-theme">Read More</small>”
-						</p>
-					</Link>
-					<small>{data?.location?.slice(0, 40)}...</small>
-					<div className="author-info pt-3">
-						<div className="thumb">
-							<img
-								src={data?.users_permissions_user?.avatar_url}
-								width="60"
-								alt="Google Review"
-							/>
-						</div>
-						<Link
-							to={
-								standalone
-									? '#'
-									: `/user/${data?.users_permissions_user.username}`
-							}
-							className="content"
-						>
-							<span className="name">
-								{data?.users_permissions_user?.first_name}
-							</span>
-							<span className="designation">
-								@{data?.users_permissions_user?.username.slice(0, 11)}...
-							</span>
-						</Link>
-						{!standalone && (
-							<Link to="/signup">
-								<button className="btn text-white shadow-sm bg-theme fw-bold btn-sm">
-									<IoCall className="mr-2" />
-									Call Me
-								</button>
-							</Link>
-						)}
-					</div>
-				</div>
-			</article>
-			{/* {state.confirmDelete ? (
+			
+			{state.confirmDelete ? (
 				<div
 					className={` single-comment bg-dark  card  p-4 text-center m-2 shadow ${
 						state.deleted ? 'animated animate__fadeOutRightBig' : 'show'
@@ -243,7 +193,7 @@ export default connect(mapStateToProps)(function EachRequest({
 						) : null}
 					</div>
 				</article>
-			)} */}
+			)}
 		</>
 	)
 })

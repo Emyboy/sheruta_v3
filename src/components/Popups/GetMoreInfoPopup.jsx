@@ -51,7 +51,9 @@ export default function GetMoreInfoPopup() {
 			<Modal show={show} size="lg" className="pt-5">
 				<Modal.Body>
 					<div className="text-center">
-						<h1 style={{ fontSize: '30px'}} className="fw-700">Sorry</h1>
+						<h1 style={{ fontSize: '30px' }} className="fw-700">
+							Sorry
+						</h1>
 						<p>These information are required moving forward</p>
 					</div>
 					<form onSubmit={handleSubmit}>
@@ -90,20 +92,22 @@ export default function GetMoreInfoPopup() {
 											name="budget"
 											type="number"
 											className="form-control"
-											placeholder='Ex. 250000'
+											placeholder="Ex. 250000"
 											onChange={(e) => setBudget(e.target.value)}
 										/>
 									</div>
 								</div>
 							)}
 						</div>
-						<div className="col-lg-4 col-sm-12">
-							<button
-								className="w-100 btn bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
-								disabled={loading}
-							>
-								{loading ? 'Loading...' : 'Save'}
-							</button>
+						<div className="row justify-content-center">
+							<div className="col-lg-4 col-sm-12">
+								<button
+									className="w-100 btn bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
+									disabled={loading}
+								>
+									{loading ? 'Loading...' : 'Save'}
+								</button>
+							</div>
 						</div>
 					</form>
 				</Modal.Body>

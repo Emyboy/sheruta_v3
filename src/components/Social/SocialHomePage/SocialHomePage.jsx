@@ -14,6 +14,7 @@ import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
 import RecentUsersList from '../../RecentUsersList/RecentUsersList'
+import { Link } from 'react-router-dom'
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
 
@@ -122,15 +123,23 @@ export default (props) => {
 									</ul>
 								</div>
 							</div>
-							
 
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
-										if(i === 2 ){
+										if (i === 2) {
 											return (
 												<>
-													<h5 className="fw-700 text-grey-600 mb-1 ml-2 mt-4">Recent Users</h5>
+													<div className="d-flex justify-content-between align-items-center  mt-4">
+														<h5 className="fw-700 text-grey-600 mb-1 ml-2">
+															Recent Verified Users
+														</h5>
+														<Link to="/start">
+															<small className="text-theme fw-bold">
+																Get Verified {'>'}
+															</small>
+														</Link>
+													</div>
 													{personal_info && <RecentUsersList />}
 												</>
 											)

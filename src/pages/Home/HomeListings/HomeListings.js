@@ -67,7 +67,9 @@ function App() {
 
 	return (
 		<section className="bg-light p-3 rounded-xxl section section-padding customer-review-area pt-2">
-			<h1 className="fw-bold text-grey-700">Available Properties</h1>
+			<div className="d-flex">
+				<h1 className="fw-bold text-grey-700">Available Properties</h1>
+			</div>
 			<Wrapper>
 				<ScrollMenu
 					// LeftArrow={() => <button>Left</button>}
@@ -81,11 +83,13 @@ function App() {
 								<div
 									data-bs-toggle="modal"
 									data-bs-target="#Modalstory"
-									className="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden cursor-pointer mb-3 mt-3"
+									className="card  d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden cursor-pointer mb-3 mt-3"
 									style={{
 										backgroundImage: `url(${val?.image_url[0]})`,
 										backgroundSize: 'cover',
 										backgroundPosition: 'center',
+										width: '200px',
+										height: '300px',
 									}}
 								>
 									<div className="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
