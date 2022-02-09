@@ -122,7 +122,7 @@ svg {
     -webkit-backdrop-filter: blur(10.5px);
 }
 .modal-content, .modal-body {
-    border-radius: 20px !important;
+    border-radius: 15px !important;
 }
 @media only screen and (max-width: 1370px) {
     .mobile-only {

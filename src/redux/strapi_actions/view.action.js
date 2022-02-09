@@ -271,7 +271,7 @@ export const getUserPaymentPlan = () => async (dispatch) => {
 			type: 'SET_VIEW_STATE',
 			payload: {
 				payment_plan_loading: false,
-				payment_plan: res.data[0],
+				payment_plan: res?.data[0],
 			},
 		})
 	} catch (error) {

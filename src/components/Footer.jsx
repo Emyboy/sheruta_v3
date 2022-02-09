@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 export default () => {
 	return (
-		<footer className="light-footer skin-light-footer" style={{ zIndex: 0 }}>
+		<footer className="dark-footer bg-light shadow skin-dark-footer border-top pt-3" style={{ zIndex: 0 }}>
 			<div>
 				<div className="container">
 					<div className="row">
 						<div className="col-lg-3 col-md-6">
 							<div className="footer-widget">
-								<h4 className="widget-title">About Us</h4>
+								<h4 className="widget-title fw-700">About Us</h4>
 								<p>
 									Why use sheruta? Have access to hundreds of potential
 									apartments, earn an alternative source of income. All possible
@@ -33,7 +33,7 @@ export default () => {
 						</div>
 						<div className="col-lg-3 col-md-6">
 							<div className="footer-widget">
-								<h4 className="widget-title">Useful links</h4>
+								<h4 className="widget-title fw-700">Useful links</h4>
 								<ul className="footer-menu">
 									<li>
 										<Link to="/about">About Us</Link>
@@ -47,13 +47,16 @@ export default () => {
 									<li>
 										<Link to="/about">About Us</Link>
 									</li>
+									<li>
+										<Link to="/agents">Join Us</Link>
+									</li>
 								</ul>
 							</div>
 						</div>
 
 						<div className="col-lg-3 col-md-6">
 							<div className="footer-widget">
-								<h4 className="widget-title">Get in Touch</h4>
+								<h4 className="widget-title fw-700">Get in Touch</h4>
 								<div className="fw-address-wrap">
 									<div className="fw fw-location">
 										No: 181, Ago Palace Way, Okota, Lagos.
@@ -70,7 +73,7 @@ export default () => {
 
 						<div className="col-lg-3 col-md-6">
 							<div className="footer-widget">
-								<h4 className="widget-title">Follow Us</h4>
+								<h4 className="widget-title fw-700">Follow Us</h4>
 								<p>Follow us on socail media.</p>
 								<ul className="footer-bottom-social" style={{ color: 'white' }}>
 									<li>

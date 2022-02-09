@@ -5,13 +5,7 @@ import '../theme.override.css'
 import { Provider } from 'react-redux'
 import store from '../redux/store/store'
 
-// JOEL UI 
-// import '../joel_ui/css/vendor/sal.css';
-// import '../joel_ui/css/vendor/slick.css';
-// import '../joel_ui/css/vendor/slick-theme.css';
-// import '../joel_ui/css/vendor/bootstrap.min.css';
 
-// OUR OWN UI
 import 'react-activity/dist/Spinner.css'
 import 'react-activity/dist/Dots.css'
 import '../social_assets/css/feather.css'
@@ -19,8 +13,7 @@ import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
 import '../App.css'
-// JOEL CSS 👇🏽
-// import '../joel_ui/css/app.css';
+
 
 
 

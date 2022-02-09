@@ -279,101 +279,75 @@ export default function MessageDetails({ conversation_id }) {
 		</Wrapper>
 	)
 
-	// return (
-	// 	<div className="row">
-	// 		{!payment_plan ? (
-	// 			<div className="col-lg-12 position-relative mt-5" id="end">
-	// 				<PaymentAlert message={'Subscribe to send messages'} />
-	// 			</div>
-	// 		) : (
-	// 			<div className="col-lg-12 position-relative">
-	// 				<div
-	// 					className="chat-wrapper pt-0 w-100 position-relative  bg-white theme-dark-bg border rounded"
-	// 					style={{ height: Global.isMobile ? '75vh' : '85vh' }}
-	// 				>
-	// 					{otherUser && (
-	// 						<div className="message-user border-bottom w-100 d-flex p-2 align-items-center justify-content-between">
-	// 							<div className="d-flex align-items-center">
-	// 								<figure className="avatar mr-3 mb-0">
-	// 									<img
-	// 										src={otherUser.avatar_url}
-	// 										alt="image"
-	// 										width="50"
-	// 										className="rounded-circle"
-	// 									/>
-	// 								</figure>
-	// 								<Link to={`/user/${otherUser.username}`}>
-	// 									<h4 className="mb-0 text-black">
-	// 										<b> {otherUser.first_name}</b>
-	// 									</h4>
-	// 									<small className="time text-muted">
-	// 										@{otherUser.username}
-	// 									</small>
-	// 								</Link>
-	// 							</div>
-	// 							<a href={`tel:${otherUser.phone_number}`}>
-	// 								<button className="btn btn-sm">
-	// 									<IoCallSharp size={25} className="text-theme" />
-	// 								</button>
-	// 							</a>
-	// 						</div>
-	// 					)}
-
-	// 					<div className="scroll-bar" style={{ height: '65vh', zIndex: 0 }}>
-	// 						<div className="chat-body p-3 ">
-	// 							<div className="messages-content pb-5">
-	// 								{messages.map((val, i) => {
-	// 									return <EachMessage message={val} key={`msg-${i}`} />
-	// 								})}
-
-	// 								<div className="clearfix"></div>
-	// 							</div>
-	// 						</div>
-	// 						<div id="end"></div>
-	// 					</div>
-	// 				</div>
-	// 				<div
-	// 					className="chat-bottom dark-bg p-3 shadow-none theme-dark-bg border"
-	// 					style={{ width: '95%', zIndex: 4 }}
-	// 				>
-	// 					<form
-	// 						className="chat-form d-flex justify-content-between"
-	// 						onSubmit={handleSubmit}
-	// 					>
-	// 						{/* <button className="bg-grey float-left">
-	//                         <i className="ti-microphone text-grey-600"></i>
-	//                     </button> */}
-	// 						<div className=" w-100">
-	// 							<textarea
-	// 								type="text"
-	// 								value={message}
-	// 								autoFocus
-	// 								placeholder="Start typing.."
-	// 								className="text-black w-100 p-1"
-	// 								onChange={(e) => setMessage(e.target.value)}
-	// 								// cols="40"
-	// 								disabled={loading}
-	// 								rows={inputRows}
-	// 								style={{
-	// 									borderRadius: message.length > 40 ? '7px' : '50px',
-
-	// 									// borderTopRightRadius: 0,
-	// 									// borderBottomRightRadius: 0,
-	// 								}}
-	// 							/>
-	// 						</div>
-	// 						<button
-	// 							className="bg-current align-self-center mb-2"
-	// 							type="submit"
-	// 							style={{ width: '50px' }}
-	// 							disabled={loading}
-	// 						>
-	// 							<i className="ti-arrow-right text-white"></i>
-	// 						</button>
-	// 					</form>
-	// 				</div>
-	// 			</div>
-	// 		)}
-	// 	</div>
-	// )
 }
+
+
+
+// import React from 'react'
+// import Layout from '../../components/Layout/Layout'
+
+// export default function MessageDetails() {
+// 	return (
+// 		<div class="h-100 d-block">
+// 			<div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
+// 				<div class="modal-popup-header w-100 border-bottom">
+// 					<div class="card p-3 d-block border-0 d-block">
+// 						<figure class="avatar mb-0 float-left me-2">
+// 							<img src="images/user-12.png" alt="image" class="w35 me-1" />
+// 						</figure>
+// 						<h5 class="fw-700 text-primary font-xssss mt-1 mb-1">
+// 							Hendrix Stamp
+// 						</h5>
+// 						<h4 class="text-grey-500 font-xsssss mt-0 mb-0">
+// 							<span class="d-inline-block bg-success btn-round-xss m-0"></span>{' '}
+// 							Available
+// 						</h4>
+// 						<a
+// 							href="#"
+// 							class="font-xssss position-absolute right-0 top-0 mt-3 me-4"
+// 						>
+// 							<i class="ti-close text-grey-900 mt-2 d-inline-block"></i>
+// 						</a>
+// 					</div>
+// 				</div>
+// 				<div class="modal-popup-body w-100 p-3" style={{ height: '60vh'}}>
+// 					<div class="message">
+// 						<div class="message-content font-xssss lh-24 fw-500">
+// 							Hi, how can I help you?
+// 						</div>
+// 					</div>
+// 					<div class="date-break font-xsssss lh-24 fw-500 text-grey-500 mt-2 mb-2">
+// 						Mon 10:20am
+// 					</div>
+// 					<div class="message self text-right mt-2">
+// 						<div class="message-content font-xssss lh-24 fw-500 bg-theme ">
+// 							I want those files for you. I want you to send 1 PDF and 1 image
+// 							file.
+// 						</div>
+// 					</div>
+// 					<div
+// 						class="snippet pt-3 ps-4 pb-2 pe-3 mt-2 bg-grey rounded-xl float-right"
+// 						data-title=".dot-typing"
+// 					>
+// 						<div class="stage">
+// 							<div class="dot-typing"></div>
+// 						</div>
+// 					</div>
+// 					<div class="clearfix"></div>
+// 				</div>
+// 				<div class="modal-popup-footer w-100 border-top">
+// 					<div class="card p-3 d-block border-0 d-block">
+// 						<div class="form-group icon-right-input style1-input mb-0">
+// 							<input
+// 								type="text"
+// 								placeholder="Start typing.."
+// 								class="form-control rounded-xl bg-greylight border-0 font-xssss fw-500 ps-3"
+// 							/>
+// 							<i class="feather-send text-grey-500 font-md"></i>
+// 						</div>
+// 					</div>
+// 				</div>
+// 			</div>
+// 		</div>
+// 	)
+// }
