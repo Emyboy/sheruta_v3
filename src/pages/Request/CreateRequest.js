@@ -318,7 +318,7 @@ const CraeteRequest = (props) => {
 	} else
 		return (
 			<Layout currentPage={'requests'}>
-				<Modal
+				{/* <Modal
 					show={view.personal_info && !view.personal_info.nin}
 					style={{ marginTop: '20vh' }}
 					size="md"
@@ -355,7 +355,7 @@ const CraeteRequest = (props) => {
 							</Link>
 						</ol>
 					</Modal.Body>
-				</Modal>
+				</Modal> */}
 				<div className="mt-5 pb-5">
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
