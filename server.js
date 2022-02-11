@@ -26,6 +26,7 @@ app.listen(PORT, (error) => {
 
 app.get('/request/:title/:id', (req, res, next) => {
 	try {
+		console.log('GETTING FOR REQUEST')
 		fs.readFile(indexPath, 'utf8', async (err, htmlData) => {
 			// console.log('STRING --', htmlData)
 			const theString = htmlData;
@@ -40,6 +41,7 @@ app.get('/request/:title/:id', (req, res, next) => {
             console.log('url ==', url)
 			// console.log('RES --', _res.data)
 			const data = _res.data.length === 0 ? null : _res.data[0]
+			console.log('REQUEST FOUND --',data);
 
 			// if (!post) return res.status(404).send('Post not found')
 			// console.log('REQUEST --', data)
