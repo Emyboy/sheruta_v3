@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import { Modal } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import Global from '../../Global'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
@@ -48,8 +48,7 @@ export default function GetMoreInfoPopup() {
 
 	if (user && personal_info) {
 		return (
-			<Modal show={show} size="lg" className="pt-5">
-				<Modal.Body>
+			<Modal visible={show} footer={null} className="pt-5" closable={false}>
 					<div className="text-center">
 						<h1 style={{ fontSize: '30px' }} className="fw-700">
 							Sorry
@@ -110,7 +109,6 @@ export default function GetMoreInfoPopup() {
 							</div>
 						</div>
 					</form>
-				</Modal.Body>
 			</Modal>
 		)
 	} else {
