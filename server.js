@@ -109,7 +109,7 @@ app.get('/feeds', (req, res, next) => {
 		return res.send('<h1>Server Error</h1>')
 	}
 })
-app.get('*', (req, res, next) => {
+app.get('/*', (req, res, next) => {
 	try {
 		fs.readFile(indexPath, 'utf8', (err, htmlData) => {
 			if (err) {

@@ -8,12 +8,12 @@ import reportWebVitals from './reportWebVitals';
 
 window.formatedPrice = new Intl.NumberFormat('en-NG')
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.hydrate(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>,
+	document.getElementById('root')
+)
 
 
 // If you want your app to work offline and load faster, you can change
