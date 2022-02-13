@@ -4,6 +4,7 @@ import { PrefaredLocations } from '../../GetStarted/Steps/PrefaredLocations'
 import AgentProfileStep from './AgentProfileStep'
 import AgentStateSelect from './AgentStateSelect'
 import UpdateAvatar from '../../GetStarted/Steps/UpdateAvatar'
+import CreateAgentLastStep from './CreateAgentLastStep'
 
 export default function AgentSignupForm() {
 	const [step, setStep] = useState(0)
@@ -15,13 +16,15 @@ export default function AgentSignupForm() {
 		idFront: null,
 		idBack: null,
 		avatar: null,
+		locations: [],
+		inspection_fee: null
 	})
 
 	useEffect(() => {
 		setNextAble(false)
 	}, [step])
 
-	console.log('AGENT DATA --', agentData)
+	// console.log('AGENT DATA --', agentData)
 
 	const addData = (newData) => {
 		setAgentData({ ...agentData, ...newData })
@@ -34,7 +37,7 @@ export default function AgentSignupForm() {
 					<i className="ti-arrow-left font-sm text-white"></i>
 				</a> */}
 				<h4 className="font-xs text-white fw-600 ms-4 mb-0 mt-2">
-					Agent Registration
+					Agent Registration ({step}) 
 				</h4>
 			</div>
 			<div className="card-body p-lg-5 p-4 w-100 border-0 ">
@@ -63,10 +66,18 @@ export default function AgentSignupForm() {
 							value={agentData?.state}
 						/>,
 						<PrefaredLocations
-							done={(e) => (e ? setNextAble(true) : setNextAble(false))}
+							done={(e) => {
+								if (e) {
+									setNextAble(true);
+									setAgentData({...agentData, locations: e})
+								} else {
+									setNextAble(false)
+								}
+							}}
 							standAlone
 							heading={'Location(s) you opperate in.'}
 						/>,
+						<CreateAgentLastStep data={agentData} changeStep={s => setStep(s)} />,
 					][step]
 				}
 			</div>

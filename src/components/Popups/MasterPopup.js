@@ -23,6 +23,7 @@ import { useInterval } from 'react-use'
 // import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
 import Cookies from 'js-cookie'
+import axios from 'axios'
 
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
@@ -99,7 +100,9 @@ const MasterPopup = (props) => {
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {
-			Cookies.set('has_nin', true)
+			Cookies.set('has_nin', true, { expires: 7})
+		}else {
+			Cookies.set('has_nin', false)
 		}
 	}, [personal_info])
 

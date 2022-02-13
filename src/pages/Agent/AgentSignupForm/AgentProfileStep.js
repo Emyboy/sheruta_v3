@@ -40,6 +40,7 @@ function AgentProfileStep({ done, data }) {
 	const [state, _setState] = useState(data?.state || null)
 	const [idFront, setIDFront] = useState(data?.idFront || null)
 	const [idBack, setIDBack] = useState(data?.idBack || null)
+	const [inspection_fee, set_inspection_fee] = useState(data?.inspection_fee || null)
 
 	const _data = {
 		state,
@@ -55,6 +56,7 @@ function AgentProfileStep({ done, data }) {
 				done(_data)
 			}
 		}
+		done(_data)
 	})
 
 	useEffect(() => {
@@ -64,10 +66,10 @@ function AgentProfileStep({ done, data }) {
 	}, [data])
 
 	return (
-		<div >
+		<div>
 			<form action="#">
 				<div className="row">
-					<div className="col-lg-6 mb-3">
+					<div className="col-lg-12 mb-3">
 						<div className="form-group">
 							<label className="mont-font fw-600 font-xsss">Company Name</label>
 							<input
@@ -75,7 +77,22 @@ function AgentProfileStep({ done, data }) {
 								className="form-control"
 								placeholder="Ex. Sheruta Housing LTD."
 								onChange={(e) => setName(e.target.value)}
-								value={data?.name}
+								defaultValue={data?.name}
+								maxLength={80}
+							/>
+						</div>
+					</div>
+					<div className="col-lg-6 mb-3">
+						<div className="form-group">
+							<label className="mont-font fw-600 font-xsss">
+								Inspection Fee
+							</label>
+							<input
+								type="number"
+								className="form-control"
+								placeholder="EX. 4,000"
+								onChange={(e) => set_inspection_fee(e.target.value)}
+								defaultValue={data?.inspection_fee}
 							/>
 						</div>
 					</div>
@@ -122,6 +139,7 @@ function AgentProfileStep({ done, data }) {
 										id="file"
 										className="input-file"
 										onChange={(e) => setIDFront(e.target.files[0])}
+										accept="image/*"
 									/>
 									{idFront ? (
 										<ImgPreview
@@ -154,6 +172,7 @@ function AgentProfileStep({ done, data }) {
 										id="file2"
 										className="input-file"
 										onChange={(e) => setIDBack(e.target.files[0])}
+										accept="image/*"
 									/>
 									{idBack ? (
 										<ImgPreview

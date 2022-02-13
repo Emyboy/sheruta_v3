@@ -46,6 +46,9 @@ const UpdateAvatar = (props) => {
 	}
 
 	function handleCrop(data) {
+    if(standalone){
+      handleImageUpload()
+    }
 		setDone(true)
 	}
 	const upload = () => {
@@ -126,10 +129,10 @@ const UpdateAvatar = (props) => {
 	}, [])
 
   useEffect(() => {
-    if(img){
+    if(img && blob){
       ended(img)
     }
-  },[blob])
+  },[blob,img])
 
 	return (
 		<div>

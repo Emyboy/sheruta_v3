@@ -6,12 +6,16 @@ import Layout from '../../components/Layout/Layout'
 import AgentService from '../../services/AgentService'
 import { Redirect } from 'react-router-dom'
 
-export default function AgentPending() {
+export default function AgentPending(props) {
 	const { user } = useSelector((state) => state.auth)
+	console.log(props)
 
 	const sendRequest = useCallback(async () => {
 		try {
-			const res = await AgentService.sendPendingRequest(user?.user)
+			const res = await AgentService.sendPendingRequest(
+				user?.user?.id,
+				props?.match?.params?.agent_id
+			)
 			if (res.data) {
 				notification.success({ message: 'Request was sent' })
 			}
@@ -37,28 +41,19 @@ export default function AgentPending() {
 					<div className="col-lg-8 col-sm-12">
 						<div className="card mt-5 rounded-xxl shadow-sm">
 							<div className="card-body">
-								<h1 className="fw-700">What next?</h1>
+								<h1 className="fw-700">Congratulations</h1>
 								<h4>
 									We have have received your request and one of our
 									representatives will reach out to you via email or phone in 2
 									business days.
 								</h4>
 								<h4>So please check your email from time to time.</h4>
-								<h1 className="fw-700 mt-4">What happens after?</h1>
+								<h1 className="fw-700 mt-4">What Next?</h1>
 								<h4>
-									If your profile gets accepted by us, we will send you a magic
-									link to begin the full registration process.
+									If your request gets accepted, we will send you a link to give
+									you access to the agent dashboard.
 								</h4>
-								<h1 className="fw-700 mt-4">What we might need from you.</h1>
-								<ul>
-									<li>
-										1. Your <b>NIN</b> (National Verification Number)
-									</li>
-									<li>2. A clean and clear image of yourself (Passport)</li>
-									<li>3. List of areas you opperate in.</li>
-									<li>4. Office address</li>
-									<li>5. Valid ID card.</li>
-								</ul>
+
 								<div className="alert alert-info mt-4">
 									<h4 className="fw-bold">
 										Call us if you don't hear from us in 2 business days

@@ -114,7 +114,7 @@ function App() {
 							<Route exact path="/feeds" component={SocialHomePage} />
 							<Route exact path="/agents" component={Agent} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
-							<Route exact path="/agents/pending" component={AgentPending} />
+							<Route exact path="/agents/pending/:agent_id" component={AgentPending} />
 							<Route exact path="/properties" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
