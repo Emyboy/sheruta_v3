@@ -39,6 +39,7 @@ import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
 import Agent from '../pages/Agent/Agent'
 import AgentPending from '../pages/Agent/AgentPending';
+import AgentSignup from '../pages/Agent/AgentSignup'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 
@@ -112,6 +113,7 @@ function App() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
 							<Route exact path="/agents" component={Agent} />
+							<Route exact path="/agents/signup" component={AgentSignup} />
 							<Route exact path="/agents/pending" component={AgentPending} />
 							<Route exact path="/properties" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />

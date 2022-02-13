@@ -95,7 +95,7 @@ const MasterPopup = (props) => {
 			// dispatch(getOtherStuffs())
 			getForRealTime()
 		}
-	}, [20000])
+	}, [30000])
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {

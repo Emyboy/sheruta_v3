@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import Btn from '../../../components/Btn/Btn'
 import { AiFillCloseCircle } from 'react-icons/ai'
@@ -9,8 +9,10 @@ import Cookies from 'js-cookie'
 import Global from '../../../Global'
 
 export const PrefaredLocations = (props) => {
-	const { setStep, step, standAlone, done } = props
-
+	const { setStep, step, standAlone, done, max, heading } = props
+	const auth = useSelector(state => state.auth);
+	const [maxNumber] = React.useState(max || 3);
+	const [mainHeading] = React.useState(heading || 'Preferred location(s)?')
 	const [data, setData] = React.useState({
 		location: null,
 		google_location: null,
@@ -24,11 +26,11 @@ export const PrefaredLocations = (props) => {
 		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${props.auth.user.jwt}`,
+				Authorization: `Bearer ${auth.user.jwt}`,
 			},
 			data: {
 				...data,
-				users_permissions_user: props.auth.user.user.id,
+				users_permissions_user: auth.user.user.id,
 				personal_info: props.hasInfo?.id || null,
 			},
 		})
@@ -46,7 +48,7 @@ export const PrefaredLocations = (props) => {
 		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations/' + id, {
 			method: 'DELETE',
 			headers: {
-				Authorization: `Bearer ${props.auth.user.jwt}`,
+				Authorization: `Bearer ${auth.user.jwt}`,
 			},
 		})
 			.then((res) => {
@@ -62,7 +64,7 @@ export const PrefaredLocations = (props) => {
 			process.env.REACT_APP_API_URL +
 				'/user-preferred-locations' +
 				'/?users_permissions_user=' +
-				props.auth.user.user.id,
+				auth.user.user.id,
 			{
 				headers: {
 					Authorization: `Bearer ${Cookies.get('token')}`,
@@ -81,6 +83,8 @@ export const PrefaredLocations = (props) => {
 	React.useEffect(() => {
 		if (locaitons.length > 0 && done) {
 			done(locaitons)
+		}else {
+			done(null)
 		}
 	}, [locaitons])
 
@@ -88,10 +92,10 @@ export const PrefaredLocations = (props) => {
 		<div>
 			<div className="sec-heading text-center mb-4">
 				<h2 className="animated animate__bounceIn h1 fw-700">
-					Preferred location(s)?
+					{mainHeading}
 				</h2>
 				<p>
-					Add <b>3</b> locations of your choice
+					Add <b>{maxNumber}</b> locations of your choice
 				</p>
 			</div>
 			<div className="container">
@@ -115,7 +119,7 @@ export const PrefaredLocations = (props) => {
 				<hr />
 				<div className="">
 					<div className="form-group text-center pt-3">
-						{locaitons.length < 3 ? (
+						{locaitons.length < maxNumber ? (
 							<>
 								<label>Location</label>
 								<GooglePlacesAutocomplete

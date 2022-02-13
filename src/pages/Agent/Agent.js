@@ -17,7 +17,7 @@ export default function Agent() {
 	}, [])
 
 	if (done) {
-		localStorage.setItem('after_login', '/agents/pending')
+		localStorage.setItem('after_login', '/agents/signup')
 		Cookies.set('agent', true, { expires: 5 })
 		return <Redirect to="/signup" />
 	}

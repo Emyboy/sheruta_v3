@@ -8,7 +8,7 @@ import { v4 as Uid } from 'uuid'
 import { Alert, notification, Switch } from 'antd'
 import { Link } from 'react-router-dom'
 import TextInput from '../../components/TextInput/TextInput'
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { getAllViewOptions, getUserFeedback } from '../../redux/strapi_actions/view.action'
 // import Layout from '../../components/Layout/Layout'
 import store from '../../redux/store/store'
