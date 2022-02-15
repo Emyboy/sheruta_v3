@@ -107,7 +107,6 @@ import styled from 'styled-components'
 import Global from '../../Global'
 
 export default function EachMessage({ message }) {
-	console.log('MESSAGE --', message)
 	const { user } = useSelector((state) => state.auth)
 
 	useEffect(() => {
