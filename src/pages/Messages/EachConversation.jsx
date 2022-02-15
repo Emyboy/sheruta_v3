@@ -64,10 +64,10 @@ function EachConversation({ conv, onClick }) {
 									/>
 								</figure>
 								<div className="fw-700 mb-0 mt-0">
-									<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat">
+									<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat align-items-center">
 										<b className="mr-2">{otherUser?.first_name?.split(' ')[0]}</b>
 										<span
-											className={`shadow bg-${
+											className={`mt-0 shadow bg-${
 												otherUser.online ? 'success' : 'danger'
 											}  btn-round-xss`}
 										></span>

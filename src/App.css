@@ -32,7 +32,7 @@ body,
 .bg-theme {
     background-color: var(--theme-color) !important;
 }
-.bg-them-light {
+.bg-theme-light {
     background-color: var(--theme-light) !important;
 }
 .bg-them-light {
