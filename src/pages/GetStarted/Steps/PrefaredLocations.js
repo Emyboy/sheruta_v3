@@ -83,7 +83,7 @@ export const PrefaredLocations = (props) => {
 	React.useEffect(() => {
 		if (locaitons.length > 0 && done) {
 			done(locaitons)
-		}else {
+		}else if(done) {
 			done(null)
 		}
 	}, [locaitons])
