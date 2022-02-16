@@ -311,6 +311,8 @@ export default function MessageDetails({ conversation_id }) {
 	const history = useHistory()
 	const myRef = React.createRef()
 	const [inputRows, setInputRows] = useState('2')
+	const defaultHeight = Global.isMobile ? '55vh' : '75vh'
+	const [height, setHeight] = useState(defaultHeight)
 
 	// const conversation_id = props.match.params.conversation_id;
 
@@ -359,7 +361,7 @@ export default function MessageDetails({ conversation_id }) {
 		}
 		setTimeout(() => {
 			executeScroll()
-		}, 2600)
+		}, 3000)
 	}, [])
 
 	const getConversation = () => {
@@ -441,7 +443,11 @@ export default function MessageDetails({ conversation_id }) {
 	}
 
 	const handleInputFocus = () => {
-		
+		if (Global.isMobile) {
+			setHeight('30vh')
+		} else {
+			setHeight(defaultHeight)
+		}
 	}
 
 	if (!otherUser) {
@@ -494,14 +500,17 @@ export default function MessageDetails({ conversation_id }) {
 				</div>
 				<div
 					className="messages-content chat-wrapper scroll-bar p-3"
-					style={{ height: Global.isMobile ? '50vh' : '75vh' }}
+					style={{ height }}
 				>
 					{messages.map((val, i) => {
 						return <EachMessage message={val} key={`msg-${i}`} />
 					})}
 					<div id="end" className="p-5" />
 				</div>
-				<form className="d-flex shadow-sm chat-form position-absolute bottom-0 w-100 left-0 bg-white z-index-1 p-3 theme-dark-bg " onSubmit={handleSubmit}>
+				<form
+					className="d-flex shadow-sm chat-form position-absolute bottom-0 w-100 left-0 bg-white z-index-1 p-3 theme-dark-bg "
+					onSubmit={handleSubmit}
+				>
 					{/* <button className="bg-grey float-left">
 						<i className="ti-microphone text-white"></i>
 					</button> */}
@@ -512,6 +521,7 @@ export default function MessageDetails({ conversation_id }) {
 							value={message}
 							autoFocus
 							onFocus={handleInputFocus}
+							onBlur={() => setHeight(defaultHeight)}
 							onChange={(e) => setMessage(e.target.value)}
 							disabled={loading}
 							rows={inputRows}
