@@ -440,6 +440,10 @@ export default function MessageDetails({ conversation_id }) {
 		}
 	}
 
+	const handleInputFocus = () => {
+		
+	}
+
 	if (!otherUser) {
 		return (
 			<div
@@ -490,7 +494,7 @@ export default function MessageDetails({ conversation_id }) {
 				</div>
 				<div
 					className="messages-content chat-wrapper scroll-bar p-3"
-					style={{ height: Global.isMobile ? '67vh' : '75vh' }}
+					style={{ height: Global.isMobile ? '50vh' : '75vh' }}
 				>
 					{messages.map((val, i) => {
 						return <EachMessage message={val} key={`msg-${i}`} />
@@ -507,6 +511,7 @@ export default function MessageDetails({ conversation_id }) {
 							placeholder="Start typing.."
 							value={message}
 							autoFocus
+							onFocus={handleInputFocus}
 							onChange={(e) => setMessage(e.target.value)}
 							disabled={loading}
 							rows={inputRows}
