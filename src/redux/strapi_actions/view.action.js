@@ -88,19 +88,27 @@ export const getAuthPersonalInfo = () => async (dispatch) => {
 			})
 		})
 		.catch((err) => {
-			if (err.response && err.response.status === 401) {
+			Cookies.set('has_nin', false)
+			if (err?.response && err?.response?.status === 401) {
 				localStorage.removeItem('token')
 				Cookies.remove('token')
 				store.dispatch({
 					type: 'LOGOUT',
 				})
-				notification.error({ message: 'You are logged out' })
+				// notification.error({ message: 'You are logged out' })
 			}
-			if (err.response?.status === 404) {
+			if (err?.response?.status === 404) {
 				store.dispatch({
 					type: 'SET_VIEW_STATE',
 					payload: {
 						configureView: true,
+					},
+				})
+			}else {
+				store.dispatch({
+					type: 'SET_VIEW_STATE',
+					payload: {
+						configureView: false,
 					},
 				})
 			}

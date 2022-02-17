@@ -16,7 +16,7 @@ const ConfigViewPopup = (props) => {
   const { user } = auth.user;
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-  const [isLookingFor, setIsLookingFor] = useState(undefined);
+  const [isLookingFor, setIsLookingFor] = useState(null);
   const dispatch = useDispatch();
   const view = useSelector(state => state.view);
 
@@ -67,7 +67,7 @@ const ConfigViewPopup = (props) => {
       });
   };
 
-  if (Cookies.get('has_nin') || view.personal_info) {
+  if (Cookies.get('has_nin') === 'true' || view.personal_info) {
 		return null
 	}
 
@@ -96,7 +96,7 @@ const ConfigViewPopup = (props) => {
 				</div>
 				<div className="col-sm-12 col-md-6 mb-3 link">
 					<div
-						className={`card rounded ${!isLookingFor && `border-success border-3 shadow`}`}
+						className={`card rounded ${isLookingFor === false && `border-success border-3 shadow`}`}
 						onClick={() => setIsLookingFor(false)}
 					>
 						<div className="card-body">
@@ -130,7 +130,7 @@ const ConfigViewPopup = (props) => {
 					text="Configure"
 					onClick={updatePersonalInfo}
 					className="mt-5"
-					disabled={isLookingFor === undefined || loading}
+					disabled={isLookingFor === null || loading}
 				/>
 			</div>
 		</Modal>

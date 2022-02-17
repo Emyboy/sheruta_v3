@@ -129,9 +129,9 @@ const UpdateAvatar = (props) => {
 	}, [])
 
   useEffect(() => {
-    if(img && blob){
-      ended(img)
-    }
+    if (img && blob && ended) {
+			ended(img)
+		}
   },[blob,img])
 
 	return (
