@@ -29,7 +29,8 @@ export default function ValidIdCard(props) {
 	const [loading, setLoading] = useState(false)
 	const [showUserData, setShowUserData] = useState(false)
 	const [ninData, setNinData] = useState(null)
-	const [showEdit, setShowEdit] = useState(false)
+	const [showEdit, setShowEdit] = useState(false);
+	const [showSkip, setShowSkip] = useState(false)
 
 	const handleSubmit = () => {
 		setLoading(true)
@@ -56,6 +57,7 @@ export default function ValidIdCard(props) {
 				// console.log(res.data);
 			})
 			.catch((err) => {
+				setShowSkip(true)
 				// console.log({ ...err });
 				notifyEmy({
 					heading: 'Error verifying NIN in get started',
@@ -85,10 +87,6 @@ export default function ValidIdCard(props) {
 
 	const next = () => {
 		setLoading(true)
-		console.log('NEXT ==============', {
-			ninData,
-			user: user.user,
-		})
 		const date = ninData.birthdate
 		const formattedDate =
 			date && moment(`${date[2]}-${date[1]}-${date[0]}`).fromNow()
@@ -158,7 +156,12 @@ export default function ValidIdCard(props) {
 
 	return (
 		<div>
-			<Modal visible={showEdit} onCancel={() => setShowEdit(!showEdit)} closable footer={null}>
+			<Modal
+				visible={showEdit}
+				onCancel={() => setShowEdit(!showEdit)}
+				closable
+				footer={null}
+			>
 				<h3>Edit Profile</h3>
 				<hr />
 				<AuthEditForm />
@@ -168,25 +171,27 @@ export default function ValidIdCard(props) {
 					National Identification Number
 				</h2>
 				<p>Identity verification for security reasons.</p>
-				<h6
-					className="fw-700 text-theme link"
-					onClick={() => props.setStep(props.step + 1)}
-				>
-					SKIP
-				</h6>
+				{showSkip && (
+					<h6
+						className="fw-700 text-theme link"
+						onClick={() => props.setStep(props.step + 1)}
+					>
+						SKIP
+					</h6>
+				)}
 			</div>
 			<Modal
 				visible={showUserData && ninData}
 				closable={true}
 				onCancel={() => setShowUserData(false)}
-                footer={null}
+				footer={null}
 			>
 				{ninData && (
 					<div>
 						<h2 className="text-center fw-bold">Please Verify This Is You</h2>
 						<div>
 							<div className="row justify-content-center text-center">
-								<div >
+								<div>
 									<img
 										src={user.user.avatar_url}
 										width="150"

@@ -132,7 +132,7 @@ function AgentProfileStep({ done, data }) {
 						<div className="card mt-3 border-0">
 							<div className="card-body d-flex justify-content-between align-items-end p-0">
 								<div className="form-group mb-0 w-100">
-									<label>ID Card Image (font)</label>
+									<label>ID Card Image (front)</label>
 									<input
 										type="file"
 										name="file"

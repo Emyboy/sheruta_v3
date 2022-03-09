@@ -8,6 +8,7 @@ import Global from '../../Global'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
 import PersonalInfoService from '../../services/PersonalInfoService'
 import UserService from '../../services/UserService'
+import Cookies from 'js-cookie'
 
 export default function GetMoreInfoPopup() {
 	const { user } = useSelector((state) => state.auth)
@@ -39,11 +40,13 @@ export default function GetMoreInfoPopup() {
 	}
 
     useEffect(() => {
-        if(user && !user?.user?.budget || !user?.user?.phone_number){
-            setShow(true)
-        }else {
-            setShow(false)
-        }
+		if(!Cookies.get('agent')){
+			if(user && !user?.user?.budget || !user?.user?.phone_number){
+				setShow(true)
+			}else {
+				setShow(false)
+			}
+		}
     },[user])
 
 	if (user && personal_info) {

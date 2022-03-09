@@ -53,12 +53,12 @@ export const AgeRange = (props) => {
 				</div>
 			</div>
 			<div className="d-flex justify-content-center">
-				<div className="col-4 col-md-5">
+				<div className="col-lg-7 col-md-5 col-sm-12">
 					<label>Slide This 👇🏽</label>
 					<Slider
 						trackStyle={{ color: 'green' }}
 						min={18}
-						max={70}
+						max={50}
 						range
 						defaultValue={data}
 						onChange={(e) => setData(e)}
