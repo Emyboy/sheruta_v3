@@ -86,9 +86,9 @@ const VerifyEmail = (props) => {
 										className="ti ti-check text-success mb-2"
 										style={{ fontSize: '100px' }}
 									></i> */}
-									<BsCheckCircleFill style={{ fontSize: '100px' }} />
+									<BsCheckCircleFill className='text-success' style={{ fontSize: '100px' }} />
 								</div>
-								<Link to="/login" className="form-group">
+								<Link to="/login" className="form-group mt-3">
 									<Btn text="Login" className="full-width mt-2" />
 								</Link>
 							</>
@@ -100,9 +100,9 @@ const VerifyEmail = (props) => {
 										className="fa fa-times text-danger mb-2"
 										style={{ fontSize: '100px' }}
 									></i> */}
-									<MdOutlineError style={{ fontSize: '100px' }} />
+									<MdOutlineError className='text-danger' style={{ fontSize: '100px' }} />
 								</div>
-								<Link to="/login" className="form-group">
+								<Link to="/login" className="form-group mt-3">
 									<Btn text="Login" className="full-width mt-2" />
 								</Link>
 							</>
