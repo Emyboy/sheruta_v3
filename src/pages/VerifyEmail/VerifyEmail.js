@@ -67,7 +67,7 @@ const VerifyEmail = (props) => {
 					id="sign-up-success"
 					style={{ marginTop: '30vh' }}
 				>
-					<div className="modal-body">
+					<div className="modal-body text-center">
 						<h4 className="modal-header-title" style={{ lineHeight: '60px' }}>
 							{state.heading}
 						</h4>
