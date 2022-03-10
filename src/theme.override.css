@@ -16,3 +16,7 @@ label {
 .ant-tabs-tab-active  {
     border-bottom-color: var(--theme-color) !important;
 }
+
+.ant-notification-notice  {
+    z-index: 100 !important;
+}

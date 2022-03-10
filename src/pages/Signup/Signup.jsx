@@ -23,13 +23,32 @@ export const Signup = (props) => {
 	const onSubmit = (e) => {
 		// console.log(e)
 		if (!termsAccepted) {
-			notification.info({ message: 'You need to accept the terms' })
+			notification.info({
+				message: 'You need to accept the terms',
+				placement: 'bottomLeft',
+			})
 			return
 		}
+		if(e.username?.length <4){
+			notification.error({ message: "Username is too short", placement: 'bottomLeft' });
+			return;
+		}
+		if(e.first_name?.length <2){
+			notification.error({ message: "First Name is too short", placement: 'bottomLeft' });
+			return;
+		}
+		
 		setState({ ...state, loading: true })
 		axios(process.env.REACT_APP_API_URL + '/auth/local/register', {
 			method: 'POST',
-			data: { ...e, username: e.username.replace(/\s/g, '') },
+			data: {
+				...e,
+				username: e.username
+					.replace(/\s/g, '')
+					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+				first_name: e.first_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+				last_name: e.last_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+			},
 		})
 			.then((res) => {
 				if (res.status === 201) {

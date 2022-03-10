@@ -55,7 +55,8 @@ function EachRequest({ data }) {
 						<VerifiedBadge user={user} className={'ml-2'} size={15} />
 					</Link>
 					<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-						{moment(data?.created_at).fromNow()}
+						{/* {moment(data?.created_at).fromNow()} */}
+						@{user?.username}
 					</span>
 				</h4>
 				<a

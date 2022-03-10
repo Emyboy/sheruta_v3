@@ -35,7 +35,7 @@ export default function Header({
 
 	if (!user) {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light nav-header bg-white shadow-xs border-0">
+			<nav className="navbar navbar-expand-lg navbar-light bg-light nav-header bg-white shadow-xs border-0" style={{ zIndex: 8 }}>
 				<div className="container-fluid">
 					<Link to="/">
 						<a className="navbar-brand">

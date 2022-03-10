@@ -29,8 +29,9 @@ export default function ValidIdCard(props) {
 	const [loading, setLoading] = useState(false)
 	const [showUserData, setShowUserData] = useState(false)
 	const [ninData, setNinData] = useState(null)
-	const [showEdit, setShowEdit] = useState(false);
+	const [showEdit, setShowEdit] = useState(false)
 	const [showSkip, setShowSkip] = useState(false)
+	const [showSkipWarning, setShowSkipWarning] = useState(false)
 
 	const handleSubmit = () => {
 		setLoading(true)
@@ -157,6 +158,31 @@ export default function ValidIdCard(props) {
 	return (
 		<div>
 			<Modal
+				visible={showSkipWarning}
+				onCancel={() => setShowSkipWarning(!showSkipWarning)}
+				closable={false}
+				footer={null}
+			>
+				<div className="text-center">
+					<h2 className="fw-bold mb-4">Your NIN is required to get verified</h2>
+					<h4>Do you wish to skip?</h4>
+					<div className="d-flex mt-5">
+						<button
+							onClick={() => props.setStep(props.step + 1)}
+							className="w-50 btn bg-theme fw-bold text-white"
+						>
+							Yes
+						</button>
+						<button
+							className="w-50 btn btn-danger fw-bold"
+							onClick={() => setShowSkipWarning(false)}
+						>
+							No
+						</button>
+					</div>
+				</div>
+			</Modal>
+			<Modal
 				visible={showEdit}
 				onCancel={() => setShowEdit(!showEdit)}
 				closable
@@ -174,7 +200,7 @@ export default function ValidIdCard(props) {
 				{showSkip && (
 					<h6
 						className="fw-700 text-theme link"
-						onClick={() => props.setStep(props.step + 1)}
+						onClick={() => setShowSkipWarning(true)}
 					>
 						SKIP
 					</h6>

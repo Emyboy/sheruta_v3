@@ -196,7 +196,8 @@ export default function RequestDetails(props) {
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-															{moment(request?.created_at).fromNow()}
+															{/* {moment(request?.created_at).fromNow()} */}
+															@{request?.users_permissions_user?.username}
 														</span>
 													</h4>
 													<a
