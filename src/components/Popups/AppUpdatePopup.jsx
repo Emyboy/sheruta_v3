@@ -45,18 +45,18 @@ export default function AppUpdatePopup() {
 		dispatch(getAppDetail())
 	}, [])
 
-	// useEffect(() => {
-	// 	if (app_details && localVersion && user) {
-	// 		if (
-	// 			app_details.version !== localVersion &&
-	// 			typeof localVersion !== undefined
-	// 		) {
-	// 			setShow(true);
-	// 		}
-	// 	} else if (app_details) {
-	// 		localStorage.setItem('version', app_details?.version)
-	// 	}
-	// }, [app_details])
+	useEffect(() => {
+		if (app_details && localVersion && user) {
+			if (
+				app_details.version !== localVersion &&
+				typeof localVersion !== undefined
+			) {
+				setShow(true);
+			}
+		} else if (app_details) {
+			localStorage.setItem('version', app_details?.version)
+		}
+	}, [app_details])
 
 	return (
 		<Modal visible={show} onCancel={() => setShow(false)} footer={false} >
