@@ -319,11 +319,13 @@ export default function MessageDetails({ conversation_id }) {
 	const executeScroll = () => {
 		// console.log('HERE WE GO')
 		// Bring this back :
-		document.getElementById('end').scrollIntoView({
-			behavior: 'smooth',
-			block: 'end',
-			inline: 'nearest',
-		})
+		if (document.getElementById('end')){
+			document.getElementById('end').scrollIntoView({
+				behavior: 'smooth',
+				block: 'end',
+				inline: 'nearest',
+			})
+		}
 	}
 
 	const getMessages = async () => {

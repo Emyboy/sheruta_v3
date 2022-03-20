@@ -56,8 +56,8 @@ export default function UserAction({ user, disable, alignment, className }) {
 			{auth.user && auth.user?.user?.id === user?.id ? null : (
 				<div className={`d-flex justify-content-${alignment || 'center'} ${className && className}`}>
 					<Link
-						to={payment_plan || user?.id == Global.ADMIN_ID  ? `/messages/new/${user?.id}` : '#'}
-						onClick={() => handleButtonClicks('message')}
+						to={`/messages/new/${user?.id}`}
+						// onClick={() => handleButtonClicks('message')}
 						className="mr-3"
 					>
 						<button
@@ -69,12 +69,12 @@ export default function UserAction({ user, disable, alignment, className }) {
 						</button>
 					</Link>{' '}
 					<a
-						href={payment_plan || user?.id == Global.ADMIN_ID  ? `tel:${user?.phone_number}` : `#call-error`}
+						href={`tel:${user?.phone_number}`}
 						className="ml-3"
 					>
 						<button
 							disabled={disable}
-							onClick={() => handleButtonClicks('called')}
+							// onClick={() => handleButtonClicks('called')}
 							className="btn shadow bg-theme text-white rounded mr-2"
 						>
 							<IoCallSharp className="mr-2" />

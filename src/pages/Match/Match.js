@@ -43,11 +43,7 @@ export default function Match() {
 					<div className="col-sm-12 col-lg-7 ">
 						<Tabs defaultActiveKey="1" onChange={callback}>
 							<TabPane tab={`Suggested (${user_suggestions.length})`} key="1">
-								{payment_plan ? (
 									<MatchList list={user_suggestions} />
-								) : (
-									<PaymentAlert message={'Subscribe to view suggestions'} />
-								)}
 							</TabPane>
 							<TabPane
 								tab={`Accepted (${accepted_suggestions.length})`}
