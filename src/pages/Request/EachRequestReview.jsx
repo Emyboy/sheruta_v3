@@ -50,7 +50,9 @@ export default function EachRequestReview({ data }) {
 				reviewData={review}
 				edit={true}
 				done={e => {
-					setReview(e);
+					if(e){
+						setReview(e)
+					}
 					setEdit(false)
 				}}
 			/>

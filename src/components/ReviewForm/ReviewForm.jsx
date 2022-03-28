@@ -17,7 +17,7 @@ export default function ReviewForm({
 	const { user } = useSelector((state) => state.auth)
 	const [review, setReview] = useState(reviewData ? reviewData?.review : null)
 	const [rating, setRating] = useState(reviewData ? reviewData?.rating : 1)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
 
 	const updateReviews = async (e) => {
 		e.preventDefault()
@@ -124,12 +124,23 @@ export default function ReviewForm({
 						maxLength={'240'}
 					></textarea>
 				</div>
-				<button
-					disabled={rating === 0 || loading}
-					className="btn text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xssss fw-700 ls-lg text-white"
-				>
-					{edit ? 'Save' : 'Submit'}
-				</button>
+				<div className="d-flex">
+					<button
+						disabled={rating === 0 || loading}
+						className="btn text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xssss fw-700 ls-lg text-white"
+					>
+						{edit ? 'Save' : 'Submit'}
+					</button>
+					{edit && (
+						<button
+							type={'button'}
+							className="btn text-danger ml-3"
+							onClick={() => done()}
+						>
+							Cancel
+						</button>
+					)}
+				</div>
 			</div>
 		</form>
 	)
