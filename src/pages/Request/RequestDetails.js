@@ -20,6 +20,8 @@ import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBan
 import { Redirect } from 'react-router'
 import EachRequestOptions from '../../components/Social/EachRequestOptions'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
+import RequestReview from './RequestReview'
+
 const ImgContainer = styled.section`
 	padding: 5em;
 	margin-bottom: 1em;
@@ -40,6 +42,8 @@ export default function RequestDetails(props) {
 	})
 	const auth = useSelector((state) => state.auth)
 	const deactivated = request?.users_permissions_user.deactivated
+	const tabs = ['More Details', 'Reviews']
+	const [currentTab, setCurrentTab] = useState(tabs[0])
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
@@ -196,8 +200,8 @@ export default function RequestDetails(props) {
 															</a>
 														</Link>
 														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-															{/* {moment(request?.created_at).fromNow()} */}
-															@{request?.users_permissions_user?.username}
+															{/* {moment(request?.created_at).fromNow()} */}@
+															{request?.users_permissions_user?.username}
 														</span>
 													</h4>
 													<a
@@ -221,6 +225,7 @@ export default function RequestDetails(props) {
 														fontSize: Global.isMobile ? '18px' : '22px',
 														fontWeight: 'bold',
 													}}
+													className="text-grey-700"
 												>
 													{request?.heading}
 												</h1>
@@ -349,87 +354,124 @@ export default function RequestDetails(props) {
 											</div>
 										</div>
 										{request?.bedrooms || request?.bathrooms ? (
-											<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
-												<div className="block-header">
-													<h5 className="block-title">
-														<b>Property Info</b>
-													</h5>
+											<>
+												<div className="card shadow-xss rounded-xxl border-0 mb-3 mt-5">
+													<div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
+														<ul
+															className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
+															id="pills-tab"
+															role="tablist"
+														>
+															{tabs.map((val, i) => {
+																return (
+																	<li
+																		className={`list-inline-item me-5 ${
+																			currentTab === val && 'active'
+																		}`}
+																		key={i}
+																		onClick={() => setCurrentTab(val)}
+																	>
+																		<a
+																			className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
+																				currentTab === val && 'active'
+																			}`}
+																			data-toggle="tab"
+																		>
+																			{val}
+																		</a>
+																	</li>
+																)
+															})}
+														</ul>
+													</div>
 												</div>
+												{currentTab === tabs[0] && (
+													<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 additional_details">
+														<div className="block-header border-bottom mb-4">
+															<h2 className="block-title">
+																<b className="text-grey-700">Property Info</b>
+															</h2>
+														</div>
 
-												<div className="block-body ml-3">
-													<ul className="dw-proprty-info row justify-content-between">
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Bedrooms:
-															</strong>
-															<br />
-															{request?.bedrooms}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Bathrooms:
-															</strong>
-															<br />
-															{request?.bathrooms}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Toilets:
-															</strong>
-															<br />
-															{request?.toilets}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Is Premium?
-															</strong>
-															<br />
-															{request?.is_premium ? 'Yes' : 'No'}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Service:
-															</strong>
-															<br />
-															{request?.service && request?.service.name}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Type:
-															</strong>
-															<br />
-															{request?.category && request?.category.name}
-														</li>
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																Rent
-															</strong>
-															<br />₦{' '}
-															{window.formatedPrice.format(request?.budget)}
-														</li>
-														{request?.rent_per_room && (
-															<li className="col-4 mb-3">
-																<strong className="text-dark font-xssss">
-																	Per Room
-																</strong>
-																<br />₦{' '}
-																{window.formatedPrice.format(
-																	request?.rent_per_room
+														<div className="block-body ml-3">
+															<ul className="dw-proprty-info row justify-content-between">
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Bedrooms:
+																	</strong>
+																	<br />
+																	{request?.bedrooms}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Bathrooms:
+																	</strong>
+																	<br />
+																	{request?.bathrooms}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Toilets:
+																	</strong>
+																	<br />
+																	{request?.toilets}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Is Premium?
+																	</strong>
+																	<br />
+																	{request?.is_premium ? 'Yes' : 'No'}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Service:
+																	</strong>
+																	<br />
+																	{request?.service && request?.service.name}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Type:
+																	</strong>
+																	<br />
+																	{request?.category && request?.category.name}
+																</li>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		Rent
+																	</strong>
+																	<br />₦{' '}
+																	{window.formatedPrice.format(request?.budget)}
+																</li>
+																{request?.rent_per_room && (
+																	<li className="col-6 col-md-3 mb-3">
+																		<strong className="text-dark font-xssss">
+																			Per Room
+																		</strong>
+																		<br />₦{' '}
+																		{window.formatedPrice.format(
+																			request?.rent_per_room
+																		)}
+																	</li>
 																)}
-															</li>
-														)}
 
-														<li className="col-4 mb-3">
-															<strong className="text-dark font-xssss">
-																State
-															</strong>
-															<br />
-															{request?.state && request?.state.name}
-														</li>
-													</ul>
-												</div>
-											</div>
+																<li className="col-6 col-md-3 mb-3">
+																	<strong className="text-dark font-xssss">
+																		State
+																	</strong>
+																	<br />
+																	{request?.state && request?.state.name}
+																</li>
+															</ul>
+														</div>
+													</div>
+												)}
+											</>
 										) : null}
+										{currentTab === tabs[1] && (
+											<RequestReview request={request} />
+										)}
 									</div>
 									{/* <div className="col-lg-3"></div> */}
 								</div>

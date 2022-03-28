@@ -10,9 +10,8 @@ import PageNotFound from '../PageNotFound'
 
 import { notifyEmy } from '../../services/Sheruta'
 import MetaTags from 'react-meta-tags'
-import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import Notifications from '../../services/Notifications'
-import UserAction from '../../components/UserAction/UserAction'
+// import UserAction from '../../components/UserAction/UserAction'
 import Global from '../../Global'
 import ProfileJumb from '../../components/ProfileComponents/ProfileJumb'
 import ProfileAbout from '../../components/ProfileComponents/ProfileAbout'
@@ -134,7 +133,7 @@ export const Profile2 = (props) => {
 						/>
 					</MetaTags>
 					{userData && <ProfileJumb user={userData} />}
-					{userData && Global.isMobile && (
+					{/* {userData && Global.isMobile && (
 						<div
 							className="fixed-bottom text-center"
 							style={{
@@ -144,7 +143,7 @@ export const Profile2 = (props) => {
 						>
 							<UserAction user={userData} />
 						</div>
-					)}
+					)} */}
 					<div className="container-fluid">
 						<div className="row">
 							<div

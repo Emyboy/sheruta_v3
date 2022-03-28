@@ -41,6 +41,7 @@
 		"react-markdown": "^7.1.0",
 		"react-meta-tags": "^1.0.1",
 		"react-paystack": "^3.0.3",
+		"react-rating-stars-component": "^2.2.0",
 		"react-redux": "^7.2.4",
 		"react-router": "^5.2.0",
 		"react-router-dom": "^5.2.0",

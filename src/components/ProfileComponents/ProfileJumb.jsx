@@ -1,17 +1,20 @@
 import { Tooltip } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Global from '../../Global';
-import VerifiedBadge from '../VerifiedBadge/VerifiedBadge';
+import Global from '../../Global'
+import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import store from '../../redux/store/store'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import ReportPopupForm from '../ReportForm/ReportPopupForm'
 
 export default function ProfileJumb({ user }) {
-	const deactivated = user.deactivated;
+	const deactivated = user?.deactivated
 	const auth = store.getState().auth;
+	const [showReport, setShowReport] = useState(false);
 
 	return (
 		<div className="col-lg-12 p-0">
+			<ReportPopupForm show={showReport} onClose={() => setShowReport(false)} />
 			<div className="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
 				<div
 					className="card-body p-0 rounded-xxl overflow-hidden m-3"
@@ -32,38 +35,58 @@ export default function ProfileJumb({ user }) {
 					>
 						<LazyLoadImage
 							src={
-								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user.avatar_url
+								deactivated ? Global.USER_PLACEHOLDER_AVATAR : user?.avatar_url
 							}
 							alt="image"
-							effect='blur'
+							effect="blur"
 							className="float-right p-1 bg-white rounded-circle w-100"
 						/>
 					</figure>
 					<h4 className="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">
 						<div className="d-flex">
-							{deactivated ? '.... ....' : user.first_name}
+							{deactivated ? '.... ....' : user?.first_name}
 							<VerifiedBadge user={user} className={'ml-2'} />{' '}
 						</div>
 						<span className="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">
-							@{deactivated ? '......' : user.username}
+							@{deactivated ? '......' : user?.username}
 						</span>
 					</h4>
-					{!deactivated && auth.user && auth.user?.user?.id !== user.id ? (
-						<div className="d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
-							<Tooltip placement="top" title={`Call ${user.first_name}`}>
+					{!deactivated && auth.user && auth.user?.user?.id !== user?.id ? (
+						<div
+							className={`d-flex align-items-center  position-absolute-md right-15 top-0 me-2 ${
+								Global.isMobile
+									? 'mb-3 pr-4 justify-content-end'
+									: 'justify-content-center'
+							}`}
+						>
+							<Tooltip placement="bottom" title={`Report ${user?.first_name}`}>
 								<a
-									href={`tel:${user.phone_number}`}
-									className="d-none d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
+									className=" d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"
+									onClick={() => {
+										sessionStorage.setItem('user', user?.id)
+										setShowReport(true)
+									}}
 								>
-									<i className="feather-phone font-md"></i>
+									<i className="feather-flag font-md"></i>
 								</a>
 							</Tooltip>
-							<Tooltip placement="top" title={`Chat with ${user.first_name}`}>
-								<Link to={`/messages/new/${user.id}`}>
-									<a className="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
+							<Tooltip
+								placement="bottom"
+								title={`Chat with ${user?.first_name}`}
+							>
+								<Link to={`/messages/new/${user?.id}`}>
+									<a className=" d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700">
 										<i className="feather-mail font-md"></i>
 									</a>
 								</Link>
+							</Tooltip>
+							<Tooltip placement="bottom" title={`Call ${user?.first_name}`}>
+								<a
+									href={`tel:${user?.phone_number}`}
+									className=" d-lg-block bg-success p-3 z-index-0 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3"
+								>
+									<i className="feather-phone font-md"></i>
+								</a>
 							</Tooltip>
 							{/* <a
 							href="#"
@@ -77,9 +100,7 @@ export default function ProfileJumb({ user }) {
 						</a> */}
 						</div>
 					) : (
-						<div className="badge badge-success d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2">
-							
-						</div>
+						<div className="badge badge-success d-flex align-items-center justify-content-center position-absolute-md right-15 top-0 me-2"></div>
 					)}
 				</div>
 

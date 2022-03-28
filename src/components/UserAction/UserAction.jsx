@@ -2,16 +2,16 @@ import React from 'react'
 import { IoMail, IoCallSharp } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Global from '../../Global'
-import store from '../../redux/store/store'
+// import Global from '../../Global'
+// import store from '../../redux/store/store'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
-import NotificationService from '../../services/Notifications'
-import { notifyEmy } from '../../services/Sheruta'
+// import NotificationService from '../../services/Notifications'
+// import { notifyEmy } from '../../services/Sheruta'
 
 
 export default function UserAction({ user, disable, alignment, className }) {
 	const auth = useSelector((state) => state.auth)
-	const { payment_plan } = useSelector((state) => state.view)
+	// const { payment_plan } = useSelector((state) => state.view)
 	const deactivated = user?.deactivated
 
 	const recordCallAnalytics = (type) => {
@@ -19,32 +19,30 @@ export default function UserAction({ user, disable, alignment, className }) {
 	}
 
 	const handleButtonClicks = (action) => {
-		if(user?.id == Global.ADMIN_ID){
-			recordCallAnalytics(AnalyticsTypes.calls)
-			return
-		}
-		if (!payment_plan) {
-			store.dispatch({
-				type: 'SET_VIEW_STATE',
-				payload: {
-					showPaymentPopup: true,
-				},
-			})
-			recordCallAnalytics(AnalyticsTypes.declinedCalls)
-			notifyEmy({
-				heading: ` ${action} ${user?.first_name} ${user?.last_name} but hasn't paid ( Blocked )`,
-			})
-			NotificationService.notifyUser({
-				owner: user?.id,
-				sub_title: 'this action was blocked',
-				type: `${action === 'message' ? 'message_attempt' : 'call_attempt'}`,
-			})
-		} else {
-			recordCallAnalytics(AnalyticsTypes.calls)
-			notifyEmy({
-				heading: ` ${action} ${user?.first_name} ${user?.last_name}`,
-			})
-		}
+		recordCallAnalytics(AnalyticsTypes.calls);
+		
+		// if (!payment_plan) {
+		// 	store.dispatch({
+		// 		type: 'SET_VIEW_STATE',
+		// 		payload: {
+		// 			showPaymentPopup: true,
+		// 		},
+		// 	})
+		// 	recordCallAnalytics(AnalyticsTypes.declinedCalls)
+		// 	notifyEmy({
+		// 		heading: ` ${action} ${user?.first_name} ${user?.last_name} but hasn't paid ( Blocked )`,
+		// 	})
+		// 	NotificationService.notifyUser({
+		// 		owner: user?.id,
+		// 		sub_title: 'this action was blocked',
+		// 		type: `${action === 'message' ? 'message_attempt' : 'call_attempt'}`,
+		// 	})
+		// } else {
+		// 	recordCallAnalytics(AnalyticsTypes.calls)
+		// 	notifyEmy({
+		// 		heading: ` ${action} ${user?.first_name} ${user?.last_name}`,
+		// 	})
+		// }
 	}
 
 	if (deactivated || auth.user && auth.user?.user?.deactivated) {
@@ -74,7 +72,7 @@ export default function UserAction({ user, disable, alignment, className }) {
 					>
 						<button
 							disabled={disable}
-							// onClick={() => handleButtonClicks('called')}
+							onClick={() => handleButtonClicks('called')}
 							className="btn shadow bg-theme text-white rounded mr-2"
 						>
 							<IoCallSharp className="mr-2" />

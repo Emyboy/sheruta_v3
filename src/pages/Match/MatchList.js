@@ -53,7 +53,7 @@ export default function MatchList() {
                 <div className="text-center" style={{ marginTop: "15vh", marginBottom: '20vh' }}>
                     <h1 className="display-4">😢</h1>
                     <h2><b>Account Not Yet Verified</b></h2>
-                    <h4>Verify your account and view your flat mates</h4><br />
+                    <h4>Verify your account and view suggested flat mates</h4><br />
                     <Link to="/start">
                         <Btn
                             text="Get Started"

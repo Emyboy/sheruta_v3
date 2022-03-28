@@ -8,7 +8,6 @@ import { getAuthPersonalInfo } from '../../../redux/strapi_actions/view.action'
 import SettingsHeader from '../components/SettingsHeader'
 
 export default function ConfigureViewSettings() {
-	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const [view, setView] = useState(personal_info && personal_info?.looking_for)
     const dispatch = useDispatch();
