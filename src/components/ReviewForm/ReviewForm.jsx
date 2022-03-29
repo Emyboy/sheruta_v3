@@ -13,11 +13,12 @@ export default function ReviewForm({
 	request,
 	edit,
 	reviewData,
+	withRating,
 }) {
 	const { user } = useSelector((state) => state.auth)
 	const [review, setReview] = useState(reviewData ? reviewData?.review : null)
 	const [rating, setRating] = useState(reviewData ? reviewData?.rating : 1)
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false)
 
 	const updateReviews = async (e) => {
 		e.preventDefault()
@@ -37,7 +38,7 @@ export default function ReviewForm({
 				}
 			)
 			if (res?.data) {
-				if(done){
+				if (done) {
 					done(res.data)
 				}
 				setLoading(false)
@@ -67,7 +68,7 @@ export default function ReviewForm({
 				},
 			})
 			if (res?.data) {
-				if(done){
+				if (done) {
 					done(res.data)
 				}
 				setLoading(false)
@@ -93,17 +94,19 @@ export default function ReviewForm({
 					</a>
 				</div>
 				<div className="d-flex p-0 mt-3 mb-2">
-					<ReactStars
-						count={5}
-						onChange={(e) => {
-							setRating(e)
-						}}
-						value={rating}
-						emptyIcon={<AiOutlineStar />}
-						fullIcon={<FaStar />}
-						size={24}
-						activeColor="#1da01d"
-					/>
+					{withRating && (
+						<ReactStars
+							count={5}
+							onChange={(e) => {
+								setRating(e)
+							}}
+							value={rating}
+							emptyIcon={<AiOutlineStar />}
+							fullIcon={<FaStar />}
+							size={24}
+							activeColor="#1da01d"
+						/>
+					)}
 				</div>
 				<div className="card-body p-0 position-relative">
 					<figure className="avatar position-absolute ms-2 mt-1 top-5">
@@ -126,7 +129,7 @@ export default function ReviewForm({
 				</div>
 				<div className="d-flex">
 					<button
-						disabled={rating === 0 || loading}
+						disabled={(withRating && rating === 0) || (!withRating && !review) || loading}
 						className="btn text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xssss fw-700 ls-lg text-white"
 					>
 						{edit ? 'Save' : 'Submit'}

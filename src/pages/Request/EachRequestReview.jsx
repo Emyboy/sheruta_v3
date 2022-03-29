@@ -7,7 +7,7 @@ import { notification } from 'antd'
 import { useSelector } from 'react-redux'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 
-export default function EachRequestReview({ data }) {
+export default function EachRequestReview({ data, withRating }) {
 	const [review, setReview] = useState(data);
 	const [showOptions, setShowOptions] = useState(false)
 	const [deleted, setDeleted] = useState(false)
@@ -49,8 +49,8 @@ export default function EachRequestReview({ data }) {
 				request={review?.request}
 				reviewData={review}
 				edit={true}
-				done={e => {
-					if(e){
+				done={(e) => {
+					if (e) {
 						setReview(e)
 					}
 					setEdit(false)
@@ -73,6 +73,7 @@ export default function EachRequestReview({ data }) {
 					<div className="d-flex justify-content-between">
 						<div>
 							<span>{review?.user?.first_name}</span>
+							{withRating &&
 							<ReactStars
 								value={review?.rating}
 								edit={false}
@@ -81,6 +82,7 @@ export default function EachRequestReview({ data }) {
 								activeColor="#1da01d"
 								color={'#8e928e'}
 							/>
+							}
 						</div>
 						<div>
 							{user && (
@@ -131,7 +133,7 @@ export default function EachRequestReview({ data }) {
 								className="link card-body p-0 d-flex mb-3"
 								onClick={() => {
 									setShowOptions(false)
-									setEdit(true);
+									setEdit(true)
 								}}
 							>
 								<i className="feather-edit text-grey-500 me-3 font-lg"></i>
@@ -143,7 +145,7 @@ export default function EachRequestReview({ data }) {
 								</h4>
 							</div>
 						)}
-						<div className="link card-body p-0 d-flex">
+						{/* <div className="link card-body p-0 d-flex">
 							<i className="feather-flag text-grey-500 me-3 font-lg"></i>
 							<h4 className="fw-600 text-grey-900 font-xssss mt-0 me-4">
 								Report
@@ -151,7 +153,7 @@ export default function EachRequestReview({ data }) {
 									Broke a rule? Please report this.
 								</span>
 							</h4>
-						</div>
+						</div> */}
 						{owner && (
 							<>
 								<hr />

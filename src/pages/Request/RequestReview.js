@@ -25,8 +25,8 @@ export default function RequestReview({ request }) {
 		<section>
 			{reviews.length === 0 && (
 				<div className="text-center card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
-					<h3 className="fw-bold">No Reviews</h3>
-					<h6>Be the first to add a review</h6>
+					<h3 className="fw-bold">No Comments</h3>
+					<h6>Be the first to add a comment</h6>
 					<h6>or simply ask questions</h6>
 				</div>
 			)}
@@ -35,9 +35,9 @@ export default function RequestReview({ request }) {
 			})}
 
 			<ReviewForm
-				heading={'Leave a review or a question'}
+				heading={'Leave a comment or a question'}
 				done={(e) => setReviews([...reviews, e])}
-                request={request?.id}
+				request={request?.id}
 			/>
 		</section>
 	)

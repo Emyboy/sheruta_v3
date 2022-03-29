@@ -140,7 +140,16 @@ export default (props) => {
 															</small>
 														</Link>
 													</div>
-													{personal_info && <RecentUsersList />}
+													{personal_info && (
+														<>
+															<RecentUsersList key={`ki-${i}`} />
+															<SocialFeedsAds index={i} key={`ad-${i}`} />
+															<EachSocialRequest
+																key={i + ' request'}
+																data={val}
+															/>
+														</>
+													)}
 												</>
 											)
 										}
