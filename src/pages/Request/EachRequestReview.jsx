@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 
 export default function EachRequestReview({ data, withRating }) {
-	const [review, setReview] = useState(data);
+	const [review, setReview] = useState(data)
 	const [showOptions, setShowOptions] = useState(false)
 	const [deleted, setDeleted] = useState(false)
 	const [edit, setEdit] = useState(false)
@@ -73,16 +73,20 @@ export default function EachRequestReview({ data, withRating }) {
 					<div className="d-flex justify-content-between">
 						<div>
 							<span>{review?.user?.first_name}</span>
-							{withRating &&
-							<ReactStars
-								value={review?.rating}
-								edit={false}
-								count={5}
-								size={!review?.review ? 30 : 17}
-								activeColor="#1da01d"
-								color={'#8e928e'}
-							/>
-							}
+							{withRating ? (
+								<ReactStars
+									value={review?.rating}
+									edit={false}
+									count={5}
+									size={!review?.review ? 30 : 17}
+									activeColor="#1da01d"
+									color={'#8e928e'}
+								/>
+							) : (
+								<div>
+									<small>@{review?.user?.username}</small>
+								</div>
+							)}
 						</div>
 						<div>
 							{user && (
@@ -102,7 +106,7 @@ export default function EachRequestReview({ data, withRating }) {
 
 					<p
 						className={`${
-							!review?.review ? 'mt-0' : 'mt-3'
+							!review?.review ? 'mt-0' : 'mt-2'
 						} text-grey-700 fw-500`}
 						style={{ fontSize: '15px' }}
 					>
@@ -122,7 +126,7 @@ export default function EachRequestReview({ data, withRating }) {
 						data-popper-placement="bottom-end"
 						style={{
 							position: 'absolute',
-							inset: '0px auto auto 0px',
+							inset: '5px auto auto -94px',
 							margin: '0px',
 							transform: 'translate(349px, 73px)',
 							left: '70px',
