@@ -1,56 +1,71 @@
-import axios from 'axios';
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useP, useParams } from 'react-router'
 import Layout from '../../components/Layout/Layout'
-import EachBlog from './EachBlog';
+import EachBlog from './EachBlog'
 
 export default function Blog() {
-    const [list, setList] = useState([])
-    useEffect(() => {
-        axios(process.env.REACT_APP_API_URL+`/blogs`)
-            .then(res => {
-                setList(res.data);
-            })
-            .catch(err => {
+	const [list, setList] = useState([]);
 
-            })
-    },[])
-    
-    return (
-        <Layout>
-            <section>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-6">
-                            <div className="breadcrumb_content style2">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="#">Home</a>
-                                    </li>
-                                    <li
-                                        className="breadcrumb-item active text-thm"
-                                        aria-current="page"
-                                    >
-                                        Blog
-                                    </li>
-                                </ol>
-                                <h2 className="breadcrumb_title">Blog</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="row">
-                                {
-                                    list.map((val,i) => {
-                                        return <EachBlog data={val} key={i+" post"} />
-                                        
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </Layout>
-    );
+	const { category_id } = useParams()
+
+	const getBlogs = async () => {
+		axios(
+			process.env.REACT_APP_API_URL + `/blogs/?&_start=0&_sort=created_at:DESC`
+		)
+			.then((res) => {
+				setList(res.data)
+			})
+			.catch((err) => {
+				return Promise.reject(err)
+			})
+	}
+
+	useEffect(() => {
+		if (!category_id){
+			getBlogs()
+		} 
+	}, [category_id])
+
+	useEffect(() => {
+		axios(
+			process.env.REACT_APP_API_URL +
+				`/blogs/?blog_categorie=${category_id}&_start=0&_sort=created_at:DESC`
+		)
+			.then((res) => {
+				setList(res.data)
+			})
+			.catch((err) => {
+				return Promise.reject(err)
+			})
+	}, [category_id])
+
+	return (
+		<Layout>
+			<section>
+				<div className="container">
+					<div className="row">
+						<div className="col-xl-6">
+							<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 p-2 breadcrumb_content style2">
+								<h2 className="breadcrumb_title mb-0 fw-bold">Blog</h2>
+							</div>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-lg-12">
+							<div className="row">
+								{list.map((val, i) => {
+									return (
+										<div className="col-xl-6 col-md-6" key={i + ' post'}>
+											<EachBlog data={val} />
+										</div>
+									)
+								})}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</Layout>
+	)
 }

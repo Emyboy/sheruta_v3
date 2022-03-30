@@ -1,56 +1,38 @@
-import moment from "moment";
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function EachBlog({ data }) {
-    return (
-        <div className="col-lg-4">
-            <div className="for_blog feat_property">
-                <div className="thumb">
-                    <img
-                        className="img-whp"
-                        src={process.env.REACT_APP_API_URL + data.image.url}
-                        alt="1.jpg"
-                    />
-                    {data.blog_categorie && (
-                        <div className="blog_tag">{data.blog_categorie.name}</div>
-                    )}
-                </div>
-                <div className="details">
-                    <div className="tc_content">
-                        <Link to={`/blog/${data.uuid}/${data.id}`}><h4>{data.title}</h4></Link>
-                        <ul className="bpg_meta">
-                            <li className="list-inline-item">
-                                <a href="#">
-                                    <i className="flaticon-calendar"></i>
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="#">{moment(data.created_at).fromNow()}</a>
-                            </li>
-                        </ul>
-                        <p>{data.description}</p>
-                    </div>
-                    {/* <div className="fp_footer">
-                        <ul className="fp_meta float-left mb0">
-                            <li className="list-inline-item">
-                                <a href="#">
-                                    <img
-                                        src="images/property/pposter1.png"
-                                        alt="pposter1.png"
-                                    />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="#">Ali Tufan</a>
-                            </li>
-                        </ul>
-                        <a className="fp_pdate float-right text-thm" href="#">
-                            Read More <span className="flaticon-next"></span>
-                        </a>
-                    </div> */}
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<article
+			className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3"
+			style={{ height: '400px' }}
+		>
+			<div className="card-body p-0 mb-2 rounded-3 overflow-hidden h-100">
+				<div
+					className="card"
+					style={{
+						height: '100%',
+						backgroundImage: `url(${data?.image_url})`,
+						backgroundRepeat: 'no-repeat',
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
+					}}
+				/>
+			</div>
+				<Link to={`/blog/category/${data?.blog_categorie?.slug}/${data?.blog_categorie?.id}`}>
+					<span className="badge badge-success mt-2 mb-2">
+						{data?.blog_categorie?.name}
+					</span>
+				</Link>
+			<Link
+				to={`/blog/${data?.blog_categorie?.slug}/${data?.slug}/${data?.id}`}
+				className="card-body p-0 me-lg-5"
+			>
+				<h1 className="font-xs fw-bold">{data?.title}</h1>
+				<p className="fw-500 text-grey-500 lh-26 font-xsss w-100 mb-2">
+					{data?.description}
+				</p>
+			</Link>
+		</article>
+	)
 }

@@ -141,7 +141,8 @@ function App() {
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
 							<Route exact path="/what-next" component={WhatNext} />
-							<Route exact path="/blog/:uuid/:id" component={BlogDetails} />
+							<Route exact path="/blog/category/:category_slug/:category_id" component={Blog} />
+							<Route exact path="/blog/:category/:uuid/:id" component={BlogDetails} />
 							<Route exact path="/start/:step" component={GetStarted} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/about" component={About} />
