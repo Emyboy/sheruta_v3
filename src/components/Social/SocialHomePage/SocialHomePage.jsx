@@ -10,7 +10,9 @@ import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
 import RecentUsersList from '../../RecentUsersList/RecentUsersList'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
 
@@ -38,7 +40,8 @@ export default (props) => {
 			axios(
 				process.env.REACT_APP_API_URL +
 					`/property-requests/?_limit=${
-						dev ? '20' : '50'
+						// dev ? '20' : '80'
+						'60'
 					}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {
@@ -171,6 +174,14 @@ export default (props) => {
 											)
 										})}
 								</>
+							)}
+							{state.list.length > 0 && (
+								<div className="card rounded-xxl">
+									<div className="card-body text-center">
+										<h1>There is more</h1>
+										<Link className='mt-3 mb-2 btn btn-success fw-bold text-white' to='/search'><FaSearch className='mr-2' />Search</Link>
+									</div>
+								</div>
 							)}
 							{state.list.length === 0 ? (
 								<div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
