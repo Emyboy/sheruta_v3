@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import Select from 'react-select'
+import CurrencyInput from 'react-currency-input-field'
 
 const ImgPreview = ({ file, onRemove }) => {
 	if (!file) {
@@ -40,7 +41,9 @@ function AgentProfileStep({ done, data }) {
 	const [state, _setState] = useState(data?.state || null)
 	const [idFront, setIDFront] = useState(data?.idFront || null)
 	const [idBack, setIDBack] = useState(data?.idBack || null)
-	const [inspection_fee, set_inspection_fee] = useState(data?.inspection_fee || null)
+	const [inspection_fee, set_inspection_fee] = useState(
+		data?.inspection_fee || null
+	)
 
 	const _data = {
 		state,
@@ -87,13 +90,27 @@ function AgentProfileStep({ done, data }) {
 							<label className="mont-font fw-600 font-xsss">
 								Inspection Fee
 							</label>
-							<input
+							<div className="input-group mb-3">
+								<span className="input-group-text" id="inspection_fee">
+									₦
+								</span>
+								<CurrencyInput
+									id="inspection_fee"
+									name="inspection_fee"
+									placeholder="Ex. 4,500"
+									className="form-control"
+									defaultValue={inspection_fee}
+									decimalsLimit={2}
+									onValueChange={(val) => set_inspection_fee(val)}
+								/>
+							</div>
+							{/* <input
 								type="number"
 								className="form-control"
 								placeholder="EX. 4,000"
 								onChange={(e) => set_inspection_fee(e.target.value)}
 								defaultValue={data?.inspection_fee}
-							/>
+							/> */}
 						</div>
 					</div>
 					<div className="col-lg-6 mb-3">

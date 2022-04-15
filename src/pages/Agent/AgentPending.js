@@ -41,22 +41,22 @@ export default function AgentPending(props) {
 					<div className="col-lg-8 col-sm-12">
 						<div className="card mt-5 rounded-xxl shadow-sm">
 							<div className="card-body">
-								<h1 className="fw-700">Congratulations</h1>
+								<h1 className="fw-700 text-grey-700">Congratulations</h1>
 								<h4>
 									We have have received your request and one of our
 									representatives will reach out to you via email or phone in 2
 									business days.
 								</h4>
 								<h4>So please check your email from time to time.</h4>
-								<h1 className="fw-700 mt-4">What Next?</h1>
+								<h1 className="fw-700 mt-4  text-grey-700">What Next?</h1>
 								<h4>
 									If your request gets accepted, we will send you a link to give
 									you access to the agent dashboard.
 								</h4>
 
 								<div className="alert alert-info mt-4">
-									<h4 className="fw-bold">
-										Call us if you don't hear from us in 2 business days
+									<h4 className="fw-bold  text-grey-700">
+										Please call us if you don't hear from us in 2 business days
 									</h4>
 								</div>
 							</div>

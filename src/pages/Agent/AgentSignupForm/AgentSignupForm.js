@@ -5,6 +5,7 @@ import AgentProfileStep from './AgentProfileStep'
 import AgentStateSelect from './AgentStateSelect'
 import UpdateAvatar from '../../GetStarted/Steps/UpdateAvatar'
 import CreateAgentLastStep from './CreateAgentLastStep'
+import LocationKeywordSelector from '../../../components/LocationKeywordSelector/LocationKeywordSelector'
 
 export default function AgentSignupForm() {
 	const [step, setStep] = useState(0)
@@ -17,8 +18,11 @@ export default function AgentSignupForm() {
 		idBack: null,
 		avatar: null,
 		locations: [],
-		inspection_fee: null
+		inspection_fee: null,
+		location_keyword: null,
 	})
+
+	console.log('THE DATA --', agentData)
 
 	useEffect(() => {
 		setNextAble(false)
@@ -37,7 +41,7 @@ export default function AgentSignupForm() {
 					<i className="ti-arrow-left font-sm text-white"></i>
 				</a> */}
 				<h4 className="font-xs text-white fw-600 ms-4 mb-0 mt-2">
-					Agent Registration ({step}) 
+					Agent Registration ({step + 1})
 				</h4>
 			</div>
 			<div className="card-body p-lg-5 p-4 w-100 border-0 ">
@@ -65,19 +69,45 @@ export default function AgentSignupForm() {
 							done={(e) => addData({ state: e })}
 							value={agentData?.state}
 						/>,
-						<PrefaredLocations
-							done={(e) => {
-								if (e) {
-									setNextAble(true);
-									setAgentData({...agentData, locations: e})
-								} else {
-									setNextAble(false)
-								}
-							}}
-							standAlone
-							heading={'Location(s) you opperate in.'}
+						// <PrefaredLocations
+						// 	done={(e) => {
+						// 		if (e) {
+						// 			setNextAble(true);
+						// 			setAgentData({...agentData, locations: e})
+						// 		} else {
+						// 			setNextAble(false)
+						// 		}
+						// 	}}
+						// 	standAlone
+						// 	heading={'Location(s) you opperate in.'}
+						// />,
+						<LocationKeywordSelector
+							state_id={agentData.state}
+							done={(e) => addData({ location_keyword: e })}
+							heading={`Where in ${agentData.state?.name}?`}
+							sub_heading={`What area in ${agentData.state?.name} do you opperate in?`}
+							stand_alone
+							no_state_error={
+								<div className="text-center">
+									<h1 className="fw-bold text-grey-600">
+										Please select a state
+									</h1>
+									<h4 className="text-muted">
+										Please go back and select a state
+									</h4>
+									<button
+										onClick={() => setStep(step - 1)}
+										className="btn bg-current text-white mt-4"
+									>
+										<i className="feather-arrow-left mr-3"></i>Select Now
+									</button>
+								</div>
+							}
 						/>,
-						<CreateAgentLastStep data={agentData} changeStep={s => setStep(s)} />,
+						<CreateAgentLastStep
+							data={agentData}
+							changeStep={(s) => setStep(s)}
+						/>,
 					][step]
 				}
 			</div>

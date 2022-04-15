@@ -18,14 +18,14 @@ export default function AgentStateSelect({ done, value }) {
 			<div className="row justify-content-center">
 				{states.map((val, i) => {
 					return (
-						<div className="col-sm-3 col-md-6 col-lg-4 mb-4">
+						<div className="col-sm-3 col-md-6 col-lg-4 mb-4" key={`state-${i}`}>
 							<button
 								className={`btn w-100 fw-700 text-success ${
-									selected === val?.id
+									selected === val
 										? 'border-2 border-success shadow-sm'
 										: 'border'
 								}`}
-								onClick={() => setSelected(val?.id)}
+								onClick={() => setSelected(val)}
 							>
 								{val?.name?.slice(0, 22)}
 							</button>

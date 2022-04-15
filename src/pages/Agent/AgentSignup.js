@@ -51,9 +51,9 @@ export default function AgentSignup() {
 		})()
 	}, [])
 
-	if (weMove) {
-		return <Redirect to={`/services`} />
-	}
+	// if (weMove) {
+	// 	return <Redirect to={`/services`} />
+	// }
 
 	if (!user) {
 		localStorage.setItem('after_login', '/agents')

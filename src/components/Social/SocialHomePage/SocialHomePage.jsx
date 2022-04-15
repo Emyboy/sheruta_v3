@@ -40,8 +40,7 @@ export default (props) => {
 			axios(
 				process.env.REACT_APP_API_URL +
 					`/property-requests/?_limit=${
-						// dev ? '20' : '80'
-						'60'
+						dev ? '20' : '90'
 					}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {
@@ -76,9 +75,9 @@ export default (props) => {
 		<div className="main-wrapper">
 			<Layout currentPage="feeds" showMessages>
 				<div className="container-fluid">
-					<div className="row _feed-body">
+					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
-							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+							<div className="col-xl-3 col-xxl-3 col-lg-4 ps-lg-0">
 								{/* <RecentUsers data={newUsers} /> */}
 								<UserFeedCard />
 							</div>
@@ -178,13 +177,22 @@ export default (props) => {
 							{state.list.length > 0 && (
 								<div className="card rounded-xxl">
 									<div className="card-body text-center">
-										<h1>There is more</h1>
-										<Link className='mt-3 mb-2 btn btn-success fw-bold text-white' to='/search'><FaSearch className='mr-2' />Search</Link>
+										<h1 className="fw-bold text-grey-600">There is more</h1>
+										<Link
+											className="mt-3 mb-2 btn btn-success fw-bold text-white"
+											to="/search"
+										>
+											<FaSearch className="mr-2" />
+											Search
+										</Link>
 									</div>
 								</div>
 							)}
 							{state.list.length === 0 ? (
-								<div className="central-meta item rounded border-gray text-center d-flex justify-content-center mt-5 pt-5">
+								<div className="central-meta item rounded-xxl bg-white card text-center d-flex justify-content-center mt-5 pt-5 pb-5">
+									<h1 className="fw-bold text-grey-600">
+										Customizing Your Feed
+									</h1>
 									<Dots />
 								</div>
 							) : null}

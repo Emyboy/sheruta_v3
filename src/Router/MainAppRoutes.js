@@ -45,6 +45,7 @@ import AgentSignup from '../pages/Agent/AgentSignup'
 
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
+const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
 const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
 const Home = React.lazy(() => import('../pages/Home/Home'))
@@ -113,6 +114,7 @@ function App() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
 							<Route exact path="/agents" component={Agent} />
+							<Route exact path="/our-rules" component={OurRules} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
 							<Route exact path="/agents/pending/:agent_id" component={AgentPending} />
 							<Route exact path="/properties" component={Properties} />

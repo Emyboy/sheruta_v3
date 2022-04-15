@@ -13,6 +13,7 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 	const { user } = useSelector((state) => state.auth);
     const [done, setDone] = useState(false);
 
+
 	const saveToDB = async () => {
 		try {
 			const newAgent = {
@@ -84,7 +85,7 @@ export default function CreateAgentLastStep({ data, changeStep }) {
     },[backID, fontID])
 
 	useEffect(() => {
-		console.log('THE DATA ---', data)
+		console.log('THE FINAL DATA ---', data)
 		if (!data?.idBack) {
 			notification.error({ message: 'Please add the back of you ID' })
 			changeStep(0)
@@ -115,9 +116,9 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 			changeStep(2)
 			return
 		}
-		if (data?.locations.length === 0) {
+		if (!data?.location_keyword) {
 			changeStep(3)
-			notification.error({ message: 'Locations are required' })
+			notification.error({ message: 'Please select a location' })
 			return
 		}
         uploadIDs()

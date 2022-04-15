@@ -312,6 +312,20 @@ export const getRecentUsers = () => async (dispatch) => {
 	}
 }
 
+export const getLocationKeyWordsByState = (state_id) => async dispatch => {
+	try {
+		const res = await axios(process.env.REACT_APP_API_URL+`/location-keywords/?state=${state_id}`)
+		dispatch({
+			type: 'SET_VIEW_STATE',
+			payload: {
+				location_keywords: res.data
+			}
+		})
+	} catch (error) {
+		return Promise.reject(error);
+	}
+}
+
 export const getRealTimeStuffs = () => (dispatch) => {
 	dispatch(getAllConversations())
 	dispatch(getUnreadMessageCount())

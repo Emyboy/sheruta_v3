@@ -79,7 +79,7 @@ export default function CreateJoinPaddy() {
 		<PrefaredLocations
 			standAlone
 			done={(e) =>
-				setData({ ...data, user_preferred_locations: e.map((val) => val?.id) })
+				setData({ ...data, user_preferred_locations: e?.map((val) => val?.id) })
 			}
 		/>,
 		<JoinPaddyDetailsFrom

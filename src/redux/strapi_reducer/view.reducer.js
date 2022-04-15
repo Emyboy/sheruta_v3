@@ -18,7 +18,8 @@ const initialState = {
     notifications: [],
     messages: [],
     amenities: [],
-    recent_users: []
+    recent_users: [],
+    location_keywords: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
-import { IoPricetagsOutline } from 'react-icons/io5'
+import { IoPricetagsOutline, IoWarningOutline } from 'react-icons/io5'
 import { RiUserSearchLine } from 'react-icons/ri'
 import { BsHash } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
@@ -106,6 +106,14 @@ export default function SideNav({ show }) {
 									</li>
 								</>
 							)}
+							<li>
+								<Link to={`/our-rules`} className="nav-content-bttn open-font">
+									<i className="font-xl text-current me-3">
+										<IoWarningOutline />
+									</i>
+									<span>Our Rules</span>
+								</Link>
+							</li>
 							<li>
 								<Link
 									to={`/how-it-works`}
