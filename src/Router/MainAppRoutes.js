@@ -154,7 +154,7 @@ function App() {
 							<Route exact path="/user/:username" component={Profile2} />
 							<Route
 								exact
-								path="/property/:uid/:property_id"
+								path="/property/:service/:category/:property_id"
 								component={PropertyDetails}
 							/>
 							<Route exact path="/signup" component={Signup} />

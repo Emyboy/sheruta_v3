@@ -12,7 +12,7 @@ const setPropertyState = (payload) => {
 export const getAllRecentProperties = () => async (dispatch) => {
 	try {
 		const res = await PropertiesService.getRecentProperties()
-
+console.log('PROPS --', res.data)
 
 		setPropertyState({
 			recent_properties: res.data,

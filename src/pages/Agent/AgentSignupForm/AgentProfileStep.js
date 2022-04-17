@@ -51,6 +51,7 @@ function AgentProfileStep({ done, data }) {
 		idFront,
 		idBack,
 		officeLocation,
+		inspection_fee
 	}
 	useEffect(() => {
 		// console.log('DATA --', data)

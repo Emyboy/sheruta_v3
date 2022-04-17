@@ -44,7 +44,7 @@ export default function ProfileAbout({ user }) {
 						<h2 className="fw-bold">Only verified users can view this</h2>
 						<Link to={`/start`}>
 							<button className="btn bg-theme text-white mt-3">
-								Verify Your Account
+								Verify Your Profile
 							</button>
 						</Link>
 					</div>

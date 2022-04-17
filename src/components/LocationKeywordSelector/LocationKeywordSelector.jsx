@@ -5,16 +5,20 @@ import {
 	getLocationKeyWordsByState,
 } from '../../redux/strapi_actions/view.action'
 import Select from 'react-select'
+import { Alert } from 'react-bootstrap'
+import axios from 'axios'
 
 export default function LocationKeywordSelector({
 	done,
 	heading,
 	sub_heading,
 	stand_alone,
+	disabled,
 }) {
 	const [state_id, setStateId] = useState(null)
 	const { location_keywords, states } = useSelector((state) => state.view)
 	const [locationKeyword, setLocationKeyword] = useState(null)
+	const { personal_info } = useSelector((state) => state?.view);
 
 	const dispatch = useDispatch()
 
@@ -26,7 +30,7 @@ export default function LocationKeywordSelector({
 
 	useEffect(() => {
 		if (done && stand_alone) {
-			return done(locationKeyword)
+			return done({ locationKeyword, state: state_id })
 		}
 	}, [locationKeyword])
 
@@ -40,6 +44,13 @@ export default function LocationKeywordSelector({
 		}
 	}
 
+	useEffect(() => {
+		if (locationKeyword && state_id) {
+			setLocationKeyword(null)
+		}
+	}, [state_id])
+
+	
 
 	return (
 		<div>
@@ -48,8 +59,28 @@ export default function LocationKeywordSelector({
 					<h1 className="fw-bold text-grey-600">
 						{heading || 'Select location keyword'}
 					</h1>
-					<h4>{sub_heading || 'What area?'}</h4>
+					<h4 className="text-muted">{sub_heading || 'Get instant updates on location'}</h4>
 				</div>
+				<Alert variant="success">
+					<Alert.Heading className="fw-bold">Why?</Alert.Heading>
+					<div className="row justify-content-between align-items-center">
+						<p>
+							We will notify you when there is an activity in the location you
+							select below.
+						</p>
+						<Alert.Heading className="fw-600">For Example</Alert.Heading>
+						<ol>
+							<li>
+								{' '}
+								&#8226;{' '}
+								{personal_info?.looking_for
+									? 'New flats in this location'
+									: 'New users looking for in this location'}
+							</li>
+							<li> &#8226; Rent updates in this location</li>
+						</ol>
+					</div>
+				</Alert>
 				<div className="form-group">
 					<label className="text-grey-600">State</label>
 					<Select
@@ -59,13 +90,15 @@ export default function LocationKeywordSelector({
 						onChange={(e) => {
 							setStateId(e)
 						}}
+						placeholder={"Please select a state"}
 					/>
 				</div>
 				{state_id && (
-					<div className="form-group">
-						<label className="text-grey-600">
+					<div className={`form-group`}>
+						<label className={`text-grey-600`}>
 							What area in {state_id?.label}?
 						</label>
+						<span className="ml-1 text-danger fw-bold">*</span>
 						<Select
 							options={location_keywords.map((val) => {
 								return { value: val?.id, label: val?.name }
@@ -73,6 +106,8 @@ export default function LocationKeywordSelector({
 							onChange={(e) => {
 								setLocationKeyword(e)
 							}}
+							className={`${!locationKeyword && 'border-danger border rounded'}`}
+							placeholder={`Please select one area in ${state_id?.label}`}
 						/>
 					</div>
 				)}
@@ -80,11 +115,11 @@ export default function LocationKeywordSelector({
 				{!stand_alone && (
 					<div className="d-flex justify-content-center mt-5">
 						<button
-							disabled={!locationKeyword || !state_id}
-							className="bg-current btn btn-sm text-center text-white font-xsss fw-600 p-2 w100 rounded-3 d-inline-block"
+							disabled={!locationKeyword || !state_id || disabled}
+							className="bg-current btn btn-sm text-center text-white font-xsss fw-600 p-2 w-50 rounded-3 d-inline-block"
 							onClick={handleSubmit}
 						>
-							Add
+							Add Notification
 						</button>
 					</div>
 				)}

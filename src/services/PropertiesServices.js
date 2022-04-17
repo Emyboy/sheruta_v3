@@ -10,9 +10,9 @@ export default class PropertiesService {
 		return data
 	};
 
-	static async getPropertyByUidAndID(uid, property_id) {
+	static async getPropertyByUidAndID(property_id) {
 		const data = await axios(
-			API_URL + `/properties/?uid=${uid}&id=${property_id}`
+			API_URL + `/properties/?id=${property_id}`
 		)
 		return data
 	}

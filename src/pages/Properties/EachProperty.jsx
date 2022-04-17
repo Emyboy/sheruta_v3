@@ -4,9 +4,17 @@ import Global from '../../Global'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
+export const formatPropertyURL = data => {
+	return `/property/${`${data?.service?.name}/${
+		data.categorie?.name
+	}-in-${data?.location?.replace(/[^\w\s]/gi, '').replace(/\s/g, '-')}`
+		.toLocaleLowerCase()
+		.replace(/\s/g, '-')}/${data.id}`
+}
+
 export default function EachProperty({ data }) {
-    console.log('DATA --', data)
-    const iconSize = 19;
+	console.log('DATA --', data)
+	const iconSize = 19
 	return (
 		<article className="card w-100 p-0 hover-card shadow-xss border-0 rounded-3 overflow-hidden me-1">
 			{data.categorie && (
@@ -16,7 +24,11 @@ export default function EachProperty({ data }) {
 			)}
 			<div className="card-image w-100 mb-3">
 				<Link
-					to={`/property/${data.uid}/${data.id}`}
+					to={{
+						pathname: formatPropertyURL(data),
+						state: data
+					}}
+					
 					className="position-relative d-block"
 				>
 					<LazyLoadImage
@@ -30,7 +42,11 @@ export default function EachProperty({ data }) {
 				<i className="feather-bookmark font-md text-grey-500 position-absolute right-0 me-3"></i>
 				<h4 className="fw-700 font-xs mt-0 lh-28 mb-0">
 					<Link
-						to={`/property/${data.uid}/${data.id}`}
+						to={{
+							pathname: formatPropertyURL(data),
+							state: data
+						}}
+						
 						className="text-dark text-grey-900"
 					>
 						{data.name}
@@ -63,7 +79,7 @@ export default function EachProperty({ data }) {
 				<span className="font-lg fw-700 mt-0 pe-3 ls-2 lh-32 d-inline-block text-success float-left">
 					<span className="font-xs">{Global.currency}</span>{' '}
 					{window.formatedPrice.format(data.price)}
-					<span className="font-xsssss text-grey-500">
+					<span className="font-xssss text-grey-500">
 						/ {data.payment_type && data.payment_type.abbreviation}
 					</span>{' '}
 				</span>

@@ -3,16 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { storage } from '../../../Firebase'
 import AgentService from '../../../services/AgentService'
-import firebase from 'firebase';
+import firebase from 'firebase'
 import { Dots } from 'react-activity'
 import { Redirect } from 'react-router'
 
 export default function CreateAgentLastStep({ data, changeStep }) {
 	const [fontID, setFontID] = useState(null)
 	const [backID, setBackID] = useState(null)
-	const { user } = useSelector((state) => state.auth);
-    const [done, setDone] = useState(false);
-
+	const { user } = useSelector((state) => state.auth)
+	const [done, setDone] = useState(false)
 
 	const saveToDB = async () => {
 		try {
@@ -21,20 +20,22 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 				id_image_front: fontID,
 				id_image_back: backID,
 				name: data?.name,
-				state: data?.state,
+				state: data?.state?.value,
 				location: data?.officeLocation?.label,
 				google_location: data?.officeLocation,
 				country: process.env.REACT_APP_COUNTRY_ID,
 				inspection_fee: data?.inspection_fee || null,
+				location_keyword: data?.location_keyword?.value
 			}
-			const res = await AgentService.createAgent(newAgent);
-            if(res.data){
-                setDone(res.data.id)
-            }
+			const res = await AgentService.createAgent(newAgent)
+			if (res.data) {
+				setDone(res.data.id)
+				console.log('SAVED DATA ---', res.data)
+			}
 		} catch (error) {
-            notification.error({ message: "Error, please try again"})
-            return Promise.reject(error);
-        }
+			notification.error({ message: 'Error, please try again' })
+			return Promise.reject(error)
+		}
 	}
 
 	const uploadIDs = async () => {
@@ -78,11 +79,11 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 		})
 	}
 
-    useEffect(() => {
-        if(backID && fontID){
-            saveToDB()
-        }
-    },[backID, fontID])
+	useEffect(() => {
+		if (backID && fontID) {
+			saveToDB()
+		}
+	}, [backID, fontID])
 
 	useEffect(() => {
 		console.log('THE FINAL DATA ---', data)
@@ -121,20 +122,20 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 			notification.error({ message: 'Please select a location' })
 			return
 		}
-        uploadIDs()
+		uploadIDs()
 	}, [])
 
-    if(done){
-        return <Redirect to={`/agents/pending/${done}`} />
-    }
+	if (done) {
+		return <Redirect to={`/agents/pending/${done}`} />
+	}
 
 	return (
 		<div>
 			<div className="row justify-content-center pt-5 pb-5">
 				<div className="col-lg-6 col-sm-12 text-center">
 					<Dots />
-					<h3 className='fw-600 mt-1 mb-3'>Please wait...</h3>
-                    <p>We are trying to create your agent account</p>
+					<h3 className="fw-600 mt-1 mb-3">Please wait...</h3>
+					<p>We are trying to create your agent account</p>
 				</div>
 			</div>
 		</div>

@@ -18,7 +18,7 @@ import AppUpdatePopup from './AppUpdatePopup'
 import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 // import Global from '../../Global'
-// import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
+import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 // import LocationUpdatePopup from './LocationUpdatePopup'
 // import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
@@ -71,9 +71,9 @@ const MasterPopup = (props) => {
 			getForUser()
 			dispatch(getOtherStuffs())
 		}
-
+		dispatch(getAllRecentProperties())
 		getForViews()
-	}, [])
+	}, [dispatch])
 
 	useEffect(() => {
 		if (user) {

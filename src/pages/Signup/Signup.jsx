@@ -9,6 +9,7 @@ import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
 import loginImg from '../../assets/img/login-bg.png'
 import Global from '../../Global'
+import Cookies from 'js-cookie'
 
 export const Signup = (props) => {
 	const { register, handleSubmit } = useForm()
@@ -55,6 +56,7 @@ export const Signup = (props) => {
 					notification.success({ message: 'Account Created' })
 					sessionStorage.setItem('mail', e.email)
 					setState({ ...state, loading: false, goToSuccess: true })
+					Cookies.set('new_user', true, { expires: 1 })
 				}
 				setState({ ...state, loading: false })
 				// store.dispatch({

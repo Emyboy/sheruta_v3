@@ -56,7 +56,7 @@ export default function AgentPending(props) {
 
 								<div className="alert alert-info mt-4">
 									<h4 className="fw-bold  text-grey-700">
-										Please call us if you don't hear from us in 2 business days
+										Call us on 08138154470 if you don't hear from us in 24hrs.
 									</h4>
 								</div>
 							</div>

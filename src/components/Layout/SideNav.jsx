@@ -3,7 +3,7 @@ import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
 import { IoPricetagsOutline, IoWarningOutline } from 'react-icons/io5'
 import { RiUserSearchLine } from 'react-icons/ri'
-import { BsHash } from 'react-icons/bs'
+import { BsHash, BsHouseDoor } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
 import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
@@ -33,22 +33,22 @@ export default function SideNav({ show }) {
 									<span>Get Started</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link to="/requests" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-red-gradiant me-3">
 										<BiCommentDetail size={size} />
 									</i>
 									<span>Requests</span>
 								</Link>
-							</li>
-							<li>
+							</li> */}
+							{/* <li>
 								<Link to="/pricing" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-gold-gradiant me-3">
 										<IoPricetagsOutline size={size} />
 									</i>
 									<span>Pricing</span>
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to="/services" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-mini-gradiant me-3">
@@ -57,26 +57,34 @@ export default function SideNav({ show }) {
 									<span>Services</span>
 								</Link>
 							</li>
-							{/* <li>
-								<Link to="/properties" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-primary-gradiant me-3">
-										<BsHouseDoor size={size} />
-									</i>
-									<span>Properties</span>
-								</Link>
-							</li> */}
 							{process.env.NODE_ENV === 'development' && (
-								<li>
-									<Link to="/join-paddy" className="nav-content-bttn open-font">
-										<i className=" btn-round-md bg-red-gradiant me-3">
-											<IoIosPeople size={size} />
-										</i>
-										<span>Join Paddy</span>
-										<span className="circle-count bg-success font-xssss mt-0">
-											NEW
-										</span>
-									</Link>
-								</li>
+								<>
+									<li>
+										<Link
+											to="/properties"
+											className="nav-content-bttn open-font"
+										>
+											<i className="btn-round-md bg-gold-gradiant me-3">
+												<BsHouseDoor size={size} />
+											</i>
+											<span>Properties</span>
+										</Link>
+									</li>
+									<li>
+										<Link
+											to="/join-paddy"
+											className="nav-content-bttn open-font"
+										>
+											<i className=" btn-round-md bg-red-gradiant me-3">
+												<IoIosPeople size={size} />
+											</i>
+											<span>Join Paddy</span>
+											<span className="circle-count bg-success font-xssss mt-0">
+												NEW
+											</span>
+										</Link>
+									</li>
+								</>
 							)}
 						</ul>
 					</div>

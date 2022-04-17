@@ -10,8 +10,11 @@ import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
 import RecentUsersList from '../../RecentUsersList/RecentUsersList'
-import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom'
+import { FaSearch } from 'react-icons/fa'
+import { Alert, Button } from 'react-bootstrap'
+import moment from 'moment'
+import Cookies from 'js-cookie'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -121,6 +124,38 @@ export default (props) => {
 									</ul>
 								</div>
 							</div>
+
+							{Cookies.get('new_user') && (
+								<Alert variant="success">
+									<Alert.Heading className="fw-bold">
+										Hey {auth?.user?.user?.first_name?.split(' ')[0]}, Welcome
+										to Sheruta.{' '}
+									</Alert.Heading>
+									<div className="row justify-content-between align-items-center">
+										<p className="col-md-6">
+											Your account is set to{' '}
+											{view?.personal_info?.looking_for ? (
+												<strong>I am looking for</strong>
+											) : (
+												<strong>I have a flat.</strong>
+											)}
+										</p>
+										<Link to={`/settings/configure-view`} className="col-3">
+											<div className="btn border-success border-2">
+												<h5 className="mb-0 text-success fw-bold">
+													Change This
+												</h5>
+											</div>
+										</Link>
+									</div>
+									<hr />
+									<p className="mb-0">
+										{view?.personal_info?.looking_for
+											? 'Reach out to those who have a flat to share by calling them or leaving them a message'
+											: 'Reach out to those who are looking for a flat to share. You can call them or leave them a message'}
+									</p>
+								</Alert>
+							)}
 
 							{filter === 'all' && (
 								<>
