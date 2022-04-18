@@ -29,6 +29,9 @@ body,
 .bg-accent {
     background-color: var(--accent-color) !important;
 }
+.border-accent {
+    border-color: var(--accent-color) !important;
+}
 .bg-theme {
     background-color: var(--theme-color) !important;
 }

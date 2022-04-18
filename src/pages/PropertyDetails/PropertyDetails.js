@@ -5,20 +5,62 @@ import PageNotFound from '../../pages/PageNotFound'
 import PropertiesService from '../../services/PropertiesServices'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import Global from '../../Global'
+import { Link } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { notification } from 'antd'
+import { Dots } from 'react-activity'
+import Cookies from 'js-cookie'
 
 export default function PropertyDetails(props) {
-	const { match, location } = props;
+	const { user } = useSelector((state) => state.auth)
+	const { match, location } = props
 	const iconSize = 19
 	const { uid, property_id } = match.params
 	const [pageState, setPageState] = useState('loading')
-	const [data, setData] = useState(location?.state || null);
+	const [data, setData] = useState(location?.state || null)
+	const [listLoading, setListLoading] = useState(false)
+
+	const showInterest = async () => {
+		setListLoading(true)
+		try {
+			const res = await axios(
+				process.env.REACT_APP_API_URL + `/properties/interest/add`,
+				{
+					method: 'POST',
+					headers: {
+						authorization: `Bearer ${Cookies.get('token')}`
+					},
+					data: {
+						user: user?.user?.id,
+						property: data?.id,
+					},
+				}
+			)
+			if (res.data) {
+				setListLoading(false)
+				console.log('ADDED ---', res.data)
+				setData({
+					...data,
+					interested_parties: [...data?.interested_parties, user?.user],
+				})
+				notification.success({ message: "You've been added" })
+			}
+		} catch (error) {
+			setListLoading(false)
+			notification.error({ message: 'Error, please try again' })
+			return Promise.reject(error)
+		}
+	}
+
 	useEffect(async () => {
-		if(data){
+		console.log('DETAILS --', data)
+		if (data) {
 			return setPageState('done')
 		}
 		try {
 			const res = await PropertiesService.getPropertyByUidAndID(property_id)
-			console.log('RS --', res)
 			if (res.data.length === 0) {
 				setPageState('not found')
 			} else {
@@ -61,6 +103,13 @@ export default function PropertyDetails(props) {
 								</span>
 								<span className="font-xsssss live-tag mt-2 bottom-0 mb-4 bg-accent ml-3 ps-3 pe-3 p-2 rounded-3 text-white text-uppersace fw-700 ls-3">
 									{data?.location_keyword?.name}
+								</span>
+								<span
+									className={`font-xsssss live-tag mt-2 bottom-0 mb-4 ${
+										data?.is_available ? 'bg-current' : 'bg-danger'
+									} ml-3 ps-3 pe-3 p-2 rounded-3 text-white text-uppersace fw-700 ls-3`}
+								>
+									{data?.is_available ? 'Available' : 'Unavailable'}
 								</span>
 								<p className="review-link font-xsss fw-600 text-grey-500 lh-3 mb-0 mt-4">
 									<i className="ti-location-pin mr-2"></i>
@@ -121,7 +170,29 @@ export default function PropertyDetails(props) {
 								</div>
 								{/* <div className="clearfix mb-5"></div> */}
 								<hr className="mb-4" />
-								<a
+								<Alert variant="success">
+									<Alert.Heading className="fw-bold">
+										You like this?
+									</Alert.Heading>
+									<p>There are two ways you can take action.</p>
+									<hr />
+									<p className="mb-0">
+										<strong>1.</strong> Click on the{' '}
+										<strong>I'm Interested</strong> button bellow, and we will
+										add you to the list of those who are interested in this
+										flat.
+										<br />
+										<strong>Why?</strong>. Because when someone else shows
+										interest, we'll notify you
+									</p>
+									<p className="mb-0">
+										<strong>2.</strong> Click on the{' '}
+										<strong>Book Inspection</strong> button bellow, add someone
+										from your contact list or from the list of people who are
+										interested in this flat.
+									</p>
+								</Alert>
+								{/* <a
 									href="#share"
 									className="btn-round-lg ms-3 d-inline-block rounded-3 bg-greylight"
 									onClick={() => {
@@ -137,19 +208,37 @@ export default function PropertyDetails(props) {
 									}}
 								>
 									<i className="feather-share-2 font-sm text-grey-700"></i>
-								</a>
-								<a
+								</a> */}
+								{/* <a
 									href="#"
 									className="btn-round-lg ms-2 d-inline-block rounded-3 bg-theme"
 								>
-									<i className="feather-phone font-sm text-white"></i>{' '}
-								</a>
-								<a
-									href="#"
-									className="bg-accent border-0 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-2 lh-34 text-center ls-3 w200"
-								>
-									BOOK INSPECTION
-								</a>
+									<i className="feather-send font-sm text-white"></i>{' '}
+								</a> */}
+
+								<div className="row mb-2 mt-3 justify-content-between">
+									<div className="col-md-6 col-sm-12">
+										<button
+											onClick={showInterest}
+											disabled={listLoading || !data?.is_available}
+											className="w-100 mb-2 border-accent border-4 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200"
+										>
+											{listLoading ? <Dots /> : "I'M INTERESTED"}{' '}
+											<span style={{ fontSize: '20px' }}>✋🏽</span>
+										</button>
+									</div>
+									<Link
+										to={`/inspections/booking/${data?.id}`}
+										className="col-md-6 col-sm-12"
+									>
+										<button
+											disabled={!data?.is_available}
+											className="w-100 mb-2 bg-accent border-0 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-2 lh-34 text-center ls-3 w200"
+										>
+											{'BOOK INSPECTION'}
+										</button>
+									</Link>
+								</div>
 							</div>
 						</div>
 					</div>

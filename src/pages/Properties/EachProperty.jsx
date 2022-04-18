@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import Global from '../../Global'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 
-export const formatPropertyURL = data => {
-	return `/property/${`${data?.service?.name}/${
+export const formatPropertyURL = (data) => {
+	return `/flat/${`${data?.service?.name}/${
 		data.categorie?.name
 	}-in-${data?.location?.replace(/[^\w\s]/gi, '').replace(/\s/g, '-')}`
 		.toLocaleLowerCase()
@@ -26,9 +27,8 @@ export default function EachProperty({ data }) {
 				<Link
 					to={{
 						pathname: formatPropertyURL(data),
-						state: data
+						state: data,
 					}}
-					
 					className="position-relative d-block"
 				>
 					<LazyLoadImage
@@ -39,14 +39,15 @@ export default function EachProperty({ data }) {
 				</Link>
 			</div>
 			<div className="card-body pt-0">
-				<i className="feather-bookmark font-md text-grey-500 position-absolute right-0 me-3"></i>
-				<h4 className="fw-700 font-xs mt-0 lh-28 mb-0">
+				<i className="font-md text-grey-500 position-absolute right-0 me-3">
+					<VerifiedBadge without_text verified={data?.agent?.is_verified}  />
+				</i>
+				<h4 className="fw-700 font-xs mt-0 lh-28 mb-1">
 					<Link
 						to={{
 							pathname: formatPropertyURL(data),
-							state: data
+							state: data,
 						}}
-						
 						className="text-dark text-grey-900"
 					>
 						{data.name}
@@ -83,9 +84,13 @@ export default function EachProperty({ data }) {
 						/ {data.payment_type && data.payment_type.abbreviation}
 					</span>{' '}
 				</span>
-				<a href="#" className="position-absolute bottom-15 mb-2 right-15">
-					<i className="btn-round-sm bg-primary-gradiant text-white font-sm feather-chevron-right"></i>
-				</a>
+				<span
+					className={`badge ${
+						data?.is_available ? 'bg-current' : 'bg-danger'
+					} position-absolute bottom-15 mb-2 right-15`}
+				>
+					{data?.is_available ? 'Available' : 'Unavailable'}
+				</span>
 			</div>
 		</article>
 	)

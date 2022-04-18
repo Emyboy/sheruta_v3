@@ -40,6 +40,8 @@ import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetai
 import Agent from '../pages/Agent/Agent'
 import AgentPending from '../pages/Agent/AgentPending';
 import AgentSignup from '../pages/Agent/AgentSignup'
+import Inspection from '../pages/Inspection/Inspection'
+import BookInspection from '../pages/Inspection/BookInspection'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 
@@ -142,6 +144,8 @@ function App() {
 							/>
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
+							<Route exact path="/inspections" component={Inspection} />
+							<Route exact path="/inspections/booking/:property_id" component={BookInspection} />
 							<Route exact path="/what-next" component={WhatNext} />
 							<Route exact path="/blog/category/:category_slug/:category_id" component={Blog} />
 							<Route exact path="/blog/:category/:uuid/:id" component={BlogDetails} />
@@ -154,7 +158,7 @@ function App() {
 							<Route exact path="/user/:username" component={Profile2} />
 							<Route
 								exact
-								path="/property/:service/:category/:property_id"
+								path="/flat/:service/:category/:property_id"
 								component={PropertyDetails}
 							/>
 							<Route exact path="/signup" component={Signup} />
