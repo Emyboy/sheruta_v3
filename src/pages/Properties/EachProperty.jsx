@@ -40,7 +40,7 @@ export default function EachProperty({ data }) {
 			</div>
 			<div className="card-body pt-0">
 				<i className="font-md text-grey-500 position-absolute right-0 me-3">
-					<VerifiedBadge without_text verified={data?.agent?.is_verified}  />
+					<VerifiedBadge without_text verified={data?.agent?.is_verified} />
 				</i>
 				<h4 className="fw-700 font-xs mt-0 lh-28 mb-1">
 					<Link
@@ -56,6 +56,45 @@ export default function EachProperty({ data }) {
 				<h6 className="font-xsss text-grey-500 fw-600 mt-0 mb-2">
 					<i className="ti ti-location-pin"></i> {data.location}
 				</h6>
+				<div className="card w-100 border-0 mb-3 mt-3">
+					<div className="dd-block pt-0">
+						<ul className="memberlist mt-1 mb-2 ms-0 d-block">
+							{data?.interested_parties?.map((val, i) => {
+								if (i < 8) {
+									return (
+										<li className="w20" key={`party-${i}`}>
+											<a href="#">
+												<img
+													src={val?.avatar_url}
+													alt="user"
+													className="w35 d-inline-block"
+													style={{ opacity: '1', borderRadius: '20px' }}
+												/>
+											</a>
+										</li>
+									)
+								}
+							})}
+
+							{data?.interested_parties?.length > 7 && (
+								<li className="last-member mr-2">
+									<a
+										href="#"
+										className="bg-greylight fw-600 text-grey-500 font-xssss w35 ls-3 text-center"
+										style={{ height: '35px', lineHeight: '35px' }}
+									>
+										+{data?.interested_parties?.length - 8}
+									</a>
+								</li>
+							)}
+							<li className="ps-3 w-auto ms-1 ml-2">
+								<a href="#" className="fw-600 text-grey-500 font-xssss">
+									{data?.interested_parties?.length} Interested Users
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div className="star d-block w-100 text-left mt-0"></div>
 				<div className="clearfix"></div>
 				<h5 className="mt-3 d-inline-block font-xssss fw-600 text-grey-500 me-4">

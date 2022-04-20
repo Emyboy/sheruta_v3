@@ -24,6 +24,7 @@ import { getAllRecentProperties } from '../../redux/strapi_actions/properties.ac
 import GetMoreInfoPopup from './GetMoreInfoPopup'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import LocationKeywordPopup from './LocationKeywordPopup'
 
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
@@ -119,6 +120,7 @@ const MasterPopup = (props) => {
 					</>
 				)} */}
 				<AppUpdatePopup />
+				<LocationKeywordPopup />
 			</>
 		)
 	} else {

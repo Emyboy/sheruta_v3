@@ -19,7 +19,8 @@ const initialState = {
     messages: [],
     amenities: [],
     recent_users: [],
-    location_keywords: []
+    location_keywords: [],
+    collect_location_keyword: false
 };
 
 function ViewReducer(state = initialState, { type, payload }) {

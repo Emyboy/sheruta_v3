@@ -12,8 +12,13 @@ import { useSelector } from 'react-redux'
 import { notification } from 'antd'
 import { Dots } from 'react-activity'
 import Cookies from 'js-cookie'
+import { BsCheckCircleFill } from 'react-icons/bs'
+import { HorizontalScrollWrapper } from '../HomeNew/components/HomeListings/HomeListings'
+import { ScrollMenu } from 'react-horizontal-scrolling-menu'
+import EachUserListCard from '../../components/RecentUsersList/EachUserListCard'
 
 export default function PropertyDetails(props) {
+	localStorage.setItem('after_login', window.location.pathname);
 	const { user } = useSelector((state) => state.auth)
 	const { match, location } = props
 	const iconSize = 19
@@ -30,7 +35,7 @@ export default function PropertyDetails(props) {
 				{
 					method: 'POST',
 					headers: {
-						authorization: `Bearer ${Cookies.get('token')}`
+						authorization: `Bearer ${Cookies.get('token')}`,
 					},
 					data: {
 						user: user?.user?.id,
@@ -80,7 +85,10 @@ export default function PropertyDetails(props) {
 	} else if (data && pageState !== 'loading') {
 		return (
 			<Layout>
-				<div className="row justify-content-center">
+				<div
+					className="row justify-content-center pb-5"
+					style={{ paddingTop: user ? '0vh' : '10vh' }}
+				>
 					<div className="col-xl-8 col-xxl-9 col-lg-8">
 						<div className="card d-block mt-4 border-0 shadow-xss bg-white ">
 							<div
@@ -168,6 +176,35 @@ export default function PropertyDetails(props) {
 										</div>
 									</div>
 								</div>
+								{data?.interested_parties?.length > 0 && (
+									<>
+										<hr />
+										<div>
+											<h2 className="fw-700 text-grey-700">Interested Users</h2>
+											<div className="container-fluid pl-0">
+												<div className="mb-5">
+													<HorizontalScrollWrapper>
+														<ScrollMenu
+															// LeftArrow={() => <button>Left</button>}
+															// RightArrow={() => <button>Right</button>}
+															wrapperClassName="wrapper"
+															// onWheel={onWheel}
+														>
+															{data?.interested_parties?.map((val, i) => {
+																return (
+																	<EachUserListCard
+																		data={val}
+																		key={`user-${i}`}
+																	/>
+																)
+															})}
+														</ScrollMenu>
+													</HorizontalScrollWrapper>
+												</div>
+											</div>
+										</div>
+									</>
+								)}
 								{/* <div className="clearfix mb-5"></div> */}
 								<hr className="mb-4" />
 								<Alert variant="success">
@@ -208,37 +245,61 @@ export default function PropertyDetails(props) {
 									}}
 								>
 									<i className="feather-share-2 font-sm text-grey-700"></i>
-								</a> */}
-								{/* <a
+								</a>
+								<a
 									href="#"
 									className="btn-round-lg ms-2 d-inline-block rounded-3 bg-theme"
 								>
 									<i className="feather-send font-sm text-white"></i>{' '}
 								</a> */}
 
-								<div className="row mb-2 mt-3 justify-content-between">
-									<div className="col-md-6 col-sm-12">
-										<button
-											onClick={showInterest}
-											disabled={listLoading || !data?.is_available}
-											className="w-100 mb-2 border-accent border-4 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200"
+								{user ? (
+									<div className="row mb-2 mt-3 justify-content-between">
+										<div className="col-md-6 col-sm-12">
+											{data?.interested_parties?.filter(
+												(x) => x?.id === user?.user?.id
+											)?.length === 1 ? (
+												<span className="w-100 alert alert-success border-accent border-4 text-white fw-600 text-uppercase font-xsss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200 text-center">
+													<BsCheckCircleFill size={20} /> Added To List
+												</span>
+											) : (
+												<button
+													onClick={showInterest}
+													disabled={listLoading || !data?.is_available}
+													className="w-100 mb-2 border-accent border-4 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200"
+												>
+													{listLoading ? (
+														<Dots />
+													) : (
+														<>
+															I'M INTERESTED{' '}
+															<span style={{ fontSize: '20px' }}>✋🏽</span>
+														</>
+													)}
+												</button>
+											)}
+										</div>
+										<Link
+											to={`/inspections/booking/${data?.id}`}
+											className="col-md-6 col-sm-12"
 										>
-											{listLoading ? <Dots /> : "I'M INTERESTED"}{' '}
-											<span style={{ fontSize: '20px' }}>✋🏽</span>
-										</button>
+											<button
+												disabled={!data?.is_available}
+												className="w-100 mb-2 bg-accent border-0 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-2 lh-34 text-center ls-3 w200"
+											>
+												{'BOOK INSPECTION'}
+											</button>
+										</Link>
 									</div>
-									<Link
-										to={`/inspections/booking/${data?.id}`}
-										className="col-md-6 col-sm-12"
-									>
-										<button
-											disabled={!data?.is_available}
-											className="w-100 mb-2 bg-accent border-0 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-2 lh-34 text-center ls-3 w200"
-										>
-											{'BOOK INSPECTION'}
-										</button>
-									</Link>
-								</div>
+								) : (
+									<div className=" justify-content-between">
+										<div className="alert alert-info">
+											<h2 className="text-center fw-700 text-grey-700">
+												Login To Book An Inspection
+											</h2>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
