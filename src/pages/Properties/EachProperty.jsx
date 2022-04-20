@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../Global'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 
 export const formatPropertyURL = (data) => {
@@ -14,7 +13,6 @@ export const formatPropertyURL = (data) => {
 }
 
 export default function EachProperty({ data }) {
-	console.log('DATA --', data)
 	const iconSize = 19
 	return (
 		<article className="card w-100 p-0 hover-card shadow-xss border-0 rounded-3 overflow-hidden me-1">
@@ -31,10 +29,20 @@ export default function EachProperty({ data }) {
 					}}
 					className="position-relative d-block"
 				>
-					<LazyLoadImage
+					{/* <LazyLoadImage
 						src={data.image_urls[0]}
 						alt={data.name}
 						className="w-100"
+					/> */}
+					<div
+						className="card"
+						style={{
+							backgroundImage: `url(${data?.image_urls[0]})`,
+							height: '300px',
+							backgroundRepeat: 'no-repeat',
+							backgroundSize: 'cover',
+							backgroundPosition: 'center',
+						}}
 					/>
 				</Link>
 			</div>
@@ -120,7 +128,7 @@ export default function EachProperty({ data }) {
 					<span className="font-xs">{Global.currency}</span>{' '}
 					{window.formatedPrice.format(data.price)}
 					<span className="font-xssss text-grey-500">
-						/ {data.payment_type && data.payment_type.abbreviation}
+						/ {data?.payment_type && data?.payment_type?.abbreviation}
 					</span>{' '}
 				</span>
 				<span

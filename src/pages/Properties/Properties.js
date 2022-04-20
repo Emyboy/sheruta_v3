@@ -9,6 +9,7 @@ import { Alert, Button } from 'react-bootstrap'
 import Sticky from 'react-sticky-el'
 import Global from '../../Global'
 import store from '../../redux/store/store'
+import SMap from '../../components/SMap/SMap'
 
 const { Option } = Select
 
@@ -137,8 +138,8 @@ export default function Properties() {
 											store.dispatch({
 												type: 'SET_VIEW_STATE',
 												payload: {
-													collect_location_keyword: true
-												}
+													collect_location_keyword: true,
+												},
 											})
 										}}
 									>
@@ -148,6 +149,9 @@ export default function Properties() {
 							</div>
 						</Alert>
 					)}
+					<div className="card p-2 mb-4" style={{ height: '400px' }}>
+						<SMap properties={recent_properties} />
+					</div>
 					<div className="row ps-2 pe-2">
 						{recent_properties.map((val, i) => {
 							return (
