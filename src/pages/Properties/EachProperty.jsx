@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../Global'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 
 export const formatPropertyURL = (data) => {
@@ -41,7 +42,7 @@ export default function EachProperty({ data }) {
 							height: '300px',
 							backgroundRepeat: 'no-repeat',
 							backgroundSize: 'cover',
-							backgroundPosition: 'center',
+							backgroundPosition: 'center'
 						}}
 					/>
 				</Link>

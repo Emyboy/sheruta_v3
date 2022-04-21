@@ -10,6 +10,7 @@ import Sticky from 'react-sticky-el'
 import Global from '../../Global'
 import store from '../../redux/store/store'
 import SMap from '../../components/SMap/SMap'
+import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 
 const { Option } = Select
 
@@ -19,6 +20,9 @@ export default function Properties() {
 	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
+	const defaultTabs = ['Grid View', 'Map View', 'User View']
+	const [tabs] = useState(defaultTabs)
+	const [tab, setTab] = useState(defaultTabs[0])
 	const [filterOption, setFilterOptions] = useState(
 		personal_info?.state ? personal_info?.state?.id : 1
 	)
@@ -72,6 +76,7 @@ export default function Properties() {
 									placeholder="Search Location"
 									allowClear
 									style={{ width: '200px' }}
+									onChange={(e) => dispatch(getAllRecentProperties(e))}
 								>
 									{location_keywords?.map((val, i) => {
 										return (
@@ -88,33 +93,27 @@ export default function Properties() {
 									id="pills-tab"
 									role="tablist"
 								>
-									<li className="active list-inline-item me-5">
-										<a
-											className="fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block active"
-											href="#navtabs1"
-											data-toggle="tab"
-										>
-											Grid View
-										</a>
-									</li>
-									<li className="list-inline-item me-5">
-										<a
-											className="fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block"
-											href="#navtabs1"
-											data-toggle="tab"
-										>
-											Map View
-										</a>
-									</li>
-									<li className="list-inline-item me-5">
-										<a
-											className="fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block"
-											href="#navtabs1"
-											data-toggle="tab"
-										>
-											Users View
-										</a>
-									</li>
+									{tabs.map((val, i) => {
+										return (
+											<li
+												key={`tab-${i}`}
+												className={`${
+													tab === val && 'active'
+												} list-inline-item me-5`}
+											>
+												<a
+													className={`fw-700 font-xssss text-grey-500 pt-3 pb-2 ls-1 d-inline-block ${
+														tab === val && 'active'
+													}`}
+													href="#navtabs1"
+													data-toggle="tab"
+													onClick={() => setTab(val)}
+												>
+													{val}
+												</a>
+											</li>
+										)
+									})}
 								</ul>
 							</div>
 						</div>
@@ -149,21 +148,29 @@ export default function Properties() {
 							</div>
 						</Alert>
 					)}
-					<div className="card p-2 mb-4" style={{ height: '400px' }}>
-						<SMap properties={recent_properties} />
-					</div>
-					<div className="row ps-2 pe-2">
-						{recent_properties.map((val, i) => {
-							return (
-								<div
-									className="col-lg-6 col-md-6 col-sm-6 mb-3 pe-2 ps-2"
-									key={`property-${i}`}
-								>
-									<EachProperty data={val} />
+					{tab === defaultTabs[1] && (
+						<>
+							{recent_properties?.length > 0 && (
+								<div className="card p-2 mb-4" style={{ height: '800px' }}>
+									<SMap properties={recent_properties} />
 								</div>
-							)
-						})}
-					</div>
+							)}
+						</>
+					)}
+					{tab === defaultTabs[0] && (
+						<div className="row ps-2 pe-2">
+							{recent_properties.map((val, i) => {
+								return (
+									<div
+										className="col-lg-6 col-md-6 col-sm-6 mb-3 pe-2 ps-2"
+										key={`property-${i}`}
+									>
+										<EachProperty data={val} />
+									</div>
+								)
+							})}
+						</div>
+					)}
 				</div>
 			</div>
 		</Layout>

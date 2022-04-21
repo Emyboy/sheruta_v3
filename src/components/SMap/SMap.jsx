@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
-import axios from 'axios'
+import Global from '../../Global'
 
-const Marker = ({ data }) => {
-	console.log('MARKER --', data)
+const Marker = (props) => {
+	console.log("MARKER PROPS ---", props)
+	const { data } = props;
 	return (
-		<div className="card badge shadow p-4">
-			<h2>{data?.price}</h2>
+		<div className="card badge shadow p-1 m-3">
+			<h6 className="mb-0">
+				{Global?.currency}
+				{window.formatedPrice.format(data.price)}
+			</h6>
 		</div>
 	)
 }
@@ -17,37 +21,25 @@ export default function SMap({ properties }) {
 			lat: 8.6753,
 			lng: 9.082,
 		},
-		zoom: 5,
+		zoom: 10,
 	}
 
-	const getPlaceInfo = async () => {
-		try {
-			const _url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=EhlMYWtlIENoYWQgQ3Jlc2NlbnQsIEFidWphIi4qLAoUChIJi2R6PkAKThARGWMAddriFV8SFAoSCdkv1kxfdE4QESuhDqK0F71T&key=AIzaSyDPMzBMle72eFfooxUVD2wmLVFhzynQeeQ`
-			console.log(_url)
-			const geo = await axios(_url)
-			console.log('the place ---', geo.data)
-		} catch (error) {
-			console.log('THE PLACE ERROR ---', error)
-			return Promise.reject(error)
-		}
-	}
-
-	useEffect(() => {
-		getPlaceInfo()
-	}, [getPlaceInfo])
 	return (
 		<GoogleMapReact
 			bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_PLACES_API_KEY }}
-			defaultCenter={defaultProps.center}
+			defaultCenter={{
+				lat: properties[0]?.google_location?.geometry?.location?.lat,
+				lng: properties[0]?.google_location?.geometry?.location?.lng,
+			}}
 			defaultZoom={defaultProps.zoom}
 		>
 			{properties?.map((val, i) => {
 				return (
 					<Marker
+						key={`marker-${i}`}
 						data={val}
-						lat={defaultProps.center.lat}
-						lng={defaultProps.center.lng}
-						text="My Marker"
+						lat={val?.google_location?.geometry?.location?.lat}
+						lng={val?.google_location?.geometry?.location?.lng}
 					/>
 				)
 			})}

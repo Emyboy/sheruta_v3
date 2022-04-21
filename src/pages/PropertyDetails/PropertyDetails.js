@@ -18,7 +18,7 @@ import { ScrollMenu } from 'react-horizontal-scrolling-menu'
 import EachUserListCard from '../../components/RecentUsersList/EachUserListCard'
 
 export default function PropertyDetails(props) {
-	localStorage.setItem('after_login', window.location.pathname);
+	localStorage.setItem('after_login', window.location.pathname)
 	const { user } = useSelector((state) => state.auth)
 	const { match, location } = props
 	const iconSize = 19
@@ -205,6 +205,42 @@ export default function PropertyDetails(props) {
 										</div>
 									</>
 								)}
+								{data?.google_location?.photos?.length > 0 && 
+									<>
+										<hr />
+										<div>
+											<h2 className="fw-700 text-grey-700">Landmarks Images</h2>
+											<div className="container-fluid pl-0">
+												<div className="mb-5">
+													<HorizontalScrollWrapper>
+														<ScrollMenu
+															// LeftArrow={() => <button>Left</button>}
+															// RightArrow={() => <button>Right</button>}
+															wrapperClassName="wrapper"
+															// onWheel={onWheel}
+														>
+															{data?.google_location?.photos?.map((val, i) => {
+																return (
+																	<div
+																		className="card mr-3"
+																		key={`pic-${i}`}
+																		style={{
+																			backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${val?.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY})`,
+																			height: '300px',
+																			width: '200px',
+																			backgroundSize: 'cover',
+																			backgroundPosition: 'center',
+																		}}
+																	/>
+																)
+															})}
+														</ScrollMenu>
+													</HorizontalScrollWrapper>
+												</div>
+											</div>
+										</div>
+									</>
+								}
 								{/* <div className="clearfix mb-5"></div> */}
 								<hr className="mb-4" />
 								<Alert variant="success">
