@@ -119,7 +119,7 @@ function App() {
 							<Route exact path="/our-rules" component={OurRules} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
 							<Route exact path="/agents/pending/:agent_id" component={AgentPending} />
-							<Route exact path="/properties" component={Properties} />
+							<Route exact path="/flats" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
 							<Route exact path="/terms" component={Terms} />

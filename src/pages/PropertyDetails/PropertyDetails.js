@@ -16,16 +16,26 @@ import { BsCheckCircleFill } from 'react-icons/bs'
 import { HorizontalScrollWrapper } from '../HomeNew/components/HomeListings/HomeListings'
 import { ScrollMenu } from 'react-horizontal-scrolling-menu'
 import EachUserListCard from '../../components/RecentUsersList/EachUserListCard'
+import PropertyDetailsRight from './PropertyDetailsRight'
+import SimilarProperties from './SimilarProperties'
+import Sticky from 'react-sticky-el'
 
 export default function PropertyDetails(props) {
+	console.log("THE PROPS ---",props)
 	localStorage.setItem('after_login', window.location.pathname)
 	const { user } = useSelector((state) => state.auth)
 	const { match, location } = props
 	const iconSize = 19
-	const { uid, property_id } = match.params
+	const { property_id } = match.params
 	const [pageState, setPageState] = useState('loading')
 	const [data, setData] = useState(location?.state || null)
 	const [listLoading, setListLoading] = useState(false)
+
+	useEffect(() => {
+		if(location?.state){
+			setData(location?.state)
+		}
+	},[location?.state])
 
 	const showInterest = async () => {
 		setListLoading(true)
@@ -76,7 +86,7 @@ export default function PropertyDetails(props) {
 			setPageState('not found')
 			return Promise.reject(error)
 		}
-	}, [])
+	}, [property_id])
 
 	if (pageState === 'loading') {
 		return <PageLoading />
@@ -85,10 +95,7 @@ export default function PropertyDetails(props) {
 	} else if (data && pageState !== 'loading') {
 		return (
 			<Layout>
-				<div
-					className="row justify-content-center pb-5"
-					style={{ paddingTop: user ? '0vh' : '10vh' }}
-				>
+				<div className="row pb-5" style={{ paddingTop: user ? '0vh' : '10vh' }}>
 					<div className="col-xl-8 col-xxl-9 col-lg-8">
 						<div className="card d-block mt-4 border-0 shadow-xss bg-white ">
 							<div
@@ -205,7 +212,7 @@ export default function PropertyDetails(props) {
 										</div>
 									</>
 								)}
-								{data?.google_location?.photos?.length > 0 && 
+								{data?.google_location?.photos?.length > 0 && (
 									<>
 										<hr />
 										<div>
@@ -240,7 +247,7 @@ export default function PropertyDetails(props) {
 											</div>
 										</div>
 									</>
-								}
+								)}
 								{/* <div className="clearfix mb-5"></div> */}
 								<hr className="mb-4" />
 								<Alert variant="success">
@@ -338,6 +345,17 @@ export default function PropertyDetails(props) {
 								)}
 							</div>
 						</div>
+					</div>
+					<div className="col-xl-4 col-xxl-3 col-lg-4 ps-0">
+						<Sticky
+							stickyStyle={{
+								zIndex: 10,
+								marginTop: Global.isMobile ? '6vh' : '11vh',
+							}}
+						>
+							<PropertyDetailsRight data={data} />
+							<SimilarProperties data={data} />
+						</Sticky>
 					</div>
 				</div>
 			</Layout>

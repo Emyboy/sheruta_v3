@@ -15,7 +15,6 @@ export const getAllRecentProperties =
 		const user_location_keyword =
 			location_keyword ||
 			(personal_info ? personal_info?.location_keyword?.id : null)
-		console.log('THE LOCATION KEYWORD FROM ACTION ---', user_location_keyword)
 		try {
 			const res = await PropertiesService.getRecentProperties(
 				user_location_keyword

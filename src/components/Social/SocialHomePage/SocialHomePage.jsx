@@ -15,6 +15,8 @@ import { FaSearch } from 'react-icons/fa'
 import { Alert, Button } from 'react-bootstrap'
 import moment from 'moment'
 import Cookies from 'js-cookie'
+import RecentBookingFeed from './RecentBookingFeed'
+import Sticky from 'react-sticky-el'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -80,9 +82,17 @@ export default (props) => {
 				<div className="container-fluid">
 					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
-							<div className="col-xl-3 col-xxl-3 col-lg-4 ps-lg-0">
-								{/* <RecentUsers data={newUsers} /> */}
-								<UserFeedCard />
+							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+								<Sticky
+									stickyStyle={{
+										zIndex: 10,
+										marginTop: Global.isMobile ? '6vh' : '11vh',
+									}}
+								>
+									{/* <RecentUsers data={newUsers} /> */}
+									<UserFeedCard />
+									<RecentBookingFeed />
+								</Sticky>
 							</div>
 						)}
 						<div

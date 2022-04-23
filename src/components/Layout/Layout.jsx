@@ -12,13 +12,13 @@ const Header = React.lazy(() => import('./Header'))
 const MessagePanel = React.lazy(() => import('./MessagePanel'))
 const SideNav = React.lazy(() => import('./SideNav'))
 
-
 export default function Layout({
 	currentPage,
 	children,
 	showMessages,
 	noBottomSpacing,
-	noScroll
+	noScroll,
+	full_screen,
 }) {
 	const { user } = useSelector((state) => state.auth)
 	const [showNav, setShowNav] = useState(false)
@@ -44,14 +44,23 @@ export default function Layout({
 			)}
 
 			<div
-				className={user && 'main-content right-chat-active'}
+				className={
+					user && `main-content ${showChat ? 'right-chat-active' : ''}`
+				}
 				style={{
-					paddingBottom: !user || noBottomSpacing ? '0vh' : '21vh',
+					paddingBottom: !user || noBottomSpacing ? '0vh' : full_screen ? '0px':'21vh',
 					overflow: noScroll && 'hidden',
 				}}
 			>
 				<div className={user && 'middle-sidebar-bottom pl-0 pr-0'}>
-					<div className={user && 'middle-sidebar-left'}>{children}</div>
+					<div
+						className={
+							user && `middle-sidebar-left ${full_screen && ' pe-0 ms-0 me-0'}`
+						}
+						style={{ maxWidth: full_screen ? '100%' : '' }}
+					>
+						{children}
+					</div>
 				</div>
 			</div>
 			{user && Global.isMobile && <FooterNav pageName={currentPage} />}

@@ -42,7 +42,7 @@ export default function EachProperty({ data }) {
 							height: '300px',
 							backgroundRepeat: 'no-repeat',
 							backgroundSize: 'cover',
-							backgroundPosition: 'center'
+							backgroundPosition: 'center',
 						}}
 					/>
 				</Link>
@@ -65,7 +65,13 @@ export default function EachProperty({ data }) {
 				<h6 className="font-xsss text-grey-500 fw-600 mt-0 mb-2">
 					<i className="ti ti-location-pin"></i> {data.location}
 				</h6>
-				<div className="card w-100 border-0 mb-3 mt-3">
+				{process.env.NODE_ENV !== 'production' && (
+					<div className="d-flex">
+						<div>{data?.location_keyword?.name},</div>
+						<div className="ml-3">{data?.state?.name} state</div>
+					</div>
+				)}
+				<div className="card w-100 border-0 mb-3 mt-2">
 					<div className="dd-block pt-0">
 						<ul className="memberlist mt-1 mb-2 ms-0 d-block">
 							{data?.interested_parties?.map((val, i) => {
