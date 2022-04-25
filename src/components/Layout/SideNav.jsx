@@ -65,6 +65,9 @@ export default function SideNav({ show }) {
 										<AiOutlineCalendar size={size} />
 									</i>
 									<span>Inspections</span>
+									<span className="circle-count bg-danger font-xssss mt-0">
+										3
+									</span>
 								</Link>
 							</li>
 							{process.env.NODE_ENV === 'development' && (

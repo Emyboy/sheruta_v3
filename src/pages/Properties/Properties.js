@@ -39,6 +39,7 @@ export default function Properties() {
 						<div className="">
 							<Sticky
 								className="shadow-xxl w-100"
+								// stickyClassName="animate__animated animate__fadeInDown"
 								stickyStyle={{
 									zIndex: 10,
 									marginTop: Global.isMobile ? '6vh' : '11vh',

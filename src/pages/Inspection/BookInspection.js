@@ -54,6 +54,7 @@ export default function BookInspection({ match }) {
 	const [tab, setTab] = useState(tabs[0])
 	const [invitedUser, setInvitedUser] = useState([])
 	const { accepted_suggestions } = useSelector((state) => state?.alice)
+	const { personal_info } = useSelector((state) => state.view)
 	const [showInvite, setShowInvite] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const { user } = useSelector((state) => state.auth)
@@ -65,9 +66,11 @@ export default function BookInspection({ match }) {
 				{
 					data: {
 						owner: user?.user?.id,
-						guests: invitedUser,
+						pending_guests: invitedUser,
 						property: property?.id,
 						agent: property?.agent?.id,
+						owner_personal_info: personal_info?.id,
+						location_keyword: property?.location_keyword?.id,
 					},
 					method: 'POST',
 					headers: {
