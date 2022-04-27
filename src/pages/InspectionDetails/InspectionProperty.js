@@ -1,7 +1,10 @@
 import React from 'react'
+import PropertyDetailsLeft from '../PropertyDetails/PropertyDetailsLeft'
 
-export default function InspectionProperty() {
+export default function InspectionProperty( { data }) {
   return (
-    <div>InspectionProperty</div>
+    <div>
+      <PropertyDetailsLeft data={data?.property} standalone />
+    </div>
   )
 }

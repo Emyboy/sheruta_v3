@@ -1,58 +1,60 @@
-import React from 'react';
+import React from 'react'
 import moment from 'moment'
+
+const EachGuest = ({ val, pending }) => {
+	return (
+		<li>
+			<div className="rounded-3 bg-transparent pb-2 mb-2 border-bottom d-flex justify-content-between">
+				<div className="email-user d-flex align-items-center">
+					<img
+						src={val?.avatar_url}
+						alt="user"
+						className="w35 me-2"
+						style={{ borderRadius: '300px' }}
+					/>
+					<h6 className="font-xssss text-grey-900 text-grey-900 mb-0 mt-0 fw-700">
+						{val?.first_name} {val?.last_name}{' '}
+						<span
+							className={`btn-round-xss ms-0 bg-${
+								val?.online ? 'success' : 'danger'
+							} me-2`}
+						></span>
+						<h6 className="text-grey-600">@{val?.username}</h6>
+					</h6>
+				</div>
+				<div className="d-flex align-items-center">
+					{pending && (
+						<span className="mr-2 btn-round-sm bg-current text-white feather-phone font-xss ms-auto mt-2"></span>
+					)}
+					<span className="mr-2 btn-round-sm bg-current text-white feather-mail font-xss ms-auto mt-2"></span>
+					{!pending && (
+						<span className="btn-round-sm bg-danger text-white font-xss ms-auto mt-2">
+							<i className="feather-trash"></i>
+						</span>
+					)}
+				</div>
+			</div>
+		</li>
+	)
+}
 
 export default function InspectionGuestList({ data }) {
 	return (
-		<div className="chat-wrapper p-3 w-100 position-relative scroll-bar bg-white theme-dark-bg">
+		<div className=" p-3 w-100 position-relative scroll-bar bg-white theme-dark-bg">
+			{data?.pending_guests?.length > 0 && (
+				<>
+					<h2 className="fw-bold text-grey-600 mb-3 mt-3">Pending Guests</h2>
+					<ul className="email-message">
+						{data?.pending_guests?.map((val, i) => {
+							return <EachGuest key={`guest-${i}`} val={val} pending />
+						})}
+					</ul>
+				</>
+			)}
+			<h2 className="fw-bold text-grey-600 mb-3 mt-3">Guests</h2>
 			<ul className="email-message">
 				{data?.guests?.map((val, i) => {
-					return (
-						<li key={`guest-${i}`}>
-							<a
-								className="rounded-3 bg-lightblue theme-light-bg"
-							>
-								<div className="form-check mt-1">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										id="blankCheckbox1"
-										value="option1"
-										aria-label=""
-									/>
-									<label
-										className="text-grey-500 font-xssss"
-										for="blankCheckbox1"
-									></label>
-								</div>
-								<div className="email-user">
-									<span
-										className={`btn-round-xss ms-0 bg-${
-											val?.online ? 'current' : 'danger'
-										} me-2`}
-									></span>
-									<img
-										src={val?.avatar_url}
-										alt="user"
-										className="w35 me-2"
-										style={{ borderRadius: '50%' }}
-									/>
-									<h6 className="font-xssss text-grey-900 text-grey-900 mb-0 mt-0 fw-700">
-										{val?.first_name} {val?.last_name}
-									</h6>
-								</div>
-								<div className="email-subject text-grey-600 text-dark fw-600 font-xssss">
-									@{val?.username}
-								</div>
-								<div className="email-text text-grey-500 fw-600 font-xssss">
-									{val?.bio}
-								</div>
-								<span className="email-file">
-									<i className="feather-mail font-xss btn-round-sm text-grey-500 me-2 p-0"></i>
-								</span>
-								<div className="email-time text-grey-500 fw-600">{moment(val?.updated_at).fromNow()}</div>
-							</a>
-						</li>
-					)
+					return <EachGuest key={`guest-${i}`} val={val} />
 				})}
 			</ul>
 		</div>

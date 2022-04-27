@@ -10,9 +10,10 @@ import { notification } from 'antd'
 import Cookies from 'js-cookie'
 import Sticky from 'react-sticky-el'
 import Global from '../../Global'
+import AgentCard from '../../components/Agent/AgentCard'
 
 export default function InspectionDetails({ match }) {
-	const tabs = ['Members', 'Inspection Date', 'The Property']
+	const tabs = ['Members', 'Inspection', 'Property', 'Agent']
 	const [tab, setTab] = useState(tabs[0])
 	const { user } = useSelector((state) => state?.auth)
 	const [data, setData] = useState(null)
@@ -28,7 +29,8 @@ export default function InspectionDetails({ match }) {
 					},
 				}
 			)
-			setData(res.data)
+			setData(res.data);
+			console.log('THE DATA --', res.data)
 		} catch (error) {
 			notification.error({ message: 'Error loading page' })
 			return Promise.reject(error)
@@ -46,8 +48,8 @@ export default function InspectionDetails({ match }) {
 	return (
 		<Layout>
 			<div>
-				<div className="row">
-					<div className="col-xl-12">
+				<div className="row justify-content-center">
+					<div className="col-xl-9">
 						{/* <div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
 							<div className="card-body d-flex align-items-center p-0">
 								<h2 className="fw-700 mb-0 mt-0 font-md text-grey-900">
@@ -101,9 +103,10 @@ export default function InspectionDetails({ match }) {
 									</div>
 								</Sticky>
 								{tab === tabs[0] && <InspectionGuestList data={data} />}
-								{tab === tabs[1] && <InspectionDate />}
-								{tab === tabs[2] && <InspectionProperty />}
-								{tab === tabs[3] && <InspectionChat />}
+								{tab === tabs[1] && <InspectionDate data={data} />}
+								{tab === tabs[2] && <InspectionProperty data={data} />}
+								{tab === tabs[3] && <AgentCard data={data?.agent_profile} />}
+								{tab === tabs[4] && <InspectionChat />}
 							</div>
 						</div>
 					</div>
