@@ -11,6 +11,7 @@ import Global from '../../Global'
 import store from '../../redux/store/store'
 import SMap from '../../components/SMap/SMap'
 import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
+import { BiSearchAlt } from 'react-icons/bi'
 
 const { Option } = Select
 
@@ -56,12 +57,13 @@ export default function Properties() {
 													<div className="badge badge-info">
 														{personal_info?.location_keyword?.name}
 													</div>
-													<div className="ml-2 badge badge-info">
+													{/* <div className="ml-2 badge badge-info">
 														{personal_info?.state?.name}
-													</div>
+													</div> */}
 												</div>
 											)}
 										</div>
+
 										{/* <div className="search-form-2 ms-auto">
 								<i className="ti-search font-xss"></i>
 								<input
@@ -126,6 +128,44 @@ export default function Properties() {
 									</div>
 								</div>
 							</Sticky>
+							{personal_info?.state && personal_info?.location_keyword && (
+								<div className="row justify-content-center align-items-center">
+									<div className="col-md-9 col-sm-12">
+										<Alert
+											variant="info"
+											className="row justify-content-between"
+										>
+											<div className="col-md-8">
+												<Alert.Heading as="h1" className="mb-0 fw-bold">
+													Your Current location
+												</Alert.Heading>
+												<p>
+													Your current location is set to{' '}
+													<strong>
+														{personal_info?.location_keyword?.name},
+													</strong>{' '}
+													<strong>{personal_info?.state?.name}</strong>
+												</p>
+											</div>
+											<div className="col-md-3">
+												<button
+													onClick={() => {
+														store.dispatch({
+															type: 'SET_VIEW_STATE',
+															payload: {
+																collect_location_keyword: true,
+															},
+														})
+													}}
+													className="btn btn-info btn-sm align-self-center"
+												>
+													Change This
+												</button>
+											</div>
+										</Alert>
+									</div>
+								</div>
+							)}
 							{personal_info && !personal_info?.location_keyword && (
 								<Alert variant="danger" className="mt-4 mb-4">
 									<Alert.Heading className="fw-bold">
@@ -178,6 +218,12 @@ export default function Properties() {
 											</div>
 										)
 									})}
+								</div>
+							)}
+							{recent_properties?.length === 0 && (
+								<div className="text-center mt-5">
+									<BiSearchAlt className="text-grey-500" size={60} />
+									<h2 className="text-grey-500 fw-bold">No Result Found</h2>
 								</div>
 							)}
 						</div>

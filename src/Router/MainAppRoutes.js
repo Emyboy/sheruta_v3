@@ -43,6 +43,7 @@ import AgentSignup from '../pages/Agent/AgentSignup'
 import Inspection from '../pages/Inspection/Inspection'
 import BookInspection from '../pages/Inspection/BookInspection'
 import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
+import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 
@@ -148,6 +149,7 @@ function App() {
 							<Route exact path="/inspections" component={Inspection} />
 							<Route exact path="/inspection/:inspection_id" component={InspectionDetails} />
 							<Route exact path="/inspections/booking/:property_id" component={BookInspection} />
+							<Route exact path="/inspection/invitation/:inspection_id" component={InspectionInvitation} />
 							<Route exact path="/what-next" component={WhatNext} />
 							<Route exact path="/blog/category/:category_slug/:category_id" component={Blog} />
 							<Route exact path="/blog/:category/:uuid/:id" component={BlogDetails} />

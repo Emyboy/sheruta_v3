@@ -29,7 +29,7 @@ export default function InspectionDetails({ match }) {
 					},
 				}
 			)
-			setData(res.data);
+			setData(res.data)
 			console.log('THE DATA --', res.data)
 		} catch (error) {
 			notification.error({ message: 'Error loading page' })
@@ -105,7 +105,23 @@ export default function InspectionDetails({ match }) {
 								{tab === tabs[0] && <InspectionGuestList data={data} />}
 								{tab === tabs[1] && <InspectionDate data={data} />}
 								{tab === tabs[2] && <InspectionProperty data={data} />}
-								{tab === tabs[3] && <AgentCard data={data?.agent_profile} />}
+								{tab === tabs[3] && (
+									<>
+										{!data?.date && !data?.time ? (
+											<div className="text-center pt-5 pb-5">
+												<h3 className="fw-bold text-grey-700">
+													You haven't booked an inspection yet.
+												</h3>
+												<h4 className="text-grey-600">
+													Once you book an inspection we'll assign an gent to
+													you.
+												</h4>
+											</div>
+										) : (
+											<AgentCard data={data?.agent_profile} />
+										)}
+									</>
+								)}
 								{tab === tabs[4] && <InspectionChat />}
 							</div>
 						</div>

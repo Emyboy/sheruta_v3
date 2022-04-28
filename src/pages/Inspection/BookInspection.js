@@ -57,7 +57,8 @@ export default function BookInspection({ match }) {
 	const { personal_info } = useSelector((state) => state.view)
 	const [showInvite, setShowInvite] = useState(false)
 	const [loading, setLoading] = useState(false)
-	const { user } = useSelector((state) => state.auth)
+	const { user } = useSelector((state) => state.auth);
+	const router = useHistory()
 
 	const createInspection = async () => {
 		try {
@@ -79,6 +80,7 @@ export default function BookInspection({ match }) {
 				}
 			)
 			console.log(res.data)
+			router.push(`/inspection/${res?.data?.id}`)
 		} catch (error) {
 			return Promise.reject(error)
 		}
@@ -146,20 +148,40 @@ export default function BookInspection({ match }) {
 								)
 							})}
 						</ul>
-						{tab === tabs[0] &&
-							property?.interested_parties?.map((val, i) => {
-								return (
-									<EachBookingUser
-										val={val}
-										key={`booker-${i}`}
-										added={invitedUser.includes(val?.id)}
-										onInvite={(e) => setInvitedUser([...invitedUser, val?.id])}
-										unInvite={() =>
-											setInvitedUser(invitedUser.filter((x) => x !== val?.id))
-										}
-									/>
-								)
-							})}
+						{tab == tabs[0] && (
+							<>
+								{property?.interested_parties?.filter(
+									(x) => x?.id !== user?.user?.id
+								)?.length > 0 ? (
+									property?.interested_parties
+										?.filter((x) => x?.id !== user?.user?.id)
+										.map((val, i) => {
+											return (
+												<EachBookingUser
+													val={val}
+													key={`booker-${i}`}
+													added={invitedUser.includes(val?.id)}
+													onInvite={(e) =>
+														setInvitedUser([...invitedUser, val?.id])
+													}
+													unInvite={() =>
+														setInvitedUser(
+															invitedUser.filter((x) => x !== val?.id)
+														)
+													}
+												/>
+											)
+										})
+								) : (
+									<div className="text-center pt-5 pb-5">
+										<h3 className="fw-bold text-grey-600">
+											No Interested Users yet.
+										</h3>
+										<small>Check Your Contacts</small>
+									</div>
+								)}
+							</>
+						)}
 						{tab === tabs[1] &&
 							accepted_suggestions?.map((val, i) => {
 								return (

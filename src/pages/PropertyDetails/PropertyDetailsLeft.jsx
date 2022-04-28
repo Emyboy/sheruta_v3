@@ -141,7 +141,8 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 						</div>
 					</>
 				)}
-				{data?.interested_parties?.length > 0 && (
+				{data?.interested_parties?.filter((x) => x?.id !== user?.user?.id)
+					?.length > 0 && (
 					<>
 						<hr />
 						<div>
@@ -156,7 +157,13 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 											// onWheel={onWheel}
 										>
 											{data?.interested_parties?.map((val, i) => {
-												return <EachUserListCard data={val} key={`user-${i}`} />
+												return (
+													<EachUserListCard
+														standalone
+														data={val}
+														key={`user-${i}`}
+													/>
+												)
 											})}
 										</ScrollMenu>
 									</HorizontalScrollWrapper>

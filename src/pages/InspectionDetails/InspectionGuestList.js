@@ -1,7 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
+import axios from 'axios'
+import { useParams } from 'react-router'
+import Cookies from 'js-cookie'
+import { notification, Spin } from 'antd'
 
 const EachGuest = ({ val, pending }) => {
+	const [loading, setLoading] = useState(false)
+	const { inspection_id } = useParams()
+	const [deleted, setDeleted] = useState(false)
+
+	const removeGuest = async () => {
+		setLoading(true)
+		try {
+			const res = await axios(
+				process.env.REACT_APP_API_URL +
+					`/property-inspections/remove/user/${val?.id}/${inspection_id}`,
+				{
+					method: 'PUT',
+					headers: {
+						authorization: `Bearer ${Cookies.get('token')}`,
+					},
+				}
+			)
+			if (res.data) {
+				setLoading(false)
+				setDeleted(true)
+				notification.success({ message: 'Removed user' })
+			}
+			console.log(res.data)
+		} catch (error) {
+			setLoading(false)
+			return Promise.reject(error)
+		}
+	}
+
+	if (deleted) {
+		return null
+	}
+
 	return (
 		<li>
 			<div className="rounded-3 bg-transparent pb-2 mb-2 border-bottom d-flex justify-content-between">
@@ -28,8 +65,15 @@ const EachGuest = ({ val, pending }) => {
 					)}
 					<span className="mr-2 btn-round-sm bg-current text-white feather-mail font-xss ms-auto mt-2"></span>
 					{!pending && (
-						<span className="btn-round-sm bg-danger text-white font-xss ms-auto mt-2">
-							<i className="feather-trash"></i>
+						<span
+							className="btn-round-sm bg-danger text-white font-xss ms-auto mt-2"
+							onClick={removeGuest}
+						>
+							{loading ? (
+								<Spin className="text-white" />
+							) : (
+								<i className="feather-trash"></i>
+							)}
 						</span>
 					)}
 				</div>
