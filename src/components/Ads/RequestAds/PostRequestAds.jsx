@@ -15,7 +15,7 @@ export default function PostRequestAds() {
 						}}
 					>
 						<div className="card-body">
-							<h4 className="text-white">
+							<h4 className="text-white font-xl">
 								<b>
 									{view.personal_info.is_looking_for
 										? 'Looking for a flat to share?'

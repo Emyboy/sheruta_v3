@@ -1,14 +1,18 @@
-import { DatePicker } from 'antd'
+import { DatePicker, notification } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-bootstrap'
 import { BsFillCalendarXFill } from 'react-icons/bs'
 import moment from 'moment'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import Cookies from 'js-cookie'
 
 export default function InspectionDate({ data }) {
 	const [date, setDate] = useState(null)
 	const [time, setTime] = useState(null)
 	const [dateError, setDateError] = useState(null)
 	const [loading, setLoading] = useState(false)
+	const { user } = useSelector((state) => state.auth)
 
 	const validateDate = () => {
 		const _end = moment(date)
@@ -35,10 +39,36 @@ export default function InspectionDate({ data }) {
 		}
 	}, [dateError])
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
+		try {
+			setLoading(true)
+			const res = await axios(
+				process.env.REACT_APP_API_URL +
+					`/property-inspections/invitation/booking/${user?.user?.id}/${data?.id}`,
+				{
+					method: 'POST',
+					headers: {
+						authorization: `Bearer ${Cookies.get('token')}`,
+					},
+					data: {
+						date,
+						time
+					}
+				}
+			)
+			if (res.data) {
+				console.log(res.data)
+				setLoading(false)
+			}
+		} catch (error) {
+			if (error.response?.data?.message) {
+				notification.error({ message: error.response?.data?.message })
+			}
+			setLoading(false)
+			return Promise.reject(error)
+		}
 		console.log({
-			date,
 			time,
 		})
 	}
@@ -72,6 +102,7 @@ export default function InspectionDate({ data }) {
 							aria-errormessage={dateError}
 							className="form-control"
 							onChange={(e) => setDate(e)}
+							disabledTime
 						/>
 						<small className="text-danger">{dateError}</small>
 					</div>
@@ -80,7 +111,7 @@ export default function InspectionDate({ data }) {
 						<input
 							className="form-control"
 							type="time"
-							onChange={(e) => setTime(e)}
+							onChange={(e) => setTime(e.target?.value)}
 						/>
 					</div>
 					<div className="text-center">
