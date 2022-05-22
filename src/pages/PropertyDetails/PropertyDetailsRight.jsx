@@ -3,7 +3,6 @@ import { Avatar } from 'antd'
 import { BsTelephoneFill } from 'react-icons/bs'
 
 export default function PropertyDetailsRight({ data }) {
-	console.log('AVATAR URL --', data)
 
 	return (
 		<div className="card w-100 border-0 mt-4 mb-4 p-lg-4 p-3 shadow-xss position-relative rounded-3 bg-white">

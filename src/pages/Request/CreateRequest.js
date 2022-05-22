@@ -6,10 +6,13 @@ import { Redirect } from 'react-router-dom'
 import { connect, useDispatch } from 'react-redux'
 import { v4 as Uid } from 'uuid'
 import { Alert, notification, Switch } from 'antd'
-import { Link } from 'react-router-dom'
+import CurrencyInput from 'react-currency-input-field'
 import TextInput from '../../components/TextInput/TextInput'
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { getAllViewOptions, getUserFeedback } from '../../redux/strapi_actions/view.action'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import {
+	getAllViewOptions,
+	getUserFeedback,
+} from '../../redux/strapi_actions/view.action'
 // import Layout from '../../components/Layout/Layout'
 import store from '../../redux/store/store'
 import { notifyEmy } from '../../services/Sheruta'
@@ -18,9 +21,9 @@ import ImageSelect from './ImageSelect'
 import { storage } from '../../Firebase'
 import firebase from 'firebase'
 import Compressor from 'compressorjs'
-import { Modal } from 'react-bootstrap'
 import TextArea from 'antd/lib/input/TextArea'
 import Global from '../../Global';
+import ReactQuill from 'react-quill';
 
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
@@ -106,8 +109,7 @@ const CraeteRequest = (props) => {
 				notification.success({ message: 'You post has been created' })
 				setTimeout(() => {
 					notification.info({ message: 'Check the home page' })
-				}, 3700);
-				
+				}, 3700)
 			})
 			.catch((err) => {
 				notifyEmy({
@@ -295,7 +297,7 @@ const CraeteRequest = (props) => {
 	useEffect(() => {
 		dispatch(getAllViewOptions())
 		window.scrollTo(0, 0)
-	},[])
+	}, [])
 
 	const handleImageSelect = (file, i) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
@@ -318,57 +320,12 @@ const CraeteRequest = (props) => {
 	} else
 		return (
 			<Layout currentPage={'requests'}>
-				{/* <Modal
-					show={view.personal_info && !view.personal_info.nin}
-					style={{ marginTop: '20vh' }}
-					size="md"
-				>
-					<Modal.Body className="text-center">
-						<h3 className="text-center fw-700">
-							Join the community to post a request.
-						</h3>
-						<hr />
-						<ol>
-							<li>
-								<h4>
-									Submit your NIN <small>(Only you can see this)</small>
-								</h4>
-							</li>
-							<li>
-								<h4>Get verified</h4>
-							</li>
-							<li>
-								<h4>Upload an image of yourself</h4>
-							</li>
-							<li>
-								<h4>View user's information</h4>
-							</li>
-							<li>
-								<h4>Have access to other verified users</h4>
-							</li>
-							<hr />
-							<Link to="/start">
-								<Btn text="Get Started" onClick={() => {}} />
-							</Link>
-							<Link to="/" className="mt-3">
-								<h5 className="text-success mt-3">Go Back Home</h5>
-							</Link>
-						</ol>
-					</Modal.Body>
-				</Modal> */}
 				<div className="mt-5 pb-5">
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
 							<div className="text-center">
 								<h1 className="display-6 mb-3">
-									<b>
-										{props.view.personal_info &&
-										props.view.personal_info.looking_for
-											? edit
-												? 'Edit Request'
-												: 'Create Request'
-											: 'Post Your Property'}
-									</b>
+									<b>Submit Property</b>
 								</h1>
 								<div className="row justify-content-center mb-5">
 									<div className="col-lg-6 col-sm-12">
@@ -394,19 +351,11 @@ const CraeteRequest = (props) => {
 										<div className="row">
 											<div className="col-lg-12 col-md-6 col-sm-12">
 												<TextInput
-													label={
-														props.view.personal_info &&
-														props.view.personal_info.looking_for
-															? 'Request Heading'
-															: 'Property title'
-													}
+													label={'Headline'}
 													required
 													maxLength={70}
 													placeholder={
-														props.view.personal_info &&
-														props.view.personal_info.looking_for
-															? '"Ex. I need a shared apartment in Ikeja"'
-															: 'Ex. Newly built flat available for share in Ikeja'
+														'Ex. Newly built flat available for share'
 													}
 													onChange={(e) =>
 														setData({
@@ -417,76 +366,69 @@ const CraeteRequest = (props) => {
 													defaultValue={data.heading}
 												/>
 											</div>
-											{view.personal_info &&
-											view.personal_info.looking_for ? null : (
-												<>
-													<div className="col-lg-6 col-md-6 col-sm-12">
-														<div className="form-group">
-															<label>Bedrooms</label>
-															<input
-																style={{
-																	height: '40px',
-																}}
-																className="form-control"
-																type="number"
-																required
-																defaultValue={data.bedrooms}
-																placeholder="Eg. 3"
-																onChange={(e) =>
-																	setData({
-																		...data,
-																		bedrooms: e.target.value,
-																	})
-																}
-															/>
-														</div>
-													</div>
-
-													<div className="col-lg-6 col-md-6 col-sm-12">
-														<div className="form-group">
-															<label>Toilets</label>
-															<input
-																style={{
-																	height: '40px',
-																}}
-																className="form-control"
-																type="number"
-																required
-																defaultValue={data.toilets}
-																placeholder="Eg. 4"
-																onChange={(e) =>
-																	setData({
-																		...data,
-																		toilets: e.target.value,
-																	})
-																}
-															/>
-														</div>
-													</div>
-
-													<div className="col-lg-6 col-md-6 col-sm-12">
-														<div className="form-group">
-															<label>Bathrooms</label>
-															<input
-																style={{
-																	height: '40px',
-																}}
-																className="form-control"
-																type="number"
-																required
-																defaultValue={data.bathrooms}
-																placeholder="Eg. 2"
-																onChange={(e) =>
-																	setData({
-																		...data,
-																		bathrooms: e.target.value,
-																	})
-																}
-															/>
-														</div>
-													</div>
-												</>
-											)}
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Bedrooms</label>
+													<input
+														style={{
+															height: '40px',
+														}}
+														className="form-control"
+														type="number"
+														required
+														defaultValue={data.bedrooms}
+														placeholder="Eg. 3"
+														onChange={(e) =>
+															setData({
+																...data,
+																bedrooms: e.target.value,
+															})
+														}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Toilets</label>
+													<input
+														style={{
+															height: '40px',
+														}}
+														className="form-control"
+														type="number"
+														required
+														defaultValue={data.toilets}
+														placeholder="Eg. 4"
+														onChange={(e) =>
+															setData({
+																...data,
+																toilets: e.target.value,
+															})
+														}
+													/>
+												</div>
+											</div>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="form-group">
+													<label>Bathrooms</label>
+													<input
+														style={{
+															height: '40px',
+														}}
+														className="form-control"
+														type="number"
+														required
+														defaultValue={data.bathrooms}
+														placeholder="Eg. 2"
+														onChange={(e) =>
+															setData({
+																...data,
+																bathrooms: e.target.value,
+															})
+														}
+													/>
+												</div>
+											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>Payment Type</label>
@@ -579,62 +521,60 @@ const CraeteRequest = (props) => {
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>
-														{props.view.personal_info &&
-														props.view.personal_info.looking_for
-															? 'Maximum Budget'
-															: 'Total Rent'}{' '}
-														(
-														{`${Global.currency}` +
-															window.formatedPrice.format(data.budget)}
-														)
-													</label>
-													<input
-														style={{
-															height: '40px',
-														}}
-														className="form-control"
-														type="number"
-														required
-														defaultValue={data.budget}
-														placeholder="Eg. 300000"
-														onChange={(e) =>
-															setData({
-																...data,
-																budget: e.target.value,
-															})
-														}
-													/>
+													<label>Rent</label>
+													<div class="input-group mb-2">
+														<div class="input-group-prepend">
+															<div class="input-group-text">
+																{Global.currency}
+															</div>
+														</div>
+														<CurrencyInput
+															style={{
+																height: '40px',
+															}}
+															id="rent"
+															name="rent"
+															placeholder="The Total Rent"
+															defaultValue={data?.budget}
+															decimalsLimit={2}
+															onValueChange={(value, name) =>
+																setData({
+																	...data,
+																	budget: value,
+																})
+															}
+															className="form-control"
+														/>
+													</div>
 												</div>
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>
-														{props.view.personal_info &&
-														props.view.personal_info.looking_for
-															? 'Minimum Budget'
-															: 'Rent Per Room'}{' '}
-														(
-														{`${Global.currency}` +
-															window.formatedPrice.format(data.rent_per_room)}
-														)
-													</label>
-													<input
-														style={{
-															height: '40px',
-														}}
-														className="form-control"
-														type="number"
-														required
-														defaultValue={data.rent_per_room}
-														placeholder="Eg. 120000"
-														onChange={(e) =>
-															setData({
-																...data,
-																rent_per_room: e.target.value,
-															})
-														}
-													/>
+													<label>Rent Per Room</label>
+													<div class="input-group mb-2">
+														<div class="input-group-prepend">
+															<div class="input-group-text">
+																{Global.currency}
+															</div>
+														</div>
+														<CurrencyInput
+															style={{
+																height: '40px',
+															}}
+															id="rent"
+															name="rent"
+															placeholder="Rent Per Room"
+															defaultValue={data.rent_per_room}
+															decimalsLimit={2}
+															onValueChange={(value, name) =>
+																setData({
+																	...data,
+																	rent_per_room: value,
+																})
+															}
+															className="form-control"
+														/>
+													</div>
 												</div>
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
@@ -677,10 +617,7 @@ const CraeteRequest = (props) => {
 											<div className="col-lg-12 col-md-12 col-sm-12">
 												<div className="form-group">
 													<label>
-														{props.view.personal_info &&
-														props.view.personal_info.looking_for
-															? 'Type your request....'
-															: 'Tell us about this property'}{' '}
+														Tell us about his flat.
 													</label>
 													<TextArea
 														rows={6}
@@ -707,39 +644,32 @@ const CraeteRequest = (props) => {
 													/>
 												</div>
 											</div>
-											{(view.personal_info &&
-												!view.personal_info.looking_for) ||
-											(edit && data.image_url.length > 0) ? (
-												<>
-													<div className="container">
-														<label className="display-7">Images</label>
-													</div>
+											<>
+												<div className="container">
+													<label className="display-7">Images</label>
+												</div>
 
-													<div className="">
-														<div className="col-lg-12">
-															<div className="row justify-content-center">
-																{new Array(image_count)
-																	.fill(null)
-																	.map((_, i) => {
-																		return (
-																			<ImageSelect
-																				index={i}
-																				edit={edit}
-																				image={imageFiles[`img${i}`]}
-																				onFileChange={(e) => {
-																					handleImageSelect(
-																						e.target.files[0],
-																						i
-																					)
-																				}}
-																			/>
-																		)
-																	})}
-															</div>
+												<div className="">
+													<div className="col-lg-12 p-0">
+														<div className="row justify-content-start">
+															{new Array(image_count).fill(null).map((_, i) => {
+																return (
+																	<div className="col-6 col-md-4 col-lg-4" key={`img-${i}`}>
+																		<ImageSelect
+																			index={i}
+																			edit={edit}
+																			image={imageFiles[`img${i}`]}
+																			onFileChange={(e) => {
+																				handleImageSelect(e.target.files[0], i)
+																			}}
+																		/>
+																	</div>
+																)
+															})}
 														</div>
 													</div>
-												</>
-											) : null}
+												</div>
+											</>
 											<div className="col-lg-12 col-md-12 col-sm-12">
 												<hr />
 												<div className="form-group">

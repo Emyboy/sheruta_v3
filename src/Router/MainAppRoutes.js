@@ -14,7 +14,8 @@ import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
 import '../App.css'
 
-
+import 'react-quill/dist/quill.snow.css'
+import 'react-image-viewer-zoom/dist/style.css' 
 
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -76,8 +77,6 @@ const PasswordReset = React.lazy(() =>
 	import('../pages/ResetPassword/PasswordReset')
 )
 const WhatNext = React.lazy(() => import('../pages/GetStarted/Steps/WhatNext'))
-const AllRequests = React.lazy(() => import('../pages/Request/AllRequests'))
-const Request = React.lazy(() => import('../pages/Request/Request'))
 const Blog = React.lazy(() => import('../pages/Blog/Blog'))
 const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
@@ -120,7 +119,11 @@ function App() {
 							<Route exact path="/agents" component={Agent} />
 							<Route exact path="/our-rules" component={OurRules} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
-							<Route exact path="/agents/pending/:agent_id" component={AgentPending} />
+							<Route
+								exact
+								path="/agents/pending/:agent_id"
+								component={AgentPending}
+							/>
 							<Route exact path="/flats" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
@@ -128,8 +131,16 @@ function App() {
 							<Route exact path="/blog" component={Blog} />
 							<Route exact path="/services" component={Services} />
 							<Route exact path="/join-paddy" component={JoinPaddy} />
-							<Route exact path="/join-paddy/create" component={CreateJoinPaddy} />
-							<Route exact path="/join-paddy/:uuid" component={JoinPaddyDetails} />
+							<Route
+								exact
+								path="/join-paddy/create"
+								component={CreateJoinPaddy}
+							/>
+							<Route
+								exact
+								path="/join-paddy/:uuid"
+								component={JoinPaddyDetails}
+							/>
 							<Route exact path="/services/:service" component={Services} />
 							<Route exact path="/messages" component={Messages} />
 							<Route exact path="/settings" component={Settings} />
@@ -147,19 +158,43 @@ function App() {
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
 							<Route exact path="/inspections" component={Inspection} />
-							<Route exact path="/inspection/:inspection_id" component={InspectionDetails} />
-							<Route exact path="/inspections/booking/:property_id" component={BookInspection} />
-							<Route exact path="/inspection/invitation/:inspection_id" component={InspectionInvitation} />
+							<Route
+								exact
+								path="/inspection/:inspection_id"
+								component={InspectionDetails}
+							/>
+							<Route
+								exact
+								path="/inspections/booking/:property_id"
+								component={BookInspection}
+							/>
+							<Route
+								exact
+								path="/inspection/invitation/:inspection_id"
+								component={InspectionInvitation}
+							/>
 							<Route exact path="/what-next" component={WhatNext} />
-							<Route exact path="/blog/category/:category_slug/:category_id" component={Blog} />
-							<Route exact path="/blog/:category/:uuid/:id" component={BlogDetails} />
+							<Route
+								exact
+								path="/blog/category/:category_slug/:category_id"
+								component={Blog}
+							/>
+							<Route
+								exact
+								path="/blog/:category/:uuid/:id"
+								component={BlogDetails}
+							/>
 							<Route exact path="/start/:step" component={GetStarted} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/about" component={About} />
-							<Route exact path="/requests" component={Request} />
-							<Route exact path="/requests/edit/:request_id" component={CreateRequest} />
-							<Route exact path="/requests/all" component={AllRequests} />
+							<Route
+								exact
+								path="/requests/edit/:request_id"
+								component={CreateRequest}
+							/>
 							<Route exact path="/user/:username" component={Profile2} />
+							<Route exact path="/flat/submit" component={CreateRequest} />
+
 							<Route
 								exact
 								path="/flat/:service/:category/:property_id"
@@ -200,7 +235,6 @@ function App() {
 								path="/password/reset/u/:token/:resetPasswordToken"
 								component={PasswordReset}
 							/>
-							<Route exact path="/requests/create" component={CreateRequest} />
 							<Route component={PageNotFound} />
 							{/* 
 

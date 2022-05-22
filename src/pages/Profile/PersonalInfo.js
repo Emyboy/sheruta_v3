@@ -30,7 +30,8 @@ const PersonalInfo = ({ userData }) => {
 					})
 				})
 		}
-	}, [userData])
+	}, [userData]);
+	
 	useEffect(() => {
 		if (userData) {
 			axios(

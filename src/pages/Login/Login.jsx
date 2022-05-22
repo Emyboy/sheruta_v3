@@ -149,15 +149,15 @@ const Login = (props) => {
 									)}
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<div className="form-group icon-input mb-3">
-											<i className="font-sm ti-email text-grey-500 pe-0"></i>
+											<i className="font-sm ti-user text-grey-500 pe-0"></i>
 											<input
 												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
 												disabled={state.loading}
 												autoFocus
 												name="identifier"
 												id="identifier"
-												type="email"
-												placeholder="Email"
+												// type="email"
+												placeholder="Username or Email"
 												{...register('identifier')}
 											/>
 										</div>

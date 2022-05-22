@@ -206,8 +206,8 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to="/requests/create">
-					<Tooltip placement="bottom" title={'Add A Request'}>
+				<Link to="/flat/submit">
+					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i
 								className={`feather-plus font-lg alert-primary btn-round-lg theme-dark-bg ${

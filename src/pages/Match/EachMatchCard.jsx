@@ -61,7 +61,11 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 
 	return (
 		<>
-			<Modal visible={showInfo} onCancel={() => setShowInfo(false)} footer={null}>
+			<Modal
+				visible={showInfo}
+				onCancel={() => setShowInfo(false)}
+				footer={null}
+			>
 				{/* <div className="card-header d-flex justify-content-between align-items-center">
 					<span className="h1 font-xl fw-bold text-center">More Info</span>
 					<button className="btn fw-700" onClick={() => setShowInfo(false)}>
@@ -150,7 +154,10 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 										)[0]?.name}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
-									<b className="text-grey-900 mr-2"> Budget: </b>
+									<b className="text-grey-900 mr-2">
+										{' '}
+										{data?.personal_info?.looking_for ? "Budget" : "Total Rent"}{' '}
+									</b>
 									{Global.currency}
 									{window.formatedPrice.format(users_permissions_user?.budget)}
 								</li>
