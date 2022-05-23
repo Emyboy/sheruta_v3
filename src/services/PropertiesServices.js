@@ -4,9 +4,20 @@ const API_URL = process.env.REACT_APP_API_URL
 export default class PropertiesService {
 	static async getRecentProperties(location_keyword) {
 		const data = await axios(
-			API_URL + (location_keyword
-				? `/properties/?location_keyword=${location_keyword}&_limit=80&_start=0&_sort=created_at:DESC`
-				: `/properties/?_limit=80&_start=0&_sort=created_at:DESC`)
+			API_URL +
+				(location_keyword
+					? `/properties/?location_keyword=${location_keyword}&_limit=80&_start=0&_sort=created_at:DESC`
+					: `/properties/?_limit=80&_start=0&_sort=created_at:DESC`)
+		)
+		return data
+	};
+	
+	static async getPropertiesByLocationKeyword(location_keyword) {
+		const data = await axios(
+			API_URL +
+				(location_keyword
+					? `/properties/?location_keyword=${location_keyword}&_limit=80&_start=0&_sort=created_at:DESC`
+					: `/properties/?_limit=80&_start=0&_sort=created_at:DESC`)
 		)
 		return data
 	}

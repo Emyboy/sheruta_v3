@@ -84,7 +84,6 @@ export const HoverDetails = ({ data }) => {
 }
 
 const Marker = (props) => {
-	console.log('MARKER PROPS ---', props)
 	const { data } = props
 	return (
 		<Popover

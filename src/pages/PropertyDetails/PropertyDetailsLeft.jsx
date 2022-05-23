@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Alert } from 'react-bootstrap'
+import { Alert, Modal } from 'react-bootstrap'
 import { BsCheckCircleFill } from 'react-icons/bs'
 import { HorizontalScrollWrapper } from '../HomeNew/components/HomeListings/HomeListings'
 import { ScrollMenu } from 'react-horizontal-scrolling-menu'
@@ -12,9 +12,11 @@ import Global from '../../Global'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { notification } from 'antd'
+import ImageViewer from 'react-simple-image-viewer'
 
 export default function PropertyDetailsLeft({ data, done, standalone }) {
 	const { user } = useSelector((state) => state.auth)
+	const [showImages, setShowImages] = useState(false)
 	const iconSize = 19
 
 	const [listLoading, setListLoading] = useState(false)
@@ -52,6 +54,15 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 	}
 	return (
 		<div className="card d-block mt-4 border-0 shadow-xss bg-white ">
+			{showImages && (
+				<ImageViewer
+					src={data?.image_urls}
+					disableScroll={false}
+					closeOnClickOutside={true}
+					onClose={() => setShowImages(false)}
+					backgroundStyle={{ height: '80vh', marginTop: '7vh' }}
+				/>
+			)}
 			<div
 				className="card-header d-flex justify-content-center text-center align-items-center"
 				style={{
@@ -62,11 +73,14 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					backgroundPosition: 'center',
 				}}
 			>
-				<button className="btn bg-accent p-2 w-50 rounded shadow text-white">
+				<button
+					className="btn bg-accent p-2 w-50 rounded shadow text-white"
+					onClick={() => setShowImages(true)}
+				>
 					View All Images
 				</button>
 			</div>
-			<div className="card-body">
+			<div onClick={() => setShowImages(false)} className="card-body">
 				<span className="font-xsssss fw-700 ps-3 pe-3 lh-32 text-uppercase rounded-3 ls-2 bg-theme shadow d-inline-block text-white ">
 					Featured
 				</span>

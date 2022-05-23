@@ -25,12 +25,14 @@ export default function PropertyDetailsRight({ data }) {
 						<h4 className="font-xsss fw-700 text-grey-700 fw-600 mt-2">
 							{data?.agent?.name}
 						</h4>
-						<button
-							className="btn border border-success mt-3 shadow-md"
-							style={{ borderRadius: '50%', height: '50px' }}
-						>
-							<BsTelephoneFill className="text-current" size={25} />
-						</button>
+						<a href={`tel:${data?.agent_profile?.phone_number}`}>
+							<button
+								className="btn border border-success mt-3 shadow-md"
+								style={{ borderRadius: '50%', height: '50px' }}
+							>
+								<BsTelephoneFill className="text-current" size={25} />
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>

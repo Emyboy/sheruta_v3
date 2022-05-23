@@ -18,7 +18,6 @@ import AppUpdatePopup from './AppUpdatePopup'
 import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 // import Global from '../../Global'
-import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 // import LocationUpdatePopup from './LocationUpdatePopup'
 // import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
@@ -29,7 +28,7 @@ import LocationKeywordPopup from './LocationKeywordPopup'
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
-	const { services, categories, personal_info } = useSelector(
+	const { personal_info } = useSelector(
 		(state) => state.view
 	)
 	const dispatch = useDispatch()
@@ -72,7 +71,6 @@ const MasterPopup = (props) => {
 			getForUser()
 			dispatch(getOtherStuffs())
 		}
-		dispatch(getAllRecentProperties())
 		getForViews()
 	}, [dispatch])
 
