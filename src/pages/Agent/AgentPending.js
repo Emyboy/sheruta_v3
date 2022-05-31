@@ -8,7 +8,6 @@ import { Redirect } from 'react-router-dom'
 
 export default function AgentPending(props) {
 	const { user } = useSelector((state) => state.auth)
-	console.log(props)
 
 	const sendRequest = useCallback(async () => {
 		try {

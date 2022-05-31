@@ -30,7 +30,6 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 			const res = await AgentService.createAgent(newAgent)
 			if (res.data) {
 				setDone(res.data.id)
-				console.log('SAVED DATA ---', res.data)
 			}
 		} catch (error) {
 			notification.error({ message: 'Error, please try again' })

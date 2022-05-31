@@ -1,4 +1,4 @@
-import { Avatar } from 'antd'
+import { Avatar, notification } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -53,8 +53,10 @@ export default function InspectionInvitation() {
 				}
 			)
 			if (status === 'reject') {
-				return router.push('/feeds')
+				notification.success({ message: "Message sent" })
+				return router.push('/feeds');
 			} else {
+				notification.success({ message: `Welcome ${user?.user?.first_name?.split(' ')[0]}` })
 				return router.push(`/inspection/${inspection_id}`)
 			}
 		} catch (error) {
@@ -98,12 +100,12 @@ export default function InspectionInvitation() {
 											<div className="text-center">
 												<Avatar src={data?.owner?.avatar_url} size={100} />
 												<h5 className="text-grey-600 fw-bold mt-2">
-													@{data?.owner?.username}
+													{data?.owner?.first_name}
 												</h5>
 												<div className="container">
 													<h3 className="mt-5 text-grey-600">
 														<strong>
-															{data?.owner?.first_name} {data?.owner?.last_name}
+															{data?.owner?.first_name}
 														</strong>{' '}
 														wants you to join an inspection for a{' '}
 														<strong>{data?.property?.bedroom} bedroom</strong>{' '}

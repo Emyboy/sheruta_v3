@@ -64,7 +64,9 @@ const Login = (props) => {
 					setState({ ...state, loading: false })
 					notification.success({ message: 'Welcome' });
 					props.setAuthState({
-						user: res.data,
+						user: {
+							user: res.data?.user
+						},
 					})
 					updateLastSeen();
 					window.location.reload()

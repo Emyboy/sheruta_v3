@@ -27,7 +27,6 @@ export default function AgentSignupForm() {
 		location_keyword: null,
 	})
 
-	console.log('THE ON CHANGE DATA --', agentData)
 
 	useEffect(() => {
 		setNextAble(false)

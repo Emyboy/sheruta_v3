@@ -58,9 +58,10 @@ export default function BookInspection({ match }) {
 	const [showInvite, setShowInvite] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const { user } = useSelector((state) => state.auth);
-	const router = useHistory()
+	const router = useHistory();
 
 	const createInspection = async () => {
+		setLoading(true)
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL + `/property-inspections`,
@@ -79,9 +80,13 @@ export default function BookInspection({ match }) {
 					},
 				}
 			)
-			console.log(res.data)
-			router.push(`/inspection/${res?.data?.id}`)
+			if(res.data){
+				setLoading(false);
+				console.log('--- INSPECTION CREATED ----', res.data)
+				router.push(`/inspection/${res?.data?.id}`)
+			}
 		} catch (error) {
+			setLoading(false);
 			return Promise.reject(error)
 		}
 	}
@@ -259,6 +264,7 @@ export default function BookInspection({ match }) {
 									<div className="d-flex justify-content-center mt-4 mb-4">
 										{invitedUser.length > 1 ? (
 											<button
+												disabled={loading}
 												className="w-70 btn bg-current text-white fw-700"
 												onClick={() => createInspection()}
 											>

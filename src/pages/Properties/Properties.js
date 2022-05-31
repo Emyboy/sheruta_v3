@@ -224,7 +224,7 @@ export default function Properties() {
 							{recent_properties?.length === 0 && (
 								<div className="text-center mt-5">
 									<BiSearchAlt className="text-grey-500" size={60} />
-									<h2 className="text-grey-500 fw-bold">No Result Found</h2>
+									<h2 className="text-grey-500 fw-bold">No Result Found {personal_info?.state && `In ${personal_info?.location_keyword?.name}`}</h2>
 								</div>
 							)}
 						</div>
