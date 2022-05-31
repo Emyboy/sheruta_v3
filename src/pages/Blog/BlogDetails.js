@@ -90,13 +90,12 @@ export default function BlogDetails(props) {
 						<div className="card-body d-block p-0 mb-3">
 							<div className="row ps-2 pe-2">
 								<div className="col-sm-12 p-1">
-									<a href="images/t-30.jpg" data-lightbox="roadtr">
-										<img
-											src={data?.image_url}
-											className="rounded-3 w-100"
-											alt="image"
-										/>
-									</a>
+									<img
+										src={data?.image_url}
+										className="rounded-3 w-100"
+										alt="image"
+										style={{ borderRadius: '10px' }}
+									/>
 								</div>
 							</div>
 						</div>
