@@ -156,8 +156,8 @@ const Login = (props) => {
 												autoFocus
 												name="identifier"
 												id="identifier"
-												type="email"
-												placeholder="Email"
+												// type="email"
+												placeholder="Username or Email"
 												{...register('identifier')}
 											/>
 										</div>
