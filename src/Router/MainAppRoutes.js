@@ -14,6 +14,8 @@ import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
 import '../App.css'
 
+// import '../assets/css/style.css';
+
 import 'react-quill/dist/quill.snow.css'
 import 'react-image-viewer-zoom/dist/style.css' 
 
