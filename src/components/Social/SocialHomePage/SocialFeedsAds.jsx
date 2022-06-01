@@ -11,7 +11,7 @@ export default function SocialFeedsAds({ index }) {
 	return (
 		<>
 			{index === 2 && <PostRequestAds />}
-			{index === 4 && personal_info && personal_info?.looking_for && <LocationKeywordAds />}
+			{/* {index === 4 && personal_info && personal_info?.looking_for && <LocationKeywordAds />} */}
 			{index === 6 && (
 				<img src={match} className="rounded-xxl pl-0 pr-0 mb-3 col-12" />
 			)}
