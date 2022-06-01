@@ -12,7 +12,6 @@ import Sticky from 'react-sticky-el'
 import PropertyDetailsLeft from './PropertyDetailsLeft'
 
 export default function PropertyDetails(props) {
-	console.log("THE PROPS ---",props)
 	localStorage.setItem('after_login', window.location.pathname)
 	const { user } = useSelector((state) => state.auth)
 	const { match, location } = props
@@ -31,7 +30,6 @@ export default function PropertyDetails(props) {
 	
 
 	useEffect(async () => {
-		console.log('DETAILS --', data)
 		if (data) {
 			return setPageState('done')
 		}

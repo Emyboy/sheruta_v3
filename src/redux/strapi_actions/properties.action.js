@@ -19,7 +19,6 @@ export const getAllRecentProperties =
 			const res = await PropertiesService.getRecentProperties(
 				user_location_keyword
 			)
-			console.log('THE RESULT ---', res.data)
 			setPropertyState({
 				recent_properties: res.data,
 			})
@@ -36,7 +35,6 @@ export const getPropertiesByLocationKeyword =
 			const res = await PropertiesService.getPropertiesByLocationKeyword(
 				location_keyword
 			)
-			console.log('THE RESULT ---', res.data)
 			setPropertyState({
 				properties: res.data,
 				recent_properties: res.data,
