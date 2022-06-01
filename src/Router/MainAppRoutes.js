@@ -14,7 +14,9 @@ import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
 import '../App.css'
 
-// import '../assets/css/style.css';
+import '../assets/css/style.css';
+import '../assets/css/boxicons.min.css';
+import '../assets/css/responsive.css';
 
 import 'react-quill/dist/quill.snow.css'
 import 'react-image-viewer-zoom/dist/style.css' 
@@ -49,13 +51,14 @@ import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
 import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
+import Home from '../pages/HomeNew/HomeNew';
 
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
 const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
-const Home = React.lazy(() => import('../pages/Home/Home'))
+// const Home = React.lazy(() => import('../pages/Home/Home'))
 const PropertyDetails = React.lazy(() =>
 	import('../pages/PropertyDetails/PropertyDetails')
 )

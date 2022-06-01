@@ -3,7 +3,7 @@ import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { Alert, Modal } from 'react-bootstrap'
 import { BsCheckCircleFill } from 'react-icons/bs'
-import { HorizontalScrollWrapper } from '../HomeNew/components/HomeListings/HomeListings'
+// import { HorizontalScrollWrapper } from '../HomeNew/components/HomeListings/HomeListings'
 import { ScrollMenu } from 'react-horizontal-scrolling-menu'
 import EachUserListCard from '../../components/RecentUsersList/EachUserListCard'
 import { Dots } from 'react-activity'
@@ -163,7 +163,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 							<h2 className="fw-700 text-grey-700">Interested Users</h2>
 							<div className="container-fluid pl-0">
 								<div className="mb-5">
-									<HorizontalScrollWrapper>
+									<div>
 										<ScrollMenu
 											// LeftArrow={() => <button>Left</button>}
 											// RightArrow={() => <button>Right</button>}
@@ -180,7 +180,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 												)
 											})}
 										</ScrollMenu>
-									</HorizontalScrollWrapper>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -193,7 +193,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 							<h2 className="fw-700 text-grey-700">Landmarks Images</h2>
 							<div className="container-fluid pl-0">
 								<div className="mb-5">
-									<HorizontalScrollWrapper>
+									<div>
 										<ScrollMenu
 											// LeftArrow={() => <button>Left</button>}
 											// RightArrow={() => <button>Right</button>}
@@ -216,7 +216,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 												)
 											})}
 										</ScrollMenu>
-									</HorizontalScrollWrapper>
+									</div>
 								</div>
 							</div>
 						</div>

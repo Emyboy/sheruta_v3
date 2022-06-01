@@ -17,7 +17,7 @@ import WhatPeopleSay from './WhatPeopleSay'
 import HomePageRequests from './HomePageRequests/HomePageRequests';
 import { MetaTags } from 'react-meta-tags';
 import home_bg from './home_bg.png';
-import HomeListings from './HomeListings/HomeListings'
+// import HomeListings from './HomeListings/HomeListings'
 
 const Wrapper = styled.div`
 	.jumbotron {
@@ -138,7 +138,7 @@ export default function Home() {
 				<section
 					className={`${!Global.isMobile ? 'container': "container-fluid"} mt-5 mb-5 p-0`}
 				>
-					<HomeListings />
+					{/* <HomeListings /> */}
 				</section>
 				<article className="container mt-6 card border-0 rounded shadow-sm pt-4 pb-4">
 					<div

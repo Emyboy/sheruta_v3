@@ -8,6 +8,7 @@ import moment from 'moment'
 import logo from '../../assets/img/logo.png'
 import Global from '../../Global';
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
+import Sticky from 'react-sticky-el';
 
 const NavWrapper = styled.ul`
 	li > a {
@@ -35,7 +36,8 @@ export default function Header({
 
 	if (!user) {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light nav-header bg-white shadow-xs border-0" style={{ zIndex: 8 }}>
+			<Sticky stickyStyle={{ zIndex: 40}} >
+			<nav className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0" style={{ zIndex: 39 }}>
 				<div className="container-fluid">
 					<Link to="/">
 						<a className="navbar-brand">
@@ -130,6 +132,7 @@ export default function Header({
 					</div>
 				</div>
 			</nav>
+			</Sticky>
 		)
 	} else
 		return (

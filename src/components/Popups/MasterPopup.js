@@ -8,6 +8,8 @@ import {
 	getRealTimeStuffs,
 	getOtherStuffs,
 	getAllViewOptions,
+	getAllLocationKeyword,
+	getLocationKeyWordsByState,
 } from '../../redux/strapi_actions/view.action'
 import {
 	suggestThemForMe,
@@ -57,6 +59,7 @@ const MasterPopup = (props) => {
 
 	// FOR ONE TIME
 	useEffect(() => {
+		dispatch(getAllLocationKeyword(1))
 		// const _token = Cookies.get('token')
 		if (localStorage.getItem('token')) {
 			localStorage.clear()

@@ -52,7 +52,6 @@ export default function Properties() {
 			>
 				<div className="row">
 					<div className="col-xl-7   chat-left scroll-bar">
-						<div className="">
 							<Sticky
 								className="shadow-xxl w-100"
 								// stickyClassName="animate__animated animate__fadeInDown"
@@ -211,10 +210,7 @@ export default function Properties() {
 											: [...recent_properties],
 									][0].map((val, i) => {
 										return (
-											<div
-												className="col-6 col-lg-6 col-md-6 col-sm-6 mb-3 pe-2 ps-2"
-												key={`property-${i}`}
-											>
+											<div className="col-lg-12 col-md-12 col-sm-12" key={`property-${i}`}>
 												<EachProperty data={val} />
 											</div>
 										)
@@ -227,7 +223,6 @@ export default function Properties() {
 									<h2 className="text-grey-500 fw-bold">No Result Found {personal_info?.state && `In ${personal_info?.location_keyword?.name}`}</h2>
 								</div>
 							)}
-						</div>
 					</div>
 					<div className="col-xl-5 d-none d-xl-block ps-0 chat-left">
 						{recent_properties?.length > 0 && (

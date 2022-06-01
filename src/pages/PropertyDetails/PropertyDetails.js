@@ -56,20 +56,25 @@ export default function PropertyDetails(props) {
 	} else if (data && pageState !== 'loading') {
 		return (
 			<Layout>
-				<div className="row pb-5" style={{ paddingTop: user ? '0vh' : '10vh' }}>
-					<div className="col-xl-8 col-xxl-9 col-lg-8">
-						<PropertyDetailsLeft data={data} done={e => setData(e)} />
-					</div>
-					<div className="col-xl-4 col-xxl-3 col-lg-4 ps-0">
-						<Sticky
-							stickyStyle={{
-								zIndex: 10,
-								marginTop: Global.isMobile ? '6vh' : '11vh',
-							}}
-						>
-							<PropertyDetailsRight data={data} />
-							<SimilarProperties data={data} />
-						</Sticky>
+				<div className="container">
+					<div
+						className="row pb-5"
+						style={{ paddingTop: user ? '0vh' : '7vh' }}
+					>
+						<div className="col-xl-8 col-xxl-9 col-lg-8">
+							<PropertyDetailsLeft data={data} done={(e) => setData(e)} />
+						</div>
+						<div className="col-xl-4 col-xxl-3 col-lg-4 ps-0">
+							<Sticky
+								stickyStyle={{
+									zIndex: 10,
+									marginTop: Global.isMobile ? '6vh' : '11vh',
+								}}
+							>
+								<PropertyDetailsRight data={data} />
+								<SimilarProperties data={data} />
+							</Sticky>
+						</div>
 					</div>
 				</div>
 			</Layout>
