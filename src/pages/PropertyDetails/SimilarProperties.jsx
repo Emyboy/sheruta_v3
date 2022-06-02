@@ -21,7 +21,79 @@ export default function SimilarProperties({ data }) {
 	useEffect(() => {
 		getSimilarData()
 	}, [getSimilarData])
+return (
+	<div className="widget widget_fido_property">
+		<h3 className="widget-title">Similar Properties</h3>
 
+		<article className="item">
+			<a style={{ zIndex: 0}} href="property-details.html" className="thumb">
+				<span className="fullimage cover bg1" role="img"></span>
+			</a>
+
+			<div className="info">
+				<h4 className="title usmall">
+					<a style={{ zIndex: 0}} href="property-details.html">Modern Apartment With Pool</a>
+				</h4>
+				<span>
+					<i className="bx bx-map"></i> 64 1st Avenue
+				</span>
+				<div className="tag">For Sell</div>
+				<div className="price">$2,500</div>
+			</div>
+		</article>
+
+		<article className="item">
+			<a style={{ zIndex: 0}} href="property-details.html" className="thumb">
+				<span className="fullimage cover bg2" role="img"></span>
+			</a>
+
+			<div className="info">
+				<h4 className="title usmall">
+					<a style={{ zIndex: 0}} href="property-details.html">Luxury Villa in Los Angeles</a>
+				</h4>
+				<span>
+					<i className="bx bx-map"></i> 64 1st Avenue
+				</span>
+				<div className="tag">For Sell</div>
+				<div className="price">$2,500</div>
+			</div>
+		</article>
+
+		<article className="item">
+			<a style={{ zIndex: 0}} href="property-details.html" className="thumb">
+				<span className="fullimage cover bg3" role="img"></span>
+			</a>
+
+			<div className="info">
+				<h4 className="title usmall">
+					<a style={{ zIndex: 0}} href="property-details.html">Blue Reef Properties</a>
+				</h4>
+				<span>
+					<i className="bx bx-map"></i> 64 1st Avenue
+				</span>
+				<div className="tag">For Sell</div>
+				<div className="price">$2,500</div>
+			</div>
+		</article>
+
+		<article className="item">
+			<a style={{ zIndex: 0}} href="property-details.html" className="thumb">
+				<span className="fullimage cover bg4" role="img"></span>
+			</a>
+
+			<div className="info">
+				<h4 className="title usmall">
+					<a style={{ zIndex: 0}} href="property-details.html">Sky Villa Apartment </a>
+				</h4>
+				<span>
+					<i className="bx bx-map"></i> 64 1st Avenue
+				</span>
+				<div className="tag">For Sell</div>
+				<div className="price">$2,500</div>
+			</div>
+		</article>
+	</div>
+)
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 mb-3">
 			<div className="card-body d-flex align-items-center  p-4">
@@ -40,34 +112,22 @@ export default function SimilarProperties({ data }) {
 							state: val,
 						}}
 					>
-						<div className="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
-							<div
-								className=" me-2 p-3 rounded-xxl"
-								style={{
-									backgroundImage: `url(${val?.image_urls[0]})`,
-									backgroundSize: 'cover',
-									backgroundPosition: 'center',
-								}}
-							>
-								<h4 className="fw-700 font-lg ls-3 lh-1 text-white mb-0">
-									<span className="ls-1 d-block font-xsss text-white fw-600">
-										BED
-									</span>
-									{val?.bedroom}
+						<article className="item">
+							<a style={{ zIndex: 0}} href="property-details.html" className="thumb">
+								<span className="fullimage cover bg1" role="img"></span>
+							</a>
+
+							<div className="info">
+								<h4 className="title usmall">
+									<a style={{ zIndex: 0}} href="property-details.html">Modern Apartment With Pool</a>
 								</h4>
+								<span>
+									<i className="bx bx-map"></i> 64 1st Avenue
+								</span>
+								<div className="tag">For Sell</div>
+								<div className="price">$2,500</div>
 							</div>
-							<>
-								<h4 className="fw-700 text-grey-900 font-xssss mt-2">
-									{val?.name}
-									<span className="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500 ">
-										{data?.description?.slice(0, 30)}...
-									</span>{' '}
-									<h4 className='fw-700 text-grey-700 font-xssss mt-2"'>
-										{window.formatedPrice.format(val.price)}
-									</h4>
-								</h4>
-							</>
-						</div>
+						</article>
 					</Link>
 				)
 			})}

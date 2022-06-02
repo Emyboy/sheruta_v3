@@ -13,6 +13,8 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { notification } from 'antd'
 import ImageViewer from 'react-simple-image-viewer'
+import { MdImage, MdOutlineLocationOn } from 'react-icons/md'
+import ReactHtmlParser from 'react-html-parser'
 
 export default function PropertyDetailsLeft({ data, done, standalone }) {
 	const { user } = useSelector((state) => state.auth)
@@ -52,6 +54,263 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 			return Promise.reject(error)
 		}
 	}
+	return (
+		<div className="property-details-desc">
+			<div
+				className="details-content bg-white rounded"
+				style={{
+					backgroundImage: `url(${data?.image_urls[0]})`,
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
+					height: '20rem',
+				}}
+			>
+				{showImages && (
+					<ImageViewer
+						src={data?.image_urls}
+						disableScroll={false}
+						closeOnClickOutside={true}
+						onClose={() => setShowImages(false)}
+						backgroundStyle={{ height: '70vh', marginTop: !Global?.isMobile ? '15vh':'9vh' }}
+					/>
+				)}
+				<div
+					className="rounded d-flex justify-content-center align-items-center"
+					style={{
+						background: '#0606068c',
+						width: '100%',
+						height: '100%',
+						position: 'absolute',
+						top: 0,
+						left: 0,
+					}}
+				>
+					<button className="btn btn-lg bg-white shadow fw-bold" onClick={() => setShowImages(true)}>
+						<MdImage size={30} /> View All Images
+					</button>
+				</div>
+			</div>
+			<div className="details-content bg-white rounded">
+				<ul className="tag-list">
+					{data?.service && <li className="tag">{data?.service?.name}</li>}
+					{data?.categorie && (
+						<li className="tag-2 bg-accent">{data?.categorie?.name}</li>
+					)}
+				</ul>
+
+				{/* <div className="price">$2,500</div> */}
+
+				<div className="content">
+					<span>
+						<MdOutlineLocationOn />
+						{data?.location}
+					</span>
+					<h3>{data?.name}</h3>
+
+					<ul className="list">
+						<li>
+							<i className="bx bx-bed"></i> {data?.bedroom} Bedrooms
+						</li>
+						<li>
+							<i className="bx bxs-bath"></i> {data?.bathroom} Baths
+						</li>
+						<li>
+							<i className="bx bx-bath"></i> {data?.toilet} Toilets
+						</li>
+					</ul>
+
+					<ul className="rating-list">
+						<h3 className="font-grey-300 mb-0">
+							{Global?.currency}
+							{window.formatedPrice.format(data.price)}{' '}
+							<span className="font-xss text-grey-500">
+								/ {data.payment_type && data.payment_type.abbreviation}
+							</span>{' '}
+						</h3>
+					</ul>
+				</div>
+			</div>
+
+			<div className="details-description bg-white rounded">
+				<h3>Description</h3>
+				<div>{ReactHtmlParser(data?.description)}</div>
+			</div>
+			<div className="details-description bg-white rounded widget widget_info">
+				<h3>Agent</h3>
+				<div className="info-box-one d-flex mt-3">
+					<img
+						width={'100'}
+						style={{ borderRadius: '50%' }}
+						src={data?.agent_profile?.avatar_url}
+						alt="image"
+					/>
+					<div className="m-2">
+						<h3 className='text-grey-600'>{data?.agent_profile?.first_name}</h3>
+						<span>
+							<i className="bx bxs-home"></i> <a>{data?.agent?.name}</a>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div className="details-features bg-white rounded">
+				<h3>Features</h3>
+
+				<div className="row justify-content-start">
+					<div className="col-lg-4 col-md-6">
+						<ul className="features-list">
+							{data?.amenities?.map((val, i) => {
+								if (i < 4) {
+									return (
+										<li key={`cat-l-${i}`}>
+											<i className="bx bx-check"></i> {val?.name}
+										</li>
+									)
+								}
+							})}
+						</ul>
+					</div>
+
+					<div className="col-lg-4 col-md-6">
+						<ul className="features-list">
+							{data?.amenities?.map((val, i) => {
+								if (i > 3 && i < 8) {
+									return (
+										<li key={`cat-r-${i}`}>
+											<i className="bx bx-check"></i> {val?.name}
+										</li>
+									)
+								}
+							})}
+						</ul>
+					</div>
+					<div className="col-lg-4 col-md-6">
+						<ul className="features-list">
+							{data?.amenities?.map((val, i) => {
+								if (i > 7 && i < 12) {
+									return (
+										<li key={`cat-r-${i}`}>
+											<i className="bx bx-check"></i> {val?.name}
+										</li>
+									)
+								}
+							})}
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div className="details-overview bg-white rounded">
+				<div className="d-flex justify-content-between mb-2 align-items-center">
+					<h3 className="mb-0">
+						Interested Users ({data?.interested_parties?.length})
+					</h3>
+					<a href="#interest" className="fw-bold text-theme">
+						Join List
+					</a>
+				</div>
+
+				<ul className="overview-listx d-flex" style={{ overflowX: 'scroll' }}>
+					{data?.interested_parties?.map((val, i) => {
+						return <EachUserListCard standalone data={val} key={`user-${i}`} />
+					})}
+				</ul>
+			</div>
+
+			{/* <div className="details-video">
+				<h3>Video</h3>
+
+				<div className="video-image">
+					<img
+						src="assets/images/property-details/property-details-3.jpg"
+						alt="image"
+					/>
+
+					<a
+						href="https://www.youtube.com/watch?v=ODfy2YIKS1M"
+						className="video-btn popup-youtube"
+					>
+						<i className="bx bx-play"></i>
+					</a>
+				</div>
+			</div> */}
+
+			{!standalone && (
+				<>
+					<Alert variant="success" id="interest">
+						<Alert.Heading style={{ fontSize: '30px' }} className="fw-bold">You like this?</Alert.Heading>
+						<p>There are two ways you can take action.</p>
+						<hr />
+						<p className="mb-0">
+							<strong>1.</strong> Click on the <strong>I'm Interested</strong>{' '}
+							button bellow, and we will add you to the list of those who are
+							interested in this flat.
+							<br />
+							<strong>Why?</strong>. Because when someone else shows interest,
+							we'll notify you
+						</p>
+						<p className="mb-0">
+							<strong>2.</strong> Click on the <strong>Book Inspection</strong>{' '}
+							button bellow, add someone from your contact list or from the list
+							of people who are interested in this flat.
+						</p>
+					</Alert>
+				</>
+			)}
+			<div className="details-overview bg-white rounded pt-1 pb-1">
+				{user ? (
+					!standalone && (
+						<div className="row mb-2 mt-3 justify-content-between">
+							<div className="col-md-6 col-sm-12">
+								{data?.interested_parties?.filter(
+									(x) => x?.id === user?.user?.id
+								)?.length === 1 ? (
+									<span className="w-100 alert alert-success border-accent border-4 text-white fw-600 text-uppercase font-xsss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200 text-center">
+										<BsCheckCircleFill size={20} /> Added To List
+									</span>
+								) : (
+									<button
+										onClick={showInterest}
+										disabled={listLoading || !data?.is_available}
+										className="w-100 border-accent border-4 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-1 lh-34 text-accent ls-3 w200"
+									>
+										{listLoading ? (
+											<Dots />
+										) : (
+											<>
+												I'M INTERESTED{' '}
+												<span style={{ fontSize: '20px' }}>✋🏽</span>
+											</>
+										)}
+									</button>
+								)}
+							</div>
+							<Link
+								to={`/inspections/booking/${data?.id}`}
+								className="col-md-6 col-sm-12"
+							>
+								<button
+									disabled={!data?.is_available}
+									className="w-100 bg-accent border-0 text-white fw-600 text-uppercase font-xssss float-left rounded-3 d-inline-block mt-0 p-2 lh-34 text-center ls-3 w200"
+								>
+									{'BOOK INSPECTION'}
+								</button>
+							</Link>
+						</div>
+					)
+				) : (
+					<div className=" justify-content-between">
+						<div className="alert alert-info">
+							<h2 className="text-center fw-700 text-grey-700">
+								Login To Book An Inspection
+							</h2>
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	)
 	return (
 		<div className="card d-block mt-4 border-0 shadow-xss bg-white ">
 			{showImages && (
@@ -144,7 +403,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 										return (
 											<div className="col-md-3 col-5" key={`am-${i}`}>
 												<h5 className="bg-grey badge mt-1 mb-3 d-inline-block font-xsss fw-600 text-grey-600 me-2">
-													{/* <i class="btn-round-sm bg-greylight ti-ruler-pencil text-grey-500 me-1"></i>{' '} */}
+													{/* <i className="btn-round-sm bg-greylight ti-ruler-pencil text-grey-500 me-1"></i>{' '} */}
 													{val?.name}
 												</h5>
 											</div>

@@ -36,7 +36,6 @@ export default function Header({
 
 	if (!user) {
 		return (
-			<Sticky stickyStyle={{ zIndex: 40}} >
 			<nav className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0" style={{ zIndex: 39 }}>
 				<div className="container-fluid">
 					<Link to="/">
@@ -132,7 +131,6 @@ export default function Header({
 					</div>
 				</div>
 			</nav>
-			</Sticky>
 		)
 	} else
 		return (

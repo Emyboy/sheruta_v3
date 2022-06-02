@@ -88,22 +88,26 @@ export default function EachUserListCard({ data }) {
 							{window.formatedPrice.format(data?.budget)}
 						</p>
 					</div>
-					{accepted_suggestions.filter(
-						(x) => x?.users_permissions_user?.id === data?.id
-					).length > 0 ? (
-						<a
-							className="text-center p-2 lh-20 w100 ms-1 ls-3 d-inline-block rounded-xl bg-danger font-xsssss fw-700 ls-lg text-white"
-							onClick={removeContact}
-						>
-							{loading ? 'Loading...' : 'REMOVE'}
-						</a>
-					) : (
-						<a
-							className="text-center p-2 lh-20 w100 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white"
-							onClick={addToContact}
-						>
-							{loading ? 'Loading...' : 'ADD'}
-						</a>
+					{user && (
+						<>
+							{accepted_suggestions.filter(
+								(x) => x?.users_permissions_user?.id === data?.id
+							).length > 0 ? (
+								<a
+									className="text-center p-2 lh-20 w100 ms-1 ls-3 d-inline-block rounded-xl bg-danger font-xsssss fw-700 ls-lg text-white"
+									onClick={removeContact}
+								>
+									{loading ? 'Loading...' : 'REMOVE'}
+								</a>
+							) : (
+								<a
+									className="text-center p-2 lh-20 w100 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white"
+									onClick={addToContact}
+								>
+									{loading ? 'Loading...' : 'ADD'}
+								</a>
+							)}
+						</>
 					)}
 				</div>
 			</div>
