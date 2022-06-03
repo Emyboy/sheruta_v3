@@ -1,5 +1,6 @@
 import React from 'react'
 import Global from '../../../Global'
+import SearchBox from './SearchBox'
 
 export default function HomeHero() {
 	return (
@@ -104,94 +105,7 @@ export default function HomeHero() {
 
 						<div className="tab_content">
 							<div className="tabs_item">
-								<div className="main-slides-search-form">
-									<form className='pb-3'>
-										<div className="row align-items-center">
-											<div className="col-lg-6 col-md-12">
-												<div className="form-group mb-2">
-													<label>
-														<i className="bx bxs-map"></i>
-													</label>
-
-													<div className="select-box">
-														<select className="form-control">
-															<option>Location</option>
-															<option>Switzerland</option>
-															<option>Canada</option>
-															<option>Japan</option>
-															<option>Germany</option>
-															<option>Australia</option>
-															<option>United Kingdom</option>
-															<option>United States</option>
-															<option>Sweden</option>
-															<option>Netherlands</option>
-														</select>
-														{/* <div className="nice-select" tabindex="0">
-															<span className="current">Location</span>
-														</div> */}
-													</div>
-												</div>
-											</div>
-
-											<div className="col-lg-3 col-md-6">
-												<div className="form-group mb-2">
-													<label>
-														<i className="bx bx-home"></i>
-													</label>
-
-													<div className="select-box">
-														<select className="form-control">
-															<option>Property Type</option>
-															<option>Apartment</option>
-															<option>Bar</option>
-															<option>Cafe</option>
-															<option>Farm</option>
-															<option>House</option>
-															<option>Luxury Homes</option>
-															<option>Office</option>
-															<option>Single Family</option>
-															<option>Store</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-6">
-												<div className="form-group mb-2">
-													<label>
-														<i className="bx bx-link"></i>
-													</label>
-
-													<div className="select-box">
-														<select className="form-control">
-															<option>Service Type</option>
-															<option>Apartment</option>
-															<option>Bar</option>
-															<option>Cafe</option>
-															<option>Farm</option>
-															<option>House</option>
-															<option>Luxury Homes</option>
-															<option>Office</option>
-															<option>Single Family</option>
-															<option>Store</option>
-														</select>
-														{/* <div className="nice-select" tabindex="0">
-															<span className="current">Property Type</span>
-														</div> */}
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div className="submit-btn">
-											<button
-												type="submit"
-												className={Global.isMobile ? 'w-100 mt-3' : ''}
-											>
-												<i className="bx bx-search"></i>
-											</button>
-										</div>
-									</form>
-								</div>
+								<SearchBox />
 							</div>
 
 							<div className="tabs_item">

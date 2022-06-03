@@ -42,7 +42,7 @@ const MasterPopup = (props) => {
 	}, [])
 
 	const getForViews = () => {
-		getAllViewOptions()
+		dispatch(getAllViewOptions())
 	}
 
 	const getForRealTime = () => {

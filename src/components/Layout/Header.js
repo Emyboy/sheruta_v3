@@ -64,9 +64,9 @@ export default function Header({
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link to={`/requests`}>
-									<a className="nav-link">Requests</a>
-								</Link>
+								{/* <Link to={`/signup`}>
+									<a className="nav-link">Post Your Property</a>
+								</Link> */}
 							</li>
 							<li className="nav-item dropdown">
 								<a

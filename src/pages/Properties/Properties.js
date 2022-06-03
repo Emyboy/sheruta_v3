@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/Layout/Layout'
 import EachProperty from './EachProperty'
@@ -10,15 +10,19 @@ import Sticky from 'react-sticky-el'
 import Global from '../../Global'
 import store from '../../redux/store/store'
 import SMap from '../../components/SMap/SMap'
+import { Helmet } from 'react-helmet'
 import {
 	getAllRecentProperties,
 	getPropertiesByLocationKeyword,
 } from '../../redux/strapi_actions/properties.action'
 import { BiSearchAlt } from 'react-icons/bi'
+import { useParams } from 'react-router'
+import LocationKeywordService from '../../services/LocationKeywordService'
 
 const { Option } = Select
 
-export default function Properties() {
+export default function Properties(props) {
+	console.log('PROPS --', props);
 	const { recent_properties, properties } = useSelector(
 		(state) => state.properties
 	)
@@ -33,22 +37,64 @@ export default function Properties() {
 		personal_info?.state ? personal_info?.state?.id : 1
 	)
 
+	const [location_keyword, setLocationKeyword] = useState(null)
+
+	const { keyword_slug } = useParams()
+
+	const getLocationKeyword = useCallback(async () => {
+		try {
+			const res = await LocationKeywordService.getLocationKeywordBySlug(
+				keyword_slug
+			)
+			setLocationKeyword(res.data[0])
+		} catch (error) {
+			return Promise.reject(error)
+		}
+	},[]);
+
 	useEffect(() => {
 		dispatch(getLocationKeyWordsByState(filterOption))
 	}, [dispatch, filterOption])
 
 	useEffect(() => {
-		if(personal_info && personal_info?.location_keyword) {
-			dispatch(getPropertiesByLocationKeyword(personal_info?.location_keyword?.id))
+		if (personal_info && personal_info?.location_keyword) {
+			dispatch(
+				getPropertiesByLocationKeyword(personal_info?.location_keyword?.id)
+			)
 			setFilterOptions(personal_info?.state?.id)
 		}
-	},[personal_info?.location_keyword])
+	}, [personal_info?.location_keyword])
+
+	useEffect(() => {
+		if (keyword_slug) {
+			getLocationKeyword()
+		}
+	}, [keyword_slug, getLocationKeyword])
+
+	useEffect(() => {
+		if (location_keyword) {
+			dispatch(getPropertiesByLocationKeyword(location_keyword?.id))
+		}
+	}, [dispatch, location_keyword])
 
 	return (
 		<Layout full_screen>
+			<Helmet>
+				<title>
+					{keyword_slug
+						? `Flats for share in ${keyword_slug?.toUpperCase()} | Sheruta`
+						: `Available flats for share in Lagos, Lekki, Abuja`}
+				</title>
+				<meta
+					name="description"
+					content={`Available flats for share in ${
+						keyword_slug || 'Lagos, Abuja, Lekki, Yaba'
+					}`}
+				/>
+			</Helmet>
 			<div
 				className="container-fluid"
-				style={{ paddingTop: !user ? '15vh' : '0' }}
+				style={{ paddingTop: !user ? '1vh' : '0' }}
 			>
 				<div className="row">
 					<div className="col-xl-7   chat-left scroll-bar">

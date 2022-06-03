@@ -5,7 +5,6 @@ import img from '../../assets/images/featured/featured-large-3.jpg'
 import Global from '../../Global'
 
 export default function EachDemoProperty({ data }) {
-	console.log('DATA --', data)
 	return (
 		<div
 			className="owl-item active mb-4 "

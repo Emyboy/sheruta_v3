@@ -64,7 +64,7 @@ export default function Layout({
 				</div>
 			</div>
 			{user && Global.isMobile && <FooterNav pageName={currentPage} />}
-			{!user && <Footer />}
+			{/* {!user && <Footer />} */}
 		</div>
 	)
 }

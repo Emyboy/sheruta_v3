@@ -2,6 +2,7 @@ import React from 'react'
 import img from '../../../assets/images/neighborhood/neighborhood-small-1.jpg'
 import img2 from '../../../assets/images/neighborhood/map.png'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export default function LocationKeywords() {
 	const { location_keywords } = useSelector((state) => state.view)
@@ -22,7 +23,10 @@ export default function LocationKeywords() {
 						return (
 							<div className="col-lg-4 col-md-6">
 								<div className="single-neighborhood">
-									<a href="property-details.html">
+									<Link
+										to={`/flats/for-share-in/${val?.slug}`}
+										style={{ width: '100%' }}
+									>
 										{/* <img
 											src={
 												val?.background_img || 'https://picsum.photos/400/300'
@@ -37,16 +41,18 @@ export default function LocationKeywords() {
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 												backgroundPosition: 'center',
-												height: '150px',
-												width: '23rem',
+												height: '160px',
+												// width: '23rem',
 											}}
 											className="rounded"
 										/>
-									</a>
+									</Link>
 
 									<div className="content">
 										<h3>
-											<a href="property-details.html">{val?.name}</a>
+											<Link to={`/flats/for-share/${val?.slug}`}>
+												{val?.name}
+											</Link>
 										</h3>
 										<span>12 Properties</span>
 									</div>
