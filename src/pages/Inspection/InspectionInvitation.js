@@ -11,6 +11,7 @@ import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
 
 export default function InspectionInvitation() {
+	localStorage.setItem('after_login', window.location.pathname)
 	const { inspection_id } = useParams()
 	const [pageState, setPageState] = useState('loading')
 	const [data, setData] = useState(null)

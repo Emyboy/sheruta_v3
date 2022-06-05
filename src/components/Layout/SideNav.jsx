@@ -193,7 +193,10 @@ export default function SideNav({ show }) {
 							<li>
 								<a
 									className="nav-content-bttn open-font h-auto pt-2 pb-2"
-									onClick={() => dispatch(logout())}
+									onClick={() => {
+										dispatch(logout());
+										window.location.reload();
+									}}
 								>
 									<i className="font-sm feather-power me-3 text-grey-500"></i>
 									<span>Logout</span>

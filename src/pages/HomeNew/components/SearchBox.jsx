@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router';
-import Global from '../../../Global';
-
+import { useHistory } from 'react-router'
+import Global from '../../../Global'
 
 export default function SearchBox() {
-    const router = useHistory()
+	const router = useHistory()
 	const { location_keywords, services, categories } = useSelector(
 		(state) => state.view
 	)
@@ -15,26 +14,40 @@ export default function SearchBox() {
 	const [service, setService] = useState(null)
 
 	const handleSearch = (e) => {
-        e.preventDefault()
+		e.preventDefault()
 		let data = {
 			keyword_slug: null,
 			property_type: null,
 			service: null,
 		}
-
+		console.log('THE DATA --', services)
 		if (location) {
-			data.keyword_slug =
-				location_keywords?.filter((x) => Number(x?.id) === Number(location))[0]
+			data.keyword_slug = location_keywords?.filter(
+				(x) => Number(x?.id) === Number(location)
+			)[0]
 		}
 		if (category) {
-			data.property_type = categories?.filter((x) => Number(x?.id) === Number(category))[0]
+			data.property_type = categories?.filter(
+				(x) => Number(x?.id) === Number(category)
+			)[0]
 		}
 		if (service) {
-			data.service = services?.filter((x) => Number(x?.id) === Number(category))[0]
+			data.service = services?.filter(
+				(x) => Number(x?.id) === Number(service)
+			)[0]
 		}
 
-        console.log('SEARCH DATA --', data);
-        router.push(`/flats/for-share/${data.keyword_slug ? data.keyword_slug?.slug : "lekki"}`, data)
+		console.log('SEARCH DATA --', data)
+		// TODO - Go to 👉🏽 https://v5.reactrouter.com/web/example/query-parameters
+		// Use router query string 👇🏽
+		router.push(
+			`/flats/for-share${
+				data.keyword_slug ? `/${data.keyword_slug?.slug}` : ''
+			}${data.property_type ? `/${data?.property_type?.slug}` : ''}${
+				data.service ? `/${data.service?.slug}` : ''
+			}`,
+			data
+		)
 	}
 
 	return (
@@ -53,9 +66,12 @@ export default function SearchBox() {
 									onChange={(e) => setLocation(e.target.value)}
 								>
 									<option>Select Location Ex. Lekki, Yaba, Jabi</option>
-									<hr className="text-grey-400 mt-3" />
 									{location_keywords?.map((val, i) => {
-										return <option value={val?.id}>{val?.name}</option>
+										return (
+											<option value={val?.id} key={`option-keyword_${i}`}>
+												{val?.name}
+											</option>
+										)
 									})}
 								</select>
 								{/* <div className="nice-select" tabindex="0">
@@ -78,7 +94,11 @@ export default function SearchBox() {
 								>
 									<option>Property Type</option>
 									{categories?.map((val, i) => {
-										return <option value={val?.id}>{val?.name}</option>
+										return (
+											<option value={val?.id} key={`search-cat-${i}`}>
+												{val?.name}
+											</option>
+										)
 									})}
 								</select>
 							</div>
@@ -97,7 +117,11 @@ export default function SearchBox() {
 								>
 									<option>Service Type</option>
 									{services?.map((val, i) => {
-										return <option value={val?.id}>{val?.name}</option>
+										return (
+											<option value={val?.id} key={`option-service-${i}`}>
+												{val?.name}
+											</option>
+										)
 									})}
 								</select>
 								{/* <div className="nice-select" tabindex="0">

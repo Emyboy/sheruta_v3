@@ -22,11 +22,13 @@ import LocationKeywordService from '../../services/LocationKeywordService'
 const { Option } = Select
 
 export default function Properties(props) {
-	console.log('PROPS --', props);
+	console.log('PROPS --', props)
 	const { recent_properties, properties } = useSelector(
 		(state) => state.properties
 	)
-	const { location_keywords } = useSelector((state) => state.view)
+	const { location_keywords, categories, services } = useSelector(
+		(state) => state.view
+	)
 	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
@@ -36,46 +38,44 @@ export default function Properties(props) {
 	const [filterOption, setFilterOptions] = useState(
 		personal_info?.state ? personal_info?.state?.id : 1
 	)
-
 	const [location_keyword, setLocationKeyword] = useState(null)
 
-	const { keyword_slug } = useParams()
+	const { keyword_slug, category_slug, service_slug } = useParams()
 
-	const getLocationKeyword = useCallback(async () => {
-		try {
-			const res = await LocationKeywordService.getLocationKeywordBySlug(
-				keyword_slug
-			)
-			setLocationKeyword(res.data[0])
-		} catch (error) {
-			return Promise.reject(error)
-		}
-	},[]);
-
-	useEffect(() => {
-		dispatch(getLocationKeyWordsByState(filterOption))
-	}, [dispatch, filterOption])
-
-	useEffect(() => {
-		if (personal_info && personal_info?.location_keyword) {
-			dispatch(
-				getPropertiesByLocationKeyword(personal_info?.location_keyword?.id)
-			)
-			setFilterOptions(personal_info?.state?.id)
-		}
-	}, [personal_info?.location_keyword])
-
-	useEffect(() => {
+	const formatQueryString = () => {
+		let queryString = '/properties/?'
 		if (keyword_slug) {
-			getLocationKeyword()
+			queryString += `location_keyword=${
+				location_keywords?.filter((x) => x?.slug == keyword_slug)[0]?.slug || "lagos"
+			}`
 		}
-	}, [keyword_slug, getLocationKeyword])
+		if (category_slug && keyword_slug) {
+			queryString += `&category=${
+				categories?.filter((x) => x.slug == category_slug)[0]?.slug ||
+				'for-share'
+			}`
+		} else
+			queryString += `categorie=${
+				categories?.filter((x) => x.slug == category_slug)[0]?.slug
+			}`
+
+		if(service_slug && category_slug && keyword_slug){
+			queryString += `service=${
+				services?.filter((x) => x.slug == service_slug)[0]?.slug || 'join-paddy'
+			}`
+		}
+		return queryString
+	}
 
 	useEffect(() => {
-		if (location_keyword) {
-			dispatch(getPropertiesByLocationKeyword(location_keyword?.id))
+		if (
+			location_keywords?.length > 0 &&
+			categories?.length > 0 &&
+			services?.length > 0
+		) {
+			console.log('THE STRING ---', formatQueryString())
 		}
-	}, [dispatch, location_keyword])
+	}, [location_keywords, categories, services])
 
 	return (
 		<Layout full_screen>
@@ -83,7 +83,7 @@ export default function Properties(props) {
 				<title>
 					{keyword_slug
 						? `Flats for share in ${keyword_slug?.toUpperCase()} | Sheruta`
-						: `Available flats for share in Lagos, Lekki, Abuja`}
+						: `Available flats for share in Lagos, Lekki, Yaba, Abuja`}
 				</title>
 				<meta
 					name="description"

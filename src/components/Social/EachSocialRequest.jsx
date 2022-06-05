@@ -52,7 +52,7 @@ function EachRequest({ data }) {
 						<a className="text-dark">
 							{deactivated ? '.... ....' : user?.first_name.split(' ')[0]}{' '}
 						</a>{' '}
-						<VerifiedBadge user={user} className={'ml-2'} size={15} />
+						<VerifiedBadge user={user} className={'ml-2'} size={15} without_text />
 					</Link>
 					<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
 						{/* {moment(data?.created_at).fromNow()} */}

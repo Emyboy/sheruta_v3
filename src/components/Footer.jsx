@@ -142,7 +142,7 @@ export default () => {
 								<form
 									className="newsletter-form"
 									data-bs-toggle="validator"
-									novalidate="true"
+									noValidate
 								>
 									<input
 										type="email"
@@ -150,7 +150,7 @@ export default () => {
 										placeholder="Email Address"
 										name="EMAIL"
 										required=""
-										autocomplete="off"
+										autoComplete="off"
 									/>
 
 									<button

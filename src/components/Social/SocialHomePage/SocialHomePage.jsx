@@ -78,8 +78,8 @@ export default (props) => {
 
 	return (
 		<div className="main-wrapper">
-			<Layout currentPage="feeds" showMessages>
-				<div className="container-fluid">
+			<Layout currentPage="feeds" showMessages={false}>
+				<div className="container">
 					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
 							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">

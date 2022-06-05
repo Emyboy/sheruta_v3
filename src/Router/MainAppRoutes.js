@@ -130,7 +130,10 @@ function App() {
 								component={AgentPending}
 							/>
 							<Route exact path="/flats" component={Properties} />
-							<Route exact path="/flats/for-share/:keyword_slug" component={Properties} />
+							{/* <Route path="/flats/for-share/:keyword_slug/:category_slug/:service_slug" component={Properties} />
+							<Route path="/flats/for-share/:keyword_slug/:category_slug" component={Properties} />
+							<Route path="/flats/for-share/:keyword_slug" component={Properties} /> */}
+							<Route path="/flats/for-share" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
 							<Route exact path="/terms" component={Terms} />

@@ -21,7 +21,7 @@ export default function LocationKeywords() {
 				<div className="row justify-content-center">
 					{location_keywords.map((val, i) => {
 						return (
-							<div className="col-lg-4 col-md-6">
+							<div className="col-lg-4 col-md-6" key={`home-keyword-${i}`}>
 								<div className="single-neighborhood">
 									<Link
 										to={`/flats/for-share-in/${val?.slug}`}
