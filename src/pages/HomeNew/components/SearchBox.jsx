@@ -9,45 +9,35 @@ export default function SearchBox() {
 		(state) => state.view
 	)
 
-	const [location, setLocation] = useState(null)
-	const [category, setCategory] = useState(null)
-	const [service, setService] = useState(null)
+	const [queryData, setQueryData] = useState({
+		location: null,
+		service: null,
+		type: null,
+	})
 
 	const handleSearch = (e) => {
-		e.preventDefault()
-		let data = {
-			keyword_slug: null,
-			property_type: null,
-			service: null,
-		}
-		console.log('THE DATA --', services)
-		if (location) {
-			data.keyword_slug = location_keywords?.filter(
-				(x) => Number(x?.id) === Number(location)
-			)[0]
-		}
-		if (category) {
-			data.property_type = categories?.filter(
-				(x) => Number(x?.id) === Number(category)
-			)[0]
-		}
-		if (service) {
-			data.service = services?.filter(
-				(x) => Number(x?.id) === Number(service)
-			)[0]
-		}
+		e.preventDefault();
 
-		console.log('SEARCH DATA --', data)
-		// TODO - Go to 👉🏽 https://v5.reactrouter.com/web/example/query-parameters
-		// Use router query string 👇🏽
-		router.push(
-			`/flats/for-share${
-				data.keyword_slug ? `/${data.keyword_slug?.slug}` : ''
-			}${data.property_type ? `/${data?.property_type?.slug}` : ''}${
-				data.service ? `/${data.service?.slug}` : ''
-			}`,
-			data
-		)
+		const queryStrings = [];
+
+		Object.keys(queryData).map((key, i) => {
+			const value = Object.values(queryData)[i];
+			if(key == 'location' && value){
+				queryStrings.push(`${key}=${value}`)
+			}
+			if(key == 'service' && value){
+				queryStrings.push(`${key}=${value}`)
+			}
+			if(key == 'type' && value){
+				queryStrings.push(`${key}=${value}`)
+			}
+		
+		});
+		
+		const query = queryStrings.join("&")
+		console.log('QUERY STRING --', query);
+
+		router.push(`/flats/?${query}`)
 	}
 
 	return (
@@ -63,20 +53,22 @@ export default function SearchBox() {
 							<div className="select-box">
 								<select
 									className="form-control"
-									onChange={(e) => setLocation(e.target.value)}
+									onChange={(e) =>
+										setQueryData({ ...queryData, location: e.target.value })
+									}
 								>
 									<option>Select Location Ex. Lekki, Yaba, Jabi</option>
 									{location_keywords?.map((val, i) => {
 										return (
-											<option value={val?.id} key={`option-keyword_${i}`}>
+											<option value={val?.slug} key={`option-keyword_${i}`}>
 												{val?.name}
 											</option>
 										)
 									})}
 								</select>
 								{/* <div className="nice-select" tabindex="0">
-															<span className="current">Location</span>
-														</div> */}
+									<span className="current">Location</span>
+								</div> */}
 							</div>
 						</div>
 					</div>
@@ -90,12 +82,14 @@ export default function SearchBox() {
 							<div className="select-box">
 								<select
 									className="form-control"
-									onChange={(e) => setCategory(e.target.value)}
+									onChange={(e) =>
+										setQueryData({ ...queryData, type: e.target.value })
+									}
 								>
 									<option>Property Type</option>
 									{categories?.map((val, i) => {
 										return (
-											<option value={val?.id} key={`search-cat-${i}`}>
+											<option value={val?.slug} key={`search-cat-${i}`}>
 												{val?.name}
 											</option>
 										)
@@ -113,12 +107,14 @@ export default function SearchBox() {
 							<div className="select-box">
 								<select
 									className="form-control"
-									onChange={(e) => setService(e.target.value)}
+									onChange={(e) =>
+										setQueryData({ ...queryData, service: e.target.value })
+									}
 								>
 									<option>Service Type</option>
 									{services?.map((val, i) => {
 										return (
-											<option value={val?.id} key={`option-service-${i}`}>
+											<option value={val?.slug} key={`option-service-${i}`}>
 												{val?.name}
 											</option>
 										)

@@ -16,16 +16,24 @@ import {
 	getPropertiesByLocationKeyword,
 } from '../../redux/strapi_actions/properties.action'
 import { BiSearchAlt } from 'react-icons/bi'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import LocationKeywordService from '../../services/LocationKeywordService'
+import PropertiesService from '../../services/PropertiesServices'
 
 const { Option } = Select
+
+export function useURLQuery() {
+	const { search } = useLocation()
+
+	return React.useMemo(() => new URLSearchParams(search), [search])
+}
 
 export default function Properties(props) {
 	console.log('PROPS --', props)
 	const { recent_properties, properties } = useSelector(
 		(state) => state.properties
 	)
+	const [list, setList] = useState([])
 	const { location_keywords, categories, services } = useSelector(
 		(state) => state.view
 	)
@@ -35,60 +43,42 @@ export default function Properties(props) {
 	const defaultTabs = ['Grid View', 'Map View', 'User View']
 	const [tabs] = useState(defaultTabs)
 	const [tab, setTab] = useState(defaultTabs[0])
-	const [filterOption, setFilterOptions] = useState(
-		personal_info?.state ? personal_info?.state?.id : 1
-	)
+
 	const [location_keyword, setLocationKeyword] = useState(null)
 
-	const { keyword_slug, category_slug, service_slug } = useParams()
-
-	const formatQueryString = () => {
-		let queryString = '/properties/?'
-		if (keyword_slug) {
-			queryString += `location_keyword=${
-				location_keywords?.filter((x) => x?.slug == keyword_slug)[0]?.slug || "lagos"
-			}`
+	const getPropertiesViaULR = useCallback(async () => {
+		try {
+			const res = await PropertiesService.getPropertyViaQuery(
+				String(props?.location?.search).replace('location', 'location_keyword.slug').replace('type', 'categorie.slug').replace('service', 'service.slug')
+			)
+			console.log(res.data)
+			setList(res.data)
+		} catch (error) {
+			console.log('SEARCH ERROR ---', error)
+			return Promise.reject(error)
 		}
-		if (category_slug && keyword_slug) {
-			queryString += `&category=${
-				categories?.filter((x) => x.slug == category_slug)[0]?.slug ||
-				'for-share'
-			}`
-		} else
-			queryString += `categorie=${
-				categories?.filter((x) => x.slug == category_slug)[0]?.slug
-			}`
-
-		if(service_slug && category_slug && keyword_slug){
-			queryString += `service=${
-				services?.filter((x) => x.slug == service_slug)[0]?.slug || 'join-paddy'
-			}`
-		}
-		return queryString
-	}
+	}, [])
 
 	useEffect(() => {
-		if (
-			location_keywords?.length > 0 &&
-			categories?.length > 0 &&
-			services?.length > 0
-		) {
-			console.log('THE STRING ---', formatQueryString())
-		}
-	}, [location_keywords, categories, services])
+		getPropertiesViaULR()
+	}, [getPropertiesViaULR])
+
+	let query = useURLQuery()
 
 	return (
 		<Layout full_screen>
 			<Helmet>
 				<title>
-					{keyword_slug
-						? `Flats for share in ${keyword_slug?.toUpperCase()} | Sheruta`
+					{query.get('location')
+						? `Flats for share in ${query
+								.get('location')
+								?.toUpperCase()} | Sheruta`
 						: `Available flats for share in Lagos, Lekki, Yaba, Abuja`}
 				</title>
 				<meta
 					name="description"
 					content={`Available flats for share in ${
-						keyword_slug || 'Lagos, Abuja, Lekki, Yaba'
+						query.get('location') || 'Lagos, Abuja, Lekki, Yaba'
 					}`}
 				/>
 			</Helmet>
@@ -109,8 +99,11 @@ export default function Properties(props) {
 							<div className="card shadow-xss w-100 d-block d-flex p-4 mb-3 pb-2 rounded-xxl">
 								<div className="card-body d-flex align-items-center p-0 justify-content-between pb-3">
 									<div>
-										<h2 className="fw-700 mb-0 mt-0 font-md text-grey-700">
-											Flats
+										<h2
+											className="fw-700 mb-0 mt-0 font-md text-grey-700"
+											style={{ textTransform: 'capitalize' }}
+										>
+											Flats {'in ' + query.get('location')}
 										</h2>
 										{personal_info?.location_keyword && (
 											<div className="d-flex">
@@ -246,11 +239,7 @@ export default function Properties(props) {
 						)}
 						{tab === defaultTabs[0] && (
 							<div className="row ps-2 pe-2">
-								{[
-									properties?.length > 0
-										? [...properties]
-										: [...recent_properties],
-								][0].map((val, i) => {
+								{list.map((val, i) => {
 									return (
 										<div
 											className="col-lg-12 col-md-12 col-sm-12"
@@ -262,12 +251,12 @@ export default function Properties(props) {
 								})}
 							</div>
 						)}
-						{recent_properties?.length === 0 && (
+						{list?.length === 0 && (
 							<div className="text-center mt-5">
 								<BiSearchAlt className="text-grey-500" size={60} />
 								<h2 className="text-grey-500 fw-bold">
 									No Result Found{' '}
-									{personal_info?.state &&
+									{list?.state &&
 										`In ${personal_info?.location_keyword?.name}`}
 								</h2>
 							</div>
@@ -275,9 +264,9 @@ export default function Properties(props) {
 					</div>
 					{!Global.isMobile && (
 						<div className="col-xl-5 col-md-12 d-none d-xl-block ps-0 chat-left">
-							{recent_properties?.length > 0 && (
+							{list?.length > 0 && (
 								<div className="card p-2 mb-4" style={{ height: '800px' }}>
-									<SMap properties={recent_properties} />
+									<SMap properties={list} />
 								</div>
 							)}
 						</div>

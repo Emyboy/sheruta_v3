@@ -26,4 +26,10 @@ export default class PropertiesService {
 		const data = await axios(API_URL + `/properties/?id=${property_id}`)
 		return data
 	}
+
+	static async getPropertyViaQuery(query){
+		console.log('SEARCHING ---', query);
+		const data = await axios(API_URL + `/properties/${query}`)
+		return data
+	}
 }
