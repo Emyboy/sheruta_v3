@@ -19,6 +19,7 @@ import { BiSearchAlt } from 'react-icons/bi'
 import { useLocation, useParams } from 'react-router'
 import LocationKeywordService from '../../services/LocationKeywordService'
 import PropertiesService from '../../services/PropertiesServices'
+import loadingGIF from '../../assets/img/loading.gif'
 
 const { Option } = Select
 
@@ -43,6 +44,7 @@ export default function Properties(props) {
 	const defaultTabs = ['Grid View', 'Map View', 'User View']
 	const [tabs] = useState(defaultTabs)
 	const [tab, setTab] = useState(defaultTabs[0])
+	const [pageState, setPageState] = useState('loading')
 
 	const [location_keyword, setLocationKeyword] = useState(null)
 
@@ -56,8 +58,14 @@ export default function Properties(props) {
 			)
 			console.log(res.data)
 			setList(res.data)
+			if(res.data.length === 0){
+				setPageState('404')
+			}else {
+				setPageState('loaded')
+			}
 		} catch (error) {
 			console.log('SEARCH ERROR ---', error)
+			setPageState('404')
 			return Promise.reject(error)
 		}
 	}, [])
@@ -88,13 +96,14 @@ export default function Properties(props) {
 				style={{ paddingTop: !user ? '1vh' : '0' }}
 			>
 				<div className="row">
-					<div className="col-xl-7   chat-left scroll-bar">
+					<div className="col-xl-7   chat-left scroll-bar scrollarea">
 						<Sticky
 							className="shadow-xxl w-100"
-							// stickyClassName="animate__animated animate__fadeInDown"
+							scrollElement=".scrollarea"
+							stickyClassName="animate__animated animate__fadeInDown"
 							stickyStyle={{
 								zIndex: 10,
-								marginTop: Global.isMobile ? '6vh' : '11vh',
+								// marginTop: Global.isMobile ? '6vh' : '11vh',
 							}}
 						>
 							<h2
@@ -104,8 +113,8 @@ export default function Properties(props) {
 								Flats{' '}
 								{query.get('location') ? 'in ' + query.get('location') : ''}
 							</h2>
-							<div className="card shadow-xss w-100 d-block d-flex pt-3 mb-3 pb-2 pl-0 pr-0 rounded-xxl">
-								<div className="d-flex align-items-center  justify-content-between pb-3">
+							<div className="card shadow-md w-100 d-block d-flex pt-3 mb-3 pb-3 pl-0 pr-0 rounded-xxl">
+								<div className="d-flex align-items-center  justify-content-between">
 									<div className="row m-0 justify-content-between w-100">
 										<div className="col-md-4 col-sm-12">
 											<Select
@@ -125,7 +134,7 @@ export default function Properties(props) {
 											</Select>
 										</div>
 
-										<div className="col-md-4 col-sm-12">
+										<div className="col-md-4 col-sm-12 text-end">
 											<Select
 												placeholder="Filter By Type"
 												className={Global.isMobile ? 'w-100' : ''}
@@ -271,13 +280,18 @@ export default function Properties(props) {
 								</div>
 							</>
 						)}
-						{list?.length === 0 && (
-							<div className="text-center mt-5">
+						{pageState === '404' && (
+							<div className="text-center " style={{ marginTop: '10vh' }}>
 								<BiSearchAlt className="text-grey-500" size={60} />
 								<h2 className="text-grey-500 fw-bold">
 									No Result Found{' '}
 									{list?.state && `In ${personal_info?.location_keyword?.name}`}
 								</h2>
+							</div>
+						)}
+						{pageState === 'loading' && (
+							<div className="text-center ">
+								<img src={loadingGIF} width="400" />
 							</div>
 						)}
 					</div>
