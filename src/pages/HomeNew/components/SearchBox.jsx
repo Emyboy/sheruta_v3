@@ -128,8 +128,11 @@ export default function SearchBox() {
 					</div>
 				</div>
 
-				<div className="submit-btn">
-					<button type="submit" className={Global.isMobile ? 'w-100 mt-3' : ''}>
+				<div className="submit-btn" style={{ minWidth: '90px' }}>
+					<button
+						type="submit"
+						className={Global.isMobile ? 'w-100 mt-3' : 'mt-0'}
+					>
 						<i className="bx bx-search"></i>
 					</button>
 				</div>

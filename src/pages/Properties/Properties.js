@@ -49,7 +49,10 @@ export default function Properties(props) {
 	const getPropertiesViaULR = useCallback(async () => {
 		try {
 			const res = await PropertiesService.getPropertyViaQuery(
-				String(props?.location?.search).replace('location', 'location_keyword.slug').replace('type', 'categorie.slug').replace('service', 'service.slug')
+				String(props?.location?.search)
+					.replace('location', 'location_keyword.slug')
+					.replace('type', 'categorie.slug')
+					.replace('service', 'service.slug')
 			)
 			console.log(res.data)
 			setList(res.data)
@@ -65,23 +68,21 @@ export default function Properties(props) {
 
 	let query = useURLQuery()
 
+	const seo_heading = `Available ${
+		query.get('type') ? query.get('type').replace('-', ' ') : 'Flats'
+	} for
+				share in ${query.get('location') ? query.get('location') : 'Lagos'}`
+
 	return (
 		<Layout full_screen>
 			<Helmet>
-				<title>
-					{query.get('location')
-						? `Flats for share in ${query
-								.get('location')
-								?.toUpperCase()} | Sheruta`
-						: `Available flats for share in Lagos, Lekki, Yaba, Abuja`}
-				</title>
+				<title>{seo_heading + ' | Sheruta'}</title>
 				<meta
 					name="description"
-					content={`Available flats for share in ${
-						query.get('location') || 'Lagos, Abuja, Lekki, Yaba'
-					}`}
+					content={`List of ${seo_heading}, also for rent.`}
 				/>
 			</Helmet>
+
 			<div
 				className="container-fluid"
 				style={{ paddingTop: !user ? '1vh' : '0' }}
@@ -96,43 +97,54 @@ export default function Properties(props) {
 								marginTop: Global.isMobile ? '6vh' : '11vh',
 							}}
 						>
-							<div className="card shadow-xss w-100 d-block d-flex p-4 mb-3 pb-2 rounded-xxl">
-								<div className="card-body d-flex align-items-center p-0 justify-content-between pb-3">
-									<div>
-										<h2
-											className="fw-700 mb-0 mt-0 font-md text-grey-700"
-											style={{ textTransform: 'capitalize' }}
-										>
-											Flats {'in ' + query.get('location')}
-										</h2>
-										{personal_info?.location_keyword && (
-											<div className="d-flex">
-												<div className="badge badge-info">
-													{personal_info?.location_keyword?.name}
-												</div>
-												{/* <div className="ml-2 badge badge-info">
-														{personal_info?.state?.name}
-													</div> */}
-											</div>
-										)}
-									</div>
+							<h2
+								className="m-0 p-0"
+								style={{ size: '0px', visibility: 'hidden' }}
+							>
+								Flats{' '}
+								{query.get('location') ? 'in ' + query.get('location') : ''}
+							</h2>
+							<div className="card shadow-xss w-100 d-block d-flex pt-3 mb-3 pb-2 pl-0 pr-0 rounded-xxl">
+								<div className="d-flex align-items-center  justify-content-between pb-3">
+									<div className="row m-0 justify-content-between w-100">
+										<div className="col-md-4 col-sm-12">
+											<Select
+												placeholder="Filter By Location"
+												className={Global.isMobile ? 'w-100 mb-3' : ''}
+												allowClear
+												style={{ width: '200px' }}
+												onChange={(e) => dispatch(getAllRecentProperties(e))}
+											>
+												{location_keywords?.map((val, i) => {
+													return (
+														<Option value={val?.id} key={`option-${i}`}>
+															{val?.name}
+														</Option>
+													)
+												})}
+											</Select>
+										</div>
 
-									<Select
-										placeholder="Search Location"
-										allowClear
-										style={{ width: '200px' }}
-										onChange={(e) => dispatch(getAllRecentProperties(e))}
-									>
-										{location_keywords?.map((val, i) => {
-											return (
-												<Option value={val?.id} key={`option-${i}`}>
-													{val?.name}
-												</Option>
-											)
-										})}
-									</Select>
+										<div className="col-md-4 col-sm-12">
+											<Select
+												placeholder="Filter By Type"
+												className={Global.isMobile ? 'w-100' : ''}
+												allowClear
+												style={{ width: '200px' }}
+												onChange={(e) => dispatch(getAllRecentProperties(e))}
+											>
+												{categories?.map((val, i) => {
+													return (
+														<Option value={val?.id} key={`option-${i}`}>
+															{val?.name}
+														</Option>
+													)
+												})}
+											</Select>
+										</div>
+									</div>
 								</div>
-								<div className="d-block w-100 shadow-none mb-0 p-0 border-top-xs">
+								{/* <div className="d-block w-100 shadow-none mb-0 p-0 border-top-xs">
 									<ul
 										className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ml-0"
 										id="pills-tab"
@@ -160,7 +172,7 @@ export default function Properties(props) {
 											)
 										})}
 									</ul>
-								</div>
+								</div> */}
 							</div>
 						</Sticky>
 						{personal_info?.state && personal_info?.location_keyword && (
@@ -238,37 +250,45 @@ export default function Properties(props) {
 							</>
 						)}
 						{tab === defaultTabs[0] && (
-							<div className="row ps-2 pe-2">
-								{list.map((val, i) => {
-									return (
-										<div
-											className="col-lg-12 col-md-12 col-sm-12"
-											key={`property-${i}`}
-										>
-											<EachProperty data={val} />
-										</div>
-									)
-								})}
-							</div>
+							<>
+								<h1
+									className="mb-3 mt-5 ml-3"
+									style={{ textTransform: 'capitalize' }}
+								>
+									{seo_heading}
+								</h1>
+								<div className="row ps-2 pe-2">
+									{list.map((val, i) => {
+										return (
+											<div
+												className="col-lg-12 col-md-12 col-sm-12"
+												key={`property-${i}`}
+											>
+												<EachProperty data={val} />
+											</div>
+										)
+									})}
+								</div>
+							</>
 						)}
 						{list?.length === 0 && (
 							<div className="text-center mt-5">
 								<BiSearchAlt className="text-grey-500" size={60} />
 								<h2 className="text-grey-500 fw-bold">
 									No Result Found{' '}
-									{list?.state &&
-										`In ${personal_info?.location_keyword?.name}`}
+									{list?.state && `In ${personal_info?.location_keyword?.name}`}
 								</h2>
 							</div>
 						)}
 					</div>
 					{!Global.isMobile && (
 						<div className="col-xl-5 col-md-12 d-none d-xl-block ps-0 chat-left">
-							{list?.length > 0 && (
-								<div className="card p-2 mb-4" style={{ height: '800px' }}>
-									<SMap properties={list} />
-								</div>
-							)}
+							<div
+								className="card p-2 mb-4 rounded-xxl"
+								style={{ height: '800px' }}
+							>
+								<SMap properties={list} />
+							</div>
 						</div>
 					)}
 				</div>

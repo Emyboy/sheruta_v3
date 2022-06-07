@@ -117,10 +117,10 @@ export default function SMap({ properties }) {
 		<GoogleMapReact
 			bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_PLACES_API_KEY }}
 			defaultCenter={{
-				lat: properties[0]?.google_location?.geometry?.location?.lat,
-				lng: properties[0]?.google_location?.geometry?.location?.lng,
+				lat: properties[0]?.google_location?.geometry?.location?.lat || 8.6753,
+				lng: properties[0]?.google_location?.geometry?.location?.lng || 9.082,
 			}}
-			defaultZoom={defaultProps.zoom}
+			defaultZoom={properties?.length == 0 ? 6 : defaultProps.zoom}
 		>
 			{properties?.map((val, i) => {
 				return (

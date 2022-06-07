@@ -23,7 +23,7 @@ export default function HomeNew() {
 		<Layout>
 			<Helmet>
 				<title>
-					Home | Sheruta
+					Flats for share in Lagos | Sheruta
 				</title>
 			</Helmet>
 			<HomeHero />

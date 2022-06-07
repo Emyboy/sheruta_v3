@@ -32,7 +32,7 @@ export default function EachProperty({ data }) {
 									state: data,
 								}}
 							>
-								RENT
+								{data?.categorie?.name}
 							</Link>
 						</div>
 						<div className="price">

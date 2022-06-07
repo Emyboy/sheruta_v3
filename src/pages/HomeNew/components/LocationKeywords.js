@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function LocationKeywords() {
 	const { location_keywords } = useSelector((state) => state.view)
+
 	return (
 		<div className="neighborhood-area ptb-100">
 			<div className="container">
@@ -24,7 +25,7 @@ export default function LocationKeywords() {
 							<div className="col-lg-4 col-md-6" key={`home-keyword-${i}`}>
 								<div className="single-neighborhood">
 									<Link
-										to={`/flats/for-share-in/${val?.slug}`}
+										to={`/flats/?location=${val?.slug}`}
 										style={{ width: '100%' }}
 									>
 										{/* <img
@@ -50,7 +51,7 @@ export default function LocationKeywords() {
 
 									<div className="content">
 										<h3>
-											<Link to={`/flats/for-share/${val?.slug}`}>
+											<Link to={`/flats/?location=${val?.slug}`}>
 												{val?.name}
 											</Link>
 										</h3>

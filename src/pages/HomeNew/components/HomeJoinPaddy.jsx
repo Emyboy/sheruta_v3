@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import img from '../../../assets/images/solution-2.png'
+import img from '../img/girls2.png';
 
 export default function HomeJoinPaddy() {
 	return (

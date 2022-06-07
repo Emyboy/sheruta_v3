@@ -12,7 +12,6 @@ export default function SimilarProperties({ data }) {
 				process.env.REACT_APP_API_URL +
 					`/properties/?location_keyword=${data?.location_keyword?.id}&_limit=5`
 			)
-			console.log('DATA -', res.data)
 			setSimilarList(res.data)
 		} catch (error) {
 			return Promise.reject(error)
@@ -27,7 +26,6 @@ export default function SimilarProperties({ data }) {
 			<h3 className="widget-title">Similar Properties</h3>
 
 			{similar_list?.map((val, i) => {
-				console.log(val)
 				return (
 					<article className="item" key={`similar-${i}`}>
 						<Link
