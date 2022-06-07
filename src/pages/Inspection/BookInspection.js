@@ -124,7 +124,7 @@ export default function BookInspection({ match }) {
 						<h3 className="fw-700 text-grey-700">Add Users</h3>
 						<Alert variant="success">
 							<Alert.Heading>
-								Once your done inviting user, close the popup and create your
+								Once your done inviting users, close the popup and create your
 								inspection.
 							</Alert.Heading>
 						</Alert>

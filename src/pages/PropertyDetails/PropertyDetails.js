@@ -32,7 +32,7 @@ export default function PropertyDetails(props) {
 			return setPageState('done')
 		}
 		try {
-			const res = await PropertiesService.getPropertyByUidAndID(property_id)
+			const res = await PropertiesService.getPropertyByUidAndID(property_id, 3)
 			if (res.data.length === 0) {
 				setPageState('not found')
 			} else {
@@ -53,7 +53,7 @@ export default function PropertyDetails(props) {
 		return (
 			<Layout full_screen>
 				<div className="property-details-area ptb-100">
-					<div className={Global.isMobile ? "" :"container"}>
+					<div className={Global.isMobile ? '' : 'container'}>
 						<div
 							className="row pb-5"
 							style={{ paddingTop: user ? '0vh' : '0' }}
@@ -61,19 +61,21 @@ export default function PropertyDetails(props) {
 							<div className="col-sm-12 col-md-12 col-lg-8">
 								<PropertyDetailsLeft data={data} done={(e) => setData(e)} />
 							</div>
-							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-0">
-								<div className="widget-area">
-									{/* <Sticky
-								stickyStyle={{
-									zIndex: 10,
-									marginTop: Global.isMobile ? '6vh' : '11vh',
-								}}
-							> */}
-									{/* <PropertyDetailsRight data={data} /> */}
-									<SimilarProperties data={data} />
-									{/* </Sticky> */}
+							{!Global.isMobile && (
+								<div className="col-xl-4 col-xxl-3 col-lg-4 ps-0">
+									<div className="widget-area">
+										<Sticky
+											stickyStyle={{
+												zIndex: 10,
+												marginTop: user ? '12vh': '1vh',
+											}}
+										>
+											{/* <PropertyDetailsRight data={data} /> */}
+											<SimilarProperties data={data} />
+										</Sticky>
+									</div>
 								</div>
-							</div>
+							)}
 						</div>
 					</div>
 				</div>

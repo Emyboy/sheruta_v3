@@ -10,7 +10,7 @@ export default function SimilarProperties({ data }) {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
-					`/properties/?location_keyword=${data?.location_keyword?.id}&_limit=5`
+					`/properties/?location_keyword=${data?.location_keyword?.id}&_limit=4`
 			)
 			setSimilarList(res.data)
 		} catch (error) {
@@ -27,7 +27,11 @@ export default function SimilarProperties({ data }) {
 
 			{similar_list?.map((val, i) => {
 				return (
-					<article className="item" key={`similar-${i}`}>
+					<article
+						className="item"
+						key={`similar-${i}`}
+						onClick={() => window.scrollTo(0, 0)}
+					>
 						<Link
 							style={{ zIndex: 0 }}
 							to={{

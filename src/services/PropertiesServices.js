@@ -22,7 +22,7 @@ export default class PropertiesService {
 		return data
 	}
 
-	static async getPropertyByUidAndID(property_id) {
+	static async getPropertyByUidAndID(property_id, limit) {
 		const data = await axios(API_URL + `/properties/?id=${property_id}`)
 		return data
 	}

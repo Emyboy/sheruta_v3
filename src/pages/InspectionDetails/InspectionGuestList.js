@@ -4,11 +4,14 @@ import axios from 'axios'
 import { useParams } from 'react-router'
 import Cookies from 'js-cookie'
 import { notification, Spin } from 'antd'
+import { useSelector } from 'react-redux'
 
-const EachGuest = ({ val, pending }) => {
+const EachGuest = ({ val, pending, group }) => {
+	console.log('GROUP ---', group)
 	const [loading, setLoading] = useState(false)
 	const { inspection_id } = useParams()
 	const [deleted, setDeleted] = useState(false)
+	const { user } = useSelector(state => state.auth);
 
 	const removeGuest = async () => {
 		setLoading(true)
@@ -56,7 +59,7 @@ const EachGuest = ({ val, pending }) => {
 								val?.online ? 'success' : 'danger'
 							} me-2`}
 						></span>
-						<h6 className="text-grey-600">@{val?.username}</h6>
+						<h6 className="text-grey-600 fw-400">@{val?.username}</h6>
 					</h6>
 				</div>
 				<div className="d-flex align-items-center">
@@ -64,17 +67,31 @@ const EachGuest = ({ val, pending }) => {
 						<span className="mr-2 btn-round-sm bg-current text-white feather-phone font-xss ms-auto mt-2"></span>
 					)}
 					<span className="mr-2 btn-round-sm bg-current text-white feather-mail font-xss ms-auto mt-2"></span>
-					{!pending && (
-						<span
-							className="btn-round-sm bg-danger text-white font-xss ms-auto mt-2"
+					{!pending && user?.user?.id == val?.id && (
+						<button
+							className="btn btn-sm bg-danger text-white font-xss ms-auto mt-2"
 							onClick={removeGuest}
 						>
 							{loading ? (
 								<Spin className="text-white" />
 							) : (
 								<i className="feather-trash"></i>
-							)}
-						</span>
+							)}{' '}
+							Leave
+						</button>
+					)}
+					{!pending && user?.user?.id == group?.owner?.id && (
+						<button
+							className="btn btn-sm bg-danger text-white font-xss ms-auto mt-2"
+							onClick={removeGuest}
+						>
+							{loading ? (
+								<Spin className="text-white" />
+							) : (
+								<i className="feather-trash"></i>
+							)}{' '}
+							Remove
+						</button>
 					)}
 				</div>
 			</div>
@@ -90,7 +107,7 @@ export default function InspectionGuestList({ data }) {
 					<h2 className="fw-bold text-grey-600 mb-3 mt-3">Pending Guests</h2>
 					<ul className="email-message">
 						{data?.pending_guests?.map((val, i) => {
-							return <EachGuest key={`guest-${i}`} val={val} pending />
+							return <EachGuest key={`guest-${i}`} val={val} pending group={data} />
 						})}
 					</ul>
 				</>
@@ -98,7 +115,7 @@ export default function InspectionGuestList({ data }) {
 			<h2 className="fw-bold text-grey-600 mb-3 mt-3">Guests</h2>
 			<ul className="email-message">
 				{data?.guests?.map((val, i) => {
-					return <EachGuest key={`guest-${i}`} val={val} />
+					return <EachGuest key={`guest-${i}`} val={val} group={data} />
 				})}
 			</ul>
 		</div>

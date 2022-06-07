@@ -104,7 +104,7 @@ export default function InspectionInvitation() {
 													{data?.owner?.first_name}
 												</h5>
 												<div className="container">
-													<h3 className="mt-5 text-grey-600">
+													<h3 className="mt-5 text-grey-600 fw-400">
 														<strong>
 															{data?.owner?.first_name}
 														</strong>{' '}

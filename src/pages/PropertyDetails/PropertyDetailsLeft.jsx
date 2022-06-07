@@ -16,6 +16,7 @@ import ImageViewer from 'react-simple-image-viewer'
 import { MdImage, MdOutlineLocationOn } from 'react-icons/md'
 import ReactHtmlParser from 'react-html-parser'
 import PropertyAmenities from './PropertyAmenities'
+import ErrorBoundary from '../../components/ErrorBoundary'
 
 export default function PropertyDetailsLeft({ data, done, standalone }) {
 	const { user } = useSelector((state) => state.auth)
@@ -64,18 +65,18 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					</Alert.Heading>
 				</Alert>
 			)}
-			<div
-				className="details-content bg-white rounded"
-				style={{
-					backgroundImage: `url(${data?.image_urls[0]})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
-					height: '20rem',
-				}}
-			>
-				{showImages &&
-					data?.is_available(
+			<ErrorBoundary>
+				<div
+					className="details-content bg-white rounded"
+					style={{
+						backgroundImage: `url(${data?.image_urls[0]})`,
+						backgroundRepeat: 'no-repeat',
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
+						height: '20rem',
+					}}
+				>
+					{showImages && (
 						<ImageViewer
 							src={data?.image_urls}
 							disableScroll={false}
@@ -87,25 +88,29 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 							}}
 						/>
 					)}
-				<div
-					className="rounded d-flex justify-content-center align-items-center"
-					style={{
-						background: '#0606068c',
-						width: '100%',
-						height: '100%',
-						position: 'absolute',
-						top: 0,
-						left: 0,
-					}}
-				>
-					{data?.is_available && <button
-						className="btn btn-lg bg-white shadow fw-bold"
-						onClick={() => setShowImages(true)}
+					<div
+						className="rounded d-flex justify-content-center align-items-center"
+						style={{
+							background: '#0606068c',
+							width: '100%',
+							height: '100%',
+							position: 'absolute',
+							top: 0,
+							left: 0,
+						}}
 					>
-						<MdImage size={30} /> View All Images
-					</button>}
+						{data?.is_available && (
+							<button
+								className="btn btn-lg bg-white shadow fw-bold"
+								onClick={() => setShowImages(true)}
+							>
+								<MdImage size={30} /> View All Images
+							</button>
+						)}
+					</div>
 				</div>
-			</div>
+			</ErrorBoundary>
+
 			<div className="details-content bg-white rounded">
 				<ul className="tag-list">
 					{data?.service && <li className="tag">{data?.service?.name}</li>}
@@ -277,7 +282,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					)
 				) : (
 					<div className=" justify-content-between">
-						<div className="alert alert-info">
+						<div className="alert alert-info mb-1">
 							<h2 className="text-center fw-700 text-grey-700">
 								Login To Book An Inspection
 							</h2>
@@ -287,5 +292,4 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 			</div>
 		</div>
 	)
-	
 }

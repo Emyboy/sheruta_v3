@@ -112,7 +112,7 @@ export default function InspectionDetails({ match }) {
 												<h3 className="fw-bold text-grey-700">
 													You haven't booked an inspection yet.
 												</h3>
-												<h4 className="text-grey-600">
+												<h4 className="text-grey-600 fw-500">
 													Once you book an inspection we'll assign an gent to
 													you.
 												</h4>
