@@ -41,12 +41,11 @@ export default function InspectionDetails({ match }) {
 		getInspection()
 	}, [getInspection])
 
-	if (!data) {
-		return null
-	}
 
 	return (
 		<Layout>
+			{
+				data &&
 			<div>
 				<div className="row justify-content-center">
 					<div className="col-xl-9">
@@ -128,6 +127,7 @@ export default function InspectionDetails({ match }) {
 					</div>
 				</div>
 			</div>
+			}
 		</Layout>
 	)
 }

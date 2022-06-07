@@ -58,7 +58,8 @@ export default function InspectionInvitation() {
 				return router.push('/feeds');
 			} else {
 				notification.success({ message: `Welcome ${user?.user?.first_name?.split(' ')[0]}` })
-				return router.push(`/inspection/${inspection_id}`)
+				router.push(`/inspection/${inspection_id}`)
+				return window.location.reload()
 			}
 		} catch (error) {
 			console.log('error --', error)
