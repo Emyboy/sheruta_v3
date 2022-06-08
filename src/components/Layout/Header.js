@@ -280,9 +280,6 @@ export default function Header({
 					style={{ right: '9vw', width: '350px' }}
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
-					{!payment_plan ? (
-						<PaymentAlert />
-					) : (
 						<>
 							{notifications.map((val, i) => {
 								if (i > 6) {
@@ -308,7 +305,7 @@ export default function Header({
 												</span>
 											</h5>
 										</Link>
-										<h6 className="text-grey-500 fw-500 font-xssss lh-4">
+										<h6 className="text-grey-500 fw-400 font-xssss lh-4">
 											{val?.title}
 										</h6>
 									</div>
@@ -318,7 +315,6 @@ export default function Header({
 								<Link to="/notifications">View All</Link>
 							</div>
 						</>
-					)}
 				</div>
 
 				<a

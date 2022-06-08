@@ -62,7 +62,7 @@ export default function MatchList() {
 						<h2>
 							<b>Profile Not Yet Verified</b>
 						</h2>
-						<h4>Verify your profile and view suggested flat mates</h4>
+						<h4 className="fw-400">Verify your profile and view suggested flat mates</h4>
 						<br />
 						<Link to="/start">
 							<Btn
