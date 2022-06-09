@@ -117,6 +117,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					{data?.categorie && (
 						<li className="tag-2 bg-accent">{data?.categorie?.name}</li>
 					)}
+					{process.env.NODE_ENV !== 'production' && <span className='ml-4 h1'>#{data?.id}</span>}
 				</ul>
 
 				{/* <div className="price">$2,500</div> */}

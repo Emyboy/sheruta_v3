@@ -6,8 +6,10 @@ import moment from 'moment'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
+import UnavailablePropertyError from './UnavailablePropertyError'
 
 export default function InspectionDate({ data }) {
+	console.log('THE DATA --', data)
 	const [date, setDate] = useState(null)
 	const [time, setTime] = useState(null)
 	const [dateError, setDateError] = useState(null)
@@ -53,8 +55,8 @@ export default function InspectionDate({ data }) {
 					},
 					data: {
 						date,
-						time
-					}
+						time,
+					},
 				}
 			)
 			if (res.data) {
@@ -75,55 +77,63 @@ export default function InspectionDate({ data }) {
 
 	return (
 		<div className="container-fluid pt-3 pb-3">
-			{data?.guests?.length + 1 < data?.property?.bedroom ? (
-				<Alert variant="info" className="text-center">
-					<Alert.Heading className="fw-bold mb-4">
-						Sorry can't book inspection now.
-					</Alert.Heading>
-					<BsFillCalendarXFill size={100} className="mb-3" />
-					<hr />
-					<p className="mb-0">
-						Not enough members to book an inspection for the{' '}
-						<strong>{data?.property?.bedroom}</strong> bedroom flat.
-					</p>
-				</Alert>
+			{!data?.property?.is_available ? (
+				<UnavailablePropertyError />
 			) : (
-				<div>
-					<h2 className="text-center fw-bold text-grey-600">Book Inspection</h2>
-					<Alert variant="info" className="text-center">
-						<p className="mb-0">
-							Once you book your inspection everyone on the group will be
-							notified.
-						</p>
-					</Alert>
-					<div className="form-group">
-						<label>Select Date</label>
-						<DatePicker
-							aria-errormessage={dateError}
-							className="form-control"
-							onChange={(e) => setDate(e)}
-							disabledTime
-						/>
-						<small className="text-danger">{dateError}</small>
-					</div>
-					<div className="form-group">
-						<label>Select Time</label>
-						<input
-							className="form-control"
-							type="time"
-							onChange={(e) => setTime(e.target?.value)}
-						/>
-					</div>
-					<div className="text-center">
-						<button
-							onClick={handleSubmit}
-							disabled={!date || !time || loading}
-							className="bg-accent text-white btn w-50 mt-4 mb-4 btn-lg"
-						>
-							Book
-						</button>
-					</div>
-				</div>
+				<>
+					{data?.guests?.length + 1 < data?.property?.bedroom ? (
+						<Alert variant="info" className="text-center">
+							<Alert.Heading className="fw-bold mb-4">
+								Sorry can't book inspection now.
+							</Alert.Heading>
+							<BsFillCalendarXFill size={100} className="mb-3" />
+							<hr />
+							<p className="mb-0">
+								Not enough members to book an inspection for the{' '}
+								<strong>{data?.property?.bedroom}</strong> bedroom flat.
+							</p>
+						</Alert>
+					) : (
+						<div>
+							<h2 className="text-center fw-bold text-grey-600">
+								Book Inspection
+							</h2>
+							<Alert variant="info" className="text-center">
+								<p className="mb-0">
+									Once you book your inspection everyone on the group will be
+									notified.
+								</p>
+							</Alert>
+							<div className="form-group">
+								<label>Select Date</label>
+								<DatePicker
+									aria-errormessage={dateError}
+									className="form-control"
+									onChange={(e) => setDate(e)}
+									disabledTime
+								/>
+								<small className="text-danger">{dateError}</small>
+							</div>
+							<div className="form-group">
+								<label>Select Time</label>
+								<input
+									className="form-control"
+									type="time"
+									onChange={(e) => setTime(e.target?.value)}
+								/>
+							</div>
+							<div className="text-center">
+								<button
+									onClick={handleSubmit}
+									disabled={!date || !time || loading}
+									className="bg-accent text-white btn w-50 mt-4 mb-4 btn-lg"
+								>
+									Book
+								</button>
+							</div>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	)

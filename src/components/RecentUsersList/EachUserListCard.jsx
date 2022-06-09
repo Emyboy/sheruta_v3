@@ -66,7 +66,10 @@ export default function EachUserListCard({ data }) {
 			</Modal>
 			<div className="card w150 d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3 me-2 mt-3">
 				<div className="card-body d-block w-100 ps-3 pe-3 pb-4 text-center">
-					<figure className="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1">
+					<figure
+						className="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"
+						style={{ height: '64px' }}
+					>
 						<VerifiedBadge
 							without_text
 							user={data}

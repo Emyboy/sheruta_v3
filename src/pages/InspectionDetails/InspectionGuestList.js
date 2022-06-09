@@ -7,7 +7,6 @@ import { notification, Spin } from 'antd'
 import { useSelector } from 'react-redux'
 
 const EachGuest = ({ val, pending, group }) => {
-	console.log('GROUP ---', group)
 	const [loading, setLoading] = useState(false)
 	const { inspection_id } = useParams()
 	const [deleted, setDeleted] = useState(false)

@@ -78,11 +78,11 @@ function EachRequest({ data }) {
 					{deactivated ? (
 						<DeactivatedBanner />
 					) : (
-						<li className="col-sm-8 text-grey-500">
+						<li className="col-sm-7 text-grey-500">
 							<i className="ti-location-pin"></i> {data?.location}
 						</li>
 					)}
-					<div className="col-sm-4">
+					<div className="col-sm-5 d-flex justify-content-end align-items-center">
 						<div className="d-flex">
 							{data?.category ? (
 								<Tag color="cyan">{data?.category.name.toUpperCase()}</Tag>
