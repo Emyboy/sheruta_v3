@@ -52,6 +52,7 @@ import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 import Home from '../pages/HomeNew/HomeNew';
+import Create from '../pages/Create/Create'
 
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
@@ -202,7 +203,8 @@ function App() {
 								component={CreateRequest}
 							/>
 							<Route exact path="/user/:username" component={Profile2} />
-							<Route exact path="/flat/submit" component={CreateRequest} />
+							<Route exact path="/flat/submit" component={Create} />
+							<Route exact path="/profile/submit" component={Create} />
 
 							<Route
 								exact

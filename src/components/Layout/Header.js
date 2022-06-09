@@ -29,7 +29,7 @@ export default function Header({
 }) {
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
-	const { notifications, messages, payment_plan } = useSelector(
+	const { notifications, messages, personal_info } = useSelector(
 		(state) => state.view
 	)
 	const [showNotification, setNotification] = useState(false)
@@ -207,7 +207,7 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to="/flat/submit">
+				<Link to={personal_info.looking_form ? "/profile/submit" : "/flat/submit"}>
 					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i

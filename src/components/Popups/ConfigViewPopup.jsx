@@ -24,7 +24,7 @@ const ConfigViewPopup = (props) => {
 		if (!view.personal_info) {
 			dispatch(getAuthPersonalInfo())
 		}
-	}, [auth.user])
+	}, [view.personal_info])
 
 	const updatePersonalInfo = () => {
 		setLoading(true)

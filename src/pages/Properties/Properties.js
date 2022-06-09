@@ -109,7 +109,7 @@ export default function Properties(props) {
 							stickyClassName="animate__animated animate__fadeInDown"
 							stickyStyle={{
 								zIndex: 10,
-								// marginTop: Global.isMobile ? '6vh' : '11vh',
+								marginTop: Global.isMobile ? '0vh' : '0vh',
 							}}
 						>
 							<h2

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Btn from '../../components/Btn/Btn'
 import Select from 'react-select'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
-import { connect, useDispatch } from 'react-redux'
+import { Redirect, useParams } from 'react-router-dom'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { v4 as Uid } from 'uuid'
 import { Alert, notification, Switch } from 'antd'
 import CurrencyInput from 'react-currency-input-field'
@@ -11,6 +11,7 @@ import TextInput from '../../components/TextInput/TextInput'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import {
 	getAllViewOptions,
+	getAuthPersonalInfo,
 	getUserFeedback,
 } from '../../redux/strapi_actions/view.action'
 // import Layout from '../../components/Layout/Layout'
@@ -32,10 +33,12 @@ const uid = Uid()
 const CraeteRequest = (props) => {
 	localStorage.setItem('after_login', `${window.location.pathname}`)
 	localStorage.setItem('after_payment', `${window.location.pathname}`)
+	const params = useParams()
 	const [done, setDone] = useState(false)
 	const [image_url, set_image_url] = useState([])
 	const dispatch = useDispatch()
-	const [edit, setEdit] = useState(false)
+	const [edit, setEdit] = useState(false);
+	const { personal_info } = useSelector(state => state.view);
 
 	const { view, match, auth } = props
 
@@ -90,6 +93,8 @@ const CraeteRequest = (props) => {
 			image_url,
 			state: parseInt(data.state),
 			country: process.env.REACT_APP_COUNTRY_ID,
+			location_keyword: personal_info?.location_keyword?.id,
+			state: personal_info?.state?.id,
 		}
 
 		axios(process.env.REACT_APP_API_URL + '/property-requests', {
@@ -108,8 +113,9 @@ const CraeteRequest = (props) => {
 				setState({ ...state, loading: false, done: true })
 				notification.success({ message: 'You post has been created' })
 				setTimeout(() => {
-					notification.info({ message: 'Check the home page' })
-				}, 3700)
+					window.scrollTo(0, 0)
+				}, 2000);
+
 			})
 			.catch((err) => {
 				notifyEmy({
@@ -133,11 +139,11 @@ const CraeteRequest = (props) => {
 	}
 
 	useEffect(() => {
-		if (match.params?.request_id) {
+		if (params?.request_id) {
 			setState({ ...state, loading: true })
 			axios(
 				process.env.REACT_APP_API_URL +
-					`/property-requests/?id=${match.params.request_id}`
+					`/property-requests/?id=${params.request_id}`
 			)
 				.then((res) => {
 					console.log('DATA ---', res.data[0])
@@ -152,7 +158,11 @@ const CraeteRequest = (props) => {
 					return Promise.reject(err)
 				})
 		}
-	}, [match.params])
+	}, [params])
+
+	useEffect(() => {
+		dispatch(getAuthPersonalInfo())
+	},[dispatch])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -172,10 +182,10 @@ const CraeteRequest = (props) => {
 			notification.error({ message: 'Please add a service' })
 			return
 		}
-		if (!data.state) {
-			notification.error({ message: 'Please select a state' })
-			return
-		}
+		// if (!data.state) {
+		// 	notification.error({ message: 'Please select a state' })
+		// 	return
+		// }
 
 		//.. Send images to firebase
 		const files = []
@@ -319,7 +329,6 @@ const CraeteRequest = (props) => {
 		return <Redirect to="/login" />
 	} else
 		return (
-			<Layout currentPage={'requests'}>
 				<div className="mt-5 pb-5">
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
@@ -492,7 +501,7 @@ const CraeteRequest = (props) => {
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>Area</label>
+													<label>Where in {personal_info?.location_keyword?.name}?</label>
 													<GooglePlacesAutocomplete
 														apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
 														apiOptions={{
@@ -509,7 +518,7 @@ const CraeteRequest = (props) => {
 																	location: e.label,
 																})
 															},
-															placeholder: 'Eg: Yaba, Lekki, Surulere',
+															placeholder: 'Type what area it\'s located in',
 														}}
 														autocompletionRequest={{
 															componentRestrictions: {
@@ -577,7 +586,7 @@ const CraeteRequest = (props) => {
 													</div>
 												</div>
 											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
+											{/* <div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>State</label>
 													<Select
@@ -596,8 +605,8 @@ const CraeteRequest = (props) => {
 														disabled={state.loading}
 													/>
 												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
+											</div> */}
+											{/* <div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>Premium Flat?</label>
 													<div className="d-flex mt-2">
@@ -612,8 +621,8 @@ const CraeteRequest = (props) => {
 														/>
 													</div>
 												</div>
-											</div>
-											+
+											</div> */}
+											
 											<div className="col-lg-12 col-md-12 col-sm-12">
 												<div className="form-group">
 													<label>
@@ -694,7 +703,6 @@ const CraeteRequest = (props) => {
 						</div>
 					</div>
 				</div>
-			</Layout>
 		)
 }
 

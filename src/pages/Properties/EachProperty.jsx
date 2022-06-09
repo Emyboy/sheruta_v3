@@ -17,7 +17,7 @@ export const formatPropertyURL = (data) => {
 export default function EachProperty({ data }) {
 	const iconSize = 19
 	return (
-		<div className="single-new-added-properties bg-white">
+		<div className="single-new-added-properties card">
 			<div className="row justify-content-center">
 				<div className="col-lg-6 col-md-12">
 					<div

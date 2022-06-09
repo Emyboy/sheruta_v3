@@ -268,7 +268,7 @@ export default function RequestDetails(props) {
 														)}
 													</div>
 												</div>
-												<div className="description mt-3">
+												<div className="description mt-3 mb-4">
 													<p
 														style={{
 															fontSize: '18px',
@@ -319,7 +319,7 @@ export default function RequestDetails(props) {
 																	? 'Min Budget:'
 																	: 'Rent Per Room:'}
 															</small>
-															<h5 className="mt-1 fw-700">
+															<h3 className="mt-1 fw-700">
 																₦{' '}
 																{window.formatedPrice.format(
 																	request?.rent_per_room
@@ -329,7 +329,7 @@ export default function RequestDetails(props) {
 																	{request?.payment_type &&
 																		request?.payment_type.name}
 																</small>
-															</h5>
+															</h3>
 														</div>
 													</div>
 												)}
