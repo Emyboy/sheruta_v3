@@ -4,6 +4,7 @@ import Global from '../../Global'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
+import moment from 'moment'
 
 export const formatPropertyURL = (data) => {
 	return `/flat/${`${data?.service?.name}/${
@@ -73,6 +74,9 @@ export default function EachProperty({ data }) {
 
 						<ul className="rating-list">
 							<li>{data?.interested_parties?.length} Interested Users</li>
+							{process.env.NODE_ENV !== 'production' && (
+								<span className='badge ml-3'>{data?.location_keyword?.name} - {moment(data?.created_at).fromNow()}</span>
+							)}
 						</ul>
 					</div>
 				</div>

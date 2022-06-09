@@ -20,6 +20,7 @@ import { useLocation, useParams } from 'react-router'
 import LocationKeywordService from '../../services/LocationKeywordService'
 import PropertiesService from '../../services/PropertiesServices'
 import loadingGIF from '../../assets/img/loading.gif'
+import { Dots } from 'react-activity'
 
 const { Option } = Select
 
@@ -30,7 +31,11 @@ export function useURLQuery() {
 }
 
 export default function Properties(props) {
-	console.log('PROPS --', props)
+	// console.log('PROPS --', props)
+	localStorage.setItem(
+		'after_login',
+		window.location.pathname + window.location.search
+	)
 	const { recent_properties, properties } = useSelector(
 		(state) => state.properties
 	)
@@ -54,13 +59,12 @@ export default function Properties(props) {
 				String(props?.location?.search)
 					.replace('location', 'location_keyword.slug')
 					.replace('type', 'categorie.slug')
-					.replace('service', 'service.slug')
+					.replace('service', 'service.slug') + `&_sort=created_at:DESC`
 			)
-			console.log(res.data)
 			setList(res.data)
-			if(res.data.length === 0){
+			if (res.data.length === 0) {
 				setPageState('404')
-			}else {
+			} else {
 				setPageState('loaded')
 			}
 		} catch (error) {
@@ -71,8 +75,10 @@ export default function Properties(props) {
 	}, [])
 
 	useEffect(() => {
-		getPropertiesViaULR()
-	}, [getPropertiesViaULR])
+		if (props?.location?.search) {
+			getPropertiesViaULR()
+		}
+	}, [getPropertiesViaULR, props?.location?.search])
 
 	let query = useURLQuery()
 
@@ -134,7 +140,7 @@ export default function Properties(props) {
 											</Select>
 										</div>
 
-										<div className="col-md-4 col-sm-12 text-end">
+										<div className="col-md-5 col-sm-12 text-end">
 											<Select
 												placeholder="Filter By Type"
 												className={Global.isMobile ? 'w-100' : ''}
@@ -290,8 +296,9 @@ export default function Properties(props) {
 							</div>
 						)}
 						{pageState === 'loading' && (
-							<div className="text-center ">
-								<img src={loadingGIF} width="400" />
+							<div className="text-center " style={{ paddingTop: '20vh' }}>
+								<Dots />
+								<h5 className="fw-500">Just A Moment</h5>
 							</div>
 						)}
 					</div>

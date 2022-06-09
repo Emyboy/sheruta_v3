@@ -76,7 +76,7 @@ export const GetStarted = (props) => {
 	// };
 
 	useEffect(() => {
-		if (auth.user) {
+		if (auth.user && !personal_info) {
 			axios(process.env.REACT_APP_API_URL + `/personal-infos/me`, {
 				headers: {
 					Authorization: `Bearer ${props.auth.user.jwt}`,

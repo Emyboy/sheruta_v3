@@ -12,9 +12,10 @@ import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
 import { IoIosPeople } from 'react-icons/io'
 import { AiOutlineCalendar } from 'react-icons/ai'
-
+import { useSelector } from 'react-redux'
 
 export default function SideNav({ show }) {
+	const { personal_info } = useSelector(state => state.view);
 	const dispatch = useDispatch()
 	const size = 25
 	return (
@@ -73,7 +74,14 @@ export default function SideNav({ show }) {
 							{process.env.NODE_ENV === 'development' && (
 								<>
 									<li>
-										<Link to="/flats" className="nav-content-bttn open-font">
+										<Link
+											to={
+												personal_info && personal_info?.location_keyword
+													? `/flats/?location=${personal_info?.location_keyword?.slug}`
+													: '/flats'
+											}
+											className="nav-content-bttn open-font"
+										>
 											<i className="btn-round-md bg-gold-gradiant me-3">
 												<BsHouseDoor size={size} />
 											</i>
@@ -194,8 +202,8 @@ export default function SideNav({ show }) {
 								<a
 									className="nav-content-bttn open-font h-auto pt-2 pb-2"
 									onClick={() => {
-										dispatch(logout());
-										window.location.reload();
+										dispatch(logout())
+										window.location.reload()
 									}}
 								>
 									<i className="font-sm feather-power me-3 text-grey-500"></i>
