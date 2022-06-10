@@ -53,7 +53,7 @@ const EachGuest = ({ val, pending, group }) => {
 						style={{ borderRadius: '300px' }}
 					/>
 					<h6 className="font-xss text-grey-700 mb-0 mt-0 fw-700">
-						{val?.first_name} {val?.last_name}{' '}
+						{val?.first_name?.split(' ')[0]}{' '}
 						<span
 							className={`btn-round-xss ms-0 bg-${
 								val?.online ? 'success' : 'danger'
