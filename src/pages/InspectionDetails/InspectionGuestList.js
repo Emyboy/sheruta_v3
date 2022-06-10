@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import Cookies from 'js-cookie'
 import { notification, Spin } from 'antd'
 import { useSelector } from 'react-redux'
+import Global from '../../Global'
 
 const EachGuest = ({ val, pending, group }) => {
 	const [loading, setLoading] = useState(false)
@@ -51,14 +52,17 @@ const EachGuest = ({ val, pending, group }) => {
 						className="w35 me-2"
 						style={{ borderRadius: '300px' }}
 					/>
-					<h6 className="font-xssss text-grey-900 text-grey-900 mb-0 mt-0 fw-700">
+					<h6 className="font-xss text-grey-700 mb-0 mt-0 fw-700">
 						{val?.first_name} {val?.last_name}{' '}
 						<span
 							className={`btn-round-xss ms-0 bg-${
 								val?.online ? 'success' : 'danger'
 							} me-2`}
 						></span>
-						<h6 className="text-grey-600 fw-400">@{val?.username}</h6>
+						<h6 className="text-grey-600 fw-400 font-xsss mt-2">
+							{Global.currency}{' '}
+							{window.formatedPrice.format(val.budget)} - Budget
+						</h6>
 					</h6>
 				</div>
 				<div className="d-flex align-items-center">
@@ -103,7 +107,7 @@ export default function InspectionGuestList({ data }) {
 		<div className=" p-3 w-100 position-relative scroll-bar bg-white theme-dark-bg">
 			{data?.pending_guests?.length > 0 && (
 				<>
-					<h2 className="fw-bold text-grey-600 mb-3 mt-3">Pending Guests</h2>
+					<h4 className="fw-bold text-grey-500 mb-3 mt-3">Pending Guests</h4>
 					<ul className="email-message">
 						{data?.pending_guests?.map((val, i) => {
 							return <EachGuest key={`guest-${i}`} val={val} pending group={data} />
@@ -111,7 +115,7 @@ export default function InspectionGuestList({ data }) {
 					</ul>
 				</>
 			)}
-			<h2 className="fw-bold text-grey-600 mb-3 mt-3">Guests</h2>
+			<h4 className="fw-bold text-grey-500 mb-3 mt-5">Guests</h4>
 			<ul className="email-message">
 				{data?.guests?.map((val, i) => {
 					return <EachGuest key={`guest-${i}`} val={val} group={data} />

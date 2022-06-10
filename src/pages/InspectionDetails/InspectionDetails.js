@@ -117,7 +117,7 @@ export default function InspectionDetails({ match }) {
 												</h4>
 											</div>
 										) : (
-											<AgentCard data={data?.agent_profile} />
+											<AgentCard val={data} />
 										)}
 									</>
 								)}
