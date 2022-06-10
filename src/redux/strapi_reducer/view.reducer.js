@@ -13,14 +13,15 @@ const initialState = {
     feed: [],
     app_details: null,
     robot_message: null,
-    robot_action_text: null,
-    robot_action_link: null,
+    robot_action_text: 'null',
+    robot_action_link: 'null',
     notifications: [],
     messages: [],
     amenities: [],
     recent_users: [],
     location_keywords: [],
-    collect_location_keyword: false
+    collect_location_keyword: false,
+    unique_habits: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {

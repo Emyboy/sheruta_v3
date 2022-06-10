@@ -21,7 +21,7 @@ const ConfigViewPopup = (props) => {
 	const view = useSelector((state) => state.view)
 
 	useEffect(() => {
-		if (!view.personal_info) {
+	if (!view.personal_info) {
 			dispatch(getAuthPersonalInfo())
 		}
 	}, [view.personal_info])

@@ -6,7 +6,23 @@ import Notifications from '../../services/Notifications'
 import PaymentService from '../../services/PaymentService'
 import { getAppDetails } from '../../services/Sheruta'
 import store from '../store/store'
-import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions'
+import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions';
+
+
+export const getAllUniqueHabits = () => (dispatch) => {
+	axios(process.env.REACT_APP_API_URL + '/user-unique-habits')
+		.then((res) => {
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					unique_habits: res.data
+				}
+			})
+		})
+		.catch((err) => {
+			return Promise.reject(err)
+		})
+}
 
 export const getAllServices = () => (dispatch) => {
 	axios(process.env.REACT_APP_API_URL + '/services')

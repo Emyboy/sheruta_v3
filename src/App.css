@@ -2,7 +2,7 @@
 :root {
     --theme-color: #00ba74;
     --accent-color: #252c41;
-    --theme-light: #00ba732e;
+    --theme-light: #e1fff3;
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
@@ -11,6 +11,15 @@ body {
 }
 #root {
     height: 100vh auto;
+}
+
+.markup a {
+    color: rgb(131, 137, 255) !important;
+    font-weight: bold;
+}
+
+h5,h6 {
+    font-weight: 400 !important;
 }
 
 html,

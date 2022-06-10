@@ -10,6 +10,7 @@ import {
 	getAllViewOptions,
 	getAllLocationKeyword,
 	getLocationKeyWordsByState,
+	getAllUniqueHabits,
 } from '../../redux/strapi_actions/view.action'
 import {
 	suggestThemForMe,
@@ -26,6 +27,8 @@ import GetMoreInfoPopup from './GetMoreInfoPopup'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import LocationKeywordPopup from './LocationKeywordPopup'
+import RobotMessage from '../Ads/RobotMessage/RobotMessage'
+import Global from '../../Global'
 
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
@@ -75,6 +78,7 @@ const MasterPopup = (props) => {
 			dispatch(getOtherStuffs())
 		}
 		getForViews()
+		dispatch(getAllUniqueHabits())
 	}, [dispatch])
 
 	useEffect(() => {
@@ -122,6 +126,7 @@ const MasterPopup = (props) => {
 				)} */}
 				<AppUpdatePopup />
 				<LocationKeywordPopup />
+				{Global.isMobile && <RobotMessage />}
 			</>
 		)
 	} else {

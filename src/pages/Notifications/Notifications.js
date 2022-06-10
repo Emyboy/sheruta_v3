@@ -4,7 +4,8 @@ import EachNotification from './EachNotification'
 // import Layout from '../../components/Layout/Layout';
 import { Redirect } from 'react-router';
 import { getRealTimeStuffs } from '../../redux/strapi_actions/view.action';
-const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+import Layout from '../../components/Layout/Layout';
+
 
 
 export default function Notifications() {
@@ -26,7 +27,7 @@ export default function Notifications() {
 		return <Redirect to="/settings/deactivate-account" />
 	}
 	return (
-		<Layout pageName="notifications">
+		<Layout currentPage="notifications">
 			<div className="container">
 				<div className="row">
 					<div className="col-xl-12">
@@ -56,13 +57,12 @@ export default function Notifications() {
 								</a> */}
 							</h2>
 
-								<ul className="notification-box">
-									{notifications &&
-										notifications.map((val, i) => {
-											return <EachNotification key={`notify-${i}`} data={val} />
-										})}
-								</ul>
-							
+							<ul className="notification-box">
+								{notifications &&
+									notifications.map((val, i) => {
+										return <EachNotification key={`notify-${i}`} data={val} />
+									})}
+							</ul>
 						</div>
 					</div>
 				</div>

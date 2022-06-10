@@ -166,6 +166,30 @@ const CraeteRequest = (props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		if (parseInt(data.budget) < 100000) {
+			notification.error({
+				message: 'Rent can not be less than hundred thousand',
+			})
+			return
+		}
+		if (parseInt(data.rent_per_room) < 100000) {
+			notification.error({
+				message: "Rent per room can't be less than hundred thousand",
+			})
+			return
+		}
+		if (parseInt(data.bathrooms) === 0) {
+			notification.error({ message: "Bathroom can't be zero" })
+			return
+		}
+		if (parseInt(data.bedrooms) === 0) {
+			notification.error({ message: "Bedroom can't be zero" })
+			return
+		}
+		if (parseInt(data.toilets) === 0) {
+			notification.error({ message: "Toilets can't be zero" })
+			return
+		}
 		if (!state.categories) {
 			notification.error({ message: 'Please select a category' })
 			return
@@ -195,10 +219,10 @@ const CraeteRequest = (props) => {
 				files.push(val)
 			}
 		})
-		if (!view.personal_info.looking_for && files.length === 0) {
+		if (files.length === 0) {
 			notification.error({ message: 'Please add an image' })
 			return
-		} else if (!view.personal_info.looking_for && files.length < 3) {
+		} else if (files.length < 3) {
 			notification.error({ message: 'Please add at least 3 images' })
 			return
 		}
@@ -329,6 +353,7 @@ const CraeteRequest = (props) => {
 		return <Redirect to="/login" />
 	} else
 		return (
+			<Layout currentPage={'requests'}>
 				<div className="mt-5 pb-5">
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
@@ -530,7 +555,7 @@ const CraeteRequest = (props) => {
 											</div>
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
-													<label>Rent</label>
+													<label>Total Rent</label>
 													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<div class="input-group-text">
@@ -703,6 +728,7 @@ const CraeteRequest = (props) => {
 						</div>
 					</div>
 				</div>
+			</Layout>
 		)
 }
 

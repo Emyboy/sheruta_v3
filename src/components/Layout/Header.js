@@ -207,7 +207,7 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to={personal_info.looking_form ? "/profile/submit" : "/flat/submit"}>
+				<Link to={"/flat/submit"}>
 					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i

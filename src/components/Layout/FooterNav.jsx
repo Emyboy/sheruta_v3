@@ -61,7 +61,7 @@ export default function FooterNav({ pageName }) {
 					/>
 				</Link>
 				<Link
-					to={`/requests/create`}
+					to={'/flat/submit'}
 					className="position-relative nav-content-bttn"
 					data-tab="chats"
 				>
@@ -83,7 +83,7 @@ export default function FooterNav({ pageName }) {
 						size={iconSize}
 						className={`text-${
 							pageName === 'notifications' ? 'theme' : 'dark'
-						} `}
+						}`}
 					/>
 				</Link>
 				<Link

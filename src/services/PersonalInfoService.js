@@ -21,4 +21,6 @@ export default class PersonalInfoService {
 			return null
 		}
 	}
+
+	
 }

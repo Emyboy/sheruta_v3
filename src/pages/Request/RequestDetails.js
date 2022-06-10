@@ -277,21 +277,17 @@ export default function RequestDetails(props) {
 														{request?.body}
 													</p>
 												</div>
-												<div className="d-flex justify-content-between align-items-center">
+												<div className="d-flex justify-content-between align-items-center mb-3">
 													<div>
-														<small className="mb-0">
-															{request?.is_searching
-																? 'My Budget:'
-																: 'Total Rent:'}
-														</small>
-														<h4 className="mt-1 fw-700">
+														<small className="mb-0">Total Rent</small>
+														<h2 className="mt-1 fw-700">
 															₦ {window.formatedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
 																	request?.payment_type.name}
 															</small>
-														</h4>
+														</h2>
 													</div>
 													<div
 														className="d-flex"
@@ -314,12 +310,8 @@ export default function RequestDetails(props) {
 												{request?.rent_per_room && (
 													<div className="d-flex justify-content-between align-items-center">
 														<div>
-															<small className="mb-0">
-																{request?.is_searching
-																	? 'Min Budget:'
-																	: 'Rent Per Room:'}
-															</small>
-															<h3 className="mt-1 fw-700">
+															<small className="mb-0">Rent Per Room</small>
+															<h2 className="mt-1 fw-700">
 																₦{' '}
 																{window.formatedPrice.format(
 																	request?.rent_per_room
@@ -329,7 +321,7 @@ export default function RequestDetails(props) {
 																	{request?.payment_type &&
 																		request?.payment_type.name}
 																</small>
-															</h3>
+															</h2>
 														</div>
 													</div>
 												)}

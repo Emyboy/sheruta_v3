@@ -12,7 +12,6 @@ import '../social_assets/css/feather.css'
 import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
-import '../App.css'
 
 import '../assets/css/style.css';
 import '../assets/css/boxicons.min.css';
@@ -20,6 +19,7 @@ import '../assets/css/responsive.css';
 
 import 'react-quill/dist/quill.snow.css'
 import 'react-image-viewer-zoom/dist/style.css' 
+import '../App.css'
 
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -52,7 +52,6 @@ import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 import Home from '../pages/HomeNew/HomeNew';
-import Create from '../pages/Create/Create'
 
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
@@ -203,8 +202,7 @@ function App() {
 								component={CreateRequest}
 							/>
 							<Route exact path="/user/:username" component={Profile2} />
-							<Route exact path="/flat/submit" component={Create} />
-							<Route exact path="/profile/submit" component={Create} />
+							<Route exact path="/flat/submit" component={CreateRequest} />
 
 							<Route
 								exact

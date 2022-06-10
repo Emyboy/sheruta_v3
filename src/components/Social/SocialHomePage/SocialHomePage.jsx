@@ -17,6 +17,7 @@ import moment from 'moment'
 import Cookies from 'js-cookie'
 import RecentBookingFeed from './RecentBookingFeed'
 import Sticky from 'react-sticky-el'
+import ErrorBoundary from '../../ErrorBoundary'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -50,13 +51,6 @@ export default (props) => {
 			)
 				.then((res) => {
 					setState({ ...state, list: res.data })
-					// console.log('FEED -----', res.data)
-					dispatch({
-						type: 'SET_VIEW_STATE',
-						payload: {
-							feed: [],
-						},
-					})
 					dispatch({
 						type: 'SET_VIEW_STATE',
 						payload: {
@@ -64,9 +58,11 @@ export default (props) => {
 						},
 					})
 				})
-				.catch((err) => {})
+				.catch((err) => {
+					return Promise.reject(err)
+				})
 		}
-	}, [state, view.personal_info])
+	}, [state])
 
 	if (!auth.user) {
 		return <Redirect to="/login" />
@@ -167,6 +163,7 @@ export default (props) => {
 								</Alert>
 							)}
 
+							<ErrorBoundary>
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
@@ -219,6 +216,7 @@ export default (props) => {
 										})}
 								</>
 							)}
+							</ErrorBoundary>
 							{state.list.length > 0 && (
 								<div className="card rounded-xxl">
 									<div className="card-body text-center">
