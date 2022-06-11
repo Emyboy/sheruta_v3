@@ -15,7 +15,7 @@ import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
 export default function SideNav({ show }) {
-	const { personal_info } = useSelector(state => state.view);
+	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
 	const size = 25
 	return (
@@ -71,23 +71,23 @@ export default function SideNav({ show }) {
 									</span>
 								</Link>
 							</li>
+							<li>
+								<Link
+									to={
+										personal_info && personal_info?.location_keyword
+											? `/flats/?location=${personal_info?.location_keyword?.slug}`
+											: '/flats'
+									}
+									className="nav-content-bttn open-font"
+								>
+									<i className="btn-round-md bg-gold-gradiant me-3">
+										<BsHouseDoor size={size} />
+									</i>
+									<span>Properties</span>
+								</Link>
+							</li>
 							{process.env.NODE_ENV === 'development' && (
 								<>
-									<li>
-										<Link
-											to={
-												personal_info && personal_info?.location_keyword
-													? `/flats/?location=${personal_info?.location_keyword?.slug}`
-													: '/flats'
-											}
-											className="nav-content-bttn open-font"
-										>
-											<i className="btn-round-md bg-gold-gradiant me-3">
-												<BsHouseDoor size={size} />
-											</i>
-											<span>Properties</span>
-										</Link>
-									</li>
 									<li>
 										<Link
 											to="/join-paddy"
