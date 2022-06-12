@@ -93,7 +93,7 @@ export default () => {
 								style={{ flexDirection: 'column' }}
 							>
 								<li style={{ maxWidth: '100%' }}>
-									<Link to="/blog">Become An Agent</Link>
+									<Link to="/agents">Become An Agent</Link>
 								</li>
 							</ul>
 							<ul

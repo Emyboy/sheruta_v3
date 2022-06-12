@@ -42,7 +42,6 @@ import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
-import Agent from '../pages/Agent/Agent'
 import AgentPending from '../pages/Agent/AgentPending';
 import AgentSignup from '../pages/Agent/AgentSignup'
 import Inspection from '../pages/Inspection/Inspection'
@@ -52,6 +51,7 @@ import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 import Home from '../pages/HomeNew/HomeNew';
+import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
 
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
@@ -121,7 +121,7 @@ function App() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
-							<Route exact path="/agents" component={Agent} />
+							<Route exact path="/agents" component={AgentLanding} />
 							<Route exact path="/our-rules" component={OurRules} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
 							<Route
