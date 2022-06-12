@@ -8,7 +8,7 @@ import PropertiesService from '../../services/PropertiesServices'
 export default function AgentCard({ val }) {
 	const data = val.agent_profile
 	const agent = val?.agent
-
+	console.log('VAL --', val)
 	const [propertyCount, setPropertyCount] = useState(0)
 
 	const getPropertyCount = useCallback(async () => {
@@ -44,6 +44,17 @@ export default function AgentCard({ val }) {
 				<p className="fw-500 font-xsss text-grey-500 mt-0 mb-3">
 					{data?.email}
 				</p>
+
+				{val.message && (
+					<div className="row justify-content-center">
+						<div className='col-md-8'>
+							<h5 className='fw-bold'>Agent Says 👇🏽</h5>
+							<div className="pt-1 pb-1 pl-4 pr-4 alert alert-info rounded-xl ">
+								{val?.message}
+							</div>
+						</div>
+					</div>
+				)}
 				<ul className="d-flex align-items-center justify-content-center mt-1">
 					<li className="m-2">
 						<h4 className="fw-700 font-sm">

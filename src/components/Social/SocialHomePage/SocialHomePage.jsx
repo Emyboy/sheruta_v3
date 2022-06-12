@@ -79,6 +79,7 @@ export default (props) => {
 					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
 							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+								<UserFeedCard />
 								<Sticky
 									stickyStyle={{
 										zIndex: 10,
@@ -86,7 +87,6 @@ export default (props) => {
 									}}
 								>
 									{/* <RecentUsers data={newUsers} /> */}
-									<UserFeedCard />
 									<RecentBookingFeed />
 								</Sticky>
 							</div>
