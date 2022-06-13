@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router'
 import Layout from '../../components/Layout/Layout'
 import EachInspection from './EachInspection'
 
@@ -50,6 +51,10 @@ export default function Inspection() {
 		getUserInspection()
 		getUserInvitedInspection()
 	}, [getUserInspection, getUserInvitedInspection])
+
+	if(!user){
+		return <Redirect to='/' />
+	}
 
 	return (
 		<Layout>

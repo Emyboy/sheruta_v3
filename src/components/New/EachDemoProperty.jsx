@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import img from '../../assets/images/featured/featured-large-3.jpg'
 import Global from '../../Global'
+import { formatPropertyURL } from '../../pages/Properties/EachProperty'
 
 export default function EachDemoProperty({ data }) {
 	return (
@@ -12,8 +13,11 @@ export default function EachDemoProperty({ data }) {
 		>
 			<div className="featured-item-box">
 				<div className="featured-image">
-					<a
-						href={`/flat/${data?.service?.id}/${data?.categorie?.id}/${data?.id}`}
+					<Link
+						to={{
+							pathname: formatPropertyURL(data),
+							state: data,
+						}}
 					>
 						{/* <img src={data?.image_urls[0]} alt="image" /> */}
 						<div
@@ -27,12 +31,15 @@ export default function EachDemoProperty({ data }) {
 							}}
 							className="rounded"
 						/>
-					</a>
+					</Link>
 
 					{data?.categorie?.name && (
 						<div className="tag">
 							<Link
-								to={`/flat/${data?.service?.id}/${data?.categorie?.id}/${data?.id}`}
+								to={{
+									pathname: formatPropertyURL(data),
+									state: data,
+								}}
 							>
 								{data?.categorie?.name}
 							</Link>
@@ -43,7 +50,10 @@ export default function EachDemoProperty({ data }) {
 						<span>{data?.location?.slice(0, 38)}...</span>
 						<h3>
 							<Link
-								to={`/flat/${data?.service?.id}/${data?.categorie?.id}/${data?.id}`}
+								to={{
+									pathname: formatPropertyURL(data),
+									state: data,
+								}}
 							>
 								{data?.name}
 							</Link>
@@ -69,16 +79,17 @@ export default function EachDemoProperty({ data }) {
 				<div className="featured-bottom-content d-flex justify-content-between align-items-center pt-0 pb-3">
 					<ul className="rating-list">
 						<div className="dd-block pt-0">
-							<ul className="memberlist mt-1 mb-2 ms-0 d-block d-flex">
-								
-							</ul>
+							<ul className="memberlist mt-1 mb-2 ms-0 d-block d-flex"></ul>
 						</div>
 						<li>{data?.interested_parties?.length} Interested Users</li>
 					</ul>
 
 					<div className="featured-btn">
 						<Link
-							to={`/flat/${data?.service?.id}/${data?.categorie?.id}/${data?.id}`}
+							to={{
+								pathname: formatPropertyURL(data),
+								state: data,
+							}}
 							className="default-btn pl-4 pr-4 pb-2 pt-2"
 						>
 							MORE{' '}

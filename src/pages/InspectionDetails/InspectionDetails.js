@@ -11,6 +11,7 @@ import Cookies from 'js-cookie'
 import Sticky from 'react-sticky-el'
 import Global from '../../Global'
 import AgentCard from '../../components/Agent/AgentCard'
+import { Redirect } from 'react-router'
 
 export default function InspectionDetails({ match }) {
 	const tabs = ['Members', 'Inspection', 'Property', 'Agent']
@@ -40,6 +41,11 @@ export default function InspectionDetails({ match }) {
 	useEffect(() => {
 		getInspection()
 	}, [getInspection])
+
+
+	if(!user){
+		return <Redirect to='/' />
+	}
 
 
 	return (

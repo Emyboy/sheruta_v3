@@ -10,6 +10,7 @@ import PropertyDetailsRight from './PropertyDetailsRight'
 import SimilarProperties from './SimilarProperties'
 import Sticky from 'react-sticky-el'
 import PropertyDetailsLeft from './PropertyDetailsLeft'
+import { Helmet } from 'react-helmet'
 
 export default function PropertyDetails(props) {
 	localStorage.setItem('after_login', window.location.pathname)
@@ -50,8 +51,22 @@ export default function PropertyDetails(props) {
 	} else if (pageState === 'not found') {
 		return <PageNotFound />
 	} else if (data && pageState !== 'loading') {
+		console.log(data)
 		return (
 			<Layout full_screen>
+				<Helmet>
+					<title>
+						{data?.is_available ? 'Available' : 'Unavailable'}{' '}
+						{String(data?.bedroom)} bedroom flat for share in{' '}
+						{data?.location_keyword?.name || 'Lagos'}
+					</title>
+					<meta
+						name="description"
+						content={`This is ${String(data?.bedroom)} bedroom ${
+							data?.categorie?.name
+						} in ${data?.location_keyword?.name}`}
+					></meta>
+				</Helmet>
 				<div className="property-details-area ptb-100">
 					<div className={Global.isMobile ? '' : 'container'}>
 						<div
@@ -67,7 +82,7 @@ export default function PropertyDetails(props) {
 										<Sticky
 											stickyStyle={{
 												zIndex: 10,
-												marginTop: user ? '12vh': '1vh',
+												marginTop: user ? '12vh' : '1vh',
 											}}
 										>
 											{/* <PropertyDetailsRight data={data} /> */}

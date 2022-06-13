@@ -32,14 +32,14 @@ export default function RecentProperties() {
 					</p>
 				</div>
 				<div className="d-flex" style={{ overflowX: 'scroll' }}>
-					{list.map((val, i) => {
+					{list.map((val) => {
 						return (
 							<div
 								className={`"col-sm-12 col-md-6 col-lg-4 ${
 									Global.isMobile ? 'mr-0 pl-0' : 'mr-4'
 								}`}
 								// style={{ width: '40rem' }}
-								key={`prop-${i}`}
+								key={`prop-${val?.id}`}
 							>
 								<EachDemoProperty data={val} />
 							</div>
