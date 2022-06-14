@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useP, useParams } from 'react-router'
 import Layout from '../../components/Layout/Layout'
 import EachBlog from './EachBlog'
 
 export default function Blog() {
 	const [list, setList] = useState([]);
-
+	const { user } = useSelector(state => state.view);
 	const { category_id } = useParams()
 
 	const getBlogs = async () => {
@@ -42,7 +43,7 @@ export default function Blog() {
 
 	return (
 		<Layout>
-			<section>
+			<section style={{ paddingTop: !user ? '5vh' : '0' }}>
 				<div className="container">
 					<div className="row">
 						<div className="col-xl-6">

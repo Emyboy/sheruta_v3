@@ -36,7 +36,10 @@ export default function Header({
 
 	if (!user) {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0" style={{ zIndex: 39 }}>
+			<nav
+				className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0"
+				style={{ zIndex: 39 }}
+			>
 				<div className="container-fluid">
 					<Link to="/">
 						<a className="navbar-brand">
@@ -68,6 +71,17 @@ export default function Header({
 									<a className="nav-link">Post Your Property</a>
 								</Link> */}
 							</li>
+
+							<li className="nav-item">
+								<Link to={`/flats/?location=lekki`}>
+									<a className="nav-link">Flats</a>
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to={`/agents`}>
+									<a className="nav-link">Agents</a>
+								</Link>
+							</li>
 							<li className="nav-item dropdown">
 								<a
 									className="nav-link dropdown-toggle"
@@ -93,7 +107,9 @@ export default function Header({
 										</Link>
 									</li>
 									<li>
-										<Link className="dropdown-item" to='/services/carry_over'>Carry Over</Link>
+										<Link className="dropdown-item" to="/services/carry_over">
+											Carry Over
+										</Link>
 									</li>
 									<li>
 										<hr className="dropdown-divider" />
@@ -106,8 +122,8 @@ export default function Header({
 								</ul>
 							</li>
 							<li className="nav-item">
-								<Link to={`/about`}>
-									<a className="nav-link">About Us</a>
+								<Link to={`/blog`}>
+									<a className="nav-link">Blog</a>
 								</Link>
 							</li>
 							{/* <li className="nav-item">
