@@ -19,9 +19,9 @@ export default function Inspection() {
 	return (
 		<Layout>
 			<div className="col-xl-12">
-				<div class="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
-					<div class="card-body d-flex align-items-center p-0">
-						<h2 class="fw-700 mb-0 mt-0 font-md text-grey-600">Your Groups</h2>
+				<div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
+					<div className="card-body d-flex align-items-center p-0">
+						<h2 className="fw-700 mb-0 mt-0 font-md text-grey-600">Your Groups</h2>
 					</div>
 				</div>
 				<div className="row ps-2 pe-1 mb-4">
@@ -31,9 +31,9 @@ export default function Inspection() {
 						)
 					})}
 				</div>
-				<div class="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
-					<div class="card-body d-flex align-items-center p-0">
-						<h2 class="fw-700 mb-0 mt-0 font-md text-grey-600">Other Groups</h2>
+				<div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
+					<div className="card-body d-flex align-items-center p-0">
+						<h2 className="fw-700 mb-0 mt-0 font-md text-grey-600">Other Groups</h2>
 					</div>
 				</div>
 				<div className="row ps-2 pe-1">

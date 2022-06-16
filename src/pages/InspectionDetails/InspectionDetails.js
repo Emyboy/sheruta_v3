@@ -49,7 +49,7 @@ export default function InspectionDetails({ match }) {
 
 
 	return (
-		<Layout>
+		<Layout showMessages>
 			{
 				data &&
 			<div>

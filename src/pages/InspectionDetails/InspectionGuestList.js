@@ -6,12 +6,16 @@ import Cookies from 'js-cookie'
 import { notification, Spin } from 'antd'
 import { useSelector } from 'react-redux'
 import Global from '../../Global'
+import PersonalInfo from '../Profile/PersonalInfo'
+import { Modal } from 'antd'
 
 const EachGuest = ({ val, pending, group }) => {
 	const [loading, setLoading] = useState(false)
 	const { inspection_id } = useParams()
 	const [deleted, setDeleted] = useState(false)
 	const { user } = useSelector(state => state.auth);
+
+	const [showInfo, setShowInfo] = useState(false);
 
 	const removeGuest = async () => {
 		setLoading(true)
@@ -44,6 +48,9 @@ const EachGuest = ({ val, pending, group }) => {
 
 	return (
 		<li>
+			<Modal visible={showInfo} footer={null} onCancel={() => setShowInfo(false)}>
+				<PersonalInfo userData={val} />
+			</Modal>
 			<div className="rounded-3 bg-transparent pb-2 mb-2 border-bottom d-flex justify-content-between">
 				<div className="email-user d-flex align-items-center">
 					<img
@@ -52,7 +59,7 @@ const EachGuest = ({ val, pending, group }) => {
 						className="w35 me-2"
 						style={{ borderRadius: '300px' }}
 					/>
-					<h6 className="font-xss text-grey-700 mb-0 mt-0 fw-700">
+					<h6 className="font-xss text-grey-700 mb-0 mt-0 fw-700 link" onClick={() => setShowInfo(true)}>
 						{val?.first_name?.split(' ')[0]}{' '}
 						<span
 							className={`btn-round-xss ms-0 bg-${
@@ -60,8 +67,8 @@ const EachGuest = ({ val, pending, group }) => {
 							} me-2`}
 						></span>
 						<h6 className="text-grey-600 fw-400 font-xsss mt-2">
-							{Global.currency}{' '}
-							{window.formatedPrice.format(val.budget)} - Budget
+							{Global.currency} {window.formatedPrice.format(val.budget)} -
+							Budget
 						</h6>
 					</h6>
 				</div>

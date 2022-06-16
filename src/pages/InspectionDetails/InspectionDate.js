@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import UnavailablePropertyError from './UnavailablePropertyError'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { convertTimeTo12Hurs } from '../../utils/moment.utils';
+import { BsCalendarX } from 'react-icons/bs';
 
 export default function InspectionDate({ data }) {
 	const [date, setDate] = useState(null)
@@ -71,9 +72,14 @@ export default function InspectionDate({ data }) {
 			setLoading(false)
 			return Promise.reject(error)
 		}
-		console.log({
-			time,
-		})
+		
+	}
+
+	if(user?.user?.id != data?.owner?.id){
+		return <div className='text-center pt-5 pb-5'>
+			<BsCalendarX size={70} />
+			<h5 className='mt-4 fw-600 text-grey-600'>Inspection hasn't been booked by group admin.</h5>
+		</div>
 	}
 
 	return (
