@@ -6,9 +6,10 @@ import { notification, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
 import logo from '../../assets/img/logo.png'
-import Global from '../../Global';
+import Global from '../../Global'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
-import Sticky from 'react-sticky-el';
+import Sticky from 'react-sticky-el'
+import { RiAddFill } from 'react-icons/ri'
 
 const NavWrapper = styled.ul`
 	li > a {
@@ -132,16 +133,24 @@ export default function Header({
 								</Link>
 							</li> */}
 						</NavWrapper>
-						<form className="d-flex">
+						<Link to="/flat/submit" onClick={() => localStorage.setItem('after_login', '/flat/submit')} className={`${Global.isMobile ? 'mb-5': ''}`}>
+							<span
+								style={{ outline: '3px black', outlineStyle: 'solid' }}
+								className="btn heder-btn d-lg-block fw-bold font-xss text-center lh-20 rounded  mr-3 pt-2 pb-2 pl-3 pr-3"
+							>
+								<RiAddFill size={25} /> Submit Property
+							</span>
+						</Link>
+						<form className={`${Global.isMobile ? 'pb-4 d-flex':''}`}>
 							<Link to="/login">
-								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
+								<span className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
 									Login
-								</a>
+								</span>
 							</Link>
 							<Link to="/signup">
-								<a className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss ms-2 w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
+								<span className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss ms-2 w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
 									Register
-								</a>
+								</span>
 							</Link>
 						</form>
 					</div>
@@ -223,7 +232,7 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to={"/flat/submit"}>
+				<Link to={'/flat/submit'}>
 					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i
@@ -296,41 +305,41 @@ export default function Header({
 					style={{ right: '9vw', width: '350px' }}
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
-						<>
-							{notifications.map((val, i) => {
-								if (i > 6) {
-									return null
-								}
-								const otherUser = val?.users_permissions_user
-								const user = val?.owner
-								return (
-									<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
-										<img
-											src={
-												otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
-											}
-											alt="user"
-											className="w40 position-absolute left-0"
-										/>
-										<Link to={otherUser ? `/user/${otherUser?.username}` : '#'}>
-											<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
-												{otherUser?.first_name || 'Someone'}{' '}
-												<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
-													{' '}
-													{moment(val?.created_at).fromNow()}
-												</span>
-											</h5>
-										</Link>
-										<h6 className="text-grey-500 fw-400 font-xssss lh-4">
-											{val?.title}
-										</h6>
-									</div>
-								)
-							})}
-							<div className="text-center">
-								<Link to="/notifications">View All</Link>
-							</div>
-						</>
+					<>
+						{notifications.map((val, i) => {
+							if (i > 6) {
+								return null
+							}
+							const otherUser = val?.users_permissions_user
+							const user = val?.owner
+							return (
+								<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+									<img
+										src={
+											otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
+										}
+										alt="user"
+										className="w40 position-absolute left-0"
+									/>
+									<Link to={otherUser ? `/user/${otherUser?.username}` : '#'}>
+										<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
+											{otherUser?.first_name || 'Someone'}{' '}
+											<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
+												{' '}
+												{moment(val?.created_at).fromNow()}
+											</span>
+										</h5>
+									</Link>
+									<h6 className="text-grey-500 fw-400 font-xssss lh-4">
+										{val?.title}
+									</h6>
+								</div>
+							)
+						})}
+						<div className="text-center">
+							<Link to="/notifications">View All</Link>
+						</div>
+					</>
 				</div>
 
 				<a

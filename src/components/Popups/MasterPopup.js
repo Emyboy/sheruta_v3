@@ -11,6 +11,7 @@ import {
 	getAllLocationKeyword,
 	getLocationKeyWordsByState,
 	getAllUniqueHabits,
+	getAllUserInspection,
 } from '../../redux/strapi_actions/view.action'
 import {
 	suggestThemForMe,
@@ -76,6 +77,7 @@ const MasterPopup = (props) => {
 			getForRealTime()
 			getForUser()
 			dispatch(getOtherStuffs())
+			dispatch(getAllUserInspection(user?.user?.id))
 		}
 		getForViews()
 		dispatch(getAllUniqueHabits())

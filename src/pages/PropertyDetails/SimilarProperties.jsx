@@ -48,7 +48,7 @@ export default function SimilarProperties({ data }) {
 						</Link>
 
 						<div className="info">
-							<h4 className="title usmall">
+							<h4 className="title usmall fw-600">
 								<Link
 									style={{ zIndex: 0 }}
 									to={{
@@ -59,11 +59,11 @@ export default function SimilarProperties({ data }) {
 									{val?.name}
 								</Link>
 							</h4>
-							<span>
+							<span className='mb-4'>
 								<i className="bx bx-map"></i> {val?.location?.slice(0, 20)}...
 							</span>
-							<div className="tag">{val?.categorie?.name}</div>
-							<div className="price">
+							{/* <div className="tag">{val?.categorie?.name}</div> */}
+							<div className="price mt-4">
 								{Global.currency}
 								{window.formatedPrice.format(data.price)}/{' '}
 							</div>

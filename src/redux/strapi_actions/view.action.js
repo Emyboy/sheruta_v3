@@ -6,8 +6,37 @@ import Notifications from '../../services/Notifications'
 import PaymentService from '../../services/PaymentService'
 import { getAppDetails } from '../../services/Sheruta'
 import store from '../store/store'
-import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions';
+import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions'
 
+const authHeader = {
+	authorization: `Bearer ${Cookies.get('token')}`,
+}
+
+export const getAllUserInspection = (user_id) => async (dispatch) => {
+	try {
+		const myInspections = await axios(
+			process.env.REACT_APP_API_URL + `/property-inspections/?owner=${user_id}`,
+			{
+				headers: authHeader,
+			}
+		)
+		const inspectionsIBelong = await axios(
+			process.env.REACT_APP_API_URL +
+				`/property-inspections/?guests_in=${user_id}`,
+			{
+				headers: authHeader,
+			}
+		)
+		dispatch({
+			type: 'SET_VIEW_STATE',
+			payload: {
+				inspections: [...myInspections.data, ...inspectionsIBelong.data],
+			},
+		})
+	} catch (error) {
+		return Promise.resolve(error)
+	}
+}
 
 export const getAllUniqueHabits = () => (dispatch) => {
 	axios(process.env.REACT_APP_API_URL + '/user-unique-habits')
@@ -15,8 +44,8 @@ export const getAllUniqueHabits = () => (dispatch) => {
 			dispatch({
 				type: 'SET_VIEW_STATE',
 				payload: {
-					unique_habits: res.data
-				}
+					unique_habits: res.data,
+				},
 			})
 		})
 		.catch((err) => {
@@ -84,16 +113,16 @@ export const getUserFeedback = () => (dispatch) => {
 					})
 				}
 			})
-			.catch((err) => {})
+			.catch((err) => {
+				return Promise.reject(err)
+			})
 	}, 5000)
 }
 
 export const getAuthPersonalInfo = () => async (dispatch) => {
 	let token = await Cookies.get('token')
 	axios(process.env.REACT_APP_API_URL + '/personal-infos/me', {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
+		headers: authHeader
 	})
 		.then((res) => {
 			store.dispatch({
@@ -120,7 +149,7 @@ export const getAuthPersonalInfo = () => async (dispatch) => {
 						configureView: true,
 					},
 				})
-			}else {
+			} else {
 				store.dispatch({
 					type: 'SET_VIEW_STATE',
 					payload: {
@@ -316,7 +345,7 @@ export const getRecentUsers = () => async (dispatch) => {
 			process.env.REACT_APP_API_URL +
 				`/users/?is_verified=true&_limit=10&_start=0&_sort=created_at:DESC`
 		)
-		
+
 		dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {
@@ -328,31 +357,35 @@ export const getRecentUsers = () => async (dispatch) => {
 	}
 }
 
-export const getLocationKeyWordsByState = (state_id) => async dispatch => {
+export const getLocationKeyWordsByState = (state_id) => async (dispatch) => {
 	try {
-		const res = await axios(process.env.REACT_APP_API_URL+`/location-keywords/?state=${state_id}`)
+		const res = await axios(
+			process.env.REACT_APP_API_URL + `/location-keywords/?state=${state_id}`
+		)
 		dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {
-				location_keywords: res.data
-			}
+				location_keywords: res.data,
+			},
 		})
 	} catch (error) {
-		return Promise.reject(error);
+		return Promise.reject(error)
 	}
 }
 
-export const getAllLocationKeyword = () => async dispatch => {
+export const getAllLocationKeyword = () => async (dispatch) => {
 	try {
-		const res = await axios(process.env.REACT_APP_API_URL+`/location-keywords`)
+		const res = await axios(
+			process.env.REACT_APP_API_URL + `/location-keywords`
+		)
 		dispatch({
 			type: 'SET_VIEW_STATE',
 			payload: {
-				location_keywords: res.data
-			}
+				location_keywords: res.data,
+			},
 		})
 	} catch (error) {
-		return Promise.reject(error);
+		return Promise.reject(error)
 	}
 }
 

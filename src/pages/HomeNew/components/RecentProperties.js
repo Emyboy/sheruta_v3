@@ -38,7 +38,6 @@ export default function RecentProperties() {
 								className={`"col-sm-12 col-md-6 col-lg-4 ${
 									Global.isMobile ? 'mr-0 pl-0' : 'mr-4'
 								}`}
-								// style={{ width: '40rem' }}
 								key={`prop-${val?.id}`}
 							>
 								<EachDemoProperty data={val} />

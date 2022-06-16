@@ -8,7 +8,7 @@ import { formatPropertyURL } from '../../pages/Properties/EachProperty'
 export default function EachDemoProperty({ data }) {
 	return (
 		<div
-			className="owl-item active mb-4 "
+			className="mb-4 "
 			style={{ width: Global.isMobile ? '330px' : '400px' }}
 		>
 			<div className="featured-item-box">

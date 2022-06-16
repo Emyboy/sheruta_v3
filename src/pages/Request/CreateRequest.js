@@ -338,7 +338,7 @@ const CraeteRequest = (props) => {
 	}
 
 	if (!auth?.user) {
-		return <Redirect to="/login" />
+		return <Redirect to="/signup" />
 	}
 	if (!props.view.personal_info) {
 		return null

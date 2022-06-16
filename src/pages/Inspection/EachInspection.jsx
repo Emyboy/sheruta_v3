@@ -67,7 +67,7 @@ export default function EachInspection({ data, index }) {
 						</figure>
 						<div className="clearfix"></div>
 						<h4 className="fw-700 text-grey-700 font-xsss mt-3 mb-1">
-							{user?.user?.id === data?.owner?.id ? 'Your' : data?.first_name}{' '}
+							{user?.user?.id === data?.owner?.id ? 'Your' : data?.owner?.first_name?.split(' ')[0]+"'s"}{' '}
 							Group
 						</h4>
 						<p className="fw-500 font-xsssss text-grey-500 mt-0 mb-3">

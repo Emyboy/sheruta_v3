@@ -10,47 +10,7 @@ export default function Inspection() {
 	const { user } = useSelector((state) => state.auth)
 	const [ownersGroup, setOwnersGroup] = useState([])
 	const [getGroups, setGuestGroup] = useState([])
-
-	const getUserInspection = useCallback(async () => {
-		try {
-			const res = await axios(
-				process.env.REACT_APP_API_URL +
-					`/property-inspections/?owner=${user?.user?.id}`,
-				{
-					headers: {
-						authorization: `Bearer ${Cookies.get('token')}`,
-					},
-				}
-			)
-
-			setOwnersGroup(res.data)
-		} catch (error) {
-			return Promise.reject(error)
-		}
-	}, [])
-
-	const getUserInvitedInspection = useCallback(async () => {
-		try {
-			const res = await axios(
-				process.env.REACT_APP_API_URL +
-					`/property-inspections/?guests_in=${user?.user?.id}`,
-				{
-					headers: {
-						authorization: `Bearer ${Cookies.get('token')}`,
-					},
-				}
-			)
-
-			setGuestGroup(res.data)
-		} catch (error) {
-			return Promise.reject(error)
-		}
-	}, [])
-
-	useEffect(() => {
-		getUserInspection()
-		getUserInvitedInspection()
-	}, [getUserInspection, getUserInvitedInspection])
+	const { inspections } = useSelector(state => state?.view);
 
 	if(!user){
 		return <Redirect to='/' />
@@ -65,7 +25,7 @@ export default function Inspection() {
 					</div>
 				</div>
 				<div className="row ps-2 pe-1 mb-4">
-					{ownersGroup?.map((val, i) => {
+					{inspections.filter(x => x?.owner?.id == user?.user?.id)?.map((val, i) => {
 						return (
 							<EachInspection key={`insp-${i}`} data={val} index={i + 100} />
 						)
@@ -77,7 +37,7 @@ export default function Inspection() {
 					</div>
 				</div>
 				<div className="row ps-2 pe-1">
-					{getGroups?.map((val, i) => {
+					{inspections.filter(x => x?.owner?.id != user?.user?.id)?.map((val, i) => {
 						return (
 							<EachInspection key={`insp-${i}`} data={val} index={i + 110} />
 						)
