@@ -26,14 +26,13 @@ export default function RecentProperties() {
 		<div className="featured-area ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Our featured flats</h3>
+					<h3>Find the neighbourhood for you</h3>
 					<p>
-						Take your time to find the best room or apartment that fits your
-						requirement.
+						Move into your preffered neighbourhood with little or no stress.
 					</p>
 				</div>
 				<div className="d-flex" style={{ overflowX: 'scroll' }}>
-					{list.map((val) => {
+					{list?.map((val) => {
 						return (
 							<div
 								className={`"col-sm-12 col-md-6 col-lg-4 ${

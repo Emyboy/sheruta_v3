@@ -15,17 +15,16 @@ export default function HomeJoinPaddy() {
 
 					<div className="col-lg-6 col-md-12">
 						<div className="solution-content text-white">
-							<h3 className='text-grey-600'>Join Paddy Find Best Property</h3>
-							<p className='text-white'>
-								Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin
-								lorem quis bibendum auctor nisi elit consequat ipsum nec
-								sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-								cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec
-								tellus a odio tincidunt auctor a ornare odio.
+							<h3 className="text-grey-600">Joinpaddy - Find Home Together</h3>
+							<p className="text-white">
+								New Feature - Now you can join together with friends and
+								preferred contacts in the community to inspect, rent and move
+								into your preferred property or space.
 							</p>
-							<p className='text-white'>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							<p className="text-white">
+								Simply search for properties in your preferred neighbourhood,
+								invite prospective roommates to book inspection together with an
+								agent. Click on button below to get started.
 							</p>
 
 							<div className="solution-btn">

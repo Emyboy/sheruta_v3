@@ -52,7 +52,6 @@ export const EachLocationKeyword = ({ val }) => {
 					`/properties/count/?location_keyword=${val?.id}`
 			)
 			setCount(res.data)
-			console.log('THE COUNT --', res.data)
 		} catch (error) {
 			return Promise.reject(error)
 		}

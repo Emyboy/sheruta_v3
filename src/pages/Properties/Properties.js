@@ -17,7 +17,6 @@ import {
 } from '../../redux/strapi_actions/properties.action'
 import { BiSearchAlt } from 'react-icons/bi'
 import { useLocation, useParams } from 'react-router'
-import LocationKeywordService from '../../services/LocationKeywordService'
 import PropertiesService from '../../services/PropertiesServices'
 import loadingGIF from '../../assets/img/loading.gif'
 import { Dots } from 'react-activity'
@@ -47,11 +46,8 @@ export default function Properties(props) {
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
 	const defaultTabs = ['Grid View', 'Map View', 'User View']
-	const [tabs] = useState(defaultTabs)
 	const [tab, setTab] = useState(defaultTabs[0])
 	const [pageState, setPageState] = useState('loading')
-
-	const [location_keyword, setLocationKeyword] = useState(null)
 
 	const getPropertiesViaULR = useCallback(async () => {
 		try {
@@ -68,8 +64,16 @@ export default function Properties(props) {
 				setPageState('loaded')
 			}
 		} catch (error) {
-			console.log('SEARCH ERROR ---', error)
 			setPageState('404')
+			return Promise.reject(error)
+		}
+	}, [])
+
+	const getRecentProperties = useCallback(async () => {
+		try {
+			const res = await PropertiesService.getRecentProperties(1)
+			setList(res.data);
+		} catch (error) {
 			return Promise.reject(error)
 		}
 	}, [])
@@ -77,6 +81,8 @@ export default function Properties(props) {
 	useEffect(() => {
 		if (props?.location?.search) {
 			getPropertiesViaULR()
+		} else {
+			getRecentProperties()
 		}
 	}, [getPropertiesViaULR, props?.location?.search])
 

@@ -93,8 +93,9 @@ export default function Header({
 									Our Services
 								</a>
 								<ul
-									className="dropdown-menu dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow hide"
+									className="dropdown-menu dropdown-menu dropdown-menu-end p-1 rounded-xxxxl border-0 hide"
 									aria-labelledby="navbarDropdown"
+									style={{ width: Global.isMobile ? '60vw':'20vw' }}
 								>
 									<li>
 										<Link className="dropdown-item" to="/services/for_share">
