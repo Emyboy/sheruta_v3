@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { notification, Tooltip } from 'antd'
+import { Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
 import logo from '../../assets/img/logo.png'
 import Global from '../../Global'
-import PaymentAlert from '../PaymentAlert/PaymentAlert'
-import Sticky from 'react-sticky-el'
+
 import { RiAddFill } from 'react-icons/ri'
 
 const NavWrapper = styled.ul`

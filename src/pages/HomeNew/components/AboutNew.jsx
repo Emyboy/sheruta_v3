@@ -15,23 +15,23 @@ export default function AboutNew() {
 
 					<div className="col-lg-6 col-md-12">
 						<div className="solution-content">
-							<h3>What do we do?</h3>
+							<h3>Why Post Your Space?</h3>
 							<p>
-								We are an online housing assistance platform providing Nigerians
-								with easier and safer housing through shared apartments and
-								more, Our mission is to help reduce cost of rent for young
-								Nigerians in the urban sides of the country
+								Vet and select verified prospective flatmates and occupants
+								within the community, from professionals to entrepreneurs and
+								students, the choice is yours. click button below to get
+								started.
 							</p>
 							<p>
-								Flatmate search made better. Co-living is here to stay and we
-								are building a community of verified or verifiable working class
-								members. We also provide peer to peer rentals to help secure
-								that apartment with little or no stress required.
+								Vet and select verified prospective flatmates and occupants
+								within the community, from professionals to entrepreneurs and
+								students, the choice is yours. click button below to get
+								started.
 							</p>
 
 							<div className="solution-btn">
-								<Link to='/about' className="default-btn">
-									CONTACT US NOW <span></span>
+								<Link to="/flat/submit" className="default-btn text-white">
+									Post Now <span></span>
 								</Link>
 							</div>
 						</div>

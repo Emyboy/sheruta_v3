@@ -20,9 +20,10 @@ export default function HomeFeatures() {
 		<div className="facilities-area pt-100 pb-70">
 			<div className="container">
 				<div className="section-title">
-					<h3>Awesome Features</h3>
+					<h3>Why Subscribe</h3>
 					<p>
-						As the community grows we create more features to meet the needs of our users.
+						Gain access to our awesome features designed for you to get the best
+						value.
 					</p>
 				</div>
 
@@ -32,10 +33,7 @@ export default function HomeFeatures() {
 							<div className="col-lg-4 col-md-6" key={`feat-${i}`}>
 								<div className="single-facilities">
 									<div className="image">
-										<img
-											src={val.img}
-											alt="feature"
-										/>
+										<img src={val.img} alt="feature" />
 									</div>
 
 									<h3>{val?.name}</h3>
@@ -43,9 +41,6 @@ export default function HomeFeatures() {
 							</div>
 						)
 					})}
-
-				
-				
 				</div>
 			</div>
 		</div>

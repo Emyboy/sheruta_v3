@@ -26,9 +26,10 @@ export default function RecentProperties() {
 		<div className="featured-area ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Our Featured Flats</h3>
+					<h3>Our featured flats</h3>
 					<p>
-						We take our time to find flat for share for our users on demand, register today and join the community.
+						Take your time to find the best room or apartment that fits your
+						requirement.
 					</p>
 				</div>
 				<div className="d-flex" style={{ overflowX: 'scroll' }}>

@@ -23,13 +23,13 @@ export default function HomeNew() {
 		<Layout>
 			<Helmet>
 				<title>
-					Flats for share in Lagos | Sheruta
+					Flats for share in Lekki, Yaba, Surulere | Sheruta
 				</title>
 			</Helmet>
 			<HomeHero />
+			<RecentProperties />
 			<AboutNew />
 			<HomeFeatures />
-			<RecentProperties />
 			<HomeJoinPaddy />
 			<LocationKeywords />
 			<Footer />

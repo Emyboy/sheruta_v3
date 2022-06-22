@@ -21,7 +21,7 @@ export default function LocationKeywords() {
 				</div>
 
 				<div className="row justify-content-center">
-					{location_keywords.map((val, i) => {
+					{location_keywords?.map((val, i) => {
 						return (
 							<EachLocationKeyword key={`location-keyword-${i}`} val={val} />
 						)
