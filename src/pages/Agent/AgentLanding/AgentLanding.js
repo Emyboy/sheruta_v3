@@ -1,5 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router'
 import Footer from '../../../components/Footer'
 import Layout from '../../../components/Layout/Layout'
 import AboutNew from '../../HomeNew/components/AboutNew'
@@ -8,6 +10,12 @@ import AgentHero from './components/AgentHero'
 import AgentReview from './components/AgentReview'
 
 export default function AgentLanding() {
+	const { user } = useSelector(state => state.auth);
+
+	if(user){
+		return <Redirect to='/' />
+	}
+
 	return (
 		<Layout>
             <Helmet>

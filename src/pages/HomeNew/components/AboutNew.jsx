@@ -4,7 +4,7 @@ import img from '../img/afro.jpg'
 
 export default function AboutNew() {
 	return (
-		<div className="solution-area ptb-100 bg-white">
+		<div className="solution-area pt-5 bg-white">
 			<div className="container">
 				<div className="row align-items-center">
 					<div className="col-lg-6 col-md-12">

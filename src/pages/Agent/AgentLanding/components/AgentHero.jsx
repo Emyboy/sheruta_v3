@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../../../assets/images/main-banner/banner-1.jpg'
@@ -17,7 +18,7 @@ export default function AgentHero() {
 								data-wow-duration="1000ms"
 								// style="visibility: visible; animation-duration: 1000ms; animation-delay: 100ms; animation-name: fadeInUp;"
 							>
-								Join the fastest flat share community in africa.
+								Join the fastest growing flat share community in africa.
 							</h1>
 							<p
 								className="wow animate__ animate__fadeInUp animated"
@@ -25,7 +26,7 @@ export default function AgentHero() {
 								data-wow-duration="1500ms"
 								// style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;"
 							>
-								Become a partner agent today.
+								Get more client as agent
 							</p>
 						</div>
 					</div>
@@ -44,7 +45,11 @@ export default function AgentHero() {
 					)}
 				</div>
 				<div className="tab main-banner-list-tab wow animate__ animate__fadeInUp animated">
-					<Link to="/signup" className=" default-btn">
+					<Link
+						to="/agents/signup"
+						className=" default-btn"
+						onClick={() => Cookies.set('agent', true, {expires: 2 })}
+					>
 						Get Started
 					</Link>
 				</div>

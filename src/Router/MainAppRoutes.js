@@ -51,17 +51,18 @@ import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 import Home from '../pages/HomeNew/HomeNew';
-import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
-
+import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding';
+import Properties from '../pages/Properties/Properties'
+import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
-const Properties = React.lazy(() => import('../pages/Properties/Properties'))
+// const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
 // const Home = React.lazy(() => import('../pages/Home/Home'))
-const PropertyDetails = React.lazy(() =>
-	import('../pages/PropertyDetails/PropertyDetails')
-)
+// const PropertyDetails = React.lazy(() =>
+// 	import('../pages/PropertyDetails/PropertyDetails')
+// )
 const CreateRequest = React.lazy(() => import('../pages/Request/CreateRequest'))
 const GetStarted = React.lazy(() => import('../pages/GetStarted/GetStarted'))
 const Login = React.lazy(() => import('../pages/Login/Login'))

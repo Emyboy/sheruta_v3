@@ -10,6 +10,7 @@ import { getUser } from '../../redux/strapi_actions/auth.actions'
 
 
 export default function AgentSignup() {
+	localStorage.setItem('after_login', "/agent/signup")
 	const { user } = useSelector((state) => state.auth)
 	const [weMove, setWeMove] = useState(false)
 	const dispatch = useDispatch()
@@ -56,7 +57,7 @@ export default function AgentSignup() {
 	// }
 
 	if (!user) {
-		localStorage.setItem('after_login', '/agents')
+		localStorage.setItem('after_login', '/agents/signup')
 		return <Redirect to="/signup" />
 	}
 	return (

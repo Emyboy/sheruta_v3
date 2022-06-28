@@ -18,11 +18,11 @@ export default class UserService {
 
 	static async updateProfile(update) {
 		const token = Cookies.get("token");
-		if(token){
+		if (token && store.getState().auth?.user) {
 			const data = await axios(
 				process.env.REACT_APP_API_URL +
 					`/users-permissions/auth/local/edit/${
-						store.getState().auth.user.user.id
+						store.getState().auth?.user?.user?.id
 					}`,
 				{
 					headers: {

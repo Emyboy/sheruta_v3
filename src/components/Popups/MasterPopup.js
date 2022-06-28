@@ -117,7 +117,7 @@ const MasterPopup = (props) => {
 	if (user) {
 		return (
 			<>
-				<ConfigViewPopup />
+				{!Cookies.get('agent') && <ConfigViewPopup />}
 				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
 				{/* {Global.PLATFORM !== 'iPhone' && (
