@@ -88,7 +88,7 @@ export default function Settings({ match }) {
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>
 												</li> */}
-												<li className="list-inline-item d-block border-bottom me-0 pl-0">
+												{/* <li className="list-inline-item d-block border-bottom me-0 pl-0">
 													<Link
 														to={'/settings/deactivate-account'}
 														className="pt-2 pb-2 d-flex align-items-center"
@@ -102,7 +102,7 @@ export default function Settings({ match }) {
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3 mr-3"></i>
 													</Link>
-												</li>
+												</li> */}
 												<li className="list-inline-item d-block border-bottom me-0 pl-0">
 													<Link
 														to="/settings/locations-settings"
