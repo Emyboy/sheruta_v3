@@ -6,7 +6,7 @@ export default class MessageService {
     static async getUserConversations() {
         const user = store.getState().auth.user?.user;
         const conv1 = await axios(
-            process.env.REACT_APP_API_URL + `/conversations/?owner=${user.id}`,
+            process.env.REACT_APP_API_URL + `/conversations/?owner=${user?.id}`,
             {
                 headers: {
                     authorization: `Bearer ${Cookies.get("token")}`,
@@ -14,7 +14,7 @@ export default class MessageService {
             },
         );
         const conv2 = await axios(
-            process.env.REACT_APP_API_URL + `/conversations/?guest=${user.id}`,
+            process.env.REACT_APP_API_URL + `/conversations/?guest=${user?.id}`,
             {
                 headers: {
                     authorization: `Bearer ${Cookies.get("token")}`,
