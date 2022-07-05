@@ -51,7 +51,7 @@ export default function AcceptedMatchList({ list }) {
 												{val?.personal_info?.looking_for ? 'Budget' : 'Rent'}
 											</b>{' '}
 											{Global.currency}
-											{window.formatedPrice.format(person?.budget)}
+											{window.formattedPrice.format(person?.budget)}
 										</p>
 									</Link>
 								</div>

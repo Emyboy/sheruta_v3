@@ -46,7 +46,7 @@ export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
 											@{user.username}
 										</span> */}
 				<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-700">
-					Budget: ₦{window.formatedPrice.format(user.budget)}
+					Budget: ₦{window.formattedPrice.format(user.budget)}
 				</span>
 			</h4>
 			<a

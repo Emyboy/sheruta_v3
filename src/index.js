@@ -6,7 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 
-window.formatedPrice = new Intl.NumberFormat('en-NG')
+window.formattedPrice = new Intl.NumberFormat('en-NG')
 
 ReactDOM.render(
   <React.StrictMode>

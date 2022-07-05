@@ -281,7 +281,7 @@ export default function RequestDetails(props) {
 													<div>
 														<small className="mb-0">Total Rent</small>
 														<h2 className="mt-1 fw-700">
-															₦ {window.formatedPrice.format(request?.budget)}{' '}
+															₦ {window.formattedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
@@ -313,7 +313,7 @@ export default function RequestDetails(props) {
 															<small className="mb-0">Rent Per Room</small>
 															<h2 className="mt-1 fw-700">
 																₦{' '}
-																{window.formatedPrice.format(
+																{window.formattedPrice.format(
 																	request?.rent_per_room
 																)}{' '}
 																<small className="text-muted">
@@ -434,7 +434,7 @@ export default function RequestDetails(props) {
 																		Rent
 																	</strong>
 																	<br />₦{' '}
-																	{window.formatedPrice.format(request?.budget)}
+																	{window.formattedPrice.format(request?.budget)}
 																</li>
 																{request?.rent_per_room && (
 																	<li className="col-6 col-md-3 mb-3">
@@ -442,7 +442,7 @@ export default function RequestDetails(props) {
 																			Per Room
 																		</strong>
 																		<br />₦{' '}
-																		{window.formatedPrice.format(
+																		{window.formattedPrice.format(
 																			request?.rent_per_room
 																		)}
 																	</li>

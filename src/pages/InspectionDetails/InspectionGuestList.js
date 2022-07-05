@@ -67,7 +67,7 @@ const EachGuest = ({ val, pending, group }) => {
 							} me-2`}
 						></span>
 						<h6 className="text-grey-600 fw-400 font-xsss mt-2">
-							{Global.currency} {window.formatedPrice.format(val.budget)} -
+							{Global.currency} {window.formattedPrice.format(val.budget)} -
 							Budget
 						</h6>
 					</h6>

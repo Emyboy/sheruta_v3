@@ -75,7 +75,7 @@ export default function AgentCard({ val }) {
 					<li className="m-2">
 						<h4 className="fw-700 font-sm">
 							{Global.currency}{' '}
-							{window.formatedPrice.format(agent?.inspection_fee)}{' '}
+							{window.formattedPrice.format(agent?.inspection_fee)}{' '}
 							<span className="font-xsss fw-500 mt-1 text-grey-500 d-block">
 								Inspection Fee
 							</span>

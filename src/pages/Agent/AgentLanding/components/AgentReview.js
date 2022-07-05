@@ -1,38 +1,39 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Global from '../../../../Global'
+import requestUtils from '../../../../utils/request.utils'
 
-const EachReview = () => {
+const EachReview = ({ val }) => {
+	const user = val.users_permissions_user
 	return (
 		<div className="col-lg-4 ">
 			<div className="owl-item">
 				<div className="customers-item">
-					<div className="customers-info">
+					<Link className="customers-info" to={`${requestUtils.renderRequestURL(val)}`}>
 						<div className="image">
-							<img src="assets/images/customers/image-2.jpg" alt="image" />
+							<img src={user?.avatar_url} alt="image" />
 						</div>
 
-						<h4>John Smith</h4>
-						<span>Restaurant Owner</span>
-					</div>
+						<h4>{val?.users_permissions_user?.first_name?.split(' ')[0]}</h4>
+						<span>
+							{val?.body && val?.body?.slice(0, 120)}
+							<a className="fw-600 text-theme ms-2">See more</a>
+						</span>
+					</Link>
 					<p>
-						Proin gravida nibh vel velit attor aliquet. Aenean sollicitudin
-						lorem quis bibendum auctor.
+						Budget:{' '}
+						<strong>
+							{Global.currency}
+							{window.formattedPrice.format(val?.budget)}
+						</strong>
 					</p>
 
 					<ul className="rating-list">
 						<li>
-							<i className="bx bxs-star"></i>
-						</li>
-						<li>
-							<i className="bx bxs-star"></i>
-						</li>
-						<li>
-							<i className="bx bxs-star"></i>
-						</li>
-						<li>
-							<i className="bx bxs-star"></i>
-						</li>
-						<li className="color-gray">
-							<i className="bx bxs-star"></i>
+							<a href={`tel:${user?.phone_number}`} className="btn bg-theme text-white">
+								Call Me <i className="bx bxs-phone text-white"></i>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -42,15 +43,30 @@ const EachReview = () => {
 }
 
 export default function AgentReview() {
+	const [data, setData] = useState([])
+
+	useEffect(() => {
+		;(async () => {
+			try {
+				const res = await axios(
+					process.env.REACT_APP_API_URL +
+						`/property-requests/?is_searching=true&_limit=3`
+				)
+				setData(res.data)
+			} catch (error) {
+				return Promise.reject(error)
+			}
+		})()
+	}, [])
+
 	return (
 		<div className="new-added-properties-area bg-201c2d ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Our Reviews By Customers</h3>
+					<h3>Our communities request</h3>
 					<p>
-						Proin gravida nibh vel velit auctor aliquet aenean sollicitudin
-						lorem quis bibendum auctor nisi elit consequat ipsum nec sagittis
-						sem nibh id elit.
+						Here are some request made by community members, list your your
+						spaces to reach more like them.
 					</p>
 				</div>
 
@@ -59,9 +75,9 @@ export default function AgentReview() {
 						className="owl-stage-outer owl-height row"
 						// style={{ height: '405.188px' }}
 					>
-						<EachReview />
-						<EachReview />
-						<EachReview />
+						{data.map((val, i) => {
+							return <EachReview key={`review-${i}`} val={val} />
+						})}
 					</div>
 					{/* <div className="owl-nav">
 						<button type="button" role="presentation" className="owl-prev">

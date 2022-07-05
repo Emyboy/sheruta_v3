@@ -144,7 +144,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					<ul className="rating-list">
 						<h3 className="font-grey-300 mb-0">
 							{Global?.currency}
-							{window.formatedPrice.format(data.price)}{' '}
+							{window.formattedPrice.format(data.price)}{' '}
 							<span className="font-xss text-grey-500 mb-0">
 								/ {data.payment_type && data.payment_type.abbreviation}
 							</span>{' '}

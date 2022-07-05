@@ -159,7 +159,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 										{data?.personal_info?.looking_for ? "Budget" : "Total Rent"}{' '}
 									</b>
 									{Global.currency}
-									{window.formatedPrice.format(users_permissions_user?.budget)}
+									{window.formattedPrice.format(users_permissions_user?.budget)}
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Joined: </b>

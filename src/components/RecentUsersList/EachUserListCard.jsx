@@ -88,7 +88,7 @@ export default function EachUserListCard({ data }) {
 						</h4>
 						<p className="fw-500 font-xsssss text-grey-500 mt-0 mb-3">
 							{Global?.currency}
-							{window.formatedPrice.format(data?.budget)}
+							{window.formattedPrice.format(data?.budget)}
 						</p>
 					</div>
 					{user && (

@@ -62,7 +62,7 @@ export default function ProfileAbout({ user }) {
 				<h4 className="fw-700 font-xsss text-grey-900 mt-3 mb-1">Budget</h4>
 				<p className="fw-500 text-grey-500 lh-24 font-xxxl mb-0">
 					{Global?.currency}
-					{window.formatedPrice.format(user?.budget)}
+					{window.formattedPrice.format(user?.budget)}
 				</p>
 				<button
 					className="text-center mt-3 btn fw-bold"

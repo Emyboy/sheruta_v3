@@ -59,7 +59,7 @@ export default function EachDemoProperty({ data }) {
 							</Link>
 						</h3>
 						<p className="font-lg">
-							{Global.currency} {window.formatedPrice.format(data?.price)}
+							{Global.currency} {window.formattedPrice.format(data?.price)}
 						</p>
 
 						<ul className="featured-list">

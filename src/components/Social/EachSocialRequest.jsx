@@ -202,7 +202,7 @@ function EachRequest({ data }) {
 							{' '}
 							<b style={{ fontSize: '17px' }} className="text-grey-600">
 								{Global.currency}
-								{window.formatedPrice.format(
+								{window.formattedPrice.format(
 									data?.rent_per_room ? data?.rent_per_room : data?.budget
 								)}{' '}
 								{data?.payment_type && (
@@ -449,7 +449,7 @@ export default memo(EachRequest)
 //                                         {" "}
 //                                         <b>
 //                                             ₦
-//                                             {window.formatedPrice.format(
+//                                             {window.formattedPrice.format(
 //                                                 data?.budget,
 //                                             )}
 //                                         </b>

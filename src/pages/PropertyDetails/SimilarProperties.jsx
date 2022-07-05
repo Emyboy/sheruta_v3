@@ -65,7 +65,7 @@ export default function SimilarProperties({ data }) {
 							{/* <div className="tag">{val?.categorie?.name}</div> */}
 							<div className="price mt-4">
 								{Global.currency}
-								{window.formatedPrice.format(data.price)}/{' '}
+								{window.formattedPrice.format(data.price)}/{' '}
 							</div>
 						</div>
 					</article>

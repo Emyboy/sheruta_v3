@@ -38,7 +38,7 @@ export default function EachProperty({ data }) {
 						</div>
 						<div className="price">
 							{Global.currency}
-							{window.formatedPrice.format(data.price)}/{' '}
+							{window.formattedPrice.format(data.price)}/{' '}
 							<span>
 								{data?.payment_type && data?.payment_type?.abbreviation}
 							</span>
@@ -201,7 +201,7 @@ export default function EachProperty({ data }) {
 	// 			<div className="clearfix"></div>
 	// 			<span className="font-lg fw-700 mt-0 pe-3 ls-2 lh-32 d-inline-block text-success float-left">
 	// 				<span className="font-xs">{Global.currency}</span>{' '}
-	// 				{window.formatedPrice.format(data.price)}
+	// 				{window.formattedPrice.format(data.price)}
 	// 				<span className="font-xssss text-grey-500">
 	// 					/ {data?.payment_type && data?.payment_type?.abbreviation}
 	// 				</span>{' '}

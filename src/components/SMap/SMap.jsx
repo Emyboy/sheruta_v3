@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import Global from '../../Global'
 import { Popover } from 'antd'
@@ -8,6 +8,8 @@ import EachProperty, {
 import { Link } from 'react-router-dom'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import { FaBath, FaBed, FaToilet } from 'react-icons/fa'
+import { MdMap } from 'react-icons/md';
+import { ImLocation } from 'react-icons/im'
 
 const iconSize = 19
 
@@ -66,7 +68,7 @@ export const HoverDetails = ({ data }) => {
 				<div className="clearfix"></div>
 				<span className="font-lg fw-700 mt-0 pe-3 ls-2 lh-32 d-inline-block text-success float-left">
 					<span className="font-xs">{Global.currency}</span>{' '}
-					{window.formatedPrice.format(data.price)}
+					{window.formattedPrice.format(data.price)}
 					<span className="font-xssss text-grey-500">
 						/ {data?.payment_type && data?.payment_type?.abbreviation}
 					</span>{' '}
@@ -91,46 +93,93 @@ const Marker = (props) => {
 			content={<HoverDetails data={data} />}
 			style={{ width: '300px', minWidth: '300px', background: 'none' }}
 		>
-			<div
+			{/* <div
 				className="card badge shadow p-2 m-3 rounded-xxxl"
 				style={{ zIndex: '60px' }}
 			>
 				<h3 className="m-0 fw-bold">
 					{Global?.currency}
-					{window.formatedPrice.format(data.price)}
+					{window.formattedPrice.format(data.price)}
 				</h3>
-			</div>
+			</div> */}
+			<ImLocation className='text-shadow text-danger' size={40} />
 		</Popover>
 	)
 }
 
 export default function SMap({ properties }) {
-	const defaultProps = {
+	const [show, setShow] = useState(false)
+	const [defaultProps, setDefaultProps] = useState({
 		center: {
-			lat: 8.6753,
-			lng: 9.082,
+			lat: 6.4502399,
+			lng: 3.4351375,
 		},
-		zoom: 12,
+		// zoom: 11,
+	})
+
+	// console.log('EACH PROPS --', properties)
+	useEffect(() => {
+		for (var val of properties) {
+			console.log('THE VAL --', val)
+			if (
+				val?.google_location?.geometry?.location?.lat &&
+				val?.google_location?.geometry?.location?.lng
+			) {
+				console.log('FOUND --', val?.id)
+				setDefaultProps({
+					...defaultProps,
+					center: {
+						lat: val?.google_location?.geometry?.location?.lat,
+						lng: val?.google_location?.geometry?.location?.lng,
+					},
+				});
+				setShow(true)
+				break
+			}
+		}
+	}, [properties])
+
+	console.log('DEFAULT THINGS ---', defaultProps)
+
+	if (!show) {
+		return (
+			<div className='d-flex justify-content-center align-items-center h-100 text-center'>
+				<div>
+					<MdMap size={60} className="text-grey-500" />
+					<h2 className='text-grey-500'>Map Will Show Here</h2>
+				</div>
+			</div>
+		)
 	}
 
 	return (
 		<GoogleMapReact
 			bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_PLACES_API_KEY }}
 			defaultCenter={{
-				lat: properties[0]?.google_location?.geometry?.location?.lat || 8.6753,
-				lng: properties[0]?.google_location?.geometry?.location?.lng || 9.082,
+				lat: defaultProps.center.lat,
+				lng: defaultProps.center.lng,
 			}}
-			defaultZoom={properties?.length == 0 ? 6 : defaultProps.zoom}
+			// defaultZoom={properties?.length == 0 ? 6 : defaultProps.zoom}
+			zoom={12}
 		>
 			{properties?.map((val, i) => {
-				return (
-					<Marker
-						key={`marker-${i}`}
-						data={val}
-						lat={val?.google_location?.geometry?.location?.lat}
-						lng={val?.google_location?.geometry?.location?.lng}
-					/>
-				)
+				// console.log("EACH MARKER",{
+				// 	lat: val?.google_location?.geometry?.location?.lat,
+				// 	lng: val?.google_location?.geometry?.location?.lng,
+				// })
+				if (
+					val?.google_location?.geometry?.location?.lng ||
+					val?.google_location?.geometry?.location?.lat
+				) {
+					return (
+						<Marker
+							key={`marker-${i}`}
+							data={val}
+							lat={val?.google_location?.geometry?.location?.lat}
+							lng={val?.google_location?.geometry?.location?.lng}
+						/>
+					)
+				}
 			})}
 		</GoogleMapReact>
 	)

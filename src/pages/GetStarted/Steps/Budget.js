@@ -34,7 +34,7 @@ export default function Budget(props) {
 			</div>
 			<h1 className="fw-bold">
 				{Global.currency}
-				{window.formatedPrice.format(budget)}
+				{window.formattedPrice.format(budget)}
 			</h1>
 			<div className="row justify-content-center">
 				<div className="col-lg-6 mb-3">

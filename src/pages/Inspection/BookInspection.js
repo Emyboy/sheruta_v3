@@ -241,7 +241,7 @@ export default function BookInspection({ match }) {
 										<h4 className="fw-bold text-grey-700">{property?.name}</h4>
 										<h3 className="fw-500">
 											{Global.currency}
-											{window.formatedPrice.format(property?.price)}
+											{window.formattedPrice.format(property?.price)}
 										</h3>
 									</div>
 								</div>

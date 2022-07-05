@@ -18,15 +18,26 @@ export default function AgentHero() {
 								data-wow-duration="1000ms"
 								// style="visibility: visible; animation-duration: 1000ms; animation-delay: 100ms; animation-name: fadeInUp;"
 							>
-								Join the fastest growing flat share community in africa.
+								Become an partner.
 							</h1>
 							<p
-								className="wow animate__ animate__fadeInUp animated"
+								className="wow animate__ animate__fadeInUp animated mt-5"
 								data-wow-delay="200ms"
 								data-wow-duration="1500ms"
 								// style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;"
 							>
-								Get more client as agent
+								There has been a recent increase in the demand for shared
+								spaces, become a partner agent to meet this demand.
+							</p>
+							<p
+								className="wow animate__ animate__fadeInUp animated mt-5"
+								data-wow-delay="200ms"
+								data-wow-duration="1500ms"
+								// style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;"
+							>
+								List available room and apartments in your area of operation and
+								get verified working class occupants for your properties. Click
+								on button below to begin registration
 							</p>
 						</div>
 					</div>
@@ -48,7 +59,7 @@ export default function AgentHero() {
 					<Link
 						to="/agents/signup"
 						className=" default-btn"
-						onClick={() => Cookies.set('agent', true, {expires: 2 })}
+						onClick={() => Cookies.set('agent', true, { expires: 2 })}
 					>
 						Get Started
 					</Link>
