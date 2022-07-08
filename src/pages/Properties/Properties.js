@@ -4,21 +4,16 @@ import Layout from '../../components/Layout/Layout'
 import EachProperty from './EachProperty'
 // import { HiFilter } from 'react-icons/hi'
 import { Form, Select } from 'antd'
-import { getLocationKeyWordsByState } from '../../redux/strapi_actions/view.action'
 import { Alert, Button } from 'react-bootstrap'
 import Sticky from 'react-sticky-el'
 import Global from '../../Global'
 import store from '../../redux/store/store'
 import SMap from '../../components/SMap/SMap'
 import { Helmet } from 'react-helmet'
-import {
-	getAllRecentProperties,
-	getPropertiesByLocationKeyword,
-} from '../../redux/strapi_actions/properties.action'
+import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 import { BiSearchAlt } from 'react-icons/bi'
-import { useLocation, useParams } from 'react-router'
+import { useHistory, useLocation, useParams } from 'react-router'
 import PropertiesService from '../../services/PropertiesServices'
-import loadingGIF from '../../assets/img/loading.gif'
 import { Dots } from 'react-activity'
 
 const { Option } = Select
@@ -42,6 +37,7 @@ export default function Properties(props) {
 	const { location_keywords, categories, services } = useSelector(
 		(state) => state.view
 	)
+	const history = useHistory()
 	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
@@ -67,26 +63,38 @@ export default function Properties(props) {
 			setPageState('404')
 			return Promise.reject(error)
 		}
-	}, [])
+	}, [props?.location?.search])
 
 	const getRecentProperties = useCallback(async () => {
 		try {
+			setPageState('loading')
 			const res = await PropertiesService.getRecentProperties(1)
-			setList(res.data);
+			setList(res.data)
+			if (res.data.length > 0) {
+				setPageState('loaded')
+			} else {
+				setPageState('404')
+			}
 		} catch (error) {
+			setPageState('loaded')
 			return Promise.reject(error)
 		}
 	}, [])
 
+	let query = useURLQuery()
 	useEffect(() => {
 		if (props?.location?.search) {
 			getPropertiesViaULR()
 		} else {
 			getRecentProperties()
 		}
-	}, [getPropertiesViaULR, props?.location?.search])
+	}, [getPropertiesViaULR, props?.location?.search, query])
 
-	let query = useURLQuery()
+	useEffect(() => {
+		console.log('CHECK --', {
+			search: props?.location?.search,
+		})
+	}, [props?.location?.search, query])
 
 	const seo_heading = `Available ${
 		query.get('type') ? query.get('type').replace('-', ' ') : 'Flats'
@@ -110,6 +118,7 @@ export default function Properties(props) {
 				<div className="row">
 					<div className="col-xl-7   chat-left scroll-bar scrollarea">
 						<Sticky
+							showSearch
 							className="shadow-xxl w-100"
 							scrollElement=".scrollarea"
 							stickyClassName="animate__animated animate__fadeInDown"
@@ -134,7 +143,15 @@ export default function Properties(props) {
 												className={Global.isMobile ? 'w-100 mb-3' : ''}
 												allowClear
 												style={{ width: '200px' }}
-												onChange={(e) => dispatch(getAllRecentProperties(e))}
+												// onChange={(e) => getKeywordProperties(e)}
+												onChange={(e) =>
+													history.push(
+														`/flats/?location=${
+															location_keywords.filter((x) => x?.id == e)[0]
+																?.slug
+														}`
+													)
+												}
 											>
 												{location_keywords?.map((val, i) => {
 													return (
@@ -299,6 +316,9 @@ export default function Properties(props) {
 									No Result Found{' '}
 									{list?.state && `In ${personal_info?.location_keyword?.name}`}
 								</h2>
+								<h3 className="text-grey-500 fw-500">
+									You can search by location at the top 👆🏽
+								</h3>
 							</div>
 						)}
 						{pageState === 'loading' && (

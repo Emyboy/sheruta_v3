@@ -120,7 +120,6 @@ export default function SMap({ properties }) {
 	// console.log('EACH PROPS --', properties)
 	useEffect(() => {
 		for (var val of properties) {
-			console.log('THE VAL --', val)
 			if (
 				val?.google_location?.geometry?.location?.lat &&
 				val?.google_location?.geometry?.location?.lng
@@ -139,7 +138,6 @@ export default function SMap({ properties }) {
 		}
 	}, [properties])
 
-	console.log('DEFAULT THINGS ---', defaultProps)
 
 	if (!show) {
 		return (
