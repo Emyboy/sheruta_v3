@@ -83,6 +83,7 @@ export default function MessagePanel({ show, togglePanel }) {
 											<li
 												className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center"
 												onClick={togglePanel}
+												key={`accepted-uu-${i}`}
 											>
 												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
 													<LazyLoadImage

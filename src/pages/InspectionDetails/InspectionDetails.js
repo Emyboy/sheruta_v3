@@ -42,20 +42,17 @@ export default function InspectionDetails({ match }) {
 		getInspection()
 	}, [getInspection])
 
-
-	if(!user){
-		return <Redirect to='/' />
+	if (!user) {
+		return <Redirect to="/" />
 	}
-
 
 	return (
 		<Layout showMessages>
-			{
-				data &&
-			<div>
-				<div className="row justify-content-center">
-					<div className="col-xl-9">
-						{/* <div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
+			{data && (
+				<div>
+					<div className="row justify-content-center">
+						<div className="col-xl-9">
+							{/* <div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
 							<div className="card-body d-flex align-items-center p-0">
 								<h2 className="fw-700 mb-0 mt-0 font-md text-grey-900">
 									Badge
@@ -70,70 +67,77 @@ export default function InspectionDetails({ match }) {
 							</div>
 						</div> */}
 
-						<div className="d-block">
-							<div className="bg-white p-0 shadow-lg rounded-3">
-								<Sticky
-									stickyStyle={{
-										zIndex: 10,
-										marginTop: Global.isMobile ? '6vh' : '11vh',
-									}}
-									stickyClassName="bg-white shadow rounded-xxxl animate__animated animate__bounceInDown"
-								>
-									<div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
-										<ul
-											className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
-											id="pills-tab"
-											role="tablist"
-										>
-											{tabs?.map((val, i) => {
-												return (
-													<li
-														className={`${
-															tab === val && 'active'
-														} list-inline-item me-5`}
-														onClick={() => setTab(val)}
-													>
-														<a
-															className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
+							<div className="d-block">
+								<div className="bg-white p-0 shadow-lg rounded-3">
+									<Sticky
+										stickyStyle={{
+											zIndex: 10,
+											marginTop: Global.isMobile ? '6vh' : '11vh',
+										}}
+										stickyClassName="bg-white shadow rounded-xxxl animate__animated animate__bounceInDown"
+									>
+										<div className="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
+											<ul
+												className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
+												id="pills-tab"
+												role="tablist"
+											>
+												{tabs?.map((val, i) => {
+													return (
+														<li
+															className={`${
 																tab === val && 'active'
-															}`}
-															data-toggle="tab"
+															} list-inline-item me-5`}
+															onClick={() => setTab(val)}
 														>
-															{val}
-														</a>
-													</li>
-												)
-											})}
-										</ul>
-									</div>
-								</Sticky>
-								{tab === tabs[0] && <InspectionGuestList data={data} />}
-								{tab === tabs[1] && <InspectionDate data={data} />}
-								{tab === tabs[2] && <InspectionProperty data={data} />}
-								{tab === tabs[3] && (
-									<>
-										{!data?.date && !data?.time ? (
-											<div className="text-center pt-5 pb-5">
-												<h3 className="fw-bold text-grey-700">
-													You haven't booked an inspection yet.
-												</h3>
-												<h4 className="text-grey-600 fw-500">
-													Once you book an inspection we'll assign an gent to
-													you.
-												</h4>
-											</div>
-										) : (
-											<AgentCard val={data} />
-										)}
-									</>
-								)}
-								{tab === tabs[4] && <InspectionChat />}
+															<a
+																className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
+																	tab === val && 'active'
+																}`}
+																data-toggle="tab"
+															>
+																{val}
+															</a>
+														</li>
+													)
+												})}
+											</ul>
+										</div>
+									</Sticky>
+									{tab === tabs[0] && <InspectionGuestList data={data} />}
+									{tab === tabs[1] && (
+										<InspectionDate
+											data={data}
+											done={(e) => {
+												getInspection()
+											}}
+										/>
+									)}
+									{tab === tabs[2] && <InspectionProperty data={data} />}
+									{tab === tabs[3] && (
+										<>
+											{!data?.date && !data?.time ? (
+												<div className="text-center pt-5 pb-5">
+													<h3 className="fw-bold text-grey-700">
+														You haven't booked an inspection yet.
+													</h3>
+													<h4 className="text-grey-600 fw-500">
+														Once you book an inspection we'll assign an gent to
+														you.
+													</h4>
+												</div>
+											) : (
+												<AgentCard val={data} />
+											)}
+										</>
+									)}
+									{tab === tabs[4] && <InspectionChat />}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			}
+			)}
 		</Layout>
 	)
 }

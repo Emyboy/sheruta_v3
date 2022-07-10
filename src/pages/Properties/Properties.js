@@ -118,7 +118,6 @@ export default function Properties(props) {
 				<div className="row">
 					<div className="col-xl-7   chat-left scroll-bar scrollarea">
 						<Sticky
-							showSearch
 							className="shadow-xxl w-100"
 							scrollElement=".scrollarea"
 							stickyClassName="animate__animated animate__fadeInDown"
@@ -144,13 +143,15 @@ export default function Properties(props) {
 												allowClear
 												style={{ width: '200px' }}
 												// onChange={(e) => getKeywordProperties(e)}
-												onChange={(e) =>
+												onChange={(e) => {
 													history.push(
 														`/flats/?location=${
 															location_keywords.filter((x) => x?.id == e)[0]
 																?.slug
 														}`
 													)
+												}
+													
 												}
 											>
 												{location_keywords?.map((val, i) => {
@@ -219,10 +220,10 @@ export default function Properties(props) {
 									<Alert variant="info" className="row justify-content-between">
 										<div className="col-md-8">
 											<Alert.Heading as="h1" className="mb-0 fw-bold">
-												Your Current location
+												Your Search location
 											</Alert.Heading>
 											<p>
-												Your current location is set to{' '}
+												Your search location is set to{' '}
 												<strong>
 													{personal_info?.location_keyword?.name},
 												</strong>{' '}
@@ -239,7 +240,7 @@ export default function Properties(props) {
 														},
 													})
 												}}
-												className="btn btn-info btn-sm align-self-center"
+												className={`btn btn-info btn-sm align-self-center ${Global.isMobile && 'mt-3'}`}
 											>
 												Change This
 											</button>
@@ -293,7 +294,7 @@ export default function Properties(props) {
 									className="mb-3 mt-5 ml-3"
 									style={{ textTransform: 'capitalize' }}
 								>
-									{seo_heading}
+									{seo_heading} {' '} ({list.length})
 								</h1>
 								<div className="row ps-2 pe-2">
 									{list.map((val, i) => {

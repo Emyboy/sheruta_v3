@@ -24,7 +24,10 @@ const EachBookingUser = ({ val, added, onInvite, unInvite }) => {
 					/>
 					<div className="mt-3">
 						<h4 className="fw-bold text-grey-700">{val?.first_name}</h4>
-						<h5 className="text-grey-600">@{val?.username}</h5>
+						<h5 className="text-grey-600">
+							{Global.currency}{' '}
+							{window.formattedPrice.format(val?.budget)} - Budget
+						</h5>
 					</div>
 				</div>
 				{added ? (
@@ -121,9 +124,9 @@ export default function BookInspection({ match }) {
 					onCancel={() => setShowInvite(false)}
 				>
 					<div className="card-body d-block w-100 shadow-none mb-0 p-0 ">
-						<h3 className="fw-700 text-grey-700">Add Users</h3>
+						<h3 className="fw-700 text-dark">Add Users</h3>
 						<Alert variant="success">
-							<Alert.Heading>
+							<Alert.Heading className='text-grey-700'>
 								Once your done inviting users, close the popup and create your
 								inspection.
 							</Alert.Heading>

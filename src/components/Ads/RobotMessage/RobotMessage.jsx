@@ -49,15 +49,15 @@ export default function RobotMessage() {
 		return (
 			<Wrapper
 				className={`bg-theme-light p-3  border shadow animate__bounceInUp animate__animated`}
-				style={{ position: 'fixed', bottom: '4vh', width: '100%', zIndex: 78 }}
-                onClick={() => {
-                    setTimeout(() => {
-                        setShow(false)
-                    }, 1000);
-                }}
+				style={{ position: 'fixed', bottom: '8vh', width: '100%', zIndex: 78 }}
+				onClick={() => {
+					setTimeout(() => {
+						setShow(false)
+					}, 1000)
+				}}
 			>
 				<span
-                    onClick={() => setShow(false)}
+					onClick={() => setShow(false)}
 					class="btn-round-sm bg-accent shadow"
 					style={{
 						fontSize: '5px',

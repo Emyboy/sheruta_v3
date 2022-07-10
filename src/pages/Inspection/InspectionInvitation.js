@@ -9,6 +9,7 @@ import { FaTimes } from 'react-icons/fa'
 import { BsCheckLg } from 'react-icons/bs'
 import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
+import Global from '../../Global'
 
 export default function InspectionInvitation() {
 	localStorage.setItem('after_login', window.location.pathname)
@@ -104,12 +105,14 @@ export default function InspectionInvitation() {
 												<h5 className="text-grey-600 fw-bold mt-2">
 													{data?.owner?.first_name}
 												</h5>
+												<h5 className="text-grey-600 fw-500 mt-2">
+													{Global.currency}{' '}
+													{window.formattedPrice.format(data?.owner?.budget)} - Budget
+												</h5>
 												<div className="container">
 													<h3 className="mt-5 text-grey-600 fw-400">
-														<strong>
-															{data?.owner?.first_name}
-														</strong>{' '}
-														wants you to join an inspection for a{' '}
+														<strong>{data?.owner?.first_name}</strong> wants you
+														to join an inspection for a{' '}
 														<strong>{data?.property?.bedroom} bedroom</strong>{' '}
 														flat located in{' '}
 														<strong>{data?.property?.location}</strong>.

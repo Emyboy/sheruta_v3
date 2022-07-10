@@ -11,7 +11,7 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { convertTimeTo12Hurs } from '../../utils/moment.utils';
 import { BsCalendarX } from 'react-icons/bs';
 
-export default function InspectionDate({ data }) {
+export default function InspectionDate({ data, done }) {
 	const [date, setDate] = useState(null)
 	const [time, setTime] = useState(null)
 	const [dateError, setDateError] = useState(null)
@@ -63,6 +63,9 @@ export default function InspectionDate({ data }) {
 			)
 			if (res.data) {
 				console.log(res.data)
+				if(done){
+					done(res.data);
+				}
 				setLoading(false)
 			}
 		} catch (error) {

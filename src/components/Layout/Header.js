@@ -313,7 +313,7 @@ export default function Header({
 							const otherUser = val?.users_permissions_user
 							const user = val?.owner
 							return (
-								<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+								<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3" key={`notify-${i}`}>
 									<img
 										src={
 											otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
