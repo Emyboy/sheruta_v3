@@ -45,7 +45,7 @@ export default function ProfileJumb({ user }) {
 					<h4 className="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">
 						<div className="d-flex">
 							{deactivated ? '.... ....' : user?.first_name}
-							<VerifiedBadge user={user} className={'ml-2'} />{' '}
+							<VerifiedBadge user={user} className={'ml-2'} size={20} without_text />{' '}
 						</div>
 						<span className="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">
 							@{deactivated ? '......' : user?.username}

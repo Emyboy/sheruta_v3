@@ -18,6 +18,7 @@ import Cookies from 'js-cookie'
 import RecentBookingFeed from './RecentBookingFeed'
 import Sticky from 'react-sticky-el'
 import ErrorBoundary from '../../ErrorBoundary'
+import ProfileProgress from '../../ProfileComponents/ProfileProgress'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -164,6 +165,7 @@ export default (props) => {
 							)}
 
 							<ErrorBoundary>
+								<ProfileProgress />
 							{filter === 'all' && (
 								<>
 									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {

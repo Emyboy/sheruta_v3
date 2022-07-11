@@ -118,6 +118,7 @@ export default function AgentSignupForm() {
 							}
 							stand_alone
 						/>,
+						
 						<CreateAgentLastStep
 							data={agentData}
 							changeStep={(s) => setStep(s)}

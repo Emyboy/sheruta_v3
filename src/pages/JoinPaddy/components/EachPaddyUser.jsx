@@ -40,7 +40,7 @@ export default function EachPaddyUser({ user, onSelect, selected, unSelect }) {
 			>
 				<div className="d-flex">
 					{user.first_name.split(' ')[0]}
-					<VerifiedBadge user={user} size={10} className={'ml-1'} />
+					<VerifiedBadge user={user} size={20} className={'ml-1'} />
 				</div>
 				{/* <span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-700">
 											@{user.username}

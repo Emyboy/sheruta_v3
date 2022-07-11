@@ -187,7 +187,7 @@ export default function RequestDetails(props) {
 														<Link
 															to={`/user/${request?.users_permissions_user.username}`}
 														>
-															<a className="text-dark d-flex">
+															<a className="align-items-center text-dark d-flex">
 																{deactivated
 																	? '..... .....'
 																	: request?.users_permissions_user
@@ -195,7 +195,8 @@ export default function RequestDetails(props) {
 																<VerifiedBadge
 																	user={request?.users_permissions_user}
 																	className={'ml-2'}
-																	size={'15'}
+																	size={20}
+																	without_text
 																/>
 															</a>
 														</Link>

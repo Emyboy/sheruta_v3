@@ -73,7 +73,9 @@ export default function EachUserListCard({ data }) {
 						<VerifiedBadge
 							without_text
 							user={data}
+							size={25}
 							className="position-absolute"
+							style={{ left: '-9px' }}
 						/>
 						<LazyLoadImage
 							src={data?.avatar_url}

@@ -51,7 +51,7 @@ function EachRequest({ data }) {
 					<h4 className="fw-700 text-grey-900 font-xssss mt-1 w-50">
 						<Link
 							to={`/user/${user?.username}`}
-							className=" d-flex justify-context-evenly"
+							className=" d-flex justify-context-evenly align-items-center"
 						>
 							<a className="text-dark">
 								{deactivated ? '.... ....' : user?.first_name.split(' ')[0]}{' '}

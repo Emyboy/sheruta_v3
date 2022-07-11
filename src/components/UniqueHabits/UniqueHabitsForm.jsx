@@ -4,83 +4,134 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAuthPersonalInfo } from '../../redux/strapi_actions/view.action'
 import PersonalInfoService from '../../services/PersonalInfoService'
+import Select from 'react-select'
+import { notification } from 'antd'
+import { BsCircle, BsCheckCircle } from 'react-icons/bs'
 
 export default function UniqueHabitsForm({ done }) {
 	const { unique_habits, personal_info } = useSelector((state) => state.view)
-
-	const mappedHabits = personal_info?.unique_habits?.map((x) => x.id)
+	const [loading, setLoading] = useState(false)
 
 	const dispatch = useDispatch()
 
-	const [selected, setSelected] = useState(mappedHabits)
+	const [selected, setSelected] = useState([])
+	const [option, setOption] = useState([])
 
-	const update = useCallback(async () => {
+	const update = async (_update) => {
 		try {
-			await PersonalInfoService.updatePersonalInfo({
-				unique_habits: selected,
-			})
-			dispatch(getAuthPersonalInfo())
+			setLoading(true)
+			console.log('SENDING ---', selected)
+			const update = await PersonalInfoService.updatePersonalInfo({
+				unique_habits: _update ? _update : selected,
+			});
+			setTimeout(() => {
+				dispatch(getAuthPersonalInfo())
+			}, 2000);
 			if (done) {
 				done()
 			}
+			setLoading(false)
 		} catch (error) {
+			setLoading(false)
 			return Promise.reject(error)
 		}
-	}, [selected])
+	}
+
+	const handleClick = (item) => {
+		if (selected.includes(item.id)) {
+			const _new = selected.filter((x) => x != item.id)
+			setSelected(_new)
+			return update(_new)
+		} else {
+			const _update = [...selected, item.id]
+			setSelected(_update)
+			return update(_update)
+		}
+	}
 
 	useEffect(() => {
-		if (mappedHabits === selected) {
-			return
+		if (personal_info) {
+			const mappedHabits = personal_info?.unique_habits?.map((x) => x.id)
+			setSelected(mappedHabits)
 		}
-		update()
-	}, [selected])
+	}, [personal_info])
+
+	useEffect(() => {
+		return dispatch(getAuthPersonalInfo())
+	},[])
+
+	if (!personal_info) {
+		return (
+			<div>
+				<div className="text-center pb-5 pt-5">
+					<h4 className="fw-500 text-grey-500 mb-0">Loading...</h4>
+				</div>
+			</div>
+		)
+	}
 
 	return (
 		<div className="middle-wrap">
-			<div className="card w-100 border-0 bg-white shadow-xs p-0 mb-4">
-				<div className="card-body p-4 w-100 bg-current border-0 d-flex rounded-3">
-					<h4 className="font-xs text-white fw-600 ms-4 mb-0 mt-2">
-						Select Your Habits
-					</h4>
-				</div>
-				<div className="card-body p-lg-5 p-4 w-100 border-0 ">
-					<div className="text-center pb-3">
-						<h5 className="fw-500 text-warning">Auto Saved</h5>
-					</div>
-					<div className="d-flex mt-3" style={{ flexWrap: 'wrap' }}>
-						{unique_habits?.map((val, i) => {
-							return (
-								<EachHabit
-									key={`habit-${i}`}
-									val={val}
-									selected={selected.includes(val?.id)}
-									onClick={() =>
-										setSelected(
-											selected.includes(val?.id)
-												? selected.filter((x) => x !== val?.id)
-												: [...selected, val?.id]
-										)
-									}
-								/>
-							)
-						})}
-					</div>
-				</div>
+			<div className="text-center pb-1">
+				<h5 className="fw-500 text-grey-500 mb-0">
+					Select What Applies To You
+				</h5>
 			</div>
+			<div className="text-center pb-3">
+				<h5 className="fw-500 text-warning">
+					{loading ? 'Saving...' : 'Auto Saved'}
+				</h5>
+			</div>
+			<div className="d-flex mt-3" style={{ flexWrap: 'wrap' }}>
+				{unique_habits?.map((val, i) => {
+					return (
+						<EachHabit
+							key={`habit-${i}`}
+							selected={selected.includes(val.id)}
+							val={val}
+							onClick={handleClick}
+						/>
+					)
+				})}
+			</div>
+			{/* <div className="mt-5">
+				<Select
+					onChange={(e) => {
+						const list = selected
+						setSelected([...list, e.value])
+					}}
+					options={option?.map((val) => ({ value: val?.id, label: val?.name }))}
+				/>
+				<div className="d-flex justify-content-center mt-4">
+					<button
+						disabled={selected.length === 0}
+						className="btn bg-accent text-white"
+						onClick={update}
+					>
+						Save Changes
+					</button>
+				</div>
+			</div> */}
 		</div>
 	)
 }
 
 const EachHabit = ({ val, selected, onClick }) => {
+	const { unique_habits } = useSelector((state) => state.view)
+
 	return (
-		<span
-			onClick={onClick}
+		<a
 			className={` ${
 				selected ? 'bg-theme text-white' : 'bg-theme-light text-dark'
-			} font-xssss rounded-3  fw-600 p-2  mt-0 mb-2 mr-2`}
-			style={{ textTransform: 'capitalize' }}
+			} font-xsss rounded-3  fw-600 p-2  mt-0 mb-3 mr-3`}
+			onClick={() => onClick(val)}
 		>
-			{val?.name}
-		</span>
+			{!selected ? (
+				<BsCircle size={20} className={'pr-1'} />
+			) : (
+				<BsCheckCircle size={20} className={'pr-1'} />
+			)}
+			<span style={{ textTransform: 'capitalize' }}>{val?.name}</span>
+		</a>
 	)
 }

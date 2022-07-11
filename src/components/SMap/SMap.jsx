@@ -29,7 +29,7 @@ export const HoverDetails = ({ data }) => {
 			/>
 			<div className="card-body pt-0">
 				<i className="font-md text-grey-500 position-absolute right-0 me-3">
-					<VerifiedBadge without_text verified={data?.agent?.is_verified} />
+					<VerifiedBadge without_text verified={data?.agent?.is_verified} size={20} />
 				</i>
 				<h4 className="fw-700 font-xs mt-0 lh-28 mb-1">
 					<Link

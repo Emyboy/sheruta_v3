@@ -131,6 +131,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 									user={users_permissions_user}
 									without_text
 									className="ml-2 mt-2"
+									size={20}
 								/>
 							</div>
 
