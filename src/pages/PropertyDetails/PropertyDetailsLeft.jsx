@@ -16,7 +16,7 @@ import ImageViewer from 'react-simple-image-viewer'
 import { MdImage, MdOutlineLocationOn } from 'react-icons/md'
 import ReactHtmlParser from 'react-html-parser'
 import PropertyAmenities from './PropertyAmenities'
-import ErrorBoundary from '../../components/ErrorBoundary'
+import ErrorBoundary from '../../components/ErrorBoundries/ErrorBoundary'
 
 export default function PropertyDetailsLeft({ data, done, standalone }) {
 	const { user } = useSelector((state) => state.auth)

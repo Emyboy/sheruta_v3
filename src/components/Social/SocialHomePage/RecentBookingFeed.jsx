@@ -4,7 +4,7 @@ export default function RecentBookingFeed() {
 	return (
 		<div className="card w-100 shadow-xss rounded-xxl border-0 p-0 ">
 			<div className="card-body d-flex align-items-center p-4 mb-0">
-				<h4 className="fw-700 mb-0 font-xssss text-grey-900">Recent Groups</h4>
+				<h4 className="fw-700 mb-0 font-xssss text-grey-900">Inspection Groups</h4>
 				<a
 					href="default-member.html"
 					className="fw-600 ms-auto font-xssss text-primary"

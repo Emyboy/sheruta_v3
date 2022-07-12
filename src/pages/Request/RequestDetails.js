@@ -42,7 +42,7 @@ export default function RequestDetails(props) {
 	})
 	const auth = useSelector((state) => state.auth)
 	const deactivated = request?.users_permissions_user.deactivated
-	const tabs = ['More Details', 'Comments']
+	const tabs = ['More Details', 'Questions']
 	const [currentTab, setCurrentTab] = useState(tabs[0])
 
 	useEffect(() => {

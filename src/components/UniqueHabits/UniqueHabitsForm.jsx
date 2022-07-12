@@ -20,7 +20,6 @@ export default function UniqueHabitsForm({ done }) {
 	const update = async (_update) => {
 		try {
 			setLoading(true)
-			console.log('SENDING ---', selected)
 			const update = await PersonalInfoService.updatePersonalInfo({
 				unique_habits: _update ? _update : selected,
 			});

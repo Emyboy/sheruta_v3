@@ -25,17 +25,27 @@ export default function RequestReview({ request }) {
 		<section>
 			{reviews.length === 0 && (
 				<div className="text-center card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
-					<h3 className="fw-bold">No Comments</h3>
-					<h6>Be the first to add a comment</h6>
-					<h6>or simply ask questions</h6>
+					<h3 className="fw-bold">No questions</h3>
+					<h6>Be the first to ask a question</h6>
+					<h6>or simply leave a review</h6>
 				</div>
 			)}
-			{reviews.map((val, i) => {
-				return <EachRequestReview data={val} key={`review-${i}`} />
-			})}
+			{reviews
+				?.filter((x) => x?.reply === null)
+				.map((val, i) => {
+					console.log('VAL --', val)
+					return (
+						<EachRequestReview
+							data={val}
+							key={`review-${i}`}
+							replies={reviews.filter(x => x?.reply?.id == val?.id)}
+						/>
+					)
+				})
+			}
 
 			<ReviewForm
-				heading={'Leave a comment or a question'}
+				heading={'Leave a question'}
 				done={(e) => setReviews([...reviews, e])}
 				request={request?.id}
 			/>

@@ -17,7 +17,7 @@ import moment from 'moment'
 import Cookies from 'js-cookie'
 import RecentBookingFeed from './RecentBookingFeed'
 import Sticky from 'react-sticky-el'
-import ErrorBoundary from '../../ErrorBoundary'
+import ErrorBoundary from '../../ErrorBoundries/ErrorBoundary'
 import ProfileProgress from '../../ProfileComponents/ProfileProgress'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
@@ -84,7 +84,7 @@ export default (props) => {
 								<Sticky
 									stickyStyle={{
 										zIndex: 10,
-										marginTop: Global.isMobile ? '6vh' : '11vh',
+										marginTop: Global.isMobile ? '6vh' : '13vh',
 									}}
 								>
 									{/* <RecentUsers data={newUsers} /> */}

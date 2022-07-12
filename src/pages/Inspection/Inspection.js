@@ -28,7 +28,7 @@ export default function Inspection() {
 					</div>
 				</div>
 				<div className="row ps-2 pe-1 mb-4">
-					{inspections.length > 0 ? (
+					{inspections?.length > 0 ? (
 						inspections
 							.filter((x) => x?.owner?.id == user?.user?.id)
 							?.map((val, i) => {
@@ -52,7 +52,7 @@ export default function Inspection() {
 					</div>
 				</div>
 				<div className="row ps-2 pe-1">
-					{inspections.length > 0 ? (
+					{inspections?.length > 0 ? (
 						inspections
 							.filter((x) => x?.owner?.id != user?.user?.id)
 							?.map((val, i) => {

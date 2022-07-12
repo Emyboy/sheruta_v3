@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import EachRequestOptions from './EachRequestOptions'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import requestUtils from '../../utils/request.utils'
-import ErrorBoundary from '../ErrorBoundary'
+import ErrorBoundary from '../ErrorBoundries/ErrorBoundary'
 function EachRequest({ data }) {
 	const user = data?.users_permissions_user
 	const deactivated = user?.deactivated

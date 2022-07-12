@@ -26,7 +26,13 @@ export default React.memo(function ProfileProgress() {
 				setProgress(100)
 			}
 		}
-	}, [personal_info])
+	}, [personal_info]);
+
+	useEffect(() => {
+		if(progress < 50){
+			setProgress(50)
+		}
+	},[progress])
 
 	if (!personal_info || progress > 99) {
 		return null

@@ -25,6 +25,7 @@ import Compressor from 'compressorjs'
 import TextArea from 'antd/lib/input/TextArea'
 import Global from '../../Global';
 import ReactQuill from 'react-quill';
+import MainErrorBoundary from '../../components/ErrorBoundries/MainErrorBoundry'
 
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
@@ -354,6 +355,7 @@ const CraeteRequest = (props) => {
 	} else
 		return (
 			<Layout currentPage={'requests'}>
+				<MainErrorBoundary>
 				<div className="mt-5 pb-5">
 					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
 						<div className="pt-5 pb-5">
@@ -728,6 +730,7 @@ const CraeteRequest = (props) => {
 						</div>
 					</div>
 				</div>
+				</MainErrorBoundary>
 			</Layout>
 		)
 }
