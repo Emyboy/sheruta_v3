@@ -29,6 +29,9 @@ export default function EachRequestReview({ data, replies }) {
 				process.env.REACT_APP_API_URL + `/reviews/${review?.id}`,
 				{
 					method: 'DELETE',
+					data: {
+						review
+					},
 					headers: {
 						Authorization: `Bearer ${Cookies.get('token')}`,
 					},
@@ -144,33 +147,18 @@ export default function EachRequestReview({ data, replies }) {
 					</div>
 				</div>
 				<div className="card-body p-0 me-lg-5 ml-5">
-					<p className="fw-500 text-grey-500 lh-26 font-xsss w-100">
+					<p className="fw-500 text-grey-500 lh-26 font-xss w-100">
 						{review?.review}
 					</p>
 				</div>
 
 				{replyList?.length > 0 && (
 					<>
-						<hr />
+						<hr className='text-grey-400' />
 						<div>
 							{replyList?.map((val) => {
 								return (
-									<div className="card-body d-flex pt-0 ps-5 pe-4 pb-0">
-										<figure className="avatar me-3">
-											<img
-												src={val?.user?.avatar_url}
-												alt={val?.user?.first_name}
-												className="shadow-sm rounded-circle w45"
-											/>
-										</figure>
-										<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-											{val?.user?.first_name}{' '}
-											<small className="text-grey-500 ml-1">Replied</small>
-											<span className="d-block font-xsss fw-500 mt-1 lh-3 text-grey-500">
-												{renderHTML(val?.review)}
-											</span>
-										</h4>
-									</div>
+									<EachReply key={`reply-${Date.now()}`} val={val} />
 								)
 							})}
 						</div>
@@ -204,5 +192,29 @@ export default function EachRequestReview({ data, replies }) {
 				)}
 			</article>
 		</>
+	)
+}
+
+
+const EachReply = ({ val }) => {
+	return (
+		<div className="card-body d-flex pt-0 ps-5 pe-4 pb-0 align-items-center mb-3">
+			{/* <figure className="avatar me-3"> */}
+			<img
+				src={val?.user?.avatar_url}
+				alt={val?.user?.first_name}
+				className="shadow-sm rounded-circle w45 avatar me-3 align-self-start"
+				width={'100'}
+				height="100"
+			/>
+			{/* </figure> */}
+			<h4 className="fw-700 text-grey-900 font-xssss mt-1">
+				{val?.user?.first_name}{' '}
+				<small className="text-grey-500 ml-1">Replied</small>
+				<span className="d-block font-xsss fw-500 mt-1 lh-3 text-grey-500">
+					{renderHTML(val?.review)}
+				</span>
+			</h4>
+		</div>
 	)
 }
