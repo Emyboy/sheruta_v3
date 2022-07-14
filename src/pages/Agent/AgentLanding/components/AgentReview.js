@@ -1,21 +1,31 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../../../Global'
 import requestUtils from '../../../../utils/request.utils'
 
 const EachReview = ({ val }) => {
 	const user = val.users_permissions_user
+
 	return (
 		<div className="col-lg-4 ">
 			<div className="owl-item">
 				<div className="customers-item">
-					<Link className="customers-info" to={`${requestUtils.renderRequestURL(val)}`}>
+					<Link
+						className="customers-info"
+						to={`${requestUtils.renderRequestURL(val)}`}
+					>
 						<div className="image">
 							<img src={user?.avatar_url} alt="image" />
 						</div>
 
-						<h4>{val?.users_permissions_user?.first_name?.split(' ')[0]}</h4>
+						<h4>
+							{val?.users_permissions_user?.first_name?.split(' ')[0]}{' '}
+							<small style={{ fontSize: '10px' }}>
+								{moment(val?.created_at).fromNow()}
+							</small>
+						</h4>
 						<span>
 							{val?.body && val?.body?.slice(0, 120)}
 							<a className="fw-600 text-theme ms-2">See more</a>
@@ -31,7 +41,10 @@ const EachReview = ({ val }) => {
 
 					<ul className="rating-list">
 						<li>
-							<a href={`tel:${user?.phone_number}`} className="btn bg-theme text-white">
+							<a
+								href={`tel:${user?.phone_number}`}
+								className="btn bg-theme text-white"
+							>
 								Call Me <i className="bx bxs-phone text-white"></i>
 							</a>
 						</li>
@@ -50,7 +63,7 @@ export default function AgentReview() {
 			try {
 				const res = await axios(
 					process.env.REACT_APP_API_URL +
-						`/property-requests/?is_searching=true&_limit=3`
+						`/property-requests/?is_searching=true&_limit=3&_sort=created_at:DESC`
 				)
 				setData(res.data)
 			} catch (error) {

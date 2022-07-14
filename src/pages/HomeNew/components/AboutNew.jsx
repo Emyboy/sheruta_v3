@@ -2,7 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import img from '../img/afro.jpg'
 
-export default function AboutNew() {
+export default function AboutNew({
+	heading,
+	bodyComponent,
+	ctaText,
+	ctaURL
+}) {
 	return (
 		<div className="solution-area pt-5 bg-white">
 			<div className="container">
@@ -15,24 +20,15 @@ export default function AboutNew() {
 
 					<div className="col-lg-6 col-md-12">
 						<div className="solution-content">
-							<h3>Why Post Your Space?</h3>
-							<p>
-								Vet and select verified prospective flatmates and occupants
-								within the community, from professionals to entrepreneurs and
-								students, the choice is yours. click button below to get
-								started.
-							</p>
-							<p>
-								Vet and select verified prospective flatmates and occupants
-								within the community, from professionals to entrepreneurs and
-								students, the choice is yours. click button below to get
-								started.
-							</p>
+							<h3>{heading}</h3>
+							{bodyComponent}
 
 							<div className="solution-btn">
-								<Link to="/flat/submit" className="default-btn text-white">
-									Post Now <span></span>
-								</Link>
+								{ctaText && ctaURL && (
+									<Link to={ctaURL} className="default-btn text-white">
+										{ctaText} <span></span>
+									</Link>
+								)}
 							</div>
 						</div>
 					</div>

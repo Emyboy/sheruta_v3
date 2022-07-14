@@ -22,13 +22,29 @@ export default function HomeNew() {
 	return (
 		<Layout>
 			<Helmet>
-				<title>
-					Flats for share in Lekki, Yaba, Surulere | Sheruta
-				</title>
+				<title>Flats for share in Lekki, Yaba, Surulere | Sheruta</title>
 			</Helmet>
 			<HomeHero />
 			<RecentProperties />
-			<AboutNew />
+			<AboutNew
+				heading={'Why Post Your Space?'}
+				bodyComponent={
+					<>
+						<p>
+							Vet and select verified prospective flatmates and occupants within
+							the community, from professionals to entrepreneurs and students,
+							the choice is yours. click button below to get started.
+						</p>
+						<p>
+							Vet and select verified prospective flatmates and occupants within
+							the community, from professionals to entrepreneurs and students,
+							the choice is yours. click button below to get started.
+						</p>
+					</>
+				}
+				ctaText="Post Now"
+				ctaURL={"/flat/submit"}
+			/>
 			<HomeFeatures />
 			<HomeJoinPaddy />
 			<LocationKeywords />

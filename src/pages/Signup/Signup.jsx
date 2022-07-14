@@ -115,23 +115,25 @@ export const Signup = (props) => {
 						}
 					/>
 				</MetaTags>
-				<div className="main-wrap">
-					<div className="row">
-						<div
+				<div className="container">
+					<div className="row justify-content-center">
+						{/* <div
 							className="col-xl-5 d-none d-xl-block p-0 vh-100 bg-image-cover bg-no-repeat"
 							style={{ backgroundImage: `url(${loginImg})` }}
-						></div>
+						></div> */}
 						<div
-							className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 "
+							className="col-sm-12 col-xl-4 col-lg-6 col-md-7"
 							style={{
-								paddingTop: Global.isMobile ? '60%' : '10%',
-								overflow: Global.isMobile ? 'scroll' : 'auto',
-								paddingBottom: '10vh',
+								// overflow: Global.isMobile ? 'scroll' : 'auto',
+								// paddingBottom: '30vh',
+								// paddingTop: '70vh',
 							}}
 						>
-							<div className="card shadow-none border-0 ms-auto me-auto login-card">
+							<div
+								className="card border-0 p-3 mt-5 rounded-xxl shadow-xxl mb-5"
+							>
 								<div className="card-body rounded-0 text-left p-1">
-									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-5">
+									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-3">
 										Register
 									</h2>
 									<form onSubmit={handleSubmit(onSubmit)}>

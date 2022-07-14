@@ -16,7 +16,7 @@ export default function EachRequestReview({ data, replies }) {
 	const [showOptions, setShowOptions] = useState(false)
 	const [deleted, setDeleted] = useState(false)
 	const [edit, setEdit] = useState(false)
-	const [showReplyInput, setShowReplyInput] = useState(false);
+	const [showReplyInput, setShowReplyInput] = useState(false)
 	const [replyList, setReplyList] = useState([])
 
 	const { user } = useSelector((state) => state?.auth)
@@ -30,7 +30,7 @@ export default function EachRequestReview({ data, replies }) {
 				{
 					method: 'DELETE',
 					data: {
-						review
+						review,
 					},
 					headers: {
 						Authorization: `Bearer ${Cookies.get('token')}`,
@@ -48,10 +48,10 @@ export default function EachRequestReview({ data, replies }) {
 	}
 
 	useEffect(() => {
-		if(replies?.length){
+		if (replies?.length) {
 			setReplyList(replies)
 		}
-	},[replies])
+	}, [replies])
 
 	if (deleted) {
 		return null
@@ -154,12 +154,10 @@ export default function EachRequestReview({ data, replies }) {
 
 				{replyList?.length > 0 && (
 					<>
-						<hr className='text-grey-400' />
+						<hr className="text-grey-400" />
 						<div>
 							{replyList?.map((val) => {
-								return (
-									<EachReply key={`reply-${Date.now()}`} val={val} />
-								)
+								return <EachReply key={`reply-${Date.now()}`} val={val} />
 							})}
 						</div>
 					</>
@@ -177,6 +175,8 @@ export default function EachRequestReview({ data, replies }) {
 								reviewData={review}
 								isReply
 								replyTo={review?.user}
+								onCancel={() => setShowReplyInput(false)}
+								autoFocus
 							/>
 						) : (
 							<div className="d-flex align-items-center  mt-4 ml-5">
@@ -194,7 +194,6 @@ export default function EachRequestReview({ data, replies }) {
 		</>
 	)
 }
-
 
 const EachReply = ({ val }) => {
 	return (

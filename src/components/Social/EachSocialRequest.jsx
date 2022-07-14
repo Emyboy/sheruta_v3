@@ -59,7 +59,7 @@ function EachRequest({ data }) {
 							<VerifiedBadge
 								user={user}
 								className={'ml-2'}
-								size={15}
+								size={20}
 								without_text
 							/>
 						</Link>

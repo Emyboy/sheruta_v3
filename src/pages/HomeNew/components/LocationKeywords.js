@@ -14,25 +14,26 @@ export default function LocationKeywords() {
 				<div className="section-title">
 					<h3>Find The Neighborhood For You</h3>
 					<p>
-						Proin gravida nibh vel velit auctor aliquet aenean sollicitudin
-						lorem quis bibendum auctor nisi elit consequat ipsum nec sagittis
-						sem nibh id elit.
+						Move into your preffered neighbourhood with little or no stress.
 					</p>
 				</div>
 
 				<div className="row justify-content-center">
 					{location_keywords?.map((val, i) => {
+						if(i > 2){
+							return null;
+						}
 						return (
 							<EachLocationKeyword key={`location-keyword-${i}`} val={val} />
 						)
 					})}
 				</div>
 
-				<div className="view-neighborhood-btn">
+				{/* <div className="view-neighborhood-btn">
 					<a href="neighborhood.html" className="default-btn">
 						VIEW MORE AREAS <span></span>
 					</a>
-				</div>
+				</div> */}
 			</div>
 
 			<div className="neighborhood-map-shape">

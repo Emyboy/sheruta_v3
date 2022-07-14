@@ -33,7 +33,6 @@ export default function RequestReview({ request }) {
 			{reviews
 				?.filter((x) => x?.reply === null)
 				.map((val, i) => {
-					console.log('VAL --', val)
 					return (
 						<EachRequestReview
 							data={val}

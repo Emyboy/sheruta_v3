@@ -18,27 +18,17 @@ export default function AgentHero() {
 								data-wow-duration="1000ms"
 								// style="visibility: visible; animation-duration: 1000ms; animation-delay: 100ms; animation-name: fadeInUp;"
 							>
-								Become an partner.
+								JOIN THE FASTED GROWING FLAT SHARE COMMUNITY.
 							</h1>
-							<p
-								className="wow animate__ animate__fadeInUp animated mt-5"
+							<h2
+								className="wow animate__ animate__fadeInUp animated mt-5 text-grey-600"
 								data-wow-delay="200ms"
 								data-wow-duration="1500ms"
+								style={{ fontSize: '40px' }}
 								// style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;"
 							>
-								There has been a recent increase in the demand for shared
-								spaces, become a partner agent to meet this demand.
-							</p>
-							<p
-								className="wow animate__ animate__fadeInUp animated mt-5"
-								data-wow-delay="200ms"
-								data-wow-duration="1500ms"
-								// style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;"
-							>
-								List available room and apartments in your area of operation and
-								get verified working class occupants for your properties. Click
-								on button below to begin registration
-							</p>
+								Get more client as agent
+							</h2>
 						</div>
 					</div>
 

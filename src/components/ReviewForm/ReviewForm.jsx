@@ -15,7 +15,9 @@ export default function ReviewForm({
 	reviewData,
 	withRating,
 	isReply,
-	replyTo
+	replyTo,
+	onCancel,
+	autoFocus,
 }) {
 	const { user } = useSelector((state) => state.auth)
 	const [review, setReview] = useState(
@@ -144,6 +146,7 @@ export default function ReviewForm({
 						value={review}
 						onChange={(e) => setReview(e.target.value)}
 						maxLength={'240'}
+						autoFocus={autoFocus}
 					></textarea>
 				</div>
 				<div className="d-flex">
@@ -157,15 +160,16 @@ export default function ReviewForm({
 					>
 						{edit ? 'Save' : 'Submit'}
 					</button>
-					{edit && (
-						<button
-							type={'button'}
-							className="btn text-danger ml-3"
-							onClick={() => done()}
-						>
-							Cancel
-						</button>
-					)}
+					{edit ||
+						(onCancel && (
+							<button
+								type={'button'}
+								className="btn text-danger ml-3"
+								onClick={() => (onCancel ? onCancel() : done())}
+							>
+								Cancel
+							</button>
+						))}
 				</div>
 			</div>
 		</form>

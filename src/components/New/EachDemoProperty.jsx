@@ -11,7 +11,7 @@ export default function EachDemoProperty({ data }) {
 			className="mb-4 "
 			style={{ width: Global.isMobile ? '330px' : '400px' }}
 		>
-			<div className="featured-item-box">
+			<div className="featured-item-box card shadow-sm">
 				<div className="featured-image">
 					<Link
 						to={{

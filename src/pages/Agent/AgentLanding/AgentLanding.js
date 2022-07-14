@@ -18,12 +18,29 @@ export default function AgentLanding() {
 
 	return (
 		<Layout>
-            <Helmet>
-                <title>Become An Agent | Sheruta</title>
-            </Helmet>
+			<Helmet>
+				<title>Become An Agent | Sheruta</title>
+			</Helmet>
 			<div>
 				<AgentHero />
-				<AboutNew />
+				<AboutNew
+					heading={'Become an partner'}
+					bodyComponent={
+						<>
+							<p>
+								There has been a recent increase in the demand for shared
+								spaces, become a partner agent to meet this demand.
+							</p>
+							<p>
+								List available room and apartments in your area of operation and
+								get verified working class occupants for your properties. Click
+								on button below to begin registration
+							</p>
+						</>
+					}
+					// ctaText="Post Now"
+					// ctaURL={'/flat/submit'}
+				/>
 				<AgentReview />
 				<OurNumbers />
 			</div>
