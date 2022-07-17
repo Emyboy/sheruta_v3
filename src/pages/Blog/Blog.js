@@ -7,7 +7,7 @@ import EachBlog from './EachBlog'
 
 export default function Blog() {
 	const [list, setList] = useState([]);
-	const { user } = useSelector(state => state.view);
+	const { user } = useSelector(state => state.auth);
 	const { category_id } = useParams()
 
 	const getBlogs = async () => {
@@ -43,21 +43,23 @@ export default function Blog() {
 
 	return (
 		<Layout>
-			<section style={{ paddingTop: !user ? '5vh' : '0' }}>
+			<section
+				style={{ paddingTop: !user ? '5vh' : '5vh' }}
+				className="blog-area-without-color ptb-100"
+			>
 				<div className="container">
-					<div className="row">
-						<div className="col-xl-6">
-							<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 p-2 breadcrumb_content style2">
-								<h2 className="breadcrumb_title mb-0 fw-bold">Blog</h2>
-							</div>
-						</div>
+					<div className="section-title pb-4">
+						<h3>Articles and Blogs</h3>
+						<p>
+							Stay upto date on your recent blog posts
+						</p>
 					</div>
 					<div className="row">
 						<div className="col-lg-12">
 							<div className="row">
 								{list.map((val, i) => {
 									return (
-										<div className="col-xl-6 col-md-6" key={i + ' post'}>
+										<div className={`col-lg-${user ? "5":"4"} col-md-6`} key={i + ' post'}>
 											<EachBlog data={val} />
 										</div>
 									)

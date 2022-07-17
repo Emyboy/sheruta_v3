@@ -41,12 +41,12 @@ const EachReview = ({ val }) => {
 
 					<ul className="rating-list">
 						<li>
-							<a
+							{/* <a
 								href={`tel:${user?.phone_number}`}
 								className="btn bg-theme text-white"
 							>
 								Call Me <i className="bx bxs-phone text-white"></i>
-							</a>
+							</a> */}
 						</li>
 					</ul>
 				</div>

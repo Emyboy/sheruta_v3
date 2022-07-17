@@ -40,7 +40,7 @@ export default function Header({
 				className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0"
 				style={{ zIndex: 39 }}
 			>
-				<div className="container-fluid">
+				<div className="container">
 					<Link to="/">
 						<a className="navbar-brand">
 							<img src={logo} alt="sheruta logo" width="150" height="40" />

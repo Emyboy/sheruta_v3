@@ -4,13 +4,13 @@ import logo from '../assets/img/logo.png'
 
 export default () => {
 	return (
-		<footer className="footer-area pt-100" style={{ zIndex: 1}}>
+		<footer className="footer-area pt-100" style={{ zIndex: 1 }}>
 			<div className="container">
 				<div className="row justify-content-center">
 					<div className="col-lg-3 col-md-6">
 						<div className="single-footer-widget">
 							<div className="widget-logo">
-								<a href="index.html">
+								<a>
 									<img src={logo} alt="image" width={'200'} />
 								</a>
 							</div>
@@ -69,7 +69,15 @@ export default () => {
 								style={{ flexDirection: 'column' }}
 							>
 								<li style={{ maxWidth: '100%' }}>
-									<Link to="/blog">Join Paddy</Link>
+									<Link to="/services/join_paddy">Join Paddy</Link>
+								</li>
+							</ul>
+							<ul
+								className="footer-quick-links"
+								style={{ flexDirection: 'column' }}
+							>
+								<li style={{ maxWidth: '100%' }}>
+									<Link to="/services/carry_over">Carry Over</Link>
 								</li>
 							</ul>
 							<ul
@@ -85,7 +93,7 @@ export default () => {
 								style={{ flexDirection: 'column' }}
 							>
 								<li style={{ maxWidth: '100%' }}>
-									<Link to="/blog">Available Flats</Link>
+									<Link to="/flats">Available Flats</Link>
 								</li>
 							</ul>
 							<ul
@@ -96,14 +104,14 @@ export default () => {
 									<Link to="/agents">Become An Agent</Link>
 								</li>
 							</ul>
-							<ul
+							{/* <ul
 								className="footer-quick-links"
 								style={{ flexDirection: 'column' }}
 							>
 								<li style={{ maxWidth: '100%' }}>
 									<Link to="/blog">About Us</Link>
 								</li>
-							</ul>
+							</ul> */}
 						</div>
 					</div>
 
