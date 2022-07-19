@@ -184,14 +184,14 @@ function App() {
 								component={InspectionInvitation}
 							/>
 							<Route exact path="/what-next" component={WhatNext} />
-							<Route
+							{/* <Route
 								exact
 								path="/blog/category/:category_slug/:category_id"
 								component={Blog}
-							/>
+							/> */}
 							<Route
 								exact
-								path="/blog/:category/:uuid/:id"
+								path="/blog/:slug/:id"
 								component={BlogDetails}
 							/>
 							<Route exact path="/start/:step" component={GetStarted} />

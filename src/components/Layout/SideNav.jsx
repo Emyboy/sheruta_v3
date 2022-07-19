@@ -151,15 +151,14 @@ export default function SideNav({ show }) {
 									<span>How It Works</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link to="/about" className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">
 										<MdWorkOutline />
 									</i>
 									<span>About Us</span>
-									{/* <span className="circle-count bg-warning mt-1">584</span> */}
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to="/terms" className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">

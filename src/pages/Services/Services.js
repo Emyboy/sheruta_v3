@@ -58,7 +58,7 @@ export default function Services({ match }) {
 						</div>
 						<div
 							className={`card shadow-sm rounded-xxl mb-5 ${
-								service && service === 'for_share' && 'border-3 border-success'
+								service && service === 'for_share' && 'border-3 border-success shadow-lg'
 							}`}
 							id="for_share"
 						>
@@ -125,7 +125,7 @@ export default function Services({ match }) {
 						</div>
 						<div
 							className={`card shadow-sm rounded-xxl mb-5 ${
-								service && service === 'join_paddy' && 'border-3 border-success'
+								service && service === 'join_paddy' && 'border-3 border-success shadow-lg'
 							}`}
 							id="join_paddy"
 						>
@@ -188,7 +188,7 @@ export default function Services({ match }) {
 						</div>
 						<div
 							className={`card shadow-sm rounded-xxl mb-5 ${
-								service && service === 'carry_over' && 'border-3 border-success'
+								service && service === 'carry_over' && 'border-3 border-success shadow-lg'
 							}`}
 							id="carry_over"
 						>

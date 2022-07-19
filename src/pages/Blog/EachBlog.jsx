@@ -2,8 +2,20 @@ import moment from 'moment'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
+export const returnBlogURL = (data, clip) => {
+	return `${clip ? `` : 'blog/'}${data?.title
+		.toLocaleLowerCase()
+		.replace(/[^\w\s]/gi, '')
+		.replace(/\s/g, '-')
+		.replace(' ', '')}/${data?.id}`
+		
+}
+
+
 export default function EachBlog({ data }) {
-	console.log(data)
+
+	
 	return (
 		<div className="blog-item bottom-30">
 			<a href="blog-details.html">
@@ -31,7 +43,7 @@ export default function EachBlog({ data }) {
 				)}
 				<h3>
 					<Link
-						to={`/blog/category/${data?.blog_categorie?.slug}/${data?.blog_categorie?.id}`}
+						to={returnBlogURL(data)}
 					>
 						{data?.title}
 					</Link>
@@ -47,7 +59,7 @@ export default function EachBlog({ data }) {
 						alt="author"
 					/>
 					<span>
-						<a href="blog-details.html">{data?.author?.first_name}</a>
+						<Link to={`/user/${data?.author?.username}`}>{data?.author?.first_name}</Link>
 					</span>
 				</div>
 

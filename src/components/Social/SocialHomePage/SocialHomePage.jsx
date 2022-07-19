@@ -80,16 +80,16 @@ export default (props) => {
 					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
 							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
-								<UserFeedCard />
 								<Sticky
 									stickyStyle={{
 										zIndex: 10,
 										marginTop: Global.isMobile ? '6vh' : '13vh',
 									}}
 								>
-									{/* <RecentUsers data={newUsers} /> */}
-									<RecentBookingFeed />
+									<UserFeedCard />
 								</Sticky>
+								{/* <RecentUsers data={newUsers} /> */}
+								{/* <RecentBookingFeed /> */}
 							</div>
 						)}
 						<div
@@ -166,58 +166,68 @@ export default (props) => {
 
 							<ErrorBoundary>
 								<ProfileProgress />
-							{filter === 'all' && (
-								<>
-									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
-										if (i === 2) {
-											return (
-												<>
-													<div className="d-flex justify-content-between align-items-center  mt-4">
-														<h5 className="fw-700 text-grey-600 mb-1 ml-2">
-															Recent Verified Users
-														</h5>
-														<Link to="/start">
-															<small className="text-theme fw-bold">
-																Get Verified {'>'}
-															</small>
-														</Link>
-													</div>
-													{personal_info && (
+								{filter === 'all' && (
+									<>
+										{(view['feed'] ? view['feed'] : state.list).map(
+											(val, i) => {
+												if (i === 2) {
+													return (
 														<>
-															<RecentUsersList key={`ki-${i}`} />
-															<SocialFeedsAds index={i} key={`ad-${i}`} />
-															<EachSocialRequest
-																key={i + ' request'}
-																data={val}
-															/>
+															<div className="d-flex justify-content-between align-items-center  mt-4">
+																<h5 className="fw-700 text-grey-600 mb-1 ml-2">
+																	Recent Verified Users
+																</h5>
+																<Link to="/start">
+																	<small className="text-theme fw-bold">
+																		Get Verified {'>'}
+																	</small>
+																</Link>
+															</div>
+															{personal_info && (
+																<>
+																	<RecentUsersList key={`ki-${i}`} />
+																	<SocialFeedsAds index={i} key={`ad-${i}`} />
+																	<EachSocialRequest
+																		key={i + ' request'}
+																		data={val}
+																	/>
+																</>
+															)}
 														</>
-													)}
-												</>
+													)
+												}
+												return (
+													<>
+														<SocialFeedsAds index={i} key={`ad-${i}`} />
+														<EachSocialRequest
+															key={i + ' request'}
+															data={val}
+														/>
+													</>
+												)
+											}
+										)}
+									</>
+								)}
+								{filter === 'for you' && (
+									<>
+										{(view['feed'] ? view['feed'] : state.list)
+											.filter(
+												(x) => x.is_searching == !personal_info.looking_for
 											)
-										}
-										return (
-											<>
-												<SocialFeedsAds index={i} key={`ad-${i}`} />
-												<EachSocialRequest key={i + ' request'} data={val} />
-											</>
-										)
-									})}
-								</>
-							)}
-							{filter === 'for you' && (
-								<>
-									{(view['feed'] ? view['feed'] : state.list)
-										.filter((x) => x.is_searching == !personal_info.looking_for)
-										.map((val, i) => {
-											return (
-												<>
-													<SocialFeedsAds index={i} key={`ad-${i}`} />
-													<EachSocialRequest key={i + ' request'} data={val} />
-												</>
-											)
-										})}
-								</>
-							)}
+											.map((val, i) => {
+												return (
+													<>
+														<SocialFeedsAds index={i} key={`ad-${i}`} />
+														<EachSocialRequest
+															key={i + ' request'}
+															data={val}
+														/>
+													</>
+												)
+											})}
+									</>
+								)}
 							</ErrorBoundary>
 							{state.list.length > 0 && (
 								<div className="card rounded-xxl">
