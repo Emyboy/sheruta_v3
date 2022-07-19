@@ -76,6 +76,7 @@ export default function BookInspection({ match }) {
 						agent: property?.agent?.id,
 						owner_personal_info: personal_info?.id,
 						location_keyword: property?.location_keyword?.id,
+						agent_profile: property?.agent_profile?.id
 					},
 					method: 'POST',
 					headers: {
@@ -265,7 +266,7 @@ export default function BookInspection({ match }) {
 										</p>
 									</Alert>
 									<div className="d-flex justify-content-center mt-4 mb-4">
-										{invitedUser.length > 1 ? (
+										{invitedUser.length > 0 ? (
 											<button
 												disabled={loading}
 												className="w-70 btn bg-current text-white fw-700"

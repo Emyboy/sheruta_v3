@@ -43,7 +43,6 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 			)
 			if (res.data) {
 				setListLoading(false)
-				console.log('ADDED ---', res.data)
 				done({
 					...data,
 					interested_parties: [...data?.interested_parties, user?.user],
@@ -117,7 +116,9 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					{data?.categorie && (
 						<li className="tag-2 bg-accent">{data?.categorie?.name}</li>
 					)}
-					{process.env.NODE_ENV !== 'production' && <span className='ml-4 h1'>#{data?.id}</span>}
+					{process.env.NODE_ENV !== 'production' && (
+						<span className="ml-4 h1">#{data?.id}</span>
+					)}
 				</ul>
 
 				{/* <div className="price">$2,500</div> */}
@@ -157,23 +158,27 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 				<h3>Description</h3>
 				<div>{ReactHtmlParser(data?.description)}</div>
 			</div>
-			<div className="details-description bg-white rounded widget widget_info">
-				<h3>Agent</h3>
-				<div className="info-box-one d-flex mt-3">
-					<img
-						width={'100'}
-						style={{ borderRadius: '50%' }}
-						src={data?.agent_profile?.avatar_url}
-						alt="image"
-					/>
-					<div className="m-2">
-						<h3 className="text-grey-600">{data?.agent_profile?.first_name}</h3>
-						<span>
-							<i className="bx bxs-home"></i> <a>{data?.agent?.name}</a>
-						</span>
+			{!standalone && (
+				<div className="details-description bg-white rounded widget widget_info">
+					<h3>Agent</h3>
+					<div className="info-box-one d-flex mt-3">
+						<img
+							width={'100'}
+							style={{ borderRadius: '50%' }}
+							src={data?.agent_profile?.avatar_url}
+							alt="image"
+						/>
+						<div className="m-2">
+							<h3 className="text-grey-600">
+								{data?.agent_profile?.first_name}
+							</h3>
+							<span>
+								<i className="bx bxs-home"></i> <a>{data?.agent?.name}</a>
+							</span>
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 
 			<PropertyAmenities data={data} />
 

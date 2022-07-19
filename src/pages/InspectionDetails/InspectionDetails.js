@@ -31,7 +31,6 @@ export default function InspectionDetails({ match }) {
 				}
 			)
 			setData(res.data)
-			console.log('THE DATA --', res.data)
 		} catch (error) {
 			notification.error({ message: 'Error loading page' })
 			return Promise.reject(error)

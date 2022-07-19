@@ -66,7 +66,7 @@ export default function BlogDetails(props) {
 	}
 	if (data) {
 		return (
-			<Layout>
+			<Layout full_screen>
 				<div
 					className="container"
 					style={{
@@ -105,11 +105,10 @@ export default function BlogDetails(props) {
 												{data?.sub_categories?.map((val, i) => {
 													return (
 														<li key={`sub-cat-${i}`}>
-															<a className='ml-1'>{val?.name}</a>
+															<a className="ml-1">{val?.name}</a>
 														</li>
 													)
 												})}
-												
 											</ul>
 										</div>
 
@@ -148,7 +147,7 @@ export default function BlogDetails(props) {
 						</div>
 						{!Global.isMobile && (
 							<div className="col-lg-4 col-md-12">
-								<Sticky stickyClassName="mt-4">
+								<Sticky stickyStyle={{ marginTop: user ? '14vh' : '5vh' }}>
 									<div className="widget-area">
 										<BlogRight />
 									</div>

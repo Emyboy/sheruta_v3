@@ -1,3 +1,4 @@
+import { Avatar } from 'antd'
 import React from 'react'
 import { useCallback } from 'react'
 import { useEffect } from 'react'
@@ -30,11 +31,13 @@ export default function AgentCard({ val }) {
 		<div className="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3 pb-4 pt-4">
 			<div className="card-body d-block w-100 p-4 text-center">
 				<figure className="avatar d-flex justify-content-center mb-0 position-relative z-index-1">
-					<img
+					<Avatar
 						src={data?.avatar_url}
 						alt="image"
-						className="float-right p-1 bg-white rounded-circle "
-						width={'200'}
+						// className="float-right p-1 bg-white rounded-circle "
+						// width={'200'}
+						size={130}
+						// height={'200'}
 					/>
 				</figure>
 				<div className="clearfix"></div>
