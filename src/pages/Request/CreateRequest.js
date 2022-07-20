@@ -26,6 +26,7 @@ import TextArea from 'antd/lib/input/TextArea'
 import Global from '../../Global';
 import ReactQuill from 'react-quill';
 import MainErrorBoundary from '../../components/ErrorBoundries/MainErrorBoundry'
+import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
 
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
@@ -147,7 +148,6 @@ const CraeteRequest = (props) => {
 					`/property-requests/?id=${params.request_id}`
 			)
 				.then((res) => {
-					console.log('DATA ---', res.data[0])
 					setData(res.data[0])
 					setEdit(true)
 					setState({ ...state, loading: false })
@@ -240,10 +240,10 @@ const CraeteRequest = (props) => {
 							uploadTask.on(
 								'state_changed',
 								(snapshot) => {
-									console.log(
-										'PROGRESS ---',
-										(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-									)
+									// console.log(
+									// 	'PROGRESS ---',
+									// 	(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+									// )
 									var progress =
 										(snapshot.bytesTransferred / snapshot.totalBytes) * 100
 									// console.log("Upload is " + progress + "% done");
@@ -346,6 +346,18 @@ const CraeteRequest = (props) => {
 	}
 	if (auth?.user && auth?.user?.user?.deactivated) {
 		return <Redirect to="/settings/deactivate-account" />
+	}
+
+	if(!personal_info?.state && !personal_info?.location_keyword){
+		return (
+			<Layout currentPage={'requests'}>
+				<div className="row justify-content-center pt-5">
+				<div className="col-lg-8 col-sm-12">
+					<LocationKeywordSelector />
+				</div>
+				</div>
+			</Layout>
+		)
 	}
 
 	if (state.done) {
