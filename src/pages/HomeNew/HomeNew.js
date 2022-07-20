@@ -27,6 +27,7 @@ export default function HomeNew() {
 			</Helmet>
 			<HomeHero />
 			<P2pProperties />
+			<HomeJoinPaddy />
 			<RecentProperties />
 			<AboutNew
 				heading={'Why Post Your Space?'}
@@ -45,10 +46,9 @@ export default function HomeNew() {
 					</>
 				}
 				ctaText="Post Now"
-				ctaURL={"/flat/submit"}
+				ctaURL={'/flat/submit'}
 			/>
 			<HomeFeatures />
-			<HomeJoinPaddy />
 			<LocationKeywords />
 			<Footer />
 		</Layout>

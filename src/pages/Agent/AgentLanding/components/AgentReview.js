@@ -1,11 +1,11 @@
 import axios from 'axios'
 import moment from 'moment'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../../../Global'
 import requestUtils from '../../../../utils/request.utils'
 
-const EachReview = ({ val }) => {
+const EachDemoRequest = ({ val }) => {
 	const user = val.users_permissions_user
 
 	return (
@@ -89,7 +89,7 @@ export default function AgentReview() {
 						// style={{ height: '405.188px' }}
 					>
 						{data.map((val, i) => {
-							return <EachReview key={`review-${i}`} val={val} />
+							return <EachDemoRequest key={`review-${i}`} val={val} />
 						})}
 					</div>
 					{/* <div className="owl-nav">
