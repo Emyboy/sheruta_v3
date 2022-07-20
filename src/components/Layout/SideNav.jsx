@@ -15,7 +15,8 @@ import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
 export default function SideNav({ show }) {
-	const { personal_info } = useSelector((state) => state.view)
+	const { personal_info } = useSelector((state) => state.view);
+	const { user } = useSelector(state => state.auth);
 	const dispatch = useDispatch()
 	const size = 25
 	return (
@@ -28,14 +29,17 @@ export default function SideNav({ show }) {
 						</div>
 						<ul className="mb-1 top-content">
 							<li className="logo d-none d-xl-block d-lg-block"></li>
-							<li>
-								<Link to="/start" className="nav-content-bttn open-font">
-									<i className=" btn-round-md bg-blue-gradiant me-3">
-										<BiRocket size={size} />
-									</i>
-									<span>Get Started</span>
-								</Link>
-							</li>
+							{!user?.user?.is_verified && (
+								<li>
+									<Link to="/start" className="nav-content-bttn open-font">
+										<i className=" btn-round-md bg-blue-gradiant me-3">
+											<BiRocket size={size} />
+										</i>
+										<span>Get Started</span>
+									</Link>
+								</li>
+							)}
+
 							{/* <li>
 								<Link to="/requests" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-red-gradiant me-3">

@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 import Global from '../../Global'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import { notification } from 'antd'
+import { Avatar, notification } from 'antd'
 import ImageViewer from 'react-simple-image-viewer'
 import { MdImage, MdOutlineLocationOn } from 'react-icons/md'
 import ReactHtmlParser from 'react-html-parser'
@@ -162,11 +162,11 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 				<div className="details-description bg-white rounded widget widget_info">
 					<h3>Agent</h3>
 					<div className="info-box-one d-flex mt-3">
-						<img
-							width={'100'}
+						<Avatar
+							size={80}
 							style={{ borderRadius: '50%' }}
 							src={data?.agent_profile?.avatar_url}
-							alt="image"
+							alt="agent"
 						/>
 						<div className="m-2">
 							<h3 className="text-grey-600">

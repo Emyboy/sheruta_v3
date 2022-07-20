@@ -20,7 +20,6 @@ const PersonalInfo = ({ userData, hasProfileLink }) => {
 				{}
 			)
 				.then((res) => {
-					console.log("INFO --", res);
 					setInfo(res.data[0])
 				})
 				.catch((err) => {

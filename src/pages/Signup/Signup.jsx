@@ -30,10 +30,10 @@ export const Signup = (props) => {
 			})
 			return
 		}
-		if(e.username?.length <4){
-			notification.error({ message: "Username is too short", placement: 'bottomLeft' });
-			return;
-		}
+		// if(e.username?.length <4){
+		// 	notification.error({ message: "Username is too short", placement: 'bottomLeft' });
+		// 	return;
+		// }
 		if(e.first_name?.length <2){
 			notification.error({ message: "First Name is too short", placement: 'bottomLeft' });
 			return;
@@ -44,9 +44,9 @@ export const Signup = (props) => {
 			method: 'POST',
 			data: {
 				...e,
-				username: e.username
-					.replace(/\s/g, '')
-					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+				// username: e.username
+				// 	.replace(/\s/g, '')
+				// 	.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 				first_name: e.first_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 				last_name: e.last_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 			},
@@ -166,7 +166,7 @@ export const Signup = (props) => {
 												placeholder="Last Name"
 											/>
 										</div>
-										<div className="form-group icon-input mb-3">
+										{/* <div className="form-group icon-input mb-3">
 											<i className="font-sm ti-user text-grey-500 pe-0"></i>
 											<input
 												required
@@ -177,7 +177,7 @@ export const Signup = (props) => {
 												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
 												placeholder="Username Ex john_doe"
 											/>
-										</div>
+										</div> */}
 										<div className="form-group icon-input mb-3">
 											<i className="font-sm ti-email text-grey-500 pe-0"></i>
 											<input
@@ -214,14 +214,14 @@ export const Signup = (props) => {
 											/>
 											<i className="font-sm ti-lock text-grey-500 pe-0"></i>
 										</div>
-										<div className="form-group icon-input mb-1">
+										{/* <div className="form-group icon-input mb-1">
 											<input
 												type="Password"
 												className="style2-input ps-5 form-control text-grey-900 font-xss ls-3"
 												placeholder="Confirm Password"
 											/>
 											<i className="font-sm ti-lock text-grey-500 pe-0"></i>
-										</div>
+										</div> */}
 										<div className="form-check text-left mb-3">
 											<input
 												type="checkbox"

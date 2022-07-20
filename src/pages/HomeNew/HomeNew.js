@@ -10,6 +10,7 @@ import HomeHero from './components/HomeHero'
 import HomeJoinPaddy from './components/HomeJoinPaddy'
 import LocationKeywords from './components/LocationKeywords'
 import RecentProperties from './components/RecentProperties'
+import P2pProperties from './P2pProperties'
 
 export default function HomeNew() {
 	const { user } = useSelector((state) => state.auth)
@@ -25,6 +26,7 @@ export default function HomeNew() {
 				<title>Flats for share in Lekki, Yaba, Surulere | Sheruta</title>
 			</Helmet>
 			<HomeHero />
+			<P2pProperties />
 			<RecentProperties />
 			<AboutNew
 				heading={'Why Post Your Space?'}

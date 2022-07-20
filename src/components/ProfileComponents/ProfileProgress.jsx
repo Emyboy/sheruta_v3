@@ -67,7 +67,10 @@ export default React.memo(function ProfileProgress() {
 						<h4 className="font-sss d-block fw-700 mt-2 mb-0">
 							Complete Your Profile
 							<span className="float-right mt-2 font-xsssss text-grey-500">
-								<Link to="/" className="btn btn-sm bg-theme text-white">
+								<Link
+									to="/settings/location-keyword"
+									className="btn btn-sm bg-theme text-white"
+								>
 									Let's Go
 								</Link>
 							</span>
