@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Tooltip } from 'antd'
+import { Avatar, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
 import logo from '../../assets/img/logo.png'
@@ -359,11 +359,11 @@ export default function Header({
 				{user && (
 					<Link to={`/user/${user?.user.username}`}>
 						<a className="p-0 ms-3 menu-icon">
-							<img
+							<Avatar
 								src={user.user?.avatar_url}
 								alt="user"
 								className="w40 mt--1"
-								style={{ borderRadius: '50px' }}
+								size={40}
 							/>
 						</a>
 					</Link>

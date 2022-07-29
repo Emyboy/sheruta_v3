@@ -22,6 +22,10 @@ export default function RecentProperties() {
 		getRecentProperties()
 	}, [getRecentProperties])
 
+	if(list.length === 0){
+		return null
+	}
+
 	return (
 		<div className="featured-area ptb-100">
 			<div className="container">

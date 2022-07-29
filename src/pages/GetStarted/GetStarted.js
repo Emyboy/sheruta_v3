@@ -23,6 +23,7 @@ import {
 import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
 import PersonalInfoService from '../../services/PersonalInfoService';
 import store from '../../redux/store/store'
+import Cookies from 'js-cookie'
 
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
@@ -79,7 +80,7 @@ export const GetStarted = (props) => {
 		if (auth.user && !personal_info) {
 			axios(process.env.REACT_APP_API_URL + `/personal-infos/me`, {
 				headers: {
-					Authorization: `Bearer ${props.auth.user.jwt}`,
+					Authorization: `Bearer ${Cookies.get('token')}`,
 				},
 			})
 				.then((res) => {

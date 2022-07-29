@@ -39,7 +39,6 @@ export default function LocationKeywordSettings() {
 					<div className="card-body p-lg-5 p-4 w-100 border-0 text-center mt-1 ">
 						<LocationKeywordSelector
 							done={(e) => {
-								console.log(e)
 								setState(e?.state?.value)
 								setLocationKeyword(e?.locationKeyword?.value)
 							}}

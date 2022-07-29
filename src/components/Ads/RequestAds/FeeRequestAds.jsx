@@ -16,7 +16,7 @@ export default function FeeRequestAds() {
                 <h5>Post a free request today</h5>
             </div>
             <div className="col-sm-1 col-lg-3" style={{ alignSelf: "center" }}>
-                <Link to="/requests/create">
+                <Link to="/flat/submit">
                     <Btn
                         text="Post"
                         className="mr-2 btn-sm"

@@ -12,15 +12,10 @@ export default React.memo(function ProfileProgress() {
 
 	useEffect(() => {
 		if (personal_info) {
-			console.log({
-				habits: personal_info?.unique_habits?.length,
-				state: personal_info?.state,
-				location_keyword: personal_info?.location_keyword
-			})
+		
 			if (!personal_info?.state && !personal_info?.location_keyword) {
 				setProgress(progress - 25)
 			}else if(personal_info?.unique_habits && personal_info?.unique_habits?.length === 0){
-				console.log('SETTING PROGESS')
 				setProgress(progress - 25)
 			}else {
 				setProgress(100)

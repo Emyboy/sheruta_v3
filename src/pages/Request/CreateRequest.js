@@ -570,9 +570,9 @@ const CraeteRequest = (props) => {
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>Total Rent</label>
-													<div class="input-group mb-2">
-														<div class="input-group-prepend">
-															<div class="input-group-text">
+													<div className="input-group mb-2">
+														<div className="input-group-prepend">
+															<div className="input-group-text">
 																{Global.currency}
 															</div>
 														</div>
@@ -599,9 +599,9 @@ const CraeteRequest = (props) => {
 											<div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>Rent Per Room</label>
-													<div class="input-group mb-2">
-														<div class="input-group-prepend">
-															<div class="input-group-text">
+													<div className="input-group mb-2">
+														<div className="input-group-prepend">
+															<div className="input-group-text">
 																{Global.currency}
 															</div>
 														</div>

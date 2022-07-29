@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Global from '../../Global'
 import requestUtils from '../../utils/request.utils'
+import { IoCallSharp } from 'react-icons/io5'
 
 export default function P2pProperties() {
 	const [list, setList] = useState([])
@@ -13,7 +14,9 @@ export default function P2pProperties() {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
-					`/property-requests/?is_searching=false&_limit=4&_sort=created_at:DESC`
+					`/property-requests/?is_searching=false&_limit=${
+						Global.isMobile ? '8' : '4'
+					}&_sort=created_at:DESC`
 			)
 			console.log(res.data)
 			setList(res.data)
@@ -63,7 +66,12 @@ export const EachP2pDemoProperty = ({ data }) => {
 				<div className="col-lg-6 col-md-12">
 					<div
 						className="properties-image "
-						style={{ backgroundImage: `url(${data?.image_url[0]})` }}
+						style={{
+							backgroundImage: `url(${data?.image_url[0]})`,
+							minHeight: '200px',
+							backgroundPosition: 'center',
+							backgroundSize: 'cover',
+						}}
 					>
 						{/* <img src={data?.image_url[0]} alt="property" /> */}
 
@@ -91,15 +99,13 @@ export const EachP2pDemoProperty = ({ data }) => {
 				<div className="col-lg-6 col-md-12">
 					<div className="properties-content">
 						<span>{data?.location}</span>
-						<h3>
-							<Link
-								to={requestUtils.renderRequestURL(data)}
-								data-lightbox="roadtrip"
-								className="position-relative d-block"
-							>
-								{data?.heading}
-							</Link>
-						</h3>
+						<Link
+							to={requestUtils.renderRequestURL(data)}
+							data-lightbox="roadtrip"
+							className="position-relative d-block mb-3"
+						>
+							<p>{data?.body?.slice(0, 75)}...</p>
+						</Link>
 
 						<ul className="list">
 							<li>
@@ -129,6 +135,9 @@ export const EachP2pDemoProperty = ({ data }) => {
 							</div>
 
 							{/* <p><i className="bx bx-calendar"></i>February 25, 2022</p> */}
+							<Link className="bg-theme text-white btn" to="/signup">
+								Call Me <IoCallSharp size={20} />
+							</Link>
 						</div>
 					</div>
 				</div>

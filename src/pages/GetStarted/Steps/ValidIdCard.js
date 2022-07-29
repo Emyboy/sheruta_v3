@@ -26,6 +26,7 @@ export default function ValidIdCard(props) {
 	// console.log('PROPS- --', props)
 	const [nin, setNin] = useState('')
 	const { user } = useSelector((state) => state.auth)
+	const { personal_info } = useSelector(state => state.view);
 	const [loading, setLoading] = useState(false)
 	const [showUserData, setShowUserData] = useState(false)
 	const [ninData, setNinData] = useState(null)
@@ -111,13 +112,16 @@ export default function ValidIdCard(props) {
 			last_name: ninData.lastname,
 		}
 
-		axios(process.env.REACT_APP_API_URL + `/personal-infos/${props.info.id}`, {
-			method: 'PUT',
-			headers: {
-				Authorization: `Bearer ${Cookies.get('token')}`,
-			},
-			data,
-		})
+		axios(
+			process.env.REACT_APP_API_URL + `/personal-infos/${personal_info.id}`,
+			{
+				method: 'PUT',
+				headers: {
+					Authorization: `Bearer ${Cookies.get('token')}`,
+				},
+				data,
+			}
+		)
 			.then((res) => {
 				// console.log("RES ----", res);
 				notifyEmy({
