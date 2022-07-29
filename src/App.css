@@ -132,14 +132,13 @@ svg {
     background-color: var(--theme-color) !important;
     border-color: var(--theme-color) !important;
 }
-.modal {
-    /* background: rgba(15, 26, 9, 0.433); */
+/* .modal {
     backdrop-filter: blur(10.5px);
     -webkit-backdrop-filter: blur(10.5px);
 }
 .modal-content, .modal-body {
     border-radius: 15px !important;
-}
+} */
 @media only screen and (max-width: 1370px) {
     .mobile-only {
         visibility: visible !important;

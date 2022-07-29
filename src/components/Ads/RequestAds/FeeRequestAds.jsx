@@ -12,7 +12,7 @@ export default function FeeRequestAds() {
             }}
         >
             <div className="col-sm-12 col-lg-7">
-                <h3>Dont be left out</h3>
+                <h3>Don't be left out</h3>
                 <h5>Post a free request today</h5>
             </div>
             <div className="col-sm-1 col-lg-3" style={{ alignSelf: "center" }}>

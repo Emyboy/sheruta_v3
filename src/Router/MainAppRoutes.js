@@ -54,6 +54,7 @@ import Home from '../pages/HomeNew/HomeNew';
 import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding';
 import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
+import Discussion from '../pages/Discussion/Discussion'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -131,6 +132,8 @@ function App() {
 								component={AgentPending}
 							/>
 							<Route exact path="/flats" component={Properties} />
+							<Route exact path="/discussion" component={Discussion} />
+							<Route exact path="/discussion/room/:room_id" component={Discussion} />
 							{/* <Route path="/flats/for-share/:keyword_slug/:category_slug/:service_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug/:category_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug" component={Properties} /> */}

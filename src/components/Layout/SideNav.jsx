@@ -2,15 +2,16 @@ import React from 'react'
 import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
 import { IoPricetagsOutline, IoWarningOutline } from 'react-icons/io5'
-import { RiUserSearchLine } from 'react-icons/ri'
-import { BsHash, BsHouseDoor, BsCalendarDay } from 'react-icons/bs'
+import { RiUserSearchLine, RiHome4Fill } from 'react-icons/ri'
+import { BsHash, BsHouseDoor, BsFillChatSquareFill } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
 import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { IoIosPeople } from 'react-icons/io'
+import { IoIosPeople,  } from 'react-icons/io'
+import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
@@ -57,22 +58,30 @@ export default function SideNav({ show }) {
 								</Link>
 							</li> */}
 							<li>
-								<Link to="/services" className="nav-content-bttn open-font">
+								<Link to="/discussion" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-mini-gradiant me-3">
-										<MdElectricalServices size={size} />
+										<BsFillChatSquareFill size={size} />
 									</i>
-									<span>Services</span>
+									<span>Discussions</span>
 								</Link>
 							</li>
 							<li>
 								<Link to="/inspections" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-current me-3">
-										<AiOutlineCalendar size={size} />
+										<IoCalendarNumberSharp size={size} />
 									</i>
 									<span>Inspections</span>
 									{/* <span className="circle-count bg-danger font-xssss mt-0">
 										3
 									</span> */}
+								</Link>
+							</li>
+							<li>
+								<Link to="/services" className="nav-content-bttn open-font">
+									<i className="btn-round-md bg-mini-gradiant me-3">
+										<IoBagCheck size={size} />
+									</i>
+									<span>Services</span>
 								</Link>
 							</li>
 							<li>
@@ -85,29 +94,12 @@ export default function SideNav({ show }) {
 									className="nav-content-bttn open-font"
 								>
 									<i className="btn-round-md bg-gold-gradiant me-3">
-										<BsHouseDoor size={size} />
+										<RiHome4Fill size={size} />
 									</i>
 									<span>Properties</span>
 								</Link>
 							</li>
-							{process.env.NODE_ENV === 'development' && (
-								<>
-									<li>
-										<Link
-											to="/join-paddy"
-											className="nav-content-bttn open-font"
-										>
-											<i className=" btn-round-md bg-red-gradiant me-3">
-												<IoIosPeople size={size} />
-											</i>
-											<span>Join Paddy</span>
-											<span className="circle-count bg-success font-xssss mt-0">
-												NEW
-											</span>
-										</Link>
-									</li>
-								</>
-							)}
+							
 						</ul>
 					</div>
 
