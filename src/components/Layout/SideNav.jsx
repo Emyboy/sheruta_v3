@@ -57,14 +57,16 @@ export default function SideNav({ show }) {
 									<span>Pricing</span>
 								</Link>
 							</li> */}
-							<li>
-								<Link to="/discussion" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-mini-gradiant me-3">
-										<BsFillChatSquareFill size={size} />
-									</i>
-									<span>Discussions</span>
-								</Link>
-							</li>
+							{process.env.NODE_ENV === 'development' && (
+								<li>
+									<Link to="/discussion" className="nav-content-bttn open-font">
+										<i className="btn-round-md bg-mini-gradiant me-3">
+											<BsFillChatSquareFill size={size} />
+										</i>
+										<span>Discussions</span>
+									</Link>
+								</li>
+							)}
 							<li>
 								<Link to="/inspections" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-current me-3">
@@ -99,7 +101,6 @@ export default function SideNav({ show }) {
 									<span>Properties</span>
 								</Link>
 							</li>
-							
 						</ul>
 					</div>
 

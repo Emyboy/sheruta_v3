@@ -9,9 +9,6 @@ import EachDiscussionOptions from './EachDiscussionOptions'
 import EachDiscussionEdit from './EachDiscussionEdit'
 import EachDiscussionContainer from './EachDiscussionContainer'
 
-const InComingChat = styled.article`
-	background-color: #edeeed;
-`
 const OutgoingChat = styled.article`
 	/* background-color: #edeeed; */
 `
@@ -41,7 +38,7 @@ export function OutgoingGroupChat({ message }) {
 			</div>
 			<p>{message}</p>
 			<i>
-				<small>{moment(new Date()).fromNow()}</small>
+				<small className='text-grey-600'>{moment(new Date()).fromNow()}</small>
 			</i>
 		</EachDiscussionContainer>
 	)
@@ -60,7 +57,7 @@ export function EachIncomingGroupChat({ message }) {
 				</div>
 				<p>{message}</p>
 				<i>
-					<small>{moment(new Date()).fromNow()}</small>
+					<small className='text-grey-600'>{moment(new Date()).fromNow()}</small>
 				</i>
 			</div>
 		</EachDiscussionContainer>

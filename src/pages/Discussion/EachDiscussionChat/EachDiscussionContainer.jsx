@@ -19,16 +19,18 @@ export default function EachDiscussionContainer({ children, outgoing }) {
 					outgoing ? 'end' : 'start'
 				} align-items`}
 			>
-				<div className="ml-2 mr-2 mb-2">
-					<div
-						className={`rounded-xl ${
-							_user.is_online ? 'bg-success' : 'bg-danger'
-						}`}
-						style={{ padding: 2 }}
-					>
-						<Avatar src={_user.avatar_url} size={40} />
+				{!outgoing && (
+					<div className="ml-2 mr-2 mb-2">
+						<div
+							className={`rounded-xl ${
+								_user.is_online ? 'bg-success' : 'bg-danger'
+							}`}
+							style={{ padding: 2 }}
+						>
+							<Avatar src={_user.avatar_url} size={40} />
+						</div>
 					</div>
-				</div>
+				)}
 				<InComingChat
 					outgoing={outgoing}
 					className="rounded p-2"

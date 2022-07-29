@@ -4,7 +4,7 @@ import { HiDotsVertical } from 'react-icons/hi'
 
 export default function DiscussionLeftHeader() {
   return (
-		<div className="p-3">
+		<div className="p-3 border-right">
 			<header className="d-flex justify-content-between align-items-center mb-3">
 				<h1>Message</h1>
 				<HiDotsVertical />

@@ -8,9 +8,9 @@ export default function DiscussionCenterHeader() {
 
 	const _user = user?.user
 	return (
-		<header className="bg-white border-bottom p-3 d-flex justify-content-between animate__fadeInDown animate__animated">
+		<header className="bg-white border-bottom p-2 d-flex justify-content-between animate__fadeInDown animate__animated">
 			<div className="d-flex">
-				<Avatar src={_user.avatar_url} size={60} />
+				<Avatar src={_user.avatar_url} size={50} />
 				<div className="pl-2">
 					<h3>Lekki Room</h3>
 					<small>
