@@ -57,14 +57,14 @@ export default function DiscussionCenter() {
 				<div style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }} />
 			</div>
 			<div
-				className="bg-white p-3 border-top"
+				className={`bg-white p-3 border-top ${Global.isMobile && "fixed-bottom app-footer"}`}
 				style={
 					Global.isMobile
 						? { position: 'absolute', bottom: 0, left: 0, right: 0 }
 						: null
 				}
 			>
-				<div className="bg-grey p-2 rounded-xl d-flex">
+				<div className="bg-grey p-2 rounded-xl d-flex w-100">
 					<input
 						className="form-control border-0 bg-grey rounded-xl font-xs"
 						placeholder="Start typing..."
