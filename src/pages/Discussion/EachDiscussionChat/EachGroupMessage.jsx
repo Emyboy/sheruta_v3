@@ -15,7 +15,7 @@ export default function EachGroupMessage({ message, outgoing }) {
 	}
 
 	if (showDelete) {
-		return <DiscussionDeleteAction />
+		return <DiscussionDeleteAction onCancel={() => setShowDelete(false)} />
 	}
 
 	const EachMessageProps = {
