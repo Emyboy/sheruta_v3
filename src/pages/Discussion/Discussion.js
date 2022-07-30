@@ -2,7 +2,7 @@ import React from 'react'
 import Global from '../../Global'
 import DiscussionCenter from './DiscussionCenter/DiscoussionCenter'
 import DiscussionLeft from './DiscussionLeft/DiscussionLeft'
-import DiscussionRight from './DiscussionRight'
+import DiscussionRight from './DiscussionRight/DiscussionRight'
 
 export default function Discussion() {
 	return (

@@ -57,7 +57,9 @@ export default function DiscussionCenter() {
 				<div style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }} />
 			</div>
 			<div
-				className={`bg-white p-3 border-top ${Global.isMobile && "fixed-bottom app-footer"}`}
+				className={`bg-white p-3 border-top animate__bounceInUp animate__animated  ${
+					Global.isMobile && 'fixed-bottom app-footer'
+				}`}
 				style={
 					Global.isMobile
 						? { position: 'absolute', bottom: 0, left: 0, right: 0 }

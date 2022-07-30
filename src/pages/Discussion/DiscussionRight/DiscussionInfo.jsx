@@ -11,7 +11,7 @@ export default function DiscussionInfo() {
 				<div
 					className="jumbotron"
 					style={{
-						backgroundImage: `url(https://picsum.photos/300/200)`,
+						backgroundImage: `url(https://picsum.photos/300/200/?blur=6)`,
 						backgroundSize: 'cover',
 						backgroundRepeat: 'no-repeat',
 					}}
@@ -23,7 +23,7 @@ export default function DiscussionInfo() {
 					<Avatar src={_user.avatar_url} size={100} />
 				</div>
 			</div>
-			<div className='text-center'>
+			<div className="text-center">
 				<h2>Lekki Room</h2>
 			</div>
 		</div>
