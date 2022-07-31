@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import moment from 'moment'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import Global from '../../../Global'
@@ -40,7 +40,7 @@ export default function DiscussionChatList({ newMessage }) {
 		}
 	}, [newMessage])
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getRecentMessages()
 	}, [getRecentMessages])
 

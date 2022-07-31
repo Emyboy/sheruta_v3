@@ -6,25 +6,36 @@ import { IoSend } from 'react-icons/io5'
 import MessageService from '../../../services/MessageService'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setGroupState } from '../../../redux/strapi_actions/group.action'
 
 export default function DiscussionChatInput({ onSend }) {
-    const { room_id } = useParams();
-    const { user } = useSelector(state => state.auth);
+	const { room_id } = useParams()
+	const { user } = useSelector((state) => state.auth)
+	const [loading, setLoading] = useState(false)
 	const [newMessage, setNewMessage] = useState('')
+	const { reply } = useSelector((state) => state?.group)
+	const dispatch = useDispatch()
+
 	const handleSubmit = async (e) => {
-        e.preventDefault()
+		e.preventDefault()
+		setLoading(true)
 		try {
 			const res = await MessageService.sendMessage({
-                message_text: newMessage,
-                location_keyword: room_id,
-                from: user?.user?.id
-            })
+				message_text: newMessage,
+				location_keyword: room_id,
+				from: user?.user?.id,
+				reply,
+			})
 			onSend({
 				...res.data,
 				new: true,
 			})
-            setNewMessage('')
+			setNewMessage('')
+			setLoading(false)
+			dispatch(setGroupState({ reply: null }))
 		} catch (error) {
+			setLoading(false)
 			return Promise.reject(error)
 		}
 	}
@@ -38,12 +49,12 @@ export default function DiscussionChatInput({ onSend }) {
 				className="form-control border-0 bg-grey rounded-xl font-xs"
 				placeholder="Start typing..."
 				onChange={(e) => setNewMessage(e.target.value)}
-                value={newMessage}
+				value={newMessage}
 			/>
 			<button
 				className="btn bg-accent text-white align-self-start"
 				style={{ borderRadius: '50px', height: '50px', width: '50px' }}
-                disabled={newMessage.length === 0}
+				disabled={newMessage.length === 0 || loading}
 			>
 				<IoSend size={24} />
 			</button>

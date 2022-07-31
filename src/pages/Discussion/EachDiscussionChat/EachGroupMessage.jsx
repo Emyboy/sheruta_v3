@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import EachDiscussionOptions from './EachDiscussionOptions'
 import EachDiscussionEdit from './EachDiscussionEdit'
 import EachDiscussionContainer from './EachDiscussionContainer'
 import DiscussionDeleteAction from './DiscussionDeleteAction'
+import { setGroupState } from '../../../redux/strapi_actions/group.action'
 
-export default function EachGroupMessage({
-	data,
-	outgoing
-}) {
+export default function EachGroupMessage({ data, outgoing }) {
 	const [showEdit, setShowEdit] = useState(false)
 	const [showDelete, setShowDelete] = useState(false)
 
@@ -23,7 +21,7 @@ export default function EachGroupMessage({
 
 	const EachMessageProps = {
 		askDelete: () => setShowDelete(true),
-		data
+		data,
 	}
 
 	if (outgoing) {
@@ -32,10 +30,7 @@ export default function EachGroupMessage({
 	return <EachIncomingGroupChat {...EachMessageProps} />
 }
 
-export function OutgoingGroupChat({
-	askDelete,
-	data
-}) {
+export function OutgoingGroupChat({ askDelete, data }) {
 	const { user } = useSelector((state) => state.auth)
 
 	const _user = user?.user
@@ -48,7 +43,9 @@ export function OutgoingGroupChat({
 			{data.reply && <Reply reply={data.reply} />}
 			<p>{data.message_text}</p>
 			<i>
-				<small className="text-grey-600">{moment(data?.created_at).fromNow()}</small>
+				<small className="text-grey-600">
+					{moment(data?.created_at).fromNow()}
+				</small>
 			</i>
 		</EachDiscussionContainer>
 	)
@@ -56,6 +53,7 @@ export function OutgoingGroupChat({
 
 export function EachIncomingGroupChat({ askDelete, data }) {
 	const { user } = useSelector((state) => state.auth)
+	const dispatch = useDispatch()
 
 	const _user = user?.user
 	return (
@@ -63,12 +61,17 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
 					<h5 className="fw-bold m-0">{data.from.first_name}</h5>
-					<EachDiscussionOptions onDeleteClick={() => askDelete()} />
+					<EachDiscussionOptions
+						onDeleteClick={() => askDelete()}
+						onReply={() => dispatch(setGroupState({ reply: data }))}
+					/>
 				</div>
 				{data.reply && <Reply reply={data.reply} />}
 				<p>{data.message_text}</p>
 				<i>
-					<small className="text-grey-600">{moment(data?.created_at).fromNow()}</small>
+					<small className="text-grey-600">
+						{moment(data?.created_at).fromNow()}
+					</small>
 				</i>
 			</div>
 		</EachDiscussionContainer>

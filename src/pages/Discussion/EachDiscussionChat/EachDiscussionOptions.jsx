@@ -4,7 +4,7 @@ import { MdEdit, MdOutlineReply, MdDelete } from 'react-icons/md'
 
 const iconSize = 24
 
-export default function EachDiscussionOptions({ onDeleteClick }) {
+export default function EachDiscussionOptions({ onDeleteClick, onReply }) {
 	return (
 		<Dropdown>
 			<Dropdown.Toggle
@@ -22,7 +22,10 @@ export default function EachDiscussionOptions({ onDeleteClick }) {
 					<MdEdit size={iconSize} /> Edit
 				</Dropdown.Item>
 				<hr className="m-0" />
-				<Dropdown.Item className="text-grey-700 fw-500 pb-3 pt-3">
+				<Dropdown.Item
+					className="text-grey-700 fw-500 pb-3 pt-3"
+					onClick={onReply}
+				>
 					<MdOutlineReply size={iconSize} /> Reply
 				</Dropdown.Item>
 				<hr className="m-0" />

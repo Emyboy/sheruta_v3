@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-
 import { useSelector } from 'react-redux'
 import DiscussionCenterHeader from './DiscussionCenterHeader'
 
 import Global from '../../../Global'
-import { useParams } from 'react-router'
 import DiscussionChatList from './DiscussionChatList'
 import DiscussionChatInput from './DiscussionChatInput'
+import { setGroupState } from '../../../redux/strapi_actions/group.action'
+import DiscussionReplyPreview from './DiscussionReplyPreview'
 
 export default function DiscussionCenter() {
 	const { user } = useSelector((state) => state.auth)
-	const { room_id } = useParams()
 	const [newMessages, setNewMessages] = useState(null)
+	const { reply } = useSelector((state) => state?.group)
 
 	const _user = user?.user
 	return (
@@ -27,7 +27,7 @@ export default function DiscussionCenter() {
 				<DiscussionChatList newMessage={newMessages} />
 			</div>
 			<div
-				className={`bg-white p-3 border-top  ${
+				className={`bg-white p-3 border-top d-flex flex-column ${
 					Global.isMobile && 'fixed-bottom app-footer'
 				}`}
 				style={
@@ -36,6 +36,9 @@ export default function DiscussionCenter() {
 						: null
 				}
 			>
+				{reply && (
+					<DiscussionReplyPreview />
+				)}
 				<DiscussionChatInput onSend={(e) => setNewMessages(e)} />
 			</div>
 		</div>
