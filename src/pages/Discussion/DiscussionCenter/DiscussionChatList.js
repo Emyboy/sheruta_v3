@@ -1,3 +1,4 @@
+import { notification } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import moment from 'moment'
@@ -34,9 +35,13 @@ export default function DiscussionChatList({ newMessage }) {
 	useEffect(() => {
 		if (newMessage) {
 			setMessages([...messages, newMessage])
-			document.getElementById('chat-end').scrollIntoView({
-				behavior: 'smooth',
-			})
+			if (!newMessage.reply) {
+				document.getElementById('chat-end').scrollIntoView({
+					behavior: 'smooth',
+				})
+			} else {
+				notification.success({ message: 'Reply sent' })
+			}
 		}
 	}, [newMessage])
 

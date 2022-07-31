@@ -4,7 +4,7 @@ import { MdEdit, MdOutlineReply, MdDelete } from 'react-icons/md'
 
 const iconSize = 24
 
-export default function EachDiscussionOptions({ onDeleteClick, onReply }) {
+export default function EachDiscussionOptions({ onDeleteClick, onReply, editable, onEditClick }) {
 	return (
 		<Dropdown>
 			<Dropdown.Toggle
@@ -18,23 +18,27 @@ export default function EachDiscussionOptions({ onDeleteClick, onReply }) {
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu className="rounded-xxxl shadow p-0">
-				<Dropdown.Item className="text-grey-700 fw-500 pb-3 pt-3">
-					<MdEdit size={iconSize} /> Edit
-				</Dropdown.Item>
-				<hr className="m-0" />
 				<Dropdown.Item
 					className="text-grey-700 fw-500 pb-3 pt-3"
 					onClick={onReply}
 				>
 					<MdOutlineReply size={iconSize} /> Reply
 				</Dropdown.Item>
-				<hr className="m-0" />
-				<Dropdown.Item
-					className="text-grey-700 fw-500 pb-3 pt-3"
-					onClick={onDeleteClick}
-				>
-					<MdDelete size={iconSize} /> Delete
-				</Dropdown.Item>
+				{editable && (
+					<>
+						<hr className="m-0" />
+						<Dropdown.Item className="text-grey-700 fw-500 pb-3 pt-3" onClick={onEditClick}>
+							<MdEdit size={iconSize} /> Edit
+						</Dropdown.Item>
+						<hr className="m-0" />
+						<Dropdown.Item
+							className="text-grey-700 fw-500 pb-3 pt-3"
+							onClick={onDeleteClick}
+						>
+							<MdDelete size={iconSize} /> Delete
+						</Dropdown.Item>
+					</>
+				)}
 			</Dropdown.Menu>
 		</Dropdown>
 	)

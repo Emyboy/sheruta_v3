@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function DiscussionPropertiesDemo() {
 	return (
-		<div className='bg-white pb-3'>
+		<div className='bg-white pb-4'>
 			<div className="d-flex justify-content-between align-items-center p-2 mb-1">
 				<h4 className="fw-500 text-grey-600 mb-0">Properties in Lekki</h4>
 				<Link to={`/flats`}>

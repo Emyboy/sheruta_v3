@@ -10,18 +10,28 @@ import { setGroupState } from '../../../redux/strapi_actions/group.action'
 export default function EachGroupMessage({ data, outgoing }) {
 	const [showEdit, setShowEdit] = useState(false)
 	const [showDelete, setShowDelete] = useState(false)
+	const [messageData, setMessageData] = useState(data);
+	const [deleted, setDeleted] = useState(false)
+
+	if(deleted){
+		return null
+	}
 
 	if (showEdit) {
-		return <EachDiscussionEdit />
+		return <EachDiscussionEdit message={messageData} done={e => {
+			setMessageData(e);
+			setShowEdit(false)
+		}} />
 	}
 
 	if (showDelete) {
-		return <DiscussionDeleteAction onCancel={() => setShowDelete(false)} />
+		return <DiscussionDeleteAction onCancel={() => setShowDelete(false)} done={() => setDeleted(true)} message={messageData} />
 	}
 
 	const EachMessageProps = {
 		askDelete: () => setShowDelete(true),
-		data,
+		data: messageData,
+		setShowEdit
 	}
 
 	if (outgoing) {
@@ -30,7 +40,7 @@ export default function EachGroupMessage({ data, outgoing }) {
 	return <EachIncomingGroupChat {...EachMessageProps} />
 }
 
-export function OutgoingGroupChat({ askDelete, data }) {
+export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 	const { user } = useSelector((state) => state.auth)
 
 	const _user = user?.user
@@ -38,7 +48,11 @@ export function OutgoingGroupChat({ askDelete, data }) {
 		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new}>
 			<div className="d-flex align-items-center justify-content-between">
 				<h5 className="fw-bold m-0">{data.from.first_name}</h5>
-				<EachDiscussionOptions onDeleteClick={() => askDelete()} />
+				<EachDiscussionOptions
+					onDeleteClick={() => askDelete()}
+					onEditClick={() => setShowEdit(true)}
+					editable
+				/>
 			</div>
 			{data.reply && <Reply reply={data.reply} />}
 			<p>{data.message_text}</p>

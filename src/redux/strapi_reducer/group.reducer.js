@@ -1,7 +1,8 @@
 const initialState = {
     reply: null,
     group_guests: [],
-    group_id: null
+    group_id: null,
+    showDetails: false
 }
 
 export default (state = initialState, { type, payload }) => {

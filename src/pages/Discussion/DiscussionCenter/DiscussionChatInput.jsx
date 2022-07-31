@@ -42,7 +42,7 @@ export default function DiscussionChatInput({ onSend }) {
 
 	return (
 		<form
-			className="bg-grey p-2 rounded-xl d-flex w-100"
+			className={`bg-grey p-2 rounded-xl d-flex w-100 `}
 			onSubmit={handleSubmit}
 		>
 			<input

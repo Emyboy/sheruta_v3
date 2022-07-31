@@ -139,7 +139,7 @@ svg {
 .modal-content, .modal-body {
     border-radius: 15px !important;
 } */
-@media only screen and (max-width: 1370px) {
+@media only screen and (max-width: 1199px) {
     .mobile-only {
         visibility: visible !important;
     }

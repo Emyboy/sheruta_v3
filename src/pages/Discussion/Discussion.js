@@ -25,13 +25,15 @@ export default function Discussion() {
 				<div className="container-fluid">
 					<div className="row">
 						{!Global.isMobile && (
-							<div className="col-lg-3 p-0">
+							<div className="col-xl-3 col-md-5 p-0">
 								<DiscussionLeft />
 							</div>
 						)}
-						<div className="col-lg-6 p-0">
-							{room_id ? (
+						<div className="col-xl-6 col-md-7 p-0 border-left">
+							{room_id  ? (
 								<DiscussionCenter />
+							) : Global.isMobile && !room_id ? (
+								<DiscussionLeft />
 							) : (
 								<div className="h-100 d-flex flex-column justify-content-center align-items-center">
 									<HiChatAlt2 size={140} className="text-grey-300" />
@@ -39,11 +41,9 @@ export default function Discussion() {
 								</div>
 							)}
 						</div>
-						{!Global.isMobile && (
-							<div className="col-lg-3 p-0">
-								<DiscussionRight />
-							</div>
-						)}
+						<div className="col-lg-3 p-0">
+							<DiscussionRight />
+						</div>
 					</div>
 				</div>
 			) : null}

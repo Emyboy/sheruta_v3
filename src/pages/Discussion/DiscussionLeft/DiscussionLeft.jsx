@@ -12,7 +12,7 @@ export default function DiscussionLeft() {
 	const [list] = useState(location_keywords.filter((x) => x.has_group))
 
 	return (
-		<div className="pl-2 bg-grey-300">
+		<div className="bg-grey-300">
 			<DiscussionLeftHeader />
 			<div className="list-group scroll-bar" style={{ maxHeight: '81vh' }}>
 				{list?.map((val, i) => {
