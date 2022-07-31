@@ -39,7 +39,10 @@ export default class MessageService {
                 authorization: `Bearer ${Cookies.get("token")}`,
             },
         });
-        this.updateConversationTime(sent.data.conversation.id);
+        if(message?.location_keyword){
+            return sent
+        }
+        this.updateConversationTime(sent.data.conversation.id)
         return sent;
     }
 

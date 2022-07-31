@@ -6,7 +6,10 @@ import EachDiscussionEdit from './EachDiscussionEdit'
 import EachDiscussionContainer from './EachDiscussionContainer'
 import DiscussionDeleteAction from './DiscussionDeleteAction'
 
-export default function EachGroupMessage({ message, outgoing }) {
+export default function EachGroupMessage({
+	data,
+	outgoing
+}) {
 	const [showEdit, setShowEdit] = useState(false)
 	const [showDelete, setShowDelete] = useState(false)
 
@@ -19,8 +22,8 @@ export default function EachGroupMessage({ message, outgoing }) {
 	}
 
 	const EachMessageProps = {
-		message,
 		askDelete: () => setShowDelete(true),
+		data
 	}
 
 	if (outgoing) {
@@ -29,49 +32,52 @@ export default function EachGroupMessage({ message, outgoing }) {
 	return <EachIncomingGroupChat {...EachMessageProps} />
 }
 
-export function OutgoingGroupChat({ message, askDelete }) {
+export function OutgoingGroupChat({
+	askDelete,
+	data
+}) {
 	const { user } = useSelector((state) => state.auth)
 
 	const _user = user?.user
 	return (
-		<EachDiscussionContainer outgoing>
+		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new}>
 			<div className="d-flex align-items-center justify-content-between">
-				<h5 className="fw-bold m-0">{_user.first_name}</h5>
+				<h5 className="fw-bold m-0">{data.from.first_name}</h5>
 				<EachDiscussionOptions onDeleteClick={() => askDelete()} />
 			</div>
-			<Reply />
-			<p>{message}</p>
+			{data.reply && <Reply reply={data.reply} />}
+			<p>{data.message_text}</p>
 			<i>
-				<small className="text-grey-600">{moment(new Date()).fromNow()}</small>
+				<small className="text-grey-600">{moment(data?.created_at).fromNow()}</small>
 			</i>
 		</EachDiscussionContainer>
 	)
 }
 
-export function EachIncomingGroupChat({ message }) {
+export function EachIncomingGroupChat({ askDelete, data }) {
 	const { user } = useSelector((state) => state.auth)
 
 	const _user = user?.user
 	return (
-		<EachDiscussionContainer outgoing={false}>
+		<EachDiscussionContainer outgoing={false} from={data.from}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
-					<h5 className="fw-bold m-0">{_user.first_name}</h5>
-					<EachDiscussionOptions />
+					<h5 className="fw-bold m-0">{data.from.first_name}</h5>
+					<EachDiscussionOptions onDeleteClick={() => askDelete()} />
 				</div>
-				<Reply />
-				<p>{message}</p>
+				{data.reply && <Reply reply={data.reply} />}
+				<p>{data.message_text}</p>
 				<i>
-					<small className="text-grey-600">
-						{moment(new Date()).fromNow()}
-					</small>
+					<small className="text-grey-600">{moment(data?.created_at).fromNow()}</small>
 				</i>
 			</div>
 		</EachDiscussionContainer>
 	)
 }
 
-const Reply = () => {
+const Reply = ({ reply }) => {
+	const from = reply?.from
+	// console.log(reply)
 	return (
 		<div
 			className="card p-2 mb-2 rounded-xxxl mt-2"
@@ -79,14 +85,13 @@ const Reply = () => {
 		>
 			<div className="d-flex align-items-center justify-content-between mb-1">
 				<small>
-					<i className="fw-600 m-0 text-grey-500">The person's name</i>
+					<i className="fw-600 m-0 text-grey-500">{from?.first_name}</i>
 				</small>
-				<small className="m-0 text-grey-500">4 mins ago</small>
+				<small className="m-0 text-grey-500">
+					{moment(reply.created_at).fromNow()}
+				</small>
 			</div>
-			<i>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptate
-				rer autem unde! Mollitia.
-			</i>
+			<i>{reply?.message_text}</i>
 		</div>
 	)
 }

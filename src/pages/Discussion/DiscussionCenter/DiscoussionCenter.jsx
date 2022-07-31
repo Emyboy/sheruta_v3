@@ -1,14 +1,17 @@
-import React from 'react'
-import { IoSend } from 'react-icons/io5'
+import React, { useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import DiscussionCenterHeader from './DiscussionCenterHeader'
-import EachGroupMessage from '../EachDiscussionChat/EachGroupMessage'
-import EachDiscussionNotification from '../DiscussionNotificatioin/EachDiscussionNotification'
+
 import Global from '../../../Global'
+import { useParams } from 'react-router'
+import DiscussionChatList from './DiscussionChatList'
+import DiscussionChatInput from './DiscussionChatInput'
 
 export default function DiscussionCenter() {
 	const { user } = useSelector((state) => state.auth)
+	const { room_id } = useParams()
+	const [newMessages, setNewMessages] = useState(null)
 
 	const _user = user?.user
 	return (
@@ -21,43 +24,10 @@ export default function DiscussionCenter() {
 				className="d-flex flex-column algin-items-start justify-content-start scroll-bar pt-4"
 				style={{ height: '100%' }}
 			>
-				<EachGroupMessage message={"Hi everyone I'm new here 👋🏽"} outgoing />
-				<EachGroupMessage message={"Welcome bro, hows's things??"} />
-				<EachGroupMessage
-					message={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-							voluptate enim dolorum explicabo aperiam tempora sed quo ut
-							quisquam! Voluptate illum placeat inventore aliquam odio omnis
-							aspernatur debitis libero facilis.`}
-					outgoing
-				/>
-				<EachDiscussionNotification
-					notification={'Josh just joined the group'}
-				/>
-				<EachGroupMessage
-					message={'Come this place is not for nonsense talk 🙄'}
-				/>
-				<EachGroupMessage message={'mad 😂😂🤣'} outgoing />
-				<EachGroupMessage message={"Hi everyone I'm new here 👋🏽"} />
-				<EachDiscussionNotification
-					notification={`dolorum explicabo aperiam tempora sed quo ut
-							quisquam! Voluptate illum placeat inventore aliquam odio omnis
-							aspernatur debitis libero `}
-				/>
-				<EachGroupMessage message={"Welcome bro, hows's things??"} />
-				<EachGroupMessage
-					message={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-							voluptate enim dolorum explicabo aperiam tempora sed quo ut
-							quisquam! Voluptate illum placeat inventore aliquam odio omnis
-							aspernatur debitis libero facilis.`}
-				/>
-				<EachGroupMessage
-					message={'Come this place is not for nonsense talk 🙄'}
-				/>
-				<EachGroupMessage message={'mad 😂😂🤣'} />
-				<div style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }} />
+				<DiscussionChatList newMessage={newMessages} />
 			</div>
 			<div
-				className={`bg-white p-3 border-top animate__bounceInUp animate__animated  ${
+				className={`bg-white p-3 border-top  ${
 					Global.isMobile && 'fixed-bottom app-footer'
 				}`}
 				style={
@@ -66,18 +36,7 @@ export default function DiscussionCenter() {
 						: null
 				}
 			>
-				<div className="bg-grey p-2 rounded-xl d-flex w-100">
-					<input
-						className="form-control border-0 bg-grey rounded-xl font-xs"
-						placeholder="Start typing..."
-					/>
-					<button
-						className="btn bg-accent text-white align-self-start"
-						style={{ borderRadius: '50px', height: '50px', width: '50px' }}
-					>
-						<IoSend size={24} />
-					</button>
-				</div>
+				<DiscussionChatInput onSend={(e) => setNewMessages(e)} />
 			</div>
 		</div>
 	)

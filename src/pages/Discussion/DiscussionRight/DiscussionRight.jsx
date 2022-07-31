@@ -7,11 +7,11 @@ import DiscussionRightUsers from './DiscussionRightUsers'
 export default function DiscussionRight() {
 	return (
 		<div
-			className="bg-white border-left scroll-bar"
+			className="bg-white border-left scroll-bar pb-5 bg-gray"
 			style={{ maxHeight: '99vh' }}
 		>
 			<DiscussionInfo />
-			<Divider />
+			{/* <Divider /> */}
 			<DiscussionPropertiesDemo />
 			<Divider />
 			<DiscussionRightUsers />

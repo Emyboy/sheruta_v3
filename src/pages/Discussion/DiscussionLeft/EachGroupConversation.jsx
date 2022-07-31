@@ -3,14 +3,20 @@ import { Avatar } from 'antd'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export default function EachGroupConversation({ active }) {
+export default function EachGroupConversation({
+	active,
+	clickURL,
+	name,
+	image_url,
+	last_seen,
+}) {
 	const { user } = useSelector((state) => state.auth)
 
 	const _user = user?.user
 
 	return (
 		<Link
-			to="/discussion/room/45255456"
+			to={clickURL}
 			className={`p-2 border-bottom w-100 list-group-item list-group-item-action ${
 				active ? 'bg-theme-light border-1 border-success' : 'bg-white'
 			}`}
@@ -22,11 +28,11 @@ export default function EachGroupConversation({ active }) {
 							className={_user?.is_online ? 'bg-danger' : 'bg-success'}
 							style={{ borderRadius: '50px', padding: 3 }}
 						>
-							<Avatar src={_user.avatar_url} size={60} className="m-0" />
+							<Avatar src={image_url} size={60} className="m-0" />
 						</div>
 					</div>
 					<div className="pl-2">
-						<h4>{_user.first_name}</h4>
+						<h4>{name}</h4>
 						<small className="text-muted">
 							<i>
 								{`Lorem ipsum dolor sit amet consectetur adip`.slice(0, 20)}...
@@ -39,7 +45,7 @@ export default function EachGroupConversation({ active }) {
 					className="d-flex justify-content-between"
 				>
 					<small>
-						<i>11 hours ago</i>
+						<i>{last_seen}</i>
 					</small>
 					<small className="bg-danger text-white align-self-end rounded-xxl pl-1 pr-1">
 						43
