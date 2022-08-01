@@ -6,32 +6,55 @@ import EachDiscussionEdit from './EachDiscussionEdit'
 import EachDiscussionContainer from './EachDiscussionContainer'
 import DiscussionDeleteAction from './DiscussionDeleteAction'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
+import renderHTML from 'react-render-html'
+import styled from 'styled-components'
+
+const MessageBody = styled.div`
+	a {
+		color: blue !important;
+		font-weight: bold;
+	}
+	img {
+		border-radius: 10px;
+	}
+`
 
 export default function EachGroupMessage({ data, outgoing }) {
 	const [showEdit, setShowEdit] = useState(false)
 	const [showDelete, setShowDelete] = useState(false)
-	const [messageData, setMessageData] = useState(data);
+	const [messageData, setMessageData] = useState(data)
 	const [deleted, setDeleted] = useState(false)
 
-	if(deleted){
+	if (deleted) {
 		return null
 	}
 
 	if (showEdit) {
-		return <EachDiscussionEdit message={messageData} done={e => {
-			setMessageData(e);
-			setShowEdit(false)
-		}} />
+		return (
+			<EachDiscussionEdit
+				message={messageData}
+				done={(e) => {
+					setMessageData(e)
+					setShowEdit(false)
+				}}
+			/>
+		)
 	}
 
 	if (showDelete) {
-		return <DiscussionDeleteAction onCancel={() => setShowDelete(false)} done={() => setDeleted(true)} message={messageData} />
+		return (
+			<DiscussionDeleteAction
+				onCancel={() => setShowDelete(false)}
+				done={() => setDeleted(true)}
+				message={messageData}
+			/>
+		)
 	}
 
 	const EachMessageProps = {
 		askDelete: () => setShowDelete(true),
 		data: messageData,
-		setShowEdit
+		setShowEdit,
 	}
 
 	if (outgoing) {
@@ -47,7 +70,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 	return (
 		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new}>
 			<div className="d-flex align-items-center justify-content-between">
-				<h5 className="fw-bold m-0">{data.from.first_name}</h5>
+				<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
 				<EachDiscussionOptions
 					onDeleteClick={() => askDelete()}
 					onEditClick={() => setShowEdit(true)}
@@ -55,7 +78,9 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 				/>
 			</div>
 			{data.reply && <Reply reply={data.reply} />}
-			<p>{data.message_text}</p>
+			<MessageBody className='fw-500 text-black'>
+				{renderHTML(data.message_text)}
+			</MessageBody>
 			<i>
 				<small className="text-grey-600">
 					{moment(data?.created_at).fromNow()}
@@ -74,14 +99,14 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 		<EachDiscussionContainer outgoing={false} from={data.from}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
-					<h5 className="fw-bold m-0">{data.from.first_name}</h5>
+					<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
 					<EachDiscussionOptions
 						onDeleteClick={() => askDelete()}
 						onReply={() => dispatch(setGroupState({ reply: data }))}
 					/>
 				</div>
 				{data.reply && <Reply reply={data.reply} />}
-				<p>{data.message_text}</p>
+				<MessageBody className='fw-500 text-black'>{renderHTML(data.message_text)}</MessageBody>
 				<i>
 					<small className="text-grey-600">
 						{moment(data?.created_at).fromNow()}
@@ -108,7 +133,13 @@ const Reply = ({ reply }) => {
 					{moment(reply.created_at).fromNow()}
 				</small>
 			</div>
-			<i>{reply?.message_text}</i>
+			<i>
+				{renderHTML(
+					reply?.message_text.length > 300
+						? String(reply?.message_text.slice(0, 300) + ' ...')
+						: reply?.message_text
+				)}
+			</i>
 		</div>
 	)
 }

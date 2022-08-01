@@ -3,13 +3,18 @@ import EachGroupConversation from './EachGroupConversation'
 import DiscussionLeftHeader from './DiscussionLeftHeader'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { useParams } from 'react-router'
+import { Redirect, useParams } from 'react-router'
 
 export default function DiscussionLeft() {
 	const { location_keywords } = useSelector((state) => state.view)
 	const { room_id } = useParams()
+	const { user } = useSelector(state => state.auth)
 
 	const [list] = useState(location_keywords.filter((x) => x.has_group))
+
+	if(!user){
+		return <Redirect to={'/login'} />
+	}
 
 	return (
 		<div className="bg-grey-300">

@@ -21,7 +21,7 @@ export default function DiscussionCenterHeader() {
 	const data = location_keywords.filter((x) => x.id == room_id)
 
 	return (
-		<header className="bg-white border-bottom p-2 d-flex justify-content-between animate__fadeInDown animate__animated">
+		<header className="bg-white border-bottom p-2 d-flex justify-content-between animate__fadeInDown animate__animated shadow-sm">
 			<div className="d-flex align-items-center">
 				{Global.isMobile && (
 					<Link to={`/discussion`} className="btn btn-sm mr-3 mobile-only">
@@ -36,7 +36,7 @@ export default function DiscussionCenterHeader() {
 					</small>
 				</div>
 			</div>
-			<button className='btn btn-sm'>
+			<button className='btn btn-sm mobile-only'>
 				<FiInfo
 					size={iconSize}
 					className="align-self-center text-grey-600"

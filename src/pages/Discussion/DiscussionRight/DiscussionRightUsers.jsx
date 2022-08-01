@@ -1,8 +1,28 @@
+import axios from 'axios'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useCallback } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import EachDiscussionGuest from './EachDiscussionGuests'
 
 export default function DiscussionRightUsers() {
+	const { room_id } = useParams();
+	const [list, setList] = useState([])
+
+	const getRecentUser = useCallback(async() => {
+		try {
+			const res = await axios(process.env.REACT_APP_API_URL+`/personal-infos/?location_keyword=${room_id}`)
+			setList(res.data)
+		} catch (error) {
+			return Promise.reject(error)
+		}
+	},[room_id]);
+
+	useEffect(() => {
+		getRecentUser()
+	}, [getRecentUser])
+
   return (
 		<div className='bg-white border-top' >
 			<div className="d-flex justify-content-between align-items-center p-2 mb-1">
@@ -12,10 +32,10 @@ export default function DiscussionRightUsers() {
 				</Link>
 			</div>
             <div>
-                <EachDiscussionGuest />
-                <EachDiscussionGuest />
-                <EachDiscussionGuest />
-                <EachDiscussionGuest />
+                {list.map((val, i) => {
+					return <EachDiscussionGuest key={`guest-${i}`} data={val} />
+				})}
+               
             </div>
 		</div>
 	)

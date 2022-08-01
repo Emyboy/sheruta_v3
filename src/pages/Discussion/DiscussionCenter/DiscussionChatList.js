@@ -18,7 +18,7 @@ export default function DiscussionChatList({ newMessage }) {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
-					`/messages/?location_keyword=${room_id}`,
+					`/messages/?location_keyword=${room_id}&_sort=created_at:ASC`,
 				{
 					headers: {
 						authorization: `Bearer ${Cookies.get('token')}`,

@@ -8,15 +8,19 @@ export default function DiscussionReplyPreview() {
 	const { reply } = useSelector((state) => state?.group)
 
 	return (
-		<div className="card card-success bg-theme-light p-2 rounded-xxl mb-2 pt-4 animate__animated animate__flipInX w-100">
+		<div className="card card-success bg-theme-light p-2 rounded-xxl mb-2 pt-3 animate__animated animate__flipInX w-100">
 			<button
-				className="btn btn-sm rounded-xxl bg-theme-light shadow-sm"
-				style={{ position: 'absolute', right: 0, top: 10 }}
+				className="btn btn-sm rounded-xl bg-accent shadow-sm border"
+				style={{ position: 'absolute', right: "-10px", top: "-15px" }}
 				onClick={() => dispatch(setGroupState({ reply: null }))}
 			>
-				<MdClose size={30} />
+				<MdClose size={25} color="white" />
 			</button>
-			<p>{reply?.message_text}</p>
+			<p>
+				<i>
+					{reply?.message_text.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 100)}...
+				</i>
+			</p>
 		</div>
 	)
 }

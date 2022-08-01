@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MdClose } from 'react-icons/md'
 import { useParams } from 'react-router'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
+import Global from '../../../Global'
 
 const iconSize = 24
 
@@ -28,7 +29,7 @@ export default function DiscussionInfo() {
 					}}
 				>
 					<button
-						className="btn btn-sm text-white"
+						className="btn btn-sm text-white mobile-only"
 						style={{ position: 'absolute', right: 10, top: 10 }}
 						onClick={() => dispatch(setGroupState({ showDetails: false }))}
 					>

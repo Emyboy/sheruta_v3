@@ -18,16 +18,13 @@ export default function EachDiscussionOptions({ onDeleteClick, onReply, editable
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu className="rounded-xxxl shadow p-0">
-				<Dropdown.Item
-					className="text-grey-700 fw-500 pb-3 pt-3"
-					onClick={onReply}
-				>
-					<MdOutlineReply size={iconSize} /> Reply
-				</Dropdown.Item>
-				{editable && (
+				{editable ? (
 					<>
 						<hr className="m-0" />
-						<Dropdown.Item className="text-grey-700 fw-500 pb-3 pt-3" onClick={onEditClick}>
+						<Dropdown.Item
+							className="text-grey-700 fw-500 pb-3 pt-3"
+							onClick={onEditClick}
+						>
 							<MdEdit size={iconSize} /> Edit
 						</Dropdown.Item>
 						<hr className="m-0" />
@@ -38,6 +35,13 @@ export default function EachDiscussionOptions({ onDeleteClick, onReply, editable
 							<MdDelete size={iconSize} /> Delete
 						</Dropdown.Item>
 					</>
+				) : (
+					<Dropdown.Item
+						className="text-grey-700 fw-500 pb-3 pt-3"
+						onClick={onReply}
+					>
+						<MdOutlineReply size={iconSize} /> Reply
+					</Dropdown.Item>
 				)}
 			</Dropdown.Menu>
 		</Dropdown>

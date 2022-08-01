@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { IoIosPeople,  } from 'react-icons/io'
+import { IoIosPeople } from 'react-icons/io'
 import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
 export default function SideNav({ show }) {
-	const { personal_info } = useSelector((state) => state.view);
-	const { user } = useSelector(state => state.auth);
+	const { personal_info } = useSelector((state) => state.view)
+	const { user } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const size = 25
 	return (
@@ -59,7 +59,14 @@ export default function SideNav({ show }) {
 							</li> */}
 							{process.env.NODE_ENV === 'development' && (
 								<li>
-									<Link to="/discussion" className="nav-content-bttn open-font">
+									<Link
+										to={`${
+											personal_info?.location_keyword
+												? `discussion/room/${personal_info?.location_keyword?.id}`
+												: `/discussion`
+										}`}
+										className="nav-content-bttn open-font"
+									>
 										<i className="btn-round-md bg-mini-gradiant me-3">
 											<BsFillChatSquareFill size={size} />
 										</i>

@@ -7,7 +7,7 @@ import Global from '../../../Global'
 import { useWindowSize } from 'react-use'
 import { useSelector } from 'react-redux'
 
-export default function DiscussionRight() {
+export default React.memo(function DiscussionRight() {
 	const width = useWindowSize().width
 	const { showDetails } = useSelector((state) => state?.group)
 	return (
@@ -27,4 +27,4 @@ export default function DiscussionRight() {
 			<div style={{ paddingTop: Global.isMobile ? '10vh' : '5vh' }} />
 		</div>
 	)
-}
+})
