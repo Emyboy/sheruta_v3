@@ -13,7 +13,7 @@ export default function DiscussionChatList({ newMessage }) {
 	const { room_id, message_id } = useParams()
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
-	console.log('RE-RENDING CHAT LIST')
+
 	const getRecentMessages = useCallback(async () => {
 		try {
 			const res = await axios(
@@ -29,7 +29,7 @@ export default function DiscussionChatList({ newMessage }) {
 					},
 				}
 			)
-			console.log('MSG --', res.data)
+			// console.log('MSG --', res.data)
 			setMessages(res.data)
 			if (!message_id) {
 				document.getElementById('chat-end').scrollIntoView()

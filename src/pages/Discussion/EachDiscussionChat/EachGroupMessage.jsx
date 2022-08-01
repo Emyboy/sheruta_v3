@@ -38,6 +38,7 @@ export default function EachGroupMessage({ data, outgoing }) {
 					setMessageData(e)
 					setShowEdit(false)
 				}}
+				onCancel={() => setShowEdit(false)}
 			/>
 		)
 	}
