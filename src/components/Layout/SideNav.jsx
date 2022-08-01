@@ -50,23 +50,21 @@ export default function SideNav({ show }) {
 								</Link>
 							</li> */}
 
-							{process.env.NODE_ENV === 'development' && (
-								<li>
-									<Link
-										to={`${
-											personal_info?.location_keyword
-												? `discussion/room/${personal_info?.location_keyword?.id}`
-												: `/discussion`
-										}`}
-										className="nav-content-bttn open-font"
-									>
-										<i className="btn-round-md bg-mini-gradiant me-3">
-											<BsFillChatSquareFill size={size} />
-										</i>
-										<span>Discussions</span>
-									</Link>
-								</li>
-							)}
+							<li>
+								<Link
+									to={`${
+										personal_info?.location_keyword
+											? `discussion/room/${personal_info?.location_keyword?.id}`
+											: `/discussion`
+									}`}
+									className="nav-content-bttn open-font"
+								>
+									<i className="btn-round-md bg-mini-gradiant me-3">
+										<BsFillChatSquareFill size={size} />
+									</i>
+									<span>Discussions</span>
+								</Link>
+							</li>
 							<li>
 								<Link
 									to={

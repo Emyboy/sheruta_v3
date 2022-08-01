@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Modal } from 'react-bootstrap';
+import { Modal } from 'antd';
 import Btn from '../Btn/Btn';
 import store from '../../redux/store/store';
 import { Link } from 'react-router-dom';

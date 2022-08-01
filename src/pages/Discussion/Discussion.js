@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Global from '../../Global'
 import DiscussionCenter from './DiscussionCenter/DiscoussionCenter'
 import DiscussionLeft from './DiscussionLeft/DiscussionLeft'
@@ -11,11 +11,13 @@ import { notifyEmy } from '../../services/Sheruta'
 export default function Discussion() {
 	const { location_keywords } = useSelector((state) => state.view)
 	const { room_id } = useParams()
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		notifyEmy({
 			heading: 'viewed the discussion page',
-		})
+		});
+		dispatch(getLocationKeyWordsByState(1))
 	},[])
 
 	return (
