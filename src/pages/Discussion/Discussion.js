@@ -7,6 +7,7 @@ import DiscussionRight from './DiscussionRight/DiscussionRight'
 import { useParams } from 'react-router-dom'
 import { HiChatAlt2 } from 'react-icons/hi'
 import { notifyEmy } from '../../services/Sheruta'
+import { getLocationKeyWordsByState } from '../../redux/strapi_actions/view.action'
 
 export default function Discussion() {
 	const { location_keywords } = useSelector((state) => state.view)
