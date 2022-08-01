@@ -8,6 +8,7 @@ import DiscussionDeleteAction from './DiscussionDeleteAction'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import renderHTML from 'react-render-html'
 import styled from 'styled-components'
+import { useParams } from 'react-router'
 
 const MessageBody = styled.div`
 	a {
@@ -78,7 +79,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 				/>
 			</div>
 			{data.reply && <Reply reply={data.reply} />}
-			<MessageBody className='fw-500 text-black'>
+			<MessageBody className="fw-500 text-black">
 				{renderHTML(data.message_text)}
 			</MessageBody>
 			<i>
@@ -96,7 +97,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 
 	const _user = user?.user
 	return (
-		<EachDiscussionContainer outgoing={false} from={data.from}>
+		<EachDiscussionContainer outgoing={false} from={data.from} message={data}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
 					<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
@@ -106,10 +107,12 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 					/>
 				</div>
 				{data.reply && <Reply reply={data.reply} />}
-				<MessageBody className='fw-500 text-black'>{renderHTML(data.message_text)}</MessageBody>
+				<MessageBody className="fw-500 text-black">
+					{renderHTML(data.message_text)}
+				</MessageBody>
 				<i>
 					<small className="text-grey-600">
-						{moment(data?.created_at).fromNow()}
+						{moment(data?.created_at).fromNow()} - #{data?.id}
 					</small>
 				</i>
 			</div>

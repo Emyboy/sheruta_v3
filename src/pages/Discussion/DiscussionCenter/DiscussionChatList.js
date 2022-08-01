@@ -10,27 +10,40 @@ import EachDiscussionNotification from '../DiscussionNotificatioin/EachDiscussio
 import EachGroupMessage from '../EachDiscussionChat/EachGroupMessage'
 
 export default function DiscussionChatList({ newMessage }) {
-	const { room_id } = useParams()
+	const { room_id, message_id } = useParams()
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
-
+	console.log('RE-RENDING CHAT LIST')
 	const getRecentMessages = useCallback(async () => {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
-					`/messages/?location_keyword=${room_id}&_sort=created_at:ASC`,
+					(message_id
+						? `/messages/?location_keyword=${room_id}&id_gte=${
+								message_id - 9
+						  }&_sort=created_at:ASC`
+						: `/messages/?location_keyword=${room_id}&_sort=created_at:ASC`),
 				{
 					headers: {
 						authorization: `Bearer ${Cookies.get('token')}`,
 					},
 				}
 			)
+			console.log('MSG --', res.data)
 			setMessages(res.data)
-			document.getElementById('chat-end').scrollIntoView()
+			if (!message_id) {
+				document.getElementById('chat-end').scrollIntoView()
+			} else {
+				setTimeout(() => {
+					document.getElementById(`reply-${message_id}`).scrollIntoView({
+						behavior: 'smooth',
+					})
+				}, 1000);
+			}
 		} catch (error) {
 			return Promise.reject(error)
 		}
-	}, [room_id])
+	}, [room_id, message_id])
 
 	useEffect(() => {
 		if (newMessage) {
@@ -48,6 +61,16 @@ export default function DiscussionChatList({ newMessage }) {
 	useLayoutEffect(() => {
 		getRecentMessages()
 	}, [getRecentMessages])
+
+	useEffect(() => {
+		// if (messages.length > 0 && message_id) {
+		// 	setTimeout(() => {
+		// 		document.getElementById(`reply-${message_id}`).scrollIntoView({
+		// 			behavior: 'smooth',
+		// 		})
+		// 	}, 2000);
+		// }
+	}, [message_id, messages])
 
 	return (
 		<div>

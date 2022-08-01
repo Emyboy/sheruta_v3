@@ -4,16 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MdClose } from 'react-icons/md'
 import { useParams } from 'react-router'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
-import Global from '../../../Global'
 
 const iconSize = 24
 
 export default function DiscussionInfo() {
 	const { room_id } = useParams()
 	const { location_keywords } = useSelector((state) => state.view)
-	const { user } = useSelector((state) => state.auth)
 	const { group_guests } = useSelector((state) => state.group)
-	const _user = user?.user
 	const dispatch = useDispatch()
 
 	const data = location_keywords.filter((x) => x.id == room_id)[0]

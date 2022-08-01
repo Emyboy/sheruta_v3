@@ -5,6 +5,7 @@ import { RiAddCircleLine } from 'react-icons/ri'
 import { BiHomeAlt } from 'react-icons/bi'
 import { BsPeople } from 'react-icons/bs'
 import { FiBell } from 'react-icons/fi'
+import { Avatar } from 'antd'
 
 const BadgeCount = ({ count }) => {
 	if (count === 0) {
@@ -91,7 +92,7 @@ export default function FooterNav({ pageName }) {
 					className="position-relative nav-content-bttn"
 				>
 					{/* <RiUser2Line size={30} /> */}
-					<img
+					<Avatar
 						src={user.user.avatar_url}
 						alt="user"
 						className={`w30 shadow-xss rounded-circle ${

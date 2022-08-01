@@ -134,6 +134,7 @@ function App() {
 							<Route exact path="/flats" component={Properties} />
 							<Route exact path="/discussion" component={Discussion} />
 							<Route exact path="/discussion/room/:room_id" component={Discussion} />
+							<Route exact path="/discussion/room/:room_id/:message_id" component={Discussion} />
 							{/* <Route path="/flats/for-share/:keyword_slug/:category_slug/:service_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug/:category_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug" component={Properties} /> */}

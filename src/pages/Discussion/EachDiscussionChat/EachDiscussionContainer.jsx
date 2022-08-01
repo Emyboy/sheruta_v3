@@ -3,17 +3,31 @@ import { Avatar } from 'antd'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Global from '../../../Global'
+import { useParams } from 'react-router'
 
 const InComingChat = styled.article`
 	background-color: ${(props) => `${props.outgoing ? '#e3ffe2' : '#f0f0f0'}`};
 `
 
-export default function EachDiscussionContainer({ children, outgoing, from, isNew }) {
+export default function EachDiscussionContainer({
+	children,
+	outgoing,
+	from,
+	isNew,
+	message,
+}) {
 	const { user } = useSelector((state) => state.auth)
-
+	const { message_id } = useParams()
 	const _user = user?.user
 	return (
-		<div className="mb-4 mr-3">
+		<div
+			className={`mb-4 mr-3 ${
+				message_id &&
+				message_id == message?.id &&
+				'p-2 animate__flash animate__animated animate__delay-2s bg-theme-light'
+			}`}
+			id={`reply-${message?.id}`}
+		>
 			<div
 				className={`d-flex justify-content-${
 					outgoing ? 'end' : 'start'

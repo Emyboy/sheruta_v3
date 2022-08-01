@@ -10,7 +10,7 @@ import { notifyEmy } from '../../services/Sheruta'
 import { getLocationKeyWordsByState } from '../../redux/strapi_actions/view.action'
 
 export default function Discussion() {
-	const { location_keywords } = useSelector((state) => state.view)
+	const { location_keywords, personal_info } = useSelector((state) => state.view)
 	const { room_id } = useParams()
 	const dispatch = useDispatch()
 
@@ -18,7 +18,9 @@ export default function Discussion() {
 		notifyEmy({
 			heading: 'viewed the discussion page',
 		});
-		dispatch(getLocationKeyWordsByState(1))
+		if(location_keywords?.length === 0){
+			dispatch(getLocationKeyWordsByState(personal_info?.state?.id))
+		}
 	},[])
 
 	return (

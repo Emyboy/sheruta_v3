@@ -39,7 +39,7 @@ export default function ProfileJumb({ user }) {
 							}
 							alt="image"
 							effect="blur"
-							className="float-right p-1 bg-white rounded-circle w-100"
+							className="float-right p-1 bg-white rounded-circle w-100 shadow-sm"
 						/>
 					</figure>
 					<h4 className="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">

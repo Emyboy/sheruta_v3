@@ -2,13 +2,14 @@ import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { formatPropertyURL } from '../../Properties/EachProperty'
 
 export default React.memo(function DiscussionPropertiesDemo() {
 	const { room_id } = useParams()
-	const { location_keywords } = useSelector(state => state.view);
+	const { location_keywords } = useSelector((state) => state.view)
 	const [list, setList] = useState([])
 
-	const keyword = location_keywords.filter(x => x.id == room_id)[0]
+	const keyword = location_keywords.filter((x) => x.id == room_id)[0]
 
 	const getRecentProperties = useCallback(async () => {
 		try {
@@ -39,8 +40,12 @@ export default React.memo(function DiscussionPropertiesDemo() {
 					{list.map((val, i) => {
 						return (
 							<div className="col-9 pl-0" key={`prop-${val?.id}`}>
-								<div
-									className="rounded-xxl shadow-sm"
+								<Link
+									to={{
+										pathname: formatPropertyURL(val),
+										state: val,
+									}}
+									className="rounded-xxl shadow-sm w-100"
 									style={{
 										backgroundImage: `url(${val?.image_urls[0]})`,
 										height: '190px',
@@ -53,7 +58,7 @@ export default React.memo(function DiscussionPropertiesDemo() {
 									>
 										₦{window.formattedPrice.format(val.price)}
 									</i>
-								</div>
+								</Link>
 							</div>
 						)
 					})}
