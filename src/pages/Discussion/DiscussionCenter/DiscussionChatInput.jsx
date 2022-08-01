@@ -8,6 +8,8 @@ import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
+import { notifyEmy } from '../../../services/Sheruta'
+import Analytics, { AnalyticsTypes } from '../../../services/Analytics'
 
 export default function DiscussionChatInput({ onSend }) {
 	const { room_id } = useParams()
@@ -26,6 +28,7 @@ export default function DiscussionChatInput({ onSend }) {
 				location_keyword: room_id,
 				from: user?.user?.id,
 				reply,
+				seen: true,
 			})
 			onSend({
 				...res.data,
@@ -33,6 +36,14 @@ export default function DiscussionChatInput({ onSend }) {
 			})
 			setNewMessage('')
 			setLoading(false)
+			notifyEmy({
+				heading: `Sent group message saying >>${res.data.message_text}<<`,
+				user: user.user.id,
+			})
+			Analytics.create({
+				user_id: user.user.id,
+				type: AnalyticsTypes.groupMessages,
+			})
 			dispatch(setGroupState({ reply: null }))
 		} catch (error) {
 			setLoading(false)

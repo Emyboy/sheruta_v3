@@ -43,7 +43,7 @@ export default function MatchList() {
                 status,
             );
             dispatch(getAllMySuggestion());
-            notifyEmy({ heading: `${status} someone as a suggestion`})
+            // notifyEmy({ heading: `${status} someone as a suggestion`})
         } catch (error) {
             return Promise.reject(error);
         }

@@ -22,9 +22,9 @@ export default function Messages(props) {
         }
     }, [props.match.params?.conversation_id]);
 
-    useEffect(() => {
-        notifyEmy({ heading: "visited the message page" });
-    }, []);
+    // useEffect(() => {
+    //     notifyEmy({ heading: "visited the message page" });
+    // }, []);
 
     if (!user) {
         return <Redirect to="/login" />;

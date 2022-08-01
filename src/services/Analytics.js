@@ -13,6 +13,7 @@ export const AnalyticsTypes = {
 	search: 'search',
 	matchAccept: 'match-accept',
 	matchRejected: 'match-rejected',
+	groupMessages: 'group-messages'
 }
 
 export default class Analytics {

@@ -1,10 +1,11 @@
 import { notification, Tooltip } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import InspectionService from '../../services/InspectionService'
+import { notifyEmy } from '../../services/Sheruta'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -31,14 +32,25 @@ export default function EachInspection({ data, index }) {
 
 	const leaveGroup = async () => {
 		try {
-			const res = await InspectionService.removeUser(user?.user?.id, data?.id);
-			setClosed(true);
+			const res = await InspectionService.removeUser(user?.user?.id, data?.id)
+			setClosed(true)
 			return notification.success({ message: "You've left the group" })
 		} catch (error) {
-			notification.error({ message: "Error, please try again" })
-			return Promise.reject(error);
+			notification.error({ message: 'Error, please try again' })
+			return Promise.reject(error)
 		}
 	}
+
+	useEffect(() => {
+		notifyEmy({
+			heading: `Visited ${
+				user?.user?.id === data?.owner?.id
+					? 'his/her won'
+					: data?.owner?.first_name?.split(' ')[0] + "'s"
+			}{' '}
+							Group`,
+		})
+	}, [])
 
 	if (closed) {
 		return null
@@ -67,7 +79,9 @@ export default function EachInspection({ data, index }) {
 						</figure>
 						<div className="clearfix"></div>
 						<h4 className="fw-700 text-grey-700 font-xsss mt-3 mb-1">
-							{user?.user?.id === data?.owner?.id ? 'Your' : data?.owner?.first_name?.split(' ')[0]+"'s"}{' '}
+							{user?.user?.id === data?.owner?.id
+								? 'Your'
+								: data?.owner?.first_name?.split(' ')[0] + "'s"}{' '}
 							Group
 						</h4>
 						<p className="fw-500 font-xsssss text-grey-500 mt-0 mb-3">
@@ -115,12 +129,19 @@ export default function EachInspection({ data, index }) {
 								return (
 									<Tooltip title={val?.first_name}>
 										<li className="w20">
-											<Link to={`/user/${val?.username}`} style={{ width: '100px'}}>
+											<Link
+												to={`/user/${val?.username}`}
+												style={{ width: '100px' }}
+											>
 												<img
 													src={val?.avatar_url}
 													alt="user"
 													className="w35 d-inline-block"
-													style={{ opacity: '1', borderRadius: '50%', width: '100px' }}
+													style={{
+														opacity: '1',
+														borderRadius: '50%',
+														width: '100px',
+													}}
 												/>
 											</Link>
 										</li>

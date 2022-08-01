@@ -12,6 +12,7 @@ export default function DiscussionInfo() {
 	const { room_id } = useParams()
 	const { location_keywords } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
+	const { group_guests } = useSelector((state) => state.group)
 	const _user = user?.user
 	const dispatch = useDispatch()
 
@@ -48,7 +49,7 @@ export default function DiscussionInfo() {
 						</div>
 						<div style={{ zIndex: 10 }} className="mt-3 ml-2">
 							<h3 className="text-white">{data?.name} Room</h3>
-							<h6 className="text-white">34 Group Members</h6>
+							<h6 className="text-white">{group_guests?.length} Group Members</h6>
 						</div>
 					</div>
 				</div>

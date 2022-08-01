@@ -10,6 +10,7 @@ import { BsCheckLg } from 'react-icons/bs'
 import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
 import Global from '../../Global'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default function InspectionInvitation() {
 	localStorage.setItem('after_login', window.location.pathname)
@@ -54,11 +55,18 @@ export default function InspectionInvitation() {
 					},
 				}
 			)
+			notifyEmy({
+				heading: `${status} ${data?.owner?.first_name} inspection invitation`,
+				status: 'success',
+				log: data,
+			})
 			if (status === 'reject') {
-				notification.success({ message: "Message sent" })
-				return router.push('/feeds');
+				notification.success({ message: 'Message sent' })
+				return router.push('/feeds')
 			} else {
-				notification.success({ message: `Welcome ${user?.user?.first_name?.split(' ')[0]}` })
+				notification.success({
+					message: `Welcome ${user?.user?.first_name?.split(' ')[0]}`,
+				})
 				router.push(`/inspection/${inspection_id}`)
 				return window.location.reload()
 			}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Global from '../../Global'
 import DiscussionCenter from './DiscussionCenter/DiscoussionCenter'
@@ -6,10 +6,17 @@ import DiscussionLeft from './DiscussionLeft/DiscussionLeft'
 import DiscussionRight from './DiscussionRight/DiscussionRight'
 import { useParams } from 'react-router-dom'
 import { HiChatAlt2 } from 'react-icons/hi'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default function Discussion() {
 	const { location_keywords } = useSelector((state) => state.view)
 	const { room_id } = useParams()
+
+	useEffect(() => {
+		notifyEmy({
+			heading: 'viewed the discussion page',
+		})
+	},[])
 
 	return (
 		<div

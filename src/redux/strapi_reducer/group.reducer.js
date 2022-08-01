@@ -2,7 +2,7 @@ const initialState = {
     reply: null,
     group_guests: [],
     group_id: null,
-    showDetails: false
+    showDetails: false,
 }
 
 export default (state = initialState, { type, payload }) => {

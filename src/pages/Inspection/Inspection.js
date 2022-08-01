@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsCalendarXFill } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import Layout from '../../components/Layout/Layout'
+import { notifyEmy } from '../../services/Sheruta'
 import EachInspection from './EachInspection'
 
 const iconSize = 50
 export default function Inspection() {
 	const { user } = useSelector((state) => state.auth)
-	const [ownersGroup, setOwnersGroup] = useState([])
-	const [getGroups, setGuestGroup] = useState([])
 	const { inspections } = useSelector((state) => state?.view)
 
+
+	useEffect(() => {
+		notifyEmy({
+			heading: 'Visited the inspection page',
+		})
+	},[])
 
 	if (!user) {
 		return <Redirect to="/" />

@@ -4,15 +4,18 @@ import DiscussionLeftHeader from './DiscussionLeftHeader'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { Redirect, useParams } from 'react-router'
+import axios from 'axios'
 
 export default function DiscussionLeft() {
 	const { location_keywords } = useSelector((state) => state.view)
 	const { room_id } = useParams()
-	const { user } = useSelector(state => state.auth)
+	const { user } = useSelector((state) => state.auth)
 
 	const [list] = useState(location_keywords.filter((x) => x.has_group))
 
-	if(!user){
+	
+
+	if (!user) {
 		return <Redirect to={'/login'} />
 	}
 
@@ -33,6 +36,7 @@ export default function DiscussionLeft() {
 									? 'just now'
 									: moment(val.created_at).fromNow()
 							}
+							id={val.id}
 						/>
 					)
 				})}

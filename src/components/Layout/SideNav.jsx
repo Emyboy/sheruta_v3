@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
-import { IoPricetagsOutline, IoWarningOutline } from 'react-icons/io5'
+import { IoWarningOutline } from 'react-icons/io5'
 import { RiUserSearchLine, RiHome4Fill } from 'react-icons/ri'
 import { BsHash, BsHouseDoor, BsFillChatSquareFill } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { IoIosPeople } from 'react-icons/io'
+import { FaTag } from 'react-icons/fa'
 import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
@@ -49,14 +49,7 @@ export default function SideNav({ show }) {
 									<span>Requests</span>
 								</Link>
 							</li> */}
-							{/* <li>
-								<Link to="/pricing" className="nav-content-bttn open-font">
-									<i className=" btn-round-md bg-gold-gradiant me-3">
-										<IoPricetagsOutline size={size} />
-									</i>
-									<span>Pricing</span>
-								</Link>
-							</li> */}
+
 							{process.env.NODE_ENV === 'development' && (
 								<li>
 									<Link
@@ -75,25 +68,6 @@ export default function SideNav({ show }) {
 								</li>
 							)}
 							<li>
-								<Link to="/inspections" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-current me-3">
-										<IoCalendarNumberSharp size={size} />
-									</i>
-									<span>Inspections</span>
-									{/* <span className="circle-count bg-danger font-xssss mt-0">
-										3
-									</span> */}
-								</Link>
-							</li>
-							<li>
-								<Link to="/services" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-mini-gradiant me-3">
-										<IoBagCheck size={size} />
-									</i>
-									<span>Services</span>
-								</Link>
-							</li>
-							<li>
 								<Link
 									to={
 										personal_info && personal_info?.location_keyword
@@ -106,6 +80,34 @@ export default function SideNav({ show }) {
 										<RiHome4Fill size={size} />
 									</i>
 									<span>Properties</span>
+								</Link>
+							</li>
+							<li>
+								<Link to="/inspections" className="nav-content-bttn open-font">
+									<i className="btn-round-md bg-current me-3">
+										<IoCalendarNumberSharp size={size} />
+									</i>
+									<span>Inspections</span>
+									{/* <span className="circle-count bg-danger font-xssss mt-0">
+										3
+									</span> */}
+								</Link>
+							</li>
+
+							<li>
+								<Link to="/pricing" className="nav-content-bttn open-font">
+									<i className=" btn-round-md bg-gold-gradiant me-3">
+										<FaTag size={size} />
+									</i>
+									<span>Pricing</span>
+								</Link>
+							</li>
+							<li>
+								<Link to="/services" className="nav-content-bttn open-font">
+									<i className="btn-round-md bg-mini-gradiant me-3">
+										<IoBagCheck size={size} />
+									</i>
+									<span>Services</span>
 								</Link>
 							</li>
 						</ul>
