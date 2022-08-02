@@ -53,9 +53,10 @@ export default function SideNav({ show }) {
 							<li>
 								<Link
 									to={`${
-										personal_info?.location_keyword
-											? `/discussion/room/${personal_info?.location_keyword?.id}`
-											: `/discussion`
+										// personal_info?.location_keyword
+										// 	? `/discussion/room/${personal_info?.location_keyword?.id}`
+										// 	: 
+											`/discussion`
 									}`}
 									className="nav-content-bttn open-font"
 								>

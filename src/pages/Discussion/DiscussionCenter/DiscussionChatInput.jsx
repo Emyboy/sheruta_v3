@@ -24,7 +24,7 @@ export default function DiscussionChatInput({ onSend }) {
 		setLoading(true)
 		try {
 			const res = await MessageService.sendMessage({
-				message_text: newMessage.replace(/[\+]?\d{10}|\(\d{3}\)\s?-\d{6}/, ''),
+				message_text: newMessage,
 				location_keyword: room_id,
 				from: user?.user?.id,
 				reply,

@@ -61,7 +61,6 @@ const Login = (props) => {
 					// 	log: res.data.user,
 					// })
 					Cookies.set('token', res.data.jwt, { expires: 7 })
-					setState({ ...state, loading: false })
 					notification.success({ message: 'Welcome' });
 					props.setAuthState({
 						user: {
@@ -69,7 +68,10 @@ const Login = (props) => {
 						},
 					})
 					updateLastSeen();
-					window.location.reload()
+					setTimeout(() => {
+						window.location.reload()
+					}, 1000);
+					setState({ ...state, loading: false })
 				} else {
 					setState({ ...state, notVerified: true, userData: res.data })
 				}

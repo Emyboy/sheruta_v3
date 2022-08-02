@@ -1,4 +1,4 @@
-import { notification } from 'antd'
+import { notification, Alert } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import moment from 'moment'
@@ -8,6 +8,7 @@ import { useParams } from 'react-router'
 import Global from '../../../Global'
 import EachDiscussionNotification from '../DiscussionNotificatioin/EachDiscussionNotification'
 import EachGroupMessage from '../EachDiscussionChat/EachGroupMessage'
+import { useInterval } from 'react-use'
 
 export default function DiscussionChatList({ newMessage }) {
 	const { room_id, message_id } = useParams()
@@ -38,7 +39,7 @@ export default function DiscussionChatList({ newMessage }) {
 					document.getElementById(`reply-${message_id}`).scrollIntoView({
 						behavior: 'smooth',
 					})
-				}, 1000);
+				}, 1000)
 			}
 		} catch (error) {
 			return Promise.reject(error)
@@ -62,19 +63,56 @@ export default function DiscussionChatList({ newMessage }) {
 		getRecentMessages()
 	}, [getRecentMessages])
 
-	useEffect(() => {
-		// if (messages.length > 0 && message_id) {
-		// 	setTimeout(() => {
-		// 		document.getElementById(`reply-${message_id}`).scrollIntoView({
-		// 			behavior: 'smooth',
-		// 		})
-		// 	}, 2000);
-		// }
-	}, [message_id, messages])
+	const getNewMessages = async () => {
+		if (messages.length > 0) {
+			try {
+				const res = await axios(
+					process.env.REACT_APP_API_URL +
+						`/messages/?location_keyword=${room_id}&id_gt=${
+							messages[messages.length - 1]?.id
+						}&_sort=created_at:ASC`
+				)
+				if(res.data.length > 0){
+					if(messages.includes("break")){
+						setMessages([...messages,  ...res.data])
+					}else {
+						setMessages([...messages, 'break', ...res.data])
+					}
+				}
+			} catch (error) {
+				return Promise.reject(error)
+			}
+		} else {
+			getRecentMessages()
+		}
+	}
+
+	useInterval(() => {
+		if (room_id) {
+			console.log('CHECKING UPDATES')
+			getNewMessages()
+			setTimeout(() => {
+				getRecentMessages()
+			}, 15000);
+		}
+	}, 20000)
 
 	return (
 		<div>
 			{messages.map((val, i) => {
+				if (typeof val === 'string') {
+					console.log('THE VAL STRING --', val)
+					return (
+						<div className="container d-flex justify-content-center mt-5 mb-4">
+							<button
+								type="button"
+								class="btn btn-sm bg-theme-light shadow-sm text-dark fw-500"
+							>
+								New Messages <br /> 👇🏽
+							</button>
+						</div>
+					)
+				}
 				return (
 					<EachGroupMessage
 						key={val.id}

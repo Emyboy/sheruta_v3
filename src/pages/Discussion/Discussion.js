@@ -42,7 +42,7 @@ export default function Discussion() {
 							</div>
 						)}
 						<div className="col-xl-6 col-md-7 p-0 border-left">
-							{room_id  ? (
+							{room_id ? (
 								<DiscussionCenter />
 							) : Global.isMobile && !room_id ? (
 								<DiscussionLeft />
@@ -54,7 +54,7 @@ export default function Discussion() {
 							)}
 						</div>
 						<div className="col-lg-3 p-0">
-							<DiscussionRight />
+							{room_id && <DiscussionRight />}
 						</div>
 					</div>
 				</div>
