@@ -79,7 +79,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 					editable
 				/>
 			</div>
-			{data.reply && <Reply reply={data.reply} />}
+			{data.reply && <Reply data={data} />}
 			<MessageBody className="fw-500 text-black">
 				{renderHTML(data.message_text)}
 			</MessageBody>
@@ -95,19 +95,20 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 export function EachIncomingGroupChat({ askDelete, data }) {
 	const { user } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
+	// console.log("MESSAGE ---", data);
 
 	const _user = user?.user
 	return (
 		<EachDiscussionContainer outgoing={false} from={data.from} message={data}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
-					<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
+					<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name} {data?.reply && "Replied"}</h5>
 					<EachDiscussionOptions
 						onDeleteClick={() => askDelete()}
 						onReply={() => dispatch(setGroupState({ reply: data }))}
 					/>
 				</div>
-				{data.reply && <Reply reply={data.reply} />}
+				<Reply data={data} />
 				<MessageBody className="fw-500 text-black">
 					{renderHTML(data.message_text)}
 				</MessageBody>
@@ -121,27 +122,28 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 	)
 }
 
-const Reply = ({ reply }) => {
-	const from = reply?.from
-	// console.log(reply)
+const Reply = ({ data }) => {
+	if(!data.reply){
+		return null
+	}
 	return (
 		<div
 			className="card p-2 mb-2 rounded-xxxl mt-2"
 			style={{ background: '#f3fffd' }}
 		>
 			<div className="d-flex align-items-center justify-content-between mb-1">
-				<small>
-					<i className="fw-600 m-0 text-grey-500">{from?.first_name}</i>
+				<small className='mr-4'>
+					<i className="fw-600 m-0 text-grey-500">{data?.to?.first_name}</i>
 				</small>
 				<small className="m-0 text-grey-500">
-					{moment(reply.created_at).fromNow()}
+					{moment(data?.reply?.created_at).fromNow()}
 				</small>
 			</div>
 			<i>
 				{renderHTML(
-					reply?.message_text.length > 300
-						? String(reply?.message_text.slice(0, 300) + ' ...')
-						: reply?.message_text
+					data?.reply?.message_text.length > 300
+						? String(data?.reply?.message_text.slice(0, 300) + ' ...')
+						: data?.reply?.message_text
 				)}
 			</i>
 		</div>

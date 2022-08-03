@@ -16,37 +16,44 @@ export default function DiscussionChatList({ newMessage }) {
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
 
-	const getRecentMessages = useCallback(async (scroll) => {
-		try {
-			const res = await axios(
-				process.env.REACT_APP_API_URL +
-					(message_id
-						? `/messages/?location_keyword=${room_id}&id_gte=${
-								message_id - 9
-						  }&_sort=created_at:ASC`
-						: `/messages/?location_keyword=${room_id}&_sort=created_at:ASC`),
-				{
-					headers: {
-						authorization: `Bearer ${Cookies.get('token')}`,
-					},
+	const getRecentMessages = useCallback(
+		async (scroll) => {
+			try {
+				const res = await axios(
+					process.env.REACT_APP_API_URL +
+						(message_id
+							? `/messages/?location_keyword=${room_id}&id_gte=${
+									message_id - 9
+							  }&_sort=created_at:ASC`
+							: `/messages/?location_keyword=${room_id}&_sort=created_at:ASC`),
+					{
+						headers: {
+							authorization: `Bearer ${Cookies.get('token')}`,
+						},
+					}
+				)
+				// console.log('MSG --', res.data)
+				setMessages(res.data)
+				if (scroll) {
+					document.getElementById('chat-end').scrollIntoView()
 				}
-			)
-			// console.log('MSG --', res.data)
-			setMessages(res.data)
-			if (scroll) {
-				document.getElementById('chat-end').scrollIntoView()
+				if (message_id) {
+					setTimeout(() => {
+						if (document.getElementById(`reply-${message_id}`)) {
+							document.getElementById(`reply-${message_id}`).scrollIntoView({
+								behavior: 'smooth',
+							})
+						} else {
+							notification.error({ message: "Couldn't find the message 😥" })
+						}
+					}, 1000)
+				}
+			} catch (error) {
+				return Promise.reject(error)
 			}
-			if (message_id) {
-				setTimeout(() => {
-					document.getElementById(`reply-${message_id}`).scrollIntoView({
-						behavior: 'smooth',
-					})
-				}, 1000)
-			}
-		} catch (error) {
-			return Promise.reject(error)
-		}
-	}, [room_id, message_id])
+		},
+		[room_id, message_id]
+	)
 
 	useEffect(() => {
 		if (newMessage) {
@@ -103,9 +110,7 @@ export default function DiscussionChatList({ newMessage }) {
 		<div>
 			{messages.map((val, i) => {
 				if (typeof val === 'string') {
-					return (
-						<DiscussionBreakPoint />
-					)
+					return <DiscussionBreakPoint />
 				}
 				return (
 					<EachGroupMessage

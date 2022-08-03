@@ -1,7 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import axios from 'axios'
-import Cookies from 'js-cookie'
 import { IoSend } from 'react-icons/io5'
 import MessageService from '../../../services/MessageService'
 import { useParams } from 'react-router'
@@ -10,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import { notifyEmy } from '../../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../../services/Analytics'
+import { useRef } from 'react'
 
 export default function DiscussionChatInput({ onSend }) {
 	const { room_id } = useParams()
@@ -20,11 +19,11 @@ export default function DiscussionChatInput({ onSend }) {
 	const { app_details, payment_plan } = useSelector((state) => state?.view)
 	const dispatch = useDispatch()
 
+	const inputRef = useRef(null);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		if (
-			payment_plan || app_details?.everything_free
-		) {
+		if (payment_plan || app_details?.everything_free) {
 			setLoading(true)
 			try {
 				const res = await MessageService.sendMessage({
@@ -33,6 +32,7 @@ export default function DiscussionChatInput({ onSend }) {
 					from: user?.user?.id,
 					reply,
 					seen: true,
+					to: reply ? reply?.from?.id : null,
 				})
 				onSend({
 					...res.data,
@@ -63,6 +63,12 @@ export default function DiscussionChatInput({ onSend }) {
 		}
 	}
 
+	useEffect(() => {
+		if(reply){
+			inputRef.current.focus()
+		}
+	},[reply])
+
 	return (
 		<form
 			className={`bg-grey p-2 rounded-xl d-flex w-100 `}
@@ -73,6 +79,7 @@ export default function DiscussionChatInput({ onSend }) {
 				placeholder="Start typing..."
 				onChange={(e) => setNewMessage(e.target.value)}
 				value={newMessage}
+				ref={inputRef}
 			/>
 			<button
 				className="btn bg-accent text-white align-self-start"
