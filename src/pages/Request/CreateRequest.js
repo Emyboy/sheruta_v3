@@ -23,8 +23,8 @@ import { storage } from '../../Firebase'
 import firebase from 'firebase'
 import Compressor from 'compressorjs'
 import TextArea from 'antd/lib/input/TextArea'
-import Global from '../../Global';
-import ReactQuill from 'react-quill';
+import Global from '../../Global'
+import ReactQuill from 'react-quill'
 import MainErrorBoundary from '../../components/ErrorBoundries/MainErrorBoundry'
 import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
 
@@ -39,8 +39,8 @@ const CraeteRequest = (props) => {
 	const [done, setDone] = useState(false)
 	const [image_url, set_image_url] = useState([])
 	const dispatch = useDispatch()
-	const [edit, setEdit] = useState(false);
-	const { personal_info } = useSelector(state => state.view);
+	const [edit, setEdit] = useState(false)
+	const { personal_info } = useSelector((state) => state.view)
 
 	const { view, match, auth } = props
 
@@ -116,8 +116,7 @@ const CraeteRequest = (props) => {
 				notification.success({ message: 'You post has been created' })
 				setTimeout(() => {
 					window.scrollTo(0, 0)
-				}, 2000);
-
+				}, 2000)
 			})
 			.catch((err) => {
 				notifyEmy({
@@ -163,7 +162,7 @@ const CraeteRequest = (props) => {
 
 	useEffect(() => {
 		dispatch(getAuthPersonalInfo())
-	},[dispatch])
+	}, [dispatch])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -348,13 +347,13 @@ const CraeteRequest = (props) => {
 		return <Redirect to="/settings/deactivate-account" />
 	}
 
-	if(!personal_info?.state && !personal_info?.location_keyword){
+	if (!personal_info?.state && !personal_info?.location_keyword) {
 		return (
 			<Layout currentPage={'requests'}>
 				<div className="row justify-content-center pt-5">
-				<div className="col-lg-8 col-sm-12">
-					<LocationKeywordSelector />
-				</div>
+					<div className="col-lg-8 col-sm-12">
+						<LocationKeywordSelector />
+					</div>
 				</div>
 			</Layout>
 		)
@@ -368,264 +367,268 @@ const CraeteRequest = (props) => {
 		return (
 			<Layout currentPage={'requests'}>
 				<MainErrorBoundary>
-				<div className="mt-5 pb-5">
-					<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
-						<div className="pt-5 pb-5">
-							<div className="text-center">
-								<h1 className="display-6 mb-3">
-									<b>Submit Property</b>
-								</h1>
-								<div className="row justify-content-center mb-5">
-									<div className="col-lg-6 col-sm-12">
-										<div className="alert alert-warning rounded-xxl">
-											<h2
-												className="fw-700 text-warning mb-2"
-												style={{ fontSize: '30px' }}
-											>
-												Warning
-											</h2>
-											<h5 className="mb-0">Once posted can't edit</h5>
+					<div className="mt-5 pb-5">
+						<div className="container card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
+							<div className="pt-5 pb-5">
+								<div className="text-center">
+									<h1 className="display-6 mb-3">
+										<b>Submit Property</b>
+									</h1>
+									<div className="row justify-content-center mb-5">
+										<div className="col-lg-6 col-sm-12">
+											<div className="alert alert-warning rounded-xxl">
+												<h2
+													className="fw-700 text-warning mb-2"
+													style={{ fontSize: '30px' }}
+												>
+													Warning
+												</h2>
+												<h5 className="mb-0">Once posted can't edit</h5>
+											</div>
 										</div>
 									</div>
+									{state.message ? (
+										<Alert message={state.message} type="success" />
+									) : null}
 								</div>
-								{state.message ? (
-									<Alert message={state.message} type="success" />
-								) : null}
-							</div>
-							<div className="comment-box submit-form border-0">
-								{/* <h3 className="reply-title">Post Request</h3> */}
-								<div className="comment-form mt-1">
-									<form onSubmit={handleSubmit}>
-										<div className="row">
-											<div className="col-lg-12 col-md-6 col-sm-12">
-												<TextInput
-													label={'Headline'}
-													required
-													maxLength={70}
-													placeholder={
-														'Ex. Newly built flat available for share'
-													}
-													onChange={(e) =>
-														setData({
-															...data,
-															heading: e.target.value,
-														})
-													}
-													defaultValue={data.heading}
-												/>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Bedrooms</label>
-													<input
-														style={{
-															height: '40px',
-														}}
-														className="form-control"
-														type="number"
+								<div className="comment-box submit-form border-0">
+									{/* <h3 className="reply-title">Post Request</h3> */}
+									<div className="comment-form mt-1">
+										<form onSubmit={handleSubmit}>
+											<div className="row">
+												<div className="col-lg-12 col-md-6 col-sm-12">
+													<TextInput
+														label={'Headline'}
 														required
-														defaultValue={data.bedrooms}
-														placeholder="Eg. 3"
+														maxLength={70}
+														placeholder={
+															'Ex. Newly built flat available for share'
+														}
 														onChange={(e) =>
 															setData({
 																...data,
-																bedrooms: e.target.value,
+																heading: e.target.value,
 															})
 														}
+														defaultValue={data.heading}
 													/>
 												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Toilets</label>
-													<input
-														style={{
-															height: '40px',
-														}}
-														className="form-control"
-														type="number"
-														required
-														defaultValue={data.toilets}
-														placeholder="Eg. 4"
-														onChange={(e) =>
-															setData({
-																...data,
-																toilets: e.target.value,
-															})
-														}
-													/>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Bedrooms</label>
+														<input
+															style={{
+																height: '40px',
+															}}
+															className="form-control"
+															type="number"
+															required
+															defaultValue={data.bedrooms}
+															placeholder="Eg. 3"
+															onChange={(e) =>
+																setData({
+																	...data,
+																	bedrooms: e.target.value,
+																})
+															}
+														/>
+													</div>
 												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Bathrooms</label>
-													<input
-														style={{
-															height: '40px',
-														}}
-														className="form-control"
-														type="number"
-														required
-														defaultValue={data.bathrooms}
-														placeholder="Eg. 2"
-														onChange={(e) =>
-															setData({
-																...data,
-																bathrooms: e.target.value,
-															})
-														}
-													/>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Toilets</label>
+														<input
+															style={{
+																height: '40px',
+															}}
+															className="form-control"
+															type="number"
+															required
+															defaultValue={data.toilets}
+															placeholder="Eg. 4"
+															onChange={(e) =>
+																setData({
+																	...data,
+																	toilets: e.target.value,
+																})
+															}
+														/>
+													</div>
 												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Payment Type</label>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Bathrooms</label>
+														<input
+															style={{
+																height: '40px',
+															}}
+															className="form-control"
+															type="number"
+															required
+															defaultValue={data.bathrooms}
+															placeholder="Eg. 2"
+															onChange={(e) =>
+																setData({
+																	...data,
+																	bathrooms: e.target.value,
+																})
+															}
+														/>
+													</div>
+												</div>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Payment Type</label>
 
-													<Select
-														placeholder="Select Service"
-														onChange={(e) => {
-															setData({
-																...data,
-																payment_type: e.value,
-															})
-														}}
-														options={view.payment_types.map((val) => ({
-															label: val.name,
-															value: val.id,
-														}))}
-														className="border rounded"
-														disabled={state.loading}
-													/>
-												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Apartment Type</label>
-													<Select
-														placeholder="Select Category"
-														options={view.categories.map((val) => ({
-															label: val.name,
-															value: val.id,
-														}))}
-														onChange={(e) => {
-															setData({
-																...data,
-																category: e.value,
-															})
-														}}
-														className="border rounded"
-														disabled={state.loading}
-													/>
-												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Select Service</label>
-													<Select
-														placeholder="Select Service"
-														onChange={(e) => {
-															setData({
-																...data,
-																service: e.value,
-															})
-														}}
-														options={view.services.map((val) => ({
-															label: val.name,
-															value: val.id,
-														}))}
-														className="border rounded"
-														disabled={state.loading}
-													/>
-												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Where in {personal_info?.location_keyword?.name}?</label>
-													<GooglePlacesAutocomplete
-														apiKey={process.env.REACT_APP_GOOGLE_PLACES_API_KEY}
-														apiOptions={{
-															language: 'en',
-															region: 'ng',
-														}}
-														selectProps={{
-															// props.state.location,
-															className: 'border',
-															onChange: (e) => {
+														<Select
+															placeholder="Select Service"
+															onChange={(e) => {
 																setData({
 																	...data,
-																	google_location: e,
-																	location: e.label,
+																	payment_type: e.value,
 																})
-															},
-															placeholder: 'Type what area it\'s located in',
-														}}
-														autocompletionRequest={{
-															componentRestrictions: {
-																country: ['ng'],
-															},
-														}}
-													/>
-												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Total Rent</label>
-													<div className="input-group mb-2">
-														<div className="input-group-prepend">
-															<div className="input-group-text">
-																{Global.currency}
-															</div>
-														</div>
-														<CurrencyInput
-															style={{
-																height: '40px',
 															}}
-															id="rent"
-															name="rent"
-															placeholder="The Total Rent"
-															defaultValue={data?.budget}
-															decimalsLimit={2}
-															onValueChange={(value, name) =>
-																setData({
-																	...data,
-																	budget: value,
-																})
-															}
-															className="form-control"
+															options={view.payment_types.map((val) => ({
+																label: val.name,
+																value: val.id,
+															}))}
+															className="border rounded"
+															disabled={state.loading}
 														/>
 													</div>
 												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-12">
-												<div className="form-group">
-													<label>Rent Per Room</label>
-													<div className="input-group mb-2">
-														<div className="input-group-prepend">
-															<div className="input-group-text">
-																{Global.currency}
-															</div>
-														</div>
-														<CurrencyInput
-															style={{
-																height: '40px',
-															}}
-															id="rent"
-															name="rent"
-															placeholder="Rent Per Room"
-															defaultValue={data.rent_per_room}
-															decimalsLimit={2}
-															onValueChange={(value, name) =>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Apartment Type</label>
+														<Select
+															placeholder="Select Category"
+															options={view.categories.map((val) => ({
+																label: val.name,
+																value: val.id,
+															}))}
+															onChange={(e) => {
 																setData({
 																	...data,
-																	rent_per_room: value,
+																	category: e.value,
 																})
-															}
-															className="form-control"
+															}}
+															className="border rounded"
+															disabled={state.loading}
 														/>
 													</div>
 												</div>
-											</div>
-											{/* <div className="col-lg-6 col-md-6 col-sm-12">
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Select Service</label>
+														<Select
+															placeholder="Select Service"
+															onChange={(e) => {
+																setData({
+																	...data,
+																	service: e.value,
+																})
+															}}
+															options={view.services.map((val) => ({
+																label: val.name,
+																value: val.id,
+															}))}
+															className="border rounded"
+															disabled={state.loading}
+														/>
+													</div>
+												</div>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>
+															Where in {personal_info?.location_keyword?.name}?
+														</label>
+														<GooglePlacesAutocomplete
+															apiKey={
+																process.env.REACT_APP_GOOGLE_PLACES_API_KEY
+															}
+															apiOptions={{
+																language: 'en',
+																region: 'ng',
+															}}
+															selectProps={{
+																// props.state.location,
+																className: 'border',
+																onChange: (e) => {
+																	setData({
+																		...data,
+																		google_location: e,
+																		location: e.label,
+																	})
+																},
+																placeholder: "Type what area it's located in",
+															}}
+															autocompletionRequest={{
+																componentRestrictions: {
+																	country: ['ng'],
+																},
+															}}
+														/>
+													</div>
+												</div>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Total Rent</label>
+														<div className="input-group mb-2">
+															<div className="input-group-prepend">
+																<div className="input-group-text">
+																	{Global.currency}
+																</div>
+															</div>
+															<CurrencyInput
+																style={{
+																	height: '40px',
+																}}
+																id="rent"
+																name="rent"
+																placeholder="The Total Rent"
+																defaultValue={data?.budget}
+																decimalsLimit={2}
+																onValueChange={(value, name) =>
+																	setData({
+																		...data,
+																		budget: value,
+																	})
+																}
+																className="form-control"
+															/>
+														</div>
+													</div>
+												</div>
+												<div className="col-lg-6 col-md-6 col-sm-12">
+													<div className="form-group">
+														<label>Rent Per Room</label>
+														<div className="input-group mb-2">
+															<div className="input-group-prepend">
+																<div className="input-group-text">
+																	{Global.currency}
+																</div>
+															</div>
+															<CurrencyInput
+																style={{
+																	height: '40px',
+																}}
+																id="rent"
+																name="rent"
+																placeholder="Rent Per Room"
+																defaultValue={data.rent_per_room}
+																decimalsLimit={2}
+																onValueChange={(value, name) =>
+																	setData({
+																		...data,
+																		rent_per_room: value,
+																	})
+																}
+																className="form-control"
+															/>
+														</div>
+													</div>
+												</div>
+												{/* <div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>State</label>
 													<Select
@@ -645,7 +648,7 @@ const CraeteRequest = (props) => {
 													/>
 												</div>
 											</div> */}
-											{/* <div className="col-lg-6 col-md-6 col-sm-12">
+												{/* <div className="col-lg-6 col-md-6 col-sm-12">
 												<div className="form-group">
 													<label>Premium Flat?</label>
 													<div className="d-flex mt-2">
@@ -661,87 +664,93 @@ const CraeteRequest = (props) => {
 													</div>
 												</div>
 											</div> */}
-											
-											<div className="col-lg-12 col-md-12 col-sm-12">
-												<div className="form-group">
-													<label>
-														Tell us about his flat.
-													</label>
-													<TextArea
-														rows={6}
-														placeholder={
-															props.view.personal_info &&
-															props.view.personal_info.looking_for
-																? "Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
-																: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
-														}
-														defaultValue={data.body}
-														value={data.body}
-														required
-														name="body"
-														minLength={50}
-														maxLength={900}
-														onChange={(e) => {
-															setData({
-																...data,
-																body_html: e.target.value,
-																body: e.target.value,
-															})
-														}}
-														disabled={state.loading}
-													/>
-												</div>
-											</div>
-											<>
-												<div className="container">
-													<label className="display-7">Images</label>
-												</div>
 
-												<div className="">
-													<div className="col-lg-12 p-0">
-														<div className="row justify-content-start">
-															{new Array(image_count).fill(null).map((_, i) => {
-																return (
-																	<div className="col-6 col-md-4 col-lg-4" key={`img-${i}`}>
-																		<ImageSelect
-																			index={i}
-																			edit={edit}
-																			image={imageFiles[`img${i}`]}
-																			onFileChange={(e) => {
-																				handleImageSelect(e.target.files[0], i)
-																			}}
-																		/>
-																	</div>
-																)
-															})}
-														</div>
+												<div className="col-lg-12 col-md-12 col-sm-12">
+													<div className="form-group">
+														<label>Tell us about his flat.</label>
+														<TextArea
+															rows={6}
+															placeholder={
+																props.view.personal_info &&
+																props.view.personal_info.looking_for
+																	? "Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
+																	: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
+															}
+															defaultValue={data.body}
+															value={data.body}
+															required
+															name="body"
+															minLength={50}
+															maxLength={900}
+															onChange={(e) => {
+																setData({
+																	...data,
+																	body_html: e.target.value,
+																	body: e.target.value,
+																})
+															}}
+															disabled={state.loading}
+														/>
 													</div>
 												</div>
-											</>
-											<div className="col-lg-12 col-md-12 col-sm-12">
-												<hr />
-												<div className="form-group">
-													<Btn
-														type="submit"
-														text={
-															props.view.personal_info &&
-															props.view.personal_info.looking_for
-																? 'Post Request'
-																: 'Post Property'
-														}
-														className="w-100 shadow"
-														loading={state.loading}
-														onClick={() => {}}
-													/>
+												<>
+													<div className="container">
+														<label className="display-7">Images</label>
+													</div>
+
+													<div className="">
+														<div className="col-lg-12 p-0">
+															<div className="row justify-content-start">
+																{new Array(image_count)
+																	.fill(null)
+																	.map((_, i) => {
+																		return (
+																			<div
+																				className="col-6 col-md-4 col-lg-4"
+																				key={`img-${i}`}
+																			>
+																				<ImageSelect
+																					index={i}
+																					edit={edit}
+																					image={imageFiles[`img${i}`]}
+																					onFileChange={(e) => {
+																						handleImageSelect(
+																							e.target.files[0],
+																							i
+																						)
+																					}}
+																				/>
+																			</div>
+																		)
+																	})}
+															</div>
+														</div>
+													</div>
+												</>
+												<div className="col-lg-12 col-md-12 col-sm-12">
+													<hr />
+													<div className="form-group">
+														<Btn
+															type="submit"
+															text={
+																props.view.personal_info &&
+																props.view.personal_info.looking_for
+																	? 'Post Request'
+																	: 'Post Property'
+															}
+															className="w-100 shadow"
+															loading={state.loading}
+															onClick={() => {}}
+														/>
+													</div>
 												</div>
 											</div>
-										</div>
-									</form>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</MainErrorBoundary>
 			</Layout>
 		)

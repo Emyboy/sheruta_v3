@@ -17,37 +17,49 @@ export default function DiscussionChatInput({ onSend }) {
 	const [loading, setLoading] = useState(false)
 	const [newMessage, setNewMessage] = useState('')
 	const { reply } = useSelector((state) => state?.group)
+	const { app_details, payment_plan } = useSelector((state) => state?.view)
 	const dispatch = useDispatch()
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		setLoading(true)
-		try {
-			const res = await MessageService.sendMessage({
-				message_text: newMessage,
-				location_keyword: room_id,
-				from: user?.user?.id,
-				reply,
-				seen: true,
+		if (
+			payment_plan || app_details?.everything_free
+		) {
+			setLoading(true)
+			try {
+				const res = await MessageService.sendMessage({
+					message_text: newMessage,
+					location_keyword: room_id,
+					from: user?.user?.id,
+					reply,
+					seen: true,
+				})
+				onSend({
+					...res.data,
+					new: true,
+				})
+				setNewMessage('')
+				setLoading(false)
+				notifyEmy({
+					heading: `Sent group message saying >>${res.data.message_text}<<`,
+					user: user.user.id,
+				})
+				Analytics.create({
+					user_id: user.user.id,
+					type: AnalyticsTypes.groupMessages,
+				})
+				dispatch(setGroupState({ reply: null }))
+			} catch (error) {
+				setLoading(false)
+				return Promise.reject(error)
+			}
+		} else {
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					showPaymentPopup: true,
+				},
 			})
-			onSend({
-				...res.data,
-				new: true,
-			})
-			setNewMessage('')
-			setLoading(false)
-			notifyEmy({
-				heading: `Sent group message saying >>${res.data.message_text}<<`,
-				user: user.user.id,
-			})
-			Analytics.create({
-				user_id: user.user.id,
-				type: AnalyticsTypes.groupMessages,
-			})
-			dispatch(setGroupState({ reply: null }))
-		} catch (error) {
-			setLoading(false)
-			return Promise.reject(error)
 		}
 	}
 

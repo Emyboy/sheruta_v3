@@ -23,11 +23,11 @@ export default function DiscussionLeft() {
 		<div className="bg-grey-300">
 			<DiscussionLeftHeader />
 			<div className="list-group scroll-bar" style={{ maxHeight: '81vh' }}>
-				{list?.map((val, i) => {
+				{list?.map((val) => {
 					return (
 						<EachGroupConversation
 							active={room_id == val.id}
-							key={`location-group-${i}`}
+							key={`location-group-${val?.id}`}
 							name={val?.name}
 							image_url={val?.background_img}
 							clickURL={`/discussion/room/${val?.id}`}

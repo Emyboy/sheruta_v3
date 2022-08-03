@@ -122,7 +122,9 @@ export const getUserFeedback = () => (dispatch) => {
 export const getAuthPersonalInfo = () => async (dispatch) => {
 	let token = await Cookies.get('token')
 	axios(process.env.REACT_APP_API_URL + '/personal-infos/me', {
-		headers: authHeader
+		headers: {
+			authorization: `Bearer ${Cookies.get('token')}`
+		}
 	})
 		.then((res) => {
 			store.dispatch({

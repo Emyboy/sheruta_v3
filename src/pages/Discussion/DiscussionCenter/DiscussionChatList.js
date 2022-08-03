@@ -9,13 +9,14 @@ import Global from '../../../Global'
 import EachDiscussionNotification from '../DiscussionNotificatioin/EachDiscussionNotification'
 import EachGroupMessage from '../EachDiscussionChat/EachGroupMessage'
 import { useInterval } from 'react-use'
+import DiscussionBreakPoint from '../DiscussionBreakPoint'
 
 export default function DiscussionChatList({ newMessage }) {
 	const { room_id, message_id } = useParams()
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
 
-	const getRecentMessages = useCallback(async () => {
+	const getRecentMessages = useCallback(async (scroll) => {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
@@ -32,9 +33,10 @@ export default function DiscussionChatList({ newMessage }) {
 			)
 			// console.log('MSG --', res.data)
 			setMessages(res.data)
-			if (!message_id) {
+			if (scroll) {
 				document.getElementById('chat-end').scrollIntoView()
-			} else {
+			}
+			if (message_id) {
 				setTimeout(() => {
 					document.getElementById(`reply-${message_id}`).scrollIntoView({
 						behavior: 'smooth',
@@ -60,7 +62,7 @@ export default function DiscussionChatList({ newMessage }) {
 	}, [newMessage])
 
 	useLayoutEffect(() => {
-		getRecentMessages()
+		getRecentMessages(true)
 	}, [getRecentMessages])
 
 	const getNewMessages = async () => {
@@ -72,10 +74,10 @@ export default function DiscussionChatList({ newMessage }) {
 							messages[messages.length - 1]?.id
 						}&_sort=created_at:ASC`
 				)
-				if(res.data.length > 0){
-					if(messages.includes("break")){
-						setMessages([...messages,  ...res.data])
-					}else {
+				if (res.data.length > 0) {
+					if (messages.includes('break')) {
+						setMessages([...messages, ...res.data])
+					} else {
 						setMessages([...messages, 'break', ...res.data])
 					}
 				}
@@ -91,9 +93,9 @@ export default function DiscussionChatList({ newMessage }) {
 		if (room_id) {
 			console.log('CHECKING UPDATES')
 			getNewMessages()
-			setTimeout(() => {
-				getRecentMessages()
-			}, 15000);
+			// setTimeout(() => {
+			// 	getRecentMessages(messages.length === 0)
+			// }, 15000)
 		}
 	}, 20000)
 
@@ -101,16 +103,8 @@ export default function DiscussionChatList({ newMessage }) {
 		<div>
 			{messages.map((val, i) => {
 				if (typeof val === 'string') {
-					console.log('THE VAL STRING --', val)
 					return (
-						<div className="container d-flex justify-content-center mt-5 mb-4">
-							<button
-								type="button"
-								class="btn btn-sm bg-theme-light shadow-sm text-dark fw-500"
-							>
-								New Messages <br /> 👇🏽
-							</button>
-						</div>
+						<DiscussionBreakPoint />
 					)
 				}
 				return (

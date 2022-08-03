@@ -30,6 +30,7 @@ import Cookies from 'js-cookie'
 import LocationKeywordPopup from './LocationKeywordPopup'
 import RobotMessage from '../Ads/RobotMessage/RobotMessage'
 import Global from '../../Global'
+import PaymentPopup from './PaymentPopup'
 
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
@@ -126,6 +127,7 @@ const MasterPopup = (props) => {
 						<LocationUpdatePopup />
 					</>
 				)} */}
+				<PaymentPopup />
 				<AppUpdatePopup />
 				<LocationKeywordPopup />
 				{Global.isMobile && <RobotMessage />}

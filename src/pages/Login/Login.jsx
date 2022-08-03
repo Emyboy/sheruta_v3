@@ -68,9 +68,9 @@ const Login = (props) => {
 						},
 					})
 					updateLastSeen();
-					setTimeout(() => {
-						window.location.reload()
-					}, 1000);
+					// setTimeout(() => {
+					// 	window.location.reload()
+					// }, 1000);
 					setState({ ...state, loading: false })
 				} else {
 					setState({ ...state, notVerified: true, userData: res.data })

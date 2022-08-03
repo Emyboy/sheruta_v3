@@ -10,6 +10,7 @@ import { notifyEmy } from '../../services/Sheruta'
 import end_sarz from '../../assets/img/end_sarz.jpeg'
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 import Global from '../../Global';
+import Cookies from 'js-cookie'
 const Layout = React.lazy(() => import("../../components/Layout/Layout"))
 
 const formattedPrice = new Intl.NumberFormat('en-NG')
@@ -59,7 +60,7 @@ export default connect(mapStateToProps)((props) => {
 		axios(process.env.REACT_APP_API_URL + '/transactions', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${props.auth.user.jwt}`,
+				Authorization: `Bearer ${Cookies.get('token')}`,
 			},
 			data: {
 				...reference,

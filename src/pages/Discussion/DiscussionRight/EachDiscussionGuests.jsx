@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 export default function EachDiscussionGuest({ active, data }) {
 
 	const _user = data?.users_permissions_user
-
 	return (
 		<Link
 			to={`/user/${_user?.username}`}
@@ -17,7 +16,7 @@ export default function EachDiscussionGuest({ active, data }) {
 				<div className="d-flex align-items-center">
 					<div>
 						<div
-							className={_user?.is_online ? 'bg-danger' : 'bg-success'}
+							className={!_user?.online ? 'bg-danger' : 'bg-success'}
 							style={{ borderRadius: '50px', padding: 3 }}
 						>
 							<Avatar src={_user.avatar_url} size={60} className="m-0" />
