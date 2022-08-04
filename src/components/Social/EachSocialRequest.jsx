@@ -54,7 +54,7 @@ function EachRequest({ data }) {
 							className=" d-flex justify-context-evenly align-items-center"
 						>
 							<a className="text-dark">
-								{deactivated ? '.... ....' : user?.first_name.split(' ')[0]}{' '}
+								{deactivated ? '.... ....' : user?.first_name?.split(' ')[0]}{' '}
 							</a>{' '}
 							<VerifiedBadge
 								user={user}

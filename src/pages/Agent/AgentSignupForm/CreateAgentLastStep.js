@@ -85,17 +85,17 @@ export default function CreateAgentLastStep({ data, changeStep }) {
 	}, [backID, fontID])
 
 	useEffect(() => {
-		console.log('THE FINAL DATA ---', data)
-		if (!data?.idBack) {
-			notification.error({ message: 'Please add the back of you ID' })
-			changeStep(0)
-			return
-		}
-		if (!data?.idFront) {
-			notification.error({ message: 'Please add the front of you ID' })
-			changeStep(0)
-			return
-		}
+		// console.log('THE FINAL DATA ---', data)
+		// if (!data?.idBack) {
+		// 	notification.error({ message: 'Please add the back of you ID' })
+		// 	changeStep(0)
+		// 	return
+		// }
+		// if (!data?.idFront) {
+		// 	notification.error({ message: 'Please add the front of you ID' })
+		// 	changeStep(0)
+		// 	return
+		// }
 		if (!data?.name) {
 			notification.error({ message: 'Company name is required' })
 			changeStep(0)
