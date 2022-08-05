@@ -10,7 +10,7 @@ import { getUser } from '../../redux/strapi_actions/auth.actions'
 
 
 export default function AgentSignup() {
-	localStorage.setItem('after_login', "/agent/signup")
+	localStorage.setItem('after_login', "/agents/signup")
 	const { user } = useSelector((state) => state.auth)
 	// const [weMove, setWeMove] = useState(false)
 	const dispatch = useDispatch()
