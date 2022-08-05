@@ -1,7 +1,8 @@
 
 
 const initialState = {
-    recent_properties: []
+    recent_properties: [],
+    properties: []
 }
 
 const PropertyReducer = (state = initialState, { type, payload }) => {

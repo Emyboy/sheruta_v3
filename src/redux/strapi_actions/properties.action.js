@@ -9,17 +9,39 @@ const setPropertyState = (payload) => {
 	})
 }
 
-export const getAllRecentProperties = () => async (dispatch) => {
-	try {
-		const res = await PropertiesService.getRecentProperties()
-
-
-		setPropertyState({
-			recent_properties: res.data,
-		})
-		return Promise.resolve()
-	} catch (error) {
-		notification.error({ message: 'Error fetching properties' })
-		return Promise.reject(error)
+export const getAllRecentProperties =
+	(location_keyword) => async (dispatch) => {
+		const { personal_info } = store.getState().view
+		const user_location_keyword =
+			location_keyword ||
+			(personal_info ? personal_info?.location_keyword?.id : null)
+		try {
+			const res = await PropertiesService.getRecentProperties(
+				user_location_keyword
+			)
+			setPropertyState({
+				recent_properties: res.data,
+			})
+			return Promise.resolve()
+		} catch (error) {
+			notification.error({ message: 'Error fetching properties' })
+			return Promise.reject(error)
+		}
 	}
-}
+
+export const getPropertiesByLocationKeyword =
+	(location_keyword) => async (dispatch) => {
+		try {
+			const res = await PropertiesService.getPropertiesByLocationKeyword(
+				location_keyword
+			)
+			setPropertyState({
+				properties: res.data,
+				recent_properties: res.data,
+			})
+			return Promise.resolve()
+		} catch (error) {
+			notification.error({ message: 'Error fetching properties' })
+			return Promise.reject(error)
+		}
+	}

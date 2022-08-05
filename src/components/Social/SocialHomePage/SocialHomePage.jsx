@@ -10,8 +10,15 @@ import { Redirect } from 'react-router'
 import UserFeedCard from './UserFeedCard'
 import SocialFeedsAds from './SocialFeedsAds'
 import RecentUsersList from '../../RecentUsersList/RecentUsersList'
-import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom'
+import { FaSearch } from 'react-icons/fa'
+import { Alert, Button } from 'react-bootstrap'
+import moment from 'moment'
+import Cookies from 'js-cookie'
+import RecentBookingFeed from './RecentBookingFeed'
+import Sticky from 'react-sticky-el'
+import ErrorBoundary from '../../ErrorBoundries/ErrorBoundary'
+import ProfileProgress from '../../ProfileComponents/ProfileProgress'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -45,13 +52,6 @@ export default (props) => {
 			)
 				.then((res) => {
 					setState({ ...state, list: res.data })
-					// console.log('FEED -----', res.data)
-					dispatch({
-						type: 'SET_VIEW_STATE',
-						payload: {
-							feed: [],
-						},
-					})
 					dispatch({
 						type: 'SET_VIEW_STATE',
 						payload: {
@@ -59,9 +59,11 @@ export default (props) => {
 						},
 					})
 				})
-				.catch((err) => {})
+				.catch((err) => {
+					return Promise.reject(err)
+				})
 		}
-	}, [state, view.personal_info])
+	}, [state])
 
 	if (!auth.user) {
 		return <Redirect to="/login" />
@@ -73,13 +75,21 @@ export default (props) => {
 
 	return (
 		<div className="main-wrapper">
-			<Layout currentPage="feeds" showMessages>
-				<div className="container-fluid">
+			<Layout currentPage="feeds" showMessages={false}>
+				<div className="container">
 					<div className="row _feed-body justify-content-evenly">
 						{!Global.isMobile && (
-							<div className="col-xl-3 col-xxl-3 col-lg-4 ps-lg-0">
+							<div className="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+								<Sticky
+									stickyStyle={{
+										zIndex: 10,
+										marginTop: Global.isMobile ? '6vh' : '13vh',
+									}}
+								>
+									<UserFeedCard />
+								</Sticky>
 								{/* <RecentUsers data={newUsers} /> */}
-								<UserFeedCard />
+								{/* <RecentBookingFeed /> */}
 							</div>
 						)}
 						<div
@@ -122,58 +132,103 @@ export default (props) => {
 								</div>
 							</div>
 
-							{filter === 'all' && (
-								<>
-									{(view['feed'] ? view['feed'] : state.list).map((val, i) => {
-										if (i === 2) {
-											return (
-												<>
-													<div className="d-flex justify-content-between align-items-center  mt-4">
-														<h5 className="fw-700 text-grey-600 mb-1 ml-2">
-															Recent Verified Users
-														</h5>
-														<Link to="/start">
-															<small className="text-theme fw-bold">
-																Get Verified {'>'}
-															</small>
-														</Link>
-													</div>
-													{personal_info && (
+							{Cookies.get('new_user') && (
+								<Alert variant="success">
+									<Alert.Heading className="fw-bold">
+										Hey {auth?.user?.user?.first_name?.split(' ')[0]}, Welcome
+										to Sheruta.{' '}
+									</Alert.Heading>
+									<div className="row justify-content-between align-items-center">
+										<p className="col-md-6">
+											Your account is set to{' '}
+											{view?.personal_info?.looking_for ? (
+												<strong>I am looking for</strong>
+											) : (
+												<strong>I have a flat.</strong>
+											)}
+										</p>
+										<Link to={`/settings/configure-view`} className="col-3">
+											<div className="btn border-success border-2">
+												<h5 className="mb-0 text-success fw-bold">
+													Change This
+												</h5>
+											</div>
+										</Link>
+									</div>
+									<hr />
+									<p className="mb-0">
+										{view?.personal_info?.looking_for
+											? 'Reach out to those who have a flat to share by calling them or leaving them a message'
+											: 'Reach out to those who are looking for a flat to share. You can call them or leave them a message'}
+									</p>
+								</Alert>
+							)}
+
+							<ErrorBoundary>
+								<ProfileProgress />
+								{filter === 'all' && (
+									<>
+										{(view['feed'] ? view['feed'] : state.list).map(
+											(val, i) => {
+												if (i === 2) {
+													return (
 														<>
-															<RecentUsersList key={`ki-${i}`} />
-															<SocialFeedsAds index={i} key={`ad-${i}`} />
-															<EachSocialRequest
-																key={i + ' request'}
-																data={val}
-															/>
+															<div className="d-flex justify-content-between align-items-center  mt-4">
+																<h5 className="fw-700 text-grey-600 mb-1 ml-2">
+																	Recent Verified Users
+																</h5>
+																<Link to="/start">
+																	<small className="text-theme fw-bold">
+																		Get Verified {'>'}
+																	</small>
+																</Link>
+															</div>
+															{personal_info && (
+																<>
+																	<RecentUsersList key={`ki-${i}`} />
+																	<SocialFeedsAds index={i} key={`ad-${i}`} />
+																	<EachSocialRequest
+																		key={i + ' request'}
+																		data={val}
+																	/>
+																</>
+															)}
 														</>
-													)}
-												</>
+													)
+												}
+												return (
+													<>
+														<SocialFeedsAds index={i} key={`ad-${i}`} />
+														<EachSocialRequest
+															key={i + ' request'}
+															data={val}
+														/>
+													</>
+												)
+											}
+										)}
+									</>
+								)}
+								{filter === 'for you' && (
+									<>
+										{(view['feed'] ? view['feed'] : state.list)
+											.filter(
+												(x) => x.is_searching == !personal_info.looking_for
 											)
-										}
-										return (
-											<>
-												<SocialFeedsAds index={i} key={`ad-${i}`} />
-												<EachSocialRequest key={i + ' request'} data={val} />
-											</>
-										)
-									})}
-								</>
-							)}
-							{filter === 'for you' && (
-								<>
-									{(view['feed'] ? view['feed'] : state.list)
-										.filter((x) => x.is_searching == !personal_info.looking_for)
-										.map((val, i) => {
-											return (
-												<>
-													<SocialFeedsAds index={i} key={`ad-${i}`} />
-													<EachSocialRequest key={i + ' request'} data={val} />
-												</>
-											)
-										})}
-								</>
-							)}
+											.map((val, i) => {
+												return (
+													<>
+														<SocialFeedsAds index={i} key={`ad-${i}`} />
+														<EachSocialRequest
+															key={i + ' request'}
+															data={val}
+														/>
+													</>
+												)
+											})}
+									</>
+								)}
+							</ErrorBoundary>
 							{state.list.length > 0 && (
 								<div className="card rounded-xxl">
 									<div className="card-body text-center">

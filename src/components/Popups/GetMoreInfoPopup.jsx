@@ -84,10 +84,10 @@ export default function GetMoreInfoPopup() {
 											{personal_info.looking_for
 												? `Budget ${
 														Global.currency
-												  } ${window.formatedPrice.format(budget)}`
+												  } ${window.formattedPrice.format(budget)}`
 												: `Room Cost ${
 														Global.currency
-												  } ${window.formatedPrice.format(budget || 0)}`}
+												  } ${window.formattedPrice.format(budget || 0)}`}
 										</label>
 										<input
 											required

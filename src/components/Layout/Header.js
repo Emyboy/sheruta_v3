@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { notification, Tooltip } from 'antd'
+import { Avatar, Tooltip } from 'antd'
 import { BsPeople } from 'react-icons/bs'
 import moment from 'moment'
 import logo from '../../assets/img/logo.png'
-import Global from '../../Global';
-import PaymentAlert from '../PaymentAlert/PaymentAlert'
+import Global from '../../Global'
+
+import { RiAddFill } from 'react-icons/ri'
 
 const NavWrapper = styled.ul`
 	li > a {
@@ -28,15 +29,18 @@ export default function Header({
 }) {
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
-	const { notifications, messages, payment_plan } = useSelector(
+	const { notifications, messages, personal_info } = useSelector(
 		(state) => state.view
 	)
 	const [showNotification, setNotification] = useState(false)
 
 	if (!user) {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light nav-header bg-white shadow-xs border-0" style={{ zIndex: 8 }}>
-				<div className="container-fluid">
+			<nav
+				className="navbar navbar-expand-lg navbar-light bg-light bg-white shadow-xs border-0"
+				style={{ zIndex: 39 }}
+			>
+				<div className="container">
 					<Link to="/">
 						<a className="navbar-brand">
 							<img src={logo} alt="sheruta logo" width="150" height="40" />
@@ -63,8 +67,19 @@ export default function Header({
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link to={`/requests`}>
-									<a className="nav-link">Requests</a>
+								{/* <Link to={`/signup`}>
+									<a className="nav-link">Post Your Property</a>
+								</Link> */}
+							</li>
+
+							<li className="nav-item">
+								<Link to={`/flats/?location=lekki`}>
+									<a className="nav-link">Flats</a>
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to={`/agents`}>
+									<a className="nav-link">Agents</a>
 								</Link>
 							</li>
 							<li className="nav-item dropdown">
@@ -78,8 +93,9 @@ export default function Header({
 									Our Services
 								</a>
 								<ul
-									className="dropdown-menu dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow hide"
+									className="dropdown-menu dropdown-menu dropdown-menu-end p-1 rounded-xxxxl border-0 hide"
 									aria-labelledby="navbarDropdown"
+									style={{ width: Global.isMobile ? '60vw':'20vw' }}
 								>
 									<li>
 										<Link className="dropdown-item" to="/services/for_share">
@@ -92,7 +108,9 @@ export default function Header({
 										</Link>
 									</li>
 									<li>
-										<Link className="dropdown-item" to='/services/carry_over'>Carry Over</Link>
+										<Link className="dropdown-item" to="/services/carry_over">
+											Carry Over
+										</Link>
 									</li>
 									<li>
 										<hr className="dropdown-divider" />
@@ -105,8 +123,8 @@ export default function Header({
 								</ul>
 							</li>
 							<li className="nav-item">
-								<Link to={`/about`}>
-									<a className="nav-link">About Us</a>
+								<Link to={`/blog`}>
+									<a className="nav-link">Blog</a>
 								</Link>
 							</li>
 							{/* <li className="nav-item">
@@ -115,16 +133,24 @@ export default function Header({
 								</Link>
 							</li> */}
 						</NavWrapper>
-						<form className="d-flex">
+						<Link to="/flat/submit" onClick={() => localStorage.setItem('after_login', '/flat/submit')} className={`${Global.isMobile ? 'mb-5': ''}`}>
+							<span
+								style={{ outline: '3px black', outlineStyle: 'solid' }}
+								className="btn heder-btn d-lg-block fw-bold font-xss text-center lh-20 rounded  mr-3 pt-2 pb-2 pl-3 pr-3"
+							>
+								<RiAddFill size={25} /> Submit Property
+							</span>
+						</Link>
+						<form className={`${Global.isMobile ? 'pb-4 d-flex':''}`}>
 							<Link to="/login">
-								<a className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
+								<span className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
 									Login
-								</a>
+								</span>
 							</Link>
 							<Link to="/signup">
-								<a className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss ms-2 w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
+								<span className="header-btn  d-lg-block bg-current fw-500 text-white font-xsss ms-2 w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3">
 									Register
-								</a>
+								</span>
 							</Link>
 						</form>
 					</div>
@@ -206,8 +232,8 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to="/requests/create">
-					<Tooltip placement="bottom" title={'Add A Request'}>
+				<Link to={'/flat/submit'}>
+					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i
 								className={`feather-plus font-lg alert-primary btn-round-lg theme-dark-bg ${
@@ -279,45 +305,41 @@ export default function Header({
 					style={{ right: '9vw', width: '350px' }}
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
-					{!payment_plan ? (
-						<PaymentAlert />
-					) : (
-						<>
-							{notifications.map((val, i) => {
-								if (i > 6) {
-									return null
-								}
-								const otherUser = val?.users_permissions_user
-								const user = val?.owner
-								return (
-									<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3">
-										<img
-											src={
-												otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
-											}
-											alt="user"
-											className="w40 position-absolute left-0"
-										/>
-										<Link to={otherUser ? `/user/${otherUser?.username}` : '#'}>
-											<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
-												{otherUser?.first_name || 'Someone'}{' '}
-												<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
-													{' '}
-													{moment(val?.created_at).fromNow()}
-												</span>
-											</h5>
-										</Link>
-										<h6 className="text-grey-500 fw-500 font-xssss lh-4">
-											{val?.title}
-										</h6>
-									</div>
-								)
-							})}
-							<div className="text-center">
-								<Link to="/notifications">View All</Link>
-							</div>
-						</>
-					)}
+					<>
+						{notifications.map((val, i) => {
+							if (i > 6) {
+								return null
+							}
+							const otherUser = val?.users_permissions_user
+							const user = val?.owner
+							return (
+								<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3" key={`notify-${i}`}>
+									<img
+										src={
+											otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
+										}
+										alt="user"
+										className="w40 position-absolute left-0"
+									/>
+									<Link to={otherUser ? `/user/${otherUser?.username}` : '#'}>
+										<h5 className="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">
+											{otherUser?.first_name || 'Someone'}{' '}
+											<span className="text-grey-400 font-xsssss fw-600 float-right mt-1">
+												{' '}
+												{moment(val?.created_at).fromNow()}
+											</span>
+										</h5>
+									</Link>
+									<h6 className="text-grey-500 fw-400 font-xssss lh-4">
+										{val?.title}
+									</h6>
+								</div>
+							)
+						})}
+						<div className="text-center">
+							<Link to="/notifications">View All</Link>
+						</div>
+					</>
 				</div>
 
 				<a
@@ -337,11 +359,11 @@ export default function Header({
 				{user && (
 					<Link to={`/user/${user?.user.username}`}>
 						<a className="p-0 ms-3 menu-icon">
-							<img
+							<Avatar
 								src={user.user?.avatar_url}
 								alt="user"
 								className="w40 mt--1"
-								style={{ borderRadius: '50px' }}
+								size={40}
 							/>
 						</a>
 					</Link>

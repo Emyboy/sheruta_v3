@@ -9,6 +9,7 @@ import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
 import loginImg from '../../assets/img/login-bg.png'
 import Global from '../../Global'
+import Cookies from 'js-cookie'
 
 export const Signup = (props) => {
 	const { register, handleSubmit } = useForm()
@@ -29,10 +30,10 @@ export const Signup = (props) => {
 			})
 			return
 		}
-		if(e.username?.length <4){
-			notification.error({ message: "Username is too short", placement: 'bottomLeft' });
-			return;
-		}
+		// if(e.username?.length <4){
+		// 	notification.error({ message: "Username is too short", placement: 'bottomLeft' });
+		// 	return;
+		// }
 		if(e.first_name?.length <2){
 			notification.error({ message: "First Name is too short", placement: 'bottomLeft' });
 			return;
@@ -43,9 +44,9 @@ export const Signup = (props) => {
 			method: 'POST',
 			data: {
 				...e,
-				username: e.username
-					.replace(/\s/g, '')
-					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+				// username: e.username
+				// 	.replace(/\s/g, '')
+				// 	.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 				first_name: e.first_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 				last_name: e.last_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
 			},
@@ -55,6 +56,7 @@ export const Signup = (props) => {
 					notification.success({ message: 'Account Created' })
 					sessionStorage.setItem('mail', e.email)
 					setState({ ...state, loading: false, goToSuccess: true })
+					Cookies.set('new_user', true, { expires: 1 })
 				}
 				setState({ ...state, loading: false })
 				// store.dispatch({
@@ -113,23 +115,25 @@ export const Signup = (props) => {
 						}
 					/>
 				</MetaTags>
-				<div className="main-wrap">
-					<div className="row">
-						<div
+				<div className="container">
+					<div className="row justify-content-center">
+						{/* <div
 							className="col-xl-5 d-none d-xl-block p-0 vh-100 bg-image-cover bg-no-repeat"
 							style={{ backgroundImage: `url(${loginImg})` }}
-						></div>
+						></div> */}
 						<div
-							className="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 "
+							className="col-sm-12 col-xl-4 col-lg-6 col-md-7"
 							style={{
-								paddingTop: Global.isMobile ? '60%' : '10%',
-								overflow: Global.isMobile ? 'scroll' : 'auto',
-								paddingBottom: '10vh',
+								// overflow: Global.isMobile ? 'scroll' : 'auto',
+								// paddingBottom: '30vh',
+								// paddingTop: '70vh',
 							}}
 						>
-							<div className="card shadow-none border-0 ms-auto me-auto login-card">
+							<div
+								className="card border-0 p-3 mt-5 rounded-xxl shadow-xxl mb-5"
+							>
 								<div className="card-body rounded-0 text-left p-1">
-									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-5">
+									<h2 className="fw-700 display1-size display2-md-size mb-4 mt-3">
 										Register
 									</h2>
 									<form onSubmit={handleSubmit(onSubmit)}>
@@ -162,7 +166,7 @@ export const Signup = (props) => {
 												placeholder="Last Name"
 											/>
 										</div>
-										<div className="form-group icon-input mb-3">
+										{/* <div className="form-group icon-input mb-3">
 											<i className="font-sm ti-user text-grey-500 pe-0"></i>
 											<input
 												required
@@ -173,7 +177,7 @@ export const Signup = (props) => {
 												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
 												placeholder="Username Ex john_doe"
 											/>
-										</div>
+										</div> */}
 										<div className="form-group icon-input mb-3">
 											<i className="font-sm ti-email text-grey-500 pe-0"></i>
 											<input
@@ -210,14 +214,14 @@ export const Signup = (props) => {
 											/>
 											<i className="font-sm ti-lock text-grey-500 pe-0"></i>
 										</div>
-										<div className="form-group icon-input mb-1">
+										{/* <div className="form-group icon-input mb-1">
 											<input
 												type="Password"
 												className="style2-input ps-5 form-control text-grey-900 font-xss ls-3"
 												placeholder="Confirm Password"
 											/>
 											<i className="font-sm ti-lock text-grey-500 pe-0"></i>
-										</div>
+										</div> */}
 										<div className="form-check text-left mb-3">
 											<input
 												type="checkbox"

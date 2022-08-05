@@ -2,25 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
-// import Layout from '../../components/Layout/Layout'
-// import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
-// import AccountSettings from './settings/AccountSettings'
+import Layout from '../../components/Layout/Layout'
+import AccountDeactivationSetting from './settings/AccountDeactivationSetting'
+import AccountSettings from './settings/AccountSettings'
 import PersonalInfoSettings from './settings/PersonalInfoSettings'
 import { Switch } from 'antd'
-// import ConfigureViewSettings from './settings/ConfigureViewSettings'
-// import PreferredLocationSetting from './settings/PreferredLocationSetting';
+import ConfigureViewSettings from './settings/ConfigureViewSettings'
+import PreferredLocationSetting from './settings/PreferredLocationSetting';
+import { MdOutlineVolunteerActivism } from 'react-icons/md'
+import UniqueHabitsSettings from './settings/UniqueHabitsSettings';
+import { MdMyLocation } from 'react-icons/md';
+import LocationKeywordSettings from './settings/LocationKeywordSettings'
 
-const AccountDeactivationSetting = React.lazy(() =>
-	import('./settings/AccountDeactivationSetting')
-)
-const AccountSettings = React.lazy(() => import('./settings/AccountSettings'))
-const ConfigureViewSettings = React.lazy(() =>
-	import('./settings/ConfigureViewSettings')
-)
-const PreferredLocationSetting = React.lazy(() =>
-	import('./settings/PreferredLocationSetting')
-)
-const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+
 
 export default function Settings({ match }) {
 	const { user } = useSelector((state) => state.auth)
@@ -49,6 +43,10 @@ export default function Settings({ match }) {
 				return <ConfigureViewSettings />
 			case 'locations-settings':
 				return <PreferredLocationSetting />
+			case 'unique-habits':
+				return <UniqueHabitsSettings />
+			case 'location-keyword':
+				return <LocationKeywordSettings />
 			default:
 				return (
 					<Layout currentPage={'settings'}>
@@ -72,6 +70,20 @@ export default function Settings({ match }) {
 														<i className="btn-round-md bg-primary-gradiant text-white feather-user font-md me-3"></i>{' '}
 														<h4 className="fw-600 font-xsss mb-0 mt-0">
 															Account Settings
+														</h4>
+														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
+													</Link>
+												</li>
+												<li className="list-inline-item d-block border-bottom me-0 pl-0">
+													<Link
+														to="/settings/unique-habits"
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-blue-gradiant text-white font-md me-3">
+															<MdOutlineVolunteerActivism />
+														</i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0">
+															Unique Habits
 														</h4>
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>
@@ -115,6 +127,20 @@ export default function Settings({ match }) {
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>
 												</li>
+												<li className="list-inline-item d-block border-bottom me-0 pl-0">
+													<Link
+														to="/settings/location-keyword"
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-mini-gradiant text-white font-md me-3">
+															<MdMyLocation />
+														</i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0">
+															Location Keyword
+														</h4>
+														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
+													</Link>
+												</li>
 											</ul>
 
 											<div className="nav-caption fw-600 font-xsss text-grey-500 mb-2">
@@ -133,7 +159,7 @@ export default function Settings({ match }) {
 														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
 													</Link>
 												</li>
-												<li className="list-inline-item d-block  me-0 pl-0">
+												{/* <li className="list-inline-item d-block  me-0 pl-0">
 													<a
 														href="#mode"
 														className="pt-2 pb-2 d-flex align-items-center"
@@ -146,9 +172,8 @@ export default function Settings({ match }) {
 															defaultChecked={darkMode}
 															onChange={() => setDarkMode(!darkMode)}
 														/>
-														{/* <i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i> */}
 													</a>
-												</li>
+												</li> */}
 											</ul>
 										</div>
 									</div>

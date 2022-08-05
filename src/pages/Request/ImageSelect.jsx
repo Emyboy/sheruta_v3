@@ -3,7 +3,7 @@ import Global from '../../Global';
 
 export default React.memo(({ image, onFileChange,index, edit }) => {
   return (
-    <label for={`upload-${index}`} style={{ width: "140px" }} className="m-2">
+    <label for={`upload-${index}`} className="m-2 w-100">
       <span
         className="glyphicon glyphicon-folder-open"
         aria-hidden="true"

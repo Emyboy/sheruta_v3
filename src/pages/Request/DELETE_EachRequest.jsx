@@ -138,7 +138,7 @@
 //                                 <b>Budget:</b>
 //                             </span>
 //                             <span className="ml-2 text-white">
-//                                 ₦ {window.formatedPrice.format(val.budget)}
+//                                 ₦ {window.formattedPrice.format(val.budget)}
 //                             </span>
 //                         </div>
 //                         <div className="d-flex">

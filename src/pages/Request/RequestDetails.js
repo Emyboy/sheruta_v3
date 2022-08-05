@@ -42,7 +42,7 @@ export default function RequestDetails(props) {
 	})
 	const auth = useSelector((state) => state.auth)
 	const deactivated = request?.users_permissions_user.deactivated
-	const tabs = ['More Details', 'Comments']
+	const tabs = ['More Details', 'Questions']
 	const [currentTab, setCurrentTab] = useState(tabs[0])
 
 	useEffect(() => {
@@ -187,7 +187,7 @@ export default function RequestDetails(props) {
 														<Link
 															to={`/user/${request?.users_permissions_user.username}`}
 														>
-															<a className="text-dark d-flex">
+															<a className="align-items-center text-dark d-flex">
 																{deactivated
 																	? '..... .....'
 																	: request?.users_permissions_user
@@ -195,7 +195,8 @@ export default function RequestDetails(props) {
 																<VerifiedBadge
 																	user={request?.users_permissions_user}
 																	className={'ml-2'}
-																	size={'15'}
+																	size={20}
+																	without_text
 																/>
 															</a>
 														</Link>
@@ -268,7 +269,7 @@ export default function RequestDetails(props) {
 														)}
 													</div>
 												</div>
-												<div className="description mt-3">
+												<div className="description mt-3 mb-4">
 													<p
 														style={{
 															fontSize: '18px',
@@ -277,21 +278,17 @@ export default function RequestDetails(props) {
 														{request?.body}
 													</p>
 												</div>
-												<div className="d-flex justify-content-between align-items-center">
+												<div className="d-flex justify-content-between align-items-center mb-3">
 													<div>
-														<small className="mb-0">
-															{request?.is_searching
-																? 'My Budget:'
-																: 'Total Rent:'}
-														</small>
-														<h4 className="mt-1 fw-700">
-															₦ {window.formatedPrice.format(request?.budget)}{' '}
+														<small className="mb-0">Total Rent</small>
+														<h2 className="mt-1 fw-700">
+															₦ {window.formattedPrice.format(request?.budget)}{' '}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
 																	request?.payment_type.name}
 															</small>
-														</h4>
+														</h2>
 													</div>
 													<div
 														className="d-flex"
@@ -314,14 +311,10 @@ export default function RequestDetails(props) {
 												{request?.rent_per_room && (
 													<div className="d-flex justify-content-between align-items-center">
 														<div>
-															<small className="mb-0">
-																{request?.is_searching
-																	? 'Min Budget:'
-																	: 'Rent Per Room:'}
-															</small>
-															<h5 className="mt-1 fw-700">
+															<small className="mb-0">Rent Per Room</small>
+															<h2 className="mt-1 fw-700">
 																₦{' '}
-																{window.formatedPrice.format(
+																{window.formattedPrice.format(
 																	request?.rent_per_room
 																)}{' '}
 																<small className="text-muted">
@@ -329,7 +322,7 @@ export default function RequestDetails(props) {
 																	{request?.payment_type &&
 																		request?.payment_type.name}
 																</small>
-															</h5>
+															</h2>
 														</div>
 													</div>
 												)}
@@ -442,7 +435,7 @@ export default function RequestDetails(props) {
 																		Rent
 																	</strong>
 																	<br />₦{' '}
-																	{window.formatedPrice.format(request?.budget)}
+																	{window.formattedPrice.format(request?.budget)}
 																</li>
 																{request?.rent_per_room && (
 																	<li className="col-6 col-md-3 mb-3">
@@ -450,7 +443,7 @@ export default function RequestDetails(props) {
 																			Per Room
 																		</strong>
 																		<br />₦{' '}
-																		{window.formatedPrice.format(
+																		{window.formattedPrice.format(
 																			request?.rent_per_room
 																		)}
 																	</li>

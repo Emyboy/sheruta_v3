@@ -8,15 +8,16 @@ import firebase from 'firebase'
 import { getUser } from '../../../redux/strapi_actions/auth.actions'
 import axios from 'axios'
 import { notifyEmy } from '../../../services/Sheruta'
+import Cookies from 'js-cookie'
 
 const UpdateAvatar = (props) => {
-	const { ended, standalone } = props
+	const { ended, standalone, setStep, step } = props
 	const [done, setDone] = useState(null)
 	const [blob, setBlob] = useState(null)
 	const [img, setImg] = useState(null)
 	const [uploading, setUploading] = useState(false)
 	const [progress, setProgress] = useState(0)
-	const { user, jwt } = props.auth.user
+	const { user } = props.auth.user
 
 	const reader = new FileReader()
 
@@ -65,7 +66,7 @@ const UpdateAvatar = (props) => {
 					avatar_url: imageUrl,
 				},
 				headers: {
-					Authorization: 'Bearer ' + jwt,
+					Authorization: 'Bearer ' + Cookies.get('token'),
 				},
 			}
 		)
@@ -73,8 +74,11 @@ const UpdateAvatar = (props) => {
 				props.getUser()
 				setUploading(false)
 				notification.success({ message: 'Image Updated' })
-				// if (ended) {
-				// 	ended(img)
+				if (ended) {
+					ended(img)
+				}
+				// if(setStep && step){
+				// 	setStep(step + 1)
 				// }
 				if (props.setStep) props.setStep(props.step + 1)
 			})
@@ -130,7 +134,7 @@ const UpdateAvatar = (props) => {
 
   useEffect(() => {
     if (img && blob && ended) {
-			ended(img)
+			// ended(img)
 		}
   },[blob,img])
 

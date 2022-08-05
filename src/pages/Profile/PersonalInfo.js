@@ -5,7 +5,7 @@ import { connect, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Btn from '../../components/Btn/Btn'
 
-const PersonalInfo = ({ userData }) => {
+const PersonalInfo = ({ userData, hasProfileLink }) => {
 	const { user } = useSelector(state => state.auth);
 	const [info, setInfo] = useState(null)
 	const [locations, setLocations] = useState([])
@@ -20,7 +20,6 @@ const PersonalInfo = ({ userData }) => {
 				{}
 			)
 				.then((res) => {
-					console.log("INFO --", res);
 					setInfo(res.data[0])
 				})
 				.catch((err) => {
@@ -30,7 +29,8 @@ const PersonalInfo = ({ userData }) => {
 					})
 				})
 		}
-	}, [userData])
+	}, [userData]);
+	
 	useEffect(() => {
 		if (userData) {
 			axios(
@@ -76,8 +76,8 @@ const PersonalInfo = ({ userData }) => {
 							: 'has a flat to share'}
 					</h5>
 					<div className="row">
-						<div className="col-lg-6">
-							<div className="gen-metabox">
+						<div className="col-lg-6 mb-4">
+							<div className="gen-metabox pb-4">
 								<span className="fw-bold">
 									<i className="fa fa-briefcase mr-1"></i>Work Industry
 								</span>
@@ -90,8 +90,8 @@ const PersonalInfo = ({ userData }) => {
 								<p>{info?.gender && info?.gender.toUpperCase()}</p>
 							</div>
 						</div>
-						<div className="col-lg-6">
-							<div className="gen-metabox">
+						<div className="col-lg-6 mb-4">
+							<div className="gen-metabox pb-4">
 								<span className="fw-bold">
 									<i className="fa fa-user-md"></i> Occupation
 								</span>
@@ -99,7 +99,10 @@ const PersonalInfo = ({ userData }) => {
 							</div>
 							<div className="gen-metabox">
 								<span className="fw-bold">
-									<i className="fa fa-map-marker-alt"></i> {info?.looking_for ? "Preferred Locations":"Apartment Area (s)"}
+									<i className="fa fa-map-marker-alt"></i>{' '}
+									{info?.looking_for
+										? 'Preferred Locations'
+										: 'Apartment Area (s)'}
 								</span>
 								<p>
 									{locations.map((val, i) => {
@@ -116,8 +119,8 @@ const PersonalInfo = ({ userData }) => {
 						{paiedInfo ? (
 							<div className="container-fluid">
 								<div className="row">
-									<div className="col-lg-6">
-										<div className="gen-metabox">
+									<div className="col-lg-6 mb-4">
+										<div className="gen-metabox pb-4">
 											<span className="fw-bold">
 												<i className="fa fa-map"></i> Local Government
 											</span>
@@ -130,7 +133,7 @@ const PersonalInfo = ({ userData }) => {
 											<p>{info?.looking_for_age_range}</p>
 										</div>
 									</div>
-									<div className="col-lg-6">
+									<div className="col-lg-6 mb-4">
 										<div className="gen-metabox no-margin">
 											<span className="fw-bold">
 												<i className="fa fa-pray"></i> Religion
@@ -138,7 +141,7 @@ const PersonalInfo = ({ userData }) => {
 											<p className="badged">{info?.religion}</p>
 										</div>
 									</div>
-									<div className="col-lg-6">
+									<div className="col-lg-6 mb-4">
 										<div className="gen-metabox no-margin">
 											<span className="fw-bold">
 												<i className="fa fa-map"></i> State Of Origin
@@ -146,7 +149,7 @@ const PersonalInfo = ({ userData }) => {
 											<p className="badged">{info?.stateOfOrigin}</p>
 										</div>
 									</div>
-									<div className="col-lg-6">
+									<div className="col-lg-6 mb-4">
 										<div className="gen-metabox no-margin">
 											<span className="fw-bold">
 												<i className="fa fa-pen"></i> About
@@ -158,6 +161,16 @@ const PersonalInfo = ({ userData }) => {
 							</div>
 						) : null}
 					</div>
+					{hasProfileLink && (
+						<div className="d-flex justify-content-center align-items-center mt-4">
+							<Link
+								className="btn bg-theme text-white"
+								to={`/user/${userData?.username}`}
+							>
+								View Profile
+							</Link>
+						</div>
+					)}
 				</div>
 			</div>
 		)

@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import { Modal } from 'antd'
-import LocationKeywordSelector from '../../LocationKeywordSelector/LocationKeywordSelector'
+import { Modal, notification } from 'antd'
+
+import { useSelector } from 'react-redux'
+import store from '../../../redux/store/store'
 
 export default function LocationKeywordAds() {
-	const [showLocationKeyword, setShowLocationKeyword] = useState(false)
+	
 
-	const handleSubmit = (data) => {
-        console.log('sending --', data)
-        //todo - Send the data to users personal info
-    }
+	
 
 	return (
 		<div
@@ -20,28 +19,18 @@ export default function LocationKeywordAds() {
 				// filter: ""
 			}}
 		>
-			<Modal closable={false} visible={showLocationKeyword} footer={null}>
-				<LocationKeywordSelector
-					done={(e) => {
-						handleSubmit({
-							location_keyword: e.locationKeyword?.value,
-							state: e.state_id?.value,
-						})
-					}}
-				/>
-				<div className="text-center">
-					<button onClick={() => {
-                        setShowLocationKeyword(false)
-                    }} className="btn text-danger mt-4">Close</button>
-				</div>
-			</Modal>
 			<div className="card-body">
 				<h1 className="fw-bold">Turn on location notification</h1>
 				<h4>
-					Get notified when there is a flat/flatmate in your area of choice.
+					Get notified when there is a flat or flatmate in your area of choice.
 				</h4>
 				<button
-					onClick={() => setShowLocationKeyword(true)}
+					onClick={() => store.dispatch({
+						type: 'SET_VIEW_STATE',
+						payload: {
+							collect_location_keyword: true
+						}
+					})}
 					className="btn bg-current text-white fw-bold mt-3"
 				>
 					Turn On

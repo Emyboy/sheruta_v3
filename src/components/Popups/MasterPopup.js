@@ -8,27 +8,34 @@ import {
 	getRealTimeStuffs,
 	getOtherStuffs,
 	getAllViewOptions,
+	getAllLocationKeyword,
+	getLocationKeyWordsByState,
+	getAllUniqueHabits,
+	getAllUserInspection,
 } from '../../redux/strapi_actions/view.action'
 import {
 	suggestThemForMe,
 } from '../../redux/strapi_actions/alice.actions'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
-import NotificationPopup from './NotificationPopup'
+// import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
 import { logout, setUserOnline } from '../../redux/strapi_actions/auth.actions'
 import { useInterval } from 'react-use'
 // import Global from '../../Global'
-// import { getAllRecentProperties } from '../../redux/strapi_actions/properties.action'
 // import LocationUpdatePopup from './LocationUpdatePopup'
 // import UserService from '../../services/UserService'
 import GetMoreInfoPopup from './GetMoreInfoPopup'
 import Cookies from 'js-cookie'
-import axios from 'axios'
+// import axios from 'axios'
+import LocationKeywordPopup from './LocationKeywordPopup'
+import RobotMessage from '../Ads/RobotMessage/RobotMessage'
+import Global from '../../Global'
+import PaymentPopup from './PaymentPopup'
 
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
-	const { services, categories, personal_info } = useSelector(
+	const { personal_info } = useSelector(
 		(state) => state.view
 	)
 	const dispatch = useDispatch()
@@ -40,7 +47,7 @@ const MasterPopup = (props) => {
 	}, [])
 
 	const getForViews = () => {
-		getAllViewOptions()
+		dispatch(getAllViewOptions())
 	}
 
 	const getForRealTime = () => {
@@ -57,6 +64,7 @@ const MasterPopup = (props) => {
 
 	// FOR ONE TIME
 	useEffect(() => {
+		dispatch(getAllLocationKeyword(1))
 		// const _token = Cookies.get('token')
 		if (localStorage.getItem('token')) {
 			localStorage.clear()
@@ -70,10 +78,11 @@ const MasterPopup = (props) => {
 			getForRealTime()
 			getForUser()
 			dispatch(getOtherStuffs())
+			dispatch(getAllUserInspection(user?.user?.id))
 		}
-
 		getForViews()
-	}, [])
+		dispatch(getAllUniqueHabits())
+	}, [dispatch])
 
 	useEffect(() => {
 		if (user) {
@@ -109,7 +118,7 @@ const MasterPopup = (props) => {
 	if (user) {
 		return (
 			<>
-				<ConfigViewPopup />
+				{!Cookies.get('agent') && <ConfigViewPopup />}
 				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
 				{/* {Global.PLATFORM !== 'iPhone' && (
@@ -118,7 +127,10 @@ const MasterPopup = (props) => {
 						<LocationUpdatePopup />
 					</>
 				)} */}
+				<PaymentPopup />
 				<AppUpdatePopup />
+				<LocationKeywordPopup />
+				{Global.isMobile && <RobotMessage />}
 			</>
 		)
 	} else {

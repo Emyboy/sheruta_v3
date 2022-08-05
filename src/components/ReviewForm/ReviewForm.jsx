@@ -14,9 +14,15 @@ export default function ReviewForm({
 	edit,
 	reviewData,
 	withRating,
+	isReply,
+	replyTo,
+	onCancel,
+	autoFocus,
 }) {
 	const { user } = useSelector((state) => state.auth)
-	const [review, setReview] = useState(reviewData ? reviewData?.review : null)
+	const [review, setReview] = useState(
+		isReply ? null : reviewData ? reviewData?.review : null
+	)
 	const [rating, setRating] = useState(reviewData ? reviewData?.rating : 1)
 	const [loading, setLoading] = useState(false)
 
@@ -53,6 +59,10 @@ export default function ReviewForm({
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		console.log('SENDING -- ', {
+			isReply,
+			reviewData,
+		})
 		try {
 			setLoading(true)
 			const res = await axios(process.env.REACT_APP_API_URL + `/reviews`, {
@@ -61,10 +71,15 @@ export default function ReviewForm({
 					Authorization: `Bearer ${Cookies.get('token')}`,
 				},
 				data: {
-					review,
+					review: `${
+						isReply
+							? `<a href="/user/${replyTo?.username}" style="color: #887eff">@${replyTo?.username}</a> ${review}`
+							: review
+					}`,
 					user: user?.user?.id,
 					rating,
 					request,
+					reply: isReply ? reviewData?.id : null,
 				},
 			})
 			if (res?.data) {
@@ -86,7 +101,13 @@ export default function ReviewForm({
 	}
 	return (
 		<form onSubmit={edit ? updateReviews : handleSubmit}>
-			<div className="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3 mt-3">
+			<div
+				className={`card w-100  rounded-xxl border-0 ${
+					!isReply
+						? 'shadow-xss ps-4 pt-4 pe-4 pb-3'
+						: 'bg-grey pl-2 pr-2 pt-2 pb-3'
+				} mb-3 mt-3`}
+			>
 				<div className="card-body p-0">
 					<a className=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center">
 						<i className="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>
@@ -125,24 +146,30 @@ export default function ReviewForm({
 						value={review}
 						onChange={(e) => setReview(e.target.value)}
 						maxLength={'240'}
+						autoFocus={autoFocus}
 					></textarea>
 				</div>
 				<div className="d-flex">
 					<button
-						disabled={(withRating && rating === 0) || (!withRating && !review) || loading}
+						disabled={
+							(withRating && rating === 0) ||
+							(!withRating && !review) ||
+							loading
+						}
 						className="btn text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xssss fw-700 ls-lg text-white"
 					>
 						{edit ? 'Save' : 'Submit'}
 					</button>
-					{edit && (
-						<button
-							type={'button'}
-							className="btn text-danger ml-3"
-							onClick={() => done()}
-						>
-							Cancel
-						</button>
-					)}
+					{edit ||
+						(onCancel && (
+							<button
+								type={'button'}
+								className="btn text-danger ml-3"
+								onClick={() => (onCancel ? onCancel() : done())}
+							>
+								Cancel
+							</button>
+						))}
 				</div>
 			</div>
 		</form>

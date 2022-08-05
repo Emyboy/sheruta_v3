@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react'
 import { FaFemale, FaMale } from 'react-icons/fa'
 import { connect } from 'react-redux';
@@ -26,7 +27,7 @@ export default connect(
         setLoading(true)
         axios(process.env.REACT_APP_API_URL + "/personal-infos" + `${hasInfo ? `/${hasInfo.id}` : ``}`, {
             headers: {
-                Authorization: `Bearer ${auth.user.jwt}`
+                Authorization: `Bearer ${Cookies.get('token')}`
             },
             method: hasInfo ? 'PUT' : 'POST',
             data: {

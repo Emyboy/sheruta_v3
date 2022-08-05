@@ -2,7 +2,7 @@
 :root {
     --theme-color: #00ba74;
     --accent-color: #252c41;
-    --theme-light: #00ba732e;
+    --theme-light: #e1fff3;
     --ant-primary-color: #00ba74;
     --antd-wave-shadow-color: #00ba74;
 }
@@ -12,6 +12,16 @@ body {
 #root {
     height: 100vh auto;
 }
+
+.markup a {
+    color: rgb(131, 137, 255) !important;
+    font-weight: bold;
+}
+
+h4,h5,h6 {
+    font-weight: 400 !important;
+}
+
 html,
 body,
 #root,
@@ -28,6 +38,9 @@ body,
 }
 .bg-accent {
     background-color: var(--accent-color) !important;
+}
+.border-accent {
+    border-color: var(--accent-color) !important;
 }
 .bg-theme {
     background-color: var(--theme-color) !important;
@@ -101,6 +114,9 @@ div.scrollmenu div {
 .border-gray {
     border: 1px solid #cac8c8 !important;
 }
+.bg-danger {
+    background-color: rgb(255, 79, 79) !important;
+}
 svg {
     margin: 0 !important;
     display: initial !important;
@@ -116,15 +132,14 @@ svg {
     background-color: var(--theme-color) !important;
     border-color: var(--theme-color) !important;
 }
-.modal {
-    /* background: rgba(15, 26, 9, 0.433); */
+/* .modal {
     backdrop-filter: blur(10.5px);
     -webkit-backdrop-filter: blur(10.5px);
 }
 .modal-content, .modal-body {
     border-radius: 15px !important;
-}
-@media only screen and (max-width: 1370px) {
+} */
+@media only screen and (max-width: 1199px) {
     .mobile-only {
         visibility: visible !important;
     }

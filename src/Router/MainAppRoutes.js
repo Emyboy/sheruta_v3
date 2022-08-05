@@ -12,9 +12,14 @@ import '../social_assets/css/feather.css'
 import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
+
+import '../assets/css/style.css';
+import '../assets/css/boxicons.min.css';
+import '../assets/css/responsive.css';
+
+import 'react-quill/dist/quill.snow.css'
+import 'react-image-viewer-zoom/dist/style.css' 
 import '../App.css'
-
-
 
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -37,21 +42,28 @@ import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
-import Agent from '../pages/Agent/Agent'
 import AgentPending from '../pages/Agent/AgentPending';
 import AgentSignup from '../pages/Agent/AgentSignup'
+import Inspection from '../pages/Inspection/Inspection'
+import BookInspection from '../pages/Inspection/BookInspection'
+import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
+import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
-
+import Home from '../pages/HomeNew/HomeNew';
+import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding';
+import Properties from '../pages/Properties/Properties'
+import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
+import Discussion from '../pages/Discussion/Discussion'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
-const Properties = React.lazy(() => import('../pages/Properties/Properties'))
+// const Properties = React.lazy(() => import('../pages/Properties/Properties'))
 const Settings = React.lazy(() => import('../pages/Settings/Settings'))
-const Home = React.lazy(() => import('../pages/Home/Home'))
-const PropertyDetails = React.lazy(() =>
-	import('../pages/PropertyDetails/PropertyDetails')
-)
+// const Home = React.lazy(() => import('../pages/Home/Home'))
+// const PropertyDetails = React.lazy(() =>
+// 	import('../pages/PropertyDetails/PropertyDetails')
+// )
 const CreateRequest = React.lazy(() => import('../pages/Request/CreateRequest'))
 const GetStarted = React.lazy(() => import('../pages/GetStarted/GetStarted'))
 const Login = React.lazy(() => import('../pages/Login/Login'))
@@ -72,8 +84,6 @@ const PasswordReset = React.lazy(() =>
 	import('../pages/ResetPassword/PasswordReset')
 )
 const WhatNext = React.lazy(() => import('../pages/GetStarted/Steps/WhatNext'))
-const AllRequests = React.lazy(() => import('../pages/Request/AllRequests'))
-const Request = React.lazy(() => import('../pages/Request/Request'))
 const Blog = React.lazy(() => import('../pages/Blog/Blog'))
 const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
@@ -113,19 +123,38 @@ function App() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/feeds" component={SocialHomePage} />
-							<Route exact path="/agents" component={Agent} />
+							<Route exact path="/agents" component={AgentLanding} />
 							<Route exact path="/our-rules" component={OurRules} />
 							<Route exact path="/agents/signup" component={AgentSignup} />
-							<Route exact path="/agents/pending/:agent_id" component={AgentPending} />
-							<Route exact path="/properties" component={Properties} />
+							<Route
+								exact
+								path="/agents/pending/:agent_id"
+								component={AgentPending}
+							/>
+							<Route exact path="/flats" component={Properties} />
+							<Route exact path="/discussion" component={Discussion} />
+							<Route exact path="/discussion/room/:room_id" component={Discussion} />
+							<Route exact path="/discussion/room/:room_id/:message_id" component={Discussion} />
+							{/* <Route path="/flats/for-share/:keyword_slug/:category_slug/:service_slug" component={Properties} />
+							<Route path="/flats/for-share/:keyword_slug/:category_slug" component={Properties} />
+							<Route path="/flats/for-share/:keyword_slug" component={Properties} /> */}
+							<Route path="/flats/for-share" component={Properties} />
 							<Route exact path="/how-it-works" component={HowItWorks} />
 							<Route exact path="/start" component={GetStarted} />
 							<Route exact path="/terms" component={Terms} />
 							<Route exact path="/blog" component={Blog} />
 							<Route exact path="/services" component={Services} />
 							<Route exact path="/join-paddy" component={JoinPaddy} />
-							<Route exact path="/join-paddy/create" component={CreateJoinPaddy} />
-							<Route exact path="/join-paddy/:uuid" component={JoinPaddyDetails} />
+							<Route
+								exact
+								path="/join-paddy/create"
+								component={CreateJoinPaddy}
+							/>
+							<Route
+								exact
+								path="/join-paddy/:uuid"
+								component={JoinPaddyDetails}
+							/>
 							<Route exact path="/services/:service" component={Services} />
 							<Route exact path="/messages" component={Messages} />
 							<Route exact path="/settings" component={Settings} />
@@ -142,19 +171,47 @@ function App() {
 							/>
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
+							<Route exact path="/inspections" component={Inspection} />
+							<Route
+								exact
+								path="/inspection/:inspection_id"
+								component={InspectionDetails}
+							/>
+							<Route
+								exact
+								path="/inspections/booking/:property_id"
+								component={BookInspection}
+							/>
+							<Route
+								exact
+								path="/inspection/invitation/:inspection_id"
+								component={InspectionInvitation}
+							/>
 							<Route exact path="/what-next" component={WhatNext} />
-							<Route exact path="/blog/category/:category_slug/:category_id" component={Blog} />
-							<Route exact path="/blog/:category/:uuid/:id" component={BlogDetails} />
+							{/* <Route
+								exact
+								path="/blog/category/:category_slug/:category_id"
+								component={Blog}
+							/> */}
+							<Route
+								exact
+								path="/blog/:slug/:id"
+								component={BlogDetails}
+							/>
 							<Route exact path="/start/:step" component={GetStarted} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/about" component={About} />
-							<Route exact path="/requests" component={Request} />
-							<Route exact path="/requests/edit/:request_id" component={CreateRequest} />
-							<Route exact path="/requests/all" component={AllRequests} />
-							<Route exact path="/user/:username" component={Profile2} />
 							<Route
 								exact
-								path="/property/:uid/:property_id"
+								path="/requests/edit/:request_id"
+								component={CreateRequest}
+							/>
+							<Route exact path="/user/:username" component={Profile2} />
+							<Route exact path="/flat/submit" component={CreateRequest} />
+
+							<Route
+								exact
+								path="/flat/:service/:category/:property_id"
 								component={PropertyDetails}
 							/>
 							<Route exact path="/signup" component={Signup} />
@@ -192,7 +249,6 @@ function App() {
 								path="/password/reset/u/:token/:resetPasswordToken"
 								component={PasswordReset}
 							/>
-							<Route exact path="/requests/create" component={CreateRequest} />
 							<Route component={PageNotFound} />
 							{/* 
 

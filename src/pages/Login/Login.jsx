@@ -54,20 +54,24 @@ const Login = (props) => {
 			.then((res) => {
 				const isVerified = res.data.user.confirmed
 				if (isVerified) {
-					notifyEmy({
-						heading: 'Just logged in',
-						user: res.data.user,
-						status: 'success',
-						log: res.data.user,
-					})
+					// notifyEmy({
+					// 	heading: 'Just logged in',
+					// 	user: res.data.user,
+					// 	status: 'success',
+					// 	log: res.data.user,
+					// })
 					Cookies.set('token', res.data.jwt, { expires: 7 })
-					setState({ ...state, loading: false })
 					notification.success({ message: 'Welcome' });
 					props.setAuthState({
-						user: res.data,
+						user: {
+							user: res.data?.user
+						},
 					})
 					updateLastSeen();
-					window.location.reload()
+					// setTimeout(() => {
+					// 	window.location.reload()
+					// }, 1000);
+					setState({ ...state, loading: false })
 				} else {
 					setState({ ...state, notVerified: true, userData: res.data })
 				}
@@ -149,7 +153,7 @@ const Login = (props) => {
 									)}
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<div className="form-group icon-input mb-3">
-											<i className="font-sm ti-email text-grey-500 pe-0"></i>
+											<i className="font-sm ti-user text-grey-500 pe-0"></i>
 											<input
 												className="style2-input ps-5 form-control text-grey-900 font-xsss fw-600"
 												disabled={state.loading}

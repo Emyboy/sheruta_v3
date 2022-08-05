@@ -20,7 +20,19 @@ import {
 	getAllViewOptions,
 	getOtherStuffs,
 } from '../../redux/strapi_actions/view.action'
+import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
+import PersonalInfoService from '../../services/PersonalInfoService';
+import store from '../../redux/store/store'
+import Cookies from 'js-cookie'
+
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
+
+const testFunc = (e) => {
+	PersonalInfoService.updatePersonalInfo({
+		location_keyword: e?.locationKeyword?.value,
+		state: e?.state_id?.value,
+	})
+}
 
 const RenderStep = ({ props, step }) => {
 	// console.log('BUT RENDERED ---', { props, step })
@@ -28,7 +40,15 @@ const RenderStep = ({ props, step }) => {
 		<LookingForStatus {...props} />,
 		//   <Gender {...props} />,
 		<LookingForGender {...props} />,
-		<PrefaredLocations {...props} />,
+		<LocationKeywordSelector done={e => {
+			testFunc(e)
+			PersonalInfoService.updatePersonalInfo({
+				location_keyword: e.locationKeyword,
+				state: e.state_id
+			});
+			props.setStep(props.step + 1)
+		}} />,
+		<PrefaredLocations {...props} heading={`Preferred location(s) in ${store.getState().view?.personal_info?.location_keyword?.name}`} />,
 		<ValidIdCard {...props} />,
 		<AgeRange {...props} />,
 		<UpdateAvatar {...props} />,
@@ -57,10 +77,10 @@ export const GetStarted = (props) => {
 	// };
 
 	useEffect(() => {
-		if (auth.user) {
+		if (auth.user && !personal_info) {
 			axios(process.env.REACT_APP_API_URL + `/personal-infos/me`, {
 				headers: {
-					Authorization: `Bearer ${props.auth.user.jwt}`,
+					Authorization: `Bearer ${Cookies.get('token')}`,
 				},
 			})
 				.then((res) => {

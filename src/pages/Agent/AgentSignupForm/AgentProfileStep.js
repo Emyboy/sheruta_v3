@@ -51,6 +51,7 @@ function AgentProfileStep({ done, data }) {
 		idFront,
 		idBack,
 		officeLocation,
+		inspection_fee
 	}
 	useEffect(() => {
 		// console.log('DATA --', data)
@@ -144,7 +145,7 @@ function AgentProfileStep({ done, data }) {
 					</div>
 				</div>
 
-				<div className="row">
+				{/* <div className="row">
 					<div className="col-lg-6 mb-3 ">
 						<div className="card mt-3 border-0">
 							<div className="card-body d-flex justify-content-between align-items-end p-0">
@@ -212,16 +213,7 @@ function AgentProfileStep({ done, data }) {
 						</div>
 					</div>
 
-					{/* <div className="col-lg-12 mb-3">
-						<label className="mont-font fw-600 font-xsss">Description</label>
-						<textarea
-							className="form-control mb-0 p-3 h100 bg-greylight lh-16"
-							rows="5"
-							placeholder="Write your message..."
-							spellcheck="false"
-						></textarea>
-					</div> */}
-				</div>
+				</div> */}
 			</form>
 		</div>
 	)

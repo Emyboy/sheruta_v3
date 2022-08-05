@@ -1,25 +1,33 @@
 import { notification } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
 import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
 import MessageService from '../../services/MessageService'
 import EachConversation from './EachConversation'
+import { BsFillChatDotsFill } from 'react-icons/bs'
 
 export default function MessageList() {
 	const [conversations, setConversation] = useState([])
 	const { payment_plan } = useSelector((state) => state.view)
+	const [loading, setLoading] = useState(true)
 
 	const getConversation = async () => {
 		try {
+			setLoading(true)
 			const convs = await MessageService.getUserConversations()
 			setConversation(convs)
+			if (convs) {
+				setLoading(false)
+			}
 		} catch (error) {
+			setLoading(false)
 			notification.error({ message: 'Error loading messages' })
 		}
 	}
 
 	useEffect(() => {
-		getConversation()
+		// getConversation()
 	}, [])
 
 	return (
@@ -43,26 +51,26 @@ export default function MessageList() {
                     </form> */}
 					</div>
 				</div>
-				{payment_plan ? (
 					<ul style={{ paddingBottom: '15vh' }}>
 						{conversations.length === 0 && (
 							<li className="text-center mt-5">
-								<h1>Your conversations will be listed here.</h1>
+								<BsFillChatDotsFill size={80} className="mb-3" />
+								<h3>Your conversations will be listed here.</h3>
 								<h6>
-									Click on the message button on someone's profile to start a
+									Click on the message button on someone's <br /> profile to start a
 									conversation.
 								</h6>
+								{loading && (
+									<div className="text-center">
+										<Dots />
+									</div>
+								)}
 							</li>
 						)}
 						{conversations.map((val, i) => {
 							return <EachConversation key={'conv-' + i} conv={val} />
 						})}
 					</ul>
-				) : (
-					<div>
-						<PaymentAlert message={"Can't view messages"} />
-					</div>
-				)}
 			</div>
 		</div>
 	)

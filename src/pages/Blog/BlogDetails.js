@@ -7,6 +7,10 @@ import styled from 'styled-components'
 import renderHTML from 'react-render-html'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
+import BlogRight from './BlogRight'
+import Sticky from 'react-sticky-el'
+import Global from '../../Global'
+import { Link } from 'react-router-dom'
 
 const Body = styled.div`
 	a {
@@ -55,15 +59,15 @@ export default function BlogDetails(props) {
 			.catch((err) => {
 				setNotFound(true)
 			})
-	}, [])
+	}, [id])
 
 	if (notFound) {
 		return <PageNotFound />
 	}
 	if (data) {
-		console.log(data)
+        console.log(data)
 		return (
-			<Layout>
+			<Layout full_screen>
 				<div
 					className="container"
 					style={{
@@ -71,67 +75,86 @@ export default function BlogDetails(props) {
 						paddingBottom: user ? '' : '15vh',
 					}}
 				>
-					<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
-						<div className="card-body p-0 d-flex">
-							<figure className="avatar me-3">
-								<img
-									src={data?.author?.avatar_url}
-									alt="image"
-									className="shadow-sm rounded-circle w45"
-								/>
-							</figure>
-							<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-								{data?.author?.first_name} {data?.author?.last_name}
-								<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-									{moment(data?.created_at).fromNow()}
-								</span>
-							</h4>
-						</div>
-						<div className="card-body d-block p-0 mb-3">
-							<div className="row ps-2 pe-2">
-								<div className="col-sm-12 p-1">
-									<img
-										src={data?.image_url}
-										className="rounded-3 w-100"
-										alt="image"
-										style={{ borderRadius: '10px' }}
-									/>
+					<div className="row">
+						<div className="col-lg-8 col-md-12">
+							<div className="blog-details-desc bg-white ">
+								<div className="article-content">
+									<div class="article-image">
+										<img src={data?.image_url} className="w-100" alt="image" />
+									</div>
+									<ul class="entry-meta">
+										<li>
+											<img src={data?.author?.avatar_url} alt="image" />
+											<Link to={`/user/${data?.author?.username}`}>
+												<h4 className="fw-bold ml-2l">
+													{data?.author?.first_name} {data?.author?.last_name}
+												</h4>
+											</Link>
+										</li>
+										<li>
+											<i class="bx bx-calendar"></i>
+											{moment(data?.created_at).fromNow()}
+										</li>
+									</ul>
+									<h3>{data?.title}</h3>
+									<>{renderHTML(data?.body)}</>
+									<div class="article-footer">
+										<div class="article-tags">
+											<h3>Related Tags</h3>
+
+											<ul class="tags">
+												{data?.sub_categories?.map((val, i) => {
+													return (
+														<li key={`sub-cat-${i}`}>
+															<a className="ml-1">{val?.name}</a>
+														</li>
+													)
+												})}
+											</ul>
+										</div>
+
+										{/* <div class="article-share">
+											<h3>Social Share</h3>
+
+											<ul class="social">
+												<li>
+													<a href="https://www.facebook.com/" target="_blank">
+														<i class="bx bxl-facebook"></i>
+													</a>
+												</li>
+												<li>
+													<a
+														href="https://twitter.com/?lang=en"
+														target="_blank"
+													>
+														<i class="bx bxl-twitter"></i>
+													</a>
+												</li>
+												<li>
+													<a href="https://www.instagram.com/" target="_blank">
+														<i class="bx bxl-instagram"></i>
+													</a>
+												</li>
+												<li>
+													<a href="https://www.pinterest.com/" target="_blank">
+														<i class="bx bxl-pinterest-alt"></i>
+													</a>
+												</li>
+											</ul>
+										</div> */}
+									</div>
 								</div>
 							</div>
 						</div>
-						<h1 className="fw-bold font-xxl">{data?.title}</h1>
-						<div className="card-body p-0 me-lg-5">
-							<Body className="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">
-								{renderHTML(data?.body)}
-							</Body>
-						</div>
-
-						<div className="card-body d-flex p-0">
-							{/* <a
-							href="#"
-							className="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2"
-						>
-							<i className="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i>{' '}
-							<i className="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>
-							2.8K Like
-						</a>
-						
-						<a
-							href="#"
-							className="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"
-						>
-							<i className="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i>
-							<span className="d-none-xss">22 Comment</span>
-						</a> */}
-
-							{/* <a
-							href="#"
-							className="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"
-						>
-							<i className="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i>
-							<span className="d-none-xs">Share</span>
-						</a> */}
-						</div>
+						{!Global.isMobile && (
+							<div className="col-lg-4 col-md-12">
+								<Sticky stickyStyle={{ marginTop: user ? '14vh' : '5vh' }}>
+									<div className="widget-area">
+										<BlogRight />
+									</div>
+								</Sticky>
+							</div>
+						)}
 					</div>
 				</div>
 			</Layout>

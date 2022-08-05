@@ -1,18 +1,23 @@
 import React from 'react'
 import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
-import { IoPricetagsOutline, IoWarningOutline } from 'react-icons/io5'
-import { RiUserSearchLine } from 'react-icons/ri'
-import { BsHash } from 'react-icons/bs'
+import { IoWarningOutline } from 'react-icons/io5'
+import { RiUserSearchLine, RiHome4Fill } from 'react-icons/ri'
+import { BsHash, BsHouseDoor, BsFillChatSquareFill } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
 import { MdElectricalServices, MdWorkOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { IoIosPeople } from 'react-icons/io'
+import { FaTag } from 'react-icons/fa'
+import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
+import { AiOutlineCalendar } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 
 export default function SideNav({ show }) {
+	const { personal_info } = useSelector((state) => state.view)
+	const { user } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const size = 25
 	return (
@@ -25,26 +30,73 @@ export default function SideNav({ show }) {
 						</div>
 						<ul className="mb-1 top-content">
 							<li className="logo d-none d-xl-block d-lg-block"></li>
-							<li>
-								<Link to="/start" className="nav-content-bttn open-font">
-									<i className=" btn-round-md bg-blue-gradiant me-3">
-										<BiRocket size={size} />
-									</i>
-									<span>Get Started</span>
-								</Link>
-							</li>
-							<li>
+							{!user?.user?.is_verified && (
+								<li>
+									<Link to="/start" className="nav-content-bttn open-font">
+										<i className=" btn-round-md bg-blue-gradiant me-3">
+											<BiRocket size={size} />
+										</i>
+										<span>Get Started</span>
+									</Link>
+								</li>
+							)}
+
+							{/* <li>
 								<Link to="/requests" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-red-gradiant me-3">
 										<BiCommentDetail size={size} />
 									</i>
 									<span>Requests</span>
 								</Link>
+							</li> */}
+
+							<li>
+								<Link
+									to={`${
+										// personal_info?.location_keyword
+										// 	? `/discussion/room/${personal_info?.location_keyword?.id}`
+										// 	: 
+											`/discussion`
+									}`}
+									className="nav-content-bttn open-font"
+								>
+									<i className="btn-round-md bg-mini-gradiant me-3">
+										<BsFillChatSquareFill size={size} />
+									</i>
+									<span>Discussions</span>
+								</Link>
 							</li>
+							<li>
+								<Link
+									to={
+										personal_info && personal_info?.location_keyword
+											? `/flats/?location=${personal_info?.location_keyword?.slug}`
+											: '/flats'
+									}
+									className="nav-content-bttn open-font"
+								>
+									<i className="btn-round-md bg-gold-gradiant me-3">
+										<RiHome4Fill size={size} />
+									</i>
+									<span>Properties</span>
+								</Link>
+							</li>
+							<li>
+								<Link to="/inspections" className="nav-content-bttn open-font">
+									<i className="btn-round-md bg-current me-3">
+										<IoCalendarNumberSharp size={size} />
+									</i>
+									<span>Inspections</span>
+									{/* <span className="circle-count bg-danger font-xssss mt-0">
+										3
+									</span> */}
+								</Link>
+							</li>
+
 							<li>
 								<Link to="/pricing" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-gold-gradiant me-3">
-										<IoPricetagsOutline size={size} />
+										<FaTag size={size} />
 									</i>
 									<span>Pricing</span>
 								</Link>
@@ -52,32 +104,11 @@ export default function SideNav({ show }) {
 							<li>
 								<Link to="/services" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-mini-gradiant me-3">
-										<MdElectricalServices size={size} />
+										<IoBagCheck size={size} />
 									</i>
 									<span>Services</span>
 								</Link>
 							</li>
-							{/* <li>
-								<Link to="/properties" className="nav-content-bttn open-font">
-									<i className="btn-round-md bg-primary-gradiant me-3">
-										<BsHouseDoor size={size} />
-									</i>
-									<span>Properties</span>
-								</Link>
-							</li> */}
-							{process.env.NODE_ENV === 'development' && (
-								<li>
-									<Link to="/join-paddy" className="nav-content-bttn open-font">
-										<i className=" btn-round-md bg-red-gradiant me-3">
-											<IoIosPeople size={size} />
-										</i>
-										<span>Join Paddy</span>
-										<span className="circle-count bg-success font-xssss mt-0">
-											NEW
-										</span>
-									</Link>
-								</li>
-							)}
 						</ul>
 					</div>
 
@@ -125,15 +156,14 @@ export default function SideNav({ show }) {
 									<span>How It Works</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link to="/about" className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">
 										<MdWorkOutline />
 									</i>
 									<span>About Us</span>
-									{/* <span className="circle-count bg-warning mt-1">584</span> */}
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to="/terms" className="nav-content-bttn open-font">
 									<i className="font-xl text-current me-3">
@@ -175,7 +205,10 @@ export default function SideNav({ show }) {
 							<li>
 								<a
 									className="nav-content-bttn open-font h-auto pt-2 pb-2"
-									onClick={() => dispatch(logout())}
+									onClick={() => {
+										dispatch(logout())
+										window.location.reload()
+									}}
 								>
 									<i className="font-sm feather-power me-3 text-grey-500"></i>
 									<span>Logout</span>

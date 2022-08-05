@@ -10,9 +10,10 @@ import { notifyEmy } from '../../services/Sheruta'
 import end_sarz from '../../assets/img/end_sarz.jpeg'
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 import Global from '../../Global';
+import Cookies from 'js-cookie'
 const Layout = React.lazy(() => import("../../components/Layout/Layout"))
 
-const formatedPrice = new Intl.NumberFormat('en-NG')
+const formattedPrice = new Intl.NumberFormat('en-NG')
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -59,7 +60,7 @@ export default connect(mapStateToProps)((props) => {
 		axios(process.env.REACT_APP_API_URL + '/transactions', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${props.auth.user.jwt}`,
+				Authorization: `Bearer ${Cookies.get('token')}`,
 			},
 			data: {
 				...reference,
@@ -221,12 +222,12 @@ export default connect(mapStateToProps)((props) => {
 										<div className="pricing-value">
 											{val.discount_price ? (
 												<h5 className="mb-0 line-through  text-danger">
-													{formatedPrice.format(formatPrice(val.price))}
+													{formattedPrice.format(formatPrice(val.price))}
 												</h5>
 											) : null}
 											<h1 className="pr-value display-3">
 												<b>
-													{formatedPrice.format(
+													{formattedPrice.format(
 														val.discount_price
 															? formatPrice(val.discount_price)
 															: formatPrice(val.price)

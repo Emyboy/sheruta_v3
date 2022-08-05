@@ -165,7 +165,7 @@ export default function PersonalInfoSettings() {
 
 								<div className="col-lg-12">
 									<a
-										href="#"
+										href="#c"
 										className="bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block"
 									>
 										Save

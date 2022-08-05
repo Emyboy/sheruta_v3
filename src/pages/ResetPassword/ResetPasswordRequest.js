@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form'
 
@@ -53,9 +53,17 @@ export const ResetPasswordRequest = (props) => {
         }
     }
 
+    useEffect(() => {
+        if(state.errorMessage){
+            setTimeout(() => {
+                setState({ errorMessage: null })
+            }, 5000);
+        }
+    }, [state.errorMessage])
+
     if (state.sent) {
         return <Layout>
-            <div >
+            <div style={{ marginTop: '20vh'}} >
                 <div className="animate__animated animate__fadeIn modal-dialog modal-dialog-centered login-pop-form" role="document">
                     <div className="modal-content" id="registermodal">
                         {/* <span className="mod-close" data-dismiss="modal" aria-hidden="true"><i className="ti-close"></i></span> */}

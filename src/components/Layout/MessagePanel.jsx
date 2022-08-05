@@ -9,7 +9,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function MessagePanel({ show, togglePanel }) {
 	const dispatch = useDispatch()
-	const { conversations, payment_plan } = useSelector((state) => state.view)
+	const { conversations } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
 	const { accepted_suggestions } = useSelector((state) => state.alice)
 
@@ -25,7 +25,7 @@ export default function MessagePanel({ show, togglePanel }) {
 			className={`right-chat nav-wrap mt-2 right-scroll-bar ${
 				show && 'active-sidebar'
 			}`}
-			style={{ zIndex: 5 }}
+			style={{ zIndex: 11 }}
 		>
 			<div className="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 				<div className="section full pe-3 ps-4 pt-4 position-relative _feed-body">
@@ -83,6 +83,7 @@ export default function MessagePanel({ show, togglePanel }) {
 											<li
 												className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center"
 												onClick={togglePanel}
+												key={`accepted-uu-${i}`}
 											>
 												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
 													<LazyLoadImage

@@ -32,7 +32,7 @@ export default function Match() {
 	// }, [])
 	if (!user) {
 		return <Redirect to="/login" />
-	}else if(user && user?.user?.deactivated){
+	} else if (user && user?.user?.deactivated) {
 		return <Redirect to="/settings/deactivate-account" />
 	}
 
@@ -43,7 +43,7 @@ export default function Match() {
 					<div className="col-sm-12 col-lg-7 ">
 						<Tabs defaultActiveKey="1" onChange={callback}>
 							<TabPane tab={`Suggested (${user_suggestions.length})`} key="1">
-									<MatchList list={user_suggestions} />
+								<MatchList list={user_suggestions} />
 							</TabPane>
 							<TabPane
 								tab={`Accepted (${accepted_suggestions.length})`}

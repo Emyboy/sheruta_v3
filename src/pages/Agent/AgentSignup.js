@@ -10,8 +10,9 @@ import { getUser } from '../../redux/strapi_actions/auth.actions'
 
 
 export default function AgentSignup() {
+	localStorage.setItem('after_login', "/agent/signup")
 	const { user } = useSelector((state) => state.auth)
-	const [weMove, setWeMove] = useState(false)
+	// const [weMove, setWeMove] = useState(false)
 	const dispatch = useDispatch()
 
 	const updateBudget = async () => {
@@ -45,9 +46,9 @@ export default function AgentSignup() {
 				process.env.REACT_APP_API_URL +
 					`/agents/?users_permissions_user=${user?.user?.id}`
 			)
-			if (res?.data && res?.data?.length > 0) {
-				setWeMove(true)
-			}
+			// if (res?.data && res?.data?.length > 0) {
+			// 	setWeMove(true)
+			// }
 		})()
 	}, [])
 
@@ -56,7 +57,7 @@ export default function AgentSignup() {
 	// }
 
 	if (!user) {
-		localStorage.setItem('after_login', '/agents')
+		localStorage.setItem('after_login', '/agents/signup')
 		return <Redirect to="/signup" />
 	}
 	return (
