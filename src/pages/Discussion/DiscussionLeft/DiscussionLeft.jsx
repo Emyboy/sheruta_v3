@@ -6,14 +6,12 @@ import moment from 'moment'
 import { Redirect, useParams } from 'react-router'
 import axios from 'axios'
 
-export default function DiscussionLeft() {
+export default React.memo(function DiscussionLeft() {
 	const { location_keywords } = useSelector((state) => state.view)
 	const { room_id } = useParams()
 	const { user } = useSelector((state) => state.auth)
 
 	const [list] = useState(location_keywords.filter((x) => x.has_group))
-
-	
 
 	if (!user) {
 		return <Redirect to={'/login'} />
@@ -43,4 +41,4 @@ export default function DiscussionLeft() {
 			</div>
 		</div>
 	)
-}
+})

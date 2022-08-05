@@ -121,11 +121,13 @@ export default function DiscussionChatList({ newMessage }) {
 				)
 			})}
 
-			<EachDiscussionNotification
-				notification={`dolorum explicabo aperiam tempora sed quo ut
+			{process.env.NODE_ENV !== 'production' && (
+				<EachDiscussionNotification
+					notification={`dolorum explicabo aperiam tempora sed quo ut
 							quisquam! Voluptate illum placeat inventore aliquam odio omnis
 							aspernatur debitis libero `}
-			/>
+				/>
+			)}
 			<div
 				style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }}
 				id="chat-end"
