@@ -114,7 +114,7 @@ const MasterPopup = (props) => {
 			Cookies.set('has_nin', false)
 		}
 		if(personal_info && personal_info?.location_keyword){
-			dispatch(getAllLocationKeyword(personal_info?.location_keyword?.id))
+			dispatch(getAllLocationKeyword(personal_info?.state?.id))
 		}else {
 			dispatch(getAllLocationKeyword(1))
 		}

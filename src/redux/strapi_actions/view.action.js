@@ -375,10 +375,10 @@ export const getLocationKeyWordsByState = (state_id) => async (dispatch) => {
 	}
 }
 
-export const getAllLocationKeyword = () => async (dispatch) => {
+export const getAllLocationKeyword = (state) => async (dispatch) => {
 	try {
 		const res = await axios(
-			process.env.REACT_APP_API_URL + `/location-keywords`
+			process.env.REACT_APP_API_URL + `/location-keywords/?state=${state || 1}`
 		)
 		dispatch({
 			type: 'SET_VIEW_STATE',
