@@ -64,7 +64,7 @@ const MasterPopup = (props) => {
 
 	// FOR ONE TIME
 	useEffect(() => {
-		dispatch(getAllLocationKeyword(1))
+		
 		// const _token = Cookies.get('token')
 		if (localStorage.getItem('token')) {
 			localStorage.clear()
@@ -112,6 +112,11 @@ const MasterPopup = (props) => {
 			Cookies.set('has_nin', true, { expires: 7})
 		}else {
 			Cookies.set('has_nin', false)
+		}
+		if(personal_info && personal_info?.location_keyword){
+			dispatch(getAllLocationKeyword(personal_info?.location_keyword?.id))
+		}else {
+			dispatch(getAllLocationKeyword(1))
 		}
 	}, [personal_info])
 
