@@ -79,7 +79,10 @@ export default function DiscussionChatList({ newMessage }) {
 					process.env.REACT_APP_API_URL +
 						`/messages/?location_keyword=${room_id}&id_gt=${
 							messages[messages.length - 1]?.id
-						}&_sort=created_at:ASC`
+						}&_sort=created_at:ASC`,
+						{
+							headers: `Bearer ${Cookies.get('token')}`
+						}
 				)
 				if (res.data.length > 0) {
 					if (messages.includes('break')) {
