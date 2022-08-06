@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Global from '../../../Global'
 import SearchBox from './SearchBox'
 
@@ -105,7 +106,16 @@ export default function HomeHero() {
 
 						<div className="tab_content">
 							<div className="tabs_item">
-								<SearchBox />
+								{/* <SearchBox /> */}
+								<Link
+									className="btn btn-lg bg-theme text-white shadow"
+									to={`/signup`}
+									onClick={() =>
+										localStorage.setItem('after_login', '/discussion')
+									}
+								>
+									Get Started
+								</Link>
 							</div>
 
 							<div className="tabs_item">
@@ -131,7 +141,6 @@ export default function HomeHero() {
 															<option>Sweden</option>
 															<option>Netherlands</option>
 														</select>
-														
 													</div>
 												</div>
 											</div>
@@ -155,12 +164,10 @@ export default function HomeHero() {
 															<option>Single Family</option>
 															<option>Store</option>
 														</select>
-														
 													</div>
 												</div>
 											</div>
 										</div>
-
 									</form>
 								</div>
 							</div>

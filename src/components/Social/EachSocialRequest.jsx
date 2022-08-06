@@ -93,10 +93,10 @@ function EachRequest({ data }) {
 						<div className="col-sm-5 d-flex justify-content-end align-items-center">
 							<div className="d-flex">
 								{data?.category ? (
-									<Tag color="cyan">{data?.category.name.toUpperCase()}</Tag>
+									<Tag color="cyan">{data?.category?.name?.toUpperCase()}</Tag>
 								) : null}
 								{data?.service ? (
-									<Tag color="volcano">{data?.service.name}</Tag>
+									<Tag color="volcano">{data?.service?.name}</Tag>
 								) : null}
 								{/* {data?.service ? (
 								<h6 className="d-inline-block p-2 text-light bg-theme fw-600 font-xssss rounded-3 me-2">

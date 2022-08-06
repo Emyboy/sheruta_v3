@@ -127,10 +127,10 @@ export default connect(mapStateToProps)(function EachRequest({
 						<div className="container">
 							<div className="mt-2 d-flex">
 								{data?.category ? (
-									<Tag color="volcano">{data?.category.name.toUpperCase()}</Tag>
+									<Tag color="volcano">{data?.category?.name?.toUpperCase()}</Tag>
 								) : null}
 								{data?.service ? (
-									<Tag color="cyan">{data?.service.name.toUpperCase()}</Tag>
+									<Tag color="cyan">{data?.service?.name?.toUpperCase()}</Tag>
 								) : null}
 							</div>
 						</div>

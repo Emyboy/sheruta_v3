@@ -19,7 +19,7 @@ export default function LocationKeywords() {
 				</div>
 
 				<div className="row justify-content-center">
-					{location_keywords?.map((val, i) => {
+					{location_keywords?.filter(x => x.has_group)?.map((val, i) => {
 						if(i > 2){
 							return null;
 						}
