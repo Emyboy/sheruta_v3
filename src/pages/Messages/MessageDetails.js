@@ -21,7 +21,7 @@ export default function MessageDetails({ conversation_id }) {
 	const [message, setMessage] = useState('')
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
-	const { payment_plan } = useSelector((state) => state.view)
+	const { payment_plan, app_details } = useSelector((state) => state.view)
 	const [conversation, setConversation] = useState(null)
 	const [otherUser, setOtherUser] = useState(null)
 	const [loading, setLoading] = useState(false)
@@ -229,15 +229,19 @@ export default function MessageDetails({ conversation_id }) {
 				</div>
 				<form
 					className="d-flex shadow-sm chat-form position-absolute bottom-0 w-100 left-0 bg-white z-index-1 p-3 theme-dark-bg "
-					onSubmit={!payment_plan ? (e) => {
-						e.preventDefault();
-						dispatch({
-							type: "SET_VIEW_STATE",
-							payload: {
-								showPaymentPopup: true
-							}
-						})
-					} : handleSubmit}
+					onSubmit={
+						!payment_plan && !app_details?.everything_free
+							? (e) => {
+									e.preventDefault()
+									dispatch({
+										type: 'SET_VIEW_STATE',
+										payload: {
+											showPaymentPopup: true,
+										},
+									})
+							  }
+							: handleSubmit
+					}
 				>
 					{/* <button className="bg-grey float-left">
 						<i className="ti-microphone text-white"></i>

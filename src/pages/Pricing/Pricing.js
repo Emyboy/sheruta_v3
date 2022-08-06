@@ -9,9 +9,9 @@ import { Modal } from 'react-bootstrap'
 import { notifyEmy } from '../../services/Sheruta'
 import end_sarz from '../../assets/img/end_sarz.jpeg'
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
-import Global from '../../Global';
+import Global from '../../Global'
 import Cookies from 'js-cookie'
-const Layout = React.lazy(() => import("../../components/Layout/Layout"))
+const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const formattedPrice = new Intl.NumberFormat('en-NG')
 
@@ -155,12 +155,12 @@ export default connect(mapStateToProps)((props) => {
 
 	const formatPrice = (price) => {
 		if (props.view?.personal_info) {
-			const looking = props.view?.personal_info?.looking_for;
-			if(looking === false){
-				return parseInt(price)+ 1000;
+			const looking = props.view?.personal_info?.looking_for
+			if (looking === false) {
+				return parseInt(price) + 1000
 			}
 		}
-		return price;
+		return price
 	}
 
 	return (
@@ -179,7 +179,9 @@ export default connect(mapStateToProps)((props) => {
 							<h2 className="mb-3">
 								<b>{state.message}</b>
 							</h2>
-							<Link to={localStorage.getItem('after_payment') || '/'}>
+							<Link
+								to={localStorage.getItem('after_payment') || '/'}
+							>
 								<button className="btn bg-theme text-black">Continue</button>
 							</Link>
 						</div>

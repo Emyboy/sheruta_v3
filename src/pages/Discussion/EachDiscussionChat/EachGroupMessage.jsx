@@ -114,7 +114,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 				</MessageBody>
 				<i>
 					<small className="text-grey-600">
-						{moment(data?.created_at).fromNow()} - #{data?.id}
+						{moment(data?.created_at).fromNow()}
 					</small>
 				</i>
 			</div>

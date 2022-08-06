@@ -4,12 +4,13 @@ import Global from '../../Global'
 import DiscussionCenter from './DiscussionCenter/DiscoussionCenter'
 import DiscussionLeft from './DiscussionLeft/DiscussionLeft'
 import DiscussionRight from './DiscussionRight/DiscussionRight'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { HiChatAlt2 } from 'react-icons/hi'
 import { notifyEmy } from '../../services/Sheruta'
 import { getLocationKeyWordsByState } from '../../redux/strapi_actions/view.action'
 
 export default function Discussion() {
+	localStorage.setItem("after_login", "/discussion")
 	const { location_keywords, personal_info } = useSelector((state) => state.view)
 	const { room_id } = useParams()
 	const dispatch = useDispatch()
@@ -47,9 +48,10 @@ export default function Discussion() {
 							) : Global.isMobile && !room_id ? (
 								<DiscussionLeft />
 							) : (
-								<div className="h-100 d-flex flex-column justify-content-center align-items-center">
+								<div className="h-100 d-flex flex-column justify-content-center align-items-center mt-4">
 									<HiChatAlt2 size={140} className="text-grey-300" />
 									<h3 className="text-grey-300">No Chat Selected</h3>
+									<Link to={'/feeds'}>Go To Feed</Link>
 								</div>
 							)}
 						</div>

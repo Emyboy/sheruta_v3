@@ -15,6 +15,7 @@ export default function DiscussionChatList({ newMessage }) {
 	const { room_id, message_id } = useParams()
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
+	const { location_keywords } = useSelector((state) => state.view)
 
 	const getRecentMessages = useCallback(
 		async (scroll) => {
@@ -80,9 +81,9 @@ export default function DiscussionChatList({ newMessage }) {
 						`/messages/?location_keyword=${room_id}&id_gt=${
 							messages[messages.length - 1]?.id
 						}&_sort=created_at:ASC`,
-						{
-							headers: `Bearer ${Cookies.get('token')}`
-						}
+					{
+						headers: `Bearer ${Cookies.get('token')}`,
+					}
 				)
 				if (res.data.length > 0) {
 					if (messages.includes('break')) {
@@ -124,13 +125,16 @@ export default function DiscussionChatList({ newMessage }) {
 				)
 			})}
 
-			{process.env.NODE_ENV !== 'production' && (
-				<EachDiscussionNotification
-					notification={`dolorum explicabo aperiam tempora sed quo ut
-							quisquam! Voluptate illum placeat inventore aliquam odio omnis
-							aspernatur debitis libero `}
-				/>
-			)}
+			<EachDiscussionNotification
+				notification={`<strong>Welcome to ${
+					location_keywords?.filter((x) => x?.id == room_id)[0]?.name
+				} chat room.</strong>
+<p class="text-grey-500 mb-3">Post your apartment and flatshare requests. You can also find users to team up with (Join paddy) & secure a space. </p>
+
+<blockquote>"Topics beyond ${
+					location_keywords?.filter((x) => x?.id == room_id)[0]?.name
+				} is not allowed."</blockquote>`}
+			/>
 			<div
 				style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }}
 				id="chat-end"
