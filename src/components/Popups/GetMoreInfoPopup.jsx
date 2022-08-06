@@ -85,7 +85,7 @@ export default function GetMoreInfoPopup() {
 												? `Budget ${
 														Global.currency
 												  } ${window.formattedPrice.format(budget)}`
-												: `Room Cost ${
+												: `Rent Per Room ${
 														Global.currency
 												  } ${window.formattedPrice.format(budget || 0)}`}
 										</label>

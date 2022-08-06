@@ -62,51 +62,66 @@ const VerifyEmail = (props) => {
 				className="animate__animated animate__fadeIn modal-dialog container mt-5 mb-5 login-pop-form"
 				role="document"
 			>
-				<div
-					className="modal-content"
-					id="sign-up-success"
-					style={{ marginTop: '30vh' }}
-				>
-					<div className="modal-body text-center">
-						<h4 className="modal-header-title" style={{ lineHeight: '60px' }}>
-							{state.heading}
-						</h4>
-						{state.display === 'loading' ? (
-							<div className="text-center">
-								<p className="text-center">Please Wait</p>
-								<div className="text-center">
-									<Spinner style={{ margin: 0 }} />
-								</div>
-							</div>
-						) : null}
-						{state.display === 'verified' ? (
-							<>
-								<div className="text-center">
-									{/* <i
+				<div className="container">
+					<div className="row justify-content-center">
+						<div className="col-lg-7 col-sm-12">
+							<div
+								className="card shadow-sm"
+								id="sign-up-success"
+								style={{ marginTop: '30vh' }}
+							>
+								<div className="modal-body text-center">
+									<h4
+										className="modal-header-title"
+										style={{ lineHeight: '60px' }}
+									>
+										{state.heading}
+									</h4>
+									{state.display === 'loading' ? (
+										<div className="text-center">
+											<p className="text-center">Please Wait</p>
+											<div className="text-center">
+												<Spinner style={{ margin: 0 }} />
+											</div>
+										</div>
+									) : null}
+									{state.display === 'verified' ? (
+										<>
+											<div className="text-center">
+												{/* <i
 										className="ti ti-check text-success mb-2"
 										style={{ fontSize: '100px' }}
 									></i> */}
-									<BsCheckCircleFill className='text-success' style={{ fontSize: '100px' }} />
-								</div>
-								<Link to="/login" className="form-group mt-3">
-									<Btn text="Login" className="full-width mt-2" />
-								</Link>
-							</>
-						) : null}
-						{state.display === 'error' ? (
-							<>
-								<div className="text-center">
-									{/* <i
+												<BsCheckCircleFill
+													className="text-success"
+													style={{ fontSize: '100px' }}
+												/>
+											</div>
+											<Link to="/login" className="form-group mt-3">
+												<Btn text="Login" className="full-width mt-2" />
+											</Link>
+										</>
+									) : null}
+									{state.display === 'error' ? (
+										<>
+											<div className="text-center">
+												{/* <i
 										className="fa fa-times text-danger mb-2"
 										style={{ fontSize: '100px' }}
 									></i> */}
-									<MdOutlineError className='text-danger' style={{ fontSize: '100px' }} />
+												<MdOutlineError
+													className="text-danger"
+													style={{ fontSize: '100px' }}
+												/>
+											</div>
+											<Link to="/login" className="form-group mt-3">
+												<Btn text="Login" className="full-width mt-2" />
+											</Link>
+										</>
+									) : null}
 								</div>
-								<Link to="/login" className="form-group mt-3">
-									<Btn text="Login" className="full-width mt-2" />
-								</Link>
-							</>
-						) : null}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
