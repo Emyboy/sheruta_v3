@@ -337,6 +337,10 @@ const CraeteRequest = (props) => {
 		setImageFiles({ ...imageFiles, [`img${i}`]: file })
 	}
 
+	if(personal_info && personal_info?.is_searching){
+		return <Redirect to={`/discussion`} />
+	}
+
 	if (!auth?.user) {
 		return <Redirect to="/signup" />
 	}
