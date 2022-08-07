@@ -22,7 +22,7 @@ const BadgeCount = ({ count }) => {
 }
 
 export default function FooterNav({ pageName }) {
-	const { notifications } = useSelector((state) => state.view)
+	const { notifications, personal_info } = useSelector((state) => state.view)
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
 	const iconSize = 25
@@ -62,7 +62,7 @@ export default function FooterNav({ pageName }) {
 					/>
 				</Link>
 				<Link
-					to={'/flat/submit'}
+					to={personal_info?.looking_for ? `/flat/request` : '/flat/submit'}
 					className="position-relative nav-content-bttn"
 					data-tab="chats"
 				>

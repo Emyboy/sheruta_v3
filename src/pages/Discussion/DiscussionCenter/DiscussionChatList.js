@@ -115,7 +115,7 @@ export default function DiscussionChatList({ newMessage }) {
 			// 	getRecentMessages(messages.length === 0)
 			// }, 15000)
 		}
-	}, 20000)
+	}, 50000)
 
 
 	return (

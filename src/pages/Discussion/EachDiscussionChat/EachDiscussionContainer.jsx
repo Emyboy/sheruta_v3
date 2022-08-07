@@ -47,7 +47,7 @@ export default function EachDiscussionContainer({
 				)}
 				<InComingChat
 					outgoing={outgoing}
-					className={`rounded p-2 ${
+					className={`rounded shadow-sm border p-2 ${
 						isNew ? 'animate__bounceInUp animate__animated ' : ''
 					}`}
 					style={{

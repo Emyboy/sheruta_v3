@@ -31,7 +31,7 @@ export default function EachDiscussionEdit({ onCancel, message, done }) {
 
 	return (
 		<Modal visible onCancel={onCancel} footer={null}>
-			<h4 className="m-0 fw-600">Edit Message</h4>
+			<h4 className="fw-600">Edit Message</h4>
 			<from className="mt-4" onSubmit={saveChanges}>
 				<TextArea
 					className="form-control"

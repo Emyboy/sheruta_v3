@@ -84,6 +84,7 @@ const Login = (props) => {
 						errorMessage: err.response
 							? err.response.data.data[0].messages[0].message
 							: 'Server Error',
+							data
 					},
 					status: 'error',
 				})

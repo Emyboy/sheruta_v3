@@ -70,7 +70,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 
 	const _user = user?.user
 	return (
-		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new}>
+		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new} message={data}>
 			<div className="d-flex align-items-center justify-content-between">
 				<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
 				<EachDiscussionOptions
@@ -85,7 +85,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 			</MessageBody>
 			<i>
 				<small className="text-grey-600">
-					{moment(data?.created_at).fromNow()}
+					{moment(data?.created_at).fromNow()} {process.env.NODE_ENV !== 'production' && data?.id}
 				</small>
 			</i>
 		</EachDiscussionContainer>

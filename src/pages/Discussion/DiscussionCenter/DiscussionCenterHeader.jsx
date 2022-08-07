@@ -38,7 +38,7 @@ export default function DiscussionCenterHeader() {
 								if (i < 9) {
 									return val?.users_permissions_user?.first_name+" "
 								}
-							})} and others`.slice(0, Global.isMobile ? 30 : 70)}
+							})} and others`.slice(0, Global.isMobile ? 25 : 70)}
 						</i>
 					</small>
 				</div>
