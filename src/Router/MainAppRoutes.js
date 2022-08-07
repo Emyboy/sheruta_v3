@@ -55,6 +55,7 @@ import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding';
 import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
+import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -208,6 +209,7 @@ function App() {
 							/>
 							<Route exact path="/user/:username" component={Profile2} />
 							<Route exact path="/flat/submit" component={CreateRequest} />
+							<Route exact path="/flat/request" component={CreateLookingForRequest} />
 
 							<Route
 								exact

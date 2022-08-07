@@ -59,12 +59,12 @@ const VerifyEmail = (props) => {
 	return (
 		<Layout>
 			<div
-				className="animate__animated animate__fadeIn modal-dialog container mt-5 mb-5 login-pop-form"
+				className="animate__animated animate__fadeIn  container mt-5 mb-5"
 				role="document"
 			>
 				<div className="container">
 					<div className="row justify-content-center">
-						<div className="col-lg-7 col-sm-12">
+						<div className="col-md-7 col-sm-12">
 							<div
 								className="card shadow-sm"
 								id="sign-up-success"

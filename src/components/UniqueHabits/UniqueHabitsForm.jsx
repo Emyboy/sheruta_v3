@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAuthPersonalInfo } from '../../redux/strapi_actions/view.action'
+import { getAllUniqueHabits, getAuthPersonalInfo } from '../../redux/strapi_actions/view.action'
 import PersonalInfoService from '../../services/PersonalInfoService'
 import Select from 'react-select'
 import { notification } from 'antd'
 import { BsCircle, BsCheckCircle } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 export default function UniqueHabitsForm({ done }) {
 	const { unique_habits, personal_info } = useSelector((state) => state.view)
@@ -56,6 +57,9 @@ export default function UniqueHabitsForm({ done }) {
 	}, [personal_info])
 
 	useEffect(() => {
+		if(unique_habits?.length === 0){
+			dispatch(getAllUniqueHabits())
+		}
 		return dispatch(getAuthPersonalInfo())
 	},[])
 
@@ -93,24 +97,16 @@ export default function UniqueHabitsForm({ done }) {
 					)
 				})}
 			</div>
-			{/* <div className="mt-5">
-				<Select
-					onChange={(e) => {
-						const list = selected
-						setSelected([...list, e.value])
-					}}
-					options={option?.map((val) => ({ value: val?.id, label: val?.name }))}
-				/>
+			<div className="mt-5">
 				<div className="d-flex justify-content-center mt-4">
-					<button
-						disabled={selected.length === 0}
-						className="btn bg-accent text-white"
-						onClick={update}
+					{selected.length > 0 ? <Link
+						to={'/discussion'}
+						className="text-theme btn"
 					>
-						Save Changes
-					</button>
+						Continue
+					</Link> : null}
 				</div>
-			</div> */}
+			</div>
 		</div>
 	)
 }

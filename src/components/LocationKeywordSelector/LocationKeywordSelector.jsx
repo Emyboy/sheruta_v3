@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+	getAllUniqueHabits,
 	getAllViewOptions,
 	getAuthPersonalInfo,
 	getLocationKeyWordsByState,
@@ -30,7 +31,7 @@ export default function LocationKeywordSelector({
 		try {
 		
 			const res = await axios(
-				process.env.REACT_APP_API_URL + `/personal-infos/${personal_info?.id}`,
+				process.env.REACT_APP_API_URL + `/personal-infos/update/location-keyword/${personal_info?.id}`,
 				{
 					method: 'PUT',
 					data: {
@@ -46,6 +47,8 @@ export default function LocationKeywordSelector({
 			if (res.data) {
 				notification.success({ message: 'Location has been set' })
 				store.dispatch(getAuthPersonalInfo())
+				store.dispatch(getLocationKeyWordsByState(personal_info?.state?.id))
+				store.dispatch(getAllUniqueHabits())
 			}
 			// console.log('UPDATED --', res.data)
 		} catch (error) {

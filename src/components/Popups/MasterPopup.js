@@ -9,7 +9,7 @@ import {
 	getOtherStuffs,
 	getAllViewOptions,
 	getAllLocationKeyword,
-	getLocationKeyWordsByState,
+	// getLocationKeyWordsByState,
 	getAllUniqueHabits,
 	getAllUserInspection,
 } from '../../redux/strapi_actions/view.action'
@@ -97,7 +97,7 @@ const MasterPopup = (props) => {
 			dispatch(setUserOnline())
 			dispatch(getOtherStuffs())
 		}
-	}, 120000)
+	}, 550000)
 
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {
@@ -105,7 +105,7 @@ const MasterPopup = (props) => {
 			// dispatch(getOtherStuffs())
 			getForRealTime()
 		}
-	}, [30000])
+	}, [80000])
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {
@@ -113,7 +113,7 @@ const MasterPopup = (props) => {
 		}else {
 			Cookies.set('has_nin', false)
 		}
-		if(personal_info && personal_info?.location_keyword){
+		if(personal_info && personal_info?.location_keyword && personal_info?.state){
 			dispatch(getAllLocationKeyword(personal_info?.state?.id))
 		}else {
 			dispatch(getAllLocationKeyword(1))

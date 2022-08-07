@@ -61,16 +61,14 @@ export default React.memo(function EachGroupConversation({
 					</div>
 				</div>
 				<div className="pl-2 w-100">
-					<div
-						className="d-flex justify-content-between align-items-center"
-					>
-						<h4 className='m-0'>{name}</h4>
+					<div className="d-flex justify-content-between align-items-center">
+						<h4 className="m-0">{name}</h4>
 						<small>
 							<i>{lastSeen}</i>
 						</small>
 					</div>
 					<small className="text-muted">
-						<i>{`${preview}`.slice(0, 25)}...</i>
+						<i>{`${preview.replace(/<\/?[^>]+(>|$)/g, '')}`.slice(0, 25)}...</i>
 					</small>
 				</div>
 			</div>

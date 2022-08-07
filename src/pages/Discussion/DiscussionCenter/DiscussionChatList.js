@@ -10,12 +10,19 @@ import EachDiscussionNotification from '../DiscussionNotificatioin/EachDiscussio
 import EachGroupMessage from '../EachDiscussionChat/EachGroupMessage'
 import { useInterval } from 'react-use'
 import DiscussionBreakPoint from '../DiscussionBreakPoint'
+import { notifyEmy } from '../../../services/Sheruta'
 
 export default function DiscussionChatList({ newMessage }) {
 	const { room_id, message_id } = useParams()
 	const [messages, setMessages] = useState([])
 	const { user } = useSelector((state) => state.auth)
 	const { location_keywords } = useSelector((state) => state.view)
+
+	useEffect(() => {
+		notifyEmy({
+			heading: `Viewed ${location_keywords?.filter(x => x.id == room_id)[0]?.name} discussion room.`,
+		})
+	},[])
 
 	const getRecentMessages = useCallback(
 		async (scroll) => {
@@ -86,7 +93,7 @@ export default function DiscussionChatList({ newMessage }) {
 					}
 				)
 				if (res.data.length > 0) {
-					if (messages.includes('break')) {
+					if (messages?.includes('break')) {
 						setMessages([...messages, ...res.data])
 					} else {
 						setMessages([...messages, 'break', ...res.data])
@@ -110,19 +117,30 @@ export default function DiscussionChatList({ newMessage }) {
 		}
 	}, 20000)
 
+
 	return (
 		<div>
 			{messages.map((val, i) => {
 				if (typeof val === 'string') {
 					return <DiscussionBreakPoint />
 				}
-				return (
-					<EachGroupMessage
-						key={val.id}
-						outgoing={user?.user?.id == val?.from?.id}
-						data={val}
-					/>
-				)
+				if(!val?.is_notification){
+					return (
+						<EachGroupMessage
+							key={val.id}
+							outgoing={user?.user?.id == val?.from?.id}
+							data={val}
+						/>
+					)
+
+				}else {
+					return (
+						<EachDiscussionNotification
+							key={val?.id}
+							notification={val?.message_text}
+						/>
+					)
+				}
 			})}
 
 			<EachDiscussionNotification
@@ -133,7 +151,7 @@ export default function DiscussionChatList({ newMessage }) {
 
 <blockquote>"Topics beyond ${
 					location_keywords?.filter((x) => x?.id == room_id)[0]?.name
-				} is not allowed."</blockquote>`}
+				} are not allowed."</blockquote>`}
 			/>
 			<div
 				style={{ paddingTop: Global.isMobile ? '30vh' : '15vh' }}
