@@ -6,7 +6,7 @@ import DiscussionLeft from './DiscussionLeft/DiscussionLeft'
 import DiscussionRight from './DiscussionRight/DiscussionRight'
 import { Link, useParams } from 'react-router-dom'
 import { HiChatAlt2 } from 'react-icons/hi'
-import { notifyEmy } from '../../services/Sheruta'
+
 import { getLocationKeyWordsByState } from '../../redux/strapi_actions/view.action'
 
 export default function Discussion() {
@@ -16,13 +16,13 @@ export default function Discussion() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		notifyEmy({
-			heading: 'viewed the discussion page',
-		});
-		if(location_keywords?.length === 0){
+		
+		// console.log('THE STATE --', personal_info?.state)
+		if (location_keywords?.length === 0 && personal_info?.state?.id) {
+			console.log('UPDATING LOCATIONS --')
 			dispatch(getLocationKeyWordsByState(personal_info?.state?.id))
 		}
-	},[])
+	}, [personal_info?.state])
 
 	return (
 		<div

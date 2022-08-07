@@ -104,7 +104,7 @@ export const EachP2pDemoProperty = ({ data }) => {
 							data-lightbox="roadtrip"
 							className="position-relative d-block mb-3"
 						>
-							<p>{data?.body?.slice(0, 75)}...</p>
+							<p>{data?.body?.slice(0, 80)}...</p>
 						</Link>
 
 						<ul className="list">
