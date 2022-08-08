@@ -83,7 +83,7 @@ export default function CreateLookingForRequest() {
 				<div className="row justify-content-center">
 					<div className="col-sm-12 col-md-7">
 						{!personal_info?.location_keyword ? (
-							<div style={{ paddingTop: '15vh' }}>
+							<div style={{ paddingTop: '15vh', paddingBottom: '20vh' }}>
 								<LocationKeywordSelector />
 							</div>
 						) : (
