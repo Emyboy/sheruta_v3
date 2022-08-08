@@ -13,6 +13,8 @@ import {
 import { notification } from 'antd'
 import { useHistory } from 'react-router'
 import { notifyEmy } from '../../services/Sheruta'
+import { Link } from 'react-router-dom'
+import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
 
 export default function CreateLookingForRequest() {
 	const { categories, payment_types, personal_info } = useSelector(
@@ -62,7 +64,7 @@ export default function CreateLookingForRequest() {
 			notifyEmy({
 				heading: `Posted looking for Request to ${personal_info?.location_keyword?.name} discussion group`,
 				status: 'success',
-			});
+			})
 			history.push(
 				`/discussion/room/${personal_info?.location_keyword?.id}/${res.data?.id}`
 			)
@@ -80,56 +82,61 @@ export default function CreateLookingForRequest() {
 			<div className="container-fluid">
 				<div className="row justify-content-center">
 					<div className="col-sm-12 col-md-7">
-						<div
-							className="card p-4 shadow-sm rounded-xxl border-0"
-							style={{ marginTop: '15vh', marginBottom: '25vh' }}
-						>
-							<div className="contact-form">
-								<div className="title">
-									<h3>Post Your Flat Request</h3>
-									<p>
-										Looking for flat? Post you request and have like minded
-										people reach out to you.
-									</p>
-								</div>
+						{!personal_info?.location_keyword ? (
+							<div style={{ paddingTop: '15vh' }}>
+								<LocationKeywordSelector />
+							</div>
+						) : (
+							<div
+								className="card p-4 shadow-sm rounded-xxl border-0 animate__fadeIn animate__animated"
+								style={{ marginTop: '15vh', marginBottom: '25vh' }}
+							>
+								<div className="contact-form">
+									<div className="title">
+										<h3>Post Your Flat Request</h3>
+										<p>
+											Looking for flat? Post you request and have like minded
+											people reach out to you.
+										</p>
+									</div>
 
-								<form onSubmit={handleSubmit} noValidate="true">
-									<div className="row justify-content-center">
-										<div className="col-lg-6 col-md-6">
-											<div className="form-group">
-												<label>Type Of Flat</label>
-												<Select
-													options={categories.map((val) => ({
-														value: val,
-														label: val.name,
-													}))}
-													onChange={(e) => setCategory(e.value)}
-													placeholder="Self Con, Mini Flat etc"
-												/>
+									<form onSubmit={handleSubmit} noValidate="true">
+										<div className="row justify-content-center">
+											<div className="col-lg-6 col-md-6">
+												<div className="form-group">
+													<label>Type Of Flat</label>
+													<Select
+														options={categories.map((val) => ({
+															value: val,
+															label: val.name,
+														}))}
+														onChange={(e) => setCategory(e.value)}
+														placeholder="Self Con, Mini Flat etc"
+													/>
 
-												<div className="help-block with-errors"></div>
+													<div className="help-block with-errors"></div>
+												</div>
 											</div>
-										</div>
 
-										<div className="col-lg-6 col-md-6">
-											<div className="form-group">
-												<label>Payment Type</label>
-												<Select
-													options={payment_types.map((val) => ({
-														value: val,
-														label: val.name,
-													}))}
-													onChange={(e) => setPaymentType(e.value)}
-													placeholder="Monthly, Annually etc"
-												/>
-												<div className="help-block with-errors"></div>
+											<div className="col-lg-6 col-md-6">
+												<div className="form-group">
+													<label>Payment Type</label>
+													<Select
+														options={payment_types.map((val) => ({
+															value: val,
+															label: val.name,
+														}))}
+														onChange={(e) => setPaymentType(e.value)}
+														placeholder="Monthly, Annually etc"
+													/>
+													<div className="help-block with-errors"></div>
+												</div>
 											</div>
-										</div>
 
-										<div className="col-lg-12 col-md-12">
-											<div className="form-group">
-												<label>Message</label>
-												{/* <ReactQuill
+											<div className="col-lg-12 col-md-12">
+												<div className="form-group">
+													<label>Message</label>
+													{/* <ReactQuill
 													theme="snow"
 													value={message_text}
 													onChange={(e) => setMessageText(e)}
@@ -139,36 +146,42 @@ export default function CreateLookingForRequest() {
 													placeholder="I'm looking for a shared flat with AC, Wifi and Gas Cooker"
 													className="rounded-xxl"
 												/> */}
-												<textarea
-													className="form-control"
-													onChange={(e) => setMessageText(e.target.value)}
-													placeholder="I'm looking for a shared flat with AC, Wifi and Gas Cooker"
-												/>
-												<div className="help-block with-errors"></div>
+													<textarea
+														className="form-control"
+														onChange={(e) => setMessageText(e.target.value)}
+														placeholder="I'm looking for a shared flat with AC, Wifi and Gas Cooker"
+														rows={'6'}
+													/>
+													<div className="help-block with-errors"></div>
+												</div>
+											</div>
+
+											<div className="d-flex justify-content-between align-items-center">
+												<Link
+													to={`/discussion`}
+													className="fw-bold text-danger"
+												>
+													Cancel
+												</Link>
+												<button
+													disabled={
+														!category ||
+														!payment_type ||
+														!message_text ||
+														loading
+													}
+													type="submit"
+													className="default-btn  btn"
+													// style={{ pointerEvents: 'all', cursor: 'pointer' }}
+												>
+													Send Message <span></span>
+												</button>
 											</div>
 										</div>
-
-										<div className="col-lg-12 col-md-12 mt-4">
-											<button
-												disabled={
-													!category || !payment_type || !message_text || loading
-												}
-												type="submit"
-												className="default-btn  btn"
-												// style={{ pointerEvents: 'all', cursor: 'pointer' }}
-											>
-												Send Message <span></span>
-											</button>
-											<div
-												id="msgSubmit"
-												className="h3 text-center hidden"
-											></div>
-											<div className="clearfix"></div>
-										</div>
-									</div>
-								</form>
+									</form>
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				</div>
 			</div>
