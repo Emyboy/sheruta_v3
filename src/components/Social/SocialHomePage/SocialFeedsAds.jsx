@@ -5,12 +5,14 @@ import sub from '../../../assets/img/sub.jpeg'
 import { Link } from 'react-router-dom'
 import LocationKeywordAds from '../../Ads/RequestAds/LocationKeywordAds'
 import { useSelector } from 'react-redux'
+import RecentGroupMsgAds from '../../Ads/GroupAds/RecentGroupMsgAds'
 
 export default function SocialFeedsAds({ index }) {
 	const { personal_info } = useSelector((state) => state.view)
 	return (
 		<>
-			{index === 2 && <PostRequestAds />}
+			{index === 1 && <RecentGroupMsgAds />}
+			{index === 3 && <PostRequestAds />}
 			
 			{index === 6 && (
 				<img src={match} className="rounded-xxl pl-0 pr-0 mb-3 col-12" />
