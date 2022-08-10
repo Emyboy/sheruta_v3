@@ -26,7 +26,7 @@ export const PrefaredLocations = (props) => {
 		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${auth.user.jwt}`,
+				authorization: `Bearer ${Cookies.get('token')}`,
 			},
 			data: {
 				...data,
@@ -48,7 +48,7 @@ export const PrefaredLocations = (props) => {
 		axios(process.env.REACT_APP_API_URL + '/user-preferred-locations/' + id, {
 			method: 'DELETE',
 			headers: {
-				Authorization: `Bearer ${auth.user.jwt}`,
+				authorization: `Bearer ${Cookies.get('token')}`,
 			},
 		})
 			.then((res) => {
@@ -67,7 +67,7 @@ export const PrefaredLocations = (props) => {
 				auth.user.user.id,
 			{
 				headers: {
-					Authorization: `Bearer ${Cookies.get('token')}`,
+					authorization: `Bearer ${Cookies.get('token')}`,
 				},
 			}
 		)
