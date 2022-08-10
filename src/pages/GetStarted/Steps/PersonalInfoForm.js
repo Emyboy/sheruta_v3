@@ -46,10 +46,10 @@ const PersonalInfoForm = (props) => {
 			notification.error({ message: 'Please select your employment status' })
 			return
 		}
-		if (!personal_info?.work_industry) {
-			notification.error({ message: 'Please select your work industry' })
-			return
-		}
+		// if (!personal_info?.work_industry) {
+		// 	notification.error({ message: 'Please select your work industry' })
+		// 	return
+		// }
 		if (!personal_info?.religion) {
 			notification.error({ message: 'Please select your religion' })
 			return
