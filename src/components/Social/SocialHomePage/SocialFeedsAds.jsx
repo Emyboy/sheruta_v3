@@ -1,9 +1,6 @@
 import React from 'react'
 import PostRequestAds from '../../Ads/RequestAds/PostRequestAds'
 import match from '../../../assets/img/match.jpeg'
-import sub from '../../../assets/img/sub.jpeg'
-import { Link } from 'react-router-dom'
-import LocationKeywordAds from '../../Ads/RequestAds/LocationKeywordAds'
 import { useSelector } from 'react-redux'
 import RecentGroupMsgAds from '../../Ads/GroupAds/RecentGroupMsgAds'
 

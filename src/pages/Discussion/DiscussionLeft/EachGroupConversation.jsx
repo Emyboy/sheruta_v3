@@ -47,7 +47,7 @@ export default React.memo(function EachGroupConversation({
 	return (
 		<Link
 			to={clickURL}
-			className={`p-2 border-bottom w-100 list-group-item list-group-item-action ${
+			className={`p-2 border w-100 list-group-item list-group-item-action ${
 				active ? 'bg-theme-light border-1 border-success' : 'bg-white'
 			}`}
 		>
