@@ -67,7 +67,7 @@ export const PrefaredLocations = (props) => {
 				auth.user.user.id,
 			{
 				headers: {
-					Authorization: `Bearer ${Cookies.get('token')}`,
+					authorization: `Bearer ${Cookies.get('token')}`,
 				},
 			}
 		)
