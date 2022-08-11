@@ -33,7 +33,7 @@ import MasterPopup from '../components/Popups/MasterPopup'
 // import Home from '../pages/Home/Home'
 import Notifications from '../pages/Notifications/Notifications'
 import Match from '../pages/Match/Match'
-// import Profile2 from '../pages/Profile/Profile2'
+import Profile2 from '../pages/Profile/Profile2'
 // import RobotMessageContainer from '../components/Ads/RobotMessage/RobotMessageContainer'
 import Messages from '../pages/Messages/Messages'
 import MessageNew from '../pages/Messages/MessageNew'
@@ -208,7 +208,7 @@ function App() {
 								path="/requests/edit/:request_id"
 								component={CreateRequest}
 							/>
-							<Route exact path="/user/:username" component={NewProfile} />
+							<Route exact path="/user/:username" component={Profile2} />
 							<Route exact path="/flat/submit" component={CreateRequest} />
 							<Route exact path="/flat/request" component={CreateLookingForRequest} />
 

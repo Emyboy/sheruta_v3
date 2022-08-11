@@ -10,7 +10,7 @@ import Alice from '../../services/Alice'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import PersonalInfo from '../../pages/Profile/PersonalInfo'
 
-export default function EachUserListCard({ data }) {
+export default function EachUserListCard({ data, standalone }) {
 	const { user } = useSelector((state) => state.auth)
 	const { accepted_suggestions } = useSelector((state) => state.alice)
 	const [loading, setLoading] = useState(false)
@@ -50,7 +50,7 @@ export default function EachUserListCard({ data }) {
 		}
 	}
 
-	if (data?.deactivated || (user && data?.id === user?.user?.id)) {
+	if (data?.deactivated || (user && !standalone && data?.id === user?.user?.id)) {
 		return null
 	}
 
@@ -93,7 +93,7 @@ export default function EachUserListCard({ data }) {
 							{window.formattedPrice.format(data?.budget)}
 						</p>
 					</div>
-					{user && (
+					{user && user?.user?.id != data?.id ? (
 						<>
 							{accepted_suggestions.filter(
 								(x) => x?.users_permissions_user?.id === data?.id
@@ -113,6 +113,12 @@ export default function EachUserListCard({ data }) {
 								</a>
 							)}
 						</>
+					) : (
+						<a
+							className="text-center p-2 lh-20 w100 ms-1 ls-3 d-inline-block rounded-xl bg-white font-xsssss fw-700 ls-lg text-white"
+						>
+							{loading ? 'Loading...' : 'REMOVE'}
+						</a>
 					)}
 				</div>
 			</div>

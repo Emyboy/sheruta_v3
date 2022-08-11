@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { BsCalendarXFill } from 'react-icons/bs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import Layout from '../../components/Layout/Layout'
+import { getAllUserInspection } from '../../redux/strapi_actions/view.action'
 import { notifyEmy } from '../../services/Sheruta'
 import EachInspection from './EachInspection'
 
@@ -11,11 +12,13 @@ export default function Inspection() {
 	const { user } = useSelector((state) => state.auth)
 	const { inspections } = useSelector((state) => state?.view)
 
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		notifyEmy({
 			heading: 'Visited the inspection page',
 		})
+		dispatch(getAllUserInspection())
 	},[])
 
 	if (!user) {

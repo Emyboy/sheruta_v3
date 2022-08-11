@@ -9,7 +9,6 @@ import PropertiesService from '../../services/PropertiesServices'
 export default function AgentCard({ val }) {
 	const data = val.agent_profile
 	const agent = val?.agent
-	console.log('VAL --', val)
 	const [propertyCount, setPropertyCount] = useState(0)
 
 	const getPropertyCount = useCallback(async () => {

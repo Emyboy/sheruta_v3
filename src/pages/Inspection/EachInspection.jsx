@@ -80,9 +80,9 @@ export default function EachInspection({ data, index }) {
 						<div className="clearfix"></div>
 						<h4 className="fw-700 text-grey-700 font-xsss mt-3 mb-1">
 							{user?.user?.id === data?.owner?.id
-								? 'Your'
+								? `#${data?.id}`
 								: data?.owner?.first_name?.split(' ')[0] + "'s"}{' '}
-							Group
+							Inspection
 						</h4>
 						<p className="fw-500 font-xsssss text-grey-500 mt-0 mb-3">
 							@{data?.owner?.username}
@@ -125,43 +125,49 @@ export default function EachInspection({ data, index }) {
 					</span>
 					<div className="dd-block">
 						<ul className="memberlist mt-1 mb-2 ms-0 d-block">
-							{data?.guests?.map((val, i) => {
-								return (
-									<Tooltip title={val?.first_name}>
-										<li className="w20">
-											<Link
-												to={`/user/${val?.username}`}
-												style={{ width: '100px' }}
-											>
-												<img
-													src={val?.avatar_url}
-													alt="user"
-													className="w35 d-inline-block"
-													style={{
-														opacity: '1',
-														borderRadius: '50%',
-														width: '100px',
-													}}
-												/>
-											</Link>
-										</li>
-									</Tooltip>
-								)
-							})}
-							<li className="last-member">
-								<a
-									href="#"
-									className="bg-greylight fw-600 text-grey-500 font-xssss w35 ls-3 text-center"
-									style={{ height: '35px', lineHeight: '35px' }}
-								>
-									+2
-								</a>
-							</li>
-							<li className="ps-3 w-auto ms-1">
-								<a href="#" className="fw-600 text-grey-500 font-xssss">
-									Members
-								</a>
-							</li>
+							{!data?.is_alone && data?.guests?.length > 0 ? (
+								<>
+									{data?.guests?.map((val, i) => {
+										return (
+											<Tooltip title={val?.first_name}>
+												<li className="w20">
+													<Link
+														to={`/user/${val?.username}`}
+														style={{ width: '100px' }}
+													>
+														<img
+															src={val?.avatar_url}
+															alt="user"
+															className="w35 d-inline-block"
+															style={{
+																opacity: '1',
+																borderRadius: '50%',
+																width: '100px',
+															}}
+														/>
+													</Link>
+												</li>
+											</Tooltip>
+										)
+									})}
+									<li className="last-member">
+										<a
+											href="#"
+											className="bg-greylight fw-600 text-grey-500 font-xssss w35 ls-3 text-center"
+											style={{ height: '35px', lineHeight: '35px' }}
+										>
+											+2
+										</a>
+									</li>
+									<li className="ps-3 w-auto ms-1">
+										<a href="#" className="fw-600 text-grey-500 font-xssss">
+											Members
+										</a>
+									</li>
+								</>
+							) : (
+								<h1 className="mb-3 text-grey-200">. . .</h1>
+							)}
 						</ul>
 					</div>
 				</div>

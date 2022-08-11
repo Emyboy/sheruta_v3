@@ -196,7 +196,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					<ul className="overview-listx d-flex" style={{ overflowX: 'scroll' }}>
 						{data?.interested_parties?.map((val, i) => {
 							return (
-								<EachUserListCard standalone data={val} key={`user-${i}`} />
+								<EachUserListCard standalone data={val} key={`user-${i}`}  />
 							)
 						})}
 					</ul>
