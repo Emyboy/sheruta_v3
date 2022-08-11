@@ -44,7 +44,7 @@ export default function DiscussionChatList({ newMessage }) {
 				if (scroll) {
 					document
 						.getElementById(
-							res.data?.length > 7 ? `reply-${res.data[7 ]?.id}` : 'chat-end'
+							res.data?.length > 7 ? `reply-${res.data[res.data?.length - 4]?.id}` : 'chat-end'
 						)
 						.scrollIntoView()
 				}
