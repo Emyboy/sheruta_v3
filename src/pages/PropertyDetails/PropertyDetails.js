@@ -11,6 +11,7 @@ import SimilarProperties from './SimilarProperties'
 import Sticky from 'react-sticky-el'
 import PropertyDetailsLeft from './PropertyDetailsLeft'
 import { Helmet } from 'react-helmet'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default function PropertyDetails(props) {
 	localStorage.setItem('after_login', window.location.pathname)
@@ -27,6 +28,19 @@ export default function PropertyDetails(props) {
 			setData(location?.state)
 		}
 	}, [location?.state])
+
+	useEffect(() => {
+		if (data) {
+			notifyEmy({
+				heading: `Viewed a property in ${data?.location_keyword?.name} ${data?.state?.name}`,
+				log: {
+					title: data?.name,
+					location: data?.location,
+					agent: data?.agent?.name,
+				},
+			})
+		}
+	}, [data])
 
 	useEffect(async () => {
 		if (data) {

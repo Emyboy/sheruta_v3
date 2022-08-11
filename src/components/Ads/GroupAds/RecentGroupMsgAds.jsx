@@ -25,7 +25,6 @@ export default function RecentGroupMsgAds() {
 					},
 				}
 			)
-			console.log(res.data)
 			if (!res.data[0]?.is_notification) {
 				setMessage(res.data[0])
 			}

@@ -49,15 +49,15 @@ export default function Discussion() {
 								<DiscussionLeft />
 							) : (
 								<div className="h-100 d-flex flex-column justify-content-center align-items-center mt-4">
-									<HiChatAlt2 size={140} className="text-grey-300" />
-									<h3 className="text-grey-300">No Chat Selected</h3>
-									<Link to={'/feeds'}>Go To Feed</Link>
+									<HiChatAlt2 size={140} className="text-grey-400" />
+									<h3 className="text-grey-400">No Chat Selected</h3>
+									<Link className="text-grey-400" to={'/feeds'}>
+										Go To Feed
+									</Link>
 								</div>
 							)}
 						</div>
-						<div className="col-lg-3 p-0">
-							{room_id && <DiscussionRight />}
-						</div>
+						<div className="col-lg-3 p-0">{room_id && <DiscussionRight />}</div>
 					</div>
 				</div>
 			) : null}

@@ -15,6 +15,8 @@ import { BiSearchAlt } from 'react-icons/bi'
 import { useHistory, useLocation, useParams } from 'react-router'
 import PropertiesService from '../../services/PropertiesServices'
 import { Dots } from 'react-activity'
+import { getAllCategories } from '../../redux/strapi_actions/view.action'
+import { notifyEmy } from '../../services/Sheruta'
 
 const { Option } = Select
 
@@ -34,12 +36,12 @@ export default function Properties(props) {
 		(state) => state.properties
 	)
 	const [list, setList] = useState([])
-	const { location_keywords, categories, services } = useSelector(
+	const { location_keywords, services } = useSelector(
 		(state) => state.view
 	)
 	const history = useHistory()
 	const { user } = useSelector((state) => state.auth)
-	const { personal_info } = useSelector((state) => state.view)
+	const { personal_info, categories } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
 	const defaultTabs = ['Grid View', 'Map View', 'User View']
 	const [tab, setTab] = useState(defaultTabs[0])
@@ -91,10 +93,13 @@ export default function Properties(props) {
 	}, [getPropertiesViaULR, props?.location?.search, query])
 
 	useEffect(() => {
-		console.log('CHECK --', {
-			search: props?.location?.search,
+		notifyEmy({
+			heading: `Viewed the properties page`
 		})
-	}, [props?.location?.search, query])
+		if(categories.length === 0){
+			dispatch(getAllCategories())
+		}
+	}, [])
 
 	const seo_heading = `Available ${
 		query.get('type') ? query.get('type').replace('-', ' ') : 'Flats'
