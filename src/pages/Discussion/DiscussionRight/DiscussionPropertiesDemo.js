@@ -50,6 +50,8 @@ export default React.memo(function DiscussionPropertiesDemo() {
 										backgroundImage: `url(${val?.image_urls[0]})`,
 										height: '190px',
 										backgroundPosition: 'center',
+										backgroundSize: 'cover',
+										backgroundRepeat: 'no-repeat'
 									}}
 								>
 									<i
