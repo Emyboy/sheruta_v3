@@ -22,7 +22,7 @@ export default React.memo(function DiscussionLeft() {
 	return (
 		<div className="bg-grey-300">
 			<DiscussionLeftHeader />
-			<div className="list-group scroll-bar" style={{ maxHeight: '81vh' }}>
+			<div className="list-group scroll-bar pb-5" style={{ maxHeight: '81vh' }}>
 				{list.length > 0 ? (
 					list?.map((val) => {
 						return (

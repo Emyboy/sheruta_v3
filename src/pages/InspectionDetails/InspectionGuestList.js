@@ -8,14 +8,15 @@ import { useSelector } from 'react-redux'
 import Global from '../../Global'
 import PersonalInfo from '../Profile/PersonalInfo'
 import { Modal } from 'antd'
+import { Link } from 'react-router-dom'
 
 const EachGuest = ({ val, pending, group }) => {
 	const [loading, setLoading] = useState(false)
 	const { inspection_id } = useParams()
 	const [deleted, setDeleted] = useState(false)
-	const { user } = useSelector(state => state.auth);
+	const { user } = useSelector((state) => state.auth)
 
-	const [showInfo, setShowInfo] = useState(false);
+	const [showInfo, setShowInfo] = useState(false)
 
 	const removeGuest = async () => {
 		setLoading(true)
@@ -48,7 +49,11 @@ const EachGuest = ({ val, pending, group }) => {
 
 	return (
 		<li>
-			<Modal visible={showInfo} footer={null} onCancel={() => setShowInfo(false)}>
+			<Modal
+				visible={showInfo}
+				footer={null}
+				onCancel={() => setShowInfo(false)}
+			>
 				<PersonalInfo userData={val} />
 			</Modal>
 			<div className="rounded-3 bg-transparent pb-2 mb-2 border-bottom d-flex justify-content-between">
@@ -59,7 +64,10 @@ const EachGuest = ({ val, pending, group }) => {
 						className="w35 me-2"
 						style={{ borderRadius: '300px' }}
 					/>
-					<h6 className="font-xss text-grey-700 mb-0 mt-0 fw-700 link" onClick={() => setShowInfo(true)}>
+					<h6
+						className="font-xss text-grey-700 mb-0 mt-0 fw-700 link"
+						onClick={() => setShowInfo(true)}
+					>
 						{val?.first_name?.split(' ')[0]}{' '}
 						<span
 							className={`btn-round-xss ms-0 bg-${
@@ -74,9 +82,13 @@ const EachGuest = ({ val, pending, group }) => {
 				</div>
 				<div className="d-flex align-items-center">
 					{pending && (
-						<span className="mr-2 btn-round-sm bg-current text-white feather-phone font-xss ms-auto mt-2"></span>
+						<a href={`tel:${val?.phone_number}`}>
+							<span className="mr-2 btn-round-sm bg-current text-white feather-phone font-xss ms-auto mt-2"></span>
+						</a>
 					)}
-					<span className="mr-2 btn-round-sm bg-current text-white feather-mail font-xss ms-auto mt-2"></span>
+					<Link to={`/messages/new/${val?.id}`} className="pl-0 pr-0">
+						<span className="mr-2 btn-round-sm bg-current text-white feather-mail font-xss ms-auto mt-2"></span>
+					</Link>
 					{!pending && user?.user?.id == val?.id && (
 						<button
 							className="btn btn-sm bg-danger text-white font-xss ms-auto mt-2"
@@ -117,7 +129,9 @@ export default function InspectionGuestList({ data }) {
 					<h4 className="fw-bold text-grey-500 mb-3 mt-3">Pending Guests</h4>
 					<ul className="email-message">
 						{data?.pending_guests?.map((val, i) => {
-							return <EachGuest key={`guest-${i}`} val={val} pending group={data} />
+							return (
+								<EachGuest key={`guest-${i}`} val={val} pending group={data} />
+							)
 						})}
 					</ul>
 				</>

@@ -14,10 +14,10 @@ import AgentCard from '../../components/Agent/AgentCard'
 import { Redirect } from 'react-router'
 
 export default function InspectionDetails({ match }) {
-	const tabs = ['Members', 'Inspection', 'Property', 'Agent']
-	const [tab, setTab] = useState(tabs[0])
+	const [tabs, setTabs] = useState(['Inspection', 'Property', 'Agent']);
 	const { user } = useSelector((state) => state?.auth)
 	const [data, setData] = useState(null)
+	const [tab, setTab] = useState(tabs[0])
 
 	const getInspection = useCallback(async () => {
 		try {
@@ -31,6 +31,10 @@ export default function InspectionDetails({ match }) {
 				}
 			)
 			setData(res.data)
+			if (!res.data?.is_alone) {
+				setTabs(["Members",...tabs])
+			}
+
 		} catch (error) {
 			notification.error({ message: 'Error loading page' })
 			return Promise.reject(error)
@@ -46,7 +50,7 @@ export default function InspectionDetails({ match }) {
 	}
 
 	return (
-		<Layout showMessages>
+		<Layout>
 			{data && (
 				<div>
 					<div className="row justify-content-center">
@@ -71,7 +75,7 @@ export default function InspectionDetails({ match }) {
 									<Sticky
 										stickyStyle={{
 											zIndex: 10,
-											marginTop: Global.isMobile ? '6vh' : '11vh',
+											marginTop: Global.isMobile ? '8vh' : '11vh',
 										}}
 										stickyClassName="bg-white shadow rounded-xxxl animate__animated animate__bounceInDown"
 									>
@@ -103,8 +107,10 @@ export default function InspectionDetails({ match }) {
 											</ul>
 										</div>
 									</Sticky>
-									{tab === tabs[0] && <InspectionGuestList data={data} />}
-									{tab === tabs[1] && (
+									{tab === tabs[0] && !data?.is_alone && (
+										<InspectionGuestList data={data} />
+									)}
+									{tab === tabs[data?.is_alone ? 0 : 1] && (
 										<InspectionDate
 											data={data}
 											done={(e) => {
@@ -112,9 +118,11 @@ export default function InspectionDetails({ match }) {
 											}}
 										/>
 									)}
-									{tab === tabs[2] && <InspectionProperty data={data} />}
-									{tab === tabs[3] && (
-										<>
+									{tab === tabs[data?.is_alone ? 1 : 2] && (
+										<InspectionProperty data={data} />
+									)}
+									{tab === tabs[data?.is_alone ? 2 : 3] && (
+										<div className="container">
 											{!data?.date && !data?.time ? (
 												<div className="text-center pt-5 pb-5">
 													<h3 className="fw-bold text-grey-700">
@@ -128,9 +136,9 @@ export default function InspectionDetails({ match }) {
 											) : (
 												<AgentCard val={data} />
 											)}
-										</>
+										</div>
 									)}
-									{tab === tabs[4] && <InspectionChat />}
+									{tab === tabs[data?.is_alone ? 3 : 4] && <InspectionChat />}
 								</div>
 							</div>
 						</div>

@@ -51,7 +51,6 @@ export default function PropertyDetails(props) {
 	} else if (pageState === 'not found') {
 		return <PageNotFound />
 	} else if (data && pageState !== 'loading') {
-		console.log(data)
 		return (
 			<Layout full_screen>
 				<Helmet>

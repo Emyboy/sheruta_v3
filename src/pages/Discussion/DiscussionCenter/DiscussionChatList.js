@@ -1,7 +1,6 @@
 import { notification, Alert } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import moment from 'moment'
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
@@ -43,7 +42,11 @@ export default function DiscussionChatList({ newMessage }) {
 				// console.log('MSG --', res.data)
 				setMessages(res.data)
 				if (scroll) {
-					document.getElementById('chat-end').scrollIntoView()
+					document
+						.getElementById(
+							res.data?.length > 7 ? `reply-${res.data[7 ]?.id}` : 'chat-end'
+						)
+						.scrollIntoView()
 				}
 				if (message_id) {
 					setTimeout(() => {
@@ -83,20 +86,32 @@ export default function DiscussionChatList({ newMessage }) {
 	const getNewMessages = async () => {
 		if (messages.length > 0) {
 			try {
-				const res = await axios(
+				const data = await fetch(
 					process.env.REACT_APP_API_URL +
 						`/messages/?location_keyword=${room_id}&id_gt=${
-							messages[messages.length - 1]?.id
+							messages[messages?.length - 1]?.id
 						}&_sort=created_at:ASC`,
 					{
-						headers: `Bearer ${Cookies.get('token')}`,
+						headers: {
+							authorization: `Bearer ${Cookies.get('token')}`,
+						},
 					}
 				)
-				if (res.data.length > 0) {
+				const res = await data.json()
+				// const res = await axios(
+				// 	process.env.REACT_APP_API_URL +
+				// 		`/messages/?location_keyword=${room_id}&id_gt=${
+				// 			messages[messages?.length - 1]?.id
+				// 		}&_sort=created_at:ASC`,
+				// 	{
+				// 		headers: `Bearer ${Cookies.get('token')}`,
+				// 	}
+				// )
+				if (res.length > 0) {
 					if (messages?.includes('break')) {
-						setMessages([...messages, ...res.data])
-					} else {
-						setMessages([...messages, 'break', ...res.data])
+						setMessages([...messages, ...res])
+					} else if (!messages?.includes('break') && !res[res.length - 1]?.id != user?.user?.id) {
+						setMessages([...messages, 'break', ...res])
 					}
 				}
 			} catch (error) {
@@ -115,7 +130,7 @@ export default function DiscussionChatList({ newMessage }) {
 			// 	getRecentMessages(messages.length === 0)
 			// }, 15000)
 		}
-	}, 50000)
+	}, process.env.NODE_ENV != 'production' ? 19000 : 50000)
 
 
 	return (

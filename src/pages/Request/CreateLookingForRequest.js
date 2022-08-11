@@ -15,6 +15,7 @@ import { useHistory } from 'react-router'
 import { notifyEmy } from '../../services/Sheruta'
 import { Link } from 'react-router-dom'
 import LocationKeywordSelector from '../../components/LocationKeywordSelector/LocationKeywordSelector'
+import Global from '../../Global'
 
 export default function CreateLookingForRequest() {
 	const { categories, payment_types, personal_info } = useSelector(
@@ -185,7 +186,7 @@ export default function CreateLookingForRequest() {
 					</div>
 				</div>
 			</div>
-			<FooterNav pageName={'requests'} />
+			{Global.isMobile && <FooterNav pageName={'requests'} />}
 		</div>
 	)
 }

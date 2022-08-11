@@ -9,6 +9,9 @@ import { FaUndo } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { BsFillBookmarkFill } from 'react-icons/bs'
 import Cookies from 'js-cookie'
+import { BiLeftArrowAlt, BiUser } from 'react-icons/bi'
+import { FiUsers } from 'react-icons/fi'
+import { Dots } from 'react-activity'
 
 const EachBookingUser = ({ val, added, onInvite, unInvite }) => {
 	return (
@@ -25,8 +28,8 @@ const EachBookingUser = ({ val, added, onInvite, unInvite }) => {
 					<div className="mt-3">
 						<h4 className="fw-bold text-grey-700">{val?.first_name}</h4>
 						<h5 className="text-grey-600">
-							{Global.currency}{' '}
-							{window.formattedPrice.format(val?.budget)} - Budget
+							{Global.currency} {window.formattedPrice.format(val?.budget)} -
+							Budget
 						</h5>
 					</div>
 				</div>
@@ -60,8 +63,11 @@ export default function BookInspection({ match }) {
 	const { personal_info } = useSelector((state) => state.view)
 	const [showInvite, setShowInvite] = useState(false)
 	const [loading, setLoading] = useState(false)
-	const { user } = useSelector((state) => state.auth);
-	const router = useHistory();
+	const { user } = useSelector((state) => state.auth)
+	const [is_alone, setIsAlone] = useState(undefined)
+	const [section, setSection] = useState(0)
+
+	const router = useHistory()
 
 	const createInspection = async () => {
 		setLoading(true)
@@ -76,7 +82,8 @@ export default function BookInspection({ match }) {
 						agent: property?.agent?.id,
 						owner_personal_info: personal_info?.id,
 						location_keyword: property?.location_keyword?.id,
-						agent_profile: property?.agent_profile?.id
+						agent_profile: property?.agent_profile?.id,
+						is_alone,
 					},
 					method: 'POST',
 					headers: {
@@ -84,13 +91,15 @@ export default function BookInspection({ match }) {
 					},
 				}
 			)
-			if(res.data){
-				setLoading(false);
-				console.log('--- INSPECTION CREATED ----', res.data)
-				router.push(`/inspection/${res?.data?.id}`)
+			if (res.data) {
+				// console.log('--- INSPECTION CREATED ----', res.data)
+				setTimeout(() => {
+					router.push(`/inspection/${res?.data?.id}`)
+					setLoading(false)
+				}, 2000)
 			}
 		} catch (error) {
-			setLoading(false);
+			setLoading(false)
 			return Promise.reject(error)
 		}
 	}
@@ -123,166 +132,182 @@ export default function BookInspection({ match }) {
 					visible={showInvite}
 					footer={null}
 					onCancel={() => setShowInvite(false)}
-				>
-					<div className="card-body d-block w-100 shadow-none mb-0 p-0 ">
-						<h3 className="fw-700 text-dark">Add Users</h3>
-						<Alert variant="success">
-							<Alert.Heading className='text-grey-700'>
-								Once your done inviting users, close the popup and create your
-								inspection.
-							</Alert.Heading>
-						</Alert>
-						<hr />
-						<ul
-							className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0"
-							id="pills-tab"
-							role="tablist"
-						>
-							{tabs?.map((val, i) => {
-								return (
-									<li
-										class={`${tab === val && 'active'} list-inline-item me-5`}
-										key={`tab-${i}`}
-										onClick={() => setTab(val)}
-									>
-										<a
-											className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
-												tab === val && 'active'
-											}`}
-											data-toggle="tab"
-										>
-											{val}
-										</a>
-									</li>
-								)
-							})}
-						</ul>
-						{tab == tabs[0] && (
-							<>
-								{property?.interested_parties?.filter(
-									(x) => x?.id !== user?.user?.id
-								)?.length > 0 ? (
-									property?.interested_parties
-										?.filter((x) => x?.id !== user?.user?.id)
-										.map((val, i) => {
-											return (
-												<EachBookingUser
-													val={val}
-													key={`booker-${i}`}
-													added={invitedUser.includes(val?.id)}
-													onInvite={(e) =>
-														setInvitedUser([...invitedUser, val?.id])
-													}
-													unInvite={() =>
-														setInvitedUser(
-															invitedUser.filter((x) => x !== val?.id)
-														)
-													}
-												/>
-											)
-										})
-								) : (
-									<div className="text-center pt-5 pb-5">
-										<h3 className="fw-bold text-grey-600">
-											No Interested Users yet.
-										</h3>
-										<small>Check Your Contacts</small>
-									</div>
-								)}
-							</>
-						)}
-						{tab === tabs[1] &&
-							accepted_suggestions?.map((val, i) => {
-								return (
-									<EachBookingUser
-										val={val?.users_permissions_user}
-										key={`booker-${i}`}
-										added={invitedUser.includes(
-											val?.users_permissions_user?.id
-										)}
-										onInvite={(e) =>
-											setInvitedUser([
-												...invitedUser,
-												val?.users_permissions_user?.id,
-											])
-										}
-										unInvite={() =>
-											setInvitedUser(
-												invitedUser.filter(
-													(x) => x !== val?.users_permissions_user.id
-												)
-											)
-										}
-									/>
-								)
-							})}
-					</div>
-				</Modal>
-				<div className="row justify-content-center">
+				></Modal>
+				<div className="row justify-content-center mb-5">
 					<div className="col-md-7 col-sm-12">
-						{property && (
-							<div className="card mb-3 rounded">
-								<div className="card-header">
-									<div className="text-center">
-										<h1 className="fw-700 text-grey-600 mb-0">
-											Open a new inspection.
-										</h1>
+						{property ? (
+							<div>
+								{section === 0 ? (
+									<div className="card rounded-xxl mb-4 border-0 shadow-sm animate__fadeIn animate__animated ">
+										<div className="card-body pt-5 pb-5 text-center">
+											<h1 className="mb-5">Select Booking Option</h1>
+											<div className="d-flex align-items-center flex-column">
+												<EachBookingOption
+													heading={'Book Alone'}
+													Icon={(p) => <BiUser {...p} />}
+													isSelected={is_alone === true}
+													sub_heading="Book and rent alone"
+													onClick={() => setIsAlone(true)}
+												/>
+												<EachBookingOption
+													heading={'Book With Someone'}
+													Icon={(p) => <FiUsers {...p} />}
+													isSelected={is_alone === false}
+													sub_heading="Team up with others on the platform"
+													onClick={() => setIsAlone(false)}
+												/>
+												<hr />
+												<button
+													disabled={is_alone === undefined || loading}
+													className="btn bg-theme text-white w-50 "
+													onClick={() =>
+														is_alone
+															? createInspection()
+															: setSection(section + 1)
+													}
+												>
+													Next
+												</button>
+											</div>
+										</div>
 									</div>
-								</div>
-								<div className="card-body d-flex p-1">
-									<div
-										className="m-2"
-										style={{
-											backgroundImage: `url(${property?.image_urls[0]})`,
-											height: '100px',
-											width: '100px',
-											borderRadius: '7px',
-											backgroundSize: 'cover',
-											backgroundPosition: 'center',
-										}}
-									/>
-									<div className="mt-2">
-										<h4 className="fw-bold text-grey-700">{property?.name}</h4>
-										<h3 className="fw-500">
-											{Global.currency}
-											{window.formattedPrice.format(property?.price)}
-										</h3>
-									</div>
-								</div>
-								<div className="card-footer p-1">
-									<Alert variant="info" className="m-1">
-										<Alert.Heading className="fw-bold">
-											You need {property?.bedroom - 1} more people to join you
-											to get this flat.
-										</Alert.Heading>
-										<p>
-											Send an invitations to people on your contact list or
-											people who are also interested in this flat.
-										</p>
-										<hr />
-										<p className="mb-0">
-											Once all <strong>{property?.bedroom - 1}</strong> people
-											accepts, you'll be able to fix a date for the inspection.
-										</p>
-									</Alert>
-									<div className="d-flex justify-content-center mt-4 mb-4">
-										{invitedUser.length > 0 ? (
-											<button
-												disabled={loading}
-												className="w-70 btn bg-current text-white fw-700"
-												onClick={() => createInspection()}
+								) : null}
+								{section === 1 ? (
+									<div className="card rounded-xxl border-0 shadow-sm animate__fadeIn animate__animated">
+										<div className="card-body d-block w-100 shadow-none mb-0 pt-4 pb-4">
+											<div className="d-flex mb-4 align-items-center">
+												<button
+													className="btn-sm btn"
+													onClick={() => setSection(0)}
+												>
+													<BiLeftArrowAlt size={40} />
+												</button>{' '}
+												<h3 className="fw-700 text-dark ">Add People</h3>
+											</div>
+											<Alert variant="success">
+												<Alert.Heading className="text-grey-700" as={'p'}>
+													Select the persons you'd like to share with.
+												</Alert.Heading>
+											</Alert>
+											<hr />
+											{property?.bedroom - Number(invitedUser.length + 1) >
+												0 && (
+												<Alert variant="danger">
+													<Alert.Heading className="text-grey-700" as={'p'}>
+														Remaining{' '}
+														{property?.bedroom - Number(invitedUser.length + 1)}{' '}
+														people
+													</Alert.Heading>
+												</Alert>
+											)}
+											<ul
+												className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0"
+												id="pills-tab"
+												role="tablist"
 											>
-												<BsFillBookmarkFill /> Create Inspection
-											</button>
-										) : (
-											<button
-												className="w-50 btn bg-accent text-white fw-700"
-												onClick={() => setShowInvite(true)}
-											>
-												Invite People
-											</button>
-										)}
+												{tabs?.map((val, i) => {
+													return (
+														<li
+															class={`${
+																tab === val && 'active'
+															} list-inline-item me-5`}
+															key={`tab-${i}`}
+															onClick={() => setTab(val)}
+														>
+															<a
+																className={`fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block ${
+																	tab === val && 'active'
+																}`}
+																data-toggle="tab"
+															>
+																{val}
+															</a>
+														</li>
+													)
+												})}
+											</ul>
+
+											{tab == tabs[0] && (
+												<>
+													{property?.interested_parties?.filter(
+														(x) => x?.id !== user?.user?.id
+													)?.length > 0 ? (
+														property?.interested_parties
+															?.filter((x) => x?.id !== user?.user?.id)
+															.map((val, i) => {
+																return (
+																	<EachBookingUser
+																		val={val}
+																		key={`booker-${i}`}
+																		added={invitedUser.includes(val?.id)}
+																		onInvite={(e) =>
+																			setInvitedUser([...invitedUser, val?.id])
+																		}
+																		unInvite={() =>
+																			setInvitedUser(
+																				invitedUser.filter((x) => x !== val?.id)
+																			)
+																		}
+																	/>
+																)
+															})
+													) : (
+														<div className="text-center pt-5 pb-5">
+															<h3 className="fw-bold text-grey-600">
+																No Interested Users yet.
+															</h3>
+															<small>Check Your Contacts</small>
+														</div>
+													)}
+												</>
+											)}
+											{tab === tabs[1] &&
+												accepted_suggestions?.map((val, i) => {
+													return (
+														<EachBookingUser
+															val={val?.users_permissions_user}
+															key={`booker-${i}`}
+															added={invitedUser.includes(
+																val?.users_permissions_user?.id
+															)}
+															onInvite={(e) =>
+																setInvitedUser([
+																	...invitedUser,
+																	val?.users_permissions_user?.id,
+																])
+															}
+															unInvite={() =>
+																setInvitedUser(
+																	invitedUser.filter(
+																		(x) => x !== val?.users_permissions_user.id
+																	)
+																)
+															}
+														/>
+													)
+												})}
+											<hr />
+
+											<div className="text-center">
+												<button
+													className="btn w-50 bg-theme text-white"
+													disabled={
+														property?.bedroom - Number(invitedUser.length + 1) >
+															0 || loading
+													}
+													onClick={createInspection}
+												>
+													Finish
+												</button>
+											</div>
+										</div>
 									</div>
+								) : null}
+							</div>
+						) : (
+							<div className="card mt-5">
+								<div className="card-body pt-5 pb-5 d-flex flex-column align-items-center justify-content-center">
+									<Dots />
 								</div>
 							</div>
 						)}
@@ -290,5 +315,34 @@ export default function BookInspection({ match }) {
 				</div>
 			</div>
 		</Layout>
+	)
+}
+
+const EachBookingOption = ({
+	heading,
+	Icon,
+	isSelected,
+	sub_heading,
+	onClick,
+}) => {
+	return (
+		<div className="col-xl-8 col-sm-10" onClick={onClick}>
+			<div
+				className={`card rounded-xxl mb-4 ${
+					isSelected && 'border-success border-2 shadow'
+				}`}
+			>
+				<div className="card-body text-center">
+					<Icon
+						size={50}
+						className={`${isSelected ? 'text-theme' : 'text-grey-600'} `}
+					/>
+					<h3 className={`mt-3 ${isSelected ? 'text-theme' : 'text-grey-600'}`}>
+						{heading}
+					</h3>
+					<small className={isSelected && 'text-theme'}>{sub_heading}</small>
+				</div>
+			</div>
+		</div>
 	)
 }

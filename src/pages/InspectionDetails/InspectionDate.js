@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import UnavailablePropertyError from './UnavailablePropertyError'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
-import { convertTimeTo12Hurs } from '../../utils/moment.utils';
-import { BsCalendarX } from 'react-icons/bs';
+import { convertTimeTo12Hurs } from '../../utils/moment.utils'
+import { BsCalendarX } from 'react-icons/bs'
 
 export default function InspectionDate({ data, done }) {
 	const [date, setDate] = useState(null)
@@ -63,8 +63,8 @@ export default function InspectionDate({ data, done }) {
 			)
 			if (res.data) {
 				console.log(res.data)
-				if(done){
-					done(res.data);
+				if (done) {
+					done(res.data)
 				}
 				setLoading(false)
 			}
@@ -75,14 +75,17 @@ export default function InspectionDate({ data, done }) {
 			setLoading(false)
 			return Promise.reject(error)
 		}
-		
 	}
 
-	if(user?.user?.id != data?.owner?.id){
-		return <div className='text-center pt-5 pb-5'>
-			<BsCalendarX size={70} />
-			<h5 className='mt-4 fw-600 text-grey-600'>Inspection hasn't been booked by group admin.</h5>
-		</div>
+	if (user?.user?.id != data?.owner?.id) {
+		return (
+			<div className="text-center pt-5 pb-5">
+				<BsCalendarX size={70} />
+				<h5 className="mt-4 fw-600 text-grey-600">
+					Inspection hasn't been booked by group admin.
+				</h5>
+			</div>
+		)
 	}
 
 	return (
@@ -91,7 +94,7 @@ export default function InspectionDate({ data, done }) {
 				<UnavailablePropertyError />
 			) : (
 				<>
-					{data?.guests?.length + 1 < data?.property?.bedroom ? (
+					{data?.guests?.length + 1 < data?.property?.bedroom && !data?.is_alone ? (
 						<Alert variant="info" className="text-center">
 							<Alert.Heading className="fw-bold mb-4">
 								Sorry can't book inspection now.
@@ -102,6 +105,7 @@ export default function InspectionDate({ data, done }) {
 								Not enough members to book an inspection for the{' '}
 								<strong>{data?.property?.bedroom}</strong> bedroom flat.
 							</p>
+							<p>Or Wait for others to accept the invitation</p>
 						</Alert>
 					) : (
 						<>
@@ -113,7 +117,6 @@ export default function InspectionDate({ data, done }) {
 									/>
 									<h3 className="fw-400">
 										Inspection has been set for
-										
 										<br /> <strong>{data?.date}</strong> by{' '}
 										<strong>{convertTimeTo12Hurs(data?.time)}</strong>
 									</h3>
@@ -131,8 +134,10 @@ export default function InspectionDate({ data, done }) {
 									</h2>
 									<Alert variant="info" className="text-center">
 										<p className="mb-0">
-											Once you book your inspection everyone on the group will
-											be notified.
+											{!data?.is_alone
+												? `Once you book your inspection everyone on the group will
+											be notified.`
+												: `Set a date and time for the inspection`}
 										</p>
 									</Alert>
 									<div className="form-group">

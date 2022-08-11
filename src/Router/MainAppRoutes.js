@@ -56,6 +56,7 @@ import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
 import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
+import NewProfile from '../pages/Profile/NewProfile/NewProfile'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
