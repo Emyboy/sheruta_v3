@@ -5,7 +5,6 @@ import '../theme.override.css'
 import { Provider } from 'react-redux'
 import store from '../redux/store/store'
 
-
 import 'react-activity/dist/Spinner.css'
 import 'react-activity/dist/Dots.css'
 import '../social_assets/css/feather.css'
@@ -13,14 +12,13 @@ import '../social_assets/css/lightbox.css'
 import '../social_assets/css//themify-icons.css'
 import '../social_assets/css/style.css'
 
-import '../assets/css/style.css';
-import '../assets/css/boxicons.min.css';
-import '../assets/css/responsive.css';
+import '../assets/css/style.css'
+import '../assets/css/boxicons.min.css'
+import '../assets/css/responsive.css'
 
 import 'react-quill/dist/quill.snow.css'
-import 'react-image-viewer-zoom/dist/style.css' 
+import 'react-image-viewer-zoom/dist/style.css'
 import '../App.css'
-
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
@@ -42,7 +40,7 @@ import Search from '../components/Search/Search'
 import HowItWorks from '../pages/HowItWorks/HowItWorks'
 import CreateJoinPaddy from '../pages/JoinPaddy/CreateJoinPaddy/CreateJoinPaddy'
 import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetails'
-import AgentPending from '../pages/Agent/AgentPending';
+import AgentPending from '../pages/Agent/AgentPending'
 import AgentSignup from '../pages/Agent/AgentSignup'
 import Inspection from '../pages/Inspection/Inspection'
 import BookInspection from '../pages/Inspection/BookInspection'
@@ -50,8 +48,8 @@ import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
 import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
-import Home from '../pages/HomeNew/HomeNew';
-import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding';
+import Home from '../pages/HomeNew/HomeNew'
+import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
 import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
@@ -89,28 +87,25 @@ const WhatNext = React.lazy(() => import('../pages/GetStarted/Steps/WhatNext'))
 const Blog = React.lazy(() => import('../pages/Blog/Blog'))
 const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
-const Services = React.lazy(() => import('../pages/Services/Services'));
-const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'));
+const Services = React.lazy(() => import('../pages/Services/Services'))
+const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'))
 
 function App() {
 	React.useEffect(() => {
-	    // setTimeout(() => {
-	    //   const msg = firebase.messaging();
-	    //   msg.requestPermission()
-	    //       .then(() => {
-	    //           return msg.getToken();
-	    //       })
-	    //       .then((data) => {
-	    //           console.log("========= NOTIFY ======================", data);
-	    //       });
-	    // }, 10000);
+		// setTimeout(() => {
+		//   const msg = firebase.messaging();
+		//   msg.requestPermission()
+		//       .then(() => {
+		//           return msg.getToken();
+		//       })
+		//       .then((data) => {
+		//           console.log("========= NOTIFY ======================", data);
+		//       });
+		// }, 10000);
 		// AOS.init({
-
 		// 	duration: 2000,
 		// })
-	},[]);
-
-	
+	}, [])
 
 	return (
 		<Suspense fallback={<PageLoader />}>
@@ -135,8 +130,16 @@ function App() {
 							/>
 							<Route exact path="/flats" component={Properties} />
 							<Route exact path="/discussion" component={Discussion} />
-							<Route exact path="/discussion/room/:room_id" component={Discussion} />
-							<Route exact path="/discussion/room/:room_id/:message_id" component={Discussion} />
+							<Route
+								exact
+								path="/discussion/room/:room_id"
+								component={Discussion}
+							/>
+							<Route
+								exact
+								path="/discussion/room/:room_id/:message_id"
+								component={Discussion}
+							/>
 							{/* <Route path="/flats/for-share/:keyword_slug/:category_slug/:service_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug/:category_slug" component={Properties} />
 							<Route path="/flats/for-share/:keyword_slug" component={Properties} /> */}
@@ -195,11 +198,7 @@ function App() {
 								path="/blog/category/:category_slug/:category_id"
 								component={Blog}
 							/> */}
-							<Route
-								exact
-								path="/blog/:slug/:id"
-								component={BlogDetails}
-							/>
+							<Route exact path="/blog/:slug/:id" component={BlogDetails} />
 							<Route exact path="/start/:step" component={GetStarted} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/about" component={About} />
@@ -208,9 +207,19 @@ function App() {
 								path="/requests/edit/:request_id"
 								component={CreateRequest}
 							/>
-							<Route exact path="/user/:username" component={Profile2} />
+							<Route
+								exact
+								path="/user/:username"
+								component={
+									process.env.NODE_ENV != 'production' ? NewProfile : Profile2
+								}
+							/>
 							<Route exact path="/flat/submit" component={CreateRequest} />
-							<Route exact path="/flat/request" component={CreateLookingForRequest} />
+							<Route
+								exact
+								path="/flat/request"
+								component={CreateLookingForRequest}
+							/>
 
 							<Route
 								exact

@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import VerifiedBadge from '../../../components/VerifiedBadge/VerifiedBadge'
+import { Skeleton } from 'antd'
 
 export default function SimilarAccounts({ info }) {
 	const [list, setList] = useState([])
@@ -35,9 +36,18 @@ export default function SimilarAccounts({ info }) {
 			<div className="card-body">
 				<h3>Similar Accounts</h3>
 				<div>
-					{list.map((val) => {
-						return <EachAccount key={val?.id} data={val} />
-					})}
+					{list.length > 0 ? (
+						list.map((val) => {
+							return <EachAccount key={val?.id} data={val} />
+						})
+					) : (
+						<>
+							<Skeleton active loading avatar round />
+							<Skeleton active loading avatar round />
+							<Skeleton active loading avatar round />
+							<Skeleton active loading avatar round />
+						</>
+					)}
 				</div>
 			</div>
 		</div>

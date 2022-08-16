@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Global from '../../../Global'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const InComingChat = styled.article`
 	background-color: ${(props) => `${props.outgoing ? '#e3ffe2' : '#f0f0f0'}`};
@@ -34,7 +35,7 @@ export default function EachDiscussionContainer({
 				} align-items`}
 			>
 				{!outgoing && (
-					<div className="ml-2 mr-2 mb-2">
+					<Link to={`/user/${from?.username}`} className="ml-2 mr-2 mb-2">
 						<div
 							className={`rounded-xl ${
 								from.online ? 'bg-success' : 'bg-danger'
@@ -43,7 +44,7 @@ export default function EachDiscussionContainer({
 						>
 							<Avatar src={from.avatar_url} size={40} />
 						</div>
-					</div>
+					</Link>
 				)}
 				<InComingChat
 					outgoing={outgoing}
