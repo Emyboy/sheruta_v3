@@ -18,7 +18,6 @@ export default function P2pProperties() {
 						Global.isMobile ? '8' : '4'
 					}&_sort=created_at:DESC`
 			)
-			console.log(res.data)
 			setList(res.data)
 		} catch (error) {
 			return Promise.reject(error)

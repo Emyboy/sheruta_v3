@@ -8,7 +8,7 @@ import {
 	AiFillLinkedin,
 	AiOutlineUserAdd,
 } from 'react-icons/ai'
-import { Tag } from 'antd'
+import { Skeleton, Tag } from 'antd'
 import ProfileHero from './ProfileHero'
 import ProfileInfo from './ProfileInfo'
 import { GrFlagFill } from 'react-icons/gr'
@@ -89,25 +89,31 @@ export default function NewProfile() {
 						<section className="mt-3 card rounded-xxl p-3 mb-4">
 							<h3>My Social Media</h3>
 							<div className="row justify-content-between mt-4 align-items-center">
-								<div className="col-xl-7">
-									<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
-										<AiFillInstagram size={socialIconsSize} />
-									</button>
-									<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
-										<AiFillFacebook size={socialIconsSize} />
-									</button>
-									<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
-										<FaTiktok size={socialIconsSize} />
-									</button>
-									<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
-										<AiFillLinkedin size={socialIconsSize} />
-									</button>
-								</div>
-								<div className="col-xl-5 text-end col-sm-1">
-									<button className="btn text-danger fw-bold">
-										<GrFlagFill /> Report Account
-									</button>
-								</div>
+								{!data ? (
+									<Skeleton.Input round active />
+								) : (
+									<>
+										<div className="col-xl-7">
+											<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
+												<AiFillInstagram size={socialIconsSize} />
+											</button>
+											<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
+												<AiFillFacebook size={socialIconsSize} />
+											</button>
+											<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
+												<FaTiktok size={socialIconsSize} />
+											</button>
+											<button className="btn mb-2 bg-greylight btn-round-lg mr-2 mb-2 rounded-3 text-grey-700">
+												<AiFillLinkedin size={socialIconsSize} />
+											</button>
+										</div>
+										<div className="col-xl-5 text-end col-sm-1">
+											<button className="btn text-danger fw-bold">
+												<GrFlagFill /> Report Account
+											</button>
+										</div>
+									</>
+								)}
 							</div>
 						</section>
 					</div>

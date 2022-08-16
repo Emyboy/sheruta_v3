@@ -37,7 +37,6 @@ export default function PropertyAds() {
 }
 
 const EachPropAds = ({ data }) => {
-    console.log(data)
 	return (
 		<Link className="mr-3" to={formatPropertyURL(data)}>
 			<div className="item">
