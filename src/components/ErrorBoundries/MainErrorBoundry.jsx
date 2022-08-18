@@ -1,4 +1,5 @@
 import React from 'react'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default class MainErrorBoundary extends React.Component {
 	constructor(props) {
@@ -14,7 +15,14 @@ export default class MainErrorBoundary extends React.Component {
 	componentDidCatch(error, errorInfo) {
 		// You can also log the error to an error reporting service
 		// logErrorToMyService(error, errorInfo)
-        console.log('THE ERROR --', error, errorInfo)
+        // console.log('THE ERROR --', error, errorInfo)
+		notifyEmy({
+			heading: `⛔ THE SITE HAS CRASHED ⛔ please check log`,
+			log: {
+				error,
+				errorInfo
+			},
+		})
 	}
 
 	render() {
