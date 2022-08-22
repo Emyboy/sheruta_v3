@@ -4,16 +4,18 @@ import match from '../../../assets/img/match.jpeg'
 import { useSelector } from 'react-redux'
 import RecentGroupMsgAds from '../../Ads/GroupAds/RecentGroupMsgAds'
 import PropertyAds from '../../Ads/PropertyAds/PropertyAds'
+import Poll from '../../Poll/Poll'
 
 export default function SocialFeedsAds({ index }) {
 	const { personal_info } = useSelector((state) => state.view)
 	return (
 		<>
-			{index === 0 && <PropertyAds />}
-			{index === 1 && <RecentGroupMsgAds />}
-			{index === 3 && <PostRequestAds />}
+			{index === 0 && <Poll />}
+			{index === 1 && <PropertyAds />}
+			{index === 4 && <RecentGroupMsgAds />}
+			{index === 6 && <PostRequestAds />}
 			
-			{index === 6 && (
+			{index === 8 && (
 				<img src={match} className="rounded-xxl pl-0 pr-0 mb-3 col-12" />
 			)}
 			{/* {index === 8 && (

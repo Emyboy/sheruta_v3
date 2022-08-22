@@ -17,6 +17,7 @@ import { MdImage, MdOutlineLocationOn } from 'react-icons/md'
 import ReactHtmlParser from 'react-html-parser'
 import PropertyAmenities from './PropertyAmenities'
 import ErrorBoundary from '../../components/ErrorBoundries/ErrorBoundary'
+import PropertyReviews from './PropertyReviews'
 
 export default function PropertyDetailsLeft({ data, done, standalone }) {
 	const { user } = useSelector((state) => state.auth)
@@ -112,10 +113,10 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 
 			<div className="details-content bg-white rounded">
 				<ul className="tag-list">
-					{data?.service && <li className="tag">{data?.service?.name}</li>}
 					{data?.categorie && (
 						<li className="tag-2 bg-accent">{data?.categorie?.name}</li>
 					)}
+					<li className="tag ml-4">For Share</li>
 					{process.env.NODE_ENV !== 'production' && (
 						<span className="ml-4 h1">#{data?.id}</span>
 					)}
@@ -160,7 +161,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 			</div>
 			{!standalone && (
 				<div className="details-description bg-white rounded widget widget_info">
-					<h3>Agent</h3>
+					<h4 className="mb-4 fw-bold">The Owner</h4>
 					<div className="info-box-one d-flex mt-3">
 						<Avatar
 							size={80}
@@ -169,12 +170,10 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 							alt="agent"
 						/>
 						<div className="m-2">
-							<h3 className="text-grey-600">
+							<h4 className="text-grey-600 fw-bold">
 								{data?.agent_profile?.first_name}
-							</h3>
-							<span>
-								<i className="bx bxs-home"></i> <a>{data?.agent?.name}</a>
-							</span>
+							</h4>
+							<small>{data?.agent?.name}</small>
 						</div>
 					</div>
 				</div>
@@ -196,7 +195,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					<ul className="overview-listx d-flex" style={{ overflowX: 'scroll' }}>
 						{data?.interested_parties?.map((val, i) => {
 							return (
-								<EachUserListCard standalone data={val} key={`user-${i}`}  />
+								<EachUserListCard standalone data={val} key={`user-${i}`} />
 							)
 						})}
 					</ul>
@@ -296,6 +295,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 					</div>
 				)}
 			</div>
+			{process.env.NODE_ENV !== 'production' && <PropertyReviews />}
 		</div>
 	)
 }
