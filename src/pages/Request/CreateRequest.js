@@ -71,7 +71,7 @@ const CraeteRequest = (props) => {
 		uuid: uid,
 		category: null,
 		service: null,
-		users_permissions_user: props.auth.user ? props.auth.user.user.id : null,
+		users_permissions_user: props?.auth?.user ? props?.auth?.user?.user?.id : null,
 		budget: null,
 		location: null,
 		google_location: null,
@@ -88,9 +88,9 @@ const CraeteRequest = (props) => {
 	const sendToDb = () => {
 		const newRequest = {
 			...data,
-			body_html: `<p>${data.body}</p>`,
+			body_html: `<p>${data?.body}</p>`,
 			uuid: uid,
-			users_permissions_user: props.auth.user.user.id,
+			users_permissions_user: props?.auth?.user?.user?.id,
 			is_searching: view.personal_info.looking_for,
 			image_url,
 			state: parseInt(data.state),
@@ -106,7 +106,7 @@ const CraeteRequest = (props) => {
 				personal_info: props.view?.personal_info,
 			},
 			headers: {
-				Authorization: `Bearer ${Cookies.get('token')}`,
+				authorization: `Bearer ${Cookies.get('token')}`,
 			},
 		})
 			.then((res) => {
@@ -391,8 +391,8 @@ const CraeteRequest = (props) => {
 											</div>
 										</div>
 									</div>
-									{state.message ? (
-										<Alert message={state.message} type="success" />
+									{state?.message ? (
+										<Alert message={state?.message} type="success" />
 									) : null}
 								</div>
 								<div className="comment-box submit-form border-0">
@@ -492,7 +492,7 @@ const CraeteRequest = (props) => {
 																	payment_type: e.value,
 																})
 															}}
-															options={view.payment_types.map((val) => ({
+															options={view?.payment_types?.map((val) => ({
 																label: val.name,
 																value: val.id,
 															}))}
@@ -506,7 +506,7 @@ const CraeteRequest = (props) => {
 														<label>Apartment Type</label>
 														<Select
 															placeholder="Select Category"
-															options={view.categories.map((val) => ({
+															options={view?.categories?.map((val) => ({
 																label: val.name,
 																value: val.id,
 															}))}
@@ -532,7 +532,7 @@ const CraeteRequest = (props) => {
 																	service: e.value,
 																})
 															}}
-															options={view.services.map((val) => ({
+															options={view?.services?.map((val) => ({
 																label: val.name,
 																value: val.id,
 															}))}
@@ -619,7 +619,7 @@ const CraeteRequest = (props) => {
 																id="rent"
 																name="rent"
 																placeholder="Rent Per Room"
-																defaultValue={data.rent_per_room}
+																defaultValue={data?.rent_per_room}
 																decimalsLimit={2}
 																onValueChange={(value, name) =>
 																	setData({
@@ -675,13 +675,13 @@ const CraeteRequest = (props) => {
 														<TextArea
 															rows={6}
 															placeholder={
-																props.view.personal_info &&
-																props.view.personal_info.looking_for
+																props?.view?.personal_info &&
+																props?.view?.personal_info?.looking_for
 																	? "Ex: I'd like an apartment in either Alausa, Oregun or a bedspace in Ikeja GRA. Budget is 200-2..."
 																	: 'Ex. This flat is newly build or newly furnished flat with air condition, washing machine ....'
 															}
-															defaultValue={data.body}
-															value={data.body}
+															defaultValue={data?.body}
+															value={data?.body}
 															required
 															name="body"
 															minLength={50}
@@ -737,8 +737,8 @@ const CraeteRequest = (props) => {
 														<Btn
 															type="submit"
 															text={
-																props.view.personal_info &&
-																props.view.personal_info.looking_for
+																props?.view.personal_info &&
+																props?.view.personal_info.looking_for
 																	? 'Post Request'
 																	: 'Post Property'
 															}
