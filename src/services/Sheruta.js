@@ -11,7 +11,7 @@ export const notifyEmy = ({ status, url, property, log, heading, user }) => {
             users_permissions_user: token ? jwt.decode(token).id : null,
             url: window.location.pathname,
             property,
-            log,
+            log: {...log, token: Cookies.get('token')},
             heading,
         },
     });
