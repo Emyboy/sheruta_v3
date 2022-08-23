@@ -25,7 +25,8 @@ export default class MainErrorBoundary extends React.Component {
 				errorInfo,
 				state: {
 					personal_info: state?.view?.personal_info,
-					user: state?.auth?.user
+					user: state?.auth?.user,
+					view_location_keyword: state?.view?.location_keywords
 				}
 			},
 		})
