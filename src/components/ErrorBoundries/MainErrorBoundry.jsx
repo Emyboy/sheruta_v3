@@ -16,11 +16,17 @@ export default class MainErrorBoundary extends React.Component {
 		// You can also log the error to an error reporting service
 		// logErrorToMyService(error, errorInfo)
         // console.log('THE ERROR --', error, errorInfo)
+		const state = JSON.parse(localStorage.getItem('state'))
 		notifyEmy({
 			heading: `⛔ THE SITE HAS CRASHED ⛔ please check log`,
 			log: {
+				url: window.location.pathname,
 				error,
-				errorInfo
+				errorInfo,
+				state: {
+					personal_info: state?.view?.personal_info,
+					user: state?.auth?.user
+				}
 			},
 		})
 	}
