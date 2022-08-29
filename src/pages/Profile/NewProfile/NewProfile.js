@@ -29,7 +29,6 @@ export default function NewProfile() {
 	const params = useParams()
 
 	const getUserProfile = useCallback(async () => {
-		console.log('GETTING ACCOUNT')
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
@@ -72,7 +71,7 @@ export default function NewProfile() {
 										{data?.personal_info?.unique_habits?.map((val) => {
 											return (
 												<Tag
-													key={`habit-${val.id}`}
+													key={`habit-${val?.id}`}
 													color="geekblue"
 													className="mb-2 fw-bold"
 												>
