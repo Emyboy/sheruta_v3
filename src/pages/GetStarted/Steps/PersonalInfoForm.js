@@ -37,6 +37,7 @@ const PersonalInfoForm = (props) => {
 		next_of_kin_phone: personal_info?.next_of_kin_phone,
 		users_permissions_user: props.auth.user.user.id,
 		work_industry: personal_info?.work_industry,
+		tiktok: personal_info?.tiktok,
 	})
 
 	const handleSubmit = (e) => {
@@ -55,18 +56,13 @@ const PersonalInfoForm = (props) => {
 		// 	return
 		// }
 		setLoading(true)
-		axios(
-			process.env.REACT_APP_API_URL +
-				'/personal-infos' +
-				`${props.info ? '/' + personal_info?.id : ''}`,
-			{
-				headers: {
-					Authorization: `Bearer ${Cookies.get('token')}`,
-				},
-				method: 'PUT',
-				data,
-			}
-		)
+		axios(process.env.REACT_APP_API_URL + `/personal-infos/${personal_info?.id}`, {
+			headers: {
+				Authorization: `Bearer ${Cookies.get('token')}`,
+			},
+			method: 'PUT',
+			data,
+		})
 			.then((res) => {
 				notification.success({ message: 'Updated Successfully' })
 				setLoading(false)
@@ -93,9 +89,9 @@ const PersonalInfoForm = (props) => {
 		dispatch(getAuthPersonalInfo())
 	}, [dispatch])
 
-  if(!personal_info){
-    return null
-  }
+	if (!personal_info) {
+		return null
+	}
 
 	return (
 		<form onSubmit={handleSubmit} className="mt-4 mb-5">
@@ -158,19 +154,12 @@ const PersonalInfoForm = (props) => {
 							</Form.Label>{' '}
 							<span className="text-danger">Required *</span>
 							<Select
+								placeholder="Ex. Real Estate, Teach, Health"
 								className="mt-2"
-								value={{
-									label: personal_info?.work_industry
-										? props.view.work_industries.filter(
-												(x) => x.id === personal_info?.work_industry
-										  )[0]?.name
-										: null,
-									value: personal_info?.work_industry
-										? props.view.work_industries.filter(
-												(x) => x.id === personal_info?.work_industry
-										  )[0]?.id
-										: null,
-								}}
+								// value={{
+								// 	label: props.view.work_industries.map((val) => val.name),
+								// 	value: props.view.work_industries.map((val) => val.id),
+								// }}
 								options={props.view.work_industries.map((val) => ({
 									value: val.id,
 									label: val.name,
@@ -294,6 +283,28 @@ const PersonalInfoForm = (props) => {
 				</div>
 			</div>
 			<div className="row">
+				<div className="col-lg-6 col-md-6">
+					<div className="form-group">
+						<div className="input-with-icon">
+							<Form.Label htmlFor="basic-url">Tiktok Username</Form.Label>
+							<InputGroup className="mb-3">
+								<InputGroup.Text
+									id="basic-addon3"
+									style={{ fontWeight: 'bold', alignSelf: 'center' }}
+								>
+									https://www.tiktok.com/@
+								</InputGroup.Text>
+								<FormControl
+									id="basic-url"
+									aria-describedby="basic-addon3"
+									defaultValue={personal_info?.tiktok}
+									className="pl-1"
+									onChange={(e) => setData({ ...data, tiktok: e.target.value })}
+								/>
+							</InputGroup>
+						</div>
+					</div>
+				</div>
 				<div className="col-lg-6 col-md-6">
 					<div className="form-group">
 						<div className="input-with-icon">
