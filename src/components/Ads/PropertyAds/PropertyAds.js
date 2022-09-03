@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useLayoutEffect, useState } from 'react'
 import axios from 'axios'
 import { Avatar } from 'antd'
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ export default function PropertyAds() {
 		}
 	}, [])
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getRecentProperties()
 	}, [getRecentProperties])
 
@@ -37,7 +37,6 @@ export default function PropertyAds() {
 }
 
 const EachPropAds = ({ data }) => {
-    console.log(data)
 	return (
 		<Link className="mr-3" to={formatPropertyURL(data)}>
 			<div className="item">

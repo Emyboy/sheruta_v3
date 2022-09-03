@@ -9,6 +9,7 @@ import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import renderHTML from 'react-render-html'
 import styled from 'styled-components'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const MessageBody = styled.div`
 	a {
@@ -72,7 +73,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 	return (
 		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new} message={data}>
 			<div className="d-flex align-items-center justify-content-between">
-				<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name}</h5>
+				<Link to={`/user/${data?.from?.username}`} className="fw-500 text-grey-600 m-0">{data.from.first_name}</Link>
 				<EachDiscussionOptions
 					onDeleteClick={() => askDelete()}
 					onEditClick={() => setShowEdit(true)}
@@ -102,7 +103,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 		<EachDiscussionContainer outgoing={false} from={data.from} message={data}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
-					<h5 className="fw-500 text-grey-600 m-0">{data.from.first_name} {data?.reply && "Replied"}</h5>
+					<Link to={`/user/${data?.from?.username}`} className="fw-500 text-grey-600 m-0">{data.from.first_name} {data?.reply && "Replied"}</Link>
 					<EachDiscussionOptions
 						onDeleteClick={() => askDelete()}
 						onReply={() => dispatch(setGroupState({ reply: data }))}

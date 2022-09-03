@@ -211,9 +211,9 @@ export default (props) => {
 								)}
 								{filter === 'for you' && (
 									<>
-										{(view['feed'] ? view['feed'] : state.list)
+										{(view['feed'] ? view['feed'] : state?.list)
 											.filter(
-												(x) => x.is_searching == !personal_info.looking_for
+												(x) => x?.is_searching == !personal_info?.looking_for
 											)
 											.map((val, i) => {
 												return (

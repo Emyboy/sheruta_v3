@@ -21,7 +21,7 @@ export default function EachRequestOptions({ data, deleted, setDeleted }) {
 		axios(process.env.REACT_APP_API_URL + `/property-requests/${data?.id}`, {
 			method: 'DELETE',
 			headers: {
-				Authorization: `Bearer ${Cookies.get('token')}`,
+				authorization: `Bearer ${Cookies.get('token')}`,
 			},
 		})
 			.then((res) => {
