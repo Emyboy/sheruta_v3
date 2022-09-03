@@ -127,7 +127,6 @@ const Reply = ({ data }) => {
 	if (!data.reply || !data?.reply?.message_text) {
 		return null
 	}
-	console.log('TEXT --', data?.reply?.message_text)
 	return (
 		<div
 			className="card p-2 mb-2 rounded-xxxl mt-2"
