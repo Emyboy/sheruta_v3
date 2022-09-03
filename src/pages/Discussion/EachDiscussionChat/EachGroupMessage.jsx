@@ -124,7 +124,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 }
 
 const Reply = ({ data }) => {
-	if(!data.reply){
+	if (!data.reply || !data?.reply?.message_text) {
 		return null
 	}
 	console.log('TEXT --', data?.reply?.message_text)
