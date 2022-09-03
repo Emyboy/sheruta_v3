@@ -124,7 +124,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 }
 
 const Reply = ({ data }) => {
-	if(!data.reply){
+	if (!data.reply || !data?.reply?.message_text) {
 		return null
 	}
 	return (
@@ -133,7 +133,7 @@ const Reply = ({ data }) => {
 			style={{ background: '#f3fffd' }}
 		>
 			<div className="d-flex align-items-center justify-content-between mb-1">
-				<small className='mr-4'>
+				<small className="mr-4">
 					<i className="fw-600 m-0 text-grey-500">{data?.to?.first_name}</i>
 				</small>
 				<small className="m-0 text-grey-500">
@@ -142,7 +142,7 @@ const Reply = ({ data }) => {
 			</div>
 			<i>
 				{renderHTML(
-					data?.reply?.message_text?.length > 300
+					data?.reply?.message_text && data?.reply?.message_text?.length > 300
 						? String(data?.reply?.message_text.slice(0, 300) + ' ...')
 						: data?.reply?.message_text
 				)}
