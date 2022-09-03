@@ -142,7 +142,7 @@ const Reply = ({ data }) => {
 			</div>
 			<i>
 				{renderHTML(
-					data?.reply?.message_text.length > 300
+					data?.reply?.message_text?.length > 300
 						? String(data?.reply?.message_text.slice(0, 300) + ' ...')
 						: data?.reply?.message_text
 				)}
