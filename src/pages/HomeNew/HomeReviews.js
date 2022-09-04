@@ -23,7 +23,7 @@ const reviews = [
 	{
 		name: 'Somto',
 		avatar_url: fav,
-		review: `Won't have been able to meet my fav roomie without Sheruta, the website was transparent enough for me to get the right person. Thanks guys`,
+		review: `The website was transparent enough for me to get the right person very quickly. Thanks guys`,
 		stars: 5,
 		occupation: 'Product manager at MyWays',
 	},
