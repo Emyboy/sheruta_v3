@@ -1,4 +1,5 @@
 import React from 'react'
+import fav from './img/fav.jpeg'
 
 const reviews = [
 	{
@@ -19,16 +20,24 @@ const reviews = [
 		stars: 5,
 		occupation: 'Digital Marketer at Zedcor',
 	},
+	{
+		name: 'Somto',
+		avatar_url: fav,
+		review: `Won't have been able to meet my fav roomie without Sheruta, the website was transparent enough for me to get the right person. Thanks guys`,
+		stars: 5,
+		occupation: 'Product manager at MyWays',
+	},
 ]
 
 export default function HomeReviews() {
 	return (
-		<div className="customers-area ptb-100">
+		<div className="ptb-100 bg-accent">
 			<div className="container">
 				<div className="section-title">
-					<h3>Recent Flatmate Reviews</h3>
-					<p>
-						Here are some reviews of users who recently found a flatmate on the site.
+					<h3 className="text-grey-200">Recent Flatmate Reviews</h3>
+					<p className="text-grey-500">
+						Here are some reviews of users who recently found a flatmate on the
+						site.
 					</p>
 				</div>
 				<div className="row">
