@@ -57,7 +57,6 @@ export default function P2pProperties() {
 }
 
 export const EachP2pDemoProperty = ({ data }) => {
-	console.log(data)
 	const _user = data?.users_permissions_user
 	return (
 		<div className="single-new-added-properties with-white-color">

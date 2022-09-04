@@ -7,6 +7,7 @@ import ConversationList from "./ConversationList";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { notifyEmy } from "../../services/Sheruta";
+import FooterNav from "../../components/Layout/FooterNav";
 
 export default function Messages(props) {
     localStorage.setItem('after_login', '/messages')
@@ -31,29 +32,30 @@ export default function Messages(props) {
     }
 
     return (
-        <Layout page={"messages"} noBottomSpacing noScroll>
-            <div style={{ overflow: "hidden" }}>
-                <div className={`container ${Global.isMobile && " m-0"}`}>
-                    <div className="row justify-content-center">
-                        <div
-                            className="p-0 col-lg-7 col-xl-8 maxw100flex-992"
-                            style={{
-                                height: Global.isMobile ? "83vh" : "86vh",
-                            }}
-                        >
-                            {showConversation ? (
-                                <MessageDetails
-                                    conversation_id={
-                                        props.match.params?.conversation_id
-                                    }
-                                />
-                            ) : (
-                                <ConversationList />
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    );
+			// <Layout page={"messages"} noBottomSpacing noScroll>
+			<div>
+				<div style={{ overflow: 'hidden' }}>
+					<div className={`container ${Global.isMobile && ' m-0'}`}>
+						<div className="row justify-content-center">
+							<div
+								className="p-0 col-lg-7 col-xl-8 maxw100flex-992"
+								style={{
+									height: Global.isMobile ? '83vh' : '86vh',
+								}}
+							>
+								{showConversation ? (
+									<MessageDetails
+										conversation_id={props.match.params?.conversation_id}
+									/>
+								) : (
+									<ConversationList />
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+                <FooterNav pageName={'message'} />
+			</div>
+			// </Layout>
+		)
 }

@@ -6,6 +6,7 @@ import { BiHomeAlt } from 'react-icons/bi'
 import { BsPeople } from 'react-icons/bs'
 import { FiBell } from 'react-icons/fi'
 import { Avatar } from 'antd'
+import Global from '../../Global'
 
 const BadgeCount = ({ count }) => {
 	if (count === 0) {
@@ -26,6 +27,10 @@ export default function FooterNav({ pageName }) {
 	const { user_suggestions } = useSelector((state) => state.alice)
 	const { user } = useSelector((state) => state.auth)
 	const iconSize = 25
+
+	if(!Global.isMobile){
+		return null
+	}
 
 	return (
 		<div
