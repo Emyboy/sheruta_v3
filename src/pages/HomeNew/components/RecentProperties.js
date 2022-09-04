@@ -22,7 +22,7 @@ export default function RecentProperties() {
 		getRecentProperties()
 	}, [getRecentProperties])
 
-	if(list.length === 0){
+	if (list.length === 0) {
 		return null
 	}
 
@@ -30,10 +30,10 @@ export default function RecentProperties() {
 		<div className="featured-area ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Our Featured Flats</h3>
+					<h3>Recent Join Paddy Flats</h3>
 					<p>
-						Take your time to find the best room or apartment that fits your
-						requirement.
+						Recently available flats for share. Team up to get one of these
+						spaces.
 					</p>
 				</div>
 				<div className="d-flex" style={{ overflowX: 'scroll' }}>
