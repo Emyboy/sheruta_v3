@@ -46,7 +46,7 @@ export default function Poll() {
 				setTimeout(() => {
 					setData(null)
 				}, 4000)
-                Cookies.set('poll', true, { expires: 14 })
+                Cookies.set('poll', true, { expires: 5 })
 			}
 		} catch (error) {
 			return Promise.reject(error)
