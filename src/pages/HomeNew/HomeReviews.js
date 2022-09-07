@@ -53,7 +53,7 @@ export default function HomeReviews() {
 const EachHomeReview = ({ data }) => {
 	return (
 		// <div className="owl-item active" style="width: 264px; margin-right: 20px;">
-		<div className="col-5 col-lg-4">
+		<div className="col-sm-5 col-lg-4">
 			<div className="customers-item">
 				<div className="customers-info d-flex">
 					<div className="image">
