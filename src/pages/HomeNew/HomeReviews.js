@@ -23,7 +23,7 @@ const reviews = [
 	{
 		name: 'Somto',
 		avatar_url: fav,
-		review: `Won't have been able to meet my fav roomie without Sheruta, the website was transparent enough for me to get the right person. Thanks guys`,
+		review: `The website was transparent enough for me to get the right person very quickly. Thanks guys`,
 		stars: 5,
 		occupation: 'Product manager at MyWays',
 	},
@@ -53,7 +53,7 @@ export default function HomeReviews() {
 const EachHomeReview = ({ data }) => {
 	return (
 		// <div className="owl-item active" style="width: 264px; margin-right: 20px;">
-		<div className="col-5 col-lg-4">
+		<div className="col-sm-5 col-lg-4">
 			<div className="customers-item">
 				<div className="customers-info d-flex">
 					<div className="image">

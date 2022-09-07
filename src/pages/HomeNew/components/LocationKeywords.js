@@ -91,7 +91,7 @@ export const EachLocationKeyword = ({ val }) => {
 					<h3>
 						<Link to={`/flats/?location=${val?.slug}`}>{val?.name}</Link>
 					</h3>
-					<span>{count} Properties</span>
+					{/* <span>{count} Properties</span> */}
 				</div>
 			</div>
 		</article>
