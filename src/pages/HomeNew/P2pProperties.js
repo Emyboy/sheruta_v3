@@ -14,8 +14,8 @@ export default function P2pProperties() {
 		try {
 			const res = await axios(
 				process.env.REACT_APP_API_URL +
-					`/property-requests/?is_searching=false&_limit=${
-						Global.isMobile ? '8' : '4'
+					`/property-requests/?is_searching=true&_limit=${
+						Global.isMobile ? '3' : '4'
 					}&_sort=created_at:DESC`
 			)
 			setList(res.data)
@@ -32,8 +32,8 @@ export default function P2pProperties() {
 		<div className="new-added-properties-area bg-201c2d ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Recent P2P Properties</h3>
-					<p>List of P2P Available Properties</p>
+					<h3>Recent Room Requests</h3>
+					<p>Join our community today and post your request to share a flat.</p>
 				</div>
 
 				<div className="row justify-content-center">
@@ -46,18 +46,18 @@ export default function P2pProperties() {
 					})}
 				</div>
 
-				<div className="view-properties-btn">
-					<Link to={`/flat/submit`} className="default-btn">
-						UPLOAD YOU APARTMENT<span></span>
+				
+			</div>
+				<div className="view-properties-btn mt-5">
+					<Link to={`/signup`} className="default-btn">
+						Post Your Request<span></span>
 					</Link>
 				</div>
-			</div>
 		</div>
 	)
 }
 
 export const EachP2pDemoProperty = ({ data }) => {
-	console.log(data)
 	const _user = data?.users_permissions_user
 	return (
 		<div className="single-new-added-properties with-white-color">
@@ -66,7 +66,7 @@ export const EachP2pDemoProperty = ({ data }) => {
 					<div
 						className="properties-image "
 						style={{
-							backgroundImage: `url(${data?.image_url[0]})`,
+							backgroundImage: `url(${_user.avatar_url})`,
 							minHeight: '200px',
 							backgroundPosition: 'center',
 							backgroundSize: 'cover',
@@ -84,10 +84,11 @@ export const EachP2pDemoProperty = ({ data }) => {
 							</Link>
 						</div>
 						<div className="price">
+							<small>Budget: {' '} </small><br />
 							{Global.currency}
 							{window.formattedPrice.format(
 								data?.rent_per_room ? data?.rent_per_room : data?.budget
-							)}
+							)}{' '}
 							{data?.payment_type && (
 								<small>/{data?.payment_type.abbreviation}</small>
 							)}
@@ -97,7 +98,10 @@ export const EachP2pDemoProperty = ({ data }) => {
 
 				<div className="col-lg-6 col-md-12">
 					<div className="properties-content">
-						<span>{data?.location}</span>
+						<span>
+							<i className="ti ti-location-pin"></i>
+							{data?.location?.slice(0, 30)}..
+						</span>
 						<Link
 							to={requestUtils.renderRequestURL(data)}
 							data-lightbox="roadtrip"
@@ -106,7 +110,7 @@ export const EachP2pDemoProperty = ({ data }) => {
 							<p>{data?.body?.slice(0, 80)}...</p>
 						</Link>
 
-						<ul className="list">
+						{/* <ul className="list">
 							<li>
 								<i className="bx bx-bed"></i> {data?.bedrooms} Bedrooms
 							</li>
@@ -116,7 +120,7 @@ export const EachP2pDemoProperty = ({ data }) => {
 							<li>
 								<i className="bx bxs-bath"></i> {data?.toilets} Toilets
 							</li>
-						</ul>
+						</ul> */}
 						<hr />
 						<div className="blog-bottom-content d-flex justify-content-between align-items-center">
 							<div className="blog-author d-flex align-items-center">
@@ -127,7 +131,7 @@ export const EachP2pDemoProperty = ({ data }) => {
 								/>
 								<span className="m-0">
 									<Link to={`/user/${_user?.username}`}>
-										{_user?.first_name}
+										{_user?.first_name?.slice(0, 10)}..
 										{/* {moment(data?.created_at).fromNow()} */}
 									</Link>
 								</span>

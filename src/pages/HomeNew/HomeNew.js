@@ -9,7 +9,9 @@ import HomeFeatures from './components/HomeFeatures'
 import HomeHero from './components/HomeHero'
 import HomeJoinPaddy from './components/HomeJoinPaddy'
 import LocationKeywords from './components/LocationKeywords'
+import RecentHomeRequest from './components/RecentHomeRequests/RecentHomeRequest'
 import RecentProperties from './components/RecentProperties'
+import HomeReviews from './HomeReviews'
 import P2pProperties from './P2pProperties'
 
 export default function HomeNew() {
@@ -26,9 +28,10 @@ export default function HomeNew() {
 				<title>Flats for share in Lekki, Yaba, Surulere | Sheruta</title>
 			</Helmet>
 			<HomeHero />
-			<P2pProperties />
+			<RecentHomeRequest />
 			<HomeJoinPaddy />
 			<RecentProperties />
+			<P2pProperties />
 			<AboutNew
 				heading={'Why Post Your Space?'}
 				bodyComponent={
@@ -49,6 +52,7 @@ export default function HomeNew() {
 				ctaURL={'/flat/submit'}
 			/>
 			<HomeFeatures />
+			<HomeReviews />
 			<LocationKeywords />
 			<Footer />
 		</Layout>
