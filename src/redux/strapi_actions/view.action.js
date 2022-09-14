@@ -392,10 +392,10 @@ export const getAllLocationKeyword = (state) => async (dispatch) => {
 }
 
 export const getRealTimeStuffs = () => (dispatch) => {
-	dispatch(getAllConversations())
-	dispatch(getUnreadMessageCount())
-	dispatch(getAllNotifications())
-	dispatch(getUserPaymentPlan())
+	// dispatch(getAllConversations())
+	// dispatch(getUnreadMessageCount())
+	// dispatch(getAllNotifications())
+	// dispatch(getUserPaymentPlan())
 }
 
 export const getAllViewOptions = () => (dispatch) => {
