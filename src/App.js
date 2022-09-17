@@ -1,5 +1,5 @@
 import React from 'react';
-import UnderConstruction from './components/UnderConstruction';
+// import UnderConstruction from './components/UnderConstruction';
 import Router from './Router'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Router />
-      <UnderConstruction />
+      {/* <UnderConstruction /> */}
     </div>
   );
 }
