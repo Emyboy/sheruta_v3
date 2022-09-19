@@ -87,17 +87,18 @@ const MasterPopup = (props) => {
 	useEffect(() => {
 		if (user) {
 			dispatch(getUserPaymentPlan())
+					dispatch(setUserOnline())
 		}
 	}, [user])
 
-	// FOR A LONGER TIME
-	useInterval(() => {
-		if (user) {
-			dispatch(getUser())
-			dispatch(setUserOnline())
-			dispatch(getOtherStuffs())
-		}
-	}, 550000)
+	// // FOR A LONGER TIME
+	// useInterval(() => {
+	// 	if (user) {
+	// 		dispatch(getUser())
+	// 		dispatch(setUserOnline())
+	// 		dispatch(getOtherStuffs())
+	// 	}
+	// }, 550000)
 
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {
