@@ -23,3 +23,10 @@ export const convertTimeTo12Hurs = (time) => {
 		return 'Time Not Stated'
 	}
 }
+
+export const calculateDays = (from) => {
+	const today = new Date()
+	let difference = today.getTime() - new Date(from).getTime()
+	let TotalDays = Math.ceil(difference / (1000 * 3600 * 24))
+	return TotalDays
+}

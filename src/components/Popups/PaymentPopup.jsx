@@ -12,7 +12,7 @@ const PaymentPopup = (props) => {
 	)
 	const { user } = useSelector((state) => state.auth)
 
-	if (feed.length === 0 && !app_details && !personal_info && !user) {
+	if (feed?.length === 0 && !app_details && !personal_info && !user) {
 		return null
 	}
 

@@ -31,14 +31,17 @@ export default function DiscussionCenterHeader() {
 				)}
 				<Avatar src={data[0]?.background_img} size={50} />
 				<div className="pl-2">
-					<h3>{data[0]?.name} Room</h3>
+					<h3>
+						{`${data[0]?.name} Room`.slice(0, Global.isMobile ? 17 : 70)}
+						{/* {data[0]?.name} Room */}
+					</h3>
 					<small>
 						<i style={{ width: '20px' }}>
 							{`${group_guests?.map((val, i) => {
 								if (i < 9) {
-									return val?.users_permissions_user?.first_name+" "
+									return val?.users_permissions_user?.first_name + ' '
 								}
-							})} and others`.slice(0, Global.isMobile ? 25 : 70)}
+							})} and others`.slice(0, Global.isMobile ? 20 : 70)}
 						</i>
 					</small>
 				</div>

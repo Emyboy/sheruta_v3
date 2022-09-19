@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 
 export default function EachDiscussionGuest({ active, data }) {
 
-	const _user = data?.users_permissions_user
+	const _user = data?.users_permissions_user;
+	console.log('USER --', data)
 	return (
 		<Link
 			to={`/user/${_user?.username}`}
-			className={`p-2 border-bottom w-100 list-group-item list-group-item-action ${
+			className={` border-1 p-2 border-bottom w-100 list-group-item list-group-item-action ${
 				active ? 'bg-theme-light border-1 border-success' : 'bg-white'
 			}`}
 		>
@@ -25,7 +26,10 @@ export default function EachDiscussionGuest({ active, data }) {
 					<div className="pl-2">
 						<h4>{_user.first_name}</h4>
 						<small className="text-muted">
-							<i>₦ {window.formattedPrice.format(_user?.budget)} Budget</i>
+							<i>
+								₦ {window.formattedPrice.format(_user?.budget)}{' '}
+								{data?.looking_for ? "Budget" : "Rent"}
+							</i>
 						</small>
 					</div>
 				</div>

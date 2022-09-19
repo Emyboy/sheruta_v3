@@ -49,7 +49,10 @@ const Login = (props) => {
 		setState({ ...state, loading: true })
 		axios(process.env.REACT_APP_API_URL + '/auth/local', {
 			method: 'POST',
-			data,
+			data: {
+				...data,
+				identifier: data.identifier.toLowerCase()
+			}
 		})
 			.then((res) => {
 				const isVerified = res.data.user.confirmed

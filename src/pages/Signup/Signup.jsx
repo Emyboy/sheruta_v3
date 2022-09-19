@@ -47,8 +47,13 @@ export const Signup = (props) => {
 				// username: e.username
 				// 	.replace(/\s/g, '')
 				// 	.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
-				first_name: e.first_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
-				last_name: e.last_name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''),
+				first_name: e.first_name
+					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+					?.split(' ')[0],
+				last_name: e.last_name
+					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+					?.split(' ')[0],
+				email: e.email?.toLocaleLowerCase(),
 			},
 		})
 			.then((res) => {

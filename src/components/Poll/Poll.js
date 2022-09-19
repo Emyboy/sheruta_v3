@@ -3,6 +3,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { BsCheckCircleFill } from 'react-icons/bs'
+import { calculateDays } from '../../utils/moment.utils'
 
 export default function Poll() {
 	const [data, setData] = useState(null)
@@ -83,7 +84,7 @@ export default function Poll() {
         }
 	}, [checkPollAnswer])
 
-	if (!data) {
+	if (!data || calculateDays(user?.user?.created_at) < 3) {
 		return null
 	}
 
