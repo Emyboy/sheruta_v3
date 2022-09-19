@@ -100,13 +100,13 @@ const MasterPopup = (props) => {
 	// 	}
 	// }, 550000)
 
-	// FOR THINGS THAT COME IN FREQUENTLY
-	useInterval(() => {
-		if (user) {
-			// dispatch(getOtherStuffs())
-			getForRealTime()
-		}
-	}, [80000])
+	// // FOR THINGS THAT COME IN FREQUENTLY
+	// useInterval(() => {
+	// 	if (user) {
+	// 		// dispatch(getOtherStuffs())
+	// 		getForRealTime()
+	// 	}
+	// }, [80000])
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {
