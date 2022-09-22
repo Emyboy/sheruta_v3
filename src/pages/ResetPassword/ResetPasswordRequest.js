@@ -19,6 +19,7 @@ export const ResetPasswordRequest = (props) => {
 
 	const onSubmit = (data) => {
 		if (data.email) {
+			console.log('EMAIL --', data.email)
 			setState({ ...state, loading: true })
 			axios(
 				process.env.REACT_APP_API_URL +
