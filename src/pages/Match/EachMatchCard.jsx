@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Btn from '../../components/Btn/Btn'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import { FiCheck } from 'react-icons/fi'
-import { MdClose, MdWork } from 'react-icons/md'
-import { FaIndustry } from 'react-icons/fa'
+import { MdClose } from 'react-icons/md'
 import { Modal } from 'antd'
 import PersonalInfo from '../Profile/PersonalInfo'
 import NotificationService from '../../services/Notifications'
@@ -164,7 +162,7 @@ export default function EachMatchCard({ data, handleStatusUpdate }) {
 								</li>
 								<li className="lh-32 font-xsss text-grey-500 fw-500 d-flex">
 									<b className="text-grey-900 mr-2"> Joined: </b>
-									{moment(users_permissions_user?.created_at).fromNow()}
+									{moment(users_permissions_user?.updated_at).fromNow()}
 								</li>
 							</ul>
 							<button

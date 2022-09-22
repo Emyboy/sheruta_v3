@@ -25,7 +25,7 @@ export const ResetPasswordRequest = (props) => {
 					'/personal-infos/password/reset/request',
 				{
 					method: 'POST',
-					data: { email: data?.email?.toLocaleLowerCase },
+					data: { email: data?.email?.toLocaleLowerCase() },
 				}
 			)
 				.then((res) => {

@@ -13,9 +13,7 @@ import {
 	getAllUniqueHabits,
 	getAllUserInspection,
 } from '../../redux/strapi_actions/view.action'
-import {
-	suggestThemForMe,
-} from '../../redux/strapi_actions/alice.actions'
+import { suggestThemForMe } from '../../redux/strapi_actions/alice.actions'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
 // import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
@@ -35,9 +33,7 @@ import PaymentPopup from './PaymentPopup'
 const MasterPopup = (props) => {
 	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
-	const { personal_info } = useSelector(
-		(state) => state.view
-	)
+	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -64,7 +60,6 @@ const MasterPopup = (props) => {
 
 	// FOR ONE TIME
 	useEffect(() => {
-		
 		// const _token = Cookies.get('token')
 		if (localStorage.getItem('token')) {
 			localStorage.clear()
@@ -87,7 +82,7 @@ const MasterPopup = (props) => {
 	useEffect(() => {
 		if (user) {
 			dispatch(getUserPaymentPlan())
-					dispatch(setUserOnline())
+			dispatch(setUserOnline())
 		}
 	}, [user])
 
@@ -110,13 +105,17 @@ const MasterPopup = (props) => {
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {
-			Cookies.set('has_nin', true, { expires: 7})
-		}else {
+			Cookies.set('has_nin', true, { expires: 7 })
+		} else {
 			Cookies.set('has_nin', false)
 		}
-		if(personal_info && personal_info?.location_keyword && personal_info?.state){
+		if (
+			personal_info &&
+			personal_info?.location_keyword &&
+			personal_info?.state
+		) {
 			dispatch(getAllLocationKeyword(personal_info?.state?.id))
-		}else {
+		} else {
 			dispatch(getAllLocationKeyword(1))
 		}
 	}, [personal_info])
