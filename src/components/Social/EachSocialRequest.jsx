@@ -123,10 +123,68 @@ function EachRequest({ data }) {
 						</p>
 					</Link>
 				</div>
-				<div className="card-body d-block p-0">
-					{
-						// (authUser &&
-						// 	!authUser?.user?.deactivated) &&
+				<div className="card-body d-block p-0 mt-3">
+					{data?.image_url && (
+						<Link
+							to={requestUtils.renderRequestURL(data)}
+							data-lightbox="roadtrip"
+							className="position-relative d-block"
+						>
+							<div className="d-flex">
+								<div
+									style={{
+										backgroundImage: `url(${data?.image_url[0]})`,
+										height: '250px',
+										width: '400px',
+										backgroundSize: 'cover',
+										backgroundPosition: 'center',
+										marginRight: '5px',
+										borderRadius: '15px 0px 0px 15px',
+									}}
+								/>
+								<div className="d-flex flex-column">
+									<div
+										style={{
+											backgroundImage: `url(${data?.image_url[1]})`,
+											height: '50%',
+											width: Global.isMobile ? '200px' : '300px',
+											backgroundSize: 'cover',
+											backgroundPosition: 'center',
+											marginBottom: '5px',
+											borderRadius: '0px 15px 0px 0px',
+										}}
+									/>
+									<div
+										style={{
+											backgroundImage: `url(${data?.image_url[2]})`,
+											height: '50%',
+											width: Global.isMobile ? '200px' : '300px',
+											backgroundSize: 'cover',
+											backgroundPosition: 'center',
+											borderRadius: '0px 0px 15px 0px',
+										}}
+									>
+										<div
+											className="d-flex justify-content-center align-items-center"
+											style={{
+												background:
+													data?.image_url.length - 3 > 0 ? '#00000086' : null,
+												height: '100%',
+												borderRadius: '0px 0px 15px 0px',
+											}}
+										>
+											{data?.image_url?.length - 3 > 0 ? (
+												<strong className="text-white font-xl">
+													+{data?.image_url.length - 3}
+												</strong>
+											) : null}
+										</div>
+									</div>
+								</div>
+							</div>
+						</Link>
+					)}
+					{/* {
 						data?.image_url && data?.image_url.length > 0 && (
 							<div className="row ps-2 pe-2 mt-4">
 								{data?.image_url &&
@@ -173,18 +231,10 @@ function EachRequest({ data }) {
 										}
 									})}
 
-								{/* <div className="col-xs-4 col-sm-4 p-1">
-							<a to="images/t-11.jpg" data-lightbox="roadtrip">
-								<img
-									src={data?.image_url[0]}
-									className="rounded-3 w-100"
-									alt="image"
-								/>
-							</a>
-						</div> */}
+								
 							</div>
 						)
-					}
+					} */}
 				</div>
 				<div className="card-body row p-0 mt-3 mb-3 justify-content-between">
 					<div className="d-flex align-items-center justify-content-start col-md-6">
