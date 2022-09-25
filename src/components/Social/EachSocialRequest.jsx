@@ -124,7 +124,7 @@ function EachRequest({ data }) {
 					</Link>
 				</div>
 				<div className="card-body d-block p-0 mt-3">
-					{data?.image_url && (
+					{data?.image_url && data?.image_url?.length > 0 && (
 						<Link
 							to={requestUtils.renderRequestURL(data)}
 							data-lightbox="roadtrip"
