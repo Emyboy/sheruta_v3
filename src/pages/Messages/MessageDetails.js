@@ -68,7 +68,6 @@ export default function MessageDetails({ conversation_id }) {
 		} else {
 			setInputRows('1')
 		}
-		console.log('LENTH --', message.length)
 	}, [message])
 
 	useEffect(() => {
@@ -119,11 +118,11 @@ export default function MessageDetails({ conversation_id }) {
 		getMessages()
 	}, [conversation])
 
-	useInterval(() => {
-		if (conversation && conversation_id) {
-			getMessages()
-		}
-	}, 10000)
+	// useInterval(() => {
+	// 	if (conversation && conversation_id) {
+	// 		getMessages()
+	// 	}
+	// }, 30000)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -206,17 +205,25 @@ export default function MessageDetails({ conversation_id }) {
 							? 'Available'
 							: `Last Seen ${moment(otherUser?.last_seen).fromNow()}`}
 					</h4>
-					{payment_plan && (
-						<a
-							href={`tel: ${otherUser?.phone_number}`}
-							className="font-xssss position-absolute right-0 top-0 mt-3 me-4"
-						>
-							<i
-								className="fa fa-phone text-theme mt-2 d-inline-block"
-								style={{ fontSize: '20px' }}
-							></i>
-						</a>
-					)}
+					<a
+						onClick={() => {
+							!payment_plan
+								? dispatch({
+										type: 'SET_VIEW_STATE',
+										payload: {
+											showPaymentPopup: true,
+										},
+								  })
+								: (() => {})()
+						}}
+						href={!payment_plan ? '#' : `tel: ${otherUser?.phone_number}`}
+						className="font-xssss position-absolute right-0 top-0 mt-3 me-4"
+					>
+						<i
+							className="fa fa-phone text-theme mt-2 d-inline-block"
+							style={{ fontSize: '20px' }}
+						></i>
+					</a>
 				</div>
 				<div
 					className="messages-content chat-wrapper scroll-bar p-3"

@@ -392,8 +392,8 @@ export const getAllLocationKeyword = (state) => async (dispatch) => {
 }
 
 export const getRealTimeStuffs = () => (dispatch) => {
-	// dispatch(getAllConversations())
-	// dispatch(getUnreadMessageCount())
+	dispatch(getAllConversations())
+	dispatch(getUnreadMessageCount())
 	// dispatch(getAllNotifications())
 	// dispatch(getUserPaymentPlan())
 }

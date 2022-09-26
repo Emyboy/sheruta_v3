@@ -4,6 +4,7 @@ import { Modal } from 'antd'
 import Btn from '../Btn/Btn'
 import store from '../../redux/store/store'
 import { Link } from 'react-router-dom'
+import Global from '../../Global'
 
 const PaymentPopup = (props) => {
 	const { view } = props
@@ -20,21 +21,42 @@ const PaymentPopup = (props) => {
 		<Modal visible={view.showPaymentPopup} footer={null} closable={false}>
 			<div className="pt-4">
 				<div className="text-center">
-					<i className="ti-alert display-3 text-warning"></i>
+					<i className="ti-crown display-3 text-warning"></i>
 					<h1>
-						<b>No or invalid subscription plan</b>
+						<b className='font-xl'>Premium Access</b>
 					</h1>
 				</div>
 				<hr className="text-muted" />
-				<label>
-					<b>Why you are seeing this.</b>
+				<label className='font-xs'>
+					<b>Why you should subscribe.</b>
 				</label>
-				<ol>
-					<li>1. Your subscription may have expired</li>
-					<li>
-						2. Your subscription type doesn't enable you perform this action
+				<ul class="pricing-features">
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> Call people directly
 					</li>
-				</ol>
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> Post room request
+					</li>
+
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> View people's social media
+					</li>
+
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> Access to flatmate matching
+					</li>
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> Boost your room request to the top
+					</li>
+
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> Message multiple users at once.
+					</li>
+					<li className={'font-xs'}>
+						<i class="bx bx-check"></i> And much more...
+					</li>
+				</ul>
+				<br />
 				<span className="text-danger">
 					<b>NOTE: </b>
 				</span>

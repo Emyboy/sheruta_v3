@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 	view: state.view,
 })
 
-export const Pricing = connect(mapStateToProps)((props) => {
+export default connect(mapStateToProps)((props) => {
 	localStorage.setItem('after_login', '/pricing')
 	const mockRef = {
 		message: 'Approved',
@@ -81,14 +81,14 @@ export const Pricing = connect(mapStateToProps)((props) => {
 					setState({
 						...state,
 						paystackDone: false,
-						message: res.val.message,
+						message: res?.data?.message,
 						messageType: 'success',
 					})
 				} else
 					setState({
 						...state,
 						paystackDone: false,
-						message: res.val.message,
+						message: res?.data?.message,
 						messageType: 'failed',
 					})
 			})
@@ -165,7 +165,7 @@ export const Pricing = connect(mapStateToProps)((props) => {
 	}
 
 	return (
-		<>
+		<Layout>
 			<div
 				className="container pb-5"
 				style={{ marginTop: !props.auth.user ? '15vh' : '3vh' }}
@@ -180,9 +180,9 @@ export const Pricing = connect(mapStateToProps)((props) => {
 							<h2 className="mb-3">
 								<b>{state.message}</b>
 							</h2>
-							<Link to={localStorage.getItem('after_payment') || '/'}>
+							<a href={localStorage.getItem('after_payment') || '/'}>
 								<button className="btn bg-theme text-black">Continue</button>
-							</Link>
+							</a>
 						</div>
 					</Modal.Body>
 				</Modal>
@@ -210,7 +210,7 @@ export const Pricing = connect(mapStateToProps)((props) => {
 				<div className="row mb-5 justify-content-center mt-5">
 					{state.plans.map((val, i) => {
 						return (
-							<div class="col-lg-9 col-md-6 col-sm-12" key={i}>
+							<div class="col-xl-6 col-md-8" key={i}>
 								<div class="single-pricing-table bg-white">
 									<FaCrown style={{ color: '#ffac14' }} size={60} />
 									<div class="pricing-header mt-3">
@@ -234,12 +234,18 @@ export const Pricing = connect(mapStateToProps)((props) => {
 										</li>
 
 										<li>
+											<i class="bx bx-check"></i> Access to flatmate matching
+										</li>
+										<li>
 											<i class="bx bx-check"></i> Boost your room request
 										</li>
 
 										<li>
 											<i class="bx bx-check"></i> Send messages to multiple
 											users
+										</li>
+										<li>
+											<i class="bx bx-check"></i> And much more
 										</li>
 
 										{/* <li class="color-gray">
@@ -406,12 +412,7 @@ export const Pricing = connect(mapStateToProps)((props) => {
 					})}
 				</div>
 			</div>
-		</>
+		</Layout>
 	)
 })
 
-export default () => {
-	return <Layout>
-		<Pricing />
-	</Layout>
-}
