@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import EachConversation from '../../pages/Messages/EachConversation'
-import { getAllSuggestionsByStatus } from '../../redux/strapi_actions/alice.actions'
 import { getAllConversations } from '../../redux/strapi_actions/view.action'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -16,7 +15,6 @@ export default function MessagePanel({ show, togglePanel }) {
 	useEffect(() => {
 		if (show) {
 			dispatch(getAllConversations())
-			dispatch(getAllSuggestionsByStatus('accepted'))
 		}
 	}, [show])
 

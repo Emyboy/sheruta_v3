@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Btn from "../../../components/Btn/Btn";
-import Alice from "../../../services/Alice";
 import { notifyEmy } from "../../../services/Sheruta";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../../redux/strapi_actions/auth.actions";
@@ -25,8 +24,7 @@ const FinishStep = (props) => {
   }, []);
 
   useEffect(() => {
-    Alice.suggestMeToThem();
-    Alice.suggestThemForMe();
+   
     notifyEmy({
       heading: "Finished the get started",
       status: 'success',
