@@ -45,6 +45,7 @@ export const ResetPasswordRequest = (props) => {
 					notifyEmy({
 						heading: 'Error Requested for a password reset',
 						status: 'error',
+						log: { ...err, email: data?.email?.toLocaleLowerCase() },
 					})
 					setState({ ...state, loading: false })
 					if (err.response.data.message) {

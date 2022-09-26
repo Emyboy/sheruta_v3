@@ -11,6 +11,7 @@ import end_sarz from '../../assets/img/end_sarz.jpeg'
 import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
 import Global from '../../Global'
 import Cookies from 'js-cookie'
+import { FaCrown } from 'react-icons/fa'
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))
 
 const formattedPrice = new Intl.NumberFormat('en-NG')
@@ -20,7 +21,7 @@ const mapStateToProps = (state) => ({
 	view: state.view,
 })
 
-export default connect(mapStateToProps)((props) => {
+export const Pricing = connect(mapStateToProps)((props) => {
 	localStorage.setItem('after_login', '/pricing')
 	const mockRef = {
 		message: 'Approved',
@@ -80,14 +81,14 @@ export default connect(mapStateToProps)((props) => {
 					setState({
 						...state,
 						paystackDone: false,
-						message: res.data.message,
+						message: res.val.message,
 						messageType: 'success',
 					})
 				} else
 					setState({
 						...state,
 						paystackDone: false,
-						message: res.data.message,
+						message: res.val.message,
 						messageType: 'failed',
 					})
 			})
@@ -129,9 +130,9 @@ export default connect(mapStateToProps)((props) => {
 
 	// const sendPaymentToBackend = () => {
 	//     // console.log('SENDING ----', {
-	//     //     ...data.reference,
+	//     //     ...val.reference,
 	//     //     // ...mockRef,
-	//     //     payment_plan: data.payment_plan,
+	//     //     payment_plan: val.payment_plan,
 	//     //     users_permissions_user: props.auth.user.user.id
 	//     // })
 
@@ -164,7 +165,7 @@ export default connect(mapStateToProps)((props) => {
 	}
 
 	return (
-		<Layout>
+		<>
 			<div
 				className="container pb-5"
 				style={{ marginTop: !props.auth.user ? '15vh' : '3vh' }}
@@ -179,9 +180,7 @@ export default connect(mapStateToProps)((props) => {
 							<h2 className="mb-3">
 								<b>{state.message}</b>
 							</h2>
-							<Link
-								to={localStorage.getItem('after_payment') || '/'}
-							>
+							<Link to={localStorage.getItem('after_payment') || '/'}>
 								<button className="btn bg-theme text-black">Continue</button>
 							</Link>
 						</div>
@@ -191,9 +190,9 @@ export default connect(mapStateToProps)((props) => {
 					<div className="col text-center">
 						<div className="sec-heading center">
 							<h1>
-								<b>See our packages</b>
+								<b>See premium packages</b>
 							</h1>
-							<p>We offer best and smart packages for you.</p>
+							<p>Do a lot with premium</p>
 						</div>
 					</div>
 				</div>
@@ -208,8 +207,79 @@ export default connect(mapStateToProps)((props) => {
                         <FreeRequestAds />
                         </div>
                 </div> */}
-				<div className="row mb-5 justify-content-center">
+				<div className="row mb-5 justify-content-center mt-5">
 					{state.plans.map((val, i) => {
+						return (
+							<div class="col-lg-9 col-md-6 col-sm-12" key={i}>
+								<div class="single-pricing-table bg-white">
+									<FaCrown style={{ color: '#ffac14' }} size={60} />
+									<div class="pricing-header mt-3">
+										<h3>Premium Plan</h3>
+									</div>
+
+									<div class="price">
+										{window.formattedPrice.format(formatPrice(val.price))}
+									</div>
+
+									<ul class="pricing-features">
+										<li>
+											<i class="bx bx-check"></i> Call people directly
+										</li>
+										<li>
+											<i class="bx bx-check"></i> Post room request
+										</li>
+
+										<li>
+											<i class="bx bx-check"></i> View people's social media
+										</li>
+
+										<li>
+											<i class="bx bx-check"></i> Boost your room request
+										</li>
+
+										<li>
+											<i class="bx bx-check"></i> Send messages to multiple
+											users
+										</li>
+
+										{/* <li class="color-gray">
+											<del>
+												<i class="bx bx-x"></i> Property Listing
+											</del>
+										</li> */}
+									</ul>
+
+									{/* <div class="pricing-btn">
+										<a href="#" class="default-btn">
+											Select Plan <span></span>
+										</a>
+									</div> */}
+									{!props.auth.user ? (
+										<Link
+											to="/login"
+											className="default-btn shadow-sm bg-theme mt-3"
+										>
+											Login To Pay
+										</Link>
+									) : (
+										<div className="pricing-btn">
+											<PaystackButton
+												className="default-btn"
+												{...{
+													...config,
+													text: 'Pay Now',
+													amount: `${formatPrice(val.price) + '00'}`,
+													email: props.auth.user.user.email,
+													onSuccess: (reference) =>
+														handlePaystackSuccessAction(reference, val.id),
+													onClose: handlePaystackCloseAction,
+												}}
+											/>
+										</div>
+									)}
+								</div>
+							</div>
+						)
 						return (
 							<div className="col-lg-4 col-md-4" key={i}>
 								<article className="card mb-4 rounded-xs shadow-lg rounded">
@@ -336,6 +406,12 @@ export default connect(mapStateToProps)((props) => {
 					})}
 				</div>
 			</div>
-		</Layout>
+		</>
 	)
 })
+
+export default () => {
+	return <Layout>
+		<Pricing />
+	</Layout>
+}

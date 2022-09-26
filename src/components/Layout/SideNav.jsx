@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { FaTag } from 'react-icons/fa'
+import { FaCrown, FaTag } from 'react-icons/fa'
 import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
@@ -55,8 +55,8 @@ export default function SideNav({ show }) {
 									to={`${
 										// personal_info?.location_keyword
 										// 	? `/discussion/room/${personal_info?.location_keyword?.id}`
-										// 	: 
-											`/discussion`
+										// 	:
+										`/discussion`
 									}`}
 									className="nav-content-bttn open-font"
 								>
@@ -96,9 +96,9 @@ export default function SideNav({ show }) {
 							<li>
 								<Link to="/pricing" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-gold-gradiant me-3">
-										<FaTag size={size} />
+										<FaCrown size={size} />
 									</i>
-									<span>Pricing</span>
+									<span>Premium</span>
 								</Link>
 							</li>
 							<li>
