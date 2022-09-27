@@ -27,7 +27,7 @@ export default function MessageDetails({ conversation_id }) {
 	const [loading, setLoading] = useState(false)
 	const dispatch = useDispatch()
 	const [inputRows, setInputRows] = useState('2')
-	const defaultHeight = Global.isMobile ? '65vh' : '75vh'
+	const defaultHeight = Global.isMobile ? '56vh' : '75vh'
 	const [height, setHeight] = useState(defaultHeight)
 
 	// const conversation_id = props.match.params.conversation_id;
