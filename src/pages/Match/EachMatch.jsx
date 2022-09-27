@@ -1,15 +1,51 @@
+import axios from 'axios'
 import moment from 'moment'
 import React from 'react'
 import { useState } from 'react'
+import { Spinner } from 'react-activity'
 import { Link } from 'react-router-dom'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
+import { headers } from '../../redux/strapi_actions/contact.actions'
 
-export default function EachMatch({ data }) {
-	console.log(data)
+export default function EachMatch({ data, done }) {
 	const [val, setVal] = useState(data)
+	const [loading, setLoading] = useState(false)
 	const _user = val?.users_permissions_user
+	const [added, setAdded] = useState(false)
+	const [remove, setRemove] = useState(false)
+
+	const addUserToContact = async () => {
+		try {
+			setLoading(true)
+			const res = await axios(
+				process.env.REACT_APP_API_URL + `/contacts/add/${_user?.id}`,
+				{
+					method: 'POST',
+					headers: headers(),
+				}
+			)
+			// console.log(res.data)
+			if (res.data) {
+				setAdded(true)
+				setTimeout(() => {
+					setLoading(false)
+					setRemove(true)
+					if(done){
+						done()
+					}
+				}, 1000)
+			}
+		} catch (error) {
+			setLoading(false)
+			return Promise.reject(error)
+		}
+	}
 
 	if (!_user) {
+		return null
+	}
+
+	if (remove) {
 		return null
 	}
 
@@ -18,9 +54,13 @@ export default function EachMatch({ data }) {
 			className="owl-item col-4 mb-3"
 			style={{ minWidth: '360px', width: '380px' }}
 		>
-			<div className="agents-item">
+			<div
+				className={`agents-item ${
+					added && 'animate__backOutUp animate__animated'
+				}`}
+			>
 				<div className="agents-image">
-					<a href="property-details.html">
+					<Link to={`/user/${_user?.username}`}>
 						{/* <img
 							src="https://us.123rf.com/450wm/luismolinero/luismolinero1909/luismolinero190917934/130592146-handsome-young-man-in-pink-shirt-over-isolated-blue-background-keeping-the-arms-crossed-in-frontal-p.jpg?ver=6"
 							alt="image"
@@ -46,7 +86,7 @@ export default function EachMatch({ data }) {
 								Has Room
 							</span>
 						)}
-					</a>
+					</Link>
 
 					<ul className="social">
 						{val?.facebook && (
@@ -180,20 +220,21 @@ export default function EachMatch({ data }) {
 					</p> */}
 
 					<div className="agents-btn">
-						<a
-							href="property-details.html"
+						<button
 							className="text-danger fw-bold btn btn-lg font-xs"
+							disabled={loading}
 						>
 							Decline <span></span>
-						</a>
+						</button>
 					</div>
 					<div className="agents-btn">
-						<a
-							href="property-details.html"
-							className="bg-accent text-white default-btn btn-sm"
+						<button
+							onClick={addUserToContact}
+							disabled={loading}
+							className="bg-accent text-white default-btn btn-sm px-4"
 						>
-							Add To Contact + <span></span>
-						</a>
+							{loading ? <Spinner /> : 'Add To Contact +'} <span></span>
+						</button>
 					</div>
 				</div>
 			</div>

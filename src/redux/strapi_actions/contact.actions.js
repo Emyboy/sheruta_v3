@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 const API_URL = process.env.REACT_APP_API_URL
 
-const headers = () => {
+export const headers = () => {
 	return {
 		authorization: `Bearer ${Cookies.get('token')}`,
 	}
@@ -14,6 +14,7 @@ export const findPerfectMatch = () => async (dispatch) => {
 		const res = await axios(API_URL + `/contacts/find-match`, {
 			headers: headers(),
 		})
+        console.log('FOUND MATCH --', res.data)
 		dispatch({
 			type: 'SET_CONTACT_STATE',
 			payload: {
