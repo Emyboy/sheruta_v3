@@ -10,6 +10,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import store from '../../../redux/store/store'
 import { getAllUniqueHabits, getLocationKeyWordsByState } from '../../../redux/strapi_actions/view.action'
+import { notifyEmy } from '../../../services/Sheruta'
 
 export default function LocationKeywordSettings() {
 	const [state, setState] = useState(null)
@@ -36,6 +37,10 @@ export default function LocationKeywordSettings() {
 				if(personal_info?.unique_habits?.length === 0){
 					history.push('/settings/unique-habits')
 				}
+				notifyEmy({
+					heading: `Updated location keyword to ${res.data?.location_keyword?.name}`,
+					status: 'success',
+				})
 			}
 		} catch (error) {
 			notification.error({ message: 'Error, please try again' })

@@ -12,6 +12,7 @@ import axios from 'axios'
 import { notification } from 'antd'
 import store from '../../redux/store/store'
 import Cookies from 'js-cookie'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default function LocationKeywordSelector({
 	done,
@@ -49,6 +50,10 @@ export default function LocationKeywordSelector({
 				store.dispatch(getAuthPersonalInfo())
 				store.dispatch(getLocationKeyWordsByState(personal_info?.state?.id))
 				store.dispatch(getAllUniqueHabits())
+				notifyEmy({
+					heading: `Updated location keyword to ${res.data?.location_keyword?.name}`,
+					status: 'success',
+				})
 			}
 			// console.log('UPDATED --', res.data)
 		} catch (error) {
