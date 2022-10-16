@@ -3,9 +3,14 @@ import moment from 'moment'
 import React from 'react'
 import { useState } from 'react'
 import { Spinner } from 'react-activity'
+import { FaPhone } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import { headers } from '../../redux/strapi_actions/contact.actions'
+import ContactService from '../../services/ContactService'
+import { Modal } from 'antd'
+import PersonalInfo from '../Profile/PersonalInfo'
+import Global from '../../Global'
 
 export default function EachMatch({ data, done }) {
 	const [val, setVal] = useState(data)
@@ -13,24 +18,19 @@ export default function EachMatch({ data, done }) {
 	const _user = val?.users_permissions_user
 	const [added, setAdded] = useState(false)
 	const [remove, setRemove] = useState(false)
+	const [showInfo, setShowInfo] = useState(false)
 
 	const addUserToContact = async () => {
 		try {
 			setLoading(true)
-			const res = await axios(
-				process.env.REACT_APP_API_URL + `/contacts/add/${_user?.id}`,
-				{
-					method: 'POST',
-					headers: headers(),
-				}
-			)
+			const res = await ContactService.addUserAsContact(_user?.id)
 			// console.log(res.data)
 			if (res.data) {
 				setAdded(true)
 				setTimeout(() => {
 					setLoading(false)
 					setRemove(true)
-					if(done){
+					if (done) {
 						done()
 					}
 				}, 1000)
@@ -51,9 +51,20 @@ export default function EachMatch({ data, done }) {
 
 	return (
 		<div
-			className="owl-item col-4 mb-3"
-			style={{ minWidth: '360px', width: '380px' }}
+			className="owl-item col-4 mb-3 pr-0"
+			style={{ minWidth: Global.isMobile ? '330px' : '360px', width: '380px' }}
 		>
+			<Modal
+				visible={showInfo}
+				onCancel={() => setShowInfo(false)}
+				footer={null}
+			>
+				<PersonalInfo userData={_user} />
+
+				<button className="btn btn-danger" onClick={() => setShowInfo(false)}>
+					close
+				</button>
+			</Modal>
 			<div
 				className={`agents-item ${
 					added && 'animate__backOutUp animate__animated'
@@ -71,7 +82,7 @@ export default function EachMatch({ data, done }) {
 								backgroundImage: `url(${_user?.avatar_url})`,
 								backgroundSize: 'cover',
 								backgroundPosition: 'center',
-								height: '200px',
+								height: '250px',
 							}}
 						/>
 						{!val?.looking_for && (
@@ -135,6 +146,7 @@ export default function EachMatch({ data, done }) {
 						<Link
 							to={`/user/${_user?.username}`}
 							className="d-flex align-items-center"
+							style={{ width: '200px'}}
 						>
 							{_user?.first_name?.split(' ')[0]}{' '}
 							<VerifiedBadge user={_user} without_text className={'mb-0'} />
@@ -203,30 +215,30 @@ export default function EachMatch({ data, done }) {
 							<i className="bx bx-envelope"></i>
 						</a>
 					</div> */}
-					<span style={{ position: 'absolute', right: '30px', top: '7%' }}>
+					<span style={{ position: 'absolute', right: '30px', top: '5%' }}>
 						<a
-							className="border shadow-sm rounded-xl pt-2 pl-2 pr-2 bg-theme-light"
+							className="border shadow-sm rounded-circle bg-theme-light d-flex align-item-center p-2"
 							href={`tel:${_user?.phone_number}`}
 						>
-							<i className="bx bx-phone font-md text-theme"></i>
+							<FaPhone className=" font-md text-theme font-xl" />
 						</a>
 					</span>
 				</div>
 				<hr />
-				<div className="agents-bottom-content- pb-2 d-flex justify-content-between align-items-center">
+				<div className="agents-bottom-content- pb-3 d-flex justify-content-end align-items-center">
 					{/* <p>
 						<i className="bx bxs-phone"></i>
 						<a href="tel:000123456789">+000 123 456 789</a>
 					</p> */}
 
-					<div className="agents-btn">
+					{/* <div className="agents-btn">
 						<button
 							className="text-danger fw-bold btn btn-lg font-xs"
 							disabled={loading}
 						>
 							Decline <span></span>
 						</button>
-					</div>
+					</div> */}
 					<div className="agents-btn">
 						<button
 							onClick={addUserToContact}

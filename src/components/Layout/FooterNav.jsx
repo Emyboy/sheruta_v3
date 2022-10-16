@@ -58,7 +58,7 @@ export default function FooterNav({ pageName }) {
 					/>
 				</Link>
 				<Link to={`/match`} className="position-relative nav-content-bttn">
-					<BadgeCount count={matches && matches?.length} />
+					<BadgeCount count={matches && !user?.user?.is_verified ? 7 : matches?.length} />
 					<BsPeople
 						size={iconSize}
 						className={`text-${

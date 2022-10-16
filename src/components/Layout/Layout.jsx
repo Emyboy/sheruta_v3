@@ -53,6 +53,7 @@ export default function Layout({
 						paddingBottom:
 							!user || noBottomSpacing ? '0vh' : full_screen ? '0px' : '21vh',
 						overflow: noScroll && 'hidden',
+						minHeight: '100vh'
 					}}
 				>
 					<div

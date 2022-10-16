@@ -210,53 +210,53 @@ export default connect(mapStateToProps)((props) => {
 				<div className="row mb-5 justify-content-center mt-5">
 					{state.plans.map((val, i) => {
 						return (
-							<div class="col-xl-6 col-md-8" key={i}>
-								<div class="single-pricing-table bg-white">
+							<div className="col-xl-6 col-md-8" key={i}>
+								<div className="single-pricing-table bg-white">
 									<FaCrown style={{ color: '#ffac14' }} size={60} />
-									<div class="pricing-header mt-3">
-										<h3>Premium Plan</h3>
+									<div className="pricing-header mt-3">
+										<h3 className='fw-500'>Premium Plan</h3>
 									</div>
 
-									<div class="price">
+									<div className="price text-accent fw-bold">
 										{window.formattedPrice.format(formatPrice(val.price))}
 									</div>
 
-									<ul class="pricing-features">
+									<ul className="pricing-features">
 										<li>
-											<i class="bx bx-check"></i> Call people directly
+											<i className="bx bx-check"></i> Call flatmates directly
 										</li>
 										<li>
-											<i class="bx bx-check"></i> Post room request
-										</li>
-
-										<li>
-											<i class="bx bx-check"></i> View people's social media
+											<i className="bx bx-check"></i> Post room request
 										</li>
 
 										<li>
-											<i class="bx bx-check"></i> Access to flatmate matching
-										</li>
-										<li>
-											<i class="bx bx-check"></i> Boost your room request
+											<i className="bx bx-check"></i> View people's social media
 										</li>
 
 										<li>
-											<i class="bx bx-check"></i> Send messages to multiple
+											<i className="bx bx-check"></i> Access to flatmate matching
+										</li>
+										<li>
+											<i className="bx bx-check"></i> Boost your room request
+										</li>
+
+										<li>
+											<i className="bx bx-check"></i> Send messages to multiple
 											users
 										</li>
 										<li>
-											<i class="bx bx-check"></i> And much more
+											<i className="bx bx-check"></i> And much more
 										</li>
 
-										{/* <li class="color-gray">
+										{/* <li className="color-gray">
 											<del>
-												<i class="bx bx-x"></i> Property Listing
+												<i className="bx bx-x"></i> Property Listing
 											</del>
 										</li> */}
 									</ul>
 
-									{/* <div class="pricing-btn">
-										<a href="#" class="default-btn">
+									{/* <div className="pricing-btn">
+										<a href="#" className="default-btn">
 											Select Plan <span></span>
 										</a>
 									</div> */}
@@ -270,7 +270,7 @@ export default connect(mapStateToProps)((props) => {
 									) : (
 										<div className="pricing-btn">
 											<PaystackButton
-												className="default-btn"
+												className="default-btn bg-accent"
 												{...{
 													...config,
 													text: 'Pay Now',

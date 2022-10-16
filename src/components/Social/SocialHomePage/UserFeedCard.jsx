@@ -12,19 +12,19 @@ export default function UserFeedCard() {
 				className="card-body position-relative h150 bg-image-cover bg-image-center"
 				style={{ backgroundImage: `url("https://picsum.photos/200/200")` }}
 			></div>
-			<Link to={`/user/${user.user.username}`}>
+			<Link to={`/user/${user?.user?.username}`}>
 				<div className="card-body d-block pt-4 text-center">
 					<figure className="avatar mt--6 position-relative w75 z-index-0 w100 z-index-1 ms-auto me-auto">
 						<img
-							src={user.user.avatar_url}
+							src={user?.user?.avatar_url}
 							alt="image"
 							className="p-1 bg-white rounded-xl w-100"
 						/>
 					</figure>
 					<h4 className="font-xs ls-1 fw-700 text-grey-900">
-						{user.user.first_name}
+						{user?.user?.first_name}
 						<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-							@{user.user.username}
+							@{user?.user?.username}
 						</span>
 					</h4>
 				</div>

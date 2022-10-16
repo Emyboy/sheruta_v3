@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 
 const { TextArea } = Input
 
-export default function PropertyReviewForm() {
+export default function PropertyReviewForm({ done }) {
 	const { user } = useSelector((state) => state.auth)
 	const [review, setReview] = useState('')
 	const [loading, setLoading] = useState(false)
@@ -17,7 +17,7 @@ export default function PropertyReviewForm() {
 		try {
 			e.preventDefault()
 			setLoading(true)
-			const res = await axios(process.env.REACT_APP_API_URL + `/reviews`, {
+			const res = await axios(process.env.REACT_APP_API_URL + `/reviews/property`, {
 				method: 'POST',
 				headers: {
 					authorization: `Bearer ${Cookies.get('token')}`,
@@ -25,11 +25,16 @@ export default function PropertyReviewForm() {
 				data: {
 					user: user?.user?.id,
 					review,
-					property: property_id,
+					property: parseInt(property_id),
 				},
 			})
-            console.log(res.data)
-			setLoading(false)
+            if(res){
+				console.log(res.data)
+				setLoading(false)
+				if(done){
+					done(res.data)
+				}
+			}
 		} catch (error) {
 			setLoading(false)
 			console.log(error)
@@ -39,7 +44,7 @@ export default function PropertyReviewForm() {
 
 	return (
 		<div className="article-leave-comment card p-3 rounded-xxl">
-			<h4>Leave A Question</h4>
+			<h2 className='fw-400'>Leave A Question</h2>
 
 			<form className="pt-4" onSubmit={handleSubmit}>
 				<div className="row justify-content-center">
@@ -58,10 +63,10 @@ export default function PropertyReviewForm() {
 					<div className="col-lg-12 col-md-12">
 						<button
 							type="submit"
-							className="default-btn"
+							className="default-btn bg-accent"
 							disabled={!review || loading}
 						>
-							Post A Comment <span></span>
+							{loading ? 'Loading...' : 'Post A Comment'} <span></span>
 						</button>
 					</div>
 				</div>

@@ -11,6 +11,7 @@ export default function MessagePanel({ show, togglePanel }) {
 	const { conversations } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
 	const { accepted_suggestions } = useSelector((state) => state.alice)
+	const { contacts } = useSelector((state) => state.contact)
 
 	useEffect(() => {
 		if (show) {
@@ -62,20 +63,19 @@ export default function MessagePanel({ show, togglePanel }) {
 						CONTACTS
 					</h4>
 					<ul className="list-group list-group-flush">
-						{accepted_suggestions && accepted_suggestions.length === 0 && (
+						{contacts.length === 0 && (
 							<li className="text-center">
 								<h6 className="text-muted">No contacts yet</h6>
 							</li>
 						)}
-						{accepted_suggestions &&
-							accepted_suggestions
+						{contacts
 								.sort(
 									(a, b) =>
 										new Date(b.updated_at).getTime() -
 										new Date(a.updated_at).getTime()
 								)
 								.map((val, i) => {
-									const otherUser = val?.users_permissions_user
+									const otherUser = val?.user
 									if (!otherUser.deactivated) {
 										return (
 											<li

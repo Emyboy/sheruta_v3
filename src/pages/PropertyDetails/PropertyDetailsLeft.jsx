@@ -161,7 +161,7 @@ export default function PropertyDetailsLeft({ data, done, standalone }) {
 			</div>
 			{!standalone && (
 				<div className="details-description bg-white rounded widget widget_info">
-					<h4 className="mb-4 fw-bold">The Owner</h4>
+					<h4 className="mb-4 fw-bold">Contact The Person</h4>
 					<div className="info-box-one d-flex mt-3">
 						<Avatar
 							size={80}

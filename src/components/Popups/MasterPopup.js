@@ -28,10 +28,12 @@ import LocationKeywordPopup from './LocationKeywordPopup'
 import RobotMessage from '../Ads/RobotMessage/RobotMessage'
 import Global from '../../Global'
 import PaymentPopup from './PaymentPopup'
-import { findPerfectMatch } from '../../redux/strapi_actions/contact.actions'
+import {
+	findPerfectMatch,
+	getAuthContacts,
+} from '../../redux/strapi_actions/contact.actions'
 
 const MasterPopup = (props) => {
-	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
@@ -66,8 +68,11 @@ const MasterPopup = (props) => {
 			dispatch(setUserOnline())
 			getForRealTime()
 			dispatch(getOtherStuffs())
-			dispatch(findPerfectMatch())
 			dispatch(getAllUserInspection(user?.user?.id))
+			dispatch(getAuthContacts(user?.user?.id))
+		} 
+		if (user && user?.user?.is_verified) {
+			dispatch(findPerfectMatch())
 		}
 		getForViews()
 		dispatch(getAllUniqueHabits())
@@ -77,8 +82,9 @@ const MasterPopup = (props) => {
 		if (user) {
 			dispatch(getUserPaymentPlan())
 			dispatch(setUserOnline())
+			dispatch(getAuthContacts(user?.user?.id))
 		}
-	}, [user])
+	}, [])
 
 	// // FOR A LONGER TIME
 	// useInterval(() => {
@@ -92,7 +98,6 @@ const MasterPopup = (props) => {
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {
 		if (user) {
-			console.log('GETTING REAL TIME')
 			// dispatch(getOtherStuffs())
 			getForRealTime()
 		}
