@@ -12,6 +12,7 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
 const MessageBody = styled.div`
+	overflow-wrap: break-word;
 	a {
 		color: blue !important;
 		font-weight: bold;
@@ -71,9 +72,19 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 
 	const _user = user?.user
 	return (
-		<EachDiscussionContainer outgoing from={data.from} isNew={data?.new} message={data}>
+		<EachDiscussionContainer
+			outgoing
+			from={data.from}
+			isNew={data?.new}
+			message={data}
+		>
 			<div className="d-flex align-items-center justify-content-between">
-				<Link to={`/user/${data?.from?.username}`} className="fw-500 text-grey-600 m-0">{data.from.first_name}</Link>
+				<Link
+					to={`/user/${data?.from?.username}`}
+					className="fw-500 text-grey-600 m-0"
+				>
+					{data.from.first_name}
+				</Link>
 				<EachDiscussionOptions
 					onDeleteClick={() => askDelete()}
 					onEditClick={() => setShowEdit(true)}
@@ -86,7 +97,8 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 			</MessageBody>
 			<i>
 				<small className="text-grey-600">
-					{moment(data?.created_at).fromNow()} {process.env.NODE_ENV !== 'production' && data?.id}
+					{moment(data?.created_at).fromNow()}{' '}
+					{process.env.NODE_ENV !== 'production' && data?.id}
 				</small>
 			</i>
 		</EachDiscussionContainer>
@@ -103,7 +115,12 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 		<EachDiscussionContainer outgoing={false} from={data.from} message={data}>
 			<div>
 				<div className="d-flex align-items-center justify-content-between">
-					<Link to={`/user/${data?.from?.username}`} className="fw-500 text-grey-600 m-0">{data.from.first_name} {data?.reply && "Replied"}</Link>
+					<Link
+						to={`/user/${data?.from?.username}`}
+						className="fw-500 text-grey-600 m-0"
+					>
+						{data.from.first_name} {data?.reply && 'Replied'}
+					</Link>
 					<EachDiscussionOptions
 						onDeleteClick={() => askDelete()}
 						onReply={() => dispatch(setGroupState({ reply: data }))}
@@ -140,7 +157,7 @@ const Reply = ({ data }) => {
 					{moment(data?.reply?.created_at).fromNow()}
 				</small>
 			</div>
-			<i>
+			<i style={{ overflowWrap: 'break-word' }}>
 				{renderHTML(
 					data?.reply?.message_text && data?.reply?.message_text?.length > 300
 						? String(data?.reply?.message_text.slice(0, 300) + ' ...')

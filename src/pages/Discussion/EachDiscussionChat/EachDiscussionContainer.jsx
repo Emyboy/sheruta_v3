@@ -40,9 +40,15 @@ export default function EachDiscussionContainer({
 							className={`rounded-xl ${
 								from.online ? 'bg-success' : 'bg-danger'
 							}`}
-							style={{ padding: 2 }}
+							style={{ padding: 2, width: '40px', height: '40px' }}
 						>
-							<Avatar src={from.avatar_url} size={40} />
+							<img
+								src={from.avatar_url}
+								alt="user avatar"
+								className="rounded-circle"
+								width="40"
+								loading="lazy"
+							/>
 						</div>
 					</Link>
 				)}

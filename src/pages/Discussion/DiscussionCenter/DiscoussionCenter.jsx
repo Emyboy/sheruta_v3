@@ -5,15 +5,12 @@ import DiscussionCenterHeader from './DiscussionCenterHeader'
 import Global from '../../../Global'
 import DiscussionChatList from './DiscussionChatList'
 import DiscussionChatInput from './DiscussionChatInput'
-import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import DiscussionReplyPreview from './DiscussionReplyPreview'
 
 export default function DiscussionCenter() {
-	const { user } = useSelector((state) => state.auth)
 	const [newMessages, setNewMessages] = useState(null)
 	const { reply, showDetails } = useSelector((state) => state?.group)
 
-	const _user = user?.user
 	return (
 		<div
 			className="bg-white d-flex flex-column justify-content-between"

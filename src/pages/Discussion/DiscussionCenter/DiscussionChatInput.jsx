@@ -19,7 +19,7 @@ export default function DiscussionChatInput({ onSend }) {
 	const { app_details, payment_plan } = useSelector((state) => state?.view)
 	const dispatch = useDispatch()
 
-	const inputRef = useRef(null);
+	const inputRef = useRef(null)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -64,22 +64,30 @@ export default function DiscussionChatInput({ onSend }) {
 	}
 
 	useEffect(() => {
-		if(reply){
+		if (reply) {
 			inputRef.current.focus()
 		}
-	},[reply])
+	}, [reply])
 
 	return (
 		<form
-			className={`bg-grey p-2 rounded-xl d-flex w-100 `}
+			className={`bg-grey p-2 rounded-xl d-flex w-100 align-items-center`}
 			onSubmit={handleSubmit}
 		>
-			<input
-				className="form-control border-0 bg-grey rounded-xl font-xs"
+			<textarea
+				className="scroll-bar form-control border-0 bg-grey rounded-xl font-xs"
 				placeholder="Start typing..."
 				onChange={(e) => setNewMessage(e.target.value)}
 				value={newMessage}
 				ref={inputRef}
+				rows={'1'}
+				style={{
+					height:
+						newMessage.length > 30 ? `${newMessage.length + 45}px` : '45px',
+					lineHeight: '30px',
+					maxHeight: '300px',
+					resize: 'none',
+				}}
 			/>
 			<button
 				className="btn bg-accent text-white align-self-start"
