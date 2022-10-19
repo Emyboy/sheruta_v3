@@ -190,7 +190,7 @@ export default function EachMatch({ data, done }) {
 								{val?.work_industry?.name}
 							</span>
 						</small>
-						<small className="font-xxxs my-3 text-center">
+						<small className="font-xxxs my-3 text-center" onClick={() => setShowInfo(true)}>
 							<span className="link fw-bold text-black m-0 text-capitalize text-theme">
 								Show More Details
 							</span>
