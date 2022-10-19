@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from 'antd'
+import { notification, Popover, Tooltip } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import React from 'react'
@@ -7,16 +7,18 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { API_URL } from '../../../redux/strapi_actions/contact.actions'
 
-export default function Promote({ type, request_id, user_id }) {
+export default function Promote({ type, request_id, user_id, done }) {
 	const [days, setDays] = useState(5)
 	const { user } = useSelector((state) => state.auth)
 	const [showTip, setShowTip] = useState(true)
+	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
 		if (days < 5) {
 			setDays(5)
 		}
 	}, [days])
+
 	useEffect(() => {
 		if (showTip) {
 			setTimeout(() => {
@@ -27,6 +29,7 @@ export default function Promote({ type, request_id, user_id }) {
 
 	const promote = async () => {
 		try {
+			setLoading(true)
 			const res = await axios(API_URL + `/ads/promote`, {
 				method: 'POST',
 				headers: {
@@ -40,18 +43,22 @@ export default function Promote({ type, request_id, user_id }) {
 					profile: user_id,
 				},
 			})
-			console.log('RES --', res.data)
+			notification.success({ message: 'Moved to the top' })
+			setLoading(false)
+			if (done) {
+				done(res.data)
+			}
 		} catch (error) {
+			if (error?.response?.status === 404) {
+				notification.info({ message: 'Request already at the top' })
+			}
+			if(done){
+				done()
+			}
+			setLoading(false)
 			return Promise.reject(error)
 		}
 	}
-
-	const content = (
-		<div>
-			<p>Content</p>
-			<p>Content</p>
-		</div>
-	)
 
 	return (
 		<div className="container">
@@ -63,19 +70,19 @@ export default function Promote({ type, request_id, user_id }) {
 
 				<div className="mt-5">
 					<div className="mb-5 d-flex justify-content-center">
-						<button
+						{/* <button
 							disabled={days === 5}
 							onClick={() => setDays(days - 1)}
 							className="btn align-self-center fw-bold font-xl btn-sm border"
 							style={{ borderRadius: '70px', width: '50px', height: '50px' }}
 						>
 							-
-						</button>
+						</button> */}
 						<div>
 							<small>For </small>
 							<h1 className="font-xxl mx-4 mb-0 ">{days} Days</h1>
 						</div>
-						<Tooltip
+						{/* <Tooltip
 							visible={showTip}
 							open={true}
 							content={content}
@@ -88,17 +95,26 @@ export default function Promote({ type, request_id, user_id }) {
 							>
 								+
 							</button>
-						</Tooltip>
+						</Tooltip> */}
 					</div>
 					<div className="d-flex flex-column">
-						<button className="btn bg-accent text-white" onClick={promote}>
-							Promote For{' '}
-							{days > 5 ? (
-								<strong>
-									₦ {window.formattedPrice.format(500 * days - 2000)}
-								</strong>
+						<button
+							className="btn bg-accent text-white text-center"
+							onClick={promote}
+						>
+							{!loading ? (
+								<>
+									Promote For{' '}
+									{days > 5 ? (
+										<strong>
+											₦ {window.formattedPrice.format(500 * days - 2000)}
+										</strong>
+									) : (
+										'Free'
+									)}
+								</>
 							) : (
-								'Free'
+								<>Loading...</>
 							)}
 						</button>
 					</div>

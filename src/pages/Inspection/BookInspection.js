@@ -13,7 +13,7 @@ import { BiLeftArrowAlt, BiUser } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 import { Dots } from 'react-activity'
 
-const EachBookingUser = ({ val, added, onInvite, unInvite }) => {
+const EachBookingUser = ({ val, added, onInvite, unInvite, personal_info }) => {
 	return (
 		<div className="card mt-3 rounded-xxl">
 			<div className="d-flex justify-content-between">
@@ -29,7 +29,7 @@ const EachBookingUser = ({ val, added, onInvite, unInvite }) => {
 						<h4 className="fw-bold text-grey-700">{val?.first_name}</h4>
 						<h5 className="text-grey-600">
 							{Global.currency} {window.formattedPrice.format(val?.budget)} -
-							Budget
+							{personal_info && personal_info?.looking_for ? "Budget" : "Rent"}
 						</h5>
 					</div>
 				</div>
@@ -59,7 +59,7 @@ export default function BookInspection({ match }) {
 	const tabs = ['Interested Users', 'Your Contacts']
 	const [tab, setTab] = useState(tabs[0])
 	const [invitedUser, setInvitedUser] = useState([])
-	const { accepted_suggestions } = useSelector((state) => state?.alice)
+	const { contacts } = useSelector((state) => state?.contact)
 	const { personal_info } = useSelector((state) => state.view)
 	const [showInvite, setShowInvite] = useState(false)
 	const [loading, setLoading] = useState(false)
@@ -262,30 +262,30 @@ export default function BookInspection({ match }) {
 												</>
 											)}
 											{tab === tabs[1] &&
-												accepted_suggestions?.map((val, i) => {
-													return (
-														<EachBookingUser
-															val={val?.users_permissions_user}
-															key={`booker-${i}`}
-															added={invitedUser.includes(
-																val?.users_permissions_user?.id
-															)}
-															onInvite={(e) =>
-																setInvitedUser([
-																	...invitedUser,
-																	val?.users_permissions_user?.id,
-																])
-															}
-															unInvite={() =>
-																setInvitedUser(
-																	invitedUser.filter(
-																		(x) => x !== val?.users_permissions_user.id
+												contacts
+													?.map((val, i) => {
+														return (
+															<EachBookingUser
+																val={val?.user}
+																key={`booker-${i}`}
+																added={invitedUser.includes(val?.user?.id)}
+																onInvite={(e) =>
+																	setInvitedUser([
+																		...invitedUser,
+																		val?.user?.id,
+																	])
+																}
+																unInvite={() =>
+																	setInvitedUser(
+																		invitedUser.filter(
+																			(x) => x !== val?.user.id
+																		)
 																	)
-																)
-															}
-														/>
-													)
-												})}
+																}
+																personal_info={val?.personal_info}
+															/>
+														)
+													})}
 											<hr />
 
 											<div className="text-center">

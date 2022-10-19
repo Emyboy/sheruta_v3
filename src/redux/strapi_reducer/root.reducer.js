@@ -1,6 +1,7 @@
 import {
     combineReducers
 } from 'redux';
+import adsReducer from './ads.reducer';
 import aliceReducer from './alice.reducer';
 import authReducer from './auth.reducer';
 import contactReducer from './contact.reducer';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     alice: aliceReducer,
     properties: propertiesReducer,
     group: groupReducer,
+    ads: adsReducer,
     contact: contactReducer
 });
 

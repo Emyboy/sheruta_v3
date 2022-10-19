@@ -6,11 +6,13 @@ import { Spinner } from 'react-activity'
 import { FaPhone } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
-import { headers } from '../../redux/strapi_actions/contact.actions'
+import { getAuthContacts, headers } from '../../redux/strapi_actions/contact.actions'
 import ContactService from '../../services/ContactService'
 import { Modal } from 'antd'
 import PersonalInfo from '../Profile/PersonalInfo'
 import Global from '../../Global'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 export default function EachMatch({ data, done }) {
 	const [val, setVal] = useState(data)
@@ -19,6 +21,8 @@ export default function EachMatch({ data, done }) {
 	const [added, setAdded] = useState(false)
 	const [remove, setRemove] = useState(false)
 	const [showInfo, setShowInfo] = useState(false)
+	const dispatch = useDispatch()
+	const { user } = useSelector(state => state.auth);
 
 	const addUserToContact = async () => {
 		try {
@@ -32,6 +36,7 @@ export default function EachMatch({ data, done }) {
 					setRemove(true)
 					if (done) {
 						done()
+						dispatch(getAuthContacts(user?.user?.id))
 					}
 				}, 1000)
 			}

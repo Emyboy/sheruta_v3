@@ -19,6 +19,7 @@ import RecentBookingFeed from './RecentBookingFeed'
 import Sticky from 'react-sticky-el'
 import ErrorBoundary from '../../ErrorBoundries/ErrorBoundary'
 import ProfileProgress from '../../ProfileComponents/ProfileProgress'
+import RequestAds from './RequestAds'
 
 // import FreeRequestAds from "../../Ads/RequestAds/FeeRequestAds";
 const Layout = React.lazy(() => import('../../Layout/Layout'))
@@ -99,7 +100,7 @@ export default (props) => {
 								paddingRight: Global.isMobile ? 0 : 2,
 							}}
 						>
-							<div className="card shadow-sm rounded-xxl border-0 mb-3 mt-3">
+							{/* <div className="card shadow-sm rounded-xxl border-0 mb-3 mt-3">
 								<div className="card-body d-block w-100 shadow-none mb-0 p-0 ">
 									<ul
 										className="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4"
@@ -130,7 +131,7 @@ export default (props) => {
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div> */}
 
 							{Cookies.get('new_user') && (
 								<Alert variant="success">
@@ -166,6 +167,8 @@ export default (props) => {
 
 							<ErrorBoundary>
 								<ProfileProgress />
+								<hr className='text-grey mt-4' />
+								<RequestAds />
 								{filter === 'all' && (
 									<>
 										{(view['feed'] ? view['feed'] : state.list).map(
@@ -188,6 +191,7 @@ export default (props) => {
 																	<RecentUsersList key={`ki-${i}`} />
 																	<SocialFeedsAds index={i} key={`ad-${i}`} />
 																	<EachSocialRequest
+																		allowPromote
 																		key={i + ' request'}
 																		data={val}
 																	/>
@@ -200,6 +204,7 @@ export default (props) => {
 													<>
 														<SocialFeedsAds index={i} key={`ad-${i}`} />
 														<EachSocialRequest
+															allowPromote
 															key={i + ' request'}
 															data={val}
 														/>
@@ -209,7 +214,7 @@ export default (props) => {
 										)}
 									</>
 								)}
-								{filter === 'for you' && (
+								{/* {filter === 'for you' && (
 									<>
 										{(view['feed'] ? view['feed'] : state?.list)
 											.filter(
@@ -220,6 +225,7 @@ export default (props) => {
 													<>
 														<SocialFeedsAds index={i} key={`ad-${i}`} />
 														<EachSocialRequest
+															allowPromote
 															key={i + ' request'}
 															data={val}
 														/>
@@ -227,7 +233,7 @@ export default (props) => {
 												)
 											})}
 									</>
-								)}
+								)} */}
 							</ErrorBoundary>
 							{state.list.length > 0 && (
 								<div className="card rounded-xxl">

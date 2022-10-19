@@ -12,6 +12,11 @@ export default function MyContacts() {
 				{contacts?.map((val) => {
 					return <EachMyContact key={`my-contact-${val?.id}`} val={val} />
 				})}
+				{contacts?.length === 0 ? (
+					<div className="text-center mt-5">
+						<h2 className="text-grey-600">No Contacts Found</h2>
+					</div>
+				) : null}
 			</div>
 		</Layout>
 	)

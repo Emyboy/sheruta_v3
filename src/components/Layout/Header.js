@@ -143,7 +143,7 @@ export default function Header({
 						</Link>
 						<form className={`${Global.isMobile ? 'pb-4 d-flex':''}`}>
 							<Link to="/login">
-								<span className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
+								<span className="header-btn d-lg-block bg-accent fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
 									Login
 								</span>
 							</Link>

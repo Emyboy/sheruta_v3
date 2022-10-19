@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Tag, Modal } from 'antd'
 import Global from '../../Global'
@@ -13,15 +12,18 @@ import requestUtils from '../../utils/request.utils'
 import ErrorBoundary from '../ErrorBoundries/ErrorBoundary'
 import { MdOutlineArrowUpward } from 'react-icons/md'
 import Promote from '../Ads/Promote/Promote'
+import { useDispatch } from 'react-redux'
 // import { Modal } from 'react-bootstrap'
 
-function EachRequest({ data }) {
+function EachRequest({ data, promoteCTA, allowPromote }) {
 	const user = data?.users_permissions_user
 	const deactivated = user?.deactivated
 	const auth = useSelector((state) => state.auth)
 	const authUser = auth.user
 	const [deleted, setDeleted] = useState(false)
 	const [showPromote, setPromote] = useState(false)
+	const { payment_plan } = useSelector((state) => state.view);
+	const dispatch = useDispatch();
 
 	// if(!data?.heading){
 	// 	return null
@@ -268,38 +270,53 @@ function EachRequest({ data }) {
 					</div>
 					<div className="col-md-6">
 						<UserAction
-							alignment={!Global.isMobile ? 'end' : 'center'}
+							alignment={!Global.isMobile ? 'between' : 'center'}
 							className={Global.isMobile && 'mt-4'}
 							user={user}
 						/>
-						{authUser &&
-							authUser?.user?.id === user?.id &&
-							process.env.NODE_ENV === 'development' && (
-								<div className="d-flex justify-content-end mt-3">
-									<Modal closable={false} visible={showPromote} onCancel={() => {}} footer={null}>
-										<Promote
-											type={
-												data?.is_searching
-													? 'im_looking_request'
-													: 'i_have_request'
-											}
-											request_id={data?.id}
-										/>
+						{authUser && authUser?.user?.id === user?.id && allowPromote && (
+							<div className="d-flex justify-content-end mt-3">
+								<Modal
+									closable={false}
+									visible={showPromote}
+									onCancel={() => {}}
+									footer={null}
+								>
+									<Promote
+										type={
+											data?.is_searching
+												? 'im_looking_request'
+												: 'i_have_request'
+										}
+										request_id={data?.id}
+										done={() => setPromote(false)}
+									/>
+									<div className="text-center">
 										<button
 											className="btn mb-4 text-danger"
 											onClick={() => setPromote(false)}
 										>
 											Cancel
 										</button>
-									</Modal>
-									<button
-										onClick={() => setPromote(true)}
-										className="bg-dark text-white btn rounded-xl"
-									>
-										Move To Top <MdOutlineArrowUpward />
-									</button>
-								</div>
-							)}
+									</div>
+								</Modal>
+								<button
+									onClick={() =>
+										!payment_plan
+											? dispatch({
+													type: 'SET_VIEW_STATE',
+													payload: {
+														showPaymentPopup: true
+													},
+											  })
+											: setPromote(true)
+									}
+									className="bg-accent text-white btn rounded-xl"
+								>
+									Move To Top <MdOutlineArrowUpward />
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</article>

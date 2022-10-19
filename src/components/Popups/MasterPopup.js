@@ -32,6 +32,7 @@ import {
 	findPerfectMatch,
 	getAuthContacts,
 } from '../../redux/strapi_actions/contact.actions'
+import { getAllAds } from '../../redux/strapi_actions/ads.actions'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -76,6 +77,7 @@ const MasterPopup = (props) => {
 		}
 		getForViews()
 		dispatch(getAllUniqueHabits())
+		dispatch(getAllAds())
 	}, [dispatch])
 
 	useEffect(() => {
