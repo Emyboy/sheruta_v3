@@ -55,6 +55,7 @@ import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
 import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
 import NewProfile from '../pages/Profile/NewProfile/NewProfile'
+import MyContacts from '../pages/Contacts/MyContacts'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -150,6 +151,7 @@ function App() {
 							<Route exact path="/blog" component={Blog} />
 							<Route exact path="/services" component={Services} />
 							<Route exact path="/join-paddy" component={JoinPaddy} />
+							<Route exact path="/contacts" component={MyContacts} />
 							<Route
 								exact
 								path="/join-paddy/create"

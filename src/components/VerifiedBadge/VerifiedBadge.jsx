@@ -8,6 +8,7 @@ const Wrapper = styled.span`
 	display: flex;
 	justify-content: flex-start;
 	align-self: center;
+	min-width: '300px';
 	color: ${(p) => (p.is_verified ? '#00ba74' : 'gray')};
 	span {
 		margin-left: 5px;

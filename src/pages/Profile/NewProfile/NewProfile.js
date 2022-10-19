@@ -41,7 +41,7 @@ export default function NewProfile() {
 					  }
 					: null
 			)
-			console.log('USER --', res.data)
+			// console.log('USER --', res.data)
 			setData(res.data)
 			return Promise.resolve()
 		} catch (error) {

@@ -30,30 +30,30 @@ const PaymentPopup = (props) => {
 				<label className='font-xs'>
 					<b>Why you should subscribe.</b>
 				</label>
-				<ul class="pricing-features">
+				<ul className="pricing-features">
 					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> Call people directly
+						<i className="bx bx-check"></i> Call flatmates directly
 					</li>
 					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> Post room request
-					</li>
-
-					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> View people's social media
+						<i className="bx bx-check"></i> Post room request
 					</li>
 
 					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> Access to flatmate matching
-					</li>
-					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> Boost your room request to the top
+						<i className="bx bx-check"></i> View people's social media
 					</li>
 
 					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> Message multiple users at once.
+						<i className="bx bx-check"></i> Access to flatmate matching
 					</li>
 					<li className={'font-xs'}>
-						<i class="bx bx-check"></i> And much more...
+						<i className="bx bx-check"></i> Boost your room request to the top
+					</li>
+
+					<li className={'font-xs'}>
+						<i className="bx bx-check"></i> Message multiple users at once.
+					</li>
+					<li className={'font-xs'}>
+						<i className="bx bx-check"></i> And much more...
 					</li>
 				</ul>
 				<br />

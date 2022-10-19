@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import EachConversation from '../../pages/Messages/EachConversation'
-import { getAllSuggestionsByStatus } from '../../redux/strapi_actions/alice.actions'
 import { getAllConversations } from '../../redux/strapi_actions/view.action'
 import PaymentAlert from '../PaymentAlert/PaymentAlert'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -12,11 +11,11 @@ export default function MessagePanel({ show, togglePanel }) {
 	const { conversations } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
 	const { accepted_suggestions } = useSelector((state) => state.alice)
+	const { contacts } = useSelector((state) => state.contact)
 
 	useEffect(() => {
 		if (show) {
 			dispatch(getAllConversations())
-			dispatch(getAllSuggestionsByStatus('accepted'))
 		}
 	}, [show])
 
@@ -64,20 +63,19 @@ export default function MessagePanel({ show, togglePanel }) {
 						CONTACTS
 					</h4>
 					<ul className="list-group list-group-flush">
-						{accepted_suggestions && accepted_suggestions.length === 0 && (
+						{contacts.length === 0 && (
 							<li className="text-center">
 								<h6 className="text-muted">No contacts yet</h6>
 							</li>
 						)}
-						{accepted_suggestions &&
-							accepted_suggestions
+						{contacts
 								.sort(
 									(a, b) =>
 										new Date(b.updated_at).getTime() -
 										new Date(a.updated_at).getTime()
 								)
 								.map((val, i) => {
-									const otherUser = val?.users_permissions_user
+									const otherUser = val?.user
 									if (!otherUser.deactivated) {
 										return (
 											<li

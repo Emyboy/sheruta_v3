@@ -53,9 +53,14 @@ export default function Layout({
 						paddingBottom:
 							!user || noBottomSpacing ? '0vh' : full_screen ? '0px' : '21vh',
 						overflow: noScroll && 'hidden',
+						minHeight: '100vh'
 					}}
 				>
-					<div className={user && 'middle-sidebar-bottom pl-0 pr-0'}>
+					<div
+						className={
+							user && `middle-sidebar-bottom ${full_screen ? 'm-0 p-0' : 'pl-0 pr-0'}`
+						}
+					>
 						<div
 							className={
 								user &&
@@ -63,7 +68,9 @@ export default function Layout({
 							}
 							style={{ maxWidth: full_screen ? '100%' : '' }}
 						>
-							<MainErrorBoundary>{children}</MainErrorBoundary>
+							<MainErrorBoundary>
+								<>{children}</>
+							</MainErrorBoundary>
 						</div>
 					</div>
 				</div>

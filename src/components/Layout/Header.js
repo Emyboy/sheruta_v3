@@ -27,7 +27,7 @@ export default function Header({
 	showChat,
 	pageName,
 }) {
-	const { user_suggestions } = useSelector((state) => state.alice)
+	const { matches } = useSelector((state) => state.contact)
 	const { user } = useSelector((state) => state.auth)
 	const { notifications, messages, personal_info } = useSelector(
 		(state) => state.view
@@ -143,7 +143,7 @@ export default function Header({
 						</Link>
 						<form className={`${Global.isMobile ? 'pb-4 d-flex':''}`}>
 							<Link to="/login">
-								<span className="header-btn d-lg-block bg-dark fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
+								<span className="header-btn d-lg-block bg-accent fw-500 text-white font-xsss ms-auto w100 text-center lh-20 rounded pl-4 pr-4 pt-3 pb-3 ">
 									Login
 								</span>
 							</Link>
@@ -249,9 +249,9 @@ export default function Header({
 				<Link to="/match">
 					<Tooltip placement="bottom" title={'Your Match'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							{user_suggestions && user_suggestions.length > 0 && (
+							{matches.length > 0 && (
 								<span className="badge badge-danger position-fixed">
-									{user_suggestions.length}
+									{matches.length}
 								</span>
 							)}
 							<i
@@ -290,7 +290,7 @@ export default function Header({
 					<Link to={`/notifications`}>
 						<span>
 							{notifications &&
-								notifications.filter((x) => !x.seen).length > 1 && (
+								notifications?.filter((x) => !x.seen)?.length > 1 && (
 									<span className="dot-count bg-danger"></span>
 								)}
 							<i className="feather-bell font-xl text-current"></i>
@@ -306,7 +306,7 @@ export default function Header({
 				>
 					<h4 className="fw-700 font-xss mb-4">Notification</h4>
 					<>
-						{notifications.map((val, i) => {
+						{notifications?.map((val, i) => {
 							if (i > 6) {
 								return null
 							}

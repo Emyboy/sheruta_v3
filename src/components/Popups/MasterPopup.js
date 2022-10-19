@@ -13,7 +13,6 @@ import {
 	getAllUniqueHabits,
 	getAllUserInspection,
 } from '../../redux/strapi_actions/view.action'
-import { suggestThemForMe } from '../../redux/strapi_actions/alice.actions'
 import { getUser } from '../../redux/strapi_actions/auth.actions'
 // import NotificationPopup from './NotificationPopup'
 import AppUpdatePopup from './AppUpdatePopup'
@@ -29,9 +28,13 @@ import LocationKeywordPopup from './LocationKeywordPopup'
 import RobotMessage from '../Ads/RobotMessage/RobotMessage'
 import Global from '../../Global'
 import PaymentPopup from './PaymentPopup'
+import {
+	findPerfectMatch,
+	getAuthContacts,
+} from '../../redux/strapi_actions/contact.actions'
+import { getAllAds } from '../../redux/strapi_actions/ads.actions'
 
 const MasterPopup = (props) => {
-	const token = Cookies.get('token')
 	const { user } = useSelector((state) => state.auth)
 	const { personal_info } = useSelector((state) => state.view)
 	const dispatch = useDispatch()
@@ -52,12 +55,6 @@ const MasterPopup = (props) => {
 		}
 	}
 
-	const getForUser = () => {
-		if (user && !user?.user?.deactivated && token) {
-			dispatch(suggestThemForMe(user?.user?.id))
-		}
-	}
-
 	// FOR ONE TIME
 	useEffect(() => {
 		// const _token = Cookies.get('token')
@@ -71,20 +68,25 @@ const MasterPopup = (props) => {
 		if (user) {
 			dispatch(setUserOnline())
 			getForRealTime()
-			getForUser()
 			dispatch(getOtherStuffs())
 			dispatch(getAllUserInspection(user?.user?.id))
+			dispatch(getAuthContacts(user?.user?.id))
+		} 
+		if (user && user?.user?.is_verified) {
+			dispatch(findPerfectMatch())
 		}
 		getForViews()
 		dispatch(getAllUniqueHabits())
+		dispatch(getAllAds())
 	}, [dispatch])
 
 	useEffect(() => {
 		if (user) {
 			dispatch(getUserPaymentPlan())
 			dispatch(setUserOnline())
+			dispatch(getAuthContacts(user?.user?.id))
 		}
-	}, [user])
+	}, [])
 
 	// // FOR A LONGER TIME
 	// useInterval(() => {
@@ -98,11 +100,10 @@ const MasterPopup = (props) => {
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {
 		if (user) {
-			console.log('GETTING REAL TIME')
 			// dispatch(getOtherStuffs())
 			getForRealTime()
 		}
-	}, [40000])
+	}, [80000])
 
 	useEffect(() => {
 		if (personal_info && personal_info?.nin) {

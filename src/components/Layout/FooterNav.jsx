@@ -24,7 +24,7 @@ const BadgeCount = ({ count }) => {
 
 export default function FooterNav({ pageName }) {
 	const { notifications, personal_info } = useSelector((state) => state.view)
-	const { user_suggestions } = useSelector((state) => state.alice)
+	const { matches } = useSelector(state => state?.contact)
 	const { user } = useSelector((state) => state.auth)
 	const iconSize = 25
 
@@ -58,7 +58,7 @@ export default function FooterNav({ pageName }) {
 					/>
 				</Link>
 				<Link to={`/match`} className="position-relative nav-content-bttn">
-					<BadgeCount count={user_suggestions && user_suggestions.length} />
+					<BadgeCount count={matches && !user?.user?.is_verified ? 7 : matches?.length} />
 					<BsPeople
 						size={iconSize}
 						className={`text-${

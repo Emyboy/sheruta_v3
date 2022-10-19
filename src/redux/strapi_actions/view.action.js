@@ -6,7 +6,6 @@ import Notifications from '../../services/Notifications'
 import PaymentService from '../../services/PaymentService'
 import { getAppDetails } from '../../services/Sheruta'
 import store from '../store/store'
-import { getAllMySuggestion, getAllSuggestionsByStatus } from './alice.actions'
 
 const authHeader = {
 	authorization: `Bearer ${Cookies.get('token')}`,
@@ -408,9 +407,7 @@ export const getAllViewOptions = () => (dispatch) => {
 }
 
 export const getOtherStuffs = () => (dispatch) => {
-	dispatch(getAllSuggestionsByStatus('accepted'))
 	dispatch(getAppDetail())
 	dispatch(getAuthPersonalInfo())
-	dispatch(getAllMySuggestion())
 	dispatch(getRecentUsers())
 }

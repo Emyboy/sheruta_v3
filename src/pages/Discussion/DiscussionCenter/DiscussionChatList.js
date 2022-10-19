@@ -19,9 +19,11 @@ export default function DiscussionChatList({ newMessage }) {
 
 	useEffect(() => {
 		notifyEmy({
-			heading: `Viewed ${location_keywords?.filter(x => x.id == room_id)[0]?.name} discussion room.`,
+			heading: `Viewed ${
+				location_keywords?.filter((x) => x.id == room_id)[0]?.name
+			} discussion room.`,
 		})
-	},[])
+	}, [])
 
 	const getRecentMessages = useCallback(
 		async (scroll) => {
@@ -44,9 +46,11 @@ export default function DiscussionChatList({ newMessage }) {
 				if (scroll) {
 					document
 						.getElementById(
-							res.data?.length > 7 ? `reply-${res.data[res.data?.length - 5]?.id}` : 'chat-end'
+							res.data?.length > 7
+								? `reply-${res.data[res.data?.length - 5]?.id}`
+								: 'chat-end'
 						)
-						.scrollIntoView({ behavior: 'smooth'})
+						.scrollIntoView()
 				}
 				if (message_id) {
 					setTimeout(() => {
@@ -110,7 +114,10 @@ export default function DiscussionChatList({ newMessage }) {
 				if (res.length > 0) {
 					if (messages?.includes('break')) {
 						setMessages([...messages, ...res])
-					} else if (!messages?.includes('break') && !res[res.length - 1]?.id != user?.user?.id) {
+					} else if (
+						!messages?.includes('break') &&
+						!res[res.length - 1]?.id != user?.user?.id
+					) {
 						setMessages([...messages, 'break', ...res])
 					}
 				}
@@ -122,16 +129,18 @@ export default function DiscussionChatList({ newMessage }) {
 		}
 	}
 
-	useInterval(() => {
-		if (room_id) {
-			console.log('CHECKING UPDATES')
-			getNewMessages()
-			// setTimeout(() => {
-			// 	getRecentMessages(messages.length === 0)
-			// }, 15000)
-		}
-	}, process.env.NODE_ENV != 'production' ? 19000 : 50000)
-
+	// useInterval(
+	// 	() => {
+	// 		if (room_id) {
+	// 			console.log('CHECKING UPDATES')
+	// 			getNewMessages()
+	// 			// setTimeout(() => {
+	// 			// 	getRecentMessages(messages.length === 0)
+	// 			// }, 15000)
+	// 		}
+	// 	},
+	// 	process.env.NODE_ENV != 'production' ? 19000 : 50000
+	// )
 
 	return (
 		<div>
@@ -139,7 +148,7 @@ export default function DiscussionChatList({ newMessage }) {
 				if (typeof val === 'string') {
 					return <DiscussionBreakPoint />
 				}
-				if(!val?.is_notification){
+				if (!val?.is_notification) {
 					return (
 						<EachGroupMessage
 							key={val.id}
@@ -147,8 +156,7 @@ export default function DiscussionChatList({ newMessage }) {
 							data={val}
 						/>
 					)
-
-				}else {
+				} else {
 					return (
 						<EachDiscussionNotification
 							key={val?.id}
@@ -162,7 +170,7 @@ export default function DiscussionChatList({ newMessage }) {
 				notification={`<strong>Welcome to ${
 					location_keywords?.filter((x) => x?.id == room_id)[0]?.name
 				} chat room.</strong>
-<p class="text-grey-500 mb-3">Post your apartment and flatshare requests. You can also find users to team up with (Join paddy) & secure a space. </p>
+<p class="text-grey-500 mb-3">Post your apartment and flatshare requests. Sharing of phone numbers are prohibited.</p>
 
 <blockquote>"Topics beyond ${
 					location_keywords?.filter((x) => x?.id == room_id)[0]?.name

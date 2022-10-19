@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Global from '../../Global'
 import { getOtherStuffs } from '../../redux/strapi_actions/view.action'
-import Alice from '../../services/Alice'
+import Alice from '../../services/AgentService'
 import VerifiedBadge from '../VerifiedBadge/VerifiedBadge'
 import PersonalInfo from '../../pages/Profile/PersonalInfo'
 

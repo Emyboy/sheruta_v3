@@ -30,7 +30,7 @@ export default function ControlledCarousel() {
 
 	return (
 		<div
-			className="container card bg-dark rounded-xxl shadow pt-4 pb-5"
+			className="container card bg-accent rounded-xxl shadow pt-4 pb-5"
 			style={{ marginTop: '100px', marginBottom: '100px' }}
 		>
 			<div className="text-center">

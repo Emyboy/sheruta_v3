@@ -244,7 +244,7 @@ export const Signup = (props) => {
 										<div className="form-group mb-1">
 											<button
 												type="submit"
-												className="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0"
+												className="form-control text-center style2-input text-white fw-600 bg-accent border-0 p-0"
 											>
 												{state.loading ? 'Loading...' : 'Register'}
 											</button>

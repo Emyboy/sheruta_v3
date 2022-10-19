@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 export default function EachDiscussionGuest({ active, data }) {
 
 	const _user = data?.users_permissions_user;
-	console.log('USER --', data)
 	return (
 		<Link
 			to={`/user/${_user?.username}`}

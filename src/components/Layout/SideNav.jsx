@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/strapi_actions/auth.actions'
 import Global from '../../Global'
-import { FaCrown, FaTag } from 'react-icons/fa'
+import { FaCrown, FaPhoneAlt, FaTag } from 'react-icons/fa'
 import { IoBagCheck, IoCalendarNumberSharp } from 'react-icons/io5'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
@@ -90,6 +90,15 @@ export default function SideNav({ show }) {
 									{/* <span className="circle-count bg-danger font-xssss mt-0">
 										3
 									</span> */}
+								</Link>
+							</li>
+
+							<li>
+								<Link className="nav-content-bttn open-font" to={`/contacts`}>
+									<i className="btn-round-md bg-red-gradiant me-3">
+										<FaPhoneAlt size={size - 5} />
+									</i>
+									<span>My Contacts</span>
 								</Link>
 							</li>
 
