@@ -13,7 +13,7 @@ export default function RequestAds() {
 
 	return (
 		<div>
-			<h1>Sponsored Ads</h1>
+			<h1>Premium Posts</h1>
 			{request_ads?.map((val) => {
 				return <EachSocialRequest data={val} />
 			})}
