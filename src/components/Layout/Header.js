@@ -28,6 +28,7 @@ export default function Header({
 	pageName,
 }) {
 	const { matches } = useSelector((state) => state.contact)
+	const { payment_plan } = useSelector((state) => state.view)
 	const { user } = useSelector((state) => state.auth)
 	const { notifications, messages, personal_info } = useSelector(
 		(state) => state.view
@@ -251,7 +252,7 @@ export default function Header({
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							{matches.length > 0 && (
 								<span className="badge badge-danger position-fixed">
-									{matches.length}
+									{!payment_plan ? 12 : matches.length}
 								</span>
 							)}
 							<i
