@@ -187,7 +187,7 @@ export default function EachMatch({ data, done }) {
 						<small className="font-xxxs mb-1">
 							Work Industry:{' '}
 							<span className="fw-bold text-black m-0 text-capitalize">
-								{val?.work_industry?.name}
+								{val?.work_industry?.name?.slice(0, 15)}
 							</span>
 						</small>
 						<small className="font-xxxs my-3 text-center" onClick={() => setShowInfo(true)}>

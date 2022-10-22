@@ -9,6 +9,7 @@ import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import { notifyEmy } from '../../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../../services/Analytics'
 import { useRef } from 'react'
+import Global from '../../../Global'
 
 export default function DiscussionChatInput({ onSend }) {
 	const { room_id } = useParams()
@@ -83,7 +84,7 @@ export default function DiscussionChatInput({ onSend }) {
 				rows={'1'}
 				style={{
 					height:
-						newMessage.length > 30 ? `${newMessage.length + 45}px` : '45px',
+						newMessage.length > (Global.isMobile ? 30: 160) ? `${newMessage.length - (Global.isMobile ? 1 : 190) + (Global.isMobile ? 45: 1)}px` : '45px',
 					lineHeight: '30px',
 					maxHeight: '300px',
 					resize: 'none',

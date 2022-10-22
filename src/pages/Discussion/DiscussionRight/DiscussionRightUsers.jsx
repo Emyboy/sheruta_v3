@@ -3,7 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { FaCrown } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { setGroupState } from '../../../redux/strapi_actions/group.action'
 import EachDiscussionGuest from './EachDiscussionGuests'
@@ -11,7 +12,8 @@ import EachDiscussionGuest from './EachDiscussionGuests'
 export default function DiscussionRightUsers() {
 	const { room_id } = useParams()
 	const [list, setList] = useState([])
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
+	const { payment_plan } = useSelector(state => state.view);
 
 	const getRecentUser = useCallback(async () => {
 		try {
@@ -29,6 +31,15 @@ export default function DiscussionRightUsers() {
 	useEffect(() => {
 		getRecentUser()
 	}, [getRecentUser])
+
+	if(!payment_plan){
+		return <div className='text-center py-5'>
+			<FaCrown className='text-warning mb-4' size={50} />
+			<h3>Go Premium Today</h3>
+			<h5>View all room members</h5>
+			<Link to='/pricing' className='text-theme mt-3 fw-bold'>Go Premium</Link>
+		</div>
+	}
 
 	return (
 		<div className="bg-white border-top">
