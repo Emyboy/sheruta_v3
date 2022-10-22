@@ -90,7 +90,7 @@ export default function EachDemoProperty({ data }) {
 								pathname: formatPropertyURL(data),
 								state: data,
 							}}
-							className="default-btn pl-4 pr-4 pb-2 pt-2"
+							className="btn bg-accent text-white pl-4 pr-4 pb-2 pt-2"
 						>
 							MORE{' '}
 							<span style={{ top: '-146.094px', left: '63.3438px' }}></span>

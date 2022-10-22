@@ -20,7 +20,7 @@ export default function HomeFeatures() {
 		<div className="facilities-area pt-100 pb-70">
 			<div className="container">
 				<div className="section-title">
-					<h3>Why Subscribe</h3>
+					<h3>Why Subscribe?</h3>
 					<p>
 						Gain access to our awesome features designed for you to get the best
 						value.

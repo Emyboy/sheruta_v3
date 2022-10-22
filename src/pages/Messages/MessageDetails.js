@@ -180,8 +180,12 @@ export default function MessageDetails({ conversation_id }) {
 	}
 	return (
 		<div className="col-xl-12 col-xxl-12 col-lg-12 pe-0 ps-0">
-			<div className="card w-100 d-block chat-body p-0 border-0 shadow-xss rounded-3 mb-3 position-relative">
+			<div
+				className="card w-100 d-block chat-body p-0 border-0 shadow-xss rounded-3 mb-3 position-relative"
+				style={{ height, overflowY: 'hidden' }}
+			>
 				<div className="card rounded-0 p-3 d-block border-0 d-block shadow-sm">
+					{console.log('HEIGHT --', height)}
 					<figure className="avatar mb-0 float-left me-2">
 						<img
 							src={otherUser?.avatar_url}
@@ -237,17 +241,18 @@ export default function MessageDetails({ conversation_id }) {
 				<form
 					className="d-flex shadow-sm chat-form position-absolute bottom-0 w-100 left-0 bg-white z-index-1 p-3 theme-dark-bg "
 					onSubmit={
-						!payment_plan && !app_details?.everything_free
-							? (e) => {
-									e.preventDefault()
-									dispatch({
-										type: 'SET_VIEW_STATE',
-										payload: {
-											showPaymentPopup: true,
-										},
-									})
-							  }
-							: handleSubmit
+						// !payment_plan && !app_details?.everything_free
+						// 	? (e) => {
+						// 			e.preventDefault()
+						// 			dispatch({
+						// 				type: 'SET_VIEW_STATE',
+						// 				payload: {
+						// 					showPaymentPopup: true,
+						// 				},
+						// 			})
+						// 	  }
+						// 	:
+							 handleSubmit
 					}
 				>
 					{/* <button className="bg-grey float-left">

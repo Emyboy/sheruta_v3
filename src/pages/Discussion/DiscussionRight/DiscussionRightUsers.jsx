@@ -37,7 +37,7 @@ export default function DiscussionRightUsers() {
 			<FaCrown className='text-warning mb-4' size={50} />
 			<h3>Go Premium Today</h3>
 			<h5>View all room members</h5>
-			<Link to='/pricing' className='text-theme mt-3 fw-bold'>Go Premium</Link>
+			<Link to='/pricing' className='text-theme mt-3 fw-bold'>Learn More</Link>
 		</div>
 	}
 

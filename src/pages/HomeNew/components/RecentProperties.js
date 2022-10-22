@@ -51,7 +51,7 @@ export default function RecentProperties() {
 					})}
 				</div>
 				<div className="view-featured-btn">
-					<Link to="/flats" className="default-btn text-white">
+					<Link to="/flats" className="btn bg-theme py-3 px-3 fw-bold text-white">
 						VIEW MORE FLATS
 						{/* <span style="top: -46.0938px; left: 267.734px;"></span> */}
 					</Link>
