@@ -173,7 +173,10 @@ export default function RecentHomeRequest() {
 				</div>
 			</div>
 			<div className="view-properties-btn mt-5">
-				<Link to={`/flat/submit`} className="btn bg-accent text-white btn-lg">
+				<Link
+					to={`/flat/submit`}
+					className="btn bg-accent py-3 px-3 fw-bold text-white"
+				>
 					Upload Your Room<span></span>
 				</Link>
 			</div>

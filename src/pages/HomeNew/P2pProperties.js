@@ -29,11 +29,13 @@ export default function P2pProperties() {
 	}, [getRecentP2PRequests])
 
 	return (
-		<div className="new-added-properties-area bg-201c2d ptb-100">
+		<div className="new-added-properties-area bg-accent ptb-100">
 			<div className="container">
 				<div className="section-title">
-					<h3>Recent Room Requests</h3>
-					<p>Join our community today and post your request to share a flat.</p>
+					<h3 className="text-white">Recent Room Requests</h3>
+					<p className="text-grey-500">
+						Join our community today and post your request to share a flat.
+					</p>
 				</div>
 
 				<div className="row justify-content-center">
@@ -45,14 +47,15 @@ export default function P2pProperties() {
 						)
 					})}
 				</div>
-
-				
 			</div>
-				<div className="view-properties-btn mt-5">
-					<Link to={`/signup`} className="default-btn">
-						Post Your Request<span></span>
-					</Link>
-				</div>
+			<div className="view-properties-btn mt-5">
+				<Link
+					to={`/signup`}
+					className="btn bg-theme py-3 px-3 fw-bold text-white"
+				>
+					Post Your Request<span></span>
+				</Link>
+			</div>
 		</div>
 	)
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Global from '../../../Global'
-import SearchBox from './SearchBox'
 
 export default function HomeHero() {
 	return (
@@ -11,6 +9,7 @@ export default function HomeHero() {
 				backgroundImage: `url(http://cdn.home-designing.com/wp-content/uploads/2019/07/dark-living-room.jpg)`,
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover',
+				backgroundPosition: 'bottom',
 			}}
 		>
 			<div className="home-slides owl-carousel owl-theme owl-loaded owl-drag">
@@ -108,7 +107,8 @@ export default function HomeHero() {
 							<div className="tabs_item">
 								{/* <SearchBox /> */}
 								<Link
-									className="btn btn-lg bg-theme text-white shadow"
+									className="btn bg-theme py-3 px-4 fw-bold text-white
+									shadow"
 									to={`/signup`}
 									onClick={() =>
 										localStorage.setItem('after_login', '/discussion')

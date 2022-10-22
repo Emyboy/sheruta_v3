@@ -4,7 +4,7 @@ import logo from '../assets/img/logo.png'
 
 export default () => {
 	return (
-		<footer className="footer-area pt-100" style={{ zIndex: 1 }}>
+		<footer className="footer-area pt-100 bg-accent" style={{ zIndex: 1 }}>
 			<div className="container">
 				<div className="row justify-content-center">
 					<div className="col-lg-3 col-md-6">
