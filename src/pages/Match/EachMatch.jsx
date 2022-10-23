@@ -151,13 +151,16 @@ export default function EachMatch({ data, done }) {
 						<Link
 							to={`/user/${_user?.username}`}
 							className="d-flex align-items-center"
-							style={{ width: '200px'}}
+							style={{ width: '200px' }}
 						>
 							{_user?.first_name?.split(' ')[0]}{' '}
 							<VerifiedBadge user={_user} without_text className={'mb-0'} />
 						</Link>
 					</h3>
-					<p className="text-muted">Seen {moment(val?.updated_at).fromNow()}</p>
+					<p className="text-muted">
+						{val?.looking_for ? 'Budget' : 'Rent'} {Global.currency}
+						{window.formattedPrice.format(_user?.budget)}
+					</p>
 					<hr className="my-2" />
 					<div className="d-flex flex-column">
 						<small className="font-xxxs mb-1">
@@ -190,7 +193,10 @@ export default function EachMatch({ data, done }) {
 								{val?.work_industry?.name?.slice(0, 15)}
 							</span>
 						</small>
-						<small className="font-xxxs my-3 text-center" onClick={() => setShowInfo(true)}>
+						<small
+							className="font-xxxs my-3 text-center"
+							onClick={() => setShowInfo(true)}
+						>
 							<span className="link fw-bold text-black m-0 text-capitalize text-theme">
 								Show More Details
 							</span>

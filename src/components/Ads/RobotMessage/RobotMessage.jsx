@@ -26,18 +26,19 @@ export default function RobotMessage() {
 		dispatch(showRobotMessage(null, null))
 	}
 
-    let expires = 7;
+    let expires = 5;
 
     useEffect(() => {
-        if(app_details && personal_info && !Cookies.get('show_gen_msg')){
+        if(app_details && personal_info && !Cookies.get('shown_gen_msg')){
             if(app_details?.general_message && app_details?.marketing_mode){
                 setTimeout(() => {
                     setShow(true)
-                    Cookies.set('show_gen_msg', true, { expires })
+                    // Cookies.set('shown_gen_msg', false, { expires })
                 }, 3000);
-            }else {
-                Cookies.set('show_gen_msg', false, { expires })
             }
+			// else {
+            //     Cookies.set('shown_gen_msg', false, { expires })
+            // }
         }
     },[app_details, personal_info])
 
@@ -57,7 +58,10 @@ export default function RobotMessage() {
 				}}
 			>
 				<span
-					onClick={() => setShow(false)}
+					onClick={() => {
+						setShow(false)
+						Cookies.set('shown_gen_msg', true, { expires })
+					}}
 					class="btn-round-sm bg-accent shadow"
 					style={{
 						fontSize: '5px',
@@ -73,7 +77,8 @@ export default function RobotMessage() {
 					<figure className="avatar me-3">
 						<img
 							style={{ width: '50px', maxWidth: '50px' }}
-							src="https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2FLOGOS%2Fsheruta%20logo%20accect%20big.png?alt=media&token=caffc833-ce8b-40ed-be52-32d7e03bbdb7"
+							// src="https://firebasestorage.googleapis.com/v0/b/sheruta-prod.appspot.com/o/DONT%20DELETE%2FLOGOS%2Fsheruta%20logo%20accect%20big.png?alt=media&token=caffc833-ce8b-40ed-be52-32d7e03bbdb7"
+							src="https://static.generated.photos/vue-static/face-generator/landing/demo-previews/age.jpg"
 							alt="image"
 							className="shadow-sm rounded-circle "
 							width="150"
