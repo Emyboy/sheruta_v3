@@ -50,7 +50,7 @@ export default function RobotMessage() {
 		return (
 			<Wrapper
 				className={`bg-theme-light p-3  border shadow animate__bounceInUp animate__animated`}
-				style={{ position: 'fixed', bottom: '8vh', width: '100%', zIndex: 78 }}
+				style={{ position: 'fixed', bottom: '8vh', width: '100%', zIndex: 1908 }}
 				onClick={() => {
 					setTimeout(() => {
 						setShow(false)
@@ -87,7 +87,7 @@ export default function RobotMessage() {
 					</figure>
 					<h4 className="fw-700 text-grey-900 font-xsss mt-1">
 						Anita from Sheruta
-						<span className="markup d-block font-xsss fw-500 mt-2 lh-3 text-grey-600">
+						<span className="markup d-block font-xsss fw-500 mt-2 lh-3 text-grey-600 scroll-bar" style={{ maxHeight: '70vh' }}>
 							<ReactMarkdown>{app_details?.general_message}</ReactMarkdown>
 						</span>
 					</h4>
