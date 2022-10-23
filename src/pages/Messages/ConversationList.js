@@ -2,8 +2,7 @@ import { notification } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
-import PaymentAlert from '../../components/PaymentAlert/PaymentAlert'
-import MessageService from '../../services/MessageService'
+
 import EachConversation from './EachConversation'
 import { BsFillChatDotsFill } from 'react-icons/bs'
 
@@ -34,7 +33,6 @@ export default function MessageList() {
                     </form> */}
 					</div>
 				</div>
-				{console.log('CONV --', conversations)}
 				<ul style={{ paddingBottom: '15vh' }}>
 					{conversations.length === 0 && (
 						<li className="text-center mt-5">
