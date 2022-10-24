@@ -8,6 +8,7 @@ import { showRobotMessage } from '../../../redux/strapi_actions/view.action'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Cookies from 'js-cookie'
+import { notifyEmy } from '../../../services/Sheruta'
 
 const Wrapper = styled.div`
 	.markup  p  a {
@@ -59,8 +60,12 @@ export default function RobotMessage() {
 			>
 				<span
 					onClick={() => {
-						setShow(false)
-						Cookies.set('shown_gen_msg', true, { expires })
+						setShow(false);
+						Cookies.set('shown_gen_msg', true, { expires });
+						notifyEmy({
+							heading: "Closed the marketing popup",
+							url: window.location.pathname,
+						})
 					}}
 					class="btn-round-sm bg-accent shadow"
 					style={{
@@ -87,7 +92,7 @@ export default function RobotMessage() {
 					</figure>
 					<h4 className="fw-700 text-grey-900 font-xsss mt-1">
 						Anita from Sheruta
-						<span className="markup d-block font-xsss fw-500 mt-2 lh-3 text-grey-600 scroll-bar" style={{ maxHeight: '70vh' }}>
+						<span className="markup d-block font-xsss fw-500 mt-2 lh-3 text-grey-600 scroll-bar" style={{ maxHeight: '65vh' }}>
 							<ReactMarkdown>{app_details?.general_message}</ReactMarkdown>
 						</span>
 					</h4>
