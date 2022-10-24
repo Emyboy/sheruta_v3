@@ -181,7 +181,8 @@ export default function MessageDetails({ conversation_id }) {
 	return (
 		<div className="col-xl-12 col-xxl-12 col-lg-12 pe-0 ps-0">
 			<div
-				className="card w-100 d-block chat-body p-0 border-0 shadow-xss rounded-3 mb-3 position-relative"
+				className="card chat-body px-0"
+				// className="card w-100 d-block chat-body p-0 border-0 shadow-xss rounded-3 mb-3 position-relative"
 				style={{ height, overflowY: 'hidden' }}
 			>
 				<div className="card rounded-0 p-3 d-block border-0 d-block shadow-sm">
