@@ -15,6 +15,7 @@ export default React.memo(function EachGroupConversation({
 	image_url,
 	last_seen,
 	id,
+	standalone
 }) {
 	const { user } = useSelector((state) => state.auth)
 	const [preview, setPreview] = useState('')
@@ -24,8 +25,9 @@ export default React.memo(function EachGroupConversation({
 	const chatPreview = useCallback(async () => {
 		try {
 			const res = await axios(
-				process.env.REACT_APP_API_URL +
-					`/messages/?location_keyword=${id}&_limit=1&_sort=created_at:DESC`,
+				process.env.REACT_APP_API_URL + standalone
+					? `/messages/?uuid=${id}&_limit=1&_sort=created_at:DESC`
+					: `/messages/?location_keyword=${id}&_limit=1&_sort=created_at:DESC`,
 				{
 					headers: {
 						authorization: `Bearer ${Cookies.get('token')}`,

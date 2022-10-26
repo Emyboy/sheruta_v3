@@ -88,14 +88,17 @@ const MasterPopup = (props) => {
 		}
 	}, [])
 
-	// // FOR A LONGER TIME
-	// useInterval(() => {
-	// 	if (user) {
-	// 		dispatch(getUser())
-	// 		dispatch(setUserOnline())
-	// 		dispatch(getOtherStuffs())
-	// 	}
-	// }, 550000)
+	useEffect(() => {
+		const updatesInterval = setInterval(() => {
+			dispatch(setUserOnline())
+		}, 600000)
+
+		return () => {
+			clearInterval(updatesInterval)
+		}
+
+	},[])
+
 
 	// FOR THINGS THAT COME IN FREQUENTLY
 	useInterval(() => {

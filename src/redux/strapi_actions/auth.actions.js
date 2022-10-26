@@ -49,7 +49,7 @@ export const getUser = () => (dispatch) => {
 export const setUserOnline = () => async (dispatch) => {
 	try {
 		await UserService.setUserOnline()
-		dispatch(getUser())
+		// dispatch(getUser())
 	} catch (error) {
 		return Promise.reject(error)
 	}

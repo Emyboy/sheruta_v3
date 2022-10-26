@@ -22,7 +22,8 @@ const initialState = {
     location_keywords: [],
     collect_location_keyword: false,
     unique_habits: [],
-    inspections: []
+    inspections: [],
+    conversations: []
 };
 
 function ViewReducer(state = initialState, { type, payload }) {
