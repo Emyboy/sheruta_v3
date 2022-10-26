@@ -5,7 +5,7 @@ import MessageService from '../../services/MessageService'
 import Global from '../../Global'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-function EachConversation({ conv, onClick }) {
+function EachConversation({ conv, onClick, isActive, standalone }) {
 	const [otherUser, setOtherUser] = useState(null)
 	const { user } = useSelector((state) => state.auth)
 	const { messages } = useSelector((state) => state.view)
@@ -44,14 +44,15 @@ function EachConversation({ conv, onClick }) {
 		}
 	}, [])
 
-	if(!conv.guest.deactivated && !conv.owner.deactivated){
-
+	if (!conv.guest.deactivated && !conv.owner.deactivated) {
 		return (
 			<li
-				className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center border border-bottom"
+				className={`bg-transparent list-group-item no-icon  pt-2 pb-2 border-0 d-flex align-items-center border border-bottom ${
+					isActive && 'bg-theme-light'
+				} ${standalone ? 'px-3' : 'pe-0 ps-0'}`}
 				onClick={() => (onClick ? onClick() : {})}
 			>
-				<Link to={`/messages/${conv.uuid}`} className='w-100'>
+				<Link to={`/messages/${conv.uuid}`} className="w-100">
 					{otherUser && (
 						<div className="d-flex justify-content-between w-100 align-items-center">
 							<div className="d-flex">
@@ -65,14 +66,19 @@ function EachConversation({ conv, onClick }) {
 								</figure>
 								<div className="fw-700 mb-0 mt-0">
 									<a className="pr-3 d-flex font-xssss text-grey-600 d-block text-dark model-popup-chat align-items-center">
-										<b className="mr-2">{otherUser?.first_name?.split(' ')[0]}</b>
+										<b className="mr-2">
+											{otherUser?.first_name?.split(' ')[0]}
+										</b>
 										<span
 											className={`mt-0 shadow bg-${
 												otherUser.online ? 'success' : 'danger'
 											}  btn-round-xss`}
 										></span>
 									</a>
-									<small className="m-0 text-muted" style={{ fontSize: '10px' }}>
+									<small
+										className="m-0 text-muted"
+										style={{ fontSize: '10px' }}
+									>
 										{latestMsg.length > 27
 											? Global.isMobile
 												? latestMsg.slice(0, 27) + '....'
@@ -90,45 +96,10 @@ function EachConversation({ conv, onClick }) {
 					)}
 				</Link>
 			</li>
-	
-			// <li className="contact border-bottom">
-			//     {otherUser && (
-			//         <Link to={`/messages/${conv.uuid}`}>
-			//             <div className="wrap">
-			//                 <span
-			//                     className={`contact-status ${
-			//                         otherUser?.online ? "bg-success" : "bg-danger"
-			//                     }`}
-			//                     style={{ left: "40px" }}
-			//                 ></span>
-			//                 <img
-			//                     className="img-fluid"
-			//                     src={otherUser.avatar_url}
-			//                     alt="s1.jpg"
-			//                 />
-			//                 <div className="meta">
-			//                     <h5 className="name">
-			//                         {otherUser.first_name} {otherUser.last_name}
-			//                     </h5>
-			//                     <p className="preview">
-			//                         {latestMsg.length > 27
-			//                             ? Global.isMobile
-			//                                 ? latestMsg.slice(0, 27) + "...."
-			//                                 : latestMsg.slice(0, 60) + "...."
-			//                             : latestMsg || "...."}
-			//                     </p>
-			//                 </div>
-			//                 {count !== 0 && <div className="m_notif">{count}</div>}
-			//             </div>
-			//         </Link>
-			//     )}
-			// </li>
 		)
-	}else {
+	} else {
 		return null
 	}
-
 }
-
 
 export default memo(EachConversation)

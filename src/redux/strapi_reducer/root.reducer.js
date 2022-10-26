@@ -4,6 +4,7 @@ import {
 import adsReducer from './ads.reducer';
 import aliceReducer from './alice.reducer';
 import authReducer from './auth.reducer';
+import chatReducer from './chat.reducer';
 import contactReducer from './contact.reducer';
 import groupReducer from './group.reducer';
 import propertiesReducer from './properties.reducer';
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     properties: propertiesReducer,
     group: groupReducer,
     ads: adsReducer,
-    contact: contactReducer
+    contact: contactReducer,
+    chat: chatReducer
 });
 
 export default rootReducer;

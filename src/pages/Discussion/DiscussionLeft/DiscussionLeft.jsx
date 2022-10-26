@@ -21,14 +21,14 @@ export default React.memo(function DiscussionLeft() {
 
 	return (
 		<div className="bg-grey-300">
-			<DiscussionLeftHeader />
+			<DiscussionLeftHeader heading={'Chat Rooms'} />
 			<div className="list-group scroll-bar pb-5" style={{ maxHeight: '81vh' }}>
 				{list.length > 0 ? (
 					list?.map((val) => {
 						return (
 							<EachGroupConversation
-								active={room_id == val.id}
 								key={`location-group-${val?.id}`}
+								active={room_id == val.id}
 								name={val?.name}
 								image_url={val?.background_img}
 								clickURL={`/discussion/room/${val?.id}`}
@@ -43,9 +43,9 @@ export default React.memo(function DiscussionLeft() {
 					})
 				) : (
 					<div className="text-center pt-5">
-						<h4 className='text-grey-500'>
-							No groups available in{' '}
-							{personal_info?.state?.name || 'your area'}<br /> at the moment. 
+						<h4 className="text-grey-500">
+							No groups available in {personal_info?.state?.name || 'your area'}
+							<br /> at the moment.
 						</h4>
 					</div>
 				)}

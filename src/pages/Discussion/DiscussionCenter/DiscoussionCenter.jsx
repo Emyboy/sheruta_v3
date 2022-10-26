@@ -16,7 +16,7 @@ export default function DiscussionCenter() {
 			className="bg-white d-flex flex-column justify-content-between"
 			style={{ height: '99vh' }}
 		>
-			<DiscussionCenterHeader />
+			<DiscussionCenterHeader backURL={`/discussion`} />
 			<div
 				className="d-flex flex-column algin-items-start justify-content-start scroll-bar pt-4"
 				style={{ height: '100%' }}

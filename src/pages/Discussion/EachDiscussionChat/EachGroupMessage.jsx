@@ -93,7 +93,7 @@ export function OutgoingGroupChat({ askDelete, data, setShowEdit }) {
 			</div>
 			{data.reply && <Reply data={data} />}
 			<MessageBody className="fw-500 text-black">
-				{renderHTML(data.message_text)}
+				{renderHTML(data.message_text?.replace(/\n/g, '<br />'))}
 			</MessageBody>
 			<i>
 				<small className="text-grey-600">
@@ -128,7 +128,7 @@ export function EachIncomingGroupChat({ askDelete, data }) {
 				</div>
 				<Reply data={data} />
 				<MessageBody className="fw-500 text-black">
-					{renderHTML(data.message_text)}
+					{renderHTML(data.message_text?.replace(/\n/g, '<br />'))}
 				</MessageBody>
 				<i>
 					<small className="text-grey-600">

@@ -125,7 +125,8 @@ function EachRequest({ data, promoteCTA, allowPromote }) {
 							className="fw-500 text-grey-600 lh-26  w-100 mb-0"
 							style={{ fontSize: '16px' }}
 						>
-							{data?.body && data?.body?.slice(0, 120)}
+							{data?.body &&
+								data?.body?.slice(0, 120)?.replace(/\n/g, '<br />')}
 							<a className="fw-600 text-theme ms-2">See more</a>
 						</p>
 					</Link>
@@ -306,7 +307,7 @@ function EachRequest({ data, promoteCTA, allowPromote }) {
 											? dispatch({
 													type: 'SET_VIEW_STATE',
 													payload: {
-														showPaymentPopup: true
+														showPaymentPopup: true,
 													},
 											  })
 											: setPromote(true)

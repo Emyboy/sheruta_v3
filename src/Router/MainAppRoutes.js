@@ -56,6 +56,7 @@ import Discussion from '../pages/Discussion/Discussion'
 import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
 import NewProfile from '../pages/Profile/NewProfile/NewProfile'
 import MyContacts from '../pages/Contacts/MyContacts'
+import Chat from '../pages/Chat/Chat'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -90,6 +91,8 @@ const BlogDetails = React.lazy(() => import('../pages/Blog/BlogDetails'))
 const Terms = React.lazy(() => import('../pages/Terms/Terms'))
 const Services = React.lazy(() => import('../pages/Services/Services'))
 const JoinPaddy = React.lazy(() => import('../pages/JoinPaddy/JoinPaddy'))
+
+const is_dev = process.env.NODE_ENV != 'production';
 
 function App() {
 	React.useEffect(() => {
@@ -163,7 +166,11 @@ function App() {
 								component={JoinPaddyDetails}
 							/>
 							<Route exact path="/services/:service" component={Services} />
-							<Route exact path="/messages" component={Messages} />
+							<Route
+								exact
+								path="/messages"
+								component={is_dev ? Chat : Messages}
+							/>
 							<Route exact path="/settings" component={Settings} />
 							<Route exact path="/settings/:type" component={Settings} />
 							<Route
@@ -174,7 +181,7 @@ function App() {
 							<Route
 								exact
 								path="/messages/:conversation_id"
-								component={Messages}
+								component={is_dev ? Chat : Messages}
 							/>
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
@@ -212,9 +219,7 @@ function App() {
 							<Route
 								exact
 								path="/user/:username"
-								component={
-									process.env.NODE_ENV != 'production' ? NewProfile : Profile2
-								}
+								component={is_dev ? NewProfile : Profile2}
 							/>
 							<Route exact path="/flat/submit" component={CreateRequest} />
 							<Route
