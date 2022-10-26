@@ -91,7 +91,7 @@ const MasterPopup = (props) => {
 	useEffect(() => {
 		const updatesInterval = setInterval(() => {
 			dispatch(setUserOnline())
-		}, 50000);
+		}, 600000)
 
 		return () => {
 			clearInterval(updatesInterval)
