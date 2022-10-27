@@ -181,7 +181,8 @@ function App() {
 							<Route
 								exact
 								path="/messages/:conversation_id"
-								component={is_dev ? Chat : Messages}
+								component={Chat}
+								// component={is_dev ? Chat : Messages}
 							/>
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
