@@ -69,13 +69,13 @@ export default function DiscussionCenterHeader({ backURL, userData }) {
 				</div>
 			</Link>
 			{userData ? (
-				<button className="btn btn-sm">
+				<a href={`tel:${userData?.phone_number}`} className="btn btn-sm">
 					<FiPhoneCall
 						size={iconSize}
 						className="align-self-center text-grey-600"
 						onClick={() => dispatch(setGroupState({ showDetails: true }))}
 					/>
-				</button>
+				</a>
 			) : (
 				<button className="btn btn-sm mobile-only">
 					<FiInfo

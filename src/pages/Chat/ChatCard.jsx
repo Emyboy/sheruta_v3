@@ -2,22 +2,23 @@ import moment from 'moment'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { IoCheckmarkDoneSharp } from 'react-icons/io5'
+import { IoMdCheckmark } from 'react-icons/io'
 import renderHTML from 'react-render-html'
 import { useEffect } from 'react'
 import MessageService from '../../services/MessageService'
 
 export default function ChatCard({ outGoing, data }) {
 	const { user } = useSelector((state) => state.auth)
-	const _user = user?.user;
+	const _user = user?.user
 
 	useEffect(() => {
-		if(data && !data?.seen && data?.from?.id !== _user?.id){
+		if (data && !data?.seen && data?.from?.id !== _user?.id) {
 			MessageService.updateMessageSeen(data?.id)
 		}
-	},[])
+	}, [])
 
 	return (
-		<div className="col-9 pl-0">
+		<div className={`pl-0 ${outGoing ? 'mr-3 ml-5': 'mr-4'}`} style={{ minWidth: '200px'}}>
 			<div
 				className={`card shadow-xs ${
 					outGoing ? ' bg-theme-light border-theme' : 'border-success'
@@ -30,10 +31,16 @@ export default function ChatCard({ outGoing, data }) {
 					</div>
 					<div className="d-flex justify-content-between">
 						<i className="text-grey-500">
-							{moment(_user?.last_seen).fromNow()}
+							{moment(data?.created_at).fromNow()}
 						</i>
 						{outGoing && (
-							<IoCheckmarkDoneSharp size={20} className="text-primary" />
+							<>
+								{data?.seen ? (
+									<IoCheckmarkDoneSharp size={20} className="text-primary" />
+								) : (
+									<IoMdCheckmark size={20} className="text-grey-500" />
+								)}
+							</>
 						)}
 					</div>
 				</div>
