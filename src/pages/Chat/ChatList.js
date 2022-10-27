@@ -6,8 +6,8 @@ import EachConversation from '../Messages/EachConversation'
 
 export default function ChatList() {
 	const { conversations } = useSelector((state) => state.view)
-	const { user } = useSelector((state) => state.auth)
-	const auth_user = user?.user
+	// const { user } = useSelector((state) => state.auth)
+	// const auth_user = user?.user
 	const params = useParams()
 
 	const { conversation_id } = params
@@ -18,8 +18,8 @@ export default function ChatList() {
 			<div className="scroll-bar" style={{ maxHeight: '85vh' }}>
 				{conversations?.map((val) => {
 					// console.log('EACH CONV --', val)
-					const _user =
-						auth_user?.id === val?.guest?.id ? val?.owner : val?.guest
+					// const _user =
+					// 	auth_user?.id === val?.guest?.id ? val?.owner : val?.guest
 					return (
 						<EachConversation
 							isActive={val?.uuid == conversation_id}

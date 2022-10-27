@@ -20,16 +20,16 @@ export default function Chat() {
 		return <Redirect to="/login" />
 	}
 
-	console.log('RERENDERING')
+	// console.log('RERENDERING')
 
 	return (
 		<MainErrorBoundary>
-			<div className="bg-accent">
+			<div className="bg-accent" style={{ overflowY: 'hidden' }}>
 				<div className="container">
 					<div className="row justify-content-center">
 						{Global.isMobile && !conversation_id ? (
 							<div
-								className="bg-white shadow col-lg-4 pb-5 px-0"
+								className="bg-white shadow col-lg-4 pb-0 px-0"
 								style={{ minHeight: '100vh' }}
 							>
 								<ChatList />
@@ -37,7 +37,7 @@ export default function Chat() {
 						) : null}
 						{!Global.isMobile && (
 							<div
-								className="bg-white shadow col-lg-4 pb-5 px-0"
+								className="bg-white shadow col-lg-4 pb-0 px-0"
 								style={{ minHeight: '100vh' }}
 							>
 								<ChatList />
