@@ -13,6 +13,7 @@ import ErrorBoundary from '../ErrorBoundries/ErrorBoundary'
 import { MdOutlineArrowUpward } from 'react-icons/md'
 import Promote from '../Ads/Promote/Promote'
 import { useDispatch } from 'react-redux'
+import renderHTML from 'react-render-html'
 // import { Modal } from 'react-bootstrap'
 
 function EachRequest({ data, promoteCTA, allowPromote }) {
@@ -126,7 +127,7 @@ function EachRequest({ data, promoteCTA, allowPromote }) {
 							style={{ fontSize: '16px' }}
 						>
 							{data?.body &&
-								data?.body?.slice(0, 120)?.replace(/\n/g, '<br />')}
+								renderHTML(data?.body?.slice(0, 120)?.replace(/\n/g, '<br />'))}
 							<a className="fw-600 text-theme ms-2">See more</a>
 						</p>
 					</Link>
