@@ -21,7 +21,7 @@ export default function ProfileJumb({ user }) {
 					style={{ height: '10rem' }}
 				>
 					<LazyLoadImage
-						src="https://img.freepik.com/premium-vector/white-abstract-background-3d-paper-style_23-2148403778.jpg?w=2000"
+						src="https://picsum.photos/400/300"
 						alt="image"
 						height="500"
 						width="100%"
