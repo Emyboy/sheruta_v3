@@ -29,7 +29,7 @@ export default function DiscussionCenterHeader({ backURL, userData }) {
 	const data = location_keywords.filter((x) => x.id == room_id)
 
 	return (
-		<header className="bg-white border-bottom p-2 d-flex justify-content-between animate__fadeInDown animate__animated shadow-sm">
+		<header className="bg-white border-bottom align-items-center p-2 d-flex justify-content-between animate__fadeInDown animate__animated shadow-sm">
 			<Link
 				to={userData ? `/user/${userData?.username}` : window.location.pathname}
 				className="d-flex align-items-center"
