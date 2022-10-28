@@ -20,7 +20,9 @@ import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBan
 import { Redirect } from 'react-router'
 import EachRequestOptions from '../../components/Social/EachRequestOptions'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
-import RequestReview from './RequestReview'
+import RequestReview from './RequestReview';
+import renderHTML from 'react-render-html'
+
 
 const ImgContainer = styled.section`
 	padding: 5em;
@@ -275,7 +277,10 @@ export default function RequestDetails(props) {
 															fontSize: '18px',
 														}}
 													>
-														{request?.body}
+														{/* {request?.body} */}
+														{renderHTML(
+															request?.body?.replace(/\n/g, '<br />')
+														)}
 													</p>
 												</div>
 												<div className="d-flex justify-content-between align-items-center mb-3">
@@ -435,7 +440,9 @@ export default function RequestDetails(props) {
 																		Rent
 																	</strong>
 																	<br />₦{' '}
-																	{window.formattedPrice.format(request?.budget)}
+																	{window.formattedPrice.format(
+																		request?.budget
+																	)}
 																</li>
 																{request?.rent_per_room && (
 																	<li className="col-6 col-md-3 mb-3">
