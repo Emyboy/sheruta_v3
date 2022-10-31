@@ -13,6 +13,7 @@ import PersonalInfo from '../Profile/PersonalInfo'
 import Global from '../../Global'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { notifyEmy } from '../../services/Sheruta'
 
 export default function EachMatch({ data, done }) {
 	const [val, setVal] = useState(data)
@@ -40,6 +41,9 @@ export default function EachMatch({ data, done }) {
 					}
 				}, 1000)
 			}
+			notifyEmy({
+				heading: `Added ${ _user?.first_name} as a contact ✅`,
+			})
 		} catch (error) {
 			setLoading(false)
 			return Promise.reject(error)
