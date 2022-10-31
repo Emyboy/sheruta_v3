@@ -64,12 +64,13 @@ export default function UserAction({ user, disable, alignment, className }) {
 				>
 					<Link
 						to={
-							(payment_plan && !app_details?.everything_free) ||
-							user?.id == Global.ADMIN_ID || app_details?.everything_free
-								? `/messages/new/${user?.id}`
-								: '#'
+							// (payment_plan && !app_details?.everything_free) ||
+							// user?.id == Global.ADMIN_ID || app_details?.everything_free
+								// ? 
+								`/messages/new/${user?.id}`
+								// : '#'
 						}
-						onClick={() => handleButtonClicks('message')}
+						// onClick={() => handleButtonClicks('message')}
 						className="mr-3"
 					>
 						<button

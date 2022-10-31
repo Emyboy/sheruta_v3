@@ -64,7 +64,9 @@ export default function MessageNew(props) {
     }
 
     if (conv_id) {
-        return <Redirect to={`/messages/${conv_id}`} />;
+        window.location = `/messages/${conv_id}`
+        // return <Redirect to={`/messages/${conv_id}`} />;
+        return null
     }
 
     return (
