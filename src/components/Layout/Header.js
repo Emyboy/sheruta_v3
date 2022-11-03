@@ -233,7 +233,13 @@ export default function Header({
 						</a>
 					</Tooltip>
 				</Link>
-				<Link to={personal_info?.looking_for ? `/flat/request`:'/flat/submit'}>
+				<Link
+					to={
+						personal_info?.looking_for === false
+							? '/flat/submit'
+							: `/flat/request`
+					}
+				>
 					<Tooltip placement="bottom" title={'Submit Flat'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
 							<i
@@ -314,7 +320,10 @@ export default function Header({
 							const otherUser = val?.users_permissions_user
 							const user = val?.owner
 							return (
-								<div className="card bg-transparent-card w-100 border-0 ps-5 mb-3" key={`notify-${i}`}>
+								<div
+									className="card bg-transparent-card w-100 border-0 ps-5 mb-3"
+									key={`notify-${i}`}
+								>
 									<img
 										src={
 											otherUser?.avatar_url || Global.USER_PLACEHOLDER_AVATAR
