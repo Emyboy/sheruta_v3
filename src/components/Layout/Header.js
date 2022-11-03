@@ -250,9 +250,9 @@ export default function Header({
 				<Link to="/match">
 					<Tooltip placement="bottom" title={'Your Match'}>
 						<a className="p-2 text-center ms-0 menu-icon center-menu-icon">
-							{matches.length > 0 && (
+							{matches?.length > 0 && (
 								<span className="badge badge-danger position-fixed">
-									{!payment_plan ? 12 : matches.length}
+									{!payment_plan ? 12 : matches?.length}
 								</span>
 							)}
 							<i
