@@ -51,7 +51,7 @@ const Login = (props) => {
 			method: 'POST',
 			data: {
 				...data,
-				identifier: data.identifier.toLowerCase()
+				identifier: data.identifier.toLowerCase().trim()
 			}
 		})
 			.then((res) => {
