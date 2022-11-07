@@ -53,7 +53,7 @@ export const Signup = (props) => {
 				last_name: e.last_name
 					.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
 					?.split(' ')[0],
-				email: e.email?.toLocaleLowerCase(),
+				email: e.email?.toLocaleLowerCase().trim(),
 			},
 		})
 			.then((res) => {
