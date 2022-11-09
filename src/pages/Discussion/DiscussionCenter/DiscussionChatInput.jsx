@@ -94,6 +94,7 @@ export default function DiscussionChatInput({
 				value={newMessage}
 				ref={inputRef}
 				rows={'1'}
+				maxLength='500'
 				style={{
 					height:
 						newMessage.length > (Global.isMobile ? 30 : 160)

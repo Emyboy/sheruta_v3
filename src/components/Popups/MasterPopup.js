@@ -33,6 +33,7 @@ import {
 	getAuthContacts,
 } from '../../redux/strapi_actions/contact.actions'
 import { getAllAds } from '../../redux/strapi_actions/ads.actions'
+import NotificationPopup from './NotificationPopup'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -131,12 +132,12 @@ const MasterPopup = (props) => {
 				{!Cookies.get('agent') && <ConfigViewPopup />}
 				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
-				{/* {Global.PLATFORM !== 'iPhone' && (
+				{Global.PLATFORM !== 'iPhone' && (
 					<>
 						<NotificationPopup />
-						<LocationUpdatePopup />
+						{/* <LocationUpdatePopup /> */}
 					</>
-				)} */}
+				)}
 				<PaymentPopup />
 				<AppUpdatePopup />
 				<LocationKeywordPopup />

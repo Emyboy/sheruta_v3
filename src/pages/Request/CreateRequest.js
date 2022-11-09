@@ -172,12 +172,12 @@ const CraeteRequest = (props) => {
 			})
 			return
 		}
-		if (parseInt(data.rent_per_room) < 100000) {
-			notification.error({
-				message: "Rent per room can't be less than hundred thousand",
-			})
-			return
-		}
+		// if (parseInt(data.rent_per_room) < 100000) {
+		// 	notification.error({
+		// 		message: "Rent per room can't be less than hundred thousand",
+		// 	})
+		// 	return
+		// }
 		if (parseInt(data.bathrooms) === 0) {
 			notification.error({ message: "Bathroom can't be zero" })
 			return
