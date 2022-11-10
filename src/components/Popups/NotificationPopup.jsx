@@ -1,13 +1,12 @@
-import { Modal } from 'react-bootstrap'
 import React, { useState } from 'react'
-import { BsFillBellFill } from 'react-icons/bs'
+import { BiBell } from 'react-icons/bi'
 import Btn from '../Btn/Btn'
 import firebase from '../../Firebase'
 import { useSelector } from 'react-redux'
 import { notifyEmy } from '../../services/Sheruta'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import { notification } from 'antd'
+import { Modal, notification } from 'antd'
 
 export default function NotificationPopup() {
 	const [done, setDone] = useState(false)
@@ -55,8 +54,9 @@ export default function NotificationPopup() {
 		Notification.requestPermission().then(() => {
 			const msg = firebase.messaging()
 			msg
-				.requestPermission()
-				.then(() => {
+			.requestPermission()
+			.then(() => {
+					setLoading(false)
 					return msg.getToken()
 				})
 				.then((data) => {
@@ -64,7 +64,7 @@ export default function NotificationPopup() {
 				})
 				.catch((err) => {
 					setShow(false)
-					console.log('ERROR --', err)
+					// console.log('ERROR --', err)
 					notifyEmy({
 						heading: 'Error turning on notification',
 						log: { ...err },
@@ -87,6 +87,7 @@ export default function NotificationPopup() {
 				}, 20000)
 			}
 		}, 5000)
+		// setShow(true)
 	}, [personal_info])
 
 	if (done) {
@@ -94,12 +95,12 @@ export default function NotificationPopup() {
 	}
 
 	return (
-		<Modal show={show}>
+		<Modal visible={show} footer={null} closable={false}>
 			<div className="card-body">
 				<div className="text-center">
-					<BsFillBellFill size={80} />
+					<BiBell size={80} />
 					<h2 className="mt-3 display-6">
-						<b>Turn On Notification</b>
+						<b>Allow Notifications</b>
 					</h2>
 					<h4>Get Realtime updates on</h4>
 					<hr />
@@ -119,13 +120,19 @@ export default function NotificationPopup() {
 						loading={loading}
 					/>
 					<br />
-					<Btn
+					<button
 						text="Not Now"
-						onClick={() => setShow(false)}
-						loading={loading}
-						className="mt-3 btn-sm"
-						danger
-					/>
+						onClick={() => {
+							setShow(false)
+							notifyEmy({
+								heading: `Closed notification popup`,
+								log: {page: window.location.pathname}
+							})
+						}}
+						className="btn fw-bold mt-4 btn-sm bg-white text-danger"
+					>
+						Not Now
+					</button>
 				</div>
 			</div>
 		</Modal>
