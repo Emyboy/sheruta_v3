@@ -57,6 +57,7 @@ import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
 import NewProfile from '../pages/Profile/NewProfile/NewProfile'
 import MyContacts from '../pages/Contacts/MyContacts'
 import Chat from '../pages/Chat/Chat'
+import WalletPage from '../pages/Wallet/WalletPage'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -133,6 +134,7 @@ function App() {
 								component={AgentPending}
 							/>
 							<Route exact path="/flats" component={Properties} />
+							<Route exact path="/wallet" component={WalletPage} />
 							<Route exact path="/discussion" component={Discussion} />
 							<Route
 								exact

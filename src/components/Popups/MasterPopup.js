@@ -34,6 +34,7 @@ import {
 } from '../../redux/strapi_actions/contact.actions'
 import { getAllAds } from '../../redux/strapi_actions/ads.actions'
 import NotificationPopup from './NotificationPopup'
+import FundWalletPopup from './Wallet/FundWalletPopup'
 
 const MasterPopup = (props) => {
 	const { user } = useSelector((state) => state.auth)
@@ -129,6 +130,7 @@ const MasterPopup = (props) => {
 	if (user) {
 		return (
 			<>
+				<FundWalletPopup />
 				{!Cookies.get('agent') && <ConfigViewPopup />}
 				{/* <GetStartedPopup /> */}
 				<GetMoreInfoPopup />
