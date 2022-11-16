@@ -1,13 +1,27 @@
 import { Avatar } from 'antd'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { IoWallet } from 'react-icons/io5'
+import { getWalletHistory } from '../../redux/strapi_actions/wallet.actions'
+import { useLayoutEffect } from 'react'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 export default function TransactionHistory() {
 	const dispatch = useDispatch()
+	const { wallet_history, wallet } = useSelector((state) => state?.wallet)
+
+	useLayoutEffect(() => {
+		;(async () => {
+			await dispatch(getWalletHistory())
+		})()
+	}, [wallet])
+
 	return (
 		<div className="my-5 ">
 			<div className="d-flex justify-content-between align-items-center mb-3">
-				<h1 className="font-xl mb-0">Wallet history</h1>
+				<h1 className="font-xl mb-0">History</h1>
 				<button
 					onClick={() =>
 						dispatch({
@@ -22,13 +36,14 @@ export default function TransactionHistory() {
 					Fund Wallet
 				</button>
 			</div>
-			<div className="card rounded-xxl">
+			<div className="card rounded-xxl" style={{ minHeight: '40vh' }}>
 				<div className="card-body scroll-bar">
-					<table className="table table-striped table-hover">
-						<table className="table">
-							{/* <thead>
+					{wallet_history?.length > 0 ? (
+						<table className="table table-striped table-hover">
+							<table className="table">
+								{/* <thead>
 								<tr>
-									<th scope="col" className="fw-100">
+									<th scope="col" className="fw-100">yarn start
 										Sender
 									</th>
 									<th scope="col" className="fw-100">
@@ -45,50 +60,92 @@ export default function TransactionHistory() {
 									</th>
 								</tr>
 							</thead> */}
-							<tbody>
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-								<EachWalletTransaction />
-							</tbody>
+								<tbody>
+									{wallet_history
+										?.sort(
+											(a, b) => new Date(b.created_at) - new Date(a.created_at)
+										)
+										?.map((val, i) => {
+											return (
+												<EachWalletTransaction val={val} key={`history-${i}`} />
+											)
+										})}
+								</tbody>
+							</table>
 						</table>
-					</table>
+					) : (
+						<div
+							style={{ minHeight: `40vh` }}
+							className="d-flex align-items-center justify-content-center"
+						>
+							<div className="text-center">
+								<IoWallet className="text-warning" size={50} />
+								<h5 className="mt-4">
+									There are no transactions yet, <br />{' '}
+									<span className="fw-bold text-theme">Fund your Wallet</span>{' '}
+									to get started.
+								</h5>
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
 	)
 }
 
-const EachWalletTransaction = () => {
+const EachWalletTransaction = ({ val }) => {
+	// console.log(val)
+	const { user } = useSelector((state) => state.auth)
+	const _user = user?.user
+
+	const renderStatus = (status) => {
+		switch (status) {
+			case 'success':
+				return 'theme'
+			case 'canceled':
+				return 'danger fw-600'
+			case 'pending':
+				return 'warning'
+			case 'invalid':
+				return 'danger'
+			default:
+				return 'danger'
+		}
+	}
+
 	return (
 		<tr>
 			<th scope="d-flex" style={{ minWidth: '220px' }}>
-				<div className="d-flex align-items-center">
+				<Link to={`/user/${val?.from?.username}`} className="d-flex">
 					<img
-						src="https://pyxis.nymag.com/v1/imgs/51b/28a/622789406b8850203e2637d657d5a0e0c3-avatar-rerelease.rsquare.w700.jpg"
+						src={val?.from?.avatar_url}
 						style={{ width: '46px', borderRadius: '50px' }}
 					/>{' '}
-					<h4 className="ml-2 mb-0 fw-500">From Chioma</h4>
-				</div>
+					<h4 className="ml-2 mt-1 fw-500">
+						From {val?.from?.id == _user?.id ? 'You' : val?.from?.first_name}
+					</h4>
+				</Link>
 			</th>
 			<td colspan="2" className="fw-500" style={{ minWidth: '160px' }}>
-				3 minutes ago
+				{moment(val?.created_at).fromNow().slice(0, 14) + '..'}
 			</td>
 			<td colspan="2" className="fw-500" style={{ minWidth: '140px' }}>
-				N200,000
+				₦{window.formattedPrice.format(val?.amount)}
 			</td>
 			<td
-				className="text-warning fw-500 d-flex align-items-center"
+				className={`text-${renderStatus(
+					val?.status
+				)} fw-500 d-flex align-items-center`}
 				style={{ minWidth: '130px' }}
 			>
-				<span class="bg-warning m-0 btn-round-xss"></span>{' '}
-				<span className="px-2">Pending</span>
+				<span
+					class={`bg-${renderStatus(val?.status)} m-0 btn-round-xss`}
+				></span>{' '}
+				<span className={`px-2 text-capitalize`}>{val?.status}</span>
 			</td>
 			<td className="fw-500" style={{ minWidth: '100px' }}>
-				ID #454
+				ID #{val?.id}
 			</td>
 		</tr>
 	)

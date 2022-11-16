@@ -1,4 +1,4 @@
-import { Modal } from 'antd'
+import { Modal, notification } from 'antd'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AmountInput from 'react-currency-input-field'
@@ -7,6 +7,10 @@ import { Dots } from 'react-activity'
 import { usePaystackPayment } from 'react-paystack'
 import { useEffect } from 'react'
 import success from './success.svg'
+import UserService from '../../../services/UserService'
+import WalletService from '../../../services/WalletService'
+import { notifyEmy } from '../../../services/Sheruta'
+import { getWallet } from '../../../redux/strapi_actions/wallet.actions'
 
 export default function FundWalletPopup() {
 	const { show_fund_wallet } = useSelector((state) => state?.wallet)
@@ -19,7 +23,18 @@ export default function FundWalletPopup() {
 		return null
 	}
 	return (
-		<Modal visible={true} footer={null} closable={false}>
+		<Modal
+			visible={true}
+			footer={null}
+			onCancel={() => {
+				dispatch({
+					type: 'SET_WALLET_STATE',
+					payload: {
+						show_fund_wallet: false,
+					},
+				})
+			}}
+		>
 			<div className="my-4">
 				{step < 2 && <h1 className="mb-4">Fund Your Wallet</h1>}
 				{
@@ -39,7 +54,17 @@ export default function FundWalletPopup() {
 						<WalletFunLoading
 							amount={amount}
 							password={password}
-							onSuccess={(e) => {}}
+							onSuccess={(e) => {
+								dispatch({
+									type: 'SET_WALLET_STATE',
+									payload: {
+										show_fund_wallet: false,
+									},
+								})
+								setStep(0)
+								dispatch(getWallet())
+								notification.success({ message: 'Wallet funded successfully' })
+							}}
 						/>,
 					][step]
 				}
@@ -81,21 +106,32 @@ const WalletAmountInput = ({ done }) => {
 }
 
 const WalletPasswordInput = ({ done }) => {
-	const [password, setPassword] = useState(0);
+	const [password, setPassword] = useState(0)
+	const [inCorrect, setInCorrect] = useState(false)
+	const [loading, setLoading] = useState(false)
 
-  const confirmPassword = async () => {
-    try {
-      
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
+	const confirmPassword = async () => {
+		try {
+			setLoading(true)
+			const res = await UserService.confirmPassword(password)
+			if (res.data.isPassword) {
+				done(password)
+			} else {
+				setInCorrect(true)
+			}
+			setLoading(false)
+		} catch (error) {
+			setLoading(false)
+			return Promise.reject(error)
+		}
+	}
 
 	return (
 		<>
 			<form>
 				<label for="exampleFormControlInput1" className="form-label">
-					Enter Password
+					Enter Password{' '}
+					{inCorrect && <span className="text-danger">Incorrect Password</span>}
 				</label>
 				<div className="input-group mb-3">
 					<input
@@ -108,9 +144,9 @@ const WalletPasswordInput = ({ done }) => {
 				</div>
 			</form>
 			<button
-				disabled={!password}
+				disabled={!password || loading}
 				className="btn btn-lg text-center bg-accent text-white my-3 w-100"
-				onClick={done}
+				onClick={confirmPassword}
 			>
 				Next
 			</button>
@@ -120,26 +156,57 @@ const WalletPasswordInput = ({ done }) => {
 
 const WalletFunLoading = ({ amount, password, onCancel, onSuccess }) => {
 	const { user } = useSelector((state) => state.auth)
-	const [loading, setLoading] = useState(false)
-	const [pageState, setPageState] = useState('none');
-  const [reference, setReference] = useState(null);
+	const { wallet } = useSelector((state) => state.wallet)
+	const [pageState, setPageState] = useState('none')
+	const [reference, setReference] = useState(null)
 	const config = {
 		reference: new Date().getTime().toString(),
 		email: user?.user?.email,
 		amount: parseInt(String(amount) + '00'),
 		publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
-	};
+	}
 
-  const sendTransaction = async () => {
+	const sendMoneyToAuth = async (ref) => {
+		if (ref && password && wallet?.id) {
+			setPageState('loading')
+			try {
+				const newTrans = await WalletService.saveWalletTransaction({
+					password,
+					reference: ref,
+					wallet_id: wallet?.id,
+					amount,
+					from: user?.user?.id,
+					to: user?.user?.id,
+				})
+				if (newTrans) {
+					setPageState('success')
+					setTimeout(() => {
+						setPageState('none')
+						if (onSuccess) {
+							onSuccess(newTrans)
+						}
+					}, 2000)
+				}
+			} catch (error) {
+				notifyEmy({
+					heading: `⚠️ Error saving wallet trans to DB`,
+					log: { error, ref, wallet_id: wallet?.id, amount },
+				})
+				return Promise.reject(error)
+			}
+		} else {
+			notifyEmy({
+				heading: `⚠️ Error saving wallet trans to DB`,
+				log: { ref, password, wallet_id: wallet?.id },
+			})
+			notification.error({ message: 'Error, Please contact Sheruta' })
+		}
+	}
 
-  }
-
-  useEffect(() => {
-    if(reference){
-
-    }
-  },[reference])
-
+	useEffect(() => {
+		if (reference) {
+		}
+	}, [reference])
 
 	const initializePayment = usePaystackPayment(config)
 
@@ -147,10 +214,7 @@ const WalletFunLoading = ({ amount, password, onCancel, onSuccess }) => {
 		// Implementation for whatever you want to do with reference and after success call.
 		console.log(reference)
 
-		setPageState('success')
-		setTimeout(() => {
-			onSuccess(reference)
-		}, 20000)
+		sendMoneyToAuth(reference)
 	}
 
 	// you can call this function anything
