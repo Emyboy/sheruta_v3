@@ -95,7 +95,7 @@ const WalletAmountInput = ({ done }) => {
 				</div>
 			</form>
 			<button
-				disabled={!amount || amount < 10}
+				disabled={!amount || amount < 500}
 				className="btn btn-lg bg-accent text-white my-3 w-100"
 				onClick={() => done(amount)}
 			>
@@ -202,11 +202,6 @@ const WalletFunLoading = ({ amount, password, onCancel, onSuccess }) => {
 			notification.error({ message: 'Error, Please contact Sheruta' })
 		}
 	}
-
-	useEffect(() => {
-		if (reference) {
-		}
-	}, [reference])
 
 	const initializePayment = usePaystackPayment(config)
 
