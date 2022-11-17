@@ -8,13 +8,12 @@ import AccountSettings from './settings/AccountSettings'
 import PersonalInfoSettings from './settings/PersonalInfoSettings'
 import { Switch } from 'antd'
 import ConfigureViewSettings from './settings/ConfigureViewSettings'
-import PreferredLocationSetting from './settings/PreferredLocationSetting';
+import PreferredLocationSetting from './settings/PreferredLocationSetting'
 import { MdOutlineVolunteerActivism } from 'react-icons/md'
-import UniqueHabitsSettings from './settings/UniqueHabitsSettings';
-import { MdMyLocation } from 'react-icons/md';
+import UniqueHabitsSettings from './settings/UniqueHabitsSettings'
+import { MdMyLocation } from 'react-icons/md'
 import LocationKeywordSettings from './settings/LocationKeywordSettings'
-
-
+import BankingInformation from './settings/BankingInformationSettings'
 
 export default function Settings({ match }) {
 	const { user } = useSelector((state) => state.auth)
@@ -47,6 +46,8 @@ export default function Settings({ match }) {
 				return <UniqueHabitsSettings />
 			case 'location-keyword':
 				return <LocationKeywordSettings />
+			case 'banking-information':
+				return <BankingInformation />
 			default:
 				return (
 					<Layout currentPage={'settings'}>
@@ -163,17 +164,34 @@ export default function Settings({ match }) {
 													<a
 														href="#mode"
 														className="pt-2 pb-2 d-flex align-items-center"
-													>
+														>
 														<i className="btn-round-md bg-blue-gradiant text-white feather-moon font-md me-3"></i>{' '}
 														<h4 className="fw-600 font-xsss mb-0 mt-0 mr-3">
-															Dark Mode
+														Dark Mode
 														</h4>
 														<Switch
 															defaultChecked={darkMode}
 															onChange={() => setDarkMode(!darkMode)}
-														/>
-													</a>
-												</li> */}
+															/>
+															</a>
+														</li> */}
+											</ul>
+											<div className="nav-caption fw-600 font-xsss text-grey-500 mb-2">
+												Wallet
+											</div>
+											<ul className="list-inline mb-4">
+												<li className="list-inline-item d-block border-bottom me-0">
+													<Link
+														to='/settings/banking-information'
+														className="pt-2 pb-2 d-flex align-items-center"
+													>
+														<i className="btn-round-md bg-primary-gradiant text-white feather-home font-md me-3"></i>{' '}
+														<h4 className="fw-600 font-xsss mb-0 mt-0">
+															Banking Information
+														</h4>
+														<i className="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i>
+													</Link>
+												</li>
 											</ul>
 										</div>
 									</div>
