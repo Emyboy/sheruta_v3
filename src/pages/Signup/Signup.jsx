@@ -76,7 +76,7 @@ export const Signup = (props) => {
 				setState({ ...state, loading: false })
 				setState({
 					...state,
-					errorMessage: err.response.data.message || 'Singup Error',
+					errorMessage: err?.response?.data?.message || 'Singup Error',
 				})
 				setTimeout(() => {
 					setState({ ...state, errorMessage: null })

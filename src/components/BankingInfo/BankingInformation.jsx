@@ -62,9 +62,12 @@ const EachAuthBank = ({ val }) => {
 			<div className="card-body">
 				<div className="row justify-content-between">
 					<div className="col-lg-8">
-						<h5 className="fw-bold">{val?.bank_name} - {val?.account_name}</h5>
+						<h5 className="fw-bold">
+							{val?.bank_name} - {val?.account_name}
+						</h5>
 						<h6>
-							<span className="text-muted">Account number: </span>{val?.account_number}
+							<span className="text-muted">Account number: </span>
+							{val?.account_number}
 						</h6>
 					</div>
 					<div className="col-lg-4 text-right">
