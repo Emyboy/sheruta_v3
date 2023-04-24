@@ -7,7 +7,7 @@ import { Dots } from 'react-activity'
 import { useSelector } from 'react-redux'
 import Select from 'react-select'
 
-export default function AddBankInfo({ bank_info, onCancel }) {
+export default function AddBankInfo({ bank_info, onCancel, done }) {
 	const [bankList, setBankList] = useState([])
 	const [accountNumber, setAccountNumber] = useState(null)
 	const [selectedBank, setSelectedBank] = useState(null)
@@ -85,7 +85,9 @@ export default function AddBankInfo({ bank_info, onCancel }) {
 					account_number: String(accountDetails?.data?.account_number),
 				},
 			})
-			console.log(res.data)
+			if(done){
+				done(res.data)
+			}
 		} catch (error) {
 			return Promise.reject(error)
 		}
@@ -134,7 +136,7 @@ export default function AddBankInfo({ bank_info, onCancel }) {
 						<div className="form-group">
 							<label for="account-number">Account Number </label>
 							{process.env.NODE_ENV !== 'production' && (
-								<small> 046924157 3</small>
+								<small> 0469241573</small>
 							)}
 							<div className="input-group mb-3">
 								<input

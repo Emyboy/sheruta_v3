@@ -46,8 +46,7 @@ import Inspection from '../pages/Inspection/Inspection'
 import BookInspection from '../pages/Inspection/BookInspection'
 import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
 import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
-// import AOS from 'aos';
-// import 'aos/dist/aos.css'
+
 import Home from '../pages/HomeNew/HomeNew'
 import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
 import Properties from '../pages/Properties/Properties'
@@ -67,7 +66,7 @@ const Settings = React.lazy(() => import('../pages/Settings/Settings'))
 // const PropertyDetails = React.lazy(() =>
 // 	import('../pages/PropertyDetails/PropertyDetails')
 // )
-const CreateRequest = React.lazy(() => import('../pages/Request/CreateRequest'))
+const CreateRequest = React.lazy(() => import('../pages/Request/SubmitRoom'))
 const GetStarted = React.lazy(() => import('../pages/GetStarted/GetStarted'))
 const Login = React.lazy(() => import('../pages/Login/Login'))
 const Signup = React.lazy(() => import('../pages/Signup/Signup'))
@@ -107,9 +106,7 @@ function App() {
 		//           console.log("========= NOTIFY ======================", data);
 		//       });
 		// }, 10000);
-		// AOS.init({
-		// 	duration: 2000,
-		// })
+
 	}, [])
 
 	return (
@@ -222,7 +219,8 @@ function App() {
 							<Route
 								exact
 								path="/user/:username"
-								component={is_dev ? NewProfile : Profile2}
+								component={ Profile2}
+								// component={is_dev ? NewProfile : Profile2}
 							/>
 							<Route exact path="/flat/submit" component={CreateRequest} />
 							<Route
@@ -286,3 +284,4 @@ function App() {
 }
 
 export default App
+

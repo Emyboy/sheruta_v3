@@ -10,7 +10,6 @@
 		"@testing-library/react": "^11.1.0",
 		"@testing-library/user-event": "^12.1.10",
 		"antd": "^4.16.6",
-		"aos": "^2.3.4",
 		"axios": "^0.21.1",
 		"bootstrap": "^5.0.2",
 		"browser-image-compression": "^1.0.14",
@@ -104,7 +103,5 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {
-		"cypress": "^8.4.0"
-	}
+	"devDependencies": {}
 }

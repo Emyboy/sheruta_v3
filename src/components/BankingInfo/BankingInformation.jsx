@@ -4,7 +4,8 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { BsFillTrashFill, BsPencilFill, BsPlusLg } from 'react-icons/bs'
+import { BsPlusLg } from 'react-icons/bs'
+import { IoMdTrash } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 import AddBankInfo from './AddBankInfo'
 
@@ -38,7 +39,12 @@ export default function BankingInformation() {
 		<div>
 			{showAdd && (
 				<Modal visible={true} closable={false} footer={null}>
-					<AddBankInfo />
+					<AddBankInfo
+						done={() => {
+							setShowAdd(false)
+							getBankInfos()
+						}}
+					/>
 				</Modal>
 			)}
 			<div className="my-4 text-right">
@@ -57,6 +63,24 @@ export default function BankingInformation() {
 }
 
 const EachAuthBank = ({ val }) => {
+	const removeBankingDetails = async () => {
+		try {
+			const res = await axios(
+				process.env.REACT_APP_API_URL + `/bank-infos/${val?.id}`,
+				{
+					headers: {
+						authorization: `Bearer ${Cookies.get('token')}`,
+					},
+					method: 'DELETE'
+				}
+			)
+			console.log('REMOVED --', res.data)
+		} catch (error) {
+			console.log(`ERROR --`, error)
+			return Promise.reject(error)
+		}
+	}
+
 	return (
 		<div className="card mb-4 shadow-sm">
 			<div className="card-body">
@@ -72,11 +96,15 @@ const EachAuthBank = ({ val }) => {
 					</div>
 					<div className="col-lg-4 text-right">
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<button type="button" className="btn bg-theme-light text-theme">
+							{/* <button type="button" className="btn bg-theme-light text-theme">
 								<BsPencilFill />
-							</button>
-							<button type="button" className="btn text-red bg-danger-light">
-								<BsFillTrashFill />
+							</button> */}
+							<button
+								type="button"
+								className="btn text-red "
+								onClick={removeBankingDetails}
+							>
+								<IoMdTrash size={30} />
 							</button>
 						</div>
 					</div>

@@ -18,7 +18,7 @@ export default function EachBlog({ data }) {
 	
 	return (
 		<div className="blog-item bottom-30">
-			<a href="blog-details.html">
+			<a>
 				{/* <img src={data?.image_url} alt="image" /> */}
 				<div
 					className="card"

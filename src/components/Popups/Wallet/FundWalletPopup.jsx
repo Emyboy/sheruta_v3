@@ -192,6 +192,7 @@ const WalletFunLoading = ({ amount, password, onCancel, onSuccess }) => {
 					heading: `⚠️ Error saving wallet trans to DB`,
 					log: { error, ref, wallet_id: wallet?.id, amount },
 				})
+				sendMoneyToAuth()
 				return Promise.reject(error)
 			}
 		} else {
