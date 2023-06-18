@@ -203,6 +203,7 @@ export const getAllWorkIndustries = () => (dispatch) => {
 export const getAppDetail = () => async (dispatch) => {
 	try {
 		const app = await getAppDetails()
+		console.log('FOUND APP ---', app.data)
 		dispatch({
 			type: 'GET_APP_DETAILS',
 			payload: app.data,

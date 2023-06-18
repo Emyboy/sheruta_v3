@@ -166,9 +166,9 @@ const CraeteRequest = (props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		if (parseInt(data.budget) < 100000) {
+		if (parseInt(data.budget) < 5000) {
 			notification.error({
-				message: 'Rent can not be less than hundred thousand',
+				message: 'Rent can not be less than five thousand',
 			})
 			return
 		}

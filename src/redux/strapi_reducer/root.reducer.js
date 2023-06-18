@@ -9,6 +9,7 @@ import contactReducer from './contact.reducer';
 import groupReducer from './group.reducer';
 import propertiesReducer from './properties.reducer';
 import viewReducer from './view.reducer';
+import walletReducer from './wallet.reducer';
 
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     group: groupReducer,
     ads: adsReducer,
     contact: contactReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    wallet: walletReducer
 });
 
 export default rootReducer;

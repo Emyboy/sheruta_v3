@@ -13,7 +13,7 @@ const iconSize = 24
 
 export default function DiscussionCenterHeader({ backURL, userData }) {
 	const { room_id } = useParams()
-	const { location_keywords, conversations } = useSelector((state) => state.view)
+	const { location_keywords, payment_plan } = useSelector((state) => state.view)
 	// const { user } = useSelector((state) => state.auth)
 	const { group_guests } = useSelector((state) => state?.group)
 	const dispatch = useDispatch()
@@ -69,7 +69,20 @@ export default function DiscussionCenterHeader({ backURL, userData }) {
 				</div>
 			</Link>
 			{userData ? (
-				<a href={`tel:${userData?.phone_number}`} className="btn btn-sm">
+				<a
+					href={payment_plan ? `tel:${userData?.phone_number}`: `#`}
+					className="btn btn-sm"
+					onClick={() => {
+						if(!payment_plan){
+							dispatch({
+								type: 'SET_VIEW_STATE',
+								payload: {
+									showPaymentPopup: true
+								},
+							})
+						}
+					}}
+				>
 					<FiPhoneCall
 						size={iconSize}
 						className="align-self-center text-grey-600"

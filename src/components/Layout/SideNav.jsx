@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiRocket, BiCommentDetail } from 'react-icons/bi'
 import { BsShieldCheck } from 'react-icons/bs'
-import { IoWarningOutline } from 'react-icons/io5'
+import { IoWallet, IoWarningOutline } from 'react-icons/io5'
 import { RiUserSearchLine, RiHome4Fill } from 'react-icons/ri'
 import { BsHash, BsHouseDoor, BsFillChatSquareFill } from 'react-icons/bs'
 import { BiHelpCircle } from 'react-icons/bi'
@@ -49,7 +49,6 @@ export default function SideNav({ show }) {
 									<span>Requests</span>
 								</Link>
 							</li> */}
-
 							<li>
 								<Link
 									to={`${
@@ -66,6 +65,29 @@ export default function SideNav({ show }) {
 									<span>Discussions</span>
 								</Link>
 							</li>
+
+							{process.env.NODE_ENV === 'development' && (
+								<li>
+									<Link to="/wallet" className="nav-content-bttn open-font">
+										<i className="btn-round-md bg-current me-3">
+											<IoWallet size={size} />
+										</i>
+										<span>Wallet</span>
+										{/* <span className="circle-count bg-danger font-xssss mt-0">
+										3
+									</span> */}
+									</Link>
+								</li>
+							)}
+							<li>
+								<Link className="nav-content-bttn open-font" to={`/contacts`}>
+									<i className="btn-round-md bg-red-gradiant me-3">
+										<FaPhoneAlt size={size - 5} />
+									</i>
+									<span>My Contacts</span>
+								</Link>
+							</li>
+
 							<li>
 								<Link
 									to={
@@ -94,15 +116,6 @@ export default function SideNav({ show }) {
 							</li>
 
 							<li>
-								<Link className="nav-content-bttn open-font" to={`/contacts`}>
-									<i className="btn-round-md bg-red-gradiant me-3">
-										<FaPhoneAlt size={size - 5} />
-									</i>
-									<span>My Contacts</span>
-								</Link>
-							</li>
-
-							<li>
 								<Link to="/pricing" className="nav-content-bttn open-font">
 									<i className=" btn-round-md bg-gold-gradiant me-3">
 										<FaCrown size={size} />
@@ -110,14 +123,14 @@ export default function SideNav({ show }) {
 									<span>Premium</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link to="/services" className="nav-content-bttn open-font">
 									<i className="btn-round-md bg-mini-gradiant me-3">
 										<IoBagCheck size={size} />
 									</i>
 									<span>Services</span>
 								</Link>
-							</li>
+							</li> */}
 						</ul>
 					</div>
 

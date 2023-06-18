@@ -92,7 +92,6 @@ export default function BookInspection({ match }) {
 				}
 			)
 			if (res.data) {
-				// console.log('--- INSPECTION CREATED ----', res.data)
 				setTimeout(() => {
 					router.push(`/inspection/${res?.data?.id}`)
 					setLoading(false)

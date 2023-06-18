@@ -50,7 +50,7 @@ export default function NotificationPopup() {
 	}
 
 	const handleClick = () => {
-		setLoading(true)
+		setShow(false)
 		Notification.requestPermission().then(() => {
 			const msg = firebase.messaging()
 			msg

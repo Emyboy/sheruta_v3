@@ -8,23 +8,23 @@ How long I've worked on this<br />
 
 <p>Sheruta an apartment sharing application for young people looking to share an apartment</p>
 
-## **How it works**
+# **TODO**
+> [ ] send password & token to fund and withdraw from wallet
 
-1. ### **Register:**
-    1. // TODO
-1. ### **Verify Email:**
-    1. // TODO
-1. ### **Submit Personal Info:**
-    1. // TODO
-1. ### **Post your request:**
-    1. // TODO
-1. ### **Get Matched:**
-    1. // TODO
-1. ### **Property Update:**
-    1. // TODO
-1. ### **Leave Feedback:**
-    1. // TODO
+> [ ] lock the personal info popup
 
+> [ ]
+
+
+# **Features**
+1. Group chat
+2. Direct realtime messaging
+3. Search
+4. Online payments (with [Paystack](https://paystack.com/) )
+5. Wallet
+6. In-app notification
+6. Push notification
+7. Email update/notifications
 
 ## **Technologies**
 1. React
@@ -33,3 +33,5 @@ How long I've worked on this<br />
 4. Axios
 5. Bootstrap
 6. Node js
+6. Postgres
+7. Socket-IO
