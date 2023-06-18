@@ -10,6 +10,7 @@ import { notifyEmy } from '../../services/Sheruta'
 import DiscussionCenterHeader from '../Discussion/DiscussionCenter/DiscussionCenterHeader'
 import DiscussionChatInput from '../Discussion/DiscussionCenter/DiscussionChatInput'
 import ChatBobbles from './ChatBobbles'
+import { isInvalid } from '../../utils/message.utils'
 
 export default function ChatCenter() {
 	const { user } = useSelector((state) => state.auth)
@@ -32,9 +33,11 @@ export default function ChatCenter() {
 
 	const _handleSubmit = async (e) => {
 		// e.preventDefault()
+
 		if (!e?.message_text) {
 			return null
 		}
+		
 		try {
 			setChatState({ sending: true })
 			const sent = await MessageService.sendMessage({

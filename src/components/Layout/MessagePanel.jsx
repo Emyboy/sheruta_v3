@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import EachConversation from '../../pages/Messages/EachConversation'
 import { getAllConversations } from '../../redux/strapi_actions/view.action'
-import PaymentAlert from '../PaymentAlert/PaymentAlert'
+// import PaymentAlert from '../PaymentAlert/PaymentAlert'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 export default function MessagePanel({ show, togglePanel }) {
 	const dispatch = useDispatch()
 	const { conversations } = useSelector((state) => state.view)
-	const { user } = useSelector((state) => state.auth)
-	const { accepted_suggestions } = useSelector((state) => state.alice)
+	// const { user } = useSelector((state) => state.auth)
+	// const { accepted_suggestions } = useSelector((state) => state.alice)
 	const { contacts } = useSelector((state) => state.contact)
 
 	useEffect(() => {
@@ -31,14 +31,14 @@ export default function MessagePanel({ show, togglePanel }) {
 					<h4 className="font-xsssss text-grey-500 text-uppercase fw-700 ls-3 mb-2">
 						MESSAGES
 					</h4>
-					<ul className="list-group list-group-flush">
-						{conversations && conversations.length === 0 && (
-							<li className="text-center">
-								<h6 className="text-muted">No conversations yet</h6>
-							</li>
-						)}
-						{conversations &&
-							conversations.map((val, i) => {
+					{conversations && (
+						<ul className="list-group list-group-flush">
+							{conversations.length === 0 && (
+								<li className="text-center">
+									<h6 className="text-muted">No conversations yet</h6>
+								</li>
+							)}
+							{conversations.map((val, i) => {
 								if (i < 8) {
 									return (
 										<EachConversation
@@ -49,7 +49,9 @@ export default function MessagePanel({ show, togglePanel }) {
 									)
 								}
 							})}
-					</ul>
+						</ul>
+					)}
+
 					{conversations && conversations.length > 7 && (
 						<div className="text-center mt-3">
 							<Link to="/messages" className="text-center text-theme ">
@@ -69,51 +71,51 @@ export default function MessagePanel({ show, togglePanel }) {
 							</li>
 						)}
 						{contacts
-								.sort(
-									(a, b) =>
-										new Date(b.updated_at).getTime() -
-										new Date(a.updated_at).getTime()
-								)
-								.map((val, i) => {
-									const otherUser = val?.user
-									if (!otherUser.deactivated) {
-										return (
-											<li
-												className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center"
-												onClick={togglePanel}
-												key={`accepted-uu-${i}`}
-											>
-												<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
-													<LazyLoadImage
-														effect="blur"
-														src={otherUser?.avatar_url}
-														alt="image"
-														className="w35 rounded-3"
-													/>
-												</span>
-												<div className="fw-700 mb-0 mt-1">
-													<Link
-														to={`/messages/new/${otherUser?.id}`}
-														className="font-xssss text-grey-600 d-block text-dark model-popup-chat"
-													>
-														{otherUser?.first_name?.split(' ')[0]}
-													</Link>
-													<small
-														style={{ fontSize: '10px' }}
-														className="text-muted"
-													>
-														@{otherUser?.username}
-													</small>
-												</div>
-												<span
-													className={`shadow bg-${
-														otherUser.online ? 'success' : 'danger'
-													} ms-auto btn-round-xss`}
-												></span>
-											</li>
-										)
-									}
-								})}
+							.sort(
+								(a, b) =>
+									new Date(b.updated_at).getTime() -
+									new Date(a.updated_at).getTime()
+							)
+							.map((val, i) => {
+								const otherUser = val?.user
+								if (!otherUser.deactivated) {
+									return (
+										<li
+											className="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center"
+											onClick={togglePanel}
+											key={`accepted-uu-${i}`}
+										>
+											<span className="btn-round-sm me-3 ls-3 text-white font-xssss fw-700">
+												<LazyLoadImage
+													effect="blur"
+													src={otherUser?.avatar_url}
+													alt="image"
+													className="w35 rounded-3"
+												/>
+											</span>
+											<div className="fw-700 mb-0 mt-1">
+												<Link
+													to={`/messages/new/${otherUser?.id}`}
+													className="font-xssss text-grey-600 d-block text-dark model-popup-chat"
+												>
+													{otherUser?.first_name?.split(' ')[0]}
+												</Link>
+												<small
+													style={{ fontSize: '10px' }}
+													className="text-muted"
+												>
+													@{otherUser?.username}
+												</small>
+											</div>
+											<span
+												className={`shadow bg-${
+													otherUser.online ? 'success' : 'danger'
+												} ms-auto btn-round-xss`}
+											></span>
+										</li>
+									)
+								}
+							})}
 					</ul>
 				</div>
 				{/* <div className="section full pe-3 ps-4 pt-0 pb-4 position-relative _feed-body">
