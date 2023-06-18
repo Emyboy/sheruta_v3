@@ -41,7 +41,7 @@ export const getUser = () => (dispatch) => {
 		})
 		.catch((err) => {
 			// console.log('GET USER ERROR --', {...err})
-			notification.error({ message: 'Slow network detected' })
+			// notification.error({ message: 'Slow network detected' })
 			return Promise.reject(err)
 		})
 }

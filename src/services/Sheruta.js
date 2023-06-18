@@ -21,7 +21,8 @@ export const notifyEmy = ({ status, url, property, log, heading, user }) => {
 export const getAppDetails = async () => {
     const app = await axios(
         process.env.REACT_APP_API_URL +
-            `/sheruta/get-app/${process.env.REACT_APP_SHERUTA_APP_ID}`,
+            `/sheruta/get-app/${1}`,
+            // `/sheruta/get-app/${process.env.REACT_APP_SHERUTA_APP_ID}`,
     );
     return app;
 };

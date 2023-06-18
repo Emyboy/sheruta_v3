@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Layout from '../../components/Layout/Layout'
 import PageLoader from '../../components/PageLoader'
-import MetaTags from 'react-meta-tags'
+// import MetaTags from 'react-meta-tags'
 import Global from '../../Global'
 import PageNotFound from '../../pages/PageNotFound'
 import { Link } from 'react-router-dom'
@@ -12,17 +12,19 @@ import styled from 'styled-components'
 import ImageViewer from 'react-simple-image-viewer'
 import { notification, Tag } from 'antd'
 import { ImLocation } from 'react-icons/im'
-import moment from 'moment'
-import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
+// import moment from 'moment'
+// import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import Notifications from '../../services/Notifications'
 import UserAction from '../../components/UserAction/UserAction'
 import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
 import { Redirect } from 'react-router'
 import EachRequestOptions from '../../components/Social/EachRequestOptions'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
-import RequestReview from './RequestReview';
+import RequestReview from './RequestReview'
 import renderHTML from 'react-render-html'
-
+import { BsFillPatchCheckFill, BsPhone } from 'react-icons/bs'
+import { MdImage } from 'react-icons/md'
+import { IoMail, IoCallSharp } from 'react-icons/io5'
 
 const ImgContainer = styled.section`
 	padding: 5em;
@@ -51,6 +53,7 @@ export default function RequestDetails(props) {
 		setState({ ...state, loading: true })
 		axios(process.env.REACT_APP_API_URL + '/property-requests/?id=' + id)
 			.then((res) => {
+				console.log(res.data)
 				if (res.data.length === 0) {
 					setState({ ...state, notFound: true, loading: false })
 				} else {
@@ -169,188 +172,224 @@ export default function RequestDetails(props) {
 							<div className="col-lg-12">
 								<div className="row merged20 justify-content-center">
 									<div className={`col-lg-9 ${Global.isMobile && 'p-0'}`}>
-										<div className="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
-											<div className="d-flex">
-												<div className="card-body p-0 d-flex">
-													{request?.users_permissions_user && (
-														<figure className="avatar me-3">
-															<img
-																src={
-																	deactivated
-																		? Global.USER_PLACEHOLDER_AVATAR
-																		: request?.users_permissions_user.avatar_url
-																}
-																alt="image"
-																className="shadow-sm rounded-circle w45"
-															/>
-														</figure>
-													)}
-													<h4 className="fw-700 text-grey-900 font-xssss mt-1">
-														<Link
-															to={`/user/${request?.users_permissions_user.username}`}
-														>
-															<a className="align-items-center text-dark d-flex">
-																{deactivated
-																	? '..... .....'
-																	: request?.users_permissions_user
-																			.first_name}{' '}
-																<VerifiedBadge
-																	user={request?.users_permissions_user}
-																	className={'ml-2'}
-																	size={20}
-																	without_text
-																/>
-															</a>
-														</Link>
-														<span className="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-															{/* {moment(request?.created_at).fromNow()} */}@
-															{request?.users_permissions_user?.username}
-														</span>
-													</h4>
-													<a
-														className="ms-auto"
-														id="dropdownMenu2"
-														data-bs-toggle="dropdown"
-														aria-expanded="false"
-													>
-														<i className="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i>
-													</a>
-													<EachRequestOptions
-														data={request}
-														deleted={deleted}
-														setDeleted={() => setDelete(true)}
-													/>
-												</div>
-											</div>
-											<div className="post-meta">
-												<h1
+										{!request?.users_permissions_user.deactivated &&
+										request?.image_url &&
+										request?.image_url.length > 0 ? (
+											// <ImgContainer
+											// 	style={{
+											// 		backgroundImage: `url(${request?.image_url[0]})`,
+											// 	}}
+											// >
+											// 	<button
+											// 		className="btn btn-dark btn-sm rounded shadow-lg"
+											// 		onClick={() => setShowImages(!showImages)}
+											// 	>
+											// 		Show All Images
+											// 	</button>
+											// </ImgContainer>
+											<div>
+												<div
+													className="card details-content bg-white rounded-xxl mb-4"
 													style={{
-														fontSize: Global.isMobile ? '18px' : '22px',
-														fontWeight: 'bold',
+														backgroundImage: `url(${request?.image_url[0]})`,
+														backgroundRepeat: 'no-repeat',
+														backgroundSize: 'cover',
+														backgroundPosition: 'center',
+														height: '20rem',
 													}}
-													className="text-grey-700"
 												>
-													{request?.heading}
-												</h1>
-												{!request?.users_permissions_user.deactivated &&
-												request?.image_url &&
-												request?.image_url.length > 0 ? (
-													<ImgContainer
+													{showImages && (
+														<ImageViewer
+															src={request?.image_url}
+															disableScroll={false}
+															closeOnClickOutside={true}
+															onClose={() => setShowImages(false)}
+															backgroundStyle={{
+																height: '70vh',
+																marginTop: !Global?.isMobile ? '15vh' : '9vh',
+															}}
+														/>
+													)}
+													<div
+														className="rounded d-flex justify-content-center align-items-center"
 														style={{
-															backgroundImage: `url(${request?.image_url[0]})`,
+															background: '#0606068c',
+															width: '100%',
+															height: '100%',
+															position: 'absolute',
+															top: 0,
+															left: 0,
 														}}
 													>
 														<button
-															className="btn btn-dark btn-sm rounded shadow-lg"
-															onClick={() => setShowImages(!showImages)}
+															className="btn btn-lg bg-white shadow fw-bold"
+															onClick={() => setShowImages(true)}
 														>
-															Show All Images
+															<MdImage size={30} /> View All Images
 														</button>
-													</ImgContainer>
-												) : null}
-												<div className="container-fluid pl-3">
-													<div className="row justify-content-between">
-														{deactivated ? (
-															<DeactivatedBanner />
-														) : (
-															<div
-																className="d-flex col-md-8 pl-0 text-dark"
-																style={{
-																	alignItems: 'center',
-																}}
-															>
-																<span
-																	style={{
-																		alignSelf: 'center',
-																	}}
-																>
-																	<ImLocation />
-																</span>{' '}
-																{request?.location}
-															</div>
-														)}
 													</div>
 												</div>
-												<div className="description mt-3 mb-4">
-													<p
-														style={{
-															fontSize: '18px',
-														}}
-													>
-														{/* {request?.body} */}
-														{renderHTML(
-															request?.body?.replace(/\n/g, '<br />')
-														)}
-													</p>
-												</div>
-												<div className="d-flex justify-content-between align-items-center mb-3">
-													<div>
-														<small className="mb-0">Total Rent</small>
-														<h2 className="mt-1 fw-700">
-															₦ {window.formattedPrice.format(request?.budget)}{' '}
+											</div>
+										) : null}
+
+										<div className="property-details-desc">
+											<div className="details-content card shadow-sm border-0 rounded-xxl">
+												<ul className="tag-list">
+													{request?.service && (
+														<li className="tag-2 bg-dark text-white mr-3">
+															{request?.service.name}
+														</li>
+													)}
+													{request?.category && (
+														<li className="tag">{request?.category.name}</li>
+													)}
+												</ul>
+
+												{/* <div className="price">$2,500</div> */}
+
+												<div className="content">
+													<span>
+														<ImLocation /> {request?.location}
+													</span>
+													<h3>
+														<a href="property-details.html">
+															₦ {window.formattedPrice.format(request?.budget)}
 															<small className="text-muted">
 																/
 																{request?.payment_type &&
 																	request?.payment_type.name}
 															</small>
-														</h2>
-													</div>
-													<div
-														className="d-flex"
-														style={{
-															alignItems: 'center',
-														}}
-													>
-														<div className="ml-2">
-															{request?.category && (
-																<Tag color="volcano">
-																	{request?.category.name}
-																</Tag>
-															)}
-															{request?.service && (
-																<Tag color="cyan">{request?.service.name}</Tag>
-															)}
+														</a>
+													</h3>
+													{request?.rent_per_room && (
+														<div className="d-flex justify-content-between align-items-center mb-3">
+															<div>
+																<p className="mb-0">Rent Per Room</p>
+																<h2 className="mt-1 fw-700">
+																	₦{' '}
+																	{window.formattedPrice.format(
+																		request?.rent_per_room
+																	)}{' '}
+																	<small className="text-muted">
+																		/
+																		{request?.payment_type &&
+																			request?.payment_type.name}
+																	</small>
+																</h2>
+															</div>
 														</div>
-													</div>
-												</div>
-												{request?.rent_per_room && (
-													<div className="d-flex justify-content-between align-items-center">
-														<div>
-															<small className="mb-0">Rent Per Room</small>
-															<h2 className="mt-1 fw-700">
-																₦{' '}
-																{window.formattedPrice.format(
-																	request?.rent_per_room
-																)}{' '}
-																<small className="text-muted">
-																	/
-																	{request?.payment_type &&
-																		request?.payment_type.name}
-																</small>
-															</h2>
-														</div>
-													</div>
-												)}
-												<div className="col-md-5 mt-4">
-													{user ? (
-														<UserAction
-															user={request?.users_permissions_user}
-														/>
-													) : (
-														// For Those Who Aren't Logged In
-														<Link
-															to={`/signup`}
-															title=""
-															className="btn main-btn bg-theme text-white"
-															data-ripple=""
-														>
-															Call Me
-															<i className="fa fa-phone ml-2"></i>
-														</Link>
 													)}
+													{/* <p>
+														Apartment <span>(78 sq.m)</span>
+													</p> */}
+
+													{request?.image_url?.length > 0 ? (
+														<ul className="list">
+															<li>
+																<i className="bx bx-bed"></i>{' '}
+																{request?.bedrooms} Bedrooms
+															</li>
+															<li>
+																<i className="bx bxs-bath"></i>{' '}
+																{request?.bathrooms} Baths
+															</li>
+															<li>
+																<i className="bx bxs-bath"></i>{' '}
+																{request?.toilets} Toilets
+															</li>
+														</ul>
+													) : null}
+
+													{/* <ul className="rating-list">
+														<li>
+															<i className="bx bxs-star"></i>
+														</li>
+														<li>
+															<i className="bx bxs-star"></i>
+														</li>
+														<li>
+															<i className="bx bxs-star"></i>
+														</li>
+														<li>
+															<i className="bx bxs-star"></i>
+														</li>
+														<li className="color-gray">
+															<i className="bx bxs-star"></i>
+														</li>
+														<li>Average</li>
+													</ul> */}
 												</div>
 											</div>
 										</div>
+
+										<div className=" card rounded-xxl shadow-sm border-0 mb-4">
+											<div className="details-description p-4">
+												<h3>Description</h3>
+												<div>
+													{renderHTML(request?.body?.replace(/\n/g, '<br />'))}
+												</div>
+											</div>
+										</div>
+
+										<div className="widget-area p-0">
+											<div className="widget widget_info pb-0 rounded-xxl bg-dark">
+												<div className="info-box-one rounded-xxl py-3">
+													<img
+														src={request?.users_permissions_user.avatar_url}
+														alt="user avatar"
+													/>
+													<h3 className="mb-1">
+														{request?.users_permissions_user.first_name}{' '}
+														{request?.users_permissions_user.is_verified ? (
+															<BsFillPatchCheckFill className="mx-1" />
+														) : null}
+													</h3>
+													<h6 className="text-white">
+														@{request?.users_permissions_user?.username}
+													</h6>
+													{request?.users_permissions_user?.bio && (
+														<small className="text-white">
+															{request?.users_permissions_user?.bio}
+														</small>
+													)}
+													<br />
+												</div>
+												{user?.user?.id !==
+													request?.users_permissions_user?.id && (
+													<div className="d-flex align-items-center my-3 justify-content-between">
+														{/* {!request?.is_searching && (
+														<div className="col-md-5 col-sm-12 d-flex justify-content-start p-0">
+															<button className="btn default-btn btn-sm py-2">
+																Pay Rent
+															</button>
+														</div>
+													)} */}
+														<div className="col-md-4- text-end col-sm-12 p-0 d-flex justify-content-end">
+															{user?.user && (
+																<Link
+																	to={`/messages/new/${request?.users_permissions_user?.id}`}
+																	className="text-white btn mx-1"
+																>
+																	<IoMail size={29} />
+																</Link>
+															)}
+															<a
+																href={
+																	user
+																		? `tel:${request?.users_permissions_user?.phone_number}`
+																		: `/login`
+																}
+																className="text-white btn px-2"
+																onClick={() => {}}
+															>
+																<IoCallSharp size={29} />
+															</a>
+														</div>
+													</div>
+												)}
+											</div>
+										</div>
+
 										{request?.bedrooms || request?.bathrooms ? (
 											<>
 												<div className="card shadow-xss rounded-xxl border-0 mb-3 mt-5">
