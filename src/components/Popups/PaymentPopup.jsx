@@ -32,11 +32,14 @@ const PaymentPopup = (props) => {
 				</label>
 				<ul className="pricing-features">
 					<li className={'font-xs'}>
-						<i className="bx bx-check"></i> Call flatmates directly
+						<i className="bx bx-check"></i> Share contact information
 					</li>
 					<li className={'font-xs'}>
-						<i className="bx bx-check"></i> Post room request
+						<i className="bx bx-check"></i> Call flatmates directly
 					</li>
+					{/* <li className={'font-xs'}>
+						<i className="bx bx-check"></i> Post room request
+					</li> */}
 
 					<li className={'font-xs'}>
 						<i className="bx bx-check"></i> View people's social media
@@ -49,12 +52,12 @@ const PaymentPopup = (props) => {
 						<i className="bx bx-check"></i> Boost your room request to the top
 					</li>
 
-					<li className={'font-xs'}>
+					{/* <li className={'font-xs'}>
 						<i className="bx bx-check"></i> Message multiple users at once.
-					</li>
-					<li className={'font-xs'}>
+					</li> */}
+					{/* <li className={'font-xs'}>
 						<i className="bx bx-check"></i> And much more...
-					</li>
+					</li> */}
 				</ul>
 				<br />
 				<span className="text-danger">
