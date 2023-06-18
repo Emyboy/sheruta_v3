@@ -46,7 +46,7 @@ export default function CreateLookingForRequest() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		if(message_text?.length < 220){
+		if(message_text?.length < 140){
 			setTimeout(() => {
 				notification.info({ message: 'Describe your ideal room', type: 'info' })
 			}, 3000);
@@ -91,9 +91,7 @@ export default function CreateLookingForRequest() {
 				heading: `Posted looking for Request to ${personal_info?.location_keyword?.name}`,
 				status: 'success',
 			})
-			history.push(
-				`/`
-			)
+			window.location = '/'
 			notification.success({ message: 'Request sent' })
 			return Promise.resolve()
 		} catch (error) {
@@ -227,7 +225,7 @@ export default function CreateLookingForRequest() {
 												<div className="col-lg-12 col-md-12">
 													<div className="form-group">
 														<label>
-															Describe your ideal room {`(220 chars)`}
+															Describe your ideal room {`(140 chars)`}
 														</label>
 														{/* <ReactQuill
 													theme="snow"
