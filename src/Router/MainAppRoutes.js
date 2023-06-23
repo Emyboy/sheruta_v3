@@ -57,6 +57,7 @@ import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
 import MyContacts from '../pages/Contacts/MyContacts'
 import Chat from '../pages/Chat/Chat'
 import WalletPage from '../pages/Wallet/WalletPage'
+import InspectionRoom from '../pages/Inspection/InspectionRoom/InspectionRoom'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -186,6 +187,7 @@ function App() {
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
 							<Route exact path="/inspections" component={Inspection} />
+							<Route exact path="/inspections/room/:room_id" component={InspectionRoom} />
 							{/* <Route
 								exact
 								path="/inspection/:inspection_id"

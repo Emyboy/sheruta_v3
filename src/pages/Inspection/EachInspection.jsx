@@ -15,6 +15,7 @@ import { notification } from 'antd'
 import { Dropdown } from 'react-bootstrap'
 import { FiRefreshCcw } from 'react-icons/fi'
 import { HiOutlineLogout } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 
 export default function EachInspection({ data }) {
 	const { user } = useSelector((state) => state.auth)
@@ -65,30 +66,32 @@ export default function EachInspection({ data }) {
 						<span>
 							Inspection with {isMine ? guest?.first_name : owner?.first_name}
 						</span>
-						<Dropdown>
-							<Dropdown.Toggle
-								id="dropdown-basic"
-								className="bg-white p-1 border-0 text-muted"
-							>
-								{/* <HiEllipsisHorizontal size={30} /> */}
-								menu
-							</Dropdown.Toggle>
+						{process.env.NODE_ENV === 'development' && (
+							<Dropdown>
+								<Dropdown.Toggle
+									id="dropdown-basic"
+									className="bg-white p-1 border-0 text-muted"
+								>
+									{/* <HiEllipsisHorizontal size={30} /> */}
+									menu
+								</Dropdown.Toggle>
 
-							<Dropdown.Menu>
-								<Dropdown.Item>
-									<FiRefreshCcw /> Reschedule
-								</Dropdown.Item>
-								{isMine ? (
+								<Dropdown.Menu>
 									<Dropdown.Item>
-										<HiOutlineTrash /> Close inspection
+										<FiRefreshCcw /> Reschedule
 									</Dropdown.Item>
-								) : (
-									<Dropdown.Item>
-										<HiOutlineLogout /> Leave
-									</Dropdown.Item>
-								)}
-							</Dropdown.Menu>
-						</Dropdown>
+									{isMine ? (
+										<Dropdown.Item>
+											<HiOutlineTrash /> Close inspection
+										</Dropdown.Item>
+									) : (
+										<Dropdown.Item>
+											<HiOutlineLogout /> Leave
+										</Dropdown.Item>
+									)}
+								</Dropdown.Menu>
+							</Dropdown>
+						)}
 					</div>
 					<div className="d-flex gap-3 align-items-center flex-wrap">
 						<span>
@@ -147,14 +150,12 @@ export default function EachInspection({ data }) {
 							>
 								Reject
 							</button> */}
-							<button
-								disabled={loading}
-								onClick={() => updateInspectionStatus('approved')}
-								type="button"
+							<Link
+								to={`/inspections/room/${_data?.id}`}
 								className="btn text-theme fw-bold"
 							>
 								<HiOutlineVideoCamera size={30} /> Join Call
-							</button>
+							</Link>
 						</div>
 					)}
 				</div>
