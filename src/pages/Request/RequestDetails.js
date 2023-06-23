@@ -15,16 +15,17 @@ import { ImLocation } from 'react-icons/im'
 // import moment from 'moment'
 // import VerifiedBadge from '../../components/VerifiedBadge/VerifiedBadge'
 import Notifications from '../../services/Notifications'
-import UserAction from '../../components/UserAction/UserAction'
-import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
+// import UserAction from '../../components/UserAction/UserAction'
+// import DeactivatedBanner from '../../components/DeactivatedBanner/DeactivatedBanner'
 import { Redirect } from 'react-router'
-import EachRequestOptions from '../../components/Social/EachRequestOptions'
+// import EachRequestOptions from '../../components/Social/EachRequestOptions'
 import Analytics, { AnalyticsTypes } from '../../services/Analytics'
 import RequestReview from './RequestReview'
 import renderHTML from 'react-render-html'
 import { BsFillPatchCheckFill, BsPhone } from 'react-icons/bs'
 import { MdImage } from 'react-icons/md'
 import { IoMail, IoCallSharp } from 'react-icons/io5'
+import InspectionBookingPopup from '../Inspection/InspectionBookingPopup'
 
 const ImgContainer = styled.section`
 	padding: 5em;
@@ -48,12 +49,12 @@ export default function RequestDetails(props) {
 	const deactivated = request?.users_permissions_user.deactivated
 	const tabs = ['More Details', 'Questions']
 	const [currentTab, setCurrentTab] = useState(tabs[0])
+	const [showInspection, setShowInspection] = useState(false)
 
 	useEffect(() => {
 		setState({ ...state, loading: true })
 		axios(process.env.REACT_APP_API_URL + '/property-requests/?id=' + id)
 			.then((res) => {
-				console.log(res.data)
 				if (res.data.length === 0) {
 					setState({ ...state, notFound: true, loading: false })
 				} else {
@@ -149,6 +150,11 @@ export default function RequestDetails(props) {
 					<script type="application/ld+json">
 					</script>
 				</MetaTags> */}
+				<InspectionBookingPopup
+					request={request}
+					show={showInspection}
+					onClose={() => setShowInspection(false)}
+				/>
 				{showImages ? (
 					<ImageViewer
 						src={request?.image_url}
@@ -357,14 +363,18 @@ export default function RequestDetails(props) {
 												{user?.user?.id !==
 													request?.users_permissions_user?.id && (
 													<div className="d-flex align-items-center my-3 justify-content-between">
-														{/* {!request?.is_searching && (
-														<div className="col-md-5 col-sm-12 d-flex justify-content-start p-0">
-															<button className="btn default-btn btn-sm py-2">
-																Pay Rent
-															</button>
-														</div>
-													)} */}
-														<div className="col-md-4- text-end col-sm-12 p-0 d-flex justify-content-end">
+														{!request?.is_searching && (
+															<div className="col-md-5 col-sm-12 d-flex justify-content-start p-0">
+																<button
+																	className="btn bg-black fw-bold text-white btn-sm py-2"
+																	style={{fontSize: '17px'}}
+																	onClick={() => setShowInspection(true)}
+																>
+																	Book Inspection
+																</button>
+															</div>
+														)}
+														<div className="col-md-4 text-end col-sm-12 p-0 d-flex justify-content-end">
 															{user?.user && (
 																<Link
 																	to={`/messages/new/${request?.users_permissions_user?.id}`}
