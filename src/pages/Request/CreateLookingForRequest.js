@@ -66,7 +66,8 @@ export default function CreateLookingForRequest() {
 			location: location?.label,
 			google_location: location,
 			country: 1,
-			heading: `In need a ${category?.name} for share in ${personal_info?.location_keyword?.name}`
+			heading: `In need a ${category?.name} for share in ${personal_info?.location_keyword?.name}`,
+			payment_type: payment_type?.id
 		}
 
 		console.log(data)

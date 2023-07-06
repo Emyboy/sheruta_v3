@@ -81,7 +81,7 @@ export default function ChatCenter() {
 				className="d-flex flex-column algin-items-start justify-content-start scroll-bar pt-4"
 				style={{ height: '100%', overflowX: 'hidden' }}
 			>
-				<ChatBobbles />
+				<ChatBobbles userData={_user} />
 			</div>
 			<div
 				className={`bg-white p-3 border-top d-flex flex-column ${

@@ -43,9 +43,9 @@ import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetai
 import AgentPending from '../pages/Agent/AgentPending'
 import AgentSignup from '../pages/Agent/AgentSignup'
 import Inspection from '../pages/Inspection/Inspection'
-import BookInspection from '../pages/Inspection/BookInspection'
-import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
-import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
+// import BookInspection from '../pages/Inspection/BookInspection'
+// import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
+// import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
 
 import Home from '../pages/HomeNew/HomeNew'
 import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
@@ -53,10 +53,11 @@ import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
 import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
-import NewProfile from '../pages/Profile/NewProfile/NewProfile'
+// import NewProfile from '../pages/Profile/NewProfile/NewProfile'
 import MyContacts from '../pages/Contacts/MyContacts'
 import Chat from '../pages/Chat/Chat'
 import WalletPage from '../pages/Wallet/WalletPage'
+import InspectionRoom from '../pages/Inspection/InspectionRoom/InspectionRoom'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -186,7 +187,8 @@ function App() {
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
 							<Route exact path="/inspections" component={Inspection} />
-							<Route
+							<Route exact path="/inspections/room/:room_id" component={InspectionRoom} />
+							{/* <Route
 								exact
 								path="/inspection/:inspection_id"
 								component={InspectionDetails}
@@ -200,7 +202,7 @@ function App() {
 								exact
 								path="/inspection/invitation/:inspection_id"
 								component={InspectionInvitation}
-							/>
+							/> */}
 							<Route exact path="/what-next" component={WhatNext} />
 							{/* <Route
 								exact

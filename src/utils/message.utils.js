@@ -2,9 +2,15 @@ import store from "../redux/store/store"
 
 export function isInvalid(str) {
     const user = store.getState().auth?.user?.user;
+	const paymentPlan = store.getState().view?.payment_plan
     if(user && user.email?.includes('sheruta')){
         return false;
     }
+
+	if(paymentPlan){
+		return false
+	}
+	
 	// Remove white spaces from the string
 	console.log('CHECKING ---', str)
 	const sanitizedStr = str.toLowerCase().replace(/\s/g, '')
