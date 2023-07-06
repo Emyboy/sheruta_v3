@@ -44,11 +44,11 @@ export default (props) => {
 
 	useEffect(() => {
 		if (state.list.length === 0) {
-			const dev = process.env.NODE_ENV === 'development'
+			const dev = process.env.NODE_ENV !== 'production'
 			axios(
 				process.env.REACT_APP_API_URL +
 					`/property-requests/?_limit=${
-						dev ? '20' : '90'
+						dev ? '5' : '90'
 					}&_start=0&_sort=created_at:DESC`
 			)
 				.then((res) => {

@@ -141,7 +141,7 @@ const MasterPopup = (props) => {
 					</>
 				)}
 				<PaymentPopup />
-				<AppUpdatePopup />
+				{/* <AppUpdatePopup /> */}
 				<LocationKeywordPopup />
 				{Global.isMobile && <RobotMessage />}
 			</>

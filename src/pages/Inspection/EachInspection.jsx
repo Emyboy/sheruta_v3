@@ -5,7 +5,7 @@ import {
 	HiClock,
 	HiEllipsisHorizontal,
 	HiOutlineVideoCamera,
-	HiOutlineTrash
+	HiOutlineTrash,
 } from 'react-icons/hi2'
 import moment from 'moment'
 import axios from 'axios'
@@ -63,30 +63,28 @@ export default function EachInspection({ data }) {
 			<div className="card">
 				<div className="card-body d-flex gap-4 flex-column">
 					<div className="d-flex align-items-center justify-content-between flex-row w-100">
-						<span>
+						<span className="text-truncate">
 							Inspection with {isMine ? guest?.first_name : owner?.first_name}
 						</span>
-						{process.env.NODE_ENV === 'development' && (
+						{isMine && process.env.NODE_ENV === 'development' && (
 							<Dropdown>
 								<Dropdown.Toggle
 									id="dropdown-basic"
 									className="bg-white p-1 border-0 text-muted"
 								>
 									{/* <HiEllipsisHorizontal size={30} /> */}
-									menu
+									options
 								</Dropdown.Toggle>
 
 								<Dropdown.Menu>
-									<Dropdown.Item>
-										<FiRefreshCcw /> Reschedule
-									</Dropdown.Item>
-									{isMine ? (
+									{_data?.status === 'approved' && isMine && (
 										<Dropdown.Item>
-											<HiOutlineTrash /> Close inspection
+											<FiRefreshCcw /> Reschedule
 										</Dropdown.Item>
-									) : (
-										<Dropdown.Item>
-											<HiOutlineLogout /> Leave
+									)}
+									{isMine && (
+										<Dropdown.Item className="text-danger">
+											<HiOutlineTrash /> Close inspection
 										</Dropdown.Item>
 									)}
 								</Dropdown.Menu>
