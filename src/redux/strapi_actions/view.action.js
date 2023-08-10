@@ -209,6 +209,7 @@ export const getAppDetail = () => async (dispatch) => {
 			payload: app.data,
 		})
 	} catch (error) {
+		getAppDetail()
 		return Promise.reject(error)
 	}
 }

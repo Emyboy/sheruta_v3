@@ -80,7 +80,7 @@ const VerifyEmail = (props) => {
 									{state.display === 'loading' ? (
 										<div className="text-center">
 											<p className="text-center">Please Wait</p>
-											<div className="text-center">
+											<div className="text-center my-4 d-flex justify-content-center">
 												<Spinner style={{ margin: 0 }} />
 											</div>
 										</div>
