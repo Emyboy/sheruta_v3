@@ -6,6 +6,7 @@ import axios from 'axios'
 import { notification } from 'antd'
 import EachInspection from './EachInspection'
 import Cookies from 'js-cookie'
+import SalesIQWidget from '../../components/Sales/SalesIQWidget'
 
 export default function Inspection() {
 	localStorage.setItem('after_login', '/inspections')
@@ -50,16 +51,19 @@ export default function Inspection() {
 
 	return (
 		<Layout>
-			<div className="container">
-				<div className="row flex-column align-items-center gap-3">
-					<div className="col-lg-8 col-sm-12">
-						<h1>Your inspections</h1>
+			<>
+				<SalesIQWidget />
+				<div className="container">
+					<div className="row flex-column align-items-center gap-3">
+						<div className="col-lg-8 col-sm-12">
+							<h1>Your inspections</h1>
+						</div>
+						{inspections?.sort(compareBookings).map((ins) => {
+							return <EachInspection key={ins?.id} data={ins} />
+						})}
 					</div>
-					{inspections?.sort(compareBookings).map((ins) => {
-						return <EachInspection key={ins?.id} data={ins} />
-					})}
 				</div>
-			</div>
+			</>
 		</Layout>
 	)
 }
