@@ -10,6 +10,7 @@ import { notifyEmy } from '../../../services/Sheruta'
 import Analytics, { AnalyticsTypes } from '../../../services/Analytics'
 import { useRef } from 'react'
 import Global from '../../../Global'
+import { isInvalid } from '../../../utils/message.utils'
 
 export default function DiscussionChatInput({
 	onSend,
@@ -28,6 +29,17 @@ export default function DiscussionChatInput({
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		if(isInvalid(newMessage)){
+			dispatch({
+				type: 'SET_VIEW_STATE',
+				payload: {
+					showPaymentPopup: true
+				},
+			})
+			alert("Subscribe to share contact info")
+			return null;
+		}
+
 		if (standalone && onSubmit) {
 			onSubmit({ message_text: newMessage });
 			//TODO - Find a better solution

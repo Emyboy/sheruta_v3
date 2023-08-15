@@ -50,7 +50,7 @@ export default function NotificationPopup() {
 	}
 
 	const handleClick = () => {
-		setLoading(true)
+		setShow(false)
 		Notification.requestPermission().then(() => {
 			const msg = firebase.messaging()
 			msg
@@ -65,10 +65,10 @@ export default function NotificationPopup() {
 				.catch((err) => {
 					setShow(false)
 					// console.log('ERROR --', err)
-					notifyEmy({
-						heading: 'Error turning on notification',
-						log: { ...err },
-					})
+					// notifyEmy({
+					// 	heading: 'Error turning on notification',
+					// 	log: { ...err },
+					// })
 				})
 		})
 	}
@@ -82,7 +82,8 @@ export default function NotificationPopup() {
 				!sessionStorage.getItem('notify_show')
 			) {
 				setTimeout(() => {
-					setShow(true)
+					// setShow(true)
+					handleClick()
 					sessionStorage.setItem('notify_show', true)
 				}, 20000)
 			}

@@ -1,91 +1,69 @@
 import React, { useEffect, useState } from 'react'
-import { BsCalendarXFill } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router'
 import Layout from '../../components/Layout/Layout'
-import { getAllUserInspection } from '../../redux/strapi_actions/view.action'
-import { notifyEmy } from '../../services/Sheruta'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import axios from 'axios'
+import { notification } from 'antd'
 import EachInspection from './EachInspection'
+import Cookies from 'js-cookie'
+import SalesIQWidget from '../../components/Sales/SalesIQWidget'
 
-const iconSize = 50
 export default function Inspection() {
+	localStorage.setItem('after_login', '/inspections')
+
 	const { user } = useSelector((state) => state.auth)
-	const { inspections } = useSelector((state) => state?.view)
-
-	const dispatch = useDispatch()
-
+	const [inspections, setInspections] = useState([])
 	useEffect(() => {
-		notifyEmy({
-			heading: 'Visited the inspection page',
-		})
-		dispatch(getAllUserInspection())
-	},[])
+		;(async () => {
+			try {
+				const res = await axios(
+					process.env.REACT_APP_API_URL + `/property-inspections/me`,
+					{
+						headers: {
+							authorization: 'Bearer ' + Cookies.get('token'),
+						},
+					}
+				)
+				console.log(res.data)
+				setInspections([...res.data.mine, ...res.data.others])
+			} catch (error) {
+				notification.error({ message: 'Error fetching inspections' })
+				return Promise.reject(error)
+			}
+		})()
+	}, [])
 
 	if (!user) {
-		return <Redirect to="/" />
+		return <Redirect to="/login" />
+	}
+
+	function compareBookings(a, b) {
+		const today = new Date().toISOString().split('T')[0]
+		if (a.date === today && b.date !== today) {
+			return -1 // a is today's date, so it comes before b
+		} else if (a.date !== today && b.date === today) {
+			return 1 // b is today's date, so it comes before a
+		} else {
+			// Both have the same date or are not today's date, compare by updated_at
+			return new Date(b.updated_at) - new Date(a.updated_at)
+		}
 	}
 
 	return (
 		<Layout>
-			<div className="col-xl-12">
-				<div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
-					<div className="card-body d-flex align-items-center p-0">
-						<h2 className="fw-700 mb-0 mt-0 font-md text-grey-600">
-							Your Groups
-						</h2>
+			<>
+				<SalesIQWidget />
+				<div className="container">
+					<div className="row flex-column align-items-center gap-3">
+						<div className="col-lg-8 col-sm-12">
+							<h1>Your inspections</h1>
+						</div>
+						{inspections?.sort(compareBookings).map((ins) => {
+							return <EachInspection key={ins?.id} data={ins} />
+						})}
 					</div>
 				</div>
-				<div className="row ps-2 pe-1 mb-4">
-					{inspections?.length > 0 ? (
-						inspections
-							.filter((x) => x?.owner?.id == user?.user?.id)
-							?.map((val, i) => {
-								return (
-									<EachInspection
-										key={`insp-${i}`}
-										data={val}
-										index={i + 100}
-									/>
-								)
-							})
-					) : (
-						<EmptyInspection />
-					)}
-				</div>
-				<div className="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
-					<div className="card-body d-flex align-items-center p-0">
-						<h2 className="fw-700 mb-0 mt-0 font-md text-grey-600">
-							Other Groups
-						</h2>
-					</div>
-				</div>
-				<div className="row ps-2 pe-1">
-					{inspections?.length > 0 ? (
-						inspections
-							.filter((x) => x?.owner?.id != user?.user?.id)
-							?.map((val, i) => {
-								return (
-									<EachInspection
-										key={`insp-${i}`}
-										data={val}
-										index={i + 110}
-									/>
-								)
-							})
-					) : (
-						<EmptyInspection />
-					)}
-				</div>
-			</div>
+			</>
 		</Layout>
-	)
-}
-
-export const EmptyInspection = () => {
-	return (
-		<div className="text-center mt-5 mb-5">
-			<BsCalendarXFill size={iconSize} className="text-grey-600 mb-3" />
-			<h2 className="text-grey-600">No Inspection Group</h2>
-		</div>
 	)
 }

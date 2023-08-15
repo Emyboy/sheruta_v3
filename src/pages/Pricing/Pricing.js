@@ -1,15 +1,13 @@
 import { notification } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { usePaystackPayment, PaystackButton } from 'react-paystack'
-import { connect, useSelector } from 'react-redux'
+import { PaystackButton } from 'react-paystack'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap'
 // import Layout from '../../components/Layout/Layout'
 import { notifyEmy } from '../../services/Sheruta'
-import end_sarz from '../../assets/img/end_sarz.jpeg'
-import FreeRequestAds from '../../components/Ads/RequestAds/FeeRequestAds'
-import Global from '../../Global'
+
 import Cookies from 'js-cookie'
 import { FaCrown } from 'react-icons/fa'
 const Layout = React.lazy(() => import('../../components/Layout/Layout'))

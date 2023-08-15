@@ -170,7 +170,7 @@ export default function DiscussionChatList({ newMessage }) {
 				notification={`<strong>Welcome to ${
 					location_keywords?.filter((x) => x?.id == room_id)[0]?.name
 				} chat room.</strong>
-<p class="text-grey-500 mb-3">Post your apartment and flatshare requests. Sharing of phone numbers are prohibited.</p>
+<p class="text-grey-500 mb-3">Drop a message here to reach thousands of hosts and apartment seekers</p>
 
 <blockquote>"Topics beyond ${
 					location_keywords?.filter((x) => x?.id == room_id)[0]?.name

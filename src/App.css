@@ -84,6 +84,17 @@ body,
 .ant-notification {
     z-index: 100 !important;
 }
+.ant-modal-content {
+    border-radius: 11px !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 div.scrollmenu {
     overflow: auto;
@@ -117,6 +128,9 @@ div.scrollmenu div {
 }
 .bg-danger {
     background-color: rgb(255, 79, 79) !important;
+}
+.bg-danger-light {
+    background-color: rgb(255, 211, 211) !important;
 }
 svg {
     margin: 0 !important;

@@ -43,20 +43,21 @@ import JoinPaddyDetails from '../pages/JoinPaddy/JoinPaddyDetails/JoinPaddyDetai
 import AgentPending from '../pages/Agent/AgentPending'
 import AgentSignup from '../pages/Agent/AgentSignup'
 import Inspection from '../pages/Inspection/Inspection'
-import BookInspection from '../pages/Inspection/BookInspection'
-import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
-import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
-// import AOS from 'aos';
-// import 'aos/dist/aos.css'
+// import BookInspection from '../pages/Inspection/BookInspection'
+// import InspectionDetails from '../pages/InspectionDetails/InspectionDetails'
+// import InspectionInvitation from '../pages/Inspection/InspectionInvitation'
+
 import Home from '../pages/HomeNew/HomeNew'
 import AgentLanding from '../pages/Agent/AgentLanding/AgentLanding'
 import Properties from '../pages/Properties/Properties'
 import PropertyDetails from '../pages/PropertyDetails/PropertyDetails'
 import Discussion from '../pages/Discussion/Discussion'
 import CreateLookingForRequest from '../pages/Request/CreateLookingForRequest'
-import NewProfile from '../pages/Profile/NewProfile/NewProfile'
+// import NewProfile from '../pages/Profile/NewProfile/NewProfile'
 import MyContacts from '../pages/Contacts/MyContacts'
 import Chat from '../pages/Chat/Chat'
+import WalletPage from '../pages/Wallet/WalletPage'
+import InspectionRoom from '../pages/Inspection/InspectionRoom/InspectionRoom'
 
 // const HomeNew = React.lazy(() => import('../pages/HomeNew/HomeNew'))
 const OurRules = React.lazy(() => import('../pages/OurRules/OurRules'))
@@ -66,7 +67,7 @@ const Settings = React.lazy(() => import('../pages/Settings/Settings'))
 // const PropertyDetails = React.lazy(() =>
 // 	import('../pages/PropertyDetails/PropertyDetails')
 // )
-const CreateRequest = React.lazy(() => import('../pages/Request/CreateRequest'))
+const CreateRequest = React.lazy(() => import('../pages/Request/SubmitRoom'))
 const GetStarted = React.lazy(() => import('../pages/GetStarted/GetStarted'))
 const Login = React.lazy(() => import('../pages/Login/Login'))
 const Signup = React.lazy(() => import('../pages/Signup/Signup'))
@@ -106,9 +107,7 @@ function App() {
 		//           console.log("========= NOTIFY ======================", data);
 		//       });
 		// }, 10000);
-		// AOS.init({
-		// 	duration: 2000,
-		// })
+
 	}, [])
 
 	return (
@@ -133,6 +132,7 @@ function App() {
 								component={AgentPending}
 							/>
 							<Route exact path="/flats" component={Properties} />
+							<Route exact path="/wallet" component={WalletPage} />
 							<Route exact path="/discussion" component={Discussion} />
 							<Route
 								exact
@@ -187,7 +187,8 @@ function App() {
 							<Route exact path="/notifications" component={Notifications} />
 							<Route exact path="/match" component={Match} />
 							<Route exact path="/inspections" component={Inspection} />
-							<Route
+							<Route exact path="/inspections/room/:room_id" component={InspectionRoom} />
+							{/* <Route
 								exact
 								path="/inspection/:inspection_id"
 								component={InspectionDetails}
@@ -201,7 +202,7 @@ function App() {
 								exact
 								path="/inspection/invitation/:inspection_id"
 								component={InspectionInvitation}
-							/>
+							/> */}
 							<Route exact path="/what-next" component={WhatNext} />
 							{/* <Route
 								exact
@@ -220,7 +221,8 @@ function App() {
 							<Route
 								exact
 								path="/user/:username"
-								component={is_dev ? NewProfile : Profile2}
+								component={ Profile2}
+								// component={is_dev ? NewProfile : Profile2}
 							/>
 							<Route exact path="/flat/submit" component={CreateRequest} />
 							<Route
@@ -284,3 +286,4 @@ function App() {
 }
 
 export default App
+

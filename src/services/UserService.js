@@ -35,4 +35,19 @@ export default class UserService {
 			return data
 		}
 	}
+
+	static async confirmPassword(password){
+		const res = await axios(process.env.REACT_APP_API_URL + `/users-permissions/auth/confirm-password`, {
+			method: 'POST',
+			data: {
+				password,
+			},
+			headers: {
+				authorization: `Bearer ${Cookies.get('token')}`
+			}
+		})
+
+		return res
+	}
+
 }

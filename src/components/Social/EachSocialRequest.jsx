@@ -30,6 +30,8 @@ function EachRequest({ data, promoteCTA, allowPromote }) {
 	// 	return null
 	// }
 
+	console.log(data)
+
 	if (deleted || data?.users_permissions_user?.deactivated) {
 		return null
 	}
