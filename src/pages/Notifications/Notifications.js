@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import EachNotification from './EachNotification'
 // import Layout from '../../components/Layout/Layout';
 import { Redirect } from 'react-router';
-import { getRealTimeStuffs } from '../../redux/strapi_actions/view.action';
+import { getAllNotifications, getRealTimeStuffs } from '../../redux/strapi_actions/view.action';
 import Layout from '../../components/Layout/Layout';
 
 
@@ -16,9 +16,13 @@ export default function Notifications() {
 
 
 	useEffect(() => {
-		setTimeout(() => {
+		let timer = setTimeout(() => {
 			dispatch(getRealTimeStuffs())
+			dispatch(getAllNotifications())
 		}, 5000);
+		return () => {
+			clearTimeout(timer);
+		}
 	},[])
 
 	if(!user){
