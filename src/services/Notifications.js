@@ -69,7 +69,7 @@ const NotificationService = {
 				console.log('FETCHED LIST --', list)
 				return list
 			} catch (error) {
-				getAuthUserNotification()
+				// getAuthUserNotification()
 			}
 		}
 	},
