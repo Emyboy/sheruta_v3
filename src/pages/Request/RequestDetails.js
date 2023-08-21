@@ -363,7 +363,6 @@ export default function RequestDetails(props) {
 												{user?.user?.id !==
 													request?.users_permissions_user?.id && (
 													<div className="d-flex align-items-center my-3 justify-content-between">
-														{!request?.is_searching && (
 															<div className="col-md-5 col-sm-12 d-flex justify-content-start p-0">
 																<button
 																	className="btn bg-black fw-bold text-white btn-sm py-2"
@@ -373,7 +372,6 @@ export default function RequestDetails(props) {
 																	Book Inspection
 																</button>
 															</div>
-														)}
 														<div className="col-md-4 text-end col-sm-12 p-0 d-flex justify-content-end">
 															{user?.user && (
 																<Link
