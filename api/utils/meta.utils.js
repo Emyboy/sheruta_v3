@@ -5,6 +5,7 @@ const sheruta_defaults = {
 }
 
 module.exports = {
+	
 	renderMetaTags: ({ title, description, image_url, htmlString }) => {
 		if (!title && !description) {
 			return htmlString
