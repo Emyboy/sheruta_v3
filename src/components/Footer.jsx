@@ -187,7 +187,7 @@ export default () => {
 				<div className="container">
 					<div className="copyright-area-content">
 						<p>
-							Copyright @<span>{new Date().getFullYear()}</span> Sheruta
+							Copyright @<span>{new Date().getFullYear()}</span> Sheruta Online
 						</p>
 					</div>
 				</div>
